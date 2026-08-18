@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+    <div class="login-page">
+
+        <div class="login-card">
+
+            <!-- College Logo -->
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                     alt="College Logo"
+                     class="college-logo">
+            </div>
+
+            <h1>Welcome Back</h1>
+            <p class="login-subtitle">Please sign in to continue</p>
+
+
+            <form id="loginForm">
+
+                <!-- Role -->
+                <div class="form-group">
+                    <label for="role">Role</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-icon">◉</span>
+
+                        <select id="role" name="role" required>
+                            <option value="" disabled selected>Select your role</option>
+                            <option value="student">Student</option>
+                            <option value="tpo">TPO / Placement Cell</option>
+                            <option value="admin">Admin</option>
+                            <option value="authority">College Authority</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username">Username / Email</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-icon">✉</span>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username or email"
+                            autocomplete="username"
+                            required>
+                    </div>
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="input-wrapper">
+                        <span class="input-icon">●</span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                            aria-label="Show password">
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+
+                <!-- Forgot Password -->
+                <div class="form-options">
+                    <a href="#" id="forgotPassword">Forgot Password?</a>
+                </div>
+
+
+                <!-- Login Button -->
+                <button type="submit" class="login-btn">
+                    Login
+                </button>
+
+                <p id="loginMessage" class="login-message"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+</body>
+</html>
