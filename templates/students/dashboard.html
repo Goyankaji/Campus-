@@ -1,0 +1,654 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | Campus Placement Portal</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Student Dashboard CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <img src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                 alt="College Logo">
+
+            <div>
+                <h2>CAMPUS</h2>
+                <span>PLACEMENT PORTAL</span>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <div class="nav-section-title">MAIN</div>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">♙</span>
+                <span>My Profile</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▣</span>
+                <span>Academics</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▤</span>
+                <span>Resume</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▱</span>
+                <span>Projects</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">✦</span>
+                <span>Skills & Certifications</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▣</span>
+                <span>Internships</span>
+            </a>
+
+            <div class="nav-section-title">PLACEMENT</div>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◉</span>
+                <span>Placement Drives</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▤</span>
+                <span>My Applications</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◷</span>
+                <span>Interviews</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▣</span>
+                <span>Offers & Joining</span>
+            </a>
+
+            <div class="nav-section-title">LEARNING & RESOURCES</div>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▤</span>
+                <span>PYQ</span>
+                <span class="nav-badge new-badge">New</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▥</span>
+                <span>Preparation Materials</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◌</span>
+                <span>Comments</span>
+                <span class="nav-badge count-badge">12</span>
+            </a>
+
+            <div class="nav-section-title">OTHERS</div>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">♢</span>
+                <span>Notifications</span>
+                <span class="nav-badge count-badge">5</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">◈</span>
+                <span>Complaints / Feedback</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+            </a>
+
+            <a href="#" class="nav-item logout-item">
+                <span class="nav-icon">⇥</span>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+        <!-- Profile Progress -->
+        <div class="profile-progress">
+            <div class="progress-heading">
+                <span>Keep going, you're doing great! 💪</span>
+            </div>
+
+            <div class="progress-text">
+                <span>Profile Completed</span>
+                <strong>80%</strong>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle">
+            <span id="themeIcon">☾</span>
+            <span id="themeText">Switch to Dark Mode</span>
+        </button>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+    <main class="main-content">
+
+        <!-- TOP HEADER -->
+        <header class="top-header">
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <!-- Search -->
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+                <input
+                    type="text"
+                    placeholder="Search for drives, companies, roles..."
+                    id="dashboardSearch">
+                <span class="search-shortcut">Ctrl + K</span>
+            </div>
+
+            <!-- Header Right -->
+            <div class="header-right">
+
+                <button class="header-icon theme-top-toggle" id="topThemeToggle">
+                    ☼
+                </button>
+
+                <button class="header-icon notification-button">
+                    ♢
+                    <span class="notification-dot">5</span>
+                </button>
+
+                <div class="user-profile">
+
+                    <img
+                        src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                        alt="Student">
+
+                    <div class="user-info">
+                        <strong>Student Name</strong>
+                        <span>B.Tech CSE • 3rd Year</span>
+                    </div>
+
+                    <span class="profile-arrow">⌄</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD BODY -->
+        <section class="dashboard-content">
+
+            <!-- Welcome -->
+            <div class="welcome-row">
+
+                <div>
+                    <h1>Welcome back! 👋</h1>
+                    <p>Here's your placement overview.</p>
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+            <section class="stats-grid">
+
+                <div class="stat-card status-card">
+                    <div class="stat-icon green-icon">✓</div>
+
+                    <div>
+                        <span>Placement Status</span>
+                        <strong>Eligible</strong>
+                        <small>You can apply for drives</small>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon blue-icon">▣</div>
+
+                    <div>
+                        <span>Applications</span>
+                        <strong>06</strong>
+                        <small>Total Applied</small>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon purple-icon">◆</div>
+
+                    <div>
+                        <span>Shortlisted</span>
+                        <strong>02</strong>
+                        <small>Shortlisted</small>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon orange-icon">▣</div>
+
+                    <div>
+                        <span>Interviews</span>
+                        <strong>01</strong>
+                        <small>Upcoming</small>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon red-icon">▣</div>
+
+                    <div>
+                        <span>Offers</span>
+                        <strong>00</strong>
+                        <small>No Offers Yet</small>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MAIN DASHBOARD GRID
+            ================================================== -->
+            <section class="dashboard-grid">
+
+                <!-- UPCOMING DRIVES -->
+                <div class="dashboard-card drives-card">
+
+                    <div class="card-header">
+                        <h2>Upcoming Drives</h2>
+                        <button class="view-all">View All</button>
+                    </div>
+
+                    <div class="drive-list">
+
+                        <div class="drive-item">
+
+                            <div class="company-logo tcs-logo">
+                                tcs
+                            </div>
+
+                            <div class="drive-info">
+                                <strong>TCS</strong>
+                                <span>Software Engineer</span>
+
+                                <div class="drive-tags">
+                                    <span>Off Campus</span>
+                                    <span>Multiple Roles</span>
+                                </div>
+                            </div>
+
+                            <div class="drive-deadline">
+                                <span>Apply by</span>
+                                <strong>25 Aug 2026</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="drive-item">
+
+                            <div class="company-logo infosys-logo">
+                                Infosys
+                            </div>
+
+                            <div class="drive-info">
+                                <strong>Infosys</strong>
+                                <span>System Engineer</span>
+
+                                <div class="drive-tags">
+                                    <span>Off Campus</span>
+                                    <span>System Engineer</span>
+                                </div>
+                            </div>
+
+                            <div class="drive-deadline">
+                                <span>Apply by</span>
+                                <strong>30 Aug 2026</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="drive-item">
+
+                            <div class="company-logo wipro-logo">
+                                wipro
+                            </div>
+
+                            <div class="drive-info">
+                                <strong>Wipro</strong>
+                                <span>Project Engineer</span>
+
+                                <div class="drive-tags">
+                                    <span>Off Campus</span>
+                                    <span>Project Engineer</span>
+                                </div>
+                            </div>
+
+                            <div class="drive-deadline">
+                                <span>Apply by</span>
+                                <strong>02 Sep 2026</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PLACEMENT OVERVIEW -->
+                <div class="dashboard-card overview-card">
+
+                    <div class="card-header">
+
+                        <h2>Placement Overview</h2>
+
+                        <select class="year-select">
+                            <option>2026-27</option>
+                            <option>2025-26</option>
+                            <option>2024-25</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="chart-area">
+
+                        <div class="donut-chart">
+
+                            <div class="donut-center">
+                                <strong>1260</strong>
+                                <span>Total Students</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-legend">
+
+                            <div class="legend-item">
+                                <span class="legend-dot placed"></span>
+                                <div>
+                                    <strong>Placed Students</strong>
+                                    <small>480 (38.1%)</small>
+                                </div>
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-dot interview"></span>
+                                <div>
+                                    <strong>In Interview</strong>
+                                    <small>215 (17.1%)</small>
+                                </div>
+                            </div>
+
+                            <div class="legend-item">
+                                <span class="legend-dot remaining"></span>
+                                <div>
+                                    <strong>Yet to Appear</strong>
+                                    <small>565 (44.8%)</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="motivation-box">
+                        <div class="motivation-icon">✦</div>
+
+                        <div>
+                            <strong>Great progress!</strong>
+                            <p>Keep preparing and grab more opportunities.</p>
+                        </div>
+
+                        <span class="rocket">🚀</span>
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT APPLICATIONS -->
+                <div class="dashboard-card applications-card">
+
+                    <div class="card-header">
+                        <h2>Recent Applications</h2>
+                        <button class="view-all">View All</button>
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Role</th>
+                                    <th>Applied On</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td><strong>TCS</strong></td>
+                                    <td>Software Engineer</td>
+                                    <td>18 Aug 2026</td>
+                                    <td>
+                                        <span class="status-badge shortlisted">
+                                            Shortlisted
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Infosys</strong></td>
+                                    <td>System Engineer</td>
+                                    <td>16 Aug 2026</td>
+                                    <td>
+                                        <span class="status-badge applied">
+                                            Applied
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Wipro</strong></td>
+                                    <td>Project Engineer</td>
+                                    <td>14 Aug 2026</td>
+                                    <td>
+                                        <span class="status-badge applied">
+                                            Applied
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LATEST NOTIFICATIONS -->
+                <div class="dashboard-card notifications-card">
+
+                    <div class="card-header">
+                        <h2>Latest Notifications</h2>
+                        <button class="view-all">View All</button>
+                    </div>
+
+                    <div class="notification-list">
+
+                        <div class="notification-item">
+
+                            <div class="notification-icon interview-notification">
+                                ▣
+                            </div>
+
+                            <div class="notification-content">
+                                <strong>TCS Technical Interview</strong>
+                                <p>Your interview is scheduled on 25 Aug 2026 at 11:00 AM.</p>
+                            </div>
+
+                            <span class="notification-time">10:30 AM</span>
+
+                        </div>
+
+
+                        <div class="notification-item">
+
+                            <div class="notification-icon drive-notification">
+                                ▣
+                            </div>
+
+                            <div class="notification-content">
+                                <strong>Infosys Drive</strong>
+                                <p>New drive for System Engineer role is live.</p>
+                            </div>
+
+                            <span class="notification-time">Yesterday</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PREPARATION STRATEGIES
+            ================================================== -->
+            <section class="dashboard-card preparation-card">
+
+                <div class="card-header">
+
+                    <h2>Preparation Strategies</h2>
+
+                    <button class="view-all">View All</button>
+
+                </div>
+
+
+                <div class="preparation-grid">
+
+                    <a href="#" class="prep-item">
+
+                        <div class="prep-icon green-prep">▤</div>
+
+                        <div>
+                            <strong>Aptitude</strong>
+                            <span>Practice daily</span>
+                        </div>
+
+                    </a>
+
+
+                    <a href="#" class="prep-item">
+
+                        <div class="prep-icon blue-prep">⌘</div>
+
+                        <div>
+                            <strong>DSA</strong>
+                            <span>Solve problems</span>
+                        </div>
+
+                    </a>
+
+
+                    <a href="#" class="prep-item">
+
+                        <div class="prep-icon purple-prep">▤</div>
+
+                        <div>
+                            <strong>HR Prep</strong>
+                            <span>Common Q&A</span>
+                        </div>
+
+                    </a>
+
+
+                    <a href="#" class="prep-item">
+
+                        <div class="prep-icon red-prep">✓</div>
+
+                        <div>
+                            <strong>Mock Tests</strong>
+                            <span>Test yourself</span>
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- Dashboard JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+</html>
+```
