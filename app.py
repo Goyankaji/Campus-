@@ -20,6 +20,14 @@ def student_dashboard():
 def authority_dashboard():
     return render_template("authority/dashboard.html")
 
+@app.route("/tpo/dashboard")
+def tpo_dashboard():
+    return render_template("tpo/dashboard.html")
+
+
+# =========================================================
+# RUN
+# =========================================================
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TPO Dashboard | Campus Placement Portal</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/tpo.css') }}">
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <img src="{{ url_for('static',
+                    filename='images/college-logo.jpeg') }}"
+                 alt="College Logo">
+
+            <div>
+                <h2>CAMPUS</h2>
+                <span>PLACEMENT PORTAL</span>
+            </div>
+
+        </div>
+
+
+        <!-- TPO PROFILE -->
+
+        <div class="tpo-profile">
+
+            <div class="tpo-avatar">
+                👤
+            </div>
+
+            <div>
+                <strong>TPO / Placement Cell</strong>
+                <span>Training & Placement Officer</span>
+
+                <small>
+                    <i></i> Online
+                </small>
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <div class="nav-section-title">
+                OVERVIEW
+            </div>
+
+
+            <a href="#"
+               class="nav-item active">
+
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">♙</span>
+                <span>Students</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">▦</span>
+                <span>Companies</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">▣</span>
+                <span>Placement Drives</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">▤</span>
+                <span>Applications</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">◆</span>
+                <span>Shortlisted Students</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">◷</span>
+                <span>Interviews</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">▣</span>
+                <span>Offers & Joining</span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                RESOURCES
+            </div>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">▤</span>
+                <span>PYQ</span>
+
+                <span class="nav-badge new-badge">
+                    NEW
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">▥</span>
+                <span>Preparation Materials</span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                PLACEMENT DATA
+            </div>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">♙</span>
+                <span>Placed Students</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">▥</span>
+                <span>Reports</span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                SYSTEM
+            </div>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">♢</span>
+                <span>Notifications</span>
+
+                <span class="nav-badge notification-badge">
+                    8
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">◈</span>
+                <span>Announcements</span>
+
+                <span class="nav-badge announcement-badge">
+                    3
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item">
+
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+
+            </a>
+
+
+            <a href="#"
+               class="nav-item logout-item">
+
+                <span class="nav-icon">⇥</span>
+                <span>Logout</span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- THEME BUTTON -->
+
+        <button class="theme-toggle"
+                id="themeToggle">
+
+            <span id="themeIcon">☾</span>
+
+            <span id="themeText">
+                Dark Mode
+            </span>
+
+        </button>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOP HEADER -->
+
+        <header class="top-header">
+
+
+            <button class="menu-toggle"
+                    id="menuToggle">
+
+                ☰
+
+            </button>
+
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input type="text"
+                       id="tpoSearch"
+                       placeholder="Search students, companies, drives...">
+
+                <span class="search-shortcut">
+                    Ctrl + K
+                </span>
+
+            </div>
+
+
+            <div class="header-right">
+
+
+                <button class="header-icon"
+                        id="topThemeToggle">
+
+                    ☼
+
+                </button>
+
+
+                <button class="header-icon notification-button">
+
+                    ♢
+
+                    <span class="notification-dot">
+                        8
+                    </span>
+
+                </button>
+
+
+                <div class="user-profile">
+
+                    <div class="user-avatar">
+                        T
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong>
+                            TPO / Placement Cell
+                        </strong>
+
+                        <span>
+                            Training & Placement Officer
+                        </span>
+
+                    </div>
+
+                    <span class="profile-arrow">
+                        ⌄
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =====================================================
+             DASHBOARD CONTENT
+        ====================================================== -->
+
+        <section class="dashboard-content">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome-row">
+
+                <div>
+
+                    <h1>
+                        Good Morning, TPO! 👋
+                    </h1>
+
+                    <p>
+                        Here's your placement overview for 2026-27.
+                    </p>
+
+                </div>
+
+
+                <div class="academic-year">
+
+                    <span>Academic Year</span>
+
+                    <strong>
+                        2026-27 ▾
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <section class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple-icon">
+                        ♙
+                    </div>
+
+                    <div>
+
+                        <span>Total Students</span>
+
+                        <strong>
+                            1,260
+                        </strong>
+
+                        <small class="positive">
+                            ↑ 8.5% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green-icon">
+                        ◆
+                    </div>
+
+                    <div>
+
+                        <span>Eligible Students</span>
+
+                        <strong>
+                            1,045
+                        </strong>
+
+                        <small class="positive">
+                            ↑ 6.3% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue-icon">
+                        ▣
+                    </div>
+
+                    <div>
+
+                        <span>Active Drives</span>
+
+                        <strong>
+                            24
+                        </strong>
+
+                        <small class="positive">
+                            ↑ 14.2% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange-icon">
+                        ▤
+                    </div>
+
+                    <div>
+
+                        <span>Total Applications</span>
+
+                        <strong>
+                            2,348
+                        </strong>
+
+                        <small class="positive">
+                            ↑ 14.7% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon violet-icon">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>Students Placed</span>
+
+                        <strong>
+                            486
+                        </strong>
+
+                        <small class="positive">
+                            ↑ 10.8% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon teal-icon">
+                        ↗
+                    </div>
+
+                    <div>
+
+                        <span>Placement %</span>
+
+                        <strong>
+                            38.57%
+                        </strong>
+
+                        <small class="positive">
+                            ↑ 4.2% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FIRST ROW
+            ================================================== -->
+
+            <section class="top-grid">
+
+
+                <!-- UPCOMING DRIVES -->
+
+                <div class="dashboard-card drives-card">
+
+
+                    <div class="card-header">
+
+                        <h2>
+                            Upcoming / Active Placement Drives
+                        </h2>
+
+                        <button class="view-all">
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div class="drive-table-wrapper">
+
+                        <table class="drive-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Company</th>
+                                    <th>Role</th>
+                                    <th>Eligible</th>
+                                    <th>Applications</th>
+                                    <th>Deadline</th>
+                                    <th>Status</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name tcs">
+                                            tcs
+                                        </strong>
+                                        TCS
+                                    </td>
+
+                                    <td>
+                                        Software Engineer
+                                    </td>
+
+                                    <td>
+                                        950
+                                    </td>
+
+                                    <td>
+                                        832
+                                    </td>
+
+                                    <td class="deadline">
+                                        25 Aug 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name infosys">
+                                            Infosys
+                                        </strong>
+                                        Infosys
+                                    </td>
+
+                                    <td>
+                                        System Engineer
+                                    </td>
+
+                                    <td>
+                                        870
+                                    </td>
+
+                                    <td>
+                                        645
+                                    </td>
+
+                                    <td class="deadline">
+                                        30 Aug 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name wipro">
+                                            wipro
+                                        </strong>
+                                        Wipro
+                                    </td>
+
+                                    <td>
+                                        Project Engineer
+                                    </td>
+
+                                    <td>
+                                        780
+                                    </td>
+
+                                    <td>
+                                        512
+                                    </td>
+
+                                    <td class="deadline">
+                                        02 Sep 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name capgemini">
+                                            ◆
+                                        </strong>
+                                        Capgemini
+                                    </td>
+
+                                    <td>
+                                        Analyst
+                                    </td>
+
+                                    <td>
+                                        680
+                                    </td>
+
+                                    <td>
+                                        321
+                                    </td>
+
+                                    <td class="deadline">
+                                        10 Sep 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status upcoming">
+                                            Upcoming
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name cognizant">
+                                            ◇
+                                        </strong>
+                                        Cognizant
+                                    </td>
+
+                                    <td>
+                                        Programmer Analyst
+                                    </td>
+
+                                    <td>
+                                        640
+                                    </td>
+
+                                    <td>
+                                        198
+                                    </td>
+
+                                    <td class="deadline">
+                                        15 Sep 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status upcoming">
+                                            Upcoming
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- PLACEMENT OVERVIEW -->
+
+                <div class="dashboard-card overview-card">
+
+
+                    <div class="card-header">
+
+                        <h2>
+                            Placement Overview
+                        </h2>
+
+                        <select class="year-select">
+
+                            <option>
+                                2026-27
+                            </option>
+
+                            <option>
+                                2025-26
+                            </option>
+
+                            <option>
+                                2024-25
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="overview-content">
+
+
+                        <div class="donut-chart">
+
+                            <div class="donut-center">
+
+                                <strong>
+                                    1,260
+                                </strong>
+
+                                <span>
+                                    Total Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart-legend">
+
+
+                            <div class="legend-item">
+
+                                <span class="legend-dot placed"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Placed Students
+                                    </strong>
+
+                                    <small>
+                                        486 (38.57%)
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <span class="legend-dot interview"></span>
+
+                                <div>
+
+                                    <strong>
+                                        In Interview
+                                    </strong>
+
+                                    <small>
+                                        248 (19.68%)
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <span class="legend-dot remaining"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Yet to Appear
+                                    </strong>
+
+                                    <small>
+                                        526 (41.75%)
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="progress-message">
+
+                        <span>
+                            🚀
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Great Progress!
+                            </strong>
+
+                            <p>
+                                You're doing better than last year.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SECOND ROW
+            ================================================== -->
+
+            <section class="bottom-grid">
+
+
+                <!-- BRANCH PLACEMENT -->
+
+                <div class="dashboard-card branch-card">
+
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Branch-wise Placement Comparison
+                            </h2>
+
+                            <p>
+                                This Year vs Last Year
+                            </p>
+
+                        </div>
+
+
+                        <select class="year-select">
+
+                            <option>
+                                2026-27
+                            </option>
+
+                            <option>
+                                2025-26
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="branch-chart">
+
+
+                        <div class="chart-legend branch-legend">
+
+                            <span>
+                                <i class="blue-dot"></i>
+                                Total Students (This Year)
+                            </span>
+
+                            <span>
+                                <i class="green-dot"></i>
+                                Placed Students (This Year)
+                            </span>
+
+                            <span>
+                                <i class="gray-dot"></i>
+                                Placed Students (Last Year)
+                            </span>
+
+                        </div>
+
+
+                        <div class="bar-chart">
+
+
+                            <!-- CSE -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 90%;">
+                                        <span>720</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 39%;">
+                                        <span>310</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 33%;">
+                                        <span>260</span>
+                                    </div>
+
+                                </div>
+
+                                <label>CSE</label>
+
+                            </div>
+
+
+                            <!-- IT -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 33%;">
+                                        <span>260</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 15%;">
+                                        <span>120</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 12%;">
+                                        <span>95</span>
+                                    </div>
+
+                                </div>
+
+                                <label>IT</label>
+
+                            </div>
+
+
+                            <!-- ECE -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 23%;">
+                                        <span>180</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 8%;">
+                                        <span>65</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 6%;">
+                                        <span>50</span>
+                                    </div>
+
+                                </div>
+
+                                <label>ECE</label>
+
+                            </div>
+
+
+                            <!-- EE -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 15%;">
+                                        <span>120</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 5%;">
+                                        <span>40</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 4%;">
+                                        <span>32</span>
+                                    </div>
+
+                                </div>
+
+                                <label>EE</label>
+
+                            </div>
+
+
+                            <!-- ME -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 13%;">
+                                        <span>100</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 4%;">
+                                        <span>30</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 3%;">
+                                        <span>20</span>
+                                    </div>
+
+                                </div>
+
+                                <label>ME</label>
+
+                            </div>
+
+
+                            <!-- CIVIL -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 8%;">
+                                        <span>60</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 2%;">
+                                        <span>15</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 1.5%;">
+                                        <span>10</span>
+                                    </div>
+
+                                </div>
+
+                                <label>Civil</label>
+
+                            </div>
+
+
+                            <!-- AI ML -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 5%;">
+                                        <span>40</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 2%;">
+                                        <span>16</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 1.8%;">
+                                        <span>12</span>
+                                    </div>
+
+                                </div>
+
+                                <label>AI/ML</label>
+
+                            </div>
+
+
+                            <!-- DS -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 4%;">
+                                        <span>30</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 1.7%;">
+                                        <span>14</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 1%;">
+                                        <span>8</span>
+                                    </div>
+
+                                </div>
+
+                                <label>DS</label>
+
+                            </div>
+
+
+                            <!-- Others -->
+
+                            <div class="bar-group">
+
+                                <div class="bars">
+
+                                    <div class="bar this-total"
+                                         style="height: 7%;">
+                                        <span>50</span>
+                                    </div>
+
+                                    <div class="bar this-placed"
+                                         style="height: 1.7%;">
+                                        <span>14</span>
+                                    </div>
+
+                                    <div class="bar last-placed"
+                                         style="height: 1.2%;">
+                                        <span>12</span>
+                                    </div>
+
+                                </div>
+
+                                <label>Others</label>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="chart-note">
+
+                        <span>ⓘ</span>
+
+                        <p>
+                            CSE leads the highest placements.
+                            Overall placement improved by
+                            <strong>4.2%</strong>
+                            compared to last year.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- TOP RECRUITING COMPANIES -->
+
+                <div class="dashboard-card companies-card">
+
+
+                    <div class="card-header">
+
+                        <h2>
+                            Top Recruiting Companies
+                        </h2>
+
+                        <button class="view-all">
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div class="companies-table">
+
+
+                        <div class="company-row header-row">
+
+                            <span>Company</span>
+                            <span>Placed</span>
+                            <span>Avg Package</span>
+
+                        </div>
+
+
+                        <div class="company-row">
+
+                            <span>
+                                <b class="mini-logo tcs">
+                                    tcs
+                                </b>
+                                TCS
+                            </span>
+
+                            <strong>
+                                128
+                            </strong>
+
+                            <span>
+                                ₹ 7.52 LPA
+                            </span>
+
+                        </div>
+
+
+                        <div class="company-row">
+
+                            <span>
+                                <b class="mini-logo infosys">
+                                    Inf
+                                </b>
+                                Infosys
+                            </span>
+
+                            <strong>
+                                96
+                            </strong>
+
+                            <span>
+                                ₹ 6.85 LPA
+                            </span>
+
+                        </div>
+
+
+                        <div class="company-row">
+
+                            <span>
+                                <b class="mini-logo wipro">
+                                    W
+                                </b>
+                                Wipro
+                            </span>
+
+                            <strong>
+                                72
+                            </strong>
+
+                            <span>
+                                ₹ 5.42 LPA
+                            </span>
+
+                        </div>
+
+
+                        <div class="company-row">
+
+                            <span>
+                                <b class="mini-logo capgemini">
+                                    ◆
+                                </b>
+                                Capgemini
+                            </span>
+
+                            <strong>
+                                48
+                            </strong>
+
+                            <span>
+                                ₹ 8.15 LPA
+                            </span>
+
+                        </div>
+
+
+                        <div class="company-row">
+
+                            <span>
+                                <b class="mini-logo cognizant">
+                                    ◇
+                                </b>
+                                Cognizant
+                            </span>
+
+                            <strong>
+                                34
+                            </strong>
+
+                            <span>
+                                ₹ 6.25 LPA
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="dashboard-card quick-card">
+
+
+                    <div class="card-header">
+
+                        <h2>
+                            Quick Actions
+                        </h2>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <button class="quick-action purple-action">
+
+                            <span>＋</span>
+
+                            <strong>
+                                Add New Company
+                            </strong>
+
+                        </button>
+
+
+                        <button class="quick-action blue-action">
+
+                            <span>＋</span>
+
+                            <strong>
+                                Create New Drive
+                            </strong>
+
+                        </button>
+
+
+                        <button class="quick-action green-action">
+
+                            <span>▤</span>
+
+                            <strong>
+                                View All Applications
+                            </strong>
+
+                        </button>
+
+
+                        <button class="quick-action orange-action">
+
+                            <span>▣</span>
+
+                            <strong>
+                                Generate Report
+                            </strong>
+
+                        </button>
+
+
+                        <button class="quick-action red-action">
+
+                            <span>➤</span>
+
+                            <strong>
+                                Send Announcement
+                            </strong>
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script src="{{ url_for('static',
+            filename='js/tpo.js') }}"></script>
+
+</body>
+
+</html>
