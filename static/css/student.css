@@ -1510,3 +1510,363 @@ body.dark-theme .donut-chart::before {
 
 }
 
+/* =========================================================
+   STUDENT DASHBOARD - DARK MODE
+========================================================= */
+
+body.dark-theme {
+
+    --student-bg: #0b1224;
+    --student-card: #111a2e;
+    --student-card-hover: #17223b;
+
+    --student-text: #f3f6ff;
+    --student-text-secondary: #9eabc5;
+    --student-text-muted: #6f7c98;
+
+    --student-border: #202b43;
+
+    background: var(--student-bg);
+    color: var(--student-text);
+}
+
+
+/* Main page */
+
+body.dark-theme .dashboard-container,
+body.dark-theme .main-content,
+body.dark-theme .dashboard-main,
+body.dark-theme .content-area {
+
+    background: var(--student-bg);
+}
+
+
+/* Sidebar */
+
+body.dark-theme .sidebar {
+
+    background: #070e21;
+    border-color: #1c2740;
+}
+
+
+/* Header */
+
+body.dark-theme .top-header,
+body.dark-theme .header {
+
+    background: var(--student-card);
+    border-color: var(--student-border);
+}
+
+
+/* Cards */
+
+body.dark-theme .card,
+body.dark-theme .dashboard-card,
+body.dark-theme .stat-card,
+body.dark-theme .kpi-card,
+body.dark-theme .application-card,
+body.dark-theme .drive-card,
+body.dark-theme .resource-card {
+
+    background: var(--student-card);
+    border-color: var(--student-border);
+    color: var(--student-text);
+}
+
+
+/* Headings */
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4 {
+
+    color: var(--student-text);
+}
+
+
+/* Normal text */
+
+body.dark-theme p,
+body.dark-theme span,
+body.dark-theme small {
+
+    color: var(--student-text-secondary);
+}
+
+
+/* Tables */
+
+body.dark-theme table {
+
+    color: var(--student-text);
+}
+
+
+body.dark-theme th {
+
+    background: #0d162b;
+    color: var(--student-text-secondary);
+}
+
+
+body.dark-theme td {
+
+    border-color: var(--student-border);
+}
+
+
+/* Inputs */
+
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme textarea {
+
+    background: #0d162b;
+    color: var(--student-text);
+    border-color: var(--student-border);
+}
+
+
+body.dark-theme input::placeholder {
+
+    color: var(--student-text-muted);
+}
+
+
+/* Search */
+
+body.dark-theme .search-container {
+
+    background: #0d162b;
+    border-color: var(--student-border);
+}
+
+
+/* Buttons */
+
+body.dark-theme .secondary-btn,
+body.dark-theme .outline-btn {
+
+    background: #151f36;
+    color: var(--student-text);
+    border-color: var(--student-border);
+}
+
+
+/* Theme button */
+
+.theme-toggle {
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.theme-toggle:hover {
+
+    transform: scale(1.05);
+
+}
+
+
+/* Notification */
+
+body.dark-theme .notification-panel,
+body.dark-theme .dropdown-menu,
+body.dark-theme .profile-dropdown {
+
+    background: var(--student-card);
+    border-color: var(--student-border);
+    color: var(--student-text);
+}
+
+
+/* Progress / resource sections */
+
+body.dark-theme .resource-item,
+body.dark-theme .quick-action,
+body.dark-theme .preparation-item {
+
+    background: #0d162b;
+    border-color: var(--student-border);
+}
+
+
+/* Hover */
+
+body.dark-theme .nav-link:hover {
+
+    background: rgba(255,255,255,0.06);
+
+}
+
+
+body.dark-theme .card:hover,
+body.dark-theme .dashboard-card:hover {
+
+    background: var(--student-card-hover);
+
+}/* =========================================================
+   FINAL STUDENT DARK MODE
+========================================================= */
+
+body.dark-theme {
+    background: #0b1224 !important;
+    color: #f2f5ff !important;
+
+    --page-bg: #0b1224;
+    --card-bg: #111a2e;
+    --text-main: #f2f5ff;
+    --text-secondary: #98a4c1;
+    --text-muted: #687594;
+    --border: #1f2a42;
+}
+
+
+/* Main area */
+
+body.dark-theme .main-content {
+    background: #0b1224;
+}
+
+
+/* Header */
+
+body.dark-theme .top-header {
+    background: #111a2e;
+    border-bottom-color: #1f2a42;
+}
+
+
+/* Dashboard cards */
+
+body.dark-theme .dashboard-card,
+body.dark-theme .stat-card {
+    background: #111a2e;
+    border-color: #1f2a42;
+    color: #f2f5ff;
+}
+
+
+/* Card headings */
+
+body.dark-theme .card-header h2,
+body.dark-theme .welcome-row h1,
+body.dark-theme .stat-card strong,
+body.dark-theme .drive-info strong,
+body.dark-theme .notification-content strong,
+body.dark-theme .prep-item strong {
+    color: #f2f5ff;
+}
+
+
+/* Normal text */
+
+body.dark-theme .welcome-row p,
+body.dark-theme .stat-card span,
+body.dark-theme .stat-card small,
+body.dark-theme .drive-info > span,
+body.dark-theme .drive-deadline span,
+body.dark-theme .notification-content p,
+body.dark-theme .notification-time,
+body.dark-theme .prep-item span,
+body.dark-theme td,
+body.dark-theme .chart-legend small {
+    color: #98a4c1;
+}
+
+
+/* Search */
+
+body.dark-theme .search-box {
+    background: #0d1629;
+    border-color: #1f2a42;
+}
+
+body.dark-theme .search-box input {
+    color: #f2f5ff;
+}
+
+
+/* Search shortcut */
+
+body.dark-theme .search-shortcut {
+    background: #111a2e;
+    border-color: #1f2a42;
+    color: #98a4c1;
+}
+
+
+/* Select */
+
+body.dark-theme .year-select {
+    background: #0d1629;
+    color: #f2f5ff;
+    border-color: #1f2a42;
+}
+
+
+/* Table */
+
+body.dark-theme th {
+    background: #0d1629;
+    color: #98a4c1;
+}
+
+body.dark-theme td {
+    border-color: #1f2a42;
+}
+
+
+/* Preparation items */
+
+body.dark-theme .prep-item {
+    background: #0d1629;
+    border-color: #1f2a42;
+}
+
+
+/* Drive tags */
+
+body.dark-theme .drive-tags span {
+    background: #211c48;
+    color: #a894ff;
+}
+
+
+/* Motivation */
+
+body.dark-theme .motivation-box {
+    background: linear-gradient(
+        100deg,
+        #1c1940,
+        #172039
+    );
+}
+
+
+/* Donut center */
+
+body.dark-theme .donut-chart::before {
+    background: #111a2e;
+}
+
+
+/* Theme button */
+
+body.dark-theme .theme-toggle {
+    color: #f2f5ff;
+    border-color: #27324c;
+}
+
+
+/* Sidebar */
+
+body.dark-theme .sidebar {
+    background: #070d21;
+}

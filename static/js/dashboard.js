@@ -1,304 +1,401 @@
-```javascript
 /* =========================================================
    CAMPUS PLACEMENT PORTAL
-   STUDENT DASHBOARD JAVASCRIPT
+   STUDENT DASHBOARD
 ========================================================= */
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+/*
+   IMPORTANT:
+   Prevent dashboard.js from initializing twice.
+*/
 
-const themeToggle = document.getElementById("themeToggle");
-const topThemeToggle = document.getElementById("topThemeToggle");
-const themeIcon = document.getElementById("themeIcon");
-const themeText = document.getElementById("themeText");
+if (!window.studentDashboardInitialized) {
 
-const sidebar = document.getElementById("sidebar");
-const menuToggle = document.getElementById("menuToggle");
+    window.studentDashboardInitialized = true;
 
 
-/* =========================================================
-   THEME
-========================================================= */
-
-function setTheme(theme) {
-
-    if (theme === "dark") {
-
-        document.body.classList.add("dark-theme");
-
-        if (themeIcon) {
-            themeIcon.textContent = "☀";
-        }
-
-        if (themeText) {
-            themeText.textContent = "Switch to Light Mode";
-        }
-
-        if (topThemeToggle) {
-            topThemeToggle.textContent = "☀";
-        }
-
-        localStorage.setItem("campusTheme", "dark");
-
-    } else {
-
-        document.body.classList.remove("dark-theme");
-
-        if (themeIcon) {
-            themeIcon.textContent = "☾";
-        }
-
-        if (themeText) {
-            themeText.textContent = "Switch to Dark Mode";
-        }
-
-        if (topThemeToggle) {
-            topThemeToggle.textContent = "☼";
-        }
-
-        localStorage.setItem("campusTheme", "light");
-    }
-}
+    document.addEventListener("DOMContentLoaded", function () {
 
 
-/* =========================================================
-   LOAD SAVED THEME
-========================================================= */
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
 
-const savedTheme =
-    localStorage.getItem("campusTheme") || "light";
+        const themeToggle =
+            document.getElementById("themeToggle");
 
-setTheme(savedTheme);
+        const topThemeToggle =
+            document.getElementById("topThemeToggle");
 
+        const themeIcon =
+            document.getElementById("themeIcon");
 
-/* =========================================================
-   SIDEBAR THEME BUTTON
-========================================================= */
+        const themeText =
+            document.getElementById("themeText");
 
-if (themeToggle) {
+        const sidebar =
+            document.getElementById("sidebar");
 
-    themeToggle.addEventListener("click", () => {
+        const menuToggle =
+            document.getElementById("menuToggle");
 
-        const currentTheme =
-            document.body.classList.contains("dark-theme")
-                ? "dark"
-                : "light";
-
-        setTheme(
-            currentTheme === "dark"
-                ? "light"
-                : "dark"
-        );
-
-    });
-
-}
+        const searchInput =
+            document.getElementById("dashboardSearch");
 
 
-/* =========================================================
-   HEADER THEME BUTTON
-========================================================= */
+        /* =====================================================
+           THEME FUNCTION
+        ===================================================== */
 
-if (topThemeToggle) {
+        function setTheme(theme) {
 
-    topThemeToggle.addEventListener("click", () => {
+            if (theme === "dark") {
 
-        const currentTheme =
-            document.body.classList.contains("dark-theme")
-                ? "dark"
-                : "light";
+                document.body.classList.add("dark-theme");
 
-        setTheme(
-            currentTheme === "dark"
-                ? "light"
-                : "dark"
-        );
+                if (themeIcon) {
+                    themeIcon.textContent = "☀";
+                }
 
-    });
+                if (themeText) {
+                    themeText.textContent =
+                        "Switch to Light Mode";
+                }
 
-}
+                if (topThemeToggle) {
+                    topThemeToggle.textContent = "☀";
+                }
 
-
-/* =========================================================
-   MOBILE SIDEBAR
-========================================================= */
-
-if (menuToggle) {
-
-    menuToggle.addEventListener("click", () => {
-
-        sidebar.classList.toggle("open");
-
-    });
-
-}
-
-
-/* =========================================================
-   CLOSE MOBILE SIDEBAR AFTER NAVIGATION
-========================================================= */
-
-document.querySelectorAll(".nav-item").forEach(item => {
-
-    item.addEventListener("click", () => {
-
-        if (window.innerWidth <= 900) {
-            sidebar.classList.remove("open");
-        }
-
-    });
-
-});
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-const searchInput =
-    document.getElementById("dashboardSearch");
-
-
-if (searchInput) {
-
-    searchInput.addEventListener("keydown", event => {
-
-        if (event.key === "Enter") {
-
-            const searchValue =
-                searchInput.value.trim();
-
-            if (searchValue !== "") {
-
-                console.log(
-                    "Searching for:",
-                    searchValue
+                localStorage.setItem(
+                    "campusTheme",
+                    "dark"
                 );
-
-                /*
-                    Later this will connect to Flask
-                    and search real companies,
-                    drives and roles.
-                */
 
             }
 
+            else {
+
+                document.body.classList.remove(
+                    "dark-theme"
+                );
+
+                if (themeIcon) {
+                    themeIcon.textContent = "☾";
+                }
+
+                if (themeText) {
+                    themeText.textContent =
+                        "Switch to Dark Mode";
+                }
+
+                if (topThemeToggle) {
+                    topThemeToggle.textContent = "☼";
+                }
+
+                localStorage.setItem(
+                    "campusTheme",
+                    "light"
+                );
+            }
         }
 
-    });
 
-}
+        /* =====================================================
+           LOAD SAVED THEME
+        ===================================================== */
+
+        const savedTheme =
+            localStorage.getItem("campusTheme");
+
+        if (savedTheme === "dark") {
+
+            setTheme("dark");
+
+        } else {
+
+            setTheme("light");
+
+        }
 
 
-/* =========================================================
-   CTRL + K SEARCH SHORTCUT
-========================================================= */
+        /* =====================================================
+           SIDEBAR THEME BUTTON
+        ===================================================== */
 
-document.addEventListener("keydown", event => {
+        if (themeToggle) {
 
-    if (
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === "k"
-    ) {
+            themeToggle.addEventListener(
+                "click",
+                function (event) {
 
-        event.preventDefault();
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    const dark =
+                        document.body.classList.contains(
+                            "dark-theme"
+                        );
+
+                    setTheme(
+                        dark ? "light" : "dark"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           TOP HEADER THEME BUTTON
+        ===================================================== */
+
+        if (topThemeToggle) {
+
+            topThemeToggle.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    const dark =
+                        document.body.classList.contains(
+                            "dark-theme"
+                        );
+
+                    setTheme(
+                        dark ? "light" : "dark"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           MOBILE SIDEBAR
+        ===================================================== */
+
+        if (menuToggle && sidebar) {
+
+            menuToggle.addEventListener(
+                "click",
+                function () {
+
+                    sidebar.classList.toggle("open");
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           MOBILE NAVIGATION
+        ===================================================== */
+
+        document
+            .querySelectorAll(".nav-item")
+            .forEach(function (item) {
+
+                item.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            window.innerWidth <= 900 &&
+                            sidebar
+                        ) {
+
+                            sidebar.classList.remove(
+                                "open"
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
 
         if (searchInput) {
-            searchInput.focus();
+
+            searchInput.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (event.key === "Enter") {
+
+                        const value =
+                            searchInput.value.trim();
+
+                        if (value !== "") {
+
+                            console.log(
+                                "Searching for:",
+                                value
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
         }
 
-    }
 
-});
+        /* =====================================================
+           CTRL + K
+        ===================================================== */
 
+        document.addEventListener(
+            "keydown",
+            function (event) {
 
-/* =========================================================
-   VIEW ALL BUTTONS
-========================================================= */
+                if (
+                    (event.ctrlKey || event.metaKey) &&
+                    event.key.toLowerCase() === "k"
+                ) {
 
-document.querySelectorAll(".view-all").forEach(button => {
+                    event.preventDefault();
 
-    button.addEventListener("click", () => {
+                    if (searchInput) {
+                        searchInput.focus();
+                    }
 
-        console.log(
-            "View All clicked:",
-            button.parentElement?.querySelector("h2")?.textContent
+                }
+
+            }
         );
 
-        /*
-            Later these buttons will redirect
-            to their respective Flask routes.
-        */
 
-    });
+        /* =====================================================
+           VIEW ALL
+        ===================================================== */
 
-});
+        document
+            .querySelectorAll(".view-all")
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const heading =
+                            button
+                                .parentElement
+                                ?.querySelector("h2");
+
+                        console.log(
+                            "View All:",
+                            heading
+                                ? heading.textContent
+                                : ""
+                        );
+
+                    }
+                );
+
+            });
 
 
-/* =========================================================
-   PREPARATION ITEMS
-========================================================= */
+        /* =====================================================
+           PREPARATION
+        ===================================================== */
 
-document.querySelectorAll(".prep-item").forEach(item => {
+        document
+            .querySelectorAll(".prep-item")
+            .forEach(function (item) {
 
-    item.addEventListener("click", event => {
+                item.addEventListener(
+                    "click",
+                    function (event) {
 
-        event.preventDefault();
+                        event.preventDefault();
 
-        const title =
-            item.querySelector("strong")?.textContent;
+                        const title =
+                            item.querySelector("strong");
 
-        console.log(
-            "Preparation selected:",
-            title
+                        console.log(
+                            "Preparation:",
+                            title
+                                ? title.textContent
+                                : ""
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =====================================================
+           NOTIFICATIONS
+        ===================================================== */
+
+        const notificationButton =
+            document.querySelector(
+                ".notification-button"
+            );
+
+        if (notificationButton) {
+
+            notificationButton.addEventListener(
+                "click",
+                function () {
+
+                    console.log(
+                        "Notifications clicked"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           WINDOW RESIZE
+        ===================================================== */
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (
+                    window.innerWidth > 900 &&
+                    sidebar
+                ) {
+
+                    sidebar.classList.remove(
+                        "open"
+                    );
+
+                }
+
+            }
         );
 
-        /*
-            Later:
-            /student/preparation/<topic>
-        */
 
-    });
+        /* =====================================================
+           CONFIRM JS
+        ===================================================== */
 
-});
-
-
-/* =========================================================
-   NOTIFICATION BUTTON
-========================================================= */
-
-const notificationButton =
-    document.querySelector(".notification-button");
-
-if (notificationButton) {
-
-    notificationButton.addEventListener("click", () => {
-
-        console.log("Notifications clicked");
-
-        /*
-            Later this will open:
-            Student Notifications page.
-        */
+        console.log(
+            "Student Dashboard JS Loaded Successfully - ONE TIME"
+        );
 
     });
 
 }
-
-
-/* =========================================================
-   WINDOW RESIZE
-========================================================= */
-
-window.addEventListener("resize", () => {
-
-    if (window.innerWidth > 900) {
-
-        sidebar.classList.remove("open");
-
-    }
-
-});
-```
