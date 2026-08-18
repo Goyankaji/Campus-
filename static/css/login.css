@@ -1,408 +1,1076 @@
+/* =====================================================
+   RESET
+===================================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
 :root {
-    --primary: #1e3a8a;
-    --primary-dark: #172554;
-    --text: #172033;
-    --muted: #6b7280;
-    --border: #d9dee8;
-    --white: #ffffff;
+
+    --primary: #1769e0;
+
+    --primary-dark: #0d4fc2;
+
+    --text: #172554;
+
+    --secondary-text: #64748b;
+
+    --border: #cbd5e1;
+
+    --error: #dc2626;
+
 }
+
+
+
+/* =====================================================
+   BODY
+===================================================== */
 
 body {
+
     min-height: 100vh;
-    font-family: "Segoe UI", Arial, sans-serif;
+
+    font-family:
+        "Segoe UI",
+        Inter,
+        Arial,
+        sans-serif;
+
+    background: #0f172a;
+
     overflow: hidden;
+
 }
 
 
-/* =========================
-   BACKGROUND
-========================= */
+
+/* =====================================================
+   MAIN LOGIN PAGE
+===================================================== */
 
 .login-page {
+
     min-height: 100vh;
+
     width: 100%;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    padding: 30px;
+    padding: 35px 20px;
+
+    position: relative;
+
+
+    /* COLLEGE BACKGROUND */
 
     background-image:
+
         linear-gradient(
-            135deg,
-            rgba(8, 18, 42, 0.78),
-            rgba(18, 42, 82, 0.58)
+            120deg,
+            rgba(8, 20, 42, 0.72),
+            rgba(15, 34, 65, 0.50)
         ),
+
         url("../images/college-bg.jpeg");
 
+
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 
-    position: relative;
 }
 
 
-/* =========================
+
+/* =====================================================
+   BACKGROUND VIGNETTE
+===================================================== */
+
+.login-page::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            transparent 20%,
+            rgba(0, 0, 0, 0.30) 100%
+        );
+
+    pointer-events: none;
+
+}
+
+
+
+/* =====================================================
    LOGIN CARD
-========================= */
+===================================================== */
 
 .login-card {
-    width: 100%;
-    max-width: 440px;
 
-    background: rgba(255, 255, 255, 0.96);
+    width: min(100%, 510px);
 
-    padding: 38px 40px;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.28);
+    padding: 42px 46px 28px;
 
     position: relative;
 
-    animation: cardAppear 0.6s ease-out;
+    z-index: 2;
+
+
+    background:
+        rgba(255, 255, 255, 0.95);
+
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.85);
+
+
+    border-radius: 24px;
+
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0, 0, 0, 0.35),
+
+        0 8px 25px
+        rgba(0, 0, 0, 0.12);
+
+
+    backdrop-filter: blur(12px);
+
+
+    animation:
+        cardEntry 0.65s ease-out;
+
 }
 
 
-@keyframes cardAppear {
+
+/* =====================================================
+   CARD ANIMATION
+===================================================== */
+
+@keyframes cardEntry {
+
     from {
+
         opacity: 0;
-        transform: translateY(25px) scale(0.98);
+
+        transform:
+            translateY(25px)
+            scale(0.97);
+
     }
+
 
     to {
+
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
+
     }
+
 }
 
 
-/* =========================
-   LOGO
-========================= */
+
+/* =====================================================
+   COLLEGE LOGO
+===================================================== */
 
 .logo-container {
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    margin-bottom: 18px;
+    margin-bottom: 17px;
+
 }
 
+
+
 .college-logo {
-    width: 78px;
-    height: 78px;
+
+    width: 88px;
+
+    height: 88px;
 
     object-fit: contain;
 
     border-radius: 50%;
+
+
+    filter:
+
+        drop-shadow(
+            0 5px 10px
+            rgba(15, 23, 42, 0.15)
+        );
+
 }
 
 
-/* =========================
-   HEADING
-========================= */
 
-.login-card h1 {
+/* =====================================================
+   WELCOME SECTION
+===================================================== */
+
+.welcome-section {
+
+    margin-bottom: 29px;
+
+}
+
+
+
+.welcome-section h1 {
+
     text-align: center;
 
-    font-size: 29px;
+    color: var(--text);
+
+    font-size: 31px;
+
+    line-height: 1.2;
+
     font-weight: 700;
 
-    color: var(--text);
+    letter-spacing: -0.5px;
 
-    margin-bottom: 7px;
 }
 
-.login-subtitle {
-    text-align: center;
 
-    color: var(--muted);
+
+.subtitle-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 9px;
+
+}
+
+
+
+.subtitle-row span {
+
+    width: 58px;
+
+    height: 1px;
+
+    background: #cbd5e1;
+
+}
+
+
+
+.subtitle-row p {
+
+    color: #64748b;
 
     font-size: 14px;
 
-    margin-bottom: 30px;
+    white-space: nowrap;
+
 }
 
 
-/* =========================
-   FORM
-========================= */
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
 
 .form-group {
-    margin-bottom: 20px;
+
+    margin-bottom: 19px;
+
 }
+
+
 
 .form-group label {
+
     display: block;
 
-    font-size: 14px;
-    font-weight: 600;
+    margin-bottom: 8px;
 
     color: var(--text);
 
-    margin-bottom: 8px;
+    font-size: 14px;
+
+    font-weight: 650;
+
 }
 
 
-/* =========================
-   INPUT WRAPPER
-========================= */
 
-.input-wrapper {
+/* =====================================================
+   INPUT BOX
+===================================================== */
+
+.input-box {
+
+    width: 100%;
+
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
     position: relative;
 
-    width: 100%;
+
+    border:
+        1px solid
+        var(--border);
+
+
+    border-radius: 11px;
+
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+
+    transition:
+
+        border-color 0.2s ease,
+
+        box-shadow 0.2s ease,
+
+        background 0.2s ease;
+
 }
 
-.input-wrapper input,
-.input-wrapper select {
+
+
+/* =====================================================
+   INPUT FOCUS
+===================================================== */
+
+.input-box:focus-within {
+
+    border-color:
+        var(--primary);
+
+
+    background:
+        #ffffff;
+
+
+    box-shadow:
+
+        0 0 0 4px
+        rgba(23, 105, 224, 0.10);
+
+}
+
+
+
+/* =====================================================
+   INPUT ICON
+===================================================== */
+
+.input-icon {
+
+    width: 21px;
+
+    height: 21px;
+
+    flex-shrink: 0;
+
+    margin-left: 16px;
+
+    color: #64748b;
+
+}
+
+
+
+.input-box:focus-within
+.input-icon {
+
+    color:
+        var(--primary);
+
+}
+
+
+
+/* =====================================================
+   INPUT + SELECT
+===================================================== */
+
+.input-box input,
+.input-box select {
+
     width: 100%;
 
-    height: 50px;
+    height: 100%;
 
-    border: 1px solid var(--border);
-
-    border-radius: 10px;
-
-    background: #f9fafc;
-
-    color: var(--text);
-
-    font-size: 14px;
+    border: none;
 
     outline: none;
 
-    transition: all 0.2s ease;
+    background: transparent;
+
+    color: #1e293b;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
 }
 
-.input-wrapper input {
-    padding: 0 48px;
+
+
+.input-box input {
+
+    padding:
+        0 15px;
+
 }
 
-.input-wrapper select {
-    padding: 0 42px 0 48px;
+
+
+.input-box select {
+
+    padding:
+        0 45px 0 15px;
 
     appearance: none;
 
     cursor: pointer;
+
 }
 
 
-/* =========================
-   ICON
-========================= */
 
-.input-icon {
+.input-box input::placeholder {
+
+    color: #94a3b8;
+
+}
+
+
+
+/* =====================================================
+   SELECT ARROW
+===================================================== */
+
+.select-arrow {
+
     position: absolute;
 
-    left: 17px;
-    top: 50%;
+    right: 15px;
 
-    transform: translateY(-50%);
+    width: 19px;
 
-    color: #7b8494;
+    height: 19px;
 
-    font-size: 14px;
+    color: #64748b;
 
-    z-index: 2;
+    pointer-events: none;
+
 }
 
 
-/* =========================
-   FOCUS
-========================= */
 
-.input-wrapper input:focus,
-.input-wrapper select:focus {
-    border-color: var(--primary);
+.input-box:focus-within
+.select-arrow {
 
-    background: #ffffff;
+    color: #1769e0;
 
-    box-shadow:
-        0 0 0 3px rgba(30, 58, 138, 0.10);
 }
 
 
-/* =========================
-   PASSWORD BUTTON
-========================= */
+
+/* =====================================================
+   PASSWORD EYE BUTTON
+===================================================== */
 
 .password-toggle {
-    position: absolute;
 
-    right: 12px;
-    top: 50%;
+    width: 46px;
 
-    transform: translateY(-50%);
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
 
     border: none;
 
     background: transparent;
 
-    color: var(--primary);
-
-    font-size: 12px;
-    font-weight: 600;
+    color: #64748b;
 
     cursor: pointer;
 
-    padding: 5px;
 }
+
+
+
+.password-toggle svg {
+
+    width: 21px;
+
+    height: 21px;
+
+    transition:
+        all 0.2s ease;
+
+}
+
+
 
 .password-toggle:hover {
-    color: var(--primary-dark);
+
+    color:
+        var(--primary);
+
 }
 
 
-/* =========================
-   FORGOT PASSWORD
-========================= */
+
+.password-toggle:focus {
+
+    outline: none;
+
+}
+
+
+
+/* =====================================================
+   ERROR MESSAGE
+===================================================== */
+
+.error-message {
+
+    display: block;
+
+    min-height: 0;
+
+    margin-top: 5px;
+
+    color:
+        var(--error);
+
+    font-size: 12px;
+
+}
+
+
+
+.input-box.input-error {
+
+    border-color:
+        var(--error);
+
+}
+
+
+
+.input-box.input-error:focus-within {
+
+    box-shadow:
+
+        0 0 0 4px
+        rgba(220, 38, 38, 0.08);
+
+}
+
+
+
+/* =====================================================
+   FORM OPTIONS
+===================================================== */
 
 .form-options {
-    display: flex;
-    justify-content: flex-end;
 
-    margin-top: -4px;
-    margin-bottom: 22px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 2px;
+
+    margin-bottom: 23px;
+
 }
 
-.form-options a {
-    text-decoration: none;
 
-    color: var(--primary);
+
+/* =====================================================
+   REMEMBER ME
+===================================================== */
+
+.remember-me {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #475569;
 
     font-size: 13px;
-    font-weight: 600;
+
+    cursor: pointer;
+
+    user-select: none;
+
 }
+
+
+
+.remember-me input {
+
+    display: none;
+
+}
+
+
+
+.custom-checkbox {
+
+    width: 19px;
+
+    height: 19px;
+
+    display: inline-block;
+
+    position: relative;
+
+    border:
+        1.5px solid
+        #b9c4d3;
+
+    border-radius: 5px;
+
+    background: white;
+
+    transition:
+        all 0.2s ease;
+
+}
+
+
+
+.remember-me input:checked
++ .custom-checkbox {
+
+    background:
+        var(--primary);
+
+    border-color:
+        var(--primary);
+
+}
+
+
+
+.remember-me input:checked
++ .custom-checkbox::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 5px;
+
+    top: 2px;
+
+    width: 5px;
+
+    height: 9px;
+
+    border:
+        solid white;
+
+    border-width:
+        0 2px 2px 0;
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
+
+.form-options a {
+
+    color:
+        var(--primary);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+}
+
+
 
 .form-options a:hover {
-    text-decoration: underline;
+
+    text-decoration:
+        underline;
+
 }
 
 
-/* =========================
-   LOGIN BUTTON
-========================= */
 
-.login-btn {
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
+
+.login-button {
+
     width: 100%;
-    height: 50px;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
 
     border: none;
-    border-radius: 10px;
 
-    background: linear-gradient(
-        135deg,
-        var(--primary),
-        #2563eb
-    );
+    border-radius: 11px;
+
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #2674e8,
+            #0955c9
+        );
+
 
     color: white;
 
-    font-size: 15px;
-    font-weight: 600;
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 650;
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
 
     box-shadow:
-        0 8px 18px rgba(30, 58, 138, 0.22);
+
+        0 10px 24px
+        rgba(23, 105, 224, 0.25);
+
+
+    transition:
+
+        transform 0.2s ease,
+
+        box-shadow 0.2s ease;
+
 }
 
-.login-btn:hover {
-    transform: translateY(-2px);
+
+
+.login-button svg {
+
+    width: 19px;
+
+    height: 19px;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+
+.login-button:hover {
+
+    transform:
+        translateY(-2px);
+
 
     box-shadow:
-        0 12px 24px rgba(30, 58, 138, 0.28);
+
+        0 14px 30px
+        rgba(23, 105, 224, 0.32);
+
 }
 
-.login-btn:active {
-    transform: translateY(0);
+
+
+.login-button:hover svg {
+
+    transform:
+        translateX(3px);
+
 }
 
 
-/* =========================
-   MESSAGE
-========================= */
+
+.login-button:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+
+.login-button.loading {
+
+    pointer-events: none;
+
+    opacity: 0.75;
+
+}
+
+
+
+/* =====================================================
+   LOGIN MESSAGE
+===================================================== */
 
 .login-message {
-    min-height: 20px;
 
-    margin-top: 15px;
+    min-height: 18px;
+
+    margin-top: 11px;
 
     text-align: center;
 
-    font-size: 13px;
+    font-size: 12px;
+
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.login-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 22px;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+
+.login-footer svg {
+
+    width: 17px;
+
+    height: 17px;
+
+    color:
+        var(--primary);
+
+}
+
+
+
+.login-footer b {
+
+    color:
+        #b0bac8;
+
+}
+
+
+
+/* =====================================================
+   MOBILE RESPONSIVE
+===================================================== */
 
 @media (max-width: 600px) {
 
     body {
+
         overflow: auto;
+
     }
+
 
     .login-page {
-        padding: 20px;
+
+        min-height: 100vh;
+
+        padding:
+            20px 14px;
+
     }
+
 
     .login-card {
-        padding: 30px 24px;
 
-        border-radius: 17px;
+        padding:
+            32px 25px 25px;
+
+        border-radius:
+            20px;
+
     }
 
-    .login-card h1 {
-        font-size: 26px;
-    }
 
     .college-logo {
-        width: 68px;
-        height: 68px;
+
+        width: 76px;
+
+        height: 76px;
+
     }
+
+
+    .welcome-section h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .subtitle-row span {
+
+        width: 35px;
+
+    }
+
 }
 
 
-@media (max-height: 700px) {
 
-    .login-page {
-        padding: 20px;
-    }
+/* =====================================================
+   SMALL HEIGHT SCREEN
+===================================================== */
+
+@media (max-height: 750px)
+and (min-width: 601px) {
 
     .login-card {
-        padding-top: 25px;
-        padding-bottom: 25px;
+
+        padding-top:
+            28px;
+
+        padding-bottom:
+            22px;
+
     }
+
 
     .college-logo {
-        width: 62px;
-        height: 62px;
+
+        width: 70px;
+
+        height: 70px;
+
     }
 
-    .login-card h1 {
-        font-size: 25px;
+
+    .welcome-section {
+
+        margin-bottom:
+            21px;
+
     }
 
-    .login-subtitle {
-        margin-bottom: 20px;
-    }
 
     .form-group {
-        margin-bottom: 14px;
+
+        margin-bottom:
+            13px;
+
     }
+
+
+    .input-box {
+
+        height:
+            48px;
+
+    }
+
+
+    .login-button {
+
+        height:
+            49px;
+
+    }
+
+
+    .login-footer {
+
+        margin-top:
+            14px;
+
+    }
+
 }
