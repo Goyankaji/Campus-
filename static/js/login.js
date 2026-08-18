@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-
     /* =====================================================
        ELEMENTS
     ===================================================== */
@@ -8,34 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm =
         document.getElementById("loginForm");
 
-
-    const role =
-        document.getElementById("role");
-
-
     const username =
         document.getElementById("username");
-
 
     const password =
         document.getElementById("password");
 
-
     const togglePassword =
         document.getElementById("togglePassword");
-
 
     const forgotPassword =
         document.getElementById("forgotPassword");
 
-
     const loginButton =
         document.getElementById("loginButton");
 
-
     const loginMessage =
         document.getElementById("loginMessage");
-
 
 
     /* =====================================================
@@ -46,10 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "click",
         () => {
 
-
             const eyeIcon =
                 document.getElementById("eyeIcon");
-
 
 
             /* =========================================
@@ -58,29 +44,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (password.type === "password") {
 
-
                 password.type = "text";
-
 
                 togglePassword.setAttribute(
                     "aria-label",
                     "Hide password"
                 );
 
-
-                /* Eye with slash */
-
                 eyeIcon.innerHTML = `
 
                     <path
                         d="M3 3L21 21"/>
 
-
                     <path
                         d="M10.6 10.6
                            A2 2 0 0 0
                            13.4 13.4"/>
-
 
                     <path
                         d="M9.2 4.2
@@ -93,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
                            C21.5 14
                            20.4 15.7
                            19 17"/>
-
 
                     <path
                         d="M6.1 6.1
@@ -109,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 `;
 
-
             }
 
 
@@ -119,17 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             else {
 
-
                 password.type = "password";
-
 
                 togglePassword.setAttribute(
                     "aria-label",
                     "Show password"
                 );
-
-
-                /* Normal Eye */
 
                 eyeIcon.innerHTML = `
 
@@ -148,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
                            4.5 16.5
                            2 12Z"/>
 
-
                     <circle
                         cx="12"
                         cy="12"
@@ -162,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-
     /* =====================================================
        LOGIN FORM SUBMIT
     ===================================================== */
@@ -171,52 +141,23 @@ document.addEventListener("DOMContentLoaded", () => {
         "submit",
         async (event) => {
 
-
             event.preventDefault();
 
-
             clearErrors();
-
 
 
             /* =========================================
                GET VALUES
             ========================================== */
 
-            const roleValue =
-                role.value;
-
-
             const usernameValue =
                 username.value.trim();
-
 
             const passwordValue =
                 password.value;
 
 
-
             let isValid = true;
-
-
-
-            /* =========================================
-               ROLE VALIDATION
-            ========================================== */
-
-            if (!roleValue) {
-
-
-                showError(
-                    "role",
-                    "Please select your role."
-                );
-
-
-                isValid = false;
-
-            }
-
 
 
             /* =========================================
@@ -225,17 +166,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!usernameValue) {
 
-
                 showError(
                     "username",
                     "Please enter your email or username."
                 );
 
-
                 isValid = false;
 
             }
-
 
 
             /* =========================================
@@ -244,17 +182,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!passwordValue) {
 
-
                 showError(
                     "password",
                     "Please enter your password."
                 );
 
-
                 isValid = false;
 
             }
-
 
 
             /* =========================================
@@ -262,11 +197,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ========================================== */
 
             if (!isValid) {
-
                 return;
-
             }
-
 
 
             /* =========================================
@@ -277,12 +209,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 "loading"
             );
 
-
             loginButton
                 .querySelector("span")
                 .textContent =
                 "Signing in...";
-
 
 
             /*
@@ -296,7 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
              *         "Content-Type": "application/json"
              *     },
              *     body: JSON.stringify({
-             *         role: roleValue,
              *         username: usernameValue,
              *         password: passwordValue
              *     })
@@ -304,34 +233,27 @@ document.addEventListener("DOMContentLoaded", () => {
              */
 
 
-
             setTimeout(() => {
-
 
                 loginButton.classList.remove(
                     "loading"
                 );
-
 
                 loginButton
                     .querySelector("span")
                     .textContent =
                     "Login";
 
-
                 loginMessage.textContent =
                     "Login interface is ready.";
 
-
                 loginMessage.style.color =
                     "#1769e0";
-
 
             }, 700);
 
         }
     );
-
 
 
     /* =====================================================
@@ -342,35 +264,16 @@ document.addEventListener("DOMContentLoaded", () => {
         "click",
         (event) => {
 
-
             event.preventDefault();
-
 
             loginMessage.textContent =
                 "Password recovery will be connected later.";
-
 
             loginMessage.style.color =
                 "#64748b";
 
         }
     );
-
-
-
-    /* =====================================================
-       CLEAR ROLE ERROR
-    ===================================================== */
-
-    role.addEventListener(
-        "change",
-        () => {
-
-            removeError("role");
-
-        }
-    );
-
 
 
     /* =====================================================
@@ -387,7 +290,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-
     /* =====================================================
        CLEAR PASSWORD ERROR
     ===================================================== */
@@ -402,17 +304,14 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-
     /* =====================================================
        SHOW ERROR
     ===================================================== */
 
     function showError(field, message) {
 
-
         const input =
             document.getElementById(field);
-
 
         const error =
             document.getElementById(
@@ -425,12 +324,10 @@ document.addEventListener("DOMContentLoaded", () => {
             .classList
             .add("input-error");
 
-
         error.textContent =
             message;
 
     }
-
 
 
     /* =====================================================
@@ -439,10 +336,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function removeError(field) {
 
-
         const input =
             document.getElementById(field);
-
 
         const error =
             document.getElementById(
@@ -455,11 +350,9 @@ document.addEventListener("DOMContentLoaded", () => {
             .classList
             .remove("input-error");
 
-
         error.textContent = "";
 
     }
-
 
 
     /* =====================================================
@@ -468,15 +361,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function clearErrors() {
 
-
-        removeError("role");
-
-
         removeError("username");
 
-
         removeError("password");
-
 
         loginMessage.textContent = "";
 
