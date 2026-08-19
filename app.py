@@ -27,6 +27,9 @@ def tpo_dashboard():
 def hod_dashboard():
     return render_template("hod/dashboard.html")
 
+@app.route("/admin/dashboard")
+def admin_dashboard():
+    return render_template("admin/dashboard.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
