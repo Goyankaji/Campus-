@@ -1,401 +1,650 @@
 /* =========================================================
-   CAMPUS PLACEMENT PORTAL
-   STUDENT DASHBOARD
+   STUDENT DASHBOARD JS
 ========================================================= */
 
 
-/*
-   IMPORTANT:
-   Prevent dashboard.js from initializing twice.
-*/
+/* =========================
+   SECTION NAVIGATION
+========================= */
 
-if (!window.studentDashboardInitialized) {
+function openSection(sectionId, clickedElement = null) {
 
-    window.studentDashboardInitialized = true;
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-
-
-        /* =====================================================
-           ELEMENTS
-        ===================================================== */
-
-        const themeToggle =
-            document.getElementById("themeToggle");
-
-        const topThemeToggle =
-            document.getElementById("topThemeToggle");
-
-        const themeIcon =
-            document.getElementById("themeIcon");
-
-        const themeText =
-            document.getElementById("themeText");
-
-        const sidebar =
-            document.getElementById("sidebar");
-
-        const menuToggle =
-            document.getElementById("menuToggle");
-
-        const searchInput =
-            document.getElementById("dashboardSearch");
+    document
+        .querySelectorAll(".page-section")
+        .forEach(section => {
+            section.classList.remove("active-section");
+        });
 
 
-        /* =====================================================
-           THEME FUNCTION
-        ===================================================== */
+    const section =
+        document.getElementById(sectionId);
 
-        function setTheme(theme) {
 
-            if (theme === "dark") {
+    if (section) {
+        section.classList.add("active-section");
+    }
 
-                document.body.classList.add("dark-theme");
 
-                if (themeIcon) {
-                    themeIcon.textContent = "☀";
-                }
+    document
+        .querySelectorAll(".nav-link")
+        .forEach(link => {
+            link.classList.remove("active");
+        });
 
-                if (themeText) {
-                    themeText.textContent =
-                        "Switch to Light Mode";
-                }
 
-                if (topThemeToggle) {
-                    topThemeToggle.textContent = "☀";
-                }
+    if (clickedElement) {
+        clickedElement.classList.add("active");
+    }
 
-                localStorage.setItem(
-                    "campusTheme",
-                    "dark"
-                );
 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================
+   OPEN SECTION FROM BUTTON
+========================= */
+
+function openSectionById(sectionId) {
+
+    const section =
+        document.getElementById(sectionId);
+
+
+    if (!section) {
+        return;
+    }
+
+
+    openSection(sectionId);
+
+
+    document
+        .querySelectorAll(".nav-link")
+        .forEach(link => {
+
+            const clickCode =
+                link.getAttribute("onclick") || "";
+
+            if (clickCode.includes(sectionId)) {
+                link.classList.add("active");
             }
 
-            else {
+        });
 
-                document.body.classList.remove(
-                    "dark-theme"
-                );
-
-                if (themeIcon) {
-                    themeIcon.textContent = "☾";
-                }
-
-                if (themeText) {
-                    themeText.textContent =
-                        "Switch to Dark Mode";
-                }
-
-                if (topThemeToggle) {
-                    topThemeToggle.textContent = "☼";
-                }
-
-                localStorage.setItem(
-                    "campusTheme",
-                    "light"
-                );
-            }
-        }
+}
 
 
-        /* =====================================================
-           LOAD SAVED THEME
-        ===================================================== */
+/* =========================
+   PROFILE DROPDOWN
+========================= */
 
-        const savedTheme =
-            localStorage.getItem("campusTheme");
+function toggleProfileMenu() {
 
-        if (savedTheme === "dark") {
-
-            setTheme("dark");
-
-        } else {
-
-            setTheme("light");
-
-        }
+    const menu =
+        document.getElementById("profileMenu");
 
 
-        /* =====================================================
-           SIDEBAR THEME BUTTON
-        ===================================================== */
-
-        if (themeToggle) {
-
-            themeToggle.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-                    const dark =
-                        document.body.classList.contains(
-                            "dark-theme"
-                        );
-
-                    setTheme(
-                        dark ? "light" : "dark"
-                    );
-
-                }
-            );
-
-        }
+    if (!menu) {
+        return;
+    }
 
 
-        /* =====================================================
-           TOP HEADER THEME BUTTON
-        ===================================================== */
+    menu.classList.toggle("show");
 
-        if (topThemeToggle) {
-
-            topThemeToggle.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-                    const dark =
-                        document.body.classList.contains(
-                            "dark-theme"
-                        );
-
-                    setTheme(
-                        dark ? "light" : "dark"
-                    );
-
-                }
-            );
-
-        }
+}
 
 
-        /* =====================================================
-           MOBILE SIDEBAR
-        ===================================================== */
+/* Close profile menu when clicking outside */
 
-        if (menuToggle && sidebar) {
+document.addEventListener("click", function(event) {
 
-            menuToggle.addEventListener(
-                "click",
-                function () {
+    const wrapper =
+        document.getElementById("profileWrapper");
 
-                    sidebar.classList.toggle("open");
-
-                }
-            );
-
-        }
+    const menu =
+        document.getElementById("profileMenu");
 
 
-        /* =====================================================
-           MOBILE NAVIGATION
-        ===================================================== */
+    if (
+        wrapper &&
+        menu &&
+        !wrapper.contains(event.target)
+    ) {
 
-        document
-            .querySelectorAll(".nav-item")
-            .forEach(function (item) {
+        menu.classList.remove("show");
 
-                item.addEventListener(
-                    "click",
-                    function () {
+    }
 
-                        if (
-                            window.innerWidth <= 900 &&
-                            sidebar
-                        ) {
+});
 
-                            sidebar.classList.remove(
-                                "open"
-                            );
+
+/* =========================
+   DARK / LIGHT MODE
+========================= */
+
+function toggleDarkMode() {
+
+    document.body.classList.toggle("dark-mode");
+
+
+    const isDark =
+        document.body.classList.contains("dark-mode");
+
+
+    localStorage.setItem(
+        "studentDarkMode",
+        isDark ? "true" : "false"
+    );
+
+
+    updateThemeIcon();
+
+}
+
+
+/* Change moon/sun icon */
+
+function updateThemeIcon() {
+
+    const icon =
+        document.getElementById("themeIcon");
+
+
+    if (!icon) {
+        return;
+    }
+
+
+    const isDark =
+        document.body.classList.contains("dark-mode");
+
+
+    icon.textContent =
+        isDark ? "☀" : "☾";
+
+}
+
+
+/* Restore saved theme */
+
+function restoreTheme() {
+
+    const savedTheme =
+        localStorage.getItem("studentDarkMode");
+
+
+    if (savedTheme === "true") {
+
+        document.body.classList.add("dark-mode");
+
+    }
+
+
+    updateThemeIcon();
+
+}
+
+
+/* =========================
+   PLACEMENT CHART
+========================= */
+
+let placementChart = null;
+
+
+function createPlacementChart() {
+
+    const canvas =
+        document.getElementById("overviewChart");
+
+
+    if (!canvas) {
+        return;
+    }
+
+
+    if (typeof Chart === "undefined") {
+
+        console.error(
+            "Chart.js could not be loaded."
+        );
+
+        return;
+
+    }
+
+
+    placementChart =
+        new Chart(canvas, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: [
+                    "Placed Students",
+                    "In Interview",
+                    "Yet to Appear"
+                ],
+
+                datasets: [{
+
+                    data: [
+                        480,
+                        215,
+                        565
+                    ],
+
+                    backgroundColor: [
+                        "#2787e8",
+                        "#7445e9",
+                        "#19b878"
+                    ],
+
+                    borderWidth: 0
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                cutout: "68%",
+
+                plugins: {
+
+                    legend: {
+
+                        position: "right",
+
+                        labels: {
+
+                            usePointStyle: true,
+
+                            pointStyle: "circle",
+
+                            padding: 9,
+
+                            font: {
+                                size: 8
+                            }
 
                         }
 
                     }
-                );
-
-            });
-
-
-        /* =====================================================
-           SEARCH
-        ===================================================== */
-
-        if (searchInput) {
-
-            searchInput.addEventListener(
-                "keydown",
-                function (event) {
-
-                    if (event.key === "Enter") {
-
-                        const value =
-                            searchInput.value.trim();
-
-                        if (value !== "") {
-
-                            console.log(
-                                "Searching for:",
-                                value
-                            );
-
-                        }
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           CTRL + K
-        ===================================================== */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    (event.ctrlKey || event.metaKey) &&
-                    event.key.toLowerCase() === "k"
-                ) {
-
-                    event.preventDefault();
-
-                    if (searchInput) {
-                        searchInput.focus();
-                    }
 
                 }
 
             }
-        );
+
+        });
+
+}
 
 
-        /* =====================================================
-           VIEW ALL
-        ===================================================== */
+/* =========================
+   YEAR CHANGE
+========================= */
 
-        document
-            .querySelectorAll(".view-all")
-            .forEach(function (button) {
+function setupYearSelectors() {
 
-                button.addEventListener(
-                    "click",
-                    function () {
+    const academicYear =
+        document.getElementById("academicYear");
 
-                        const heading =
-                            button
-                                .parentElement
-                                ?.querySelector("h2");
-
-                        console.log(
-                            "View All:",
-                            heading
-                                ? heading.textContent
-                                : ""
-                        );
-
-                    }
-                );
-
-            });
+    const overviewYear =
+        document.getElementById("overviewYear");
 
 
-        /* =====================================================
-           PREPARATION
-        ===================================================== */
-
-        document
-            .querySelectorAll(".prep-item")
-            .forEach(function (item) {
-
-                item.addEventListener(
-                    "click",
-                    function (event) {
-
-                        event.preventDefault();
-
-                        const title =
-                            item.querySelector("strong");
-
-                        console.log(
-                            "Preparation:",
-                            title
-                                ? title.textContent
-                                : ""
-                        );
-
-                    }
-                );
-
-            });
+    if (
+        !academicYear ||
+        !overviewYear
+    ) {
+        return;
+    }
 
 
-        /* =====================================================
-           NOTIFICATIONS
-        ===================================================== */
+    academicYear.addEventListener(
+        "change",
+        function() {
 
-        const notificationButton =
-            document.querySelector(
-                ".notification-button"
-            );
+            overviewYear.value =
+                academicYear.value;
 
-        if (notificationButton) {
-
-            notificationButton.addEventListener(
-                "click",
-                function () {
-
-                    console.log(
-                        "Notifications clicked"
-                    );
-
-                }
+            updateChartForYear(
+                academicYear.value
             );
 
         }
+    );
 
 
-        /* =====================================================
-           WINDOW RESIZE
-        ===================================================== */
+    overviewYear.addEventListener(
+        "change",
+        function() {
 
-        window.addEventListener(
-            "resize",
-            function () {
+            academicYear.value =
+                overviewYear.value;
 
-                if (
-                    window.innerWidth > 900 &&
-                    sidebar
-                ) {
+            updateChartForYear(
+                overviewYear.value
+            );
 
-                    sidebar.classList.remove(
-                        "open"
-                    );
+        }
+    );
 
-                }
+}
 
-            }
+
+/* Change chart data according to year */
+
+function updateChartForYear(year) {
+
+    const yearlyData = {
+
+        "2025-26": {
+            placed: 480,
+            interview: 215,
+            remaining: 565
+        },
+
+        "2024-25": {
+            placed: 410,
+            interview: 190,
+            remaining: 620
+        },
+
+        "2023-24": {
+            placed: 365,
+            interview: 170,
+            remaining: 685
+        }
+
+    };
+
+
+    const data =
+        yearlyData[year] ||
+        yearlyData["2025-26"];
+
+
+    const total =
+        data.placed +
+        data.interview +
+        data.remaining;
+
+
+    const placedPercent =
+        ((data.placed / total) * 100).toFixed(1);
+
+
+    const interviewPercent =
+        ((data.interview / total) * 100).toFixed(1);
+
+
+    const remainingPercent =
+        ((data.remaining / total) * 100).toFixed(1);
+
+
+    /* =========================
+       UPDATE CENTER
+    ========================= */
+
+    const totalElement =
+        document.getElementById("totalStudents");
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            total.toLocaleString();
+
+    }
+
+
+    /* =========================
+       UPDATE LEGEND
+    ========================= */
+
+    const placedElement =
+        document.getElementById("placedValue");
+
+    if (placedElement) {
+
+        placedElement.textContent =
+            `${data.placed} (${placedPercent}%)`;
+
+    }
+
+
+    const interviewElement =
+        document.getElementById("interviewValue");
+
+    if (interviewElement) {
+
+        interviewElement.textContent =
+            `${data.interview} (${interviewPercent}%)`;
+
+    }
+
+
+    const remainingElement =
+        document.getElementById("remainingValue");
+
+    if (remainingElement) {
+
+        remainingElement.textContent =
+            `${data.remaining} (${remainingPercent}%)`;
+
+    }
+
+
+    /* =========================
+       UPDATE DONUT
+    ========================= */
+
+    const donut =
+        document.getElementById("placementDonut");
+
+    if (donut) {
+
+        donut.style.background =
+            `conic-gradient(
+                #287de8 0 ${placedPercent}%,
+                #7047e8 ${placedPercent}% ${Number(placedPercent) + Number(interviewPercent)}%,
+                #19b36b ${Number(placedPercent) + Number(interviewPercent)}% 100%
+            )`;
+
+    }
+
+}
+
+
+/* =========================
+   ADD SKILL
+========================= */
+
+function addSkill() {
+
+    const skill =
+        prompt("Enter your skill:");
+
+
+    if (!skill) {
+        return;
+    }
+
+
+    const cleanSkill =
+        skill.trim();
+
+
+    if (!cleanSkill) {
+        return;
+    }
+
+
+    const list =
+        document.getElementById("skillsList");
+
+
+    if (!list) {
+        return;
+    }
+
+
+    const element =
+        document.createElement("span");
+
+
+    element.className = "skill";
+
+
+    element.innerHTML = `
+        ${escapeHTML(cleanSkill)}
+        <button onclick="removeSkill(this)">
+            ×
+        </button>
+    `;
+
+
+    list.appendChild(element);
+
+}
+
+
+/* =========================
+   REMOVE SKILL
+========================= */
+
+function removeSkill(button) {
+
+    if (
+        confirm("Remove this skill?")
+    ) {
+
+        button
+            .parentElement
+            .remove();
+
+    }
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent = value;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================
+   EDIT PROFILE
+========================= */
+
+function toggleEditProfile() {
+
+    const inputs =
+        document.querySelectorAll(
+            ".profile-fields input"
         );
 
 
-        /* =====================================================
-           CONFIRM JS
-        ===================================================== */
+    inputs.forEach(input => {
 
-        console.log(
-            "Student Dashboard JS Loaded Successfully - ONE TIME"
-        );
+        input.disabled =
+            !input.disabled;
 
     });
 
 }
+
+
+/* =========================
+   UPLOAD MESSAGE
+========================= */
+
+function showUploadMessage() {
+
+    alert(
+        "Upload system will be connected with the database soon."
+    );
+
+}
+
+
+/* =========================
+   SEARCH SHORTCUT
+========================= */
+
+function setupSearch() {
+
+    const search =
+        document.getElementById(
+            "globalSearch"
+        );
+
+
+    if (!search) {
+        return;
+    }
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.ctrlKey &&
+                event.key.toLowerCase() === "k"
+            ) {
+
+                event.preventDefault();
+
+                search.focus();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        restoreTheme();
+
+        setupSearch();
+
+        setupYearSelectors();
+
+        createPlacementChart();
+
+    }
+);

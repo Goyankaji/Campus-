@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,1685 +8,1074 @@
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/admin.css') }}">
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-<div class="app-layout">
+<div class="app-shell">
 
-    <!-- =====================================================
-         SIDEBAR
-    ====================================================== -->
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar" id="sidebar">
 
-    <aside class="sidebar">
-
-        <!-- BRAND -->
         <div class="brand">
-
-            <div class="brand-logo">
-                <img src="{{ url_for('static', filename='images/college-logo.JPEG') }}"
-                     alt="College Logo">
-            </div>
-
-            <div class="brand-text">
-                <h2>CAMPUS</h2>
+            <img src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                 alt="Campus Logo">
+            <div>
+                <strong>CAMPUS</strong>
                 <span>PLACEMENT PORTAL</span>
             </div>
-
         </div>
 
+        <nav class="sidebar-nav">
 
-        <!-- NAVIGATION -->
-        <nav class="sidebar-navigation">
+            <div class="nav-group">
+                <div class="nav-label">MAIN</div>
 
-            <!-- Dashboard -->
-            <button class="nav-link active"
-                    onclick="openSection('dashboard', this)">
+                <button class="nav-item active" data-view="dashboard">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </button>
 
-                <span class="nav-icon">⌂</span>
-                <span>Dashboard</span>
+                <button class="nav-item" data-view="users">
+                    <span class="nav-icon">♙</span>
+                    <span>User Management</span>
+                    <span class="nav-badge">12</span>
+                </button>
 
-            </button>
+                <button class="nav-item" data-view="roles">
+                    <span class="nav-icon">◆</span>
+                    <span>Role Management</span>
+                </button>
 
-
-            <div class="nav-heading">
-                MAIN
+                <button class="nav-item" data-view="companies">
+                    <span class="nav-icon">▣</span>
+                    <span>Companies</span>
+                </button>
             </div>
 
+            <div class="nav-group">
+                <div class="nav-label">PLACEMENT</div>
 
-            <!-- Users -->
-            <button class="nav-link"
-                    onclick="openSection('users', this)">
+                <button class="nav-item" data-view="drives">
+                    <span class="nav-icon">◉</span>
+                    <span>Placement Drives</span>
+                </button>
 
-                <span class="nav-icon">♙</span>
-                <span>Users</span>
+                <button class="nav-item" data-view="placements">
+                    <span class="nav-icon">✓</span>
+                    <span>Placements</span>
+                </button>
 
-                <span class="nav-badge">
-                    12
-                </span>
-
-            </button>
-
-
-            <!-- Students -->
-            <button class="nav-link"
-                    onclick="openSection('students', this)">
-
-                <span class="nav-icon">🎓</span>
-                <span>Students</span>
-
-            </button>
-
-
-            <!-- Faculty -->
-            <button class="nav-link"
-                    onclick="openSection('faculty', this)">
-
-                <span class="nav-icon">♟</span>
-                <span>Faculty</span>
-
-            </button>
-
-
-            <!-- Companies -->
-            <button class="nav-link"
-                    onclick="openSection('companies', this)">
-
-                <span class="nav-icon">▣</span>
-                <span>Companies</span>
-
-            </button>
-
-
-            <div class="nav-heading">
-                PLACEMENT
+                <button class="nav-item" data-view="analytics">
+                    <span class="nav-icon">▥</span>
+                    <span>Analytics</span>
+                </button>
             </div>
 
+            <div class="nav-group">
+                <div class="nav-label">SYSTEM</div>
 
-            <!-- Drives -->
-            <button class="nav-link"
-                    onclick="openSection('drives', this)">
+                <button class="nav-item" data-view="notifications">
+                    <span class="nav-icon">♧</span>
+                    <span>Notifications</span>
+                    <span class="nav-badge danger">5</span>
+                </button>
 
-                <span class="nav-icon">◉</span>
-                <span>Placement Drives</span>
+                <button class="nav-item" data-view="feedback">
+                    <span class="nav-icon">◌</span>
+                    <span>Feedback</span>
+                    <span class="nav-badge danger">3</span>
+                </button>
 
-            </button>
+                <button class="nav-item" data-view="announcements">
+                    <span class="nav-icon">◇</span>
+                    <span>Announcements</span>
+                </button>
 
-
-            <!-- Placements -->
-            <button class="nav-link"
-                    onclick="openSection('placements', this)">
-
-                <span class="nav-icon">✓</span>
-                <span>Placements</span>
-
-            </button>
-
-
-            <!-- Analytics -->
-            <button class="nav-link"
-                    onclick="openSection('analytics', this)">
-
-                <span class="nav-icon">▥</span>
-                <span>Analytics</span>
-
-            </button>
-
-
-            <div class="nav-heading">
-                SYSTEM
+                <button class="nav-item" data-view="settings">
+                    <span class="nav-icon">⚙</span>
+                    <span>Settings</span>
+                </button>
             </div>
-
-
-            <!-- Notifications -->
-            <button class="nav-link"
-                    onclick="openSection('notifications', this)">
-
-                <span class="nav-icon">♧</span>
-                <span>Notifications</span>
-
-                <span class="nav-badge red">
-                    5
-                </span>
-
-            </button>
-
-
-            <!-- Complaints -->
-            <button class="nav-link"
-                    onclick="openSection('complaints', this)">
-
-                <span class="nav-icon">◌</span>
-                <span>Complaints / Feedback</span>
-
-                <span class="nav-badge red">
-                    3
-                </span>
-
-            </button>
-
-
-            <!-- Announcements -->
-            <button class="nav-link"
-                    onclick="openSection('announcements', this)">
-
-                <span class="nav-icon">◈</span>
-                <span>Announcements</span>
-
-            </button>
-
-
-            <!-- Settings -->
-            <button class="nav-link"
-                    onclick="openSection('settings', this)">
-
-                <span class="nav-icon">⚙</span>
-                <span>Settings</span>
-
-            </button>
 
         </nav>
 
-
-        <!-- SIDEBAR BOTTOM -->
         <div class="sidebar-bottom">
 
-            <div class="progress-box">
-
-                <div class="progress-title">
-                    Keep going, you're doing great! 💪
-                </div>
-
-                <div class="progress-text">
-
+            <div class="progress-card">
+                <strong>Keep going, you're doing great! 💪</strong>
+                <div class="progress-meta">
                     <span>System Completed</span>
-
-                    <span>80%</span>
-
+                    <b>80%</b>
                 </div>
-
-                <div class="progress-bar">
-
-                    <div class="progress-value"></div>
-
+                <div class="progress-track">
+                    <div class="progress-fill"></div>
                 </div>
-
             </div>
 
-
-            <!-- LOGOUT -->
-            <a href="{{ url_for('index') }}"
-               class="logout-btn">
-
-                <span>↪</span>
-
-                Logout
-
-            </a>
+            <button class="logout-btn" onclick="window.location.href='/'">
+                ↪ &nbsp; Logout
+            </button>
 
         </div>
 
     </aside>
 
 
+    <!-- ================= MAIN ================= -->
+    <main class="main-content">
 
-    <!-- =====================================================
-         MAIN AREA
-    ====================================================== -->
+        <header class="top-header">
 
-    <main class="main-area">
+            <button class="mobile-menu" id="menuToggle">☰</button>
 
-
-        <!-- =================================================
-             TOP BAR
-        ================================================== -->
-
-        <!-- =================================================
-     TOP BAR
-================================================== -->
-
-<header class="topbar">
-
-    <!-- SEARCH -->
-    <div class="search-box">
-
-        <span class="search-icon">⌕</span>
-
-        <input
-            type="text"
-            id="globalSearch"
-            placeholder="Search for students, companies, drives...">
-
-        <span class="search-shortcut">
-            Ctrl + K
-        </span>
-
-    </div>
-
-
-    <!-- TOP RIGHT -->
-    <div class="topbar-right">
-
-        <!-- THEME -->
-        <button
-            class="theme-toggle"
-            id="themeToggle"
-            onclick="toggleDarkMode()"
-            title="Toggle theme">
-
-            <span id="themeIcon">☾</span>
-
-        </button>
-
-
-        <!-- NOTIFICATION -->
-        <button
-            class="top-icon notification-button"
-            title="Notifications">
-
-            ♧
-
-            <span class="notification-dot"></span>
-
-        </button>
-
-
-        <!-- ADMIN PROFILE - ONLY ONE -->
-        <div class="profile">
-
-            <div class="profile-avatar">
-                A
+            <div class="search-box">
+                <span>⌕</span>
+                <input id="globalSearch"
+                       type="text"
+                       placeholder="Search for students, companies, drives...">
+                <kbd>Ctrl + K</kbd>
             </div>
 
-            <div class="profile-details">
-
-                <strong>
-                    Admin
-                </strong>
-
-                <span>
-                    Administrator
-                </span>
-
-            </div>
-
-            <span class="profile-arrow">
-                ▾
-            </span>
-
-        </div>
-
-    </div>
-
-</header>
-
-                <!-- ADMIN PROFILE
-                <div class="profile">
-
-                    <div class="profile-avatar">
-                        A
-                    </div>
-
-                    <div class="profile-details">
-
-                        <strong>
-                            Admin
-                        </strong>
-
-                        <span>
-                            Administrator
-                        </span>
-
-                    </div>
-
-                    <span class="profile-arrow">
-                        ▾
-                    </span>
-
-                </div>
-
-            </div>
-
-        </header> -->
-
-
-
-        <!-- =================================================
-             DASHBOARD SECTION
-        ================================================== -->
-
-        <section
-            id="dashboard"
-            class="page-section active-section">
-
-
-            <!-- WELCOME -->
-            <div class="welcome-section">
-
-                <div>
-
-                    <h1>
-                        Welcome back! 👋
-                    </h1>
-
-                    <p>
-                        Here's your placement overview.
-                    </p>
-
-                </div>
-
-
-                <div class="academic-session">
-
-                    <span>
-                        Academic Session
-                    </span>
-
-                    <strong>
-                        2025-26
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 STATISTICS
-            ================================================== -->
-
-            <div class="stats-grid">
-
-
-                <!-- Students -->
-                <div class="stat-card">
-
-                    <div class="stat-icon green">
-                        🎓
-                    </div>
-
-                    <div class="stat-content">
-
-                        <span>
-                            Total Students
-                        </span>
-
-                        <h2>
-                            1260
-                        </h2>
-
-                        <small class="positive">
-                            ↑ 8.2% from last year
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Companies -->
-                <div class="stat-card">
-
-                    <div class="stat-icon blue">
-                        ▣
-                    </div>
-
-                    <div class="stat-content">
-
-                        <span>
-                            Companies
-                        </span>
-
-                        <h2>
-                            42
-                        </h2>
-
-                        <small class="positive">
-                            ↑ 12.5% from last year
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Drives -->
-                <div class="stat-card">
-
-                    <div class="stat-icon purple">
-                        ◉
-                    </div>
-
-                    <div class="stat-content">
-
-                        <span>
-                            Active Drives
-                        </span>
-
-                        <h2>
-                            18
-                        </h2>
-
-                        <small>
-                            06 closing soon
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Placed -->
-                <div class="stat-card">
-
-                    <div class="stat-icon orange">
-                        ✓
-                    </div>
-
-                    <div class="stat-content">
-
-                        <span>
-                            Students Placed
-                        </span>
-
-                        <h2>
-                            865
-                        </h2>
-
-                        <small class="positive">
-                            68.7% placement rate
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Offers -->
-                <div class="stat-card">
-
-                    <div class="stat-icon red">
-                        ◈
-                    </div>
-
-                    <div class="stat-content">
-
-                        <span>
-                            Offers Received
-                        </span>
-
-                        <h2>
-                            910
-                        </h2>
-
-                        <small>
-                            45 joining pending
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 FIRST ROW
-            ================================================== -->
-
-            <div class="dashboard-grid">
-
-
-                <!-- UPCOMING DRIVES -->
-                <div class="panel drives-panel">
-
-
-                    <div class="panel-header">
-
-                        <div>
-
-                            <h2>
-                                Upcoming Placement Drives
-                            </h2>
-
-                            <p>
-                                Latest recruitment opportunities
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            class="view-all-btn"
-                            onclick="openSection('drives')">
-
-                            View All
-
-                        </button>
-
-                    </div>
-
-
-                    <div class="drive-list">
-
-
-                        <!-- TCS -->
-                        <div class="drive-item">
-
-                            <div class="company-logo tcs">
-                                tcs
-                            </div>
-
-
-                            <div class="drive-info">
-
-                                <strong>
-                                    TCS
-                                </strong>
-
-                                <span>
-                                    Software Engineer
-                                </span>
-
-                                <div class="tags">
-
-                                    <span>
-                                        On Campus
-                                    </span>
-
-                                    <span>
-                                        Multiple Roles
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="drive-date">
-
-                                <small>
-                                    Apply by
-                                </small>
-
-                                <strong>
-                                    25 Aug 2026
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- INFOSYS -->
-                        <div class="drive-item">
-
-                            <div class="company-logo infosys">
-                                I
-                            </div>
-
-
-                            <div class="drive-info">
-
-                                <strong>
-                                    Infosys
-                                </strong>
-
-                                <span>
-                                    System Engineer
-                                </span>
-
-                                <div class="tags">
-
-                                    <span>
-                                        On Campus
-                                    </span>
-
-                                    <span>
-                                        System Engineer
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="drive-date">
-
-                                <small>
-                                    Apply by
-                                </small>
-
-                                <strong>
-                                    30 Aug 2026
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- WIPRO -->
-                        <div class="drive-item">
-
-                            <div class="company-logo wipro">
-                                W
-                            </div>
-
-
-                            <div class="drive-info">
-
-                                <strong>
-                                    Wipro
-                                </strong>
-
-                                <span>
-                                    Project Engineer
-                                </span>
-
-                                <div class="tags">
-
-                                    <span>
-                                        On Campus
-                                    </span>
-
-                                    <span>
-                                        Project Engineer
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="drive-date">
-
-                                <small>
-                                    Apply by
-                                </small>
-
-                                <strong>
-                                    02 Sep 2026
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- PLACEMENT OVERVIEW -->
-                <div class="panel overview-panel">
-
-
-                    <div class="panel-header">
-
-                        <div>
-
-                            <h2>
-                                Placement Overview
-                            </h2>
-
-                            <p>
-                                Current academic session
-                            </p>
-
-                        </div>
-
-
-                        <select
-                            id="overviewYear"
-                            onchange="changeOverviewYear()">
-
-                            <option value="2025-26">
-                                2025-26
-                            </option>
-
-                            <option value="2024-25">
-                                2024-25
-                            </option>
-
-                            <option value="2023-24">
-                                2023-24
-                            </option>
-
-                            <option value="2022-23">
-                                2022-23
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="overview-chart">
-
-                        <canvas
-                            id="overviewChart">
-                        </canvas>
-
-                    </div>
-
-
-                    <div class="overview-message">
-
-                        <span class="message-icon">
-                            ✦
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Great progress!
-                            </strong>
-
-                            <p>
-                                Placement activity is progressing
-                                well this academic session.
-                            </p>
-
-                        </div>
-
-                        <span class="rocket">
-                            🚀
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 YEAR WISE GRAPH
-            ================================================== -->
-
-            <div class="panel year-chart-panel">
-
-
-                <div class="panel-header">
-
+            <div class="header-right">
+
+                <button class="header-icon"
+                        id="themeToggle"
+                        title="Toggle light / dark mode">
+                    ☼
+                </button>
+
+                <button class="header-icon notification-icon"
+                        data-view="notifications"
+                        title="Notifications">
+                    ♧
+                    <span></span>
+                </button>
+
+                <div class="admin-profile">
+                    <div class="avatar">A</div>
                     <div>
-
-                        <h2>
-                            Year-wise Placement Performance
-                        </h2>
-
-                        <p>
-                            Students placed across academic sessions
-                        </p>
-
+                        <strong>Admin</strong>
+                        <small>Administrator</small>
                     </div>
-
-
-                    <select id="placementYearRange">
-
-                        <option value="4">
-                            Last 4 Years
-                        </option>
-
-                        <option value="5">
-                            Last 5 Years
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="year-chart">
-
-                    <canvas
-                        id="yearWiseChart">
-                    </canvas>
-
+                    <span>⌄</span>
                 </div>
 
             </div>
 
+        </header>
 
+
+        <section class="page-content">
 
             <!-- =================================================
-                 BOTTOM GRID
+                 DASHBOARD VIEW
             ================================================== -->
+            <section class="view active" id="view-dashboard">
 
-            <div class="bottom-grid">
+                <div class="welcome-row">
+                    <div>
+                        <h1>Welcome back! 👋</h1>
+                        <p>Here's your placement overview.</p>
+                    </div>
+
+                    <div class="session-info">
+                        <span>Academic Session</span>
+                        <strong>2025-26</strong>
+                    </div>
+                </div>
 
 
-                <!-- RECENT PLACEMENT ACTIVITY -->
-                <div class="panel applications-panel">
+                <!-- STAT CARDS -->
+                <div class="stats-grid">
 
-
-                    <div class="panel-header">
-
+                    <div class="stat-card">
+                        <div class="stat-icon mint">🎓</div>
                         <div>
+                            <span>Total Students</span>
+                            <strong>1260</strong>
+                            <small class="positive">↑ 8.2% from last year</small>
+                        </div>
+                    </div>
 
-                            <h2>
-                                Recent Placement Activity
-                            </h2>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">▣</div>
+                        <div>
+                            <span>Companies</span>
+                            <strong>42</strong>
+                            <small class="positive">↑ 12.5% from last year</small>
+                        </div>
+                    </div>
 
-                            <p>
-                                Latest student placement updates
-                            </p>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">◉</div>
+                        <div>
+                            <span>Active Drives</span>
+                            <strong>18</strong>
+                            <small>06 closing soon</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">✓</div>
+                        <div>
+                            <span>Students Placed</span>
+                            <strong>865</strong>
+                            <small class="positive">68.7% placement rate</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon pink">◇</div>
+                        <div>
+                            <span>Offers Received</span>
+                            <strong>910</strong>
+                            <small>45 joining pending</small>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- DRIVES + OVERVIEW -->
+                <div class="dashboard-two-col">
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div>
+                                <h2>Upcoming Placement Drives</h2>
+                                <p>Latest recruitment opportunities</p>
+                            </div>
+                            <button class="outline-btn" data-view="drives">View All</button>
+                        </div>
+
+                        <div class="drive-list">
+
+                            <div class="drive-row">
+                                <div class="company-logo">tcs</div>
+                                <div class="drive-main">
+                                    <strong>TCS</strong>
+                                    <span>Software Engineer</span>
+                                    <div>
+                                        <em>On Campus</em>
+                                        <em>Multiple Roles</em>
+                                    </div>
+                                </div>
+                                <div class="deadline">
+                                    <span>Apply by</span>
+                                    <strong>25 Aug 2026</strong>
+                                </div>
+                            </div>
+
+                            <div class="drive-row">
+                                <div class="company-logo">I</div>
+                                <div class="drive-main">
+                                    <strong>Infosys</strong>
+                                    <span>System Engineer</span>
+                                    <div>
+                                        <em>On Campus</em>
+                                        <em>System Engineer</em>
+                                    </div>
+                                </div>
+                                <div class="deadline">
+                                    <span>Apply by</span>
+                                    <strong>30 Aug 2026</strong>
+                                </div>
+                            </div>
+
+                            <div class="drive-row">
+                                <div class="company-logo">W</div>
+                                <div class="drive-main">
+                                    <strong>Wipro</strong>
+                                    <span>Project Engineer</span>
+                                    <div>
+                                        <em>On Campus</em>
+                                        <em>Project Engineer</em>
+                                    </div>
+                                </div>
+                                <div class="deadline">
+                                    <span>Apply by</span>
+                                    <strong>02 Sep 2026</strong>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="panel overview-panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h2>Placement Overview</h2>
+                                <p>Current academic session</p>
+                            </div>
+
+                            <select id="overviewYear">
+                                <option value="2025-26">2025-26</option>
+                                <option value="2024-25">2024-25</option>
+                                <option value="2023-24">2023-24</option>
+                                <option value="2022-23">2022-23</option>
+                            </select>
+                        </div>
+
+                        <div class="overview-body">
+
+                            <div class="admin-donut"
+                                 id="placementDonut">
+
+                                <div class="donut-center">
+                                    <strong id="totalStudents">1260</strong>
+                                    <span>Total Students</span>
+                                </div>
+
+                            </div>
+
+                            <div class="overview-legend">
+
+                                <div>
+                                    <span class="dot blue-dot"></span>
+                                    <div>
+                                        <b>Placed Students</b>
+                                        <small id="placedValue">480 (38.1%)</small>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <span class="dot purple-dot"></span>
+                                    <div>
+                                        <b>In Interview</b>
+                                        <small id="interviewValue">215 (17.1%)</small>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <span class="dot green-dot"></span>
+                                    <div>
+                                        <b>Yet to Appear</b>
+                                        <small id="remainingValue">565 (44.8%)</small>
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
+                        <div class="overview-message">
+                            <div>✦</div>
+                            <p>
+                                <strong>Great progress!</strong>
+                                Placement activity is progressing well this academic session.
+                            </p>
+                            <span>🚀</span>
+                        </div>
 
-                        <button class="view-all-btn">
-                            View All
-                        </button>
+                    </div>
+
+                </div>
+
+
+                <!-- YEAR WISE CHART -->
+                <div class="panel chart-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h2>Year-wise Placement Performance</h2>
+                            <p>Students placed across academic sessions</p>
+                        </div>
+
+                        <select id="performanceRange">
+                            <option value="4">Last 4 Years</option>
+                            <option value="3">Last 3 Years</option>
+                        </select>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="placementPerformanceChart"></canvas>
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT ACTIVITY + NOTIFICATIONS -->
+                <div class="dashboard-two-col lower-grid">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h2>Recent Placement Activity</h2>
+                                <p>Latest student placement updates</p>
+                            </div>
+                            <button class="outline-btn">View All</button>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>STUDENT</th>
+                                        <th>COMPANY</th>
+                                        <th>ROLE</th>
+                                        <th>APPLIED ON</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>Rahul Sharma</td>
+                                        <td>TCS</td>
+                                        <td>Software Engineer</td>
+                                        <td>18 Aug 2026</td>
+                                        <td><span class="status selected">Selected</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Priya Verma</td>
+                                        <td>Infosys</td>
+                                        <td>System Engineer</td>
+                                        <td>17 Aug 2026</td>
+                                        <td><span class="status interview">Interview</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aman Gupta</td>
+                                        <td>Wipro</td>
+                                        <td>Project Engineer</td>
+                                        <td>16 Aug 2026</td>
+                                        <td><span class="status applied">Applied</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Neha Singh</td>
+                                        <td>Accenture</td>
+                                        <td>Associate Engineer</td>
+                                        <td>15 Aug 2026</td>
+                                        <td><span class="status placed">Placed</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
 
 
-                    <div class="table-wrapper">
+                    <div class="panel">
 
-                        <table>
+                        <div class="panel-header">
+                            <div>
+                                <h2>Latest Notifications</h2>
+                                <p>Recent system updates</p>
+                            </div>
+                            <button class="outline-btn" data-view="notifications">View All</button>
+                        </div>
+
+                        <div class="notification-list">
+
+                            <div class="notification-row">
+                                <div class="notification-symbol yellow">▣</div>
+                                <div>
+                                    <strong>TCS Technical Interview</strong>
+                                    <p>Technical interviews scheduled for eligible students.</p>
+                                    <small>10 min ago</small>
+                                </div>
+                            </div>
+
+                            <div class="notification-row">
+                                <div class="notification-symbol blue">◉</div>
+                                <div>
+                                    <strong>New Placement Drive</strong>
+                                    <p>Infosys drive has been published.</p>
+                                    <small>Yesterday</small>
+                                </div>
+                            </div>
+
+                            <div class="notification-row">
+                                <div class="notification-symbol purple">♙</div>
+                                <div>
+                                    <strong>Pending User Verification</strong>
+                                    <p>12 new accounts require verification.</p>
+                                    <small>2 days ago</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK MANAGEMENT -->
+                <div class="panel quick-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h2>Quick Management</h2>
+                            <p>Frequently used administrative actions</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-grid">
+
+                        <button class="quick-card" data-view="users">
+                            <span>♙</span>
+                            <div>
+                                <strong>Manage Users</strong>
+                                <small>12 pending verification</small>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+                        <button class="quick-card" data-view="companies">
+                            <span>▣</span>
+                            <div>
+                                <strong>Manage Companies</strong>
+                                <small>42 companies</small>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+                        <button class="quick-card" data-view="drives">
+                            <span>◉</span>
+                            <div>
+                                <strong>Placement Drives</strong>
+                                <small>18 active drives</small>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+                        <button class="quick-card" data-view="feedback">
+                            <span>◌</span>
+                            <div>
+                                <strong>Feedback</strong>
+                                <small>3 unresolved</small>
+                            </div>
+                            <b>→</b>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 USER MANAGEMENT VIEW
+            ================================================== -->
+            <section class="view" id="view-users">
+
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">ADMINISTRATION</span>
+                        <h1>User Management</h1>
+                        <p>Manage students, TPOs and faculty accounts.</p>
+                    </div>
+
+                    <button class="primary-btn" id="addUserBtn">+ Add User</button>
+                </div>
+
+                <div class="management-cards">
+
+                    <div class="management-card">
+                        <span class="management-icon blue-bg">🎓</span>
+                        <div>
+                            <span>Students</span>
+                            <strong>1,126</strong>
+                            <small>1,098 active</small>
+                        </div>
+                        <button data-filter-role="Student">Manage →</button>
+                    </div>
+
+                    <div class="management-card">
+                        <span class="management-icon purple-bg">◉</span>
+                        <div>
+                            <span>TPO</span>
+                            <strong>12</strong>
+                            <small>11 active</small>
+                        </div>
+                        <button data-filter-role="TPO">Manage →</button>
+                    </div>
+
+                    <div class="management-card">
+                        <span class="management-icon green-bg">♙</span>
+                        <div>
+                            <span>Faculty</span>
+                            <strong>84</strong>
+                            <small>80 active</small>
+                        </div>
+                        <button data-filter-role="Faculty">Manage →</button>
+                    </div>
+
+                </div>
+
+                <div class="panel management-panel">
+
+                    <div class="management-toolbar">
+                        <div>
+                            <h2>All Users</h2>
+                            <p>Add, edit, approve, block or remove accounts.</p>
+                        </div>
+
+                        <div class="toolbar-controls">
+                            <input id="userSearch" placeholder="Search users...">
+
+                            <select id="userRoleFilter">
+                                <option value="All">All Roles</option>
+                                <option value="Student">Student</option>
+                                <option value="TPO">TPO</option>
+                                <option value="HOD">HOD</option>
+                                <option value="Tutor">Tutor</option>
+                                <option value="Higher Authority">Higher Authority</option>
+                            </select>
+
+                            <select id="userStatusFilter">
+                                <option value="All">All Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Blocked">Blocked</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table id="usersTable">
 
                             <thead>
-
-                            <tr>
-
-                                <th>
-                                    STUDENT
-                                </th>
-
-                                <th>
-                                    COMPANY
-                                </th>
-
-                                <th>
-                                    ROLE
-                                </th>
-
-                                <th>
-                                    APPLIED ON
-                                </th>
-
-                                <th>
-                                    STATUS
-                                </th>
-
-                            </tr>
-
+                                <tr>
+                                    <th>USER</th>
+                                    <th>ROLE</th>
+                                    <th>DEPARTMENT</th>
+                                    <th>STATUS</th>
+                                    <th>LAST ACTIVE</th>
+                                    <th>ACTION</th>
+                                </tr>
                             </thead>
-
 
                             <tbody>
 
+                                <tr data-role="Student" data-status="Active">
+                                    <td>
+                                        <div class="user-cell">
+                                            <span class="table-avatar">RS</span>
+                                            <div>
+                                                <strong>Rahul Sharma</strong>
+                                                <small>rahul@campus.edu</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Student</td>
+                                    <td>CSE</td>
+                                    <td><span class="status active">Active</span></td>
+                                    <td>Today, 10:42 AM</td>
+                                    <td><button class="action-btn">⋮</button></td>
+                                </tr>
 
-                            <tr>
+                                <tr data-role="Student" data-status="Pending">
+                                    <td>
+                                        <div class="user-cell">
+                                            <span class="table-avatar">PV</span>
+                                            <div>
+                                                <strong>Priya Verma</strong>
+                                                <small>priya@campus.edu</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Student</td>
+                                    <td>IT</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                    <td>Yesterday</td>
+                                    <td><button class="action-btn">⋮</button></td>
+                                </tr>
 
-                                <td>
-                                    <strong>
-                                        Rahul Sharma
-                                    </strong>
-                                </td>
+                                <tr data-role="TPO" data-status="Active">
+                                    <td>
+                                        <div class="user-cell">
+                                            <span class="table-avatar">AK</span>
+                                            <div>
+                                                <strong>Ankit Kumar</strong>
+                                                <small>tpo@campus.edu</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>TPO</td>
+                                    <td>Placement Cell</td>
+                                    <td><span class="status active">Active</span></td>
+                                    <td>Today, 09:18 AM</td>
+                                    <td><button class="action-btn">⋮</button></td>
+                                </tr>
 
-                                <td>
-                                    TCS
-                                </td>
+                                <tr data-role="HOD" data-status="Active">
+                                    <td>
+                                        <div class="user-cell">
+                                            <span class="table-avatar">AM</span>
+                                            <div>
+                                                <strong>Dr. Amit Mehta</strong>
+                                                <small>hod.cse@campus.edu</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>HOD</td>
+                                    <td>CSE</td>
+                                    <td><span class="status active">Active</span></td>
+                                    <td>Today, 08:30 AM</td>
+                                    <td><button class="action-btn">⋮</button></td>
+                                </tr>
 
-                                <td>
-                                    Software Engineer
-                                </td>
+                                <tr data-role="Tutor" data-status="Blocked">
+                                    <td>
+                                        <div class="user-cell">
+                                            <span class="table-avatar">NS</span>
+                                            <div>
+                                                <strong>Neha Singh</strong>
+                                                <small>neha@campus.edu</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Tutor</td>
+                                    <td>CSE</td>
+                                    <td><span class="status blocked">Blocked</span></td>
+                                    <td>18 Aug 2026</td>
+                                    <td><button class="action-btn">⋮</button></td>
+                                </tr>
 
-                                <td>
-                                    18 Aug 2026
-                                </td>
-
-                                <td>
-
-                                    <span class="status selected">
-                                        Selected
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr>
-
-                                <td>
-                                    <strong>
-                                        Priya Verma
-                                    </strong>
-                                </td>
-
-                                <td>
-                                    Infosys
-                                </td>
-
-                                <td>
-                                    System Engineer
-                                </td>
-
-                                <td>
-                                    17 Aug 2026
-                                </td>
-
-                                <td>
-
-                                    <span class="status interview">
-                                        Interview
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr>
-
-                                <td>
-                                    <strong>
-                                        Aman Gupta
-                                    </strong>
-                                </td>
-
-                                <td>
-                                    Wipro
-                                </td>
-
-                                <td>
-                                    Project Engineer
-                                </td>
-
-                                <td>
-                                    16 Aug 2026
-                                </td>
-
-                                <td>
-
-                                    <span class="status applied">
-                                        Applied
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr>
-
-                                <td>
-                                    <strong>
-                                        Neha Singh
-                                    </strong>
-                                </td>
-
-                                <td>
-                                    Accenture
-                                </td>
-
-                                <td>
-                                    Associate Engineer
-                                </td>
-
-                                <td>
-                                    15 Aug 2026
-                                </td>
-
-                                <td>
-
-                                    <span class="status placed">
-                                        Placed
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
+                                <tr data-role="Higher Authority" data-status="Active">
+                                    <td>
+                                        <div class="user-cell">
+                                            <span class="table-avatar">RM</span>
+                                            <div>
+                                                <strong>Rajiv Mehta</strong>
+                                                <small>authority@campus.edu</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Higher Authority</td>
+                                    <td>Administration</td>
+                                    <td><span class="status active">Active</span></td>
+                                    <td>18 Aug 2026</td>
+                                    <td><button class="action-btn">⋮</button></td>
+                                </tr>
 
                             </tbody>
 
                         </table>
-
                     </div>
 
                 </div>
 
+            </section>
 
 
-                <!-- LATEST NOTIFICATIONS -->
-                <div class="panel notifications-panel">
+            <!-- =================================================
+                 ROLE MANAGEMENT VIEW
+            ================================================== -->
+            <section class="view" id="view-roles">
 
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">ACCESS CONTROL</span>
+                        <h1>Role Management</h1>
+                        <p>Define what each role can view, edit and manage.</p>
+                    </div>
+                </div>
 
-                    <div class="panel-header">
+                <div class="role-layout">
 
-                        <div>
+                    <div class="role-list">
 
-                            <h2>
-                                Latest Notifications
-                            </h2>
+                        <button class="role-card active" data-role-panel="student">
+                            <span class="role-symbol blue-bg">🎓</span>
+                            <div>
+                                <strong>Student</strong>
+                                <small>1,126 users</small>
+                            </div>
+                            <span>→</span>
+                        </button>
 
-                            <p>
-                                Recent system updates
-                            </p>
+                        <button class="role-card" data-role-panel="tpo">
+                            <span class="role-symbol purple-bg">◉</span>
+                            <div>
+                                <strong>TPO</strong>
+                                <small>12 users</small>
+                            </div>
+                            <span>→</span>
+                        </button>
 
-                        </div>
+                        <button class="role-card" data-role-panel="hod">
+                            <span class="role-symbol green-bg">♙</span>
+                            <div>
+                                <strong>HOD</strong>
+                                <small>8 users</small>
+                            </div>
+                            <span>→</span>
+                        </button>
 
+                        <button class="role-card" data-role-panel="tutor">
+                            <span class="role-symbol yellow-bg">♧</span>
+                            <div>
+                                <strong>Tutor</strong>
+                                <small>64 users</small>
+                            </div>
+                            <span>→</span>
+                        </button>
 
-                        <button class="view-all-btn">
-                            View All
+                        <button class="role-card" data-role-panel="authority">
+                            <span class="role-symbol pink-bg">◆</span>
+                            <div>
+                                <strong>Higher Authority</strong>
+                                <small>12 users</small>
+                            </div>
+                            <span>→</span>
                         </button>
 
                     </div>
 
 
-                    <div class="notification-list">
+                    <div class="panel permissions-panel">
 
-
-                        <!-- Notification 1 -->
-                        <div class="notification-item">
-
-                            <div class="notification-icon orange">
-                                ▣
-                            </div>
-
-                            <div class="notification-content">
-
-                                <strong>
-                                    TCS Technical Interview
-                                </strong>
-
-                                <p>
-                                    Technical interviews scheduled
-                                    for eligible students.
+                        <div class="permission-header">
+                            <div>
+                                <span class="eyebrow">ROLE</span>
+                                <h2 id="permissionRoleTitle">Student</h2>
+                                <p id="permissionRoleDescription">
+                                    Student portal access and placement journey.
                                 </p>
-
-                                <small>
-                                    10 min ago
-                                </small>
-
                             </div>
+
+                            <span class="role-status">System Role</span>
+                        </div>
+
+                        <div class="permission-grid" id="permissionGrid">
+
+                            <!-- populated by JS -->
 
                         </div>
 
-
-                        <!-- Notification 2 -->
-                        <div class="notification-item">
-
-                            <div class="notification-icon blue">
-                                ◉
-                            </div>
-
-                            <div class="notification-content">
-
-                                <strong>
-                                    New Placement Drive
-                                </strong>
-
-                                <p>
-                                    Infosys drive has been published.
-                                </p>
-
-                                <small>
-                                    Yesterday
-                                </small>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Notification 3 -->
-                        <div class="notification-item">
-
-                            <div class="notification-icon purple">
-                                ♙
-                            </div>
-
-                            <div class="notification-content">
-
-                                <strong>
-                                    Pending User Verification
-                                </strong>
-
-                                <p>
-                                    12 new accounts require verification.
-                                </p>
-
-                                <small>
-                                    2 days ago
-                                </small>
-
-                            </div>
-
+                        <div class="permission-footer">
+                            <span>Changes apply to all users with this role.</span>
+                            <button class="primary-btn" id="savePermissions">
+                                Save Changes
+                            </button>
                         </div>
 
                     </div>
 
                 </div>
 
-            </div>
-
+            </section>
 
 
             <!-- =================================================
-                 QUICK MANAGEMENT
+                 SIMPLE PLACEHOLDER VIEWS
             ================================================== -->
-
-            <div class="panel quick-management">
-
-
-                <div class="panel-header">
-
+            <section class="view simple-view" id="view-companies">
+                <div class="page-title-row">
                     <div>
-
-                        <h2>
-                            Quick Management
-                        </h2>
-
-                        <p>
-                            Frequently used administrative actions
-                        </p>
-
+                        <span class="eyebrow">PLACEMENT</span>
+                        <h1>Companies</h1>
+                        <p>Company records and placement partners.</p>
                     </div>
-
                 </div>
+                <div class="empty-panel">
+                    <div>▣</div>
+                    <h2>Company Management</h2>
+                    <p>This section is ready for company CRUD and history.</p>
+                </div>
+            </section>
 
+            <section class="view simple-view" id="view-drives">
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">PLACEMENT</span>
+                        <h1>Placement Drives</h1>
+                        <p>Create, edit and manage recruitment drives.</p>
+                    </div>
+                </div>
+                <div class="empty-panel">
+                    <div>◉</div>
+                    <h2>Placement Drive Management</h2>
+                    <p>Drive management can be connected to the TPO module later.</p>
+                </div>
+            </section>
 
-                <div class="quick-actions">
+            <section class="view simple-view" id="view-placements">
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">PLACEMENT</span>
+                        <h1>Placements</h1>
+                        <p>Monitor selected, placed and joining students.</p>
+                    </div>
+                </div>
+                <div class="empty-panel">
+                    <div>✓</div>
+                    <h2>Placement Management</h2>
+                    <p>Placement records and joining status will appear here.</p>
+                </div>
+            </section>
 
+            <section class="view simple-view" id="view-analytics">
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">REPORTING</span>
+                        <h1>Analytics</h1>
+                        <p>Placement analytics and year-wise reports.</p>
+                    </div>
+                </div>
+                <div class="empty-panel">
+                    <div>▥</div>
+                    <h2>Analytics</h2>
+                    <p>Use the dashboard chart for the current overview.</p>
+                </div>
+            </section>
 
-                    <!-- Verify Users -->
-                    <button onclick="openSection('users')">
+            <section class="view simple-view" id="view-notifications">
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">SYSTEM</span>
+                        <h1>Notifications</h1>
+                        <p>System and placement notifications.</p>
+                    </div>
+                </div>
+                <div class="empty-panel">
+                    <div>♧</div>
+                    <h2>Notifications</h2>
+                    <p>Notification management will appear here.</p>
+                </div>
+            </section>
 
-                        <span class="quick-icon">
-                            ♙
-                        </span>
-
+            <section class="view simple-view" id="view-feedback">
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">SYSTEM</span>
+                        <h1>Feedback</h1>
+                        <p>Review feedback submitted by users.</p>
+                    </div>
+                </div>
+                <div class="feedback-list">
+                    <div class="feedback-card">
+                        <div class="feedback-avatar">RS</div>
                         <div>
-
-                            <strong>
-                                Verify Users
-                            </strong>
-
-                            <small>
-                                12 pending
-                            </small>
-
+                            <strong>Rahul Sharma</strong>
+                            <p>Placement drive information was very useful.</p>
+                            <small>Student • 10 min ago</small>
                         </div>
+                        <span class="status new">New</span>
+                    </div>
 
-                        <b>
-                            →
-                        </b>
-
-                    </button>
-
-
-                    <!-- Companies -->
-                    <button onclick="openSection('companies')">
-
-                        <span class="quick-icon">
-                            ▣
-                        </span>
-
+                    <div class="feedback-card">
+                        <div class="feedback-avatar">PV</div>
                         <div>
-
-                            <strong>
-                                Manage Companies
-                            </strong>
-
-                            <small>
-                                42 companies
-                            </small>
-
+                            <strong>Priya Verma</strong>
+                            <p>Please add more technical preparation material.</p>
+                            <small>Student • Yesterday</small>
                         </div>
+                        <span class="status review">Review</span>
+                    </div>
 
-                        <b>
-                            →
-                        </b>
-
-                    </button>
-
-
-                    <!-- Drives -->
-                    <button onclick="openSection('drives')">
-
-                        <span class="quick-icon">
-                            ◉
-                        </span>
-
+                    <div class="feedback-card">
+                        <div class="feedback-avatar">AK</div>
                         <div>
-
-                            <strong>
-                                Placement Drives
-                            </strong>
-
-                            <small>
-                                18 active drives
-                            </small>
-
+                            <strong>Ankit Kumar</strong>
+                            <p>Company management workflow is easy to use.</p>
+                            <small>TPO • 2 days ago</small>
                         </div>
-
-                        <b>
-                            →
-                        </b>
-
-                    </button>
-
-
-                    <!-- Complaints -->
-                    <button onclick="openSection('complaints')">
-
-                        <span class="quick-icon">
-                            ◌
-                        </span>
-
-                        <div>
-
-                            <strong>
-                                Complaints
-                            </strong>
-
-                            <small>
-                                3 unresolved
-                            </small>
-
-                        </div>
-
-                        <b>
-                            →
-                        </b>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             OTHER ADMIN MODULES
-        ================================================== -->
-
-
-        <section id="users"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>User Management</h1>
-
-                <p>
-                    Manage, verify, approve and block users.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ♙
+                        <span class="status resolved">Resolved</span>
                     </div>
-
-                    <h2>
-                        User Management
-                    </h2>
-
-                    <p>
-                        User management module will be connected
-                        with MySQL later.
-                    </p>
-
                 </div>
+            </section>
 
-            </div>
-
-        </section>
-
-
-
-        <section id="students"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Students</h1>
-
-                <p>
-                    View and manage student records.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        🎓
+            <section class="view simple-view" id="view-announcements">
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">SYSTEM</span>
+                        <h1>Announcements</h1>
+                        <p>Publish important campus-wide announcements.</p>
                     </div>
-
-                    <h2>
-                        Student Management
-                    </h2>
-
-                    <p>
-                        Student data will appear here.
-                    </p>
-
+                    <button class="primary-btn">+ New Announcement</button>
                 </div>
+                <div class="empty-panel">
+                    <div>◇</div>
+                    <h2>Announcement Management</h2>
+                    <p>Create, publish and manage announcements.</p>
+                </div>
+            </section>
 
-            </div>
-
-        </section>
-
-
-
-        <section id="faculty"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Faculty</h1>
-
-                <p>
-                    Manage faculty, HOD and tutor information.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ♟
+            <section class="view simple-view" id="view-settings">
+                <div class="page-title-row">
+                    <div>
+                        <span class="eyebrow">SYSTEM</span>
+                        <h1>Settings</h1>
+                        <p>Configure system-wide administration settings.</p>
                     </div>
-
-                    <h2>
-                        Faculty Management
-                    </h2>
-
-                    <p>
-                        Faculty management module.
-                    </p>
-
                 </div>
-
-            </div>
+                <div class="empty-panel">
+                    <div>⚙</div>
+                    <h2>System Settings</h2>
+                    <p>Settings will be connected to the database later.</p>
+                </div>
+            </section>
 
         </section>
-
-
-
-        <section id="companies"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Companies</h1>
-
-                <p>
-                    Manage recruiting companies.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ▣
-                    </div>
-
-                    <h2>
-                        Company Management
-                    </h2>
-
-                    <p>
-                        Company management module.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section id="drives"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Placement Drives</h1>
-
-                <p>
-                    Manage placement drives and recruitment activities.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ◉
-                    </div>
-
-                    <h2>
-                        Placement Drive Management
-                    </h2>
-
-                    <p>
-                        Placement drive management module.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section id="placements"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Placements</h1>
-
-                <p>
-                    View placement records and results.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ✓
-                    </div>
-
-                    <h2>
-                        Placement Records
-                    </h2>
-
-                    <p>
-                        Placement records module.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section id="analytics"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Analytics</h1>
-
-                <p>
-                    View detailed placement analytics.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ▥
-                    </div>
-
-                    <h2>
-                        Placement Analytics
-                    </h2>
-
-                    <p>
-                        Detailed analytics will be added here.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section id="notifications"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Notifications</h1>
-
-                <p>
-                    Manage system notifications.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ♧
-                    </div>
-
-                    <h2>
-                        Notifications
-                    </h2>
-
-                    <p>
-                        Notification management module.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section id="complaints"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Complaints & Feedback</h1>
-
-                <p>
-                    Manage complaints, suggestions and feedback.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ◌
-                    </div>
-
-                    <h2>
-                        Complaint Management
-                    </h2>
-
-                    <p>
-                        Complaint management module.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section id="announcements"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Announcements</h1>
-
-                <p>
-                    Create and manage placement announcements.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ◈
-                    </div>
-
-                    <h2>
-                        Announcement Management
-                    </h2>
-
-                    <p>
-                        Announcement module.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section id="settings"
-                 class="page-section">
-
-            <div class="inner-page">
-
-                <h1>Settings</h1>
-
-                <p>
-                    Manage system configuration.
-                </p>
-
-                <div class="empty-module">
-
-                    <div class="module-icon">
-                        ⚙
-                    </div>
-
-                    <h2>
-                        System Settings
-                    </h2>
-
-                    <p>
-                        System settings module.
-                    </p>
-
-                </div>
-            </div>
-
-        </section>
-
 
     </main>
 
 </div>
 
 
-<!-- JAVASCRIPT -->
+<!-- ADD USER MODAL -->
+<div class="modal-backdrop" id="userModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+            <div>
+                <span class="eyebrow">USER MANAGEMENT</span>
+                <h2>Add New User</h2>
+            </div>
+            <button class="modal-close" id="closeUserModal">×</button>
+        </div>
+
+        <div class="modal-grid">
+
+            <label>
+                Full Name
+                <input id="newUserName" placeholder="Enter full name">
+            </label>
+
+            <label>
+                Email
+                <input id="newUserEmail" type="email" placeholder="name@campus.edu">
+            </label>
+
+            <label>
+                Role
+                <select id="newUserRole">
+                    <option>Student</option>
+                    <option>TPO</option>
+                    <option>HOD</option>
+                    <option>Tutor</option>
+                    <option>Higher Authority</option>
+                </select>
+            </label>
+
+            <label>
+                Department
+                <input id="newUserDepartment" placeholder="CSE / IT / Administration">
+            </label>
+
+        </div>
+
+        <div class="modal-footer">
+            <button class="outline-btn" id="cancelUserModal">Cancel</button>
+            <button class="primary-btn" id="createUser">Create User</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 
 </body>
