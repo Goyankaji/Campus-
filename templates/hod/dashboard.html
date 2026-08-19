@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HOD Dashboard | Campus Placement Portal</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- HOD CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/hod.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="hod-app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="hod-sidebar" id="hodSidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="hod-logo">
+
+            <img
+                src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                alt="College Logo">
+
+            <div>
+
+                <h2>HOD PORTAL</h2>
+
+                <span>DEPARTMENT DASHBOARD</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- HOD PROFILE -->
+
+        <div class="hod-profile">
+
+            <div class="hod-avatar">
+                H
+            </div>
+
+            <div>
+
+                <strong>Dr. Rahul Sharma</strong>
+
+                <span>HOD • CSE Department</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="hod-navigation">
+
+
+            <!-- OVERVIEW -->
+
+            <div class="nav-title">
+                OVERVIEW
+            </div>
+
+
+            <a href="#" class="hod-nav active">
+
+                <span class="nav-symbol">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">◉</span>
+
+                <span>Department Overview</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">♙</span>
+
+                <span>Students</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">▣</span>
+
+                <span>Placement Drives</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">▤</span>
+
+                <span>Applications</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">◆</span>
+
+                <span>Shortlisted Students</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">◷</span>
+
+                <span>Interviews</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">▣</span>
+
+                <span>Offers & Joining</span>
+
+            </a>
+
+
+
+            <!-- ACADEMICS -->
+
+            <div class="nav-title">
+                ACADEMICS
+            </div>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">▤</span>
+
+                <span>Academic Performance</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">◉</span>
+
+                <span>Attendance</span>
+
+            </a>
+
+
+
+            <!-- PLACEMENT -->
+
+            <div class="nav-title">
+                PLACEMENT
+            </div>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">✓</span>
+
+                <span>Placed Students</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">▥</span>
+
+                <span>Placement Statistics</span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">▤</span>
+
+                <span>Reports</span>
+
+            </a>
+
+
+
+            <!-- SYSTEM -->
+
+            <div class="nav-title">
+                SYSTEM
+            </div>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">♢</span>
+
+                <span>Notifications</span>
+
+                <span class="badge red">
+                    6
+                </span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">◈</span>
+
+                <span>Announcements</span>
+
+                <span class="badge purple">
+                    3
+                </span>
+
+            </a>
+
+
+            <a href="#" class="hod-nav">
+
+                <span class="nav-symbol">⚙</span>
+
+                <span>Settings</span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <a href="#" class="hod-logout">
+
+            <span>⇥</span>
+
+            <span>Logout</span>
+
+        </a>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="hod-main">
+
+
+        <!-- TOP HEADER -->
+
+        <header class="hod-header">
+
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu">
+
+                ☰
+
+            </button>
+
+
+            <div class="header-welcome">
+
+                <h1>
+                    Good Morning, HOD! 👋
+                </h1>
+
+                <p>
+                    Here's the placement overview of your department for 2026-27.
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="hod-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="hodSearch"
+                    placeholder="Search students...">
+
+                <small>
+                    Ctrl + K
+                </small>
+
+            </div>
+
+
+            <!-- HEADER RIGHT -->
+
+            <div class="header-actions">
+
+
+                <button
+                    class="header-theme"
+                    id="hodThemeToggle">
+
+                    ☼
+
+                </button>
+
+
+                <button class="header-notification">
+
+                    ♢
+
+                    <span>
+                        6
+                    </span>
+
+                </button>
+
+
+                <div class="header-user">
+
+                    <div class="header-avatar">
+                        R
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Dr. Rahul Sharma
+                        </strong>
+
+                        <small>
+                            HOD • CSE Department
+                        </small>
+
+                    </div>
+
+                    <span class="arrow">
+                       ⌄
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             DASHBOARD CONTENT
+        ====================================================== -->
+
+        <section class="hod-content">
+
+
+            <!-- DEPARTMENT LABEL -->
+
+            <div class="department-label">
+
+                <span>Department</span>
+
+                <strong>
+                    Computer Science & Engineering
+                </strong>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 KPI CARDS
+            ================================================== -->
+
+            <section class="hod-stats">
+
+
+                <div class="hod-stat">
+
+                    <div class="stat-circle purple">
+                        ♟
+                    </div>
+
+                    <div>
+
+                        <span>Total Students</span>
+
+                        <strong>180</strong>
+
+                        <small>
+                            100% of Department
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hod-stat">
+
+                    <div class="stat-circle green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>Placement Eligible</span>
+
+                        <strong>145</strong>
+
+                        <small>
+                            80.56% of Department
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hod-stat">
+
+                    <div class="stat-circle blue">
+                        ♙
+                    </div>
+
+                    <div>
+
+                        <span>Students Placed</span>
+
+                        <strong>82</strong>
+
+                        <small class="positive">
+                            45.56% of Department
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hod-stat">
+
+                    <div class="stat-circle orange">
+                        ◉
+                    </div>
+
+                    <div>
+
+                        <span>In Interview</span>
+
+                        <strong>24</strong>
+
+                        <small>
+                            13.33% of Department
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hod-stat">
+
+                    <div class="stat-circle purple">
+                        ↗
+                    </div>
+
+                    <div>
+
+                        <span>Placement %</span>
+
+                        <strong>45.56%</strong>
+
+                        <small class="positive">
+                            ↑ 5.2% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hod-stat">
+
+                    <div class="stat-circle teal">
+                        ₹
+                    </div>
+
+                    <div>
+
+                        <span>Average Package</span>
+
+                        <strong>₹ 6.80 LPA</strong>
+
+                        <small class="positive">
+                            ↑ 8.6% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MAIN ANALYTICS
+            ================================================== -->
+
+            <section class="analytics-grid">
+
+
+                <!-- PLACEMENT OVERVIEW -->
+
+                <div class="hod-card placement-overview">
+
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                Department Placement Overview
+                            </h2>
+
+                            <span>
+                                2026-27
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="donut-section">
+
+
+                        <div class="hod-donut">
+
+                            <div class="donut-inner">
+
+                                <strong>
+                                    180
+                                </strong>
+
+                                <span>
+                                    Total Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="donut-legend">
+
+
+                            <div>
+
+                                <i class="dot blue-dot"></i>
+
+                                <section>
+
+                                    <strong>
+                                        Placed Students
+                                    </strong>
+
+                                    <span>
+                                        82 (45.56%)
+                                    </span>
+
+                                </section>
+
+                            </div>
+
+
+                            <div>
+
+                                <i class="dot purple-dot"></i>
+
+                                <section>
+
+                                    <strong>
+                                        In Interview
+                                    </strong>
+
+                                    <span>
+                                        24 (13.33%)
+                                    </span>
+
+                                </section>
+
+                            </div>
+
+
+                            <div>
+
+                                <i class="dot green-dot"></i>
+
+                                <section>
+
+                                    <strong>
+                                        Yet to Place
+                                    </strong>
+
+                                    <span>
+                                        74 (41.11%)
+                                    </span>
+
+                                </section>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- YEAR WISE PERFORMANCE -->
+
+                <div class="hod-card performance-card">
+
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                Placement Performance
+                            </h2>
+
+                            <span>
+                                Year-wise comparison
+                            </span>
+
+                        </div>
+
+
+                        <select>
+
+                            <option>2026-27</option>
+
+                            <option>2025-26</option>
+
+                            <option>2024-25</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="bar-chart">
+
+
+                        <div class="chart-y">
+
+                            <span>100%</span>
+                            <span>75%</span>
+                            <span>50%</span>
+                            <span>25%</span>
+                            <span>0%</span>
+
+                        </div>
+
+
+                        <div class="bars">
+
+
+                            <div class="bar-group">
+
+                                <div
+                                    class="bar previous"
+                                    style="height:62%;">
+
+                                    <span>62%</span>
+
+                                </div>
+
+                                <small>
+                                    2023-24
+                                </small>
+
+                            </div>
+
+
+                            <div class="bar-group">
+
+                                <div
+                                    class="bar previous"
+                                    style="height:68%;">
+
+                                    <span>68%</span>
+
+                                </div>
+
+                                <small>
+                                    2024-25
+                                </small>
+
+                            </div>
+
+
+                            <div class="bar-group">
+
+                                <div
+                                    class="bar previous"
+                                    style="height:74%;">
+
+                                    <span>74%</span>
+
+                                </div>
+
+                                <small>
+                                    2025-26
+                                </small>
+
+                            </div>
+
+
+                            <div class="bar-group">
+
+                                <div
+                                    class="bar current"
+                                    style="height:71%;">
+
+                                    <span>71%</span>
+
+                                </div>
+
+                                <small>
+                                    2026-27
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-note">
+
+                        ↗ Placement % improved by
+                        <strong>5.2%</strong>
+                        compared to last year.
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STUDENT STATUS -->
+
+                <div class="hod-card status-card">
+
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                Student Placement Status
+                            </h2>
+
+                            <span>
+                                Current department status
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-list">
+
+
+                        <div class="status-row">
+
+                            <div>
+
+                                <span>Placed</span>
+
+                                <strong>
+                                    82 (45.56%)
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-blue"
+                                    style="width:45.56%;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-row">
+
+                            <div>
+
+                                <span>In Interview</span>
+
+                                <strong>
+                                    24 (13.33%)
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-purple"
+                                    style="width:13.33%;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-row">
+
+                            <div>
+
+                                <span>Shortlisted</span>
+
+                                <strong>
+                                    31 (17.22%)
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-orange"
+                                    style="width:17.22%;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-row">
+
+                            <div>
+
+                                <span>Applied</span>
+
+                                <strong>
+                                    18 (10%)
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-teal"
+                                    style="width:10%;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-row">
+
+                            <div>
+
+                                <span>Not Yet Placed</span>
+
+                                <strong>
+                                    25 (13.89%)
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-red"
+                                    style="width:13.89%;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="status-total">
+
+                        Total Students:
+                        <strong>180</strong>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 LOWER SECTION
+            ================================================== -->
+
+            <section class="lower-grid">
+
+
+                <!-- UPCOMING DRIVES -->
+
+                <div class="hod-card drives-card">
+
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                Upcoming Placement Drives
+                            </h2>
+
+                            <span>
+                                For your department
+                            </span>
+
+                        </div>
+
+                        <button>
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-scroll">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Company
+                                    </th>
+
+                                    <th>
+                                        Role
+                                    </th>
+
+                                    <th>
+                                        Eligible
+                                    </th>
+
+                                    <th>
+                                        Apply By
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name">
+                                            TCS
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        Software Engineer
+                                    </td>
+
+                                    <td>
+                                        120
+                                    </td>
+
+                                    <td class="deadline">
+                                        25 Aug 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name">
+                                            Infosys
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        System Engineer
+                                    </td>
+
+                                    <td>
+                                        105
+                                    </td>
+
+                                    <td class="deadline">
+                                        30 Aug 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name">
+                                            Wipro
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        Project Engineer
+                                    </td>
+
+                                    <td>
+                                        98
+                                    </td>
+
+                                    <td class="deadline">
+                                        02 Sep 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status upcoming">
+                                            Upcoming
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name">
+                                            Capgemini
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        Analyst
+                                    </td>
+
+                                    <td>
+                                        85
+                                    </td>
+
+                                    <td class="deadline">
+                                        10 Sep 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status upcoming">
+                                            Upcoming
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong class="company-name">
+                                            Cognizant
+                                        </strong>
+                                    </td>
+
+                                    <td>
+                                        Programmer Analyst
+                                    </td>
+
+                                    <td>
+                                        70
+                                    </td>
+
+                                    <td class="deadline">
+                                        15 Sep 2026
+                                    </td>
+
+                                    <td>
+                                        <span class="drive-status upcoming">
+                                            Upcoming
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TOP RECRUITERS -->
+
+                <div class="hod-card recruiters-card">
+
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <h2>
+                                Top Recruiting Companies
+                            </h2>
+
+                            <span>
+                                For your department
+                            </span>
+
+                        </div>
+
+                        <button>
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-scroll">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Company
+                                    </th>
+
+                                    <th>
+                                        Students Placed
+                                    </th>
+
+                                    <th>
+                                        Avg Package
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>TCS</strong>
+                                    </td>
+
+                                    <td>
+                                        18
+                                    </td>
+
+                                    <td>
+                                        ₹6.20 LPA
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Infosys</strong>
+                                    </td>
+
+                                    <td>
+                                        14
+                                    </td>
+
+                                    <td>
+                                        ₹6.50 LPA
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Wipro</strong>
+                                    </td>
+
+                                    <td>
+                                        11
+                                    </td>
+
+                                    <td>
+                                        ₹5.80 LPA
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Accenture</strong>
+                                    </td>
+
+                                    <td>
+                                        9
+                                    </td>
+
+                                    <td>
+                                        ₹7.10 LPA
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Capgemini</strong>
+                                    </td>
+
+                                    <td>
+                                        7
+                                    </td>
+
+                                    <td>
+                                        ₹6.00 LPA
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- RIGHT COLUMN -->
+
+                <div class="right-column">
+
+
+                    <!-- ACADEMIC PERFORMANCE -->
+
+                    <div class="hod-card academic-card">
+
+
+                        <div class="card-heading">
+
+                            <div>
+
+                                <h2>
+                                    Academic Performance
+                                </h2>
+
+                                <span>
+                                    Department overview
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="academic-list">
+
+
+                            <div>
+
+                                <span class="academic-icon green">
+                                    ★
+                                </span>
+
+                                <span>
+                                    Average CGPA
+                                </span>
+
+                                <strong>
+                                    7.82 / 10
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="academic-icon blue">
+                                    ◉
+                                </span>
+
+                                <span>
+                                    Attendance Avg.
+                                </span>
+
+                                <strong>
+                                    86%
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="academic-icon red">
+                                    !
+                                </span>
+
+                                <span>
+                                    Backlog Students
+                                </span>
+
+                                <strong>
+                                    18 (10%)
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- QUICK ACTIONS -->
+
+                    <div class="hod-card quick-card">
+
+
+                        <div class="card-heading">
+
+                            <h2>
+                                Quick Actions
+                            </h2>
+
+                        </div>
+
+
+                        <div class="quick-grid">
+
+
+                            <button class="quick-btn purple-btn">
+
+                                <span>
+                                    ♙
+                                </span>
+
+                                View Students
+
+                            </button>
+
+
+                            <button class="quick-btn blue-btn">
+
+                                <span>
+                                    ▥
+                                </span>
+
+                                View Placement Data
+
+                            </button>
+
+
+                            <button class="quick-btn green-btn">
+
+                                <span>
+                                    ✓
+                                </span>
+
+                                View Placed Students
+
+                            </button>
+
+
+                            <button class="quick-btn orange-btn">
+
+                                <span>
+                                    ▤
+                                </span>
+
+                                Generate Report
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- FOOTER NOTE -->
+
+            <div class="department-footer">
+
+                ⓘ
+
+                All data shown is only for
+                <strong>
+                    Computer Science & Engineering
+                </strong>
+                department.
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- HOD JavaScript -->
+
+<script src="{{ url_for('static', filename='js/hod.js') }}"></script>
+
+</body>
+
+</html>
