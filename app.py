@@ -31,5 +31,8 @@ def hod_dashboard():
 def admin_dashboard():
     return render_template("admin/dashboard.html")
 
+@app.route("/tutor/dashboard")
+def tutor_dashboard():
+    return render_template("tutor/dashboard.html")
 if __name__ == "__main__":
     app.run(debug=True)
