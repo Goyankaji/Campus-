@@ -35,8 +35,9 @@ function openSection(sectionId, clickedElement = null) {
     }
 
 
+    // HOD STYLE SIDEBAR
     const navLinks =
-        document.querySelectorAll(".nav-link");
+        document.querySelectorAll(".hod-nav");
 
 
     navLinks.forEach(link => {
@@ -49,6 +50,17 @@ function openSection(sectionId, clickedElement = null) {
     if (clickedElement) {
 
         clickedElement.classList.add("active");
+
+    } else {
+
+        const activeLink =
+            document.querySelector(
+                `.hod-nav[onclick*="openSection('${sectionId}'"]`
+            );
+
+        if (activeLink) {
+            activeLink.classList.add("active");
+        }
 
     }
 
@@ -590,6 +602,57 @@ function restoreDarkMode() {
 
 
 /* =========================================================
+   PROFILE CLICK
+========================================================= */
+
+function setupProfileClick() {
+
+    const profile =
+        document.querySelector(".profile");
+
+
+    if (!profile) {
+        return;
+    }
+
+
+    // Make profile clickable
+    profile.style.cursor = "pointer";
+
+
+    profile.addEventListener(
+        "click",
+        function() {
+
+            openSection("profile");
+
+        }
+    );
+
+
+    // Keyboard support
+    profile.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                openSection("profile");
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    SEARCH
 ========================================================= */
 
@@ -663,9 +726,29 @@ document.addEventListener(
 
         setupSearch();
 
+        setupProfileClick();
+
+
+        // Set Dashboard as initial active section
+        const initialSection =
+            document.getElementById(
+                "dashboard"
+            );
+
+
+        if (initialSection) {
+
+            openSection(
+                "dashboard"
+            );
+
+        }
+
+
         createOverviewChart(
             "2025-26"
         );
+
 
         createYearWiseChart();
 

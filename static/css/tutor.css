@@ -1730,3 +1730,265 @@ body.dark-mode thead {
         padding: 0 9px;
     }
 }
+
+/* =========================================================
+   HOD STYLE SIDEBAR FOR TUTOR
+   ========================================================= */
+.hod-sidebar {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 240px;
+    height: 100vh;
+
+    padding: 18px 14px;
+
+    background: var(--sidebar);
+    color: var(--sidebar-text);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+
+    z-index: 1000;
+}
+
+.hod-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.hod-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.15);
+}
+
+
+/* LOGO */
+
+.hod-logo {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 2px 6px 20px;
+}
+
+.hod-logo img {
+
+    width: 42px;
+    height: 42px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    background: white;
+}
+
+.hod-logo h2 {
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.hod-logo span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #aeb9d3;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: .5px;
+}
+
+
+/* PROFILE */
+
+.hod-profile {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    margin-bottom: 8px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.045);
+}
+
+.hod-avatar {
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #7449ed,
+        #4f2dc7
+    );
+
+    color: white;
+
+    font-weight: 700;
+}
+
+.hod-profile strong {
+
+    display: block;
+
+    color: white;
+
+    font-size: 9px;
+}
+
+.hod-profile span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--sidebar-muted);
+
+    font-size: 7px;
+}
+
+
+/* NAVIGATION */
+
+.hod-navigation {
+    flex: 1;
+}
+
+.nav-title {
+
+    color: var(--sidebar-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .8px;
+
+    padding: 15px 9px 6px;
+}
+
+.hod-nav {
+
+    min-height: 34px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 10px;
+
+    margin: 2px 0;
+
+    border-radius: 8px;
+
+    color: var(--sidebar-text);
+
+    font-size: 11px;
+    font-weight: 500;
+
+    transition: var(--transition);
+}
+
+.hod-nav:hover {
+
+    background: var(--sidebar-hover);
+
+    color: white;
+}
+
+.hod-nav.active {
+
+    background:
+        linear-gradient(
+            90deg,
+            #5b32e8,
+            #7448ef
+        );
+
+    color: white;
+
+    box-shadow:
+        0 6px 18px rgba(91,50,232,.25);
+}
+
+.nav-symbol {
+
+    width: 18px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.badge {
+
+    margin-left: auto;
+
+    min-width: 18px;
+
+    padding: 3px 5px;
+
+    border-radius: 20px;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 7px;
+    font-weight: 700;
+}
+
+.badge.red {
+    background: var(--red);
+}
+
+.badge.purple {
+    background: var(--purple);
+}
+
+
+/* LOGOUT */
+
+.hod-logout {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    color: #ef6378;
+
+    font-size: 11px;
+
+    border-top: 1px solid rgba(255,255,255,.08);
+
+    margin-top: 8px;
+}

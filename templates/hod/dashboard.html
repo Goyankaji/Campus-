@@ -56,7 +56,7 @@
 
         <!-- HOD PROFILE -->
 
-        <div class="hod-profile">
+        <!-- <div class="hod-profile">
 
             <div class="hod-avatar">
                 H
@@ -70,7 +70,7 @@
 
             </div>
 
-        </div>
+        </div> -->
 
 
         <!-- NAVIGATION -->
@@ -85,7 +85,7 @@
             </div>
 
 
-            <a href="#" class="hod-nav active">
+            <a href="#dashboard" class="hod-nav active" onclick="openSection('dashboard', this); return false;">
 
                 <span class="nav-symbol">⌂</span>
 
@@ -139,13 +139,13 @@
             </a>
 
 
-            <a href="#" class="hod-nav">
+            <!-- <a href="#" class="hod-nav">
 
                 <span class="nav-symbol">◷</span>
 
                 <span>Interviews</span>
 
-            </a>
+            </a> -->
 
 
             <a href="#" class="hod-nav">
@@ -345,7 +345,7 @@
                 </button>
 
 
-                <button class="header-notification">
+                <button class="header-notification" id="hodNotification">
 
                     ♢
 
@@ -356,7 +356,7 @@
                 </button>
 
 
-                <div class="header-user">
+                <div class="header-user" id="hodProfile" role="button" tabindex="0" aria-label="Open HOD profile">
 
                     <div class="header-avatar">
                         R
@@ -391,7 +391,9 @@
              DASHBOARD CONTENT
         ====================================================== -->
 
-        <section class="hod-content">
+        <section id="dashboard" class="hod-page-section active-section">
+
+        <div class="hod-content">
 
 
             <!-- DEPARTMENT LABEL -->

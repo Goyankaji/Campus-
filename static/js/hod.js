@@ -1,94 +1,56 @@
 /* =========================================================
-   CAMPUS PLACEMENT PORTAL
-   HOD DASHBOARD JAVASCRIPT
+   HOD DASHBOARD
 ========================================================= */
 
 
 /* =========================================================
-   ELEMENTS
+   SECTION NAVIGATION
 ========================================================= */
 
-const hodThemeToggle =
-    document.getElementById("hodThemeToggle");
+function openSection(sectionId, clickedElement = null) {
 
-const mobileMenu =
-    document.getElementById("mobileMenu");
+    const sections =
+        document.querySelectorAll(".hod-page-section");
 
-const hodSidebar =
-    document.getElementById("hodSidebar");
+    sections.forEach(section => {
+        section.classList.remove("active-section");
+    });
 
-const hodSearch =
-    document.getElementById("hodSearch");
+    const selectedSection =
+        document.getElementById(sectionId);
 
+    if (selectedSection) {
+        selectedSection.classList.add("active-section");
+    }
 
-/* =========================================================
-   THEME
-========================================================= */
+    const navLinks =
+        document.querySelectorAll(".hod-nav");
 
-function applyHodTheme(theme) {
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+    });
 
-    if (theme === "dark") {
+    if (clickedElement) {
 
-        document.body.classList.add("dark-mode");
-
-        if (hodThemeToggle) {
-            hodThemeToggle.textContent = "☀";
-        }
-
-        localStorage.setItem(
-            "hodTheme",
-            "dark"
-        );
+        clickedElement.classList.add("active");
 
     } else {
 
-        document.body.classList.remove("dark-mode");
-
-        if (hodThemeToggle) {
-            hodThemeToggle.textContent = "☾";
-        }
-
-        localStorage.setItem(
-            "hodTheme",
-            "light"
-        );
-    }
-}
-
-
-/* =========================================================
-   LOAD SAVED THEME
-========================================================= */
-
-const savedHodTheme =
-    localStorage.getItem("hodTheme") || "light";
-
-applyHodTheme(savedHodTheme);
-
-
-/* =========================================================
-   THEME TOGGLE
-========================================================= */
-
-if (hodThemeToggle) {
-
-    hodThemeToggle.addEventListener(
-        "click",
-        function () {
-
-            const isDark =
-                document.body.classList.contains(
-                    "dark-mode"
-                );
-
-            applyHodTheme(
-                isDark
-                    ? "light"
-                    : "dark"
+        const activeLink =
+            document.querySelector(
+                `.hod-nav[href="#${sectionId}"]`
             );
 
+        if (activeLink) {
+            activeLink.classList.add("active");
         }
-    );
+
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 }
 
@@ -97,94 +59,197 @@ if (hodThemeToggle) {
    MOBILE SIDEBAR
 ========================================================= */
 
-if (mobileMenu) {
+function setupMobileMenu() {
 
-    mobileMenu.addEventListener(
-        "click",
-        function () {
+    const menu =
+        document.getElementById("mobileMenu");
 
-            hodSidebar.classList.toggle("open");
+    const sidebar =
+        document.getElementById("hodSidebar");
 
-        }
-    );
+    if (!menu || !sidebar) {
+        return;
+    }
+
+    menu.addEventListener("click", function () {
+
+        sidebar.classList.toggle("open");
+
+    });
+
+
+    // Close sidebar after selecting a menu item
+    document.querySelectorAll(".hod-nav").forEach(link => {
+
+        link.addEventListener("click", function () {
+
+            sidebar.classList.remove("open");
+
+        });
+
+    });
 
 }
 
 
 /* =========================================================
-   CLOSE MOBILE SIDEBAR
+   DARK MODE
 ========================================================= */
 
-document
-    .querySelectorAll(".hod-nav")
-    .forEach(function (item) {
+function toggleHodDarkMode() {
 
-        item.addEventListener(
-            "click",
-            function () {
+    document.body.classList.toggle("dark-mode");
 
-                if (window.innerWidth <= 900) {
+    const isDark =
+        document.body.classList.contains("dark-mode");
 
-                    hodSidebar.classList.remove(
-                        "open"
-                    );
+    localStorage.setItem(
+        "hodDarkMode",
+        isDark ? "true" : "false"
+    );
 
-                }
+    updateHodThemeIcon();
 
-            }
-        );
-
-    });
+}
 
 
 /* =========================================================
-   SEARCH SHORTCUT
+   THEME ICON
 ========================================================= */
 
-document.addEventListener(
-    "keydown",
-    function (event) {
+function updateHodThemeIcon() {
 
-        if (
-            (event.ctrlKey || event.metaKey) &&
-            event.key.toLowerCase() === "k"
-        ) {
+    const button =
+        document.getElementById("hodThemeToggle");
 
-            event.preventDefault();
+    if (!button) {
+        return;
+    }
 
-            if (hodSearch) {
-                hodSearch.focus();
-            }
+    const isDark =
+        document.body.classList.contains("dark-mode");
 
-        }
+    button.textContent =
+        isDark ? "☀" : "☼";
+
+}
+
+
+/* =========================================================
+   RESTORE DARK MODE
+========================================================= */
+
+function restoreHodDarkMode() {
+
+    const saved =
+        localStorage.getItem("hodDarkMode");
+
+    if (saved === "true") {
+
+        document.body.classList.add("dark-mode");
 
     }
-);
+
+    updateHodThemeIcon();
+
+}
 
 
 /* =========================================================
    SEARCH
 ========================================================= */
 
-if (hodSearch) {
+function setupHodSearch() {
 
-    hodSearch.addEventListener(
+    const search =
+        document.getElementById("hodSearch");
+
+    if (!search) {
+        return;
+    }
+
+    // CTRL + K
+    document.addEventListener(
         "keydown",
-        function (event) {
+        function(event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.ctrlKey &&
+                event.key.toLowerCase() === "k"
+            ) {
 
-                const value =
-                    hodSearch.value.trim();
+                event.preventDefault();
 
-                if (value !== "") {
+                search.focus();
 
-                    console.log(
-                        "HOD searching for:",
-                        value
-                    );
+            }
 
-                }
+        }
+    );
+
+
+    search.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                search.value
+                    .trim()
+                    .toLowerCase();
+
+            if (!value) {
+                return;
+            }
+
+            console.log(
+                "HOD searching:",
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function setupHodProfile() {
+
+    const profile =
+        document.getElementById("hodProfile");
+
+    if (!profile) {
+        return;
+    }
+
+
+    // CLICK PROFILE
+    profile.addEventListener(
+        "click",
+        function() {
+
+            openSection("profile");
+
+        }
+    );
+
+
+    // ENTER / SPACE
+    profile.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                openSection("profile");
 
             }
 
@@ -195,123 +260,72 @@ if (hodSearch) {
 
 
 /* =========================================================
-   RESPONSIVE SIDEBAR
+   NOTIFICATION
 ========================================================= */
 
-window.addEventListener(
-    "resize",
-    function () {
+function setupHodNotification() {
 
-        if (
-            window.innerWidth > 900 &&
-            hodSidebar
-        ) {
+    const notification =
+        document.getElementById(
+            "hodNotification"
+        );
 
-            hodSidebar.classList.remove(
-                "open"
+    if (!notification) {
+        return;
+    }
+
+
+    notification.addEventListener(
+        "click",
+        function() {
+
+            console.log(
+                "HOD notifications clicked"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        restoreHodDarkMode();
+
+        setupMobileMenu();
+
+        setupHodSearch();
+
+        setupHodProfile();
+
+        setupHodNotification();
+
+
+        const theme =
+            document.getElementById(
+                "hodThemeToggle"
+            );
+
+
+        if (theme) {
+
+            theme.addEventListener(
+                "click",
+                toggleHodDarkMode
             );
 
         }
 
+
+        // Dashboard is the default section
+        openSection("dashboard");
+
     }
-);
-
-
-/* =========================================================
-   QUICK ACTIONS
-========================================================= */
-
-document
-    .querySelectorAll(".quick-btn")
-    .forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                console.log(
-                    "HOD Quick Action:",
-                    button.textContent.trim()
-                );
-
-                /*
-                    Later Flask routes can be connected here.
-
-                    Example:
-
-                    View Students
-                    -> /hod/students
-
-                    View Placement Data
-                    -> /hod/placement-statistics
-
-                    View Placed Students
-                    -> /hod/placed-students
-
-                    Generate Report
-                    -> /hod/reports
-                */
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   VIEW ALL BUTTONS
-========================================================= */
-
-document
-    .querySelectorAll(".card-heading button")
-    .forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                console.log(
-                    "View All clicked"
-                );
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   NAVIGATION PLACEHOLDER
-========================================================= */
-
-document
-    .querySelectorAll(".hod-nav")
-    .forEach(function (item) {
-
-        item.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                document
-                    .querySelectorAll(".hod-nav")
-                    .forEach(function (nav) {
-
-                        nav.classList.remove(
-                            "active"
-                        );
-
-                    });
-
-                item.classList.add("active");
-
-            }
-        );
-
-    });
-
-
-console.log(
-    "HOD Dashboard JS Loaded Successfully"
 );

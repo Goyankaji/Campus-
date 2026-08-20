@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Tutor Dashboard | Campus Placement Portal</title>
-
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/tutor.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/hod.css') }}">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -21,191 +23,126 @@
          SIDEBAR
     ====================================================== -->
 
-    <aside class="sidebar">
+    <aside class="hod-sidebar" id="hodSidebar">
 
-        <!-- BRAND -->
-        <div class="brand">
+        <!-- LOGO -->
+        <div class="hod-logo">
+            <img
+                src="{{ url_for('static', filename='images/college-logo.JPEG') }}"
+                alt="College Logo">
 
-            <div class="brand-logo">
-                <img
-                    src="{{ url_for('static', filename='images/college-logo.JPEG') }}"
-                    alt="College Logo">
+            <div>
+                <h2>TUTOR PORTAL</h2>
+                <span>DEPARTMENT DASHBOARD</span>
             </div>
-
-            <div class="brand-text">
-                <h2>CAMPUS</h2>
-                <span>PLACEMENT PORTAL</span>
-            </div>
-
         </div>
 
+        <!-- TUTOR PROFILE -->
+        <!-- <div class="hod-profile">
+            <div class="hod-avatar">T</div>
+            <div>
+                <strong>Tutor</strong>
+                <span>TUTOR • CSE Department</span>
+            </div>
+        </div> -->
 
         <!-- NAVIGATION -->
-        <nav class="sidebar-navigation">
+        <nav class="hod-navigation">
 
-            <button class="nav-link active"
-                    onclick="openSection('dashboard', this)">
-                <span class="nav-icon">⌂</span>
+            <div class="nav-title">OVERVIEW</div>
+
+            <a href="#dashboard" class="hod-nav active"
+               onclick="openSection('dashboard', this); return false;">
+                <span class="nav-symbol">⌂</span>
                 <span>Dashboard</span>
-            </button>
+            </a>
 
+            <div class="nav-title">MAIN</div>
 
-            <div class="nav-heading">
-                MAIN
-            </div>
-
-
-            <button class="nav-link"
-                    onclick="openSection('profile', this)">
-                <span class="nav-icon">♙</span>
+            <!-- <a href="#profile" class="hod-nav"
+               onclick="openSection('profile', this); return false;">
+                <span class="nav-symbol">♙</span>
                 <span>My Profile</span>
-            </button>
+            </a> -->
 
+            <a href="#students" class="hod-nav"
+               onclick="openSection('students', this); return false;">
+                <span class="nav-symbol">♙</span>
+                <span>Students</span>
+            </a>
 
-            <button class="nav-link"
-                    onclick="openSection('students', this)">
-                <span class="nav-icon">🎓</span>
-                <span>My Students</span>
-            </button>
-
-
-            <button class="nav-link"
-                    onclick="openSection('attendance', this)">
-                <span class="nav-icon">✓</span>
+            <a href="#attendance" class="hod-nav"
+               onclick="openSection('attendance', this); return false;">
+                <span class="nav-symbol">◉</span>
                 <span>Attendance</span>
-            </button>
+            </a>
 
-
-            <button class="nav-link"
-                    onclick="openSection('academics', this)">
-                <span class="nav-icon">▣</span>
+            <a href="#academics" class="hod-nav"
+               onclick="openSection('academics', this); return false;">
+                <span class="nav-symbol">▤</span>
                 <span>Academics</span>
-            </button>
+            </a>
 
+            <div class="nav-title">PLACEMENT</div>
 
-            <div class="nav-heading">
-                PLACEMENT
-            </div>
-
-
-            <button class="nav-link"
-                    onclick="openSection('drives', this)">
-                <span class="nav-icon">◉</span>
+            <a href="#drives" class="hod-nav"
+               onclick="openSection('drives', this); return false;">
+                <span class="nav-symbol">▣</span>
                 <span>Placement Drives</span>
-            </button>
+            </a>
 
-
-            <button class="nav-link"
-                    onclick="openSection('applications', this)">
-                <span class="nav-icon">⌁</span>
+            <a href="#applications" class="hod-nav"
+               onclick="openSection('applications', this); return false;">
+                <span class="nav-symbol">▤</span>
                 <span>Student Applications</span>
-            </button>
+            </a>
 
-
-            <button class="nav-link"
-                    onclick="openSection('interviews', this)">
-                <span class="nav-icon">◷</span>
+            <a href="#interviews" class="hod-nav"
+               onclick="openSection('interviews', this); return false;">
+                <span class="nav-symbol">◷</span>
                 <span>Interviews</span>
-            </button>
+            </a>
 
-
-            <button class="nav-link"
-                    onclick="openSection('placement-status', this)">
-                <span class="nav-icon">✓</span>
+            <a href="#placement-status" class="hod-nav"
+               onclick="openSection('placement-status', this); return false;">
+                <span class="nav-symbol">✓</span>
                 <span>Placement Status</span>
-            </button>
+            </a>
 
+            <div class="nav-title">SYSTEM</div>
 
-            <div class="nav-heading">
-                LEARNING
-            </div>
-
-
-            <button class="nav-link"
-                    onclick="openSection('materials', this)">
-                <span class="nav-icon">▤</span>
-                <span>Preparation Materials</span>
-            </button>
-
-
-            <button class="nav-link"
-                    onclick="openSection('pyq', this)">
-                <span class="nav-icon">▥</span>
-                <span>PYQ</span>
-            </button>
-
-
-            <button class="nav-link"
-                    onclick="openSection('announcements', this)">
-                <span class="nav-icon">◈</span>
+            <a href="#announcements" class="hod-nav"
+               onclick="openSection('announcements', this); return false;">
+                <span class="nav-symbol">◈</span>
                 <span>Announcements</span>
-            </button>
+            </a>
 
-
-            <div class="nav-heading">
-                OTHERS
-            </div>
-
-
-            <button class="nav-link"
-                    onclick="openSection('notifications', this)">
-
-                <span class="nav-icon">♧</span>
+            <a href="#notifications" class="hod-nav"
+               onclick="openSection('notifications', this); return false;">
+                <span class="nav-symbol">♢</span>
                 <span>Notifications</span>
+                <span class="badge red">5</span>
+            </a>
 
-                <span class="nav-badge red">
-                    5
-                </span>
-
-            </button>
-
-
-            <button class="nav-link"
-                    onclick="openSection('complaints', this)">
-                <span class="nav-icon">◌</span>
+            <a href="#complaints" class="hod-nav"
+               onclick="openSection('complaints', this); return false;">
+                <span class="nav-symbol">◌</span>
                 <span>Complaints / Feedback</span>
-            </button>
+            </a>
 
-
-            <button class="nav-link"
-                    onclick="openSection('settings', this)">
-                <span class="nav-icon">⚙</span>
+            <a href="#settings" class="hod-nav"
+               onclick="openSection('settings', this); return false;">
+                <span class="nav-symbol">⚙</span>
                 <span>Settings</span>
-            </button>
+            </a>
 
         </nav>
 
-
-        <!-- SIDEBAR BOTTOM -->
-        <div class="sidebar-bottom">
-
-            <div class="progress-box">
-
-                <div class="progress-title">
-                    Keep helping your students! 🎓
-                </div>
-
-                <div class="progress-text">
-                    <span>Students Reviewed</span>
-                    <span>80%</span>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-value"></div>
-                </div>
-
-            </div>
-
-
-            <a href="{{ url_for('index') }}"
-               class="logout-btn">
-
-                <span>↪</span>
-                Logout
-
-            </a>
-
-        </div>
+        <!-- LOGOUT -->
+        <a href="{{ url_for('index') }}" class="hod-logout">
+            <span>⇥</span>
+            <span>Logout</span>
+        </a>
 
     </aside>
 
@@ -273,7 +210,11 @@
 
 
                 <!-- TUTOR PROFILE -->
-                <div class="profile">
+                <div class="profile"
+                     onclick="openSection('profile')"
+                     role="button"
+                     tabindex="0"
+                     title="Open My Profile">
 
                     <div class="profile-avatar">
                         T
