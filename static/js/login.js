@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm =
         document.getElementById("loginForm");
 
-    const username =
-        document.getElementById("username");
+    const email =
+        document.getElementById("email");
 
     const password =
         document.getElementById("password");
@@ -30,128 +30,115 @@ document.addEventListener("DOMContentLoaded", () => {
        SHOW / HIDE PASSWORD
     ===================================================== */
 
-    togglePassword.addEventListener(
-        "click",
-        () => {
+    if (togglePassword) {
 
-            const eyeIcon =
-                document.getElementById("eyeIcon");
+        togglePassword.addEventListener(
+            "click",
+            () => {
 
-
-            /* =========================================
-               SHOW PASSWORD
-            ========================================== */
-
-            if (password.type === "password") {
-
-                password.type = "text";
-
-                togglePassword.setAttribute(
-                    "aria-label",
-                    "Hide password"
-                );
-
-                eyeIcon.innerHTML = `
-
-                    <path
-                        d="M3 3L21 21"/>
-
-                    <path
-                        d="M10.6 10.6
-                           A2 2 0 0 0
-                           13.4 13.4"/>
-
-                    <path
-                        d="M9.2 4.2
-                           C10.1 3.9
-                           11 3.7
-                           12 3.7
-                           C18 3.7
-                           21.5 9
-                           22 12
-                           C21.5 14
-                           20.4 15.7
-                           19 17"/>
-
-                    <path
-                        d="M6.1 6.1
-                           C3.8 7.7
-                           2.5 10.2
-                           2 12
-                           C2.8 14.5
-                           6.5 20.3
-                           12 20.3
-                           C13.2 20.3
-                           14.4 20.1
-                           15.5 19.7"/>
-
-                `;
-
-            }
+                const eyeIcon =
+                    document.getElementById("eyeIcon");
 
 
-            /* =========================================
-               HIDE PASSWORD
-            ========================================== */
+                if (password.type === "password") {
 
-            else {
+                    password.type = "text";
 
-                password.type = "password";
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
 
-                togglePassword.setAttribute(
-                    "aria-label",
-                    "Show password"
-                );
+                    eyeIcon.innerHTML = `
 
-                eyeIcon.innerHTML = `
+                        <path d="M3 3L21 21"/>
 
-                    <path
-                        d="M2 12
-                           C4.5 7.5
-                           8 5.5
-                           12 5.5
-                           C16 5.5
-                           19.5 7.5
-                           22 12
-                           C19.5 16.5
-                           16 18.5
-                           12 18.5
-                           C8 18.5
-                           4.5 16.5
-                           2 12Z"/>
+                        <path
+                            d="M10.6 10.6
+                               A2 2 0 0 0
+                               13.4 13.4"/>
 
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="3"/>
+                        <path
+                            d="M9.2 4.2
+                               C10.1 3.9
+                               11 3.7
+                               12 3.7
+                               C18 3.7
+                               21.5 9
+                               22 12
+                               C21.5 14
+                               20.4 15.7
+                               19 17"/>
 
-                `;
+                        <path
+                            d="M6.1 6.1
+                               C3.8 7.7
+                               2.5 10.2
+                               2 12
+                               C2.8 14.5
+                               6.5 20.3
+                               12 20.3
+                               C13.2 20.3
+                               14.4 20.1
+                               15.5 19.7"/>
+
+                    `;
+
+                }
+
+                else {
+
+                    password.type = "password";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+
+                    eyeIcon.innerHTML = `
+
+                        <path
+                            d="M2 12
+                               C4.5 7.5
+                               8 5.5
+                               12 5.5
+                               C16 5.5
+                               19.5 7.5
+                               22 12
+                               C19.5 16.5
+                               16 18.5
+                               12 18.5
+                               C8 18.5
+                               4.5 16.5
+                               2 12Z"/>
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="3"/>
+
+                    `;
+
+                }
 
             }
+        );
 
-        }
-    );
+    }
 
 
     /* =====================================================
-       LOGIN FORM SUBMIT
+       LOGIN FORM VALIDATION
     ===================================================== */
 
     loginForm.addEventListener(
         "submit",
-        async (event) => {
-
-            event.preventDefault();
+        (event) => {
 
             clearErrors();
 
-
-            /* =========================================
-               GET VALUES
-            ========================================== */
-
-            const usernameValue =
-                username.value.trim();
+            const emailValue =
+                email.value.trim().toLowerCase();
 
             const passwordValue =
                 password.value;
@@ -161,14 +148,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             /* =========================================
-               USERNAME VALIDATION
+               EMAIL VALIDATION
             ========================================== */
 
-            if (!usernameValue) {
+            if (!emailValue) {
 
                 showError(
-                    "username",
-                    "Please enter your email or username."
+                    "email",
+                    "Please enter your email address."
+                );
+
+                isValid = false;
+
+            }
+
+            else if (
+                !emailValue.endsWith("@poornima.org")
+            ) {
+
+                showError(
+                    "email",
+                    "Only @poornima.org email addresses are allowed."
                 );
 
                 isValid = false;
@@ -193,16 +193,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             /* =========================================
-               STOP IF INVALID
+               STOP INVALID FORM
             ========================================== */
 
             if (!isValid) {
+
+                event.preventDefault();
+
                 return;
+
             }
 
 
             /* =========================================
-               TEMPORARY LOGIN
+               REAL FLASK SUBMISSION
+               
+               IMPORTANT:
+               We DO NOT use preventDefault here.
+               
+               Browser will submit:
+               
+               POST /login
+               
+               Flask will verify:
+               - email
+               - password
+               - account status
+               - role
             ========================================== */
 
             loginButton.classList.add(
@@ -213,44 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 .querySelector("span")
                 .textContent =
                 "Signing in...";
-
-
-            /*
-             * REAL FLASK LOGIN WILL BE CONNECTED HERE.
-             *
-             * Later:
-             *
-             * fetch("/login", {
-             *     method: "POST",
-             *     headers: {
-             *         "Content-Type": "application/json"
-             *     },
-             *     body: JSON.stringify({
-             *         username: usernameValue,
-             *         password: passwordValue
-             *     })
-             * });
-             */
-
-
-            setTimeout(() => {
-
-                loginButton.classList.remove(
-                    "loading"
-                );
-
-                loginButton
-                    .querySelector("span")
-                    .textContent =
-                    "Login";
-
-                loginMessage.textContent =
-                    "Login interface is ready.";
-
-                loginMessage.style.color =
-                    "#1769e0";
-
-            }, 700);
 
         }
     );
@@ -267,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             loginMessage.textContent =
-                "Password recovery will be connected later.";
+                "Password recovery will be available soon.";
 
             loginMessage.style.color =
                 "#64748b";
@@ -277,14 +256,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CLEAR USERNAME ERROR
+       CLEAR EMAIL ERROR
     ===================================================== */
 
-    username.addEventListener(
+    email.addEventListener(
         "input",
         () => {
 
-            removeError("username");
+            removeError("email");
 
         }
     );
@@ -361,11 +340,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function clearErrors() {
 
-        removeError("username");
+        removeError("email");
 
         removeError("password");
 
         loginMessage.textContent = "";
 
     }
+
 });

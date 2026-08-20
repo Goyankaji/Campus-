@@ -71,20 +71,48 @@
 
 
             <!-- =========================================
+                 SERVER SIDE FLASH MESSAGES
+            ========================================== -->
+
+            {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                    <div class="login-message server-message">
+
+                        {% for message in messages %}
+
+                            <p>{{ message }}</p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+
+
+            <!-- =========================================
                  LOGIN FORM
             ========================================== -->
 
-            <form id="loginForm"
-                  novalidate>
+            <form
+                id="loginForm"
+                action="{{ url_for('login') }}"
+                method="POST">
+
+
                 <!-- =====================================
-                     EMAIL / USERNAME
+                     EMAIL
                 ====================================== -->
 
                 <div class="form-group">
 
 
-                    <label for="username">
-                        Email / Username
+                    <label for="email">
+                        Email
                     </label>
 
 
@@ -116,11 +144,14 @@
 
 
                         <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            placeholder="Enter email or username"
-                            autocomplete="username">
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your @poornima.org email"
+                            autocomplete="username"
+                            pattern="[A-Za-z0-9._%+-]+@poornima\.org"
+                            title="Please use your @poornima.org email address"
+                            required>
 
 
                     </div>
@@ -128,7 +159,7 @@
 
                     <small
                         class="error-message"
-                        id="usernameError">
+                        id="emailError">
                     </small>
 
 
@@ -182,7 +213,8 @@
                             id="password"
                             name="password"
                             placeholder="Enter your password"
-                            autocomplete="current-password">
+                            autocomplete="current-password"
+                            required>
 
 
 
@@ -250,7 +282,8 @@
 
                         <input
                             type="checkbox"
-                            id="rememberMe">
+                            id="rememberMe"
+                            name="remember_me">
 
 
                         <span
@@ -319,7 +352,7 @@
 
 
 
-                <!-- Login Message -->
+                <!-- Client-side Login Message -->
 
                 <p
                     id="loginMessage"

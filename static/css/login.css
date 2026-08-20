@@ -1074,3 +1074,32 @@ and (min-width: 601px) {
     }
 
 }
+/* =====================================================
+   SERVER MESSAGE
+===================================================== */
+
+.server-message {
+
+    margin-bottom: 18px;
+
+    padding: 10px 14px;
+
+    border-radius: 9px;
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    color: #b91c1c;
+
+    font-size: 13px;
+
+    text-align: center;
+
+}
+
+.server-message p {
+
+    margin: 0;
+
+}
