@@ -2087,3 +2087,449 @@ body.dark-mode .overview-message p {
         flex-wrap: wrap;
     }
 }
+/* =========================================================
+   USER MANAGEMENT - NEW UI
+========================================================= */
+
+.user-page-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.role-filter {
+    height: 39px;
+
+    min-width: 155px;
+
+    border: 1px solid var(--border);
+
+    background: var(--card);
+
+    color: var(--text);
+
+    border-radius: 8px;
+
+    padding: 0 11px;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   EMPTY USERS
+========================================================= */
+
+.users-empty-state {
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+.empty-user-icon {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 14px;
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+
+    margin-bottom: 13px;
+}
+
+.users-empty-state h3 {
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+.users-empty-state p {
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   USER MODAL
+========================================================= */
+
+.user-modal {
+    width: 760px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+}
+
+.user-steps {
+    display: flex;
+
+    align-items: center;
+
+    padding: 15px 22px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.user-step {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    opacity: .45;
+}
+
+.user-step.active {
+    opacity: 1;
+}
+
+.user-step > span {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #edf0f6;
+
+    color: var(--muted);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.user-step.active > span {
+    background: var(--primary);
+
+    color: white;
+}
+
+.user-step strong {
+    display: block;
+
+    font-size: 9px;
+}
+
+.user-step small {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    margin-top: 2px;
+}
+
+.step-line {
+    width: 70px;
+
+    height: 1px;
+
+    background: var(--border);
+
+    margin: 0 12px;
+}
+
+
+/* =========================================================
+   FORM STEPS
+========================================================= */
+
+.user-form-step {
+    display: none;
+
+    padding: 22px;
+}
+
+.user-form-step.active {
+    display: block;
+}
+
+.form-section-title {
+    margin-bottom: 18px;
+}
+
+.form-section-title h3 {
+    font-size: 15px;
+
+    margin-bottom: 4px;
+}
+
+.form-section-title p {
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.form-subheading {
+    color: var(--text);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    padding-bottom: 8px;
+
+    margin-top: 7px;
+
+    border-bottom: 1px solid var(--border);
+
+    margin-bottom: 12px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   CREDENTIAL NOTE
+========================================================= */
+
+.credential-note {
+    margin-top: 18px;
+
+    padding: 12px;
+
+    background: var(--primary-light);
+
+    border-radius: 9px;
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: flex-start;
+}
+
+.credential-note > span {
+    font-size: 16px;
+}
+
+.credential-note strong {
+    display: block;
+
+    color: var(--primary);
+
+    font-size: 9px;
+
+    margin-bottom: 3px;
+}
+
+.credential-note p {
+    color: var(--muted);
+
+    font-size: 8px;
+
+    line-height: 14px;
+}
+
+
+/* =========================================================
+   MODAL FORM INPUTS
+========================================================= */
+
+.modal-grid label {
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.modal-grid input,
+.modal-grid select {
+    width: 100%;
+
+    height: 40px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: var(--card);
+
+    color: var(--text);
+
+    padding: 0 11px;
+
+    font-size: 9px;
+
+    margin-top: 6px;
+}
+
+.modal-grid input:focus,
+.modal-grid select:focus {
+    border-color: #9d83eb;
+
+    box-shadow:
+        0 0 0 3px rgba(109,60,232,.08);
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.user-modal .modal-footer {
+    position: sticky;
+
+    bottom: 0;
+
+    background: var(--card);
+
+    z-index: 2;
+}
+
+
+@media (max-width: 700px) {
+
+    .user-page-actions {
+        width: 100%;
+
+        margin-top: 12px;
+    }
+
+    .role-filter {
+        flex: 1;
+    }
+
+    .page-title-row {
+        flex-direction: column;
+    }
+
+    .user-modal {
+        width: calc(100% - 20px);
+    }
+
+    .user-steps {
+        padding: 12px;
+    }
+
+    .step-line {
+        width: 30px;
+    }
+
+}
+
+/* =========================================================
+   CORRECTED USER MANAGEMENT UI
+========================================================= */
+
+.user-page-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.role-filter {
+    height: 40px;
+    min-width: 175px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 10px;
+}
+
+.role-filter:focus {
+    border-color: #9d83eb;
+    box-shadow: 0 0 0 3px rgba(109,60,232,.08);
+}
+
+.users-empty-state {
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 35px;
+}
+
+.empty-user-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin-bottom: 14px;
+}
+
+.users-empty-state h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.users-empty-state p {
+    color: var(--muted);
+    font-size: 10px;
+    margin-bottom: 16px;
+}
+
+.role-help-card {
+    margin-top: 14px;
+    padding: 11px 12px;
+    border-radius: 9px;
+    background: var(--primary-light);
+    color: var(--muted);
+    font-size: 9px;
+    line-height: 15px;
+}
+
+.user-modal {
+    width: 780px;
+    max-height: 92vh;
+}
+
+.user-modal .modal-footer {
+    position: sticky;
+    bottom: 0;
+    background: var(--card);
+    z-index: 5;
+}
+
+@media (max-width: 700px) {
+    .user-page-actions {
+        width: 100%;
+    }
+
+    .role-filter {
+        flex: 1;
+        min-width: 0;
+    }
+}

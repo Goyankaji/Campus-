@@ -559,6 +559,7 @@
             </section>
 
 
+
             <!-- =================================================
                  USER MANAGEMENT VIEW
             ================================================== -->
@@ -571,41 +572,17 @@
                         <p>Manage students, TPOs and faculty accounts.</p>
                     </div>
 
-                    <button class="primary-btn" id="addUserBtn">+ Add User</button>
-                </div>
-
-                <div class="management-cards">
-
-                    <div class="management-card">
-                        <span class="management-icon blue-bg">🎓</span>
-                        <div>
-                            <span>Students</span>
-                            <strong>1,126</strong>
-                            <small>1,098 active</small>
-                        </div>
-                        <button data-filter-role="Student">Manage →</button>
+                    <div class="user-page-actions">
+                        <select class="role-filter" id="topUserRoleFilter" aria-label="Filter users by role">
+                            <option value="All">All</option>
+                            <option value="Student">Student</option>
+                            <option value="TPO">TPO</option>
+                            <option value="HOD">HOD</option>
+                            <option value="Tutor">Tutor</option>
+                            <option value="Higher Authority">Higher Authority</option>
+                        </select>
+                        <button class="primary-btn" id="addUserBtn">+ Add User</button>
                     </div>
-
-                    <div class="management-card">
-                        <span class="management-icon purple-bg">◉</span>
-                        <div>
-                            <span>TPO</span>
-                            <strong>12</strong>
-                            <small>11 active</small>
-                        </div>
-                        <button data-filter-role="TPO">Manage →</button>
-                    </div>
-
-                    <div class="management-card">
-                        <span class="management-icon green-bg">♙</span>
-                        <div>
-                            <span>Faculty</span>
-                            <strong>84</strong>
-                            <small>80 active</small>
-                        </div>
-                        <button data-filter-role="Faculty">Manage →</button>
-                    </div>
-
                 </div>
 
                 <div class="panel management-panel">
@@ -613,11 +590,11 @@
                     <div class="management-toolbar">
                         <div>
                             <h2>All Users</h2>
-                            <p>Add, edit, approve, block or remove accounts.</p>
+                            <p>New users created by the administrator will appear here.</p>
                         </div>
 
                         <div class="toolbar-controls">
-                            <input id="userSearch" placeholder="Search users...">
+                            <input id="userSearch" type="search" placeholder="Search users...">
 
                             <select id="userRoleFilter">
                                 <option value="All">All Roles</option>
@@ -637,9 +614,15 @@
                         </div>
                     </div>
 
-                    <div class="table-wrap">
-                        <table id="usersTable">
+                    <div class="users-empty-state" id="usersEmptyState">
+                        <div class="empty-user-icon">♙</div>
+                        <h3>No users added yet</h3>
+                        <p>Create a user with login credentials and profile details using <b>+ Add User</b>.</p>
+                        <button class="primary-btn" id="emptyAddUserBtn">+ Add First User</button>
+                    </div>
 
+                    <div class="table-wrap" id="usersTableWrap" style="display:none;">
+                        <table id="usersTable">
                             <thead>
                                 <tr>
                                     <th>USER</th>
@@ -650,120 +633,13 @@
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
-
-                            <tbody>
-
-                                <tr data-role="Student" data-status="Active">
-                                    <td>
-                                        <div class="user-cell">
-                                            <span class="table-avatar">RS</span>
-                                            <div>
-                                                <strong>Rahul Sharma</strong>
-                                                <small>rahul@campus.edu</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Student</td>
-                                    <td>CSE</td>
-                                    <td><span class="status active">Active</span></td>
-                                    <td>Today, 10:42 AM</td>
-                                    <td><button class="action-btn">⋮</button></td>
-                                </tr>
-
-                                <tr data-role="Student" data-status="Pending">
-                                    <td>
-                                        <div class="user-cell">
-                                            <span class="table-avatar">PV</span>
-                                            <div>
-                                                <strong>Priya Verma</strong>
-                                                <small>priya@campus.edu</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Student</td>
-                                    <td>IT</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                    <td>Yesterday</td>
-                                    <td><button class="action-btn">⋮</button></td>
-                                </tr>
-
-                                <tr data-role="TPO" data-status="Active">
-                                    <td>
-                                        <div class="user-cell">
-                                            <span class="table-avatar">AK</span>
-                                            <div>
-                                                <strong>Ankit Kumar</strong>
-                                                <small>tpo@campus.edu</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>TPO</td>
-                                    <td>Placement Cell</td>
-                                    <td><span class="status active">Active</span></td>
-                                    <td>Today, 09:18 AM</td>
-                                    <td><button class="action-btn">⋮</button></td>
-                                </tr>
-
-                                <tr data-role="HOD" data-status="Active">
-                                    <td>
-                                        <div class="user-cell">
-                                            <span class="table-avatar">AM</span>
-                                            <div>
-                                                <strong>Dr. Amit Mehta</strong>
-                                                <small>hod.cse@campus.edu</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>HOD</td>
-                                    <td>CSE</td>
-                                    <td><span class="status active">Active</span></td>
-                                    <td>Today, 08:30 AM</td>
-                                    <td><button class="action-btn">⋮</button></td>
-                                </tr>
-
-                                <tr data-role="Tutor" data-status="Blocked">
-                                    <td>
-                                        <div class="user-cell">
-                                            <span class="table-avatar">NS</span>
-                                            <div>
-                                                <strong>Neha Singh</strong>
-                                                <small>neha@campus.edu</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Tutor</td>
-                                    <td>CSE</td>
-                                    <td><span class="status blocked">Blocked</span></td>
-                                    <td>18 Aug 2026</td>
-                                    <td><button class="action-btn">⋮</button></td>
-                                </tr>
-
-                                <tr data-role="Higher Authority" data-status="Active">
-                                    <td>
-                                        <div class="user-cell">
-                                            <span class="table-avatar">RM</span>
-                                            <div>
-                                                <strong>Rajiv Mehta</strong>
-                                                <small>authority@campus.edu</small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Higher Authority</td>
-                                    <td>Administration</td>
-                                    <td><span class="status active">Active</span></td>
-                                    <td>18 Aug 2026</td>
-                                    <td><button class="action-btn">⋮</button></td>
-                                </tr>
-
-                            </tbody>
-
+                            <tbody></tbody>
                         </table>
                     </div>
 
                 </div>
 
             </section>
-
 
             <!-- =================================================
                  ROLE MANAGEMENT VIEW
@@ -1021,58 +897,538 @@
 </div>
 
 
-<!-- ADD USER MODAL -->
-<div class="modal-backdrop" id="userModal">
+<!-- =================================================
+     ADD USER MODAL
+================================================= -->
 
-    <div class="modal">
+<div class="modal-backdrop"
+     id="userModal">
+
+    <div class="modal user-modal">
+
+        <!-- MODAL HEADER -->
 
         <div class="modal-header">
+
             <div>
-                <span class="eyebrow">USER MANAGEMENT</span>
-                <h2>Add New User</h2>
+
+                <span class="eyebrow">
+                    USER MANAGEMENT
+                </span>
+
+                <h2 id="modalTitle">
+                    Create Login Account
+                </h2>
+
             </div>
-            <button class="modal-close" id="closeUserModal">×</button>
-        </div>
 
-        <div class="modal-grid">
+            <button
+                class="modal-close"
+                id="closeUserModal">
 
-            <label>
-                Full Name
-                <input id="newUserName" placeholder="Enter full name">
-            </label>
+                ×
 
-            <label>
-                Email
-                <input id="newUserEmail" type="email" placeholder="name@campus.edu">
-            </label>
-
-            <label>
-                Role
-                <select id="newUserRole">
-                    <option>Student</option>
-                    <option>TPO</option>
-                    <option>HOD</option>
-                    <option>Tutor</option>
-                    <option>Higher Authority</option>
-                </select>
-            </label>
-
-            <label>
-                Department
-                <input id="newUserDepartment" placeholder="CSE / IT / Administration">
-            </label>
+            </button>
 
         </div>
+
+
+        <!-- STEPS -->
+
+        <div class="user-steps">
+
+            <div class="user-step active"
+                 id="stepIndicator1">
+
+                <span>1</span>
+
+                <div>
+                    <strong>
+                        Login Account
+                    </strong>
+
+                    <small>
+                        Credentials & role
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="step-line"></div>
+
+
+            <div class="user-step"
+                 id="stepIndicator2">
+
+                <span>2</span>
+
+                <div>
+                    <strong>
+                        Profile Details
+                    </strong>
+
+                    <small>
+                        Personal & academic information
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             STEP 1
+        ========================================== -->
+
+        <div class="user-form-step active"
+             id="userStep1">
+
+            <div class="form-section-title">
+
+                <h3>
+                    Login Credentials
+                </h3>
+
+                <p>
+                    These credentials will be used
+                    by the user to log in.
+                </p>
+
+            </div>
+
+
+            <div class="modal-grid">
+
+                <label>
+
+                    Full Name
+
+                    <input
+                        id="newUserName"
+                        type="text"
+                        placeholder="Enter full name"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Email / Login ID
+
+                    <input
+                        id="newUserEmail"
+                        type="email"
+                        placeholder="name@campus.edu"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Password
+
+                    <input
+                        id="newUserPassword"
+                        type="password"
+                        placeholder="Create password"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Confirm Password
+
+                    <input
+                        id="newUserConfirmPassword"
+                        type="password"
+                        placeholder="Confirm password"
+                    >
+
+                </label>
+
+
+                <label class="full-width">
+
+                    Role
+
+                    <select id="newUserRole">
+
+                        <option value="">
+                            Select Role
+                        </option>
+
+                        <option value="Student">
+                            Student
+                        </option>
+
+                        <option value="TPO">
+                            TPO
+                        </option>
+
+                        <option value="HOD">
+                            HOD
+                        </option>
+
+                        <option value="Tutor">
+                            Tutor
+                        </option>
+
+                        <option value="Higher Authority">
+                            Higher Authority
+                        </option>
+
+                    </select>
+
+                </label>
+
+            </div>
+
+
+            <div class="credential-note">
+
+                <span>🔐</span>
+
+                <div>
+
+                    <strong>
+                        Login credentials
+                    </strong>
+
+                    <p>
+                        The email and password entered here
+                        will be linked to the user's account
+                        after database integration.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             STEP 2
+        ========================================== -->
+
+        <div class="user-form-step"
+             id="userStep2">
+
+            <div class="form-section-title">
+
+                <h3 id="profileFormTitle">
+                    Profile Details
+                </h3>
+
+                <p id="profileFormDescription">
+                    Enter information that will appear
+                    on the user's profile.
+                </p>
+
+            </div>
+
+
+            <!-- STUDENT FORM -->
+
+            <div class="role-profile-form"
+                 id="studentProfileForm">
+
+                <div class="form-subheading">
+                    Personal Information
+                </div>
+
+                <div class="modal-grid">
+
+                    <label>
+                        First Name
+                        <input
+                            id="studentFirstName"
+                            placeholder="First name"
+                        >
+                    </label>
+
+                    <label>
+                        Last Name
+                        <input
+                            id="studentLastName"
+                            placeholder="Last name"
+                        >
+                    </label>
+
+                    <label>
+                        Date of Birth
+                        <input
+                            id="studentDob"
+                            type="date"
+                        >
+                    </label>
+
+                    <label>
+                        Gender
+                        <select id="studentGender">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option>
+                                Male
+                            </option>
+
+                            <option>
+                                Female
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+                    </label>
+
+                    <label>
+                        Phone Number
+                        <input
+                            id="studentPhone"
+                            placeholder="Phone number"
+                        >
+                    </label>
+
+                    <label>
+                        Alternate Phone
+                        <input
+                            id="studentAltPhone"
+                            placeholder="Alternate phone"
+                        >
+                    </label>
+
+                </div>
+
+
+                <div class="form-subheading">
+                    Academic Information
+                </div>
+
+                <div class="modal-grid">
+
+                    <label>
+                        Enrollment / Roll Number
+                        <input
+                            id="studentRollNo"
+                            placeholder="Enrollment number"
+                        >
+                    </label>
+
+                    <label>
+                        Department
+                        <input
+                            id="studentDepartment"
+                            placeholder="CSE / IT / ECE"
+                        >
+                    </label>
+
+                    <label>
+                        Program
+                        <input
+                            id="studentProgram"
+                            placeholder="B.Tech / MCA / etc."
+                        >
+                    </label>
+
+                    <label>
+                        Batch
+                        <input
+                            id="studentBatch"
+                            placeholder="2023-27"
+                        >
+                    </label>
+
+                    <label>
+                        Semester
+                        <select id="studentSemester">
+
+                            <option value="">
+                                Select semester
+                            </option>
+
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+
+                        </select>
+                    </label>
+
+                    <label>
+                        CGPA
+                        <input
+                            id="studentCgpa"
+                            type="number"
+                            step="0.01"
+                            placeholder="0.00"
+                        >
+                    </label>
+
+                </div>
+
+
+                <div class="form-subheading">
+                    Address
+                </div>
+
+                <div class="modal-grid">
+
+                    <label class="full-width">
+                        Address
+                        <input
+                            id="studentAddress"
+                            placeholder="Full address"
+                        >
+                    </label>
+
+                    <label>
+                        City
+                        <input
+                            id="studentCity"
+                            placeholder="City"
+                        >
+                    </label>
+
+                    <label>
+                        State
+                        <input
+                            id="studentState"
+                            placeholder="State"
+                        >
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- GENERIC STAFF FORM -->
+
+            <div class="role-profile-form"
+                 id="staffProfileForm">
+
+                <div class="form-subheading">
+                    Professional Information
+                </div>
+
+                <div class="modal-grid">
+
+                    <label>
+                        Full Name
+                        <input
+                            id="staffFullName"
+                            placeholder="Full name"
+                        >
+                    </label>
+
+                    <label>
+                        Employee ID
+                        <input
+                            id="staffEmployeeId"
+                            placeholder="Employee ID"
+                        >
+                    </label>
+
+                    <label>
+                        Department
+                        <input
+                            id="staffDepartment"
+                            placeholder="Department"
+                        >
+                    </label>
+
+                    <label>
+                        Designation
+                        <input
+                            id="staffDesignation"
+                            placeholder="Designation"
+                        >
+                    </label>
+
+                    <label>
+                        Phone Number
+                        <input
+                            id="staffPhone"
+                            placeholder="Phone number"
+                        >
+                    </label>
+
+                    <label>
+                        Joining Date
+                        <input
+                            id="staffJoiningDate"
+                            type="date"
+                        >
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MODAL FOOTER -->
 
         <div class="modal-footer">
-            <button class="outline-btn" id="cancelUserModal">Cancel</button>
-            <button class="primary-btn" id="createUser">Create User</button>
+
+            <button
+                class="outline-btn"
+                id="cancelUserModal">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                class="outline-btn"
+                id="backUserStep"
+                style="display:none;">
+
+                ← Back
+
+            </button>
+
+
+            <button
+                class="primary-btn"
+                id="continueUserStep">
+
+                Continue →
+
+            </button>
+
+
+            <button
+                class="primary-btn"
+                id="createUser"
+                style="display:none;">
+
+                Create User
+
+            </button>
+
         </div>
 
     </div>
 
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

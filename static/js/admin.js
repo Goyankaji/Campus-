@@ -661,6 +661,12 @@ function updatePerformanceChart(yearCount) {
    USER MANAGEMENT
 ========================================================= */
 
+const USER_CREATE_ENDPOINT =
+    "/admin/api/users";
+
+let adminUsers = [];
+
+
 function setupUserManagement() {
 
     const search =
@@ -678,6 +684,18 @@ function setupUserManagement() {
     const statusFilter =
         document.getElementById(
             "userStatusFilter"
+        );
+
+
+    const topRoleFilter =
+        document.getElementById(
+            "topUserRoleFilter"
+        );
+
+
+    const emptyAddUserBtn =
+        document.getElementById(
+            "emptyAddUserBtn"
         );
 
 
@@ -711,32 +729,38 @@ function setupUserManagement() {
     }
 
 
-    document
-        .querySelectorAll(
-            "[data-filter-role]"
-        )
-        .forEach(button => {
+    if (topRoleFilter) {
 
-            button.addEventListener(
-                "click",
-                () => {
+        topRoleFilter.addEventListener(
+            "change",
+            () => {
 
-                    openView("users");
+                if (roleFilter) {
 
-
-                    if (roleFilter) {
-
-                        roleFilter.value =
-                            button.dataset.filterRole;
-
-                        filterUsers();
-
-                    }
+                    roleFilter.value =
+                        topRoleFilter.value;
 
                 }
-            );
 
-        });
+                filterUsers();
+
+            }
+        );
+
+    }
+
+
+    if (emptyAddUserBtn) {
+
+        emptyAddUserBtn.addEventListener(
+            "click",
+            openUserModal
+        );
+
+    }
+
+
+    renderUsers();
 
 }
 
@@ -776,11 +800,11 @@ function filterUsers() {
 
 
             const rowRole =
-                row.dataset.role;
+                row.dataset.role || "";
 
 
             const rowStatus =
-                row.dataset.status;
+                row.dataset.status || "";
 
 
             const matchesSearch =
@@ -798,15 +822,224 @@ function filterUsers() {
 
 
             row.style.display =
-                (
-                    matchesSearch &&
-                    matchesRole &&
-                    matchesStatus
-                )
-                ? ""
-                : "none";
+                matchesSearch &&
+                matchesRole &&
+                matchesStatus
+                    ? ""
+                    : "none";
 
         });
+
+}
+
+
+function renderUsers() {
+
+    const tbody =
+        document.querySelector(
+            "#usersTable tbody"
+        );
+
+
+    const tableWrap =
+        document.getElementById(
+            "usersTableWrap"
+        );
+
+
+    const emptyState =
+        document.getElementById(
+            "usersEmptyState"
+        );
+
+
+    if (
+        !tbody ||
+        !tableWrap ||
+        !emptyState
+    ) {
+        return;
+    }
+
+
+    tbody.innerHTML = "";
+
+
+    if (!adminUsers.length) {
+
+        tableWrap.style.display =
+            "none";
+
+        emptyState.style.display =
+            "flex";
+
+        return;
+
+    }
+
+
+    tableWrap.style.display =
+        "block";
+
+
+    emptyState.style.display =
+        "none";
+
+
+    adminUsers.forEach(user => {
+
+        const tr =
+            document.createElement(
+                "tr"
+            );
+
+
+        tr.dataset.role =
+            user.role;
+
+
+        tr.dataset.status =
+            user.status;
+
+
+        tr.innerHTML = `
+
+            <td>
+
+                <div class="user-cell">
+
+                    <span class="table-avatar">
+                        ${escapeHtml(
+                            getInitials(
+                                user.name
+                            )
+                        )}
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            ${escapeHtml(
+                                user.name
+                            )}
+                        </strong>
+
+                        <small>
+                            ${escapeHtml(
+                                user.email
+                            )}
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    user.role
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    user.department || "-"
+                )}
+            </td>
+
+            <td>
+
+                <span
+                    class="status ${escapeHtml(
+                        user.status.toLowerCase()
+                    )}"
+                >
+                    ${escapeHtml(
+                        user.status
+                    )}
+                </span>
+
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    user.lastActive ||
+                    "Just created"
+                )}
+            </td>
+
+            <td>
+
+                <button
+                    class="action-btn"
+                    type="button"
+                >
+                    ⋮
+                </button>
+
+            </td>
+
+        `;
+
+
+        tbody.appendChild(tr);
+
+    });
+
+
+    filterUsers();
+
+}
+
+
+function getInitials(name) {
+
+    return name
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(
+            part =>
+                part
+                    .charAt(0)
+                    .toUpperCase()
+        )
+        .join("") || "U";
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ""
+    )
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
@@ -814,6 +1047,9 @@ function filterUsers() {
 /* =========================================================
    ADD USER MODAL
 ========================================================= */
+
+let currentUserStep = 1;
+
 
 function setupModal() {
 
@@ -841,28 +1077,43 @@ function setupModal() {
         );
 
 
+    const continueButton =
+        document.getElementById(
+            "continueUserStep"
+        );
+
+
+    const backButton =
+        document.getElementById(
+            "backUserStep"
+        );
+
+
     const createButton =
         document.getElementById(
             "createUser"
         );
 
 
-    if (
-        !modal ||
-        !openButton
-    ) {
+    const roleSelect =
+        document.getElementById(
+            "newUserRole"
+        );
+
+
+    if (!modal) {
         return;
     }
 
 
-    openButton.addEventListener(
-        "click",
-        () => {
+    if (openButton) {
 
-            modal.classList.add("show");
+        openButton.addEventListener(
+            "click",
+            openUserModal
+        );
 
-        }
-    );
+    }
 
 
     if (closeButton) {
@@ -885,6 +1136,67 @@ function setupModal() {
     }
 
 
+    if (continueButton) {
+
+        continueButton.addEventListener(
+            "click",
+            () => {
+
+                if (!validateLoginStep()) {
+                    return;
+                }
+
+
+                currentUserStep = 2;
+
+
+                updateUserModalStep();
+
+
+                updateRoleProfileForm();
+
+            }
+        );
+
+    }
+
+
+    if (backButton) {
+
+        backButton.addEventListener(
+            "click",
+            () => {
+
+                currentUserStep = 1;
+
+                updateUserModalStep();
+
+            }
+        );
+
+    }
+
+
+    if (createButton) {
+
+        createButton.addEventListener(
+            "click",
+            createUser
+        );
+
+    }
+
+
+    if (roleSelect) {
+
+        roleSelect.addEventListener(
+            "change",
+            updateRoleProfileForm
+        );
+
+    }
+
+
     modal.addEventListener(
         "click",
         event => {
@@ -901,14 +1213,43 @@ function setupModal() {
     );
 
 
-    if (createButton) {
+    updateRoleProfileForm();
 
-        createButton.addEventListener(
-            "click",
-            createUser
+}
+
+
+function openUserModal() {
+
+    const modal =
+        document.getElementById(
+            "userModal"
         );
 
+
+    if (!modal) {
+        return;
     }
+
+
+    resetUserForm();
+
+
+    currentUserStep = 1;
+
+
+    updateUserModalStep();
+
+
+    modal.classList.add(
+        "show"
+    );
+
+
+    document
+        .getElementById(
+            "newUserName"
+        )
+        ?.focus();
 
 }
 
@@ -932,7 +1273,267 @@ function closeModal() {
 }
 
 
-function createUser() {
+function resetUserForm() {
+
+    document
+        .querySelectorAll(
+            "#userModal input, #userModal select"
+        )
+        .forEach(field => {
+
+            if (
+                field.type === "checkbox"
+            ) {
+
+                field.checked = false;
+
+            }
+            else {
+
+                field.value = "";
+
+            }
+
+        });
+
+
+    const role =
+        document.getElementById(
+            "newUserRole"
+        );
+
+
+    if (role) {
+
+        role.value =
+            "Student";
+
+    }
+
+
+    updateRoleProfileForm();
+
+}
+
+
+function updateUserModalStep() {
+
+    const step1 =
+        document.getElementById(
+            "userStep1"
+        );
+
+
+    const step2 =
+        document.getElementById(
+            "userStep2"
+        );
+
+
+    const indicator1 =
+        document.getElementById(
+            "stepIndicator1"
+        );
+
+
+    const indicator2 =
+        document.getElementById(
+            "stepIndicator2"
+        );
+
+
+    const continueButton =
+        document.getElementById(
+            "continueUserStep"
+        );
+
+
+    const backButton =
+        document.getElementById(
+            "backUserStep"
+        );
+
+
+    const createButton =
+        document.getElementById(
+            "createUser"
+        );
+
+
+    const isStep2 =
+        currentUserStep === 2;
+
+
+    if (step1) {
+
+        step1.classList.toggle(
+            "active",
+            !isStep2
+        );
+
+    }
+
+
+    if (step2) {
+
+        step2.classList.toggle(
+            "active",
+            isStep2
+        );
+
+    }
+
+
+    if (indicator1) {
+
+        indicator1.classList.toggle(
+            "active",
+            !isStep2
+        );
+
+    }
+
+
+    if (indicator2) {
+
+        indicator2.classList.toggle(
+            "active",
+            isStep2
+        );
+
+    }
+
+
+    if (continueButton) {
+
+        continueButton.style.display =
+            isStep2
+                ? "none"
+                : "inline-flex";
+
+    }
+
+
+    if (backButton) {
+
+        backButton.style.display =
+            isStep2
+                ? "inline-flex"
+                : "none";
+
+    }
+
+
+    if (createButton) {
+
+        createButton.style.display =
+            isStep2
+                ? "inline-flex"
+                : "none";
+
+    }
+
+}
+
+
+function updateRoleProfileForm() {
+
+    const role =
+        document.getElementById(
+            "newUserRole"
+        )?.value ||
+        "Student";
+
+
+    const studentForm =
+        document.getElementById(
+            "studentProfileForm"
+        );
+
+
+    const staffForm =
+        document.getElementById(
+            "staffProfileForm"
+        );
+
+
+    const title =
+        document.getElementById(
+            "profileFormTitle"
+        );
+
+
+    const description =
+        document.getElementById(
+            "profileFormDescription"
+        );
+
+
+    const roleHelp =
+        document.getElementById(
+            "roleHelpCard"
+        );
+
+
+    const isStudent =
+        role === "Student";
+
+
+    if (studentForm) {
+
+        studentForm.style.display =
+            isStudent
+                ? "block"
+                : "none";
+
+    }
+
+
+    if (staffForm) {
+
+        staffForm.style.display =
+            isStudent
+                ? "none"
+                : "block";
+
+    }
+
+
+    if (title) {
+
+        title.textContent =
+            isStudent
+
+                ? "Student Profile Details"
+
+                : `${role} Profile Details`;
+
+    }
+
+
+    if (description) {
+
+        description.textContent =
+            isStudent
+
+                ? "Enter the student's personal, academic and address information."
+
+                : `Enter the professional information for this ${role} account.`;
+
+    }
+
+
+    if (roleHelp) {
+
+        roleHelp.textContent =
+            `${role} is selected. This role will be saved with the login account and can later be controlled through Role Management.`;
+
+    }
+
+}
+
+
+function validateLoginStep() {
 
     const name =
         document.getElementById(
@@ -946,49 +1547,369 @@ function createUser() {
         )?.value.trim();
 
 
+    const password =
+        document.getElementById(
+            "newUserPassword"
+        )?.value;
+
+
+    const confirmPassword =
+        document.getElementById(
+            "newUserConfirmPassword"
+        )?.value;
+
+
     const role =
         document.getElementById(
             "newUserRole"
         )?.value;
 
 
-    const department =
-        document.getElementById(
-            "newUserDepartment"
-        )?.value.trim();
-
-
     if (
         !name ||
-        !email
+        !email ||
+        !password ||
+        !confirmPassword ||
+        !role
     ) {
 
         alert(
-            "Please enter name and email."
+            "Please fill Name, Email, Password, Confirm Password and Role."
         );
 
-        return;
+        return false;
 
     }
 
 
-    console.log(
-        "New user:",
-        {
-            name,
-            email,
-            role,
-            department
+    if (
+        password.length < 6
+    ) {
+
+        alert(
+            "Password must contain at least 6 characters."
+        );
+
+        return false;
+
+    }
+
+
+    if (
+        password !== confirmPassword
+    ) {
+
+        alert(
+            "Password and Confirm Password do not match."
+        );
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+function getProfileData(role) {
+
+    if (
+        role === "Student"
+    ) {
+
+        return {
+
+            first_name:
+                document.getElementById(
+                    "studentFirstName"
+                )?.value.trim() || "",
+
+            last_name:
+                document.getElementById(
+                    "studentLastName"
+                )?.value.trim() || "",
+
+            dob:
+                document.getElementById(
+                    "studentDob"
+                )?.value || "",
+
+            gender:
+                document.getElementById(
+                    "studentGender"
+                )?.value || "",
+
+            phone:
+                document.getElementById(
+                    "studentPhone"
+                )?.value.trim() || "",
+
+            alternate_phone:
+                document.getElementById(
+                    "studentAltPhone"
+                )?.value.trim() || "",
+
+            roll_no:
+                document.getElementById(
+                    "studentRollNo"
+                )?.value.trim() || "",
+
+            department:
+                document.getElementById(
+                    "studentDepartment"
+                )?.value.trim() || "",
+
+            program:
+                document.getElementById(
+                    "studentProgram"
+                )?.value.trim() || "",
+
+            batch:
+                document.getElementById(
+                    "studentBatch"
+                )?.value.trim() || "",
+
+            semester:
+                document.getElementById(
+                    "studentSemester"
+                )?.value || "",
+
+            cgpa:
+                document.getElementById(
+                    "studentCgpa"
+                )?.value || "",
+
+            address:
+                document.getElementById(
+                    "studentAddress"
+                )?.value.trim() || "",
+
+            city:
+                document.getElementById(
+                    "studentCity"
+                )?.value.trim() || "",
+
+            state:
+                document.getElementById(
+                    "studentState"
+                )?.value.trim() || ""
+
+        };
+
+    }
+
+
+    return {
+
+        full_name:
+            document.getElementById(
+                "staffFullName"
+            )?.value.trim() || "",
+
+        employee_id:
+            document.getElementById(
+                "staffEmployeeId"
+            )?.value.trim() || "",
+
+        department:
+            document.getElementById(
+                "staffDepartment"
+            )?.value.trim() || "",
+
+        designation:
+            document.getElementById(
+                "staffDesignation"
+            )?.value.trim() || "",
+
+        phone:
+            document.getElementById(
+                "staffPhone"
+            )?.value.trim() || "",
+
+        joining_date:
+            document.getElementById(
+                "staffJoiningDate"
+            )?.value || "",
+
+        additional_details:
+            document.getElementById(
+                "staffAdditionalDetails"
+            )?.value.trim() || ""
+
+    };
+
+}
+
+
+async function createUser() {
+
+    if (!validateLoginStep()) {
+        return;
+    }
+
+
+    const name =
+        document.getElementById(
+            "newUserName"
+        )?.value.trim();
+
+
+    const email =
+        document.getElementById(
+            "newUserEmail"
+        )?.value.trim();
+
+
+    const password =
+        document.getElementById(
+            "newUserPassword"
+        )?.value;
+
+
+    const role =
+        document.getElementById(
+            "newUserRole"
+        )?.value;
+
+
+    const payload = {
+
+        name,
+
+        email,
+
+        password,
+
+        role,
+
+        profile:
+            getProfileData(
+                role
+            )
+
+    };
+
+
+    const createButton =
+        document.getElementById(
+            "createUser"
+        );
+
+
+    if (createButton) {
+
+        createButton.disabled =
+            true;
+
+        createButton.textContent =
+            "Creating...";
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                USER_CREATE_ENDPOINT,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Server returned ${response.status}`
+            );
+
         }
-    );
 
 
-    alert(
-        `${name} created successfully.`
-    );
+        const result =
+            await response.json();
 
 
-    closeModal();
+        adminUsers.push({
+
+            id:
+                result.id ||
+                crypto.randomUUID(),
+
+            name,
+
+            email,
+
+            role,
+
+            department:
+                payload.profile.department ||
+                "-",
+
+            status:
+                result.status ||
+                "Active",
+
+            lastActive:
+                "Just created"
+
+        });
+
+
+        renderUsers();
+
+
+        closeModal();
+
+
+        alert(
+            "User account and profile created successfully."
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "User creation failed:",
+            error
+        );
+
+
+        alert(
+
+            "Frontend is ready, but the database/API route is not connected yet.\n\n" +
+
+            `Create this Flask POST route: ${USER_CREATE_ENDPOINT}`
+
+        );
+
+    }
+    finally {
+
+        if (createButton) {
+
+            createButton.disabled =
+                false;
+
+            createButton.textContent =
+                "Create User";
+
+        }
+
+    }
 
 }
 
@@ -1000,61 +1921,113 @@ function createUser() {
 const rolePermissions = {
 
     student: [
+
         ["Dashboard", true],
+
         ["My Profile", true],
+
         ["Academics", true],
+
         ["My Uploads", true],
+
         ["Placement Drives", true],
+
         ["My Applications", true],
+
         ["Interviews", true],
+
         ["Offers & Joining", true],
+
         ["Announcements", true],
+
         ["Settings", true]
+
     ],
+
 
     tpo: [
+
         ["Dashboard", true],
+
         ["Student Management", true],
+
         ["Company Management", true],
+
         ["Placement Drives", true],
+
         ["Applications", true],
+
         ["Placements", true],
+
         ["Analytics", true],
+
         ["Announcements", true],
+
         ["Reports", true],
+
         ["Settings", true]
+
     ],
+
 
     hod: [
+
         ["Dashboard", true],
+
         ["Department Students", true],
+
         ["Student Academics", true],
+
         ["Student Placement Status", true],
+
         ["Department Reports", true],
+
         ["Announcements", true],
+
         ["Settings", true]
+
     ],
+
 
     tutor: [
+
         ["Dashboard", true],
+
         ["Assigned Students", true],
+
         ["Student Progress", true],
+
         ["Attendance", true],
+
         ["Announcements", true],
+
         ["Settings", true]
+
     ],
 
+
     authority: [
+
         ["Dashboard", true],
+
         ["User Management", true],
+
         ["Role Management", true],
+
         ["Companies", true],
+
         ["Placement Drives", true],
+
         ["Placements", true],
+
         ["Analytics", true],
+
         ["Announcements", true],
+
         ["Feedback", true],
+
         ["Settings", true]
+
     ]
 
 };
@@ -1063,33 +2036,57 @@ const rolePermissions = {
 const roleInfo = {
 
     student: {
-        title: "Student",
+
+        title:
+            "Student",
+
         description:
             "Student portal access and placement journey."
+
     },
+
 
     tpo: {
-        title: "TPO",
+
+        title:
+            "TPO",
+
         description:
             "Placement cell management and recruitment operations."
+
     },
+
 
     hod: {
-        title: "HOD",
+
+        title:
+            "HOD",
+
         description:
             "Department-level student monitoring and academic oversight."
+
     },
+
 
     tutor: {
-        title: "Tutor",
+
+        title:
+            "Tutor",
+
         description:
             "Assigned student mentoring and progress monitoring."
+
     },
 
+
     authority: {
-        title: "Higher Authority",
+
+        title:
+            "Higher Authority",
+
         description:
             "High-level administration and complete system oversight."
+
     }
 
 };
@@ -1169,8 +2166,13 @@ function createPermissionPanel(role) {
         roleInfo[role];
 
 
-    if (!data || !info) {
+    if (
+        !data ||
+        !info
+    ) {
+
         return;
+
     }
 
 
@@ -1193,23 +2195,30 @@ function createPermissionPanel(role) {
 
 
     if (title) {
+
         title.textContent =
             info.title;
+
     }
 
 
     if (description) {
+
         description.textContent =
             info.description;
+
     }
 
 
     if (!grid) {
+
         return;
+
     }
 
 
-    grid.innerHTML = "";
+    grid.innerHTML =
+        "";
 
 
     data.forEach(
@@ -1248,7 +2257,9 @@ function createPermissionPanel(role) {
             `;
 
 
-            grid.appendChild(item);
+            grid.appendChild(
+                item
+            );
 
         }
     );
