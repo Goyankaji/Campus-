@@ -1,209 +1,289 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-<head>  
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Student Dashboard | Campus Placement Portal</title>
+    <title>Student Dashboard | Campus</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/student.css') }}">
 
-    <!-- Student Dashboard CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-<div class="app-container">
+<div class="app-layout">
 
-    <!-- =====================================================
-         SIDEBAR
-    ====================================================== -->
-    <aside class="sidebar" id="sidebar">
+    <!-- ================= SIDEBAR ================= -->
 
-        <!-- Logo -->
-        <div class="sidebar-logo">
-            <img src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
-                 alt="College Logo">
+    <aside class="sidebar">
 
-            <div>
+        <div class="brand">
+            <div class="brand-logo">
+                <img
+                    src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                    alt="College Logo">
+            </div>
+
+            <div class="brand-text">
                 <h2>CAMPUS</h2>
                 <span>PLACEMENT PORTAL</span>
             </div>
         </div>
 
-        <!-- Navigation -->
-        <nav class="sidebar-nav">
 
-            <a href="#" class="nav-item active">
+        <nav class="sidebar-navigation">
+
+            <button class="nav-link active"
+                    onclick="openSection('dashboard', this)">
                 <span class="nav-icon">⌂</span>
                 <span>Dashboard</span>
-            </a>
+            </button>
 
-            <div class="nav-section-title">MAIN</div>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">♙</span>
-                <span>My Profile</span>
-            </a>
+            <div class="nav-heading">MAIN</div>
 
-            <a href="#" class="nav-item">
+            <button class="nav-link"
+                    onclick="openSection('academics', this)">
                 <span class="nav-icon">▣</span>
                 <span>Academics</span>
-            </a>
+            </button>
 
-            <a href="#" class="nav-item">
+            <button class="nav-link"
+                    onclick="openSection('my-uploads', this)">
                 <span class="nav-icon">▤</span>
-                <span>Resume</span>
-            </a>
+                <span>My Uploads</span>
+            </button>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▱</span>
-                <span>Projects</span>
-            </a>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">✦</span>
-                <span>Skills & Certifications</span>
-            </a>
+            <div class="nav-heading">PLACEMENT</div>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▣</span>
-                <span>Internships</span>
-            </a>
-
-            <div class="nav-section-title">PLACEMENT</div>
-
-            <a href="#" class="nav-item">
+            <button class="nav-link"
+                    onclick="openSection('drives', this)">
                 <span class="nav-icon">◉</span>
                 <span>Placement Drives</span>
-            </a>
+            </button>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▤</span>
+            <button class="nav-link"
+                    onclick="openSection('applications', this)">
+                <span class="nav-icon">⌁</span>
                 <span>My Applications</span>
-            </a>
+            </button>
 
-            <a href="#" class="nav-item">
+            <button class="nav-link"
+                    onclick="openSection('interviews', this)">
                 <span class="nav-icon">◷</span>
                 <span>Interviews</span>
-            </a>
+            </button>
 
-            <a href="#" class="nav-item">
+            <button class="nav-link"
+                    onclick="openSection('offers', this)">
                 <span class="nav-icon">▣</span>
                 <span>Offers & Joining</span>
-            </a>
+            </button>
 
-            <div class="nav-section-title">LEARNING & RESOURCES</div>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">▤</span>
-                <span>PYQ</span>
-                <span class="nav-badge new-badge">New</span>
-            </a>
+            <div class="nav-heading">LEARNING & RESOURCES</div>
 
-            <a href="#" class="nav-item">
+            <button class="nav-link"
+                    onclick="openSection('pyq', this)">
                 <span class="nav-icon">▥</span>
+                <span>PYQ</span>
+                <span class="nav-badge new">New</span>
+            </button>
+
+            <button class="nav-link"
+                    onclick="openSection('materials', this)">
+                <span class="nav-icon">▤</span>
                 <span>Preparation Materials</span>
-            </a>
+            </button>
 
-            <a href="#" class="nav-item">
-                <span class="nav-icon">◌</span>
-                <span>Comments</span>
-                <span class="nav-badge count-badge">12</span>
-            </a>
-
-            <div class="nav-section-title">OTHERS</div>
-
-            <a href="#" class="nav-item">
-                <span class="nav-icon">♢</span>
-                <span>Notifications</span>
-                <span class="nav-badge count-badge">5</span>
-            </a>
-
-            <a href="#" class="nav-item">
+            <button class="nav-link"
+                    onclick="openSection('announcements', this)">
                 <span class="nav-icon">◈</span>
-                <span>Complaints / Feedback</span>
-            </a>
+                <span>Announcements</span>
+                <span class="nav-badge red">5</span>
+            </button>
 
-            <a href="#" class="nav-item">
+
+            <div class="nav-heading">OTHERS</div>
+
+            <button class="nav-link"
+                    onclick="openSection('settings', this)">
                 <span class="nav-icon">⚙</span>
                 <span>Settings</span>
-            </a>
-
-            <a href="#" class="nav-item logout-item">
-                <span class="nav-icon">⇥</span>
-                <span>Logout</span>
-            </a>
+            </button>
 
         </nav>
 
-        <!-- Profile Progress -->
-        <div class="profile-progress">
-            <div class="progress-heading">
-                <span>Keep going, you're doing great! 💪</span>
+
+        <div class="sidebar-bottom">
+
+            <div class="progress-box">
+                <div class="progress-title">
+                    Keep going, you're doing great! 💪
+                </div>
+
+                <div class="progress-text">
+                    <span>Profile Completed</span>
+                    <span>80%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-value"></div>
+                </div>
             </div>
 
-            <div class="progress-text">
-                <span>Profile Completed</span>
-                <strong>80%</strong>
-            </div>
 
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
-            </div>
+            <a href="{{ url_for('index') }}"
+               class="logout-btn">
+                <span>↪</span>
+                Logout
+            </a>
+
         </div>
+
     </aside>
 
 
-    <!-- =====================================================
-         MAIN CONTENT
-    ====================================================== -->
-    <main class="main-content">
+    <!-- ================= MAIN ================= -->
 
-        <!-- TOP HEADER -->
-        <header class="top-header">
+    <main class="main-area">
 
-            <button class="menu-toggle" id="menuToggle">☰</button>
 
-            <!-- Search -->
+        <!-- ================= TOPBAR ================= -->
+
+        <header class="topbar">
+
             <div class="search-box">
                 <span class="search-icon">⌕</span>
+
                 <input
                     type="text"
-                    placeholder="Search for drives, companies, roles..."
-                    id="dashboardSearch">
-                <span class="search-shortcut">Ctrl + K</span>
+                    id="globalSearch"
+                    placeholder="Search for drives, companies, roles...">
+
+                <span class="search-shortcut">
+                    Ctrl + K
+                </span>
             </div>
 
-            <!-- Header Right -->
-            <div class="header-right">
 
-                <button class="header-icon theme-top-toggle" id="topThemeToggle">
-                    ☼
+            <div class="topbar-right">
+
+                <!-- DARK/LIGHT MODE -->
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    onclick="toggleDarkMode()">
+
+                    <span id="themeIcon">☾</span>
+
                 </button>
 
-                <button class="header-icon notification-button">
-                    ♢
-                    <span class="notification-dot">5</span>
+
+                <!-- ANNOUNCEMENTS -->
+                <button
+                    class="top-icon"
+                    onclick="openSectionById('announcements')">
+
+                    ♧
+
+                    <span class="notification-dot"></span>
+
                 </button>
 
-                <div class="user-profile">
 
-                    <img
-                        src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
-                        alt="Student">
+                <!-- PROFILE -->
+                <div class="profile-wrapper"
+                     id="profileWrapper">
 
-                    <div class="user-info">
-                        <strong>Student Name</strong>
-                        <span>B.Tech CSE • 3rd Year</span>
+                    <button
+                        class="profile"
+                        onclick="toggleProfileMenu()">
+
+                        <div class="profile-avatar">
+                            S
+                        </div>
+
+                        <div class="profile-details">
+
+                            <strong>
+                                Student Name
+                            </strong>
+
+                            <span>
+                                B.Tech CSE • 3rd Year
+                            </span>
+
+                        </div>
+
+                        <span class="profile-arrow">
+                            ▾
+                        </span>
+
+                    </button>
+
+
+                    <!-- PROFILE DROPDOWN -->
+
+                    <div
+                        class="profile-menu"
+                        id="profileMenu">
+
+                        <div class="profile-menu-header">
+
+                            <div class="large-avatar">
+                                S
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Student Name
+                                </strong>
+
+                                <span>
+                                    student@college.edu
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-divider"></div>
+
+
+                        <button
+                            onclick="openSectionById('profile')">
+
+                            <span>♙</span>
+                            My Profile
+
+                        </button>
+
+
+                        <button
+                            onclick="openSectionById('profile')">
+
+                            <span>✦</span>
+                            Skills
+
+                        </button>
+
+
+                        <div class="profile-divider"></div>
+
+
+                        <a href="{{ url_for('index') }}">
+
+                            <span>↪</span>
+                            Logout
+
+                        </a>
+
                     </div>
-
-                    <span class="profile-arrow">⌄</span>
 
                 </div>
 
@@ -212,116 +292,178 @@
         </header>
 
 
-        <!-- DASHBOARD BODY -->
-        <section class="dashboard-content">
+        <!-- ================= DASHBOARD ================= -->
 
-            <!-- Welcome -->
-            <div class="welcome-row">
+        <section
+            id="dashboard"
+            class="page-section active-section">
+
+
+            <div class="welcome-section">
 
                 <div>
                     <h1>Welcome back! 👋</h1>
-                    <p>Here's your placement overview.</p>
+
+                    <p>
+                        Here's your placement overview.
+                    </p>
+                </div>
+
+
+                <div class="academic-session">
+
+                    <span>Academic Session</span>
+
+                    <select id="academicYear">
+
+                        <option>2025-26</option>
+                        <option>2024-25</option>
+                        <option>2023-24</option>
+
+                    </select>
+
                 </div>
 
             </div>
 
 
-            <!-- =================================================
-                 STAT CARDS
-            ================================================== -->
-            <section class="stats-grid">
+            <!-- ================= STATS ================= -->
 
-                <div class="stat-card status-card">
-                    <div class="stat-icon green-icon">✓</div>
+            <div class="stats-grid">
 
-                    <div>
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div class="stat-content">
                         <span>Placement Status</span>
-                        <strong>Eligible</strong>
+                        <h2>Eligible</h2>
                         <small>You can apply for drives</small>
                     </div>
+
                 </div>
 
 
                 <div class="stat-card">
-                    <div class="stat-icon blue-icon">▣</div>
 
-                    <div>
+                    <div class="stat-icon blue">
+                        ▣
+                    </div>
+
+                    <div class="stat-content">
                         <span>Applications</span>
-                        <strong>06</strong>
+                        <h2>06</h2>
                         <small>Total Applied</small>
                     </div>
+
                 </div>
 
 
                 <div class="stat-card">
-                    <div class="stat-icon purple-icon">◆</div>
 
-                    <div>
+                    <div class="stat-icon purple">
+                        ◆
+                    </div>
+
+                    <div class="stat-content">
                         <span>Shortlisted</span>
-                        <strong>02</strong>
+                        <h2>02</h2>
                         <small>Shortlisted</small>
                     </div>
+
                 </div>
 
 
                 <div class="stat-card">
-                    <div class="stat-icon orange-icon">▣</div>
 
-                    <div>
+                    <div class="stat-icon orange">
+                        ▣
+                    </div>
+
+                    <div class="stat-content">
                         <span>Interviews</span>
-                        <strong>01</strong>
+                        <h2>01</h2>
                         <small>Upcoming</small>
                     </div>
+
                 </div>
 
 
                 <div class="stat-card">
-                    <div class="stat-icon red-icon">▣</div>
 
-                    <div>
+                    <div class="stat-icon red">
+                        ▣
+                    </div>
+
+                    <div class="stat-content">
                         <span>Offers</span>
-                        <strong>00</strong>
+                        <h2>00</h2>
                         <small>No Offers Yet</small>
                     </div>
+
                 </div>
 
-            </section>
+            </div>
 
 
-            <!-- =================================================
-                 MAIN DASHBOARD GRID
-            ================================================== -->
-            <section class="dashboard-grid">
+            <!-- ================= FIRST ROW ================= -->
+
+            <div class="dashboard-grid">
+
 
                 <!-- UPCOMING DRIVES -->
-                <div class="dashboard-card drives-card">
 
-                    <div class="card-header">
+                <div class="panel drives-panel">
+
+                    <div class="panel-header">
+
                         <h2>Upcoming Drives</h2>
-                        <button class="view-all">View All</button>
+
+                        <button
+                            class="view-all-btn"
+                            onclick="openSectionById('drives')">
+
+                            View All
+
+                        </button>
+
                     </div>
+
 
                     <div class="drive-list">
 
+
                         <div class="drive-item">
 
-                            <div class="company-logo tcs-logo">
+                            <div class="company-logo tcs">
                                 tcs
                             </div>
 
                             <div class="drive-info">
-                                <strong>TCS</strong>
-                                <span>Software Engineer</span>
 
-                                <div class="drive-tags">
+                                <strong>TCS</strong>
+
+                                <span>
+                                    Software Engineer
+                                </span>
+
+                                <div class="tags">
                                     <span>Off Campus</span>
                                     <span>Multiple Roles</span>
                                 </div>
+
                             </div>
 
-                            <div class="drive-deadline">
-                                <span>Apply by</span>
-                                <strong>25 Aug 2026</strong>
+                            <div class="drive-date">
+
+                                <small>Apply by</small>
+
+                                <strong>
+                                    25 Aug 2026
+                                </strong>
+
                             </div>
 
                         </div>
@@ -329,23 +471,33 @@
 
                         <div class="drive-item">
 
-                            <div class="company-logo infosys-logo">
+                            <div class="company-logo infosys">
                                 Infosys
                             </div>
 
                             <div class="drive-info">
-                                <strong>Infosys</strong>
-                                <span>System Engineer</span>
 
-                                <div class="drive-tags">
+                                <strong>Infosys</strong>
+
+                                <span>
+                                    System Engineer
+                                </span>
+
+                                <div class="tags">
                                     <span>Off Campus</span>
                                     <span>System Engineer</span>
                                 </div>
+
                             </div>
 
-                            <div class="drive-deadline">
-                                <span>Apply by</span>
-                                <strong>30 Aug 2026</strong>
+                            <div class="drive-date">
+
+                                <small>Apply by</small>
+
+                                <strong>
+                                    30 Aug 2026
+                                </strong>
+
                             </div>
 
                         </div>
@@ -353,23 +505,33 @@
 
                         <div class="drive-item">
 
-                            <div class="company-logo wipro-logo">
+                            <div class="company-logo wipro">
                                 wipro
                             </div>
 
                             <div class="drive-info">
-                                <strong>Wipro</strong>
-                                <span>Project Engineer</span>
 
-                                <div class="drive-tags">
+                                <strong>Wipro</strong>
+
+                                <span>
+                                    Project Engineer
+                                </span>
+
+                                <div class="tags">
                                     <span>Off Campus</span>
                                     <span>Project Engineer</span>
                                 </div>
+
                             </div>
 
-                            <div class="drive-deadline">
-                                <span>Apply by</span>
-                                <strong>02 Sep 2026</strong>
+                            <div class="drive-date">
+
+                                <small>Apply by</small>
+
+                                <strong>
+                                    02 Sep 2026
+                                </strong>
+
                             </div>
 
                         </div>
@@ -379,86 +541,154 @@
                 </div>
 
 
-                <!-- PLACEMENT OVERVIEW -->
-                <div class="dashboard-card overview-card">
+                <!-- ================= PLACEMENT OVERVIEW ================= -->
 
-                    <div class="card-header">
+<div class="panel overview-panel">
 
-                        <h2>Placement Overview</h2>
+    <div class="panel-header">
 
-                        <select class="year-select">
-                            <option>2026-27</option>
-                            <option>2025-26</option>
-                            <option>2024-25</option>
-                        </select>
+        <h2>Placement Overview</h2>
 
-                    </div>
+        <select id="overviewYear">
+            <option value="2025-26">2025-26</option>
+            <option value="2024-25">2024-25</option>
+            <option value="2023-24">2023-24</option>
+        </select>
 
+    </div>
 
-                    <div class="chart-area">
+    <div class="overview-chart-content">
 
-                        <div class="donut-chart">
+        <!-- DONUT -->
+        <div class="donut-wrapper">
 
-                            <div class="donut-center">
-                                <strong>1260</strong>
-                                <span>Total Students</span>
-                            </div>
+            <div class="donut-chart" id="placementDonut">
 
-                        </div>
+                <div class="donut-center">
 
+                    <strong id="totalStudents">
+                        1260
+                    </strong>
 
-                        <div class="chart-legend">
-
-                            <div class="legend-item">
-                                <span class="legend-dot placed"></span>
-                                <div>
-                                    <strong>Placed Students</strong>
-                                    <small>480 (38.1%)</small>
-                                </div>
-                            </div>
-
-                            <div class="legend-item">
-                                <span class="legend-dot interview"></span>
-                                <div>
-                                    <strong>In Interview</strong>
-                                    <small>215 (17.1%)</small>
-                                </div>
-                            </div>
-
-                            <div class="legend-item">
-                                <span class="legend-dot remaining"></span>
-                                <div>
-                                    <strong>Yet to Appear</strong>
-                                    <small>565 (44.8%)</small>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="motivation-box">
-                        <div class="motivation-icon">✦</div>
-
-                        <div>
-                            <strong>Great progress!</strong>
-                            <p>Keep preparing and grab more opportunities.</p>
-                        </div>
-
-                        <span class="rocket">🚀</span>
-                    </div>
+                    <span>
+                        Total Students
+                    </span>
 
                 </div>
 
+            </div>
 
-                <!-- RECENT APPLICATIONS -->
-                <div class="dashboard-card applications-card">
+        </div>
 
-                    <div class="card-header">
-                        <h2>Recent Applications</h2>
-                        <button class="view-all">View All</button>
+
+        <!-- LEGEND / DETAILS -->
+        <div class="chart-legend">
+
+            <div class="legend-item">
+
+                <span class="legend-dot placed"></span>
+
+                <div>
+                    <strong>
+                        Placed Students
+                    </strong>
+
+                    <small id="placedValue">
+                        480 (38.1%)
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-dot interview"></span>
+
+                <div>
+                    <strong>
+                        In Interview
+                    </strong>
+
+                    <small id="interviewValue">
+                        215 (17.1%)
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-dot remaining"></span>
+
+                <div>
+                    <strong>
+                        Yet to Appear
+                    </strong>
+
+                    <small id="remainingValue">
+                        565 (44.8%)
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRESS MESSAGE -->
+    <div class="overview-message">
+
+        <div class="message-icon">
+            ✦
+        </div>
+
+        <div class="message-content">
+
+            <strong>
+                Great progress!
+            </strong>
+
+            <p>
+                Keep preparing and grab more opportunities.
+            </p>
+
+        </div>
+
+        <div class="rocket">
+            🚀
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- ================= APPLICATIONS ================= -->
+
+            <div class="bottom-grid">
+
+
+                <div class="panel applications-panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Recent Applications
+                        </h2>
+
+                        <button
+                            class="view-all-btn"
+                            onclick="openSectionById('applications')">
+
+                            View All
+
+                        </button>
+
                     </div>
+
 
                     <div class="table-wrapper">
 
@@ -466,12 +696,13 @@
 
                             <thead>
                                 <tr>
-                                    <th>Company</th>
-                                    <th>Role</th>
-                                    <th>Applied On</th>
-                                    <th>Status</th>
+                                    <th>COMPANY</th>
+                                    <th>ROLE</th>
+                                    <th>APPLIED ON</th>
+                                    <th>STATUS</th>
                                 </tr>
                             </thead>
+
 
                             <tbody>
 
@@ -480,7 +711,7 @@
                                     <td>Software Engineer</td>
                                     <td>18 Aug 2026</td>
                                     <td>
-                                        <span class="status-badge shortlisted">
+                                        <span class="status shortlisted">
                                             Shortlisted
                                         </span>
                                     </td>
@@ -491,7 +722,7 @@
                                     <td>System Engineer</td>
                                     <td>16 Aug 2026</td>
                                     <td>
-                                        <span class="status-badge applied">
+                                        <span class="status applied">
                                             Applied
                                         </span>
                                     </td>
@@ -502,7 +733,7 @@
                                     <td>Project Engineer</td>
                                     <td>14 Aug 2026</td>
                                     <td>
-                                        <span class="status-badge applied">
+                                        <span class="status applied">
                                             Applied
                                         </span>
                                     </td>
@@ -517,44 +748,76 @@
                 </div>
 
 
-                <!-- LATEST NOTIFICATIONS -->
-                <div class="dashboard-card notifications-card">
+                <!-- ANNOUNCEMENTS -->
 
-                    <div class="card-header">
-                        <h2>Latest Notifications</h2>
-                        <button class="view-all">View All</button>
+                <div class="panel announcements-panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Latest Announcements
+                        </h2>
+
+                        <button
+                            class="view-all-btn"
+                            onclick="openSectionById('announcements')">
+
+                            View All
+
+                        </button>
+
                     </div>
 
-                    <div class="notification-list">
 
-                        <div class="notification-item">
+                    <div class="announcement-list">
 
-                            <div class="notification-icon interview-notification">
+
+                        <div class="announcement-item">
+
+                            <div class="announcement-icon orange">
                                 ▣
                             </div>
 
-                            <div class="notification-content">
-                                <strong>TCS Technical Interview</strong>
-                                <p>Your interview is scheduled on 25 Aug 2026 at 11:00 AM.</p>
+                            <div class="announcement-content">
+
+                                <strong>
+                                    TCS Technical Interview
+                                </strong>
+
+                                <p>
+                                    Your interview is scheduled on 25 Aug 2026.
+                                </p>
+
                             </div>
 
-                            <span class="notification-time">10:30 AM</span>
+                            <small>
+                                10:30 AM
+                            </small>
 
                         </div>
 
 
-                        <div class="notification-item">
+                        <div class="announcement-item">
 
-                            <div class="notification-icon drive-notification">
+                            <div class="announcement-icon blue">
                                 ▣
                             </div>
 
-                            <div class="notification-content">
-                                <strong>Infosys Drive</strong>
-                                <p>New drive for System Engineer role is live.</p>
+                            <div class="announcement-content">
+
+                                <strong>
+                                    Infosys Drive
+                                </strong>
+
+                                <p>
+                                    New drive for System Engineer role is live.
+                                </p>
+
                             </div>
 
-                            <span class="notification-time">Yesterday</span>
+                            <small>
+                                Yesterday
+                            </small>
 
                         </div>
 
@@ -562,76 +825,516 @@
 
                 </div>
 
-            </section>
+            </div>
 
 
-            <!-- =================================================
-                 PREPARATION STRATEGIES
-            ================================================== -->
-            <section class="dashboard-card preparation-card">
+            <!-- ================= PREPARATION ================= -->
 
-                <div class="card-header">
+            <div class="panel preparation-panel">
 
-                    <h2>Preparation Strategies</h2>
+                <div class="panel-header">
 
-                    <button class="view-all">View All</button>
+                    <h2>
+                        Preparation Strategies
+                    </h2>
+
+                    <button
+                        class="view-all-btn"
+                        onclick="openSectionById('materials')">
+
+                        View All
+
+                    </button>
 
                 </div>
 
 
                 <div class="preparation-grid">
 
-                    <a href="#" class="prep-item">
+                    <div class="preparation-card">
 
-                        <div class="prep-icon green-prep">▤</div>
+                        <div class="preparation-icon green">
+                            ▤
+                        </div>
 
                         <div>
                             <strong>Aptitude</strong>
-                            <span>Practice daily</span>
+                            <small>Practice daily</small>
                         </div>
 
-                    </a>
+                    </div>
 
 
-                    <a href="#" class="prep-item">
+                    <div class="preparation-card">
 
-                        <div class="prep-icon blue-prep">⌘</div>
+                        <div class="preparation-icon blue">
+                            ⌘
+                        </div>
 
                         <div>
                             <strong>DSA</strong>
-                            <span>Solve problems</span>
+                            <small>Solve problems</small>
                         </div>
 
-                    </a>
+                    </div>
 
 
-                    <a href="#" class="prep-item">
+                    <div class="preparation-card">
 
-                        <div class="prep-icon purple-prep">▤</div>
+                        <div class="preparation-icon purple">
+                            ▣
+                        </div>
 
                         <div>
                             <strong>HR Prep</strong>
-                            <span>Common Q&A</span>
+                            <small>Common Q&A</small>
                         </div>
 
-                    </a>
+                    </div>
 
 
-                    <a href="#" class="prep-item">
+                    <div class="preparation-card">
 
-                        <div class="prep-icon red-prep">✓</div>
+                        <div class="preparation-icon red">
+                            ✓
+                        </div>
 
                         <div>
                             <strong>Mock Tests</strong>
-                            <span>Test yourself</span>
+                            <small>Test yourself</small>
                         </div>
 
-                    </a>
+                    </div>
 
                 </div>
 
-            </section>
+            </div>
 
+        </section>
+
+
+        <!-- ================= PROFILE ================= -->
+
+        <section id="profile" class="page-section">
+
+            <div class="inner-page">
+
+                <div class="page-title">
+
+                    <div>
+                        <h1>My Profile</h1>
+
+                        <p>
+                            Manage your personal information and skills.
+                        </p>
+                    </div>
+
+                    <button
+                        class="primary-btn"
+                        onclick="toggleEditProfile()">
+
+                        ✎ Edit Profile
+
+                    </button>
+
+                </div>
+
+
+                <div class="profile-grid">
+
+
+                    <div class="panel profile-card">
+
+                        <div class="panel-header">
+                            <h2>Personal Information</h2>
+                        </div>
+
+
+                        <div class="profile-info">
+
+                            <div class="profile-large-avatar">
+                                S
+                            </div>
+
+
+                            <div class="profile-fields">
+
+                                <div class="field">
+                                    <label>Full Name</label>
+                                    <input
+                                        type="text"
+                                        value="Student Name"
+                                        disabled>
+                                </div>
+
+                                <div class="field">
+                                    <label>Email</label>
+                                    <input
+                                        type="email"
+                                        value="student@college.edu"
+                                        disabled>
+                                </div>
+
+                                <div class="field">
+                                    <label>Roll Number</label>
+                                    <input
+                                        type="text"
+                                        value="23CS001"
+                                        disabled>
+                                </div>
+
+                                <div class="field">
+                                    <label>Department</label>
+                                    <input
+                                        type="text"
+                                        value="Computer Science & Engineering"
+                                        disabled>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel skills-card">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <h2>My Skills</h2>
+
+                                <p>
+                                    Add or edit your skills
+                                </p>
+                            </div>
+
+                            <button
+                                class="add-skill-btn"
+                                onclick="addSkill()">
+
+                                + Add Skill
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="skills-list"
+                            id="skillsList">
+
+                            <span class="skill">
+                                Java
+                                <button onclick="removeSkill(this)">×</button>
+                            </span>
+
+                            <span class="skill">
+                                Python
+                                <button onclick="removeSkill(this)">×</button>
+                            </span>
+
+                            <span class="skill">
+                                SQL
+                                <button onclick="removeSkill(this)">×</button>
+                            </span>
+
+                            <span class="skill">
+                                HTML
+                                <button onclick="removeSkill(this)">×</button>
+                            </span>
+
+                            <span class="skill">
+                                CSS
+                                <button onclick="removeSkill(this)">×</button>
+                            </span>
+
+                            <span class="skill">
+                                JavaScript
+                                <button onclick="removeSkill(this)">×</button>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MY UPLOADS ================= -->
+
+        <section id="my-uploads" class="page-section">
+
+            <div class="inner-page">
+
+                <div class="page-title">
+
+                    <div>
+                        <h1>My Uploads</h1>
+
+                        <p>
+                            Upload and manage your placement documents.
+                        </p>
+                    </div>
+
+                    <button
+                        class="primary-btn"
+                        onclick="showUploadMessage()">
+
+                        + Upload Document
+
+                    </button>
+
+                </div>
+
+
+                <div class="uploads-grid">
+
+
+                    <div class="upload-card">
+
+                        <div class="upload-icon blue">
+                            📄
+                        </div>
+
+                        <div class="upload-content">
+
+                            <h3>Resume</h3>
+
+                            <p>
+                                Upload your latest resume.
+                            </p>
+
+                            <span class="uploaded">
+                                ✓ Uploaded
+                            </span>
+
+                        </div>
+
+                        <button class="upload-action">
+                            Update
+                        </button>
+
+                    </div>
+
+
+                    <div class="upload-card">
+
+                        <div class="upload-icon purple">
+                            🎓
+                        </div>
+
+                        <div class="upload-content">
+
+                            <h3>Certificates</h3>
+
+                            <p>
+                                Upload academic or professional certificates.
+                            </p>
+
+                            <span class="uploaded">
+                                ✓ 3 Files
+                            </span>
+
+                        </div>
+
+                        <button class="upload-action">
+                            Manage
+                        </button>
+
+                    </div>
+
+
+                    <div class="upload-card">
+
+                        <div class="upload-icon orange">
+                            💼
+                        </div>
+
+                        <div class="upload-content">
+
+                            <h3>Internship Documents</h3>
+
+                            <p>
+                                Upload internship certificates and documents.
+                            </p>
+
+                            <span class="not-uploaded">
+                                Not uploaded
+                            </span>
+
+                        </div>
+
+                        <button class="upload-action">
+                            Upload
+                        </button>
+
+                    </div>
+
+
+                    <div class="upload-card">
+
+                        <div class="upload-icon green">
+                            📁
+                        </div>
+
+                        <div class="upload-content">
+
+                            <h3>Project Documents</h3>
+
+                            <p>
+                                Upload project reports and documents.
+                            </p>
+
+                            <span class="uploaded">
+                                ✓ 2 Files
+                            </span>
+
+                        </div>
+
+                        <button class="upload-action">
+                            Manage
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= OTHER PAGES ================= -->
+
+        <section id="academics" class="page-section">
+            <div class="inner-page">
+                <h1>Academics</h1>
+                <p>View your academic performance.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">▣</div>
+                    <h2>Academic Records</h2>
+                    <p>Your academic information will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="drives" class="page-section">
+            <div class="inner-page">
+                <h1>Placement Drives</h1>
+                <p>Explore available placement opportunities.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">◉</div>
+                    <h2>Placement Drives</h2>
+                    <p>Available drives will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="applications" class="page-section">
+            <div class="inner-page">
+                <h1>My Applications</h1>
+                <p>Track all your placement applications.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">⌁</div>
+                    <h2>Applications</h2>
+                    <p>Your applications will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="interviews" class="page-section">
+            <div class="inner-page">
+                <h1>Interviews</h1>
+                <p>View your upcoming and previous interviews.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">◷</div>
+                    <h2>Interviews</h2>
+                    <p>Interview details will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="offers" class="page-section">
+            <div class="inner-page">
+                <h1>Offers & Joining</h1>
+                <p>Track your placement offers and joining details.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">★</div>
+                    <h2>Offers</h2>
+                    <p>Offer information will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="pyq" class="page-section">
+            <div class="inner-page">
+                <h1>PYQ</h1>
+                <p>Previous year placement questions.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">▥</div>
+                    <h2>Previous Year Questions</h2>
+                    <p>Question papers will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="materials" class="page-section">
+            <div class="inner-page">
+                <h1>Preparation Materials</h1>
+                <p>Prepare for your placement interviews.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">▤</div>
+                    <h2>Preparation Materials</h2>
+                    <p>Study resources will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="announcements" class="page-section">
+            <div class="inner-page">
+                <h1>Announcements</h1>
+                <p>Latest placement announcements and updates.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">◈</div>
+                    <h2>Announcements</h2>
+                    <p>Latest announcements will appear here.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="settings" class="page-section">
+            <div class="inner-page">
+                <h1>Settings</h1>
+                <p>Manage your account settings.</p>
+
+                <div class="empty-module">
+                    <div class="module-icon">⚙</div>
+                    <h2>Account Settings</h2>
+                    <p>Settings will appear here.</p>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -639,9 +1342,8 @@
 </div>
 
 
-<!-- Dashboard JavaScript -->
+
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 </body>
 </html>
-```
