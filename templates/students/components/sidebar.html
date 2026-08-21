@@ -1,0 +1,294 @@
+<aside class="student-sidebar">
+
+    <!-- BRAND -->
+    <div class="student-brand">
+
+        <div class="student-brand-logo">
+            <img
+                src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                alt="Campus Logo">
+        </div>
+
+        <div class="student-brand-text">
+            <h2>CAMPUS</h2>
+            <span>PLACEMENT PORTAL</span>
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+    <nav class="student-sidebar-nav">
+
+        <!-- DASHBOARD -->
+        <a
+            href="{{ url_for('student_dashboard') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'student_dashboard' %}active{% endif %}">
+
+            <span class="student-nav-icon">⌂</span>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!-- MAIN -->
+        <div class="student-nav-heading">
+            MAIN
+        </div>
+
+
+        <!-- MY PROFILE -->
+        <a
+            href="{{ url_for('student_profile') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'student_profile' %}active{% endif %}">
+
+            <span class="student-nav-icon">♙</span>
+            <span>My Profile</span>
+
+        </a>
+
+
+        <!-- ACADEMICS -->
+        <a
+            href="{{ url_for('student_academics') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'student_academics' %}active{% endif %}">
+
+            <span class="student-nav-icon">▣</span>
+            <span>Academics</span>
+
+        </a>
+
+
+        <a
+    href="{{ url_for('student_my_uploads') }}"
+    class="student-nav-link
+    {% if request.endpoint == 'student_my_uploads' %}active{% endif %}">
+
+    <span class="student-nav-icon">
+        ▤
+    </span>
+
+    <span>
+        My Uploads
+    </span>
+
+</a>
+
+
+        <!-- PLACEMENT -->
+        <div class="student-nav-heading">
+            PLACEMENT
+        </div>
+
+
+        <!-- PLACEMENT DRIVES -->
+        <a
+            href="{{ url_for('placement_drives') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'placement_drives' %}active{% endif %}">
+
+            <span class="student-nav-icon">◉</span>
+            <span>Placement Drives</span>
+
+        </a>
+
+
+        <!-- MY APPLICATIONS -->
+        <a
+            href="{{ url_for('student_applications') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'student_applications' %}active{% endif %}">
+            <span class="student-nav-icon">⌁</span>
+            <span>My Applications</span>
+        </a>
+
+
+        <!-- INTERVIEWS -->
+        <a
+            href="{{ url_for('student_interviews') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'student_interviews' %}active{% endif %}">
+            <span class="student-nav-icon">◷</span>
+            <span>
+                Interviews
+            </span>
+        </a>
+
+
+        <a
+    href="{{ url_for('student_offers_joining') }}"
+    class="student-nav-link
+    {% if request.endpoint == 'student_offers_joining' %}active{% endif %}">
+
+    <span class="student-nav-icon">
+        ▣
+    </span>
+
+    <span>
+        Offers & Joining
+    </span>
+
+</a>
+
+
+        <!-- =====================================================
+     LEARNING & RESOURCES
+====================================================== -->
+
+<div class="student-nav-heading">
+    LEARNING & RESOURCES
+</div>
+
+
+<!-- PREPARATION -->
+
+<a
+    href="{{ url_for('student_preparation') }}"
+    class="student-nav-link
+    {% if request.endpoint == 'student_preparation' %}active{% endif %}">
+
+    <span class="student-nav-icon">
+        ▥
+    </span>
+
+    <span>
+        Preparation
+    </span>
+
+</a>
+
+
+<!-- COMMENTS -->
+
+<a
+    href="{{ url_for('student_discussion') }}"
+    class="student-nav-link
+    {% if request.endpoint == 'student_discussion' %}active{% endif %}">
+
+    <span class="student-nav-icon">
+        ◇
+    </span>
+
+    <span>
+        Discussion
+    </span>
+
+</a>
+
+
+<!-- ANNOUNCEMENTS -->
+
+<a
+    href="{{ url_for('student_announcements') }}"
+    class="student-nav-link
+    {% if request.endpoint == 'student_announcements' %}active{% endif %}">
+
+    <span class="student-nav-icon">
+        ◈
+    </span>
+
+    <span>
+        Announcements
+    </span>
+
+</a>
+
+       <!-- =====================================================
+     OTHERS
+====================================================== -->
+
+<div class="student-nav-heading">
+    OTHERS
+</div>
+
+
+<!-- HELP -->
+
+<a
+    href="{{ url_for('student_help') }}"
+    class="student-nav-link
+    {% if request.endpoint == 'student_help' %}active{% endif %}">
+
+    <span class="student-nav-icon">
+        ?
+    </span>
+
+    <span>
+        Help
+    </span>
+
+</a>
+
+
+<!-- SETTINGS -->
+
+<a
+    href="{{ url_for('student_settings') }}"
+    class="student-nav-link
+    {% if request.endpoint == 'student_settings' %}active{% endif %}">
+
+    <span class="student-nav-icon">
+        ⚙
+    </span>
+
+    <span>
+        Settings
+    </span>
+
+</a>
+
+
+    <!-- SIDEBAR FOOTER -->
+    <div class="student-sidebar-bottom">
+
+
+        <!-- PROFILE COMPLETION -->
+        <div class="student-progress-box">
+
+            <div class="student-progress-title">
+                Keep going, you're doing great! 💪
+            </div>
+
+
+            <div class="student-progress-info">
+
+                <span>
+                    Profile Completed
+                </span>
+
+                <strong>
+                    {{ profile_completion }}%
+                </strong>
+
+            </div>
+
+
+            <div class="student-progress-bar">
+
+                <div
+                    class="student-progress-value"
+                    style="width: {{ profile_completion }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+        <a
+            href="{{ url_for('index') }}"
+            class="student-logout-btn">
+
+            <span>↪</span>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</aside>

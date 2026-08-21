@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Preparation Material | Campus</title>
+
+
+    <!-- COMMON CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <!-- PAGE CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/preparation.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-preparation-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-preparation-header">
+
+                <div>
+
+                    <h1>
+                        Preparation Material
+                    </h1>
+
+                    <p>
+                        Prepare for placements with curated
+                        resources, practice material and
+                        company-wise previous year questions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 QUICK STATS
+            ================================================== -->
+
+            <div class="student-preparation-stats">
+
+
+                <div class="student-preparation-stat">
+
+                    <span>
+                        Total Resources
+                    </span>
+
+                    <strong>
+                        120+
+                    </strong>
+
+                </div>
+
+
+                <div class="student-preparation-stat">
+
+                    <span>
+                        PYQs
+                    </span>
+
+                    <strong>
+                        45+
+                    </strong>
+
+                </div>
+
+
+                <div class="student-preparation-stat">
+
+                    <span>
+                        Practice Sets
+                    </span>
+
+                    <strong>
+                        30+
+                    </strong>
+
+                </div>
+
+
+                <div class="student-preparation-stat">
+
+                    <span>
+                        Companies
+                    </span>
+
+                    <strong>
+                        18
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTER BAR
+            ================================================== -->
+
+            <div class="student-preparation-toolbar">
+
+
+                <div class="student-preparation-tabs">
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-tab active"
+                        data-filter="all">
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-tab"
+                        data-filter="aptitude">
+
+                        Aptitude
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-tab"
+                        data-filter="technical">
+
+                        Technical
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-tab"
+                        data-filter="coding">
+
+                        Coding
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-tab"
+                        data-filter="pyq">
+
+                        PYQs
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-tab"
+                        data-filter="company">
+
+                        Company-wise
+
+                    </button>
+
+
+                </div>
+
+
+                <input
+                    type="text"
+                    class="student-preparation-search"
+                    placeholder="Search material...">
+
+            </div>
+
+
+            <!-- =================================================
+                 MATERIAL GRID
+            ================================================== -->
+
+            <div class="student-preparation-grid">
+
+
+                <!-- =================================================
+                     APTITUDE
+                ================================================== -->
+
+                <div
+                    class="student-preparation-card"
+                    data-category="aptitude">
+
+
+                    <div class="student-preparation-card-top">
+
+                        <div class="student-preparation-icon">
+                            ∑
+                        </div>
+
+                        <span class="student-preparation-type">
+                            Aptitude
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Quantitative Aptitude
+                    </h3>
+
+
+                    <p>
+                        Percentages, profit & loss, time & work,
+                        probability and other placement topics.
+                    </p>
+
+
+                    <div class="student-preparation-meta">
+
+                        <span>
+                            25 Resources
+                        </span>
+
+                        <span>
+                            Beginner → Advanced
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-btn">
+
+                        Explore
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     TECHNICAL
+                ================================================== -->
+
+                <div
+                    class="student-preparation-card"
+                    data-category="technical">
+
+
+                    <div class="student-preparation-card-top">
+
+                        <div class="student-preparation-icon">
+                            &lt;/&gt;
+                        </div>
+
+                        <span class="student-preparation-type">
+                            Technical
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Core CS Fundamentals
+                    </h3>
+
+
+                    <p>
+                        DBMS, Operating Systems, Computer Networks,
+                        OOP and Software Engineering concepts.
+                    </p>
+
+
+                    <div class="student-preparation-meta">
+
+                        <span>
+                            32 Resources
+                        </span>
+
+                        <span>
+                            Interview Focused
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-btn">
+
+                        Explore
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     CODING
+                ================================================== -->
+
+                <div
+                    class="student-preparation-card"
+                    data-category="coding">
+
+
+                    <div class="student-preparation-card-top">
+
+                        <div class="student-preparation-icon">
+                            #
+                        </div>
+
+                        <span class="student-preparation-type">
+                            Coding
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Coding Practice
+                    </h3>
+
+
+                    <p>
+                        DSA problems covering arrays, strings,
+                        trees, graphs and dynamic programming.
+                    </p>
+
+
+                    <div class="student-preparation-meta">
+
+                        <span>
+                            40 Practice Sets
+                        </span>
+
+                        <span>
+                            Multiple Difficulty
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-btn">
+
+                        Practice
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PYQ
+                ================================================== -->
+
+                <div
+                    class="student-preparation-card student-preparation-pyq"
+                    data-category="pyq">
+
+
+                    <div class="student-preparation-card-top">
+
+                        <div class="student-preparation-icon">
+                            PY
+                        </div>
+
+                        <span class="student-preparation-type">
+                            Previous Year
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Previous Year Questions
+                    </h3>
+
+
+                    <p>
+                        Company-wise previous year placement questions
+                        covering aptitude, technical and coding rounds.
+                    </p>
+
+
+                    <div class="student-preparation-meta">
+
+                        <span>
+                            45+ Papers
+                        </span>
+
+                        <span>
+                            18 Companies
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-btn">
+
+                        View PYQs
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     COMPANY WISE
+                ================================================== -->
+
+                <div
+                    class="student-preparation-card"
+                    data-category="company">
+
+
+                    <div class="student-preparation-card-top">
+
+                        <div class="student-preparation-icon">
+                            C
+                        </div>
+
+                        <span class="student-preparation-type">
+                            Company-wise
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Company Preparation
+                    </h3>
+
+
+                    <p>
+                        Prepare according to company-specific patterns,
+                        topics, previous questions and interview rounds.
+                    </p>
+
+
+                    <div class="student-preparation-meta">
+
+                        <span>
+                            18 Companies
+                        </span>
+
+                        <span>
+                            Updated Regularly
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-btn">
+
+                        Explore
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     MOCK TESTS
+                ================================================== -->
+
+                <div
+                    class="student-preparation-card"
+                    data-category="aptitude">
+
+
+                    <div class="student-preparation-card-top">
+
+                        <div class="student-preparation-icon">
+                            ✓
+                        </div>
+
+                        <span class="student-preparation-type">
+                            Practice
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Placement Mock Tests
+                    </h3>
+
+
+                    <p>
+                        Full-length placement tests combining
+                        aptitude, reasoning, verbal and technical
+                        questions.
+                    </p>
+
+
+                    <div class="student-preparation-meta">
+
+                        <span>
+                            30+ Tests
+                        </span>
+
+                        <span>
+                            Timed Practice
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="student-preparation-btn">
+
+                        Start Test
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 PYQ SECTION
+            ================================================== -->
+
+            <section class="student-pyq-section">
+
+
+                <div class="student-pyq-header">
+
+                    <div>
+
+                        <h2>
+                            Previous Year Questions
+                        </h2>
+
+                        <p>
+                            Practice real company-wise
+                            placement questions.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="student-pyq-view-all">
+
+                        View All PYQs →
+
+                    </button>
+
+                </div>
+
+
+                <div class="student-pyq-list">
+
+
+    <!-- =================================================
+         TCS
+    ================================================== -->
+
+    <div class="student-pyq-item">
+
+        <div class="student-pyq-company">
+            TCS
+        </div>
+
+
+        <div class="student-pyq-info">
+
+            <strong>
+                TCS Placement Paper 2025
+            </strong>
+
+            <span>
+                Aptitude · Technical · Coding
+            </span>
+
+        </div>
+
+
+        <span class="student-pyq-questions">
+            40 Questions
+        </span>
+
+
+        <a
+            href="{{ url_for(
+                'student_pyq',
+                company='tcs'
+            ) }}"
+            class="student-pyq-open">
+
+            Open
+
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         INFOSYS
+    ================================================== -->
+
+    <div class="student-pyq-item">
+
+        <div class="student-pyq-company">
+            INF
+        </div>
+
+
+        <div class="student-pyq-info">
+
+            <strong>
+                Infosys Placement Paper 2025
+            </strong>
+
+            <span>
+                Aptitude · Logical Reasoning
+            </span>
+
+        </div>
+
+
+        <span class="student-pyq-questions">
+            35 Questions
+        </span>
+
+
+        <a
+            href="{{ url_for(
+                'student_pyq',
+                company='infosys'
+            ) }}"
+            class="student-pyq-open">
+
+            Open
+
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         AMAZON
+    ================================================== -->
+
+    <div class="student-pyq-item">
+
+        <div class="student-pyq-company">
+            AMZ
+        </div>
+
+
+        <div class="student-pyq-info">
+
+            <strong>
+                Amazon SDE Assessment
+            </strong>
+
+            <span>
+                DSA · Coding · Problem Solving
+            </span>
+
+        </div>
+
+
+        <span class="student-pyq-questions">
+            30 Questions
+        </span>
+
+
+        <a
+            href="{{ url_for(
+                'student_pyq',
+                company='amazon'
+            ) }}"
+            class="student-pyq-open">
+
+            Open
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/preparation.js'
+    ) }}">
+</script>
+
+
+</body>
+
+</html>

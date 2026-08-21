@@ -1,0 +1,1253 @@
+/* =========================================================
+   CAMPUS — STUDENT DASHBOARD CSS
+   Dashboard-specific styles only
+========================================================= */
+
+
+/* =========================================================
+   1. DASHBOARD PAGE
+========================================================= */
+
+.student-dashboard-page {
+    padding: 26px 30px 40px;
+}
+
+
+/* =========================================================
+   2. DASHBOARD HEADER
+========================================================= */
+
+.student-dashboard-header {
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.student-dashboard-heading h1 {
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 27px;
+    line-height: 1.2;
+
+    font-weight: 750;
+}
+
+
+.student-dashboard-heading p {
+    margin: 7px 0 0;
+
+    color: var(--student-text-soft);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   3. WELCOME CARD
+========================================================= */
+
+.student-welcome-card {
+
+    position: relative;
+
+    margin-bottom: 18px;
+
+    padding: 22px 24px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6938ef 0%,
+            #7a45ee 55%,
+            #5930d8 100%
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 28px rgba(105,56,239,.20);
+}
+
+
+.student-welcome-card::after {
+
+    content: "";
+
+    width: 180px;
+    height: 180px;
+
+    position: absolute;
+
+    right: -55px;
+    top: -80px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+.student-welcome-card::before {
+
+    content: "";
+
+    width: 110px;
+    height: 110px;
+
+    position: absolute;
+
+    right: 100px;
+    bottom: -75px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+
+.student-welcome-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 75%;
+}
+
+
+.student-welcome-content h2 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+    line-height: 1.3;
+
+    font-weight: 750;
+}
+
+
+.student-welcome-content p {
+
+    margin: 8px 0 0;
+
+    color:
+        rgba(255,255,255,.82);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   4. DASHBOARD QUICK ACTIONS
+========================================================= */
+
+.student-dashboard-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 16px;
+}
+
+
+.student-dashboard-action {
+
+    min-height: 34px;
+
+    padding: 0 12px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    border:
+        1px solid rgba(255,255,255,.18);
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    transition: .2s ease;
+}
+
+
+.student-dashboard-action:hover {
+
+    background:
+        rgba(255,255,255,.18);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   5. STATISTICS GRID
+========================================================= */
+
+.student-dashboard-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   6. STAT CARD
+========================================================= */
+
+.student-dashboard-stat-card {
+
+    min-height: 112px;
+
+    padding: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    background:
+        var(--student-surface);
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: 10px;
+
+    box-shadow:
+        var(--student-shadow);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.student-dashboard-stat-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 28px rgba(28,39,66,.10);
+}
+
+
+.student-dashboard-stat-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.student-dashboard-stat-icon {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 14px;
+}
+
+
+.student-dashboard-stat-label {
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.student-dashboard-stat-value {
+
+    margin-top: 10px;
+
+    color:
+        var(--student-text);
+
+    font-size: 23px;
+
+    line-height: 1;
+
+    font-weight: 750;
+}
+
+
+.student-dashboard-stat-sub {
+
+    margin-top: 5px;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 8px;
+}
+
+
+.student-dashboard-stat-sub.success {
+
+    color:
+        var(--student-success);
+}
+
+
+.student-dashboard-stat-sub.danger {
+
+    color:
+        var(--student-danger);
+}
+
+
+/* =========================================================
+   7. MAIN DASHBOARD GRID
+========================================================= */
+
+.student-dashboard-main-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.55fr)
+        minmax(300px, .9fr);
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   8. DASHBOARD CARD
+========================================================= */
+
+.student-dashboard-card {
+
+    padding: 20px;
+
+    background:
+        var(--student-surface);
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius:
+        var(--student-radius);
+
+    box-shadow:
+        var(--student-shadow);
+}
+
+
+/* =========================================================
+   9. CARD HEADER
+========================================================= */
+
+.student-dashboard-card-header {
+
+    margin-bottom: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.student-dashboard-card-header h3 {
+
+    margin: 0;
+
+    color:
+        var(--student-text);
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.student-dashboard-card-header p {
+
+    margin: 4px 0 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 9px;
+}
+
+
+.student-dashboard-view-all {
+
+    color:
+        var(--student-primary);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.student-dashboard-view-all:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   10. UPCOMING DRIVES
+========================================================= */
+
+.student-dashboard-drive-list {
+
+    display: grid;
+
+    gap: 10px;
+}
+
+
+.student-dashboard-drive {
+
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: 8px;
+
+    background:
+        var(--student-surface-soft);
+
+    transition: .2s ease;
+}
+
+
+.student-dashboard-drive:hover {
+
+    border-color:
+        rgba(105,56,239,.30);
+
+    transform: translateX(2px);
+}
+
+
+.student-dashboard-company-logo {
+
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.student-dashboard-drive-info {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.student-dashboard-drive-info strong {
+
+    display: block;
+
+    color:
+        var(--student-text);
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.student-dashboard-drive-info span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+.student-dashboard-drive-package {
+
+    color:
+        var(--student-success);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   11. APPLICATION STATUS
+========================================================= */
+
+.student-dashboard-application-list {
+
+    display: grid;
+
+    gap: 9px;
+}
+
+
+.student-dashboard-application {
+
+    padding: 11px 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border-bottom:
+        1px solid var(--student-border);
+}
+
+
+.student-dashboard-application:last-child {
+
+    border-bottom: 0;
+}
+
+
+.student-dashboard-application-info {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.student-dashboard-application-info strong {
+
+    display: block;
+
+    color:
+        var(--student-text);
+
+    font-size: 10px;
+}
+
+
+.student-dashboard-application-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+.student-dashboard-status {
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.student-dashboard-status.applied {
+
+    background:
+        rgba(105,56,239,.12);
+
+    color:
+        var(--student-primary);
+}
+
+
+.student-dashboard-status.shortlisted {
+
+    background:
+        rgba(34,201,130,.12);
+
+    color:
+        var(--student-success);
+}
+
+
+.student-dashboard-status.rejected {
+
+    background:
+        rgba(242,85,120,.12);
+
+    color:
+        var(--student-danger);
+}
+
+
+.student-dashboard-status.pending {
+
+    background:
+        rgba(245,165,36,.12);
+
+    color:
+        var(--student-warning);
+}
+
+
+/* =========================================================
+   12. INTERVIEW CARD
+========================================================= */
+
+.student-dashboard-interview {
+
+    padding: 14px;
+
+    border-radius: 9px;
+
+    background:
+        var(--student-primary-soft);
+
+    border:
+        1px solid rgba(105,56,239,.12);
+}
+
+
+.student-dashboard-interview-company {
+
+    color:
+        var(--student-primary);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.student-dashboard-interview-role {
+
+    margin-top: 5px;
+
+    color:
+        var(--student-text);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.student-dashboard-interview-details {
+
+    margin-top: 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+
+.student-dashboard-interview-detail {
+
+    padding: 8px;
+
+    border-radius: 6px;
+
+    background:
+        var(--student-surface);
+}
+
+
+.student-dashboard-interview-detail span {
+
+    display: block;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+.student-dashboard-interview-detail strong {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--student-text);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   13. ACADEMIC OVERVIEW
+========================================================= */
+
+.student-dashboard-academic {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+.student-dashboard-academic-item {
+
+    padding: 13px;
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: 8px;
+
+    background:
+        var(--student-surface-soft);
+
+    text-align: center;
+}
+
+
+.student-dashboard-academic-item span {
+
+    display: block;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+.student-dashboard-academic-item strong {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color:
+        var(--student-text);
+
+    font-size: 18px;
+
+    font-weight: 750;
+}
+
+
+.student-dashboard-academic-item small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   14. ELIGIBILITY / PLACEMENT STATUS
+========================================================= */
+
+.student-dashboard-eligibility {
+
+    padding: 16px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,201,130,.12),
+            rgba(34,201,130,.04)
+        );
+
+    border:
+        1px solid rgba(34,201,130,.15);
+}
+
+
+.student-dashboard-eligibility-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.student-dashboard-eligibility-dot {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        var(--student-success);
+
+    box-shadow:
+        0 0 0 4px rgba(34,201,130,.12);
+}
+
+
+.student-dashboard-eligibility-status strong {
+
+    color:
+        var(--student-success);
+
+    font-size: 12px;
+}
+
+
+.student-dashboard-eligibility p {
+
+    margin: 10px 0 0;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   15. ANNOUNCEMENTS
+========================================================= */
+
+.student-dashboard-announcements {
+
+    display: grid;
+
+    gap: 9px;
+}
+
+
+.student-dashboard-announcement {
+
+    padding: 11px 12px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    border-bottom:
+        1px solid var(--student-border);
+}
+
+
+.student-dashboard-announcement:last-child {
+
+    border-bottom: 0;
+}
+
+
+.student-dashboard-announcement-icon {
+
+    width: 28px;
+    height: 28px;
+
+    flex: 0 0 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 11px;
+}
+
+
+.student-dashboard-announcement-content {
+
+    flex: 1;
+}
+
+
+.student-dashboard-announcement-content strong {
+
+    display: block;
+
+    color:
+        var(--student-text);
+
+    font-size: 10px;
+}
+
+
+.student-dashboard-announcement-content p {
+
+    margin: 4px 0 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+
+    line-height: 1.4;
+}
+
+
+.student-dashboard-announcement-time {
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   16. QUICK LINKS
+========================================================= */
+
+.student-dashboard-quick-links {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 9px;
+}
+
+
+.student-dashboard-quick-link {
+
+    min-height: 70px;
+
+    padding: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: 8px;
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text);
+
+    text-decoration: none;
+
+    transition: .2s ease;
+}
+
+
+.student-dashboard-quick-link:hover {
+
+    border-color:
+        rgba(105,56,239,.30);
+
+    background:
+        var(--student-primary-soft);
+
+    transform: translateY(-1px);
+}
+
+
+.student-dashboard-quick-link-icon {
+
+    color:
+        var(--student-primary);
+
+    font-size: 15px;
+}
+
+
+.student-dashboard-quick-link strong {
+
+    font-size: 9px;
+}
+
+
+.student-dashboard-quick-link span {
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   17. EMPTY STATE
+========================================================= */
+
+.student-dashboard-empty {
+
+    padding: 28px 15px;
+
+    text-align: center;
+
+    color:
+        var(--student-text-muted);
+}
+
+
+.student-dashboard-empty-icon {
+
+    margin-bottom: 8px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 22px;
+}
+
+
+.student-dashboard-empty strong {
+
+    display: block;
+
+    color:
+        var(--student-text);
+
+    font-size: 11px;
+}
+
+
+.student-dashboard-empty p {
+
+    margin: 5px 0 0;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   18. RESPONSIVE — LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .student-dashboard-stats {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .student-dashboard-main-grid {
+
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   19. RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .student-dashboard-page {
+
+        padding: 22px;
+    }
+
+
+    .student-dashboard-header {
+
+        flex-direction: column;
+    }
+
+
+    .student-welcome-content {
+
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================================
+   20. RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .student-dashboard-page {
+
+        padding: 16px;
+    }
+
+
+    .student-dashboard-stats {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .student-dashboard-academic {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .student-dashboard-quick-links {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .student-dashboard-drive {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .student-dashboard-drive-package {
+
+        width: 100%;
+
+        margin-left: 52px;
+    }
+
+
+    .student-welcome-card {
+
+        padding: 20px;
+    }
+
+
+    .student-welcome-content h2 {
+
+        font-size: 19px;
+    }
+
+
+    .student-dashboard-actions {
+
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,1038 @@
+/* =========================================================
+   CAMPUS — STUDENT PROFILE CSS
+   Profile page specific styles only
+========================================================= */
+
+
+/* =========================================================
+   1. PROFILE PAGE
+========================================================= */
+
+.student-profile-page {
+    padding: 26px 30px 40px;
+}
+
+
+/* =========================================================
+   2. PROFILE HEADER
+========================================================= */
+
+.student-profile-header {
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.student-profile-heading h1 {
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 27px;
+    line-height: 1.2;
+
+    font-weight: 750;
+}
+
+
+.student-profile-heading p {
+    margin: 7px 0 0;
+
+    color: var(--student-text-soft);
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   3. EDIT PROFILE BUTTON
+========================================================= */
+
+.student-profile-edit-btn {
+
+    min-height: 38px;
+
+    padding: 0 16px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background: var(--student-primary);
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.student-profile-edit-btn:hover {
+
+    background: var(--student-primary-light);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   4. TOP PROFILE GRID
+========================================================= */
+
+.student-profile-top-grid {
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   5. PROFILE HERO
+========================================================= */
+
+.student-profile-hero {
+
+    min-height: 190px;
+
+    padding: 28px;
+
+    display: flex;
+    align-items: center;
+
+    background: var(--student-surface);
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: var(--student-radius);
+
+    box-shadow: var(--student-shadow);
+}
+
+
+.student-profile-hero-content {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   6. LARGE PROFILE AVATAR
+========================================================= */
+
+.student-profile-avatar-large {
+
+    width: 125px;
+    height: 125px;
+
+    flex: 0 0 125px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #eee5ff;
+
+    border: 3px solid var(--student-primary);
+
+    color: var(--student-primary);
+
+    font-size: 46px;
+
+    font-weight: 700;
+}
+
+
+.student-profile-avatar-large img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   7. PROFILE BASIC DETAILS
+========================================================= */
+
+.student-profile-main-info {
+
+    min-width: 0;
+}
+
+
+.student-profile-main-info h2 {
+
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 25px;
+
+    line-height: 1.3;
+
+    font-weight: 750;
+}
+
+
+.student-profile-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-left: 8px;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(34,201,130,.13);
+
+    color:
+        var(--student-success);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    vertical-align: middle;
+}
+
+
+.student-profile-program {
+
+    margin-top: 8px;
+
+    color: var(--student-text-soft);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+.student-profile-year-badge {
+
+    display: inline-flex;
+
+    margin-left: 7px;
+
+    padding: 5px 9px;
+
+    border-radius: 6px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   8. PROFILE META
+========================================================= */
+
+.student-profile-meta {
+
+    margin-top: 17px;
+
+    display: grid;
+
+    gap: 8px;
+
+    color: var(--student-text-soft);
+
+    font-size: 11px;
+}
+
+
+.student-profile-meta strong {
+
+    color: var(--student-text);
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   9. PROFILE COMPLETION CARD
+========================================================= */
+
+.student-profile-completion {
+
+    padding: 22px;
+
+    background: var(--student-surface);
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: var(--student-radius);
+
+    box-shadow: var(--student-shadow);
+}
+
+
+.student-profile-card-title {
+
+    margin-bottom: 18px;
+
+    color: var(--student-text);
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.student-profile-completion-content {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   10. COMPLETION CIRCLE
+========================================================= */
+
+.student-profile-completion-circle {
+
+    width: 108px;
+    height: 108px;
+
+    flex: 0 0 108px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            var(--student-primary) 0%,
+            var(--student-primary) var(--completion, 80%),
+            #dfe3ef var(--completion, 80%),
+            #dfe3ef 100%
+        );
+}
+
+
+body.dark-mode
+.student-profile-completion-circle {
+
+    background:
+        conic-gradient(
+            var(--student-primary) 0%,
+            var(--student-primary) var(--completion, 80%),
+            #26304a var(--completion, 80%),
+            #26304a 100%
+        );
+}
+
+
+.student-profile-completion-circle::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 78px;
+    height: 78px;
+
+    border-radius: 50%;
+
+    background: var(--student-surface);
+}
+
+
+.student-profile-completion-value {
+
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+}
+
+
+.student-profile-completion-value strong {
+
+    display: block;
+
+    color: var(--student-text);
+
+    font-size: 21px;
+
+    line-height: 1.2;
+}
+
+
+.student-profile-completion-value span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--student-text-muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   11. COMPLETION CHECKLIST
+========================================================= */
+
+.student-profile-completion-list {
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+
+    display: grid;
+
+    gap: 8px;
+
+    color: var(--student-text-soft);
+
+    font-size: 10px;
+
+    line-height: 1.3;
+}
+
+
+.student-profile-completion-list li.done {
+
+    color: var(--student-success);
+
+    font-weight: 500;
+}
+
+
+.student-profile-completion-list li.pending {
+
+    color: var(--student-text-muted);
+}
+
+
+/* =========================================================
+   12. INFORMATION GRID
+========================================================= */
+
+.student-profile-info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        minmax(250px, .78fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   13. INFORMATION CARD
+========================================================= */
+
+.student-profile-info-card {
+
+    padding: 20px;
+
+    background: var(--student-surface);
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: var(--student-radius);
+
+    box-shadow: var(--student-shadow);
+}
+
+
+/* =========================================================
+   14. CARD HEADER
+========================================================= */
+
+.student-profile-card-header {
+
+    padding-bottom: 13px;
+
+    margin-bottom: 3px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    border-bottom:
+        1px solid var(--student-border);
+}
+
+
+.student-profile-card-header h3 {
+
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   15. ADMIN MANAGED BADGE
+========================================================= */
+
+.student-admin-badge {
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   16. INFORMATION ROW
+========================================================= */
+
+.student-profile-info-row {
+
+    min-height: 39px;
+
+    display: grid;
+
+    grid-template-columns: 42% 58%;
+
+    align-items: center;
+
+    border-bottom:
+        1px solid var(--student-border);
+
+    font-size: 11px;
+}
+
+
+.student-profile-info-row:last-of-type {
+
+    border-bottom: 0;
+}
+
+
+.student-profile-info-label {
+
+    color: var(--student-text-muted);
+}
+
+
+.student-profile-info-value {
+
+    color: var(--student-text);
+
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   17. ADMIN MESSAGE
+========================================================= */
+
+.student-admin-message {
+
+    margin-top: 15px;
+
+    padding: 11px 12px;
+
+    border-radius: 7px;
+
+    background:
+        var(--student-primary-soft);
+
+    color: var(--student-text-soft);
+
+    font-size: 9px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   18. PROFESSIONAL LINKS
+========================================================= */
+
+.student-profile-links-card {
+
+    padding: 20px;
+
+    background: var(--student-surface);
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: var(--student-radius);
+
+    box-shadow: var(--student-shadow);
+}
+
+
+.student-profile-edit-links {
+
+    padding: 4px 7px;
+
+    border: 0;
+
+    border-radius: 5px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   19. LINK ITEM
+========================================================= */
+
+.student-profile-link-item {
+
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border-bottom:
+        1px solid var(--student-border);
+}
+
+
+.student-profile-link-item:last-of-type {
+
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   20. LINK ICON
+========================================================= */
+
+.student-profile-link-icon {
+
+    width: 30px;
+    height: 30px;
+
+    flex: 0 0 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: #eee5ff;
+
+    color: var(--student-primary);
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   21. LINK DETAILS
+========================================================= */
+
+.student-profile-link-details {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.student-profile-link-details strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--student-text);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.student-profile-link-details a {
+
+    display: block;
+
+    overflow: hidden;
+
+    color: var(--student-text-muted);
+
+    font-size: 8px;
+
+    line-height: 1.3;
+
+    text-decoration: none;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.student-profile-link-details a:hover {
+
+    color: var(--student-primary);
+}
+
+
+.student-profile-link-open {
+
+    color: var(--student-primary);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   22. ADD LINK
+========================================================= */
+
+.student-profile-add-link {
+
+    width: 100%;
+
+    min-height: 35px;
+
+    margin-top: 14px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.student-profile-add-link:hover {
+
+    background:
+        rgba(105,56,239,.18);
+}
+
+
+/* =========================================================
+   23. ABOUT CARD
+========================================================= */
+
+.student-profile-about {
+
+    margin-top: 18px;
+
+    padding: 20px;
+
+    background: var(--student-surface);
+
+    border:
+        1px solid var(--student-border);
+
+    border-radius: var(--student-radius);
+
+    box-shadow: var(--student-shadow);
+}
+
+
+.student-profile-about-header {
+
+    padding-bottom: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid var(--student-border);
+}
+
+
+.student-profile-about-header h3 {
+
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.student-profile-about-edit {
+
+    padding: 5px 9px;
+
+    border: 0;
+
+    border-radius: 5px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   24. ABOUT TEXT
+========================================================= */
+
+.student-profile-about-text {
+
+    max-width: 78%;
+
+    padding-top: 15px;
+
+    color: var(--student-text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.75;
+}
+
+
+.student-profile-about-updated {
+
+    margin-top: 9px;
+
+    color: var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   25. RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .student-profile-top-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .student-profile-info-grid {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+    }
+
+
+    .student-profile-links-card {
+
+        grid-column: span 2;
+    }
+}
+
+
+/* =========================================================
+   26. RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .student-profile-page {
+
+        padding: 20px;
+    }
+
+
+    .student-profile-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .student-profile-hero {
+
+        padding: 22px;
+    }
+
+
+    .student-profile-hero-content {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .student-profile-info-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .student-profile-links-card {
+
+        grid-column: auto;
+    }
+
+
+    .student-profile-about-text {
+
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================================
+   27. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .student-profile-page {
+
+        padding: 16px;
+    }
+
+
+    .student-profile-avatar-large {
+
+        width: 100px;
+        height: 100px;
+
+        flex-basis: 100px;
+
+        font-size: 38px;
+    }
+
+
+    .student-profile-main-info h2 {
+
+        font-size: 21px;
+    }
+
+
+    .student-profile-completion-content {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .student-profile-info-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 4px;
+
+        padding: 10px 0;
+    }
+}

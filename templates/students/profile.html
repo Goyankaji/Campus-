@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Campus</title>
+
+
+    <!-- =====================================================
+         STUDENT COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/common.css') }}">
+
+
+    <!-- =====================================================
+         PROFILE PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/profile.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         COMMON SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- =================================================
+             COMMON TOPBAR
+        ================================================== -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <!-- =================================================
+             PROFILE PAGE
+        ================================================== -->
+
+        <section class="student-profile-page">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="student-profile-header">
+
+
+                <div class="student-profile-heading">
+
+                    <h1>
+                        My Profile
+                    </h1>
+
+                    <p>
+                        View your information and manage your professional profile
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="student-profile-edit-btn">
+
+                    ✎ &nbsp; Edit Profile
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 PROFILE TOP SECTION
+            ================================================== -->
+
+            <div class="student-profile-top-grid">
+
+
+                <!-- =================================================
+                     PROFILE HERO
+                ================================================== -->
+
+                <div class="student-profile-hero">
+
+
+                    <div class="student-profile-hero-content">
+
+
+                        <!-- PROFILE PHOTO -->
+
+                        <div class="student-profile-avatar-large">
+
+
+                            {% if student.profile_photo %}
+
+                                <img
+                                    src="{{ student.profile_photo }}"
+                                    alt="Profile Photo">
+
+                            {% else %}
+
+                                {{ student.name[0] | upper }}
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                        <!-- BASIC INFORMATION -->
+
+                        <div class="student-profile-main-info">
+
+
+                            <h2>
+
+                                {{ student.name }}
+
+                                <span class="student-profile-status">
+                                    ● Active
+                                </span>
+
+                            </h2>
+
+
+                            <div class="student-profile-program">
+
+                                {{ student.program }}
+
+                                <span class="student-profile-year-badge">
+
+                                    {{ student.current_year }}
+                                    ·
+                                    {{ student.current_semester }}
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="student-profile-meta">
+
+
+                                <span>
+
+                                    🪪 Student ID:
+
+                                    <strong>
+                                        {{ student.student_id }}
+                                    </strong>
+
+                                </span>
+
+
+                                <span>
+
+                                    ✉
+
+                                    <strong>
+                                        {{ student.email }}
+                                    </strong>
+
+                                </span>
+
+
+                                <span>
+
+                                    ☎
+
+                                    <strong>
+                                        {{ student.phone }}
+                                    </strong>
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PROFILE COMPLETION
+                ================================================== -->
+
+                <div class="student-profile-completion">
+
+
+                    <div class="student-profile-card-title">
+
+                        Profile Completion
+
+                    </div>
+
+
+                    <div class="student-profile-completion-content">
+
+
+                        <!-- CIRCLE -->
+
+                        <div
+                            class="student-profile-completion-circle"
+                            style="--completion: {{ profile_completion }}%;">
+
+                            <div class="student-profile-completion-value">
+
+                                <strong>
+                                    {{ profile_completion }}%
+                                </strong>
+
+                                <span>
+                                    Complete
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CHECKLIST -->
+
+                        <ul class="student-profile-completion-list">
+
+
+                            <li class="done">
+                                ✓ Personal Information
+                            </li>
+
+
+                            <li class="done">
+                                ✓ Academic Information
+                            </li>
+
+
+                            <li class="done">
+                                ✓ Resume
+                            </li>
+
+
+                            <li class="done">
+                                ✓ Projects
+                            </li>
+
+
+                            <li class="done">
+                                ✓ Skills & Certifications
+                            </li>
+
+
+                            <li class="pending">
+                                ○ LinkedIn Profile
+                            </li>
+
+
+                            <li class="pending">
+                                ○ GitHub Profile
+                            </li>
+
+
+                            <li class="pending">
+                                ○ About Me
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 INFORMATION SECTION
+            ================================================== -->
+
+            <div class="student-profile-info-grid">
+
+
+                <!-- =================================================
+                     PERSONAL INFORMATION
+                ================================================== -->
+
+                <div class="student-profile-info-card">
+
+
+                    <div class="student-profile-card-header">
+
+
+                        <h3>
+                            Personal Information
+                        </h3>
+
+
+                        <span class="student-admin-badge">
+
+                            Managed by Admin 🔒
+
+                        </span>
+
+
+                    </div>
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Full Name
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.name }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- DOB -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Date of Birth
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.dob }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- GENDER -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Gender
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.gender }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Email Address
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.email }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Phone Number
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.phone }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Address
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.address }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- BLOOD GROUP -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Blood Group
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.blood_group }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- ADMIN NOTE -->
+
+                    <div class="student-admin-message">
+
+                        🔒 &nbsp;
+
+                        This information is managed by the administration.
+                        Please contact the admin office for any changes.
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     ACADEMIC INFORMATION
+                ================================================== -->
+
+                <div class="student-profile-info-card">
+
+
+                    <div class="student-profile-card-header">
+
+
+                        <h3>
+                            Academic Information
+                        </h3>
+
+
+                        <span class="student-admin-badge">
+
+                            Managed by Admin 🔒
+
+                        </span>
+
+
+                    </div>
+
+
+                    <!-- PROGRAM -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Program
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.program }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- DEPARTMENT -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Department
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.department }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- BATCH -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Batch
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.batch }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- YEAR -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Current Year
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.current_year }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- SEMESTER -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Current Semester
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.current_semester }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- ENROLLMENT -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Enrollment Number
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.enrollment_no }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- CGPA -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            CGPA
+                        </span>
+
+                        <span class="student-profile-info-value">
+                            {{ student.cgpa }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- PLACEMENT STATUS -->
+
+                    <div class="student-profile-info-row">
+
+                        <span class="student-profile-info-label">
+                            Placement Status
+                        </span>
+
+                        <span
+                            class="student-profile-info-value"
+                            style="color: var(--student-success);">
+
+                            ● Eligible
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- ADMIN NOTE -->
+
+                    <div class="student-admin-message">
+
+                        🔒 &nbsp;
+
+                        This information is managed by the administration.
+                        Please contact the admin office for any changes.
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PROFESSIONAL LINKS
+                ================================================== -->
+
+                <div class="student-profile-links-card">
+
+
+                    <div class="student-profile-card-header">
+
+
+                        <h3>
+                            Professional Links
+                        </h3>
+
+
+                        <button
+                            type="button"
+                            class="student-profile-edit-links">
+
+                            ✎ Edit Links
+
+                        </button>
+
+
+                    </div>
+
+
+                    {% for link in student.links %}
+
+
+                    <div class="student-profile-link-item">
+
+
+                        <!-- ICON -->
+
+                        <div class="student-profile-link-icon">
+
+                            {{ link.icon }}
+
+                        </div>
+
+
+                        <!-- DETAILS -->
+
+                        <div class="student-profile-link-details">
+
+
+                            <strong>
+                                {{ link.platform }}
+                            </strong>
+
+
+                            <a
+                                href="{{ link.url }}"
+                                target="_blank"
+                                rel="noopener noreferrer">
+
+                                {{ link.url }}
+
+                            </a>
+
+
+                        </div>
+
+
+                        <!-- OPEN -->
+
+                        <span class="student-profile-link-open">
+                            ↗
+                        </span>
+
+
+                    </div>
+
+
+                    {% endfor %}
+
+
+                    <button
+                        type="button"
+                        class="student-profile-add-link">
+
+                        + &nbsp; Add New Link
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ABOUT ME
+            ================================================== -->
+
+            <div class="student-profile-about">
+
+
+                <div class="student-profile-about-header">
+
+
+                    <h3>
+                        About Me
+                    </h3>
+
+
+                    <button
+                        type="button"
+                        class="student-profile-about-edit">
+
+                        ✎ Edit
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="student-profile-about-text">
+
+                    {{ student.about }}
+
+                </div>
+
+
+                <div class="student-profile-about-updated">
+
+                    Last updated:
+                    {{ student.about_updated_at }}
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     STUDENT COMMON JS
+========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/student/common.js') }}">
+</script>
+
+
+<!-- =========================================================
+     PROFILE JS
+========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/student/profile.js') }}">
+</script>
+
+
+</body>
+
+</html>

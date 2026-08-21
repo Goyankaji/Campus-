@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Uploads | Campus</title>
+
+
+    <!-- COMMON CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <!-- PAGE CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/my_uploads.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-uploads-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-uploads-header">
+
+                <div>
+
+                    <h1>
+                        My Uploads
+                    </h1>
+
+                    <p>
+                        Manage your resume, certificates and
+                        internship details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="student-uploads-summary">
+
+
+                <div class="student-upload-summary-card">
+
+                    <div class="student-upload-summary-icon">
+                        CV
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Resume
+                        </span>
+
+                        <strong>
+                            Uploaded
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="student-upload-summary-card">
+
+                    <div class="student-upload-summary-icon">
+                        C
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Certificates
+                        </span>
+
+                        <strong>
+                            04 Uploaded
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="student-upload-summary-card">
+
+                    <div class="student-upload-summary-icon">
+                        I
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Internships
+                        </span>
+
+                        <strong>
+                            02 Added
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 UPLOAD CARDS
+            ================================================== -->
+
+            <div class="student-uploads-grid">
+
+
+                <!-- =================================================
+                     RESUME
+                ================================================== -->
+
+                <div
+                    class="student-upload-card"
+                    data-upload-type="resume">
+
+
+                    <div class="student-upload-card-header">
+
+                        <div class="student-upload-icon">
+                            CV
+                        </div>
+
+                        <span class="student-upload-status uploaded">
+                            Uploaded
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        Resume
+                    </h2>
+
+
+                    <p>
+                        Upload your latest resume for placement
+                        applications and recruiter review.
+                    </p>
+
+
+                    <div class="student-upload-file">
+
+                        <div class="student-upload-file-icon">
+                            PDF
+                        </div>
+
+
+                        <div class="student-upload-file-info">
+
+                            <strong>
+                                Student_Resume.pdf
+                            </strong>
+
+                            <span>
+                                Updated on 18 Aug 2026 · 1.2 MB
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-upload-actions">
+
+                        <button
+                            type="button"
+                            class="student-upload-secondary">
+
+                            View
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="student-upload-secondary">
+
+                            Download
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="student-upload-primary">
+
+                            Replace Resume
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     CERTIFICATES
+                ================================================== -->
+
+                <div
+                    class="student-upload-card"
+                    data-upload-type="certificates">
+
+
+                    <div class="student-upload-card-header">
+
+                        <div class="student-upload-icon">
+                            C
+                        </div>
+
+                        <span class="student-upload-status">
+                            04 Files
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        Certificates
+                    </h2>
+
+
+                    <p>
+                        Manage academic, technical and professional
+                        certificates relevant to placements.
+                    </p>
+
+
+                    <div class="student-upload-certificate-list">
+
+
+                        <div class="student-upload-mini-file">
+
+                            <span>
+                                📄
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Python Certificate
+                                </strong>
+
+                                <small>
+                                    PDF · 820 KB
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-upload-mini-file">
+
+                            <span>
+                                📄
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    AWS Certificate
+                                </strong>
+
+                                <small>
+                                    PDF · 1.1 MB
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-upload-actions">
+
+                        <button
+                            type="button"
+                            class="student-upload-secondary">
+
+                            View All
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="student-upload-primary">
+
+                            Upload Certificate
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     INTERNSHIP DETAILS
+                ================================================== -->
+
+                <div
+                    class="student-upload-card"
+                    data-upload-type="internship">
+
+
+                    <div class="student-upload-card-header">
+
+                        <div class="student-upload-icon">
+                            I
+                        </div>
+
+                        <span class="student-upload-status">
+                            02 Internships
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        Internship Details
+                    </h2>
+
+
+                    <p>
+                        Add and manage your internship experience,
+                        company details and technologies used.
+                    </p>
+
+
+                    <div class="student-internship-list">
+
+
+                        <div class="student-internship-item">
+
+                            <div>
+
+                                <strong>
+                                    ABC Technologies
+                                </strong>
+
+                                <span>
+                                    Software Developer Intern
+                                </span>
+
+                            </div>
+
+                            <small>
+                                Jun 2025 – Aug 2025
+                            </small>
+
+                        </div>
+
+
+                        <div class="student-internship-item">
+
+                            <div>
+
+                                <strong>
+                                    XYZ Solutions
+                                </strong>
+
+                                <span>
+                                    Web Development Intern
+                                </span>
+
+                            </div>
+
+                            <small>
+                                May 2024 – Jul 2024
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-upload-actions">
+
+                        <button
+                            type="button"
+                            class="student-upload-secondary">
+
+                            View Details
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="student-upload-primary">
+
+                            Add Internship
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 UPLOAD GUIDELINES
+            ================================================== -->
+
+            <div class="student-upload-note">
+
+                <div class="student-upload-note-icon">
+                    !
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Upload Guidelines
+                    </strong>
+
+                    <p>
+                        Keep your resume and certificates updated.
+                        Use PDF format wherever possible and make
+                        sure the documents are clear and readable.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/my_uploads.js'
+    ) }}">
+</script>
+
+
+</body>
+
+</html>

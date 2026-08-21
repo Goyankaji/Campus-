@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | Campus</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/common.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/applications.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- SIDEBAR -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- MAIN -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-applications-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-applications-header">
+
+                <div>
+
+                    <h1>
+                        My Applications
+                    </h1>
+
+                    <p>
+                        Track all your placement applications and their current status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="student-applications-summary">
+
+
+                <div class="student-application-summary-card">
+
+                    <span>
+                        Total Applications
+                    </span>
+
+                    <strong>
+                        08
+                    </strong>
+
+                    <small>
+                        All submitted applications
+                    </small>
+
+                </div>
+
+
+                <div class="student-application-summary-card">
+
+                    <span>
+                        Shortlisted
+                    </span>
+
+                    <strong>
+                        03
+                    </strong>
+
+                    <small>
+                        Moved to next stage
+                    </small>
+
+                </div>
+
+
+                <div class="student-application-summary-card">
+
+                    <span>
+                        Interviews
+                    </span>
+
+                    <strong>
+                        02
+                    </strong>
+
+                    <small>
+                        Interview calls received
+                    </small>
+
+                </div>
+
+
+                <div class="student-application-summary-card">
+
+                    <span>
+                        Rejected
+                    </span>
+
+                    <strong>
+                        02
+                    </strong>
+
+                    <small>
+                        Applications closed
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTER BAR
+            ================================================== -->
+
+            <div class="student-applications-filter-bar">
+
+
+                <div class="student-applications-tabs">
+
+
+                    <button
+                        type="button"
+                        class="student-applications-tab active"
+                        data-filter="all">
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-applications-tab"
+                        data-filter="applied">
+
+                        Applied
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-applications-tab"
+                        data-filter="shortlisted">
+
+                        Shortlisted
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-applications-tab"
+                        data-filter="rejected">
+
+                        Rejected
+
+                    </button>
+
+
+                </div>
+
+
+                <input
+                    type="text"
+                    class="student-applications-search"
+                    placeholder="Search company or role...">
+
+            </div>
+
+
+            <!-- =================================================
+                 APPLICATION LIST
+            ================================================== -->
+
+            <div class="student-applications-list">
+
+
+                <!-- =================================================
+                     TCS
+                ================================================== -->
+
+                <div
+                    class="student-application-card"
+                    data-status="applied">
+
+
+                    <div class="student-application-logo">
+                        TCS
+                    </div>
+
+
+                    <div class="student-application-company">
+
+                        <strong>
+                            Tata Consultancy Services
+                        </strong>
+
+                        <span>
+                            Software Engineer
+                        </span>
+
+                        <small>
+                            Applied on 18 Aug 2026
+                        </small>
+
+                    </div>
+
+
+                    <div class="student-application-package">
+
+                        <span>
+                            PACKAGE
+                        </span>
+
+                        <strong>
+                            ₹7.5 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="student-application-status interview">
+
+                            Interview Scheduled
+
+                        </div>
+
+                        <div class="student-application-next">
+                            Technical Round · 28 Aug
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="student-application-action">
+
+                        View Details
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     INFOSYS
+                ================================================== -->
+
+                <div
+                    class="student-application-card"
+                    data-status="shortlisted">
+
+
+                    <div class="student-application-logo">
+                        INF
+                    </div>
+
+
+                    <div class="student-application-company">
+
+                        <strong>
+                            Infosys
+                        </strong>
+
+                        <span>
+                            Systems Engineer
+                        </span>
+
+                        <small>
+                            Applied on 17 Aug 2026
+                        </small>
+
+                    </div>
+
+
+                    <div class="student-application-package">
+
+                        <span>
+                            PACKAGE
+                        </span>
+
+                        <strong>
+                            ₹6.5 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="student-application-status shortlisted">
+
+                            Shortlisted
+
+                        </div>
+
+                        <div class="student-application-next">
+                            Awaiting interview schedule
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="student-application-action">
+
+                        View Details
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     AMAZON
+                ================================================== -->
+
+                <div
+                    class="student-application-card"
+                    data-status="applied">
+
+
+                    <div class="student-application-logo">
+                        AMZ
+                    </div>
+
+
+                    <div class="student-application-company">
+
+                        <strong>
+                            Amazon
+                        </strong>
+
+                        <span>
+                            SDE Intern
+                        </span>
+
+                        <small>
+                            Applied on 15 Aug 2026
+                        </small>
+
+                    </div>
+
+
+                    <div class="student-application-package">
+
+                        <span>
+                            PACKAGE
+                        </span>
+
+                        <strong>
+                            ₹12 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="student-application-status applied">
+
+                            Application Submitted
+
+                        </div>
+
+                        <div class="student-application-next">
+                            Under review
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="student-application-action">
+
+                        View Details
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     ACCENTURE
+                ================================================== -->
+
+                <div
+                    class="student-application-card"
+                    data-status="shortlisted">
+
+
+                    <div class="student-application-logo">
+                        ACC
+                    </div>
+
+
+                    <div class="student-application-company">
+
+                        <strong>
+                            Accenture
+                        </strong>
+
+                        <span>
+                            Associate Software Engineer
+                        </span>
+
+                        <small>
+                            Applied on 12 Aug 2026
+                        </small>
+
+                    </div>
+
+
+                    <div class="student-application-package">
+
+                        <span>
+                            PACKAGE
+                        </span>
+
+                        <strong>
+                            ₹6 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="student-application-status shortlisted">
+
+                            Shortlisted
+
+                        </div>
+
+                        <div class="student-application-next">
+                            Assessment cleared
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="student-application-action">
+
+                        View Details
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     WIPRO
+                ================================================== -->
+
+                <div
+                    class="student-application-card"
+                    data-status="rejected">
+
+
+                    <div class="student-application-logo">
+                        WPR
+                    </div>
+
+
+                    <div class="student-application-company">
+
+                        <strong>
+                            Wipro
+                        </strong>
+
+                        <span>
+                            Project Engineer
+                        </span>
+
+                        <small>
+                            Applied on 10 Aug 2026
+                        </small>
+
+                    </div>
+
+
+                    <div class="student-application-package">
+
+                        <span>
+                            PACKAGE
+                        </span>
+
+                        <strong>
+                            ₹5.8 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="student-application-status rejected">
+
+                            Rejected
+
+                        </div>
+
+                        <div class="student-application-next">
+                            Application closed
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="student-application-action">
+
+                        View Details
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     COGNIZANT
+                ================================================== -->
+
+                <div
+                    class="student-application-card"
+                    data-status="rejected">
+
+
+                    <div class="student-application-logo">
+                        CTS
+                    </div>
+
+
+                    <div class="student-application-company">
+
+                        <strong>
+                            Cognizant
+                        </strong>
+
+                        <span>
+                            Programmer Analyst
+                        </span>
+
+                        <small>
+                            Applied on 08 Aug 2026
+                        </small>
+
+                    </div>
+
+
+                    <div class="student-application-package">
+
+                        <span>
+                            PACKAGE
+                        </span>
+
+                        <strong>
+                            ₹6.2 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="student-application-status rejected">
+
+                            Rejected
+
+                        </div>
+
+                        <div class="student-application-next">
+                            Interview result — Not Selected
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="student-application-action">
+
+                        View Details
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/student/common.js') }}">
+</script>
+
+
+<script
+    src="{{ url_for('static', filename='js/student/applications.js') }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,339 @@
+/* =========================================================
+   CAMPUS — STUDENT ANNOUNCEMENTS
+========================================================= */
+
+.student-announcements-page {
+    padding: 26px 30px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-announcements-header {
+    margin-bottom: 20px;
+}
+
+.student-announcements-header h1 {
+    margin: 0;
+    color: var(--student-text);
+    font-size: 27px;
+    font-weight: 750;
+}
+
+.student-announcements-header p {
+    margin: 7px 0 0;
+    color: var(--student-text-soft);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.student-announcements-toolbar {
+    margin-bottom: 18px;
+    padding: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    background: var(--student-surface);
+    border: 1px solid var(--student-border);
+    border-radius: 9px;
+}
+
+.student-announcement-tabs {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+}
+
+.student-announcement-tab {
+    padding: 8px 13px;
+
+    border: 1px solid var(--student-border);
+    border-radius: 6px;
+
+    background: transparent;
+    color: var(--student-text-soft);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.student-announcement-tab:hover {
+    border-color: var(--student-primary);
+    color: var(--student-primary);
+}
+
+.student-announcement-tab.active {
+    background: var(--student-primary);
+    border-color: var(--student-primary);
+    color: #fff;
+}
+
+.student-announcement-search {
+    width: 220px;
+
+    padding: 8px 11px;
+
+    border: 1px solid var(--student-border);
+    border-radius: 6px;
+
+    background: var(--student-surface-soft);
+    color: var(--student-text);
+
+    font-size: 9px;
+    outline: none;
+}
+
+.student-announcement-search:focus {
+    border-color: var(--student-primary);
+}
+
+
+/* =========================================================
+   ANNOUNCEMENT LIST
+========================================================= */
+
+.student-announcements-list {
+    display: grid;
+    gap: 12px;
+}
+
+
+/* =========================================================
+   ANNOUNCEMENT CARD
+========================================================= */
+
+.student-announcement-card {
+    padding: 17px;
+
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    align-items: start;
+
+    gap: 14px;
+
+    background: var(--student-surface);
+
+    border: 1px solid var(--student-border);
+    border-radius: 10px;
+
+    box-shadow: var(--student-shadow);
+
+    transition: .2s ease;
+}
+
+.student-announcement-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 26px rgba(28, 39, 66, .10);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.student-announcement-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: var(--student-primary-soft);
+    color: var(--student-primary);
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.student-announcement-icon.urgent {
+    background: rgba(242, 85, 120, .12);
+    color: var(--student-danger);
+}
+
+.student-announcement-icon.success {
+    background: rgba(34, 201, 130, .12);
+    color: var(--student-success);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.student-announcement-content {
+    min-width: 0;
+}
+
+.student-announcement-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.student-announcement-heading h3 {
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.student-announcement-content p {
+    margin: 7px 0 0;
+
+    max-width: 850px;
+
+    color: var(--student-text-soft);
+
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.student-announcement-meta {
+    margin-top: 10px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    color: var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.student-announcement-badge {
+    padding: 4px 7px;
+
+    border-radius: 15px;
+
+    font-size: 7px;
+    font-weight: 700;
+}
+
+.student-announcement-badge.important {
+    background: rgba(242, 85, 120, .12);
+    color: var(--student-danger);
+}
+
+.student-announcement-badge.placement {
+    background: rgba(105, 56, 239, .12);
+    color: var(--student-primary);
+}
+
+.student-announcement-badge.academic {
+    background: rgba(45, 146, 255, .12);
+    color: #2d92ff;
+}
+
+.student-announcement-badge.general {
+    background: rgba(34, 201, 130, .12);
+    color: var(--student-success);
+}
+
+
+/* =========================================================
+   ACTION
+========================================================= */
+
+.student-announcement-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.student-announcement-unread {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--student-primary);
+}
+
+.student-announcement-btn {
+    padding: 8px 11px;
+
+    border: 1px solid var(--student-border);
+    border-radius: 6px;
+
+    background: transparent;
+    color: var(--student-text-soft);
+
+    font-size: 8px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.student-announcement-btn:hover {
+    border-color: var(--student-primary);
+    color: var(--student-primary);
+}
+
+
+/* =========================================================
+   READ CARD
+========================================================= */
+
+.student-announcement-card.read {
+    opacity: .82;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .student-announcements-page {
+        padding: 20px;
+    }
+
+    .student-announcements-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .student-announcement-search {
+        width: 100%;
+    }
+
+    .student-announcement-card {
+        grid-template-columns: 44px 1fr;
+    }
+
+    .student-announcement-action {
+        grid-column: 2;
+    }
+}

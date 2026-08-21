@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Academics | Campus</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/common.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/academics.css') }}">
+
+</head>
+
+<body>
+
+<div class="student-layout">
+
+    {% include 'students/components/sidebar.html' %}
+
+    <main class="student-main">
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-academics-page">
+
+
+            <!-- HEADER -->
+
+            <div class="student-academics-header">
+
+                <h1>Academics</h1>
+
+                <p>
+                    View your academic performance, semester results and attendance.
+                </p>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="student-academic-summary">
+
+                <div class="student-academic-summary-card">
+                    <span>Current CGPA</span>
+                    <strong>8.42</strong>
+                </div>
+
+                <div class="student-academic-summary-card">
+                    <span>Current Semester</span>
+                    <strong>5th</strong>
+                </div>
+
+                <div class="student-academic-summary-card">
+                    <span>Backlogs</span>
+                    <strong>0</strong>
+                </div>
+
+                <div class="student-academic-summary-card">
+                    <span>Attendance</span>
+                    <strong>87%</strong>
+                </div>
+
+            </div>
+
+
+            <!-- MAIN GRID -->
+
+            <div class="student-academics-grid">
+
+
+                <!-- SEMESTER PERFORMANCE -->
+
+                <div class="student-academic-card">
+
+                    <div class="student-academic-card-header">
+
+                        <h3>Semester Performance</h3>
+
+                        <p>
+                            Academic performance across semesters
+                        </p>
+
+                    </div>
+
+
+                    <table class="student-semester-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Semester</th>
+                                <th>SGPA</th>
+                                <th>Credits</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>1st Semester</td>
+                                <td>8.10</td>
+                                <td>24</td>
+                                <td class="good">Passed</td>
+                            </tr>
+
+                            <tr>
+                                <td>2nd Semester</td>
+                                <td>8.32</td>
+                                <td>24</td>
+                                <td class="good">Passed</td>
+                            </tr>
+
+                            <tr>
+                                <td>3rd Semester</td>
+                                <td>8.54</td>
+                                <td>25</td>
+                                <td class="good">Passed</td>
+                            </tr>
+
+                            <tr>
+                                <td>4th Semester</td>
+                                <td>8.71</td>
+                                <td>25</td>
+                                <td class="good">Passed</td>
+                            </tr>
+
+                            <tr>
+                                <td>5th Semester</td>
+                                <td>8.42</td>
+                                <td>—</td>
+                                <td class="good">Current</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- CGPA -->
+
+                <div class="student-academic-card">
+
+                    <div class="student-academic-card-header">
+
+                        <h3>Overall CGPA</h3>
+
+                        <p>
+                            Current cumulative performance
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-cgpa-box">
+
+                        <div class="student-cgpa-circle">
+
+                            <div class="student-cgpa-value">
+
+                                <strong>8.42</strong>
+
+                                <span>CGPA / 10</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBJECT + ATTENDANCE -->
+
+            <div class="student-academics-grid">
+
+
+                <!-- SUBJECT PERFORMANCE -->
+
+                <div class="student-academic-card">
+
+                    <div class="student-academic-card-header">
+
+                        <h3>Subject Performance</h3>
+
+                        <p>
+                            Current semester subject-wise performance
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-subject-list">
+
+
+                        <div class="student-subject-row">
+
+                            <div class="student-subject-info">
+
+                                <strong>Data Structures & Algorithms</strong>
+
+                                <span>
+                                    <i style="width: 88%;"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="student-subject-score">
+                                88%
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-subject-row">
+
+                            <div class="student-subject-info">
+
+                                <strong>Database Management Systems</strong>
+
+                                <span>
+                                    <i style="width: 84%;"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="student-subject-score">
+                                84%
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-subject-row">
+
+                            <div class="student-subject-info">
+
+                                <strong>Operating Systems</strong>
+
+                                <span>
+                                    <i style="width: 81%;"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="student-subject-score">
+                                81%
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-subject-row">
+
+                            <div class="student-subject-info">
+
+                                <strong>Computer Networks</strong>
+
+                                <span>
+                                    <i style="width: 86%;"></i>
+                                </span>
+
+                            </div>
+
+                            <div class="student-subject-score">
+                                86%
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- ATTENDANCE -->
+
+                <div class="student-academic-card">
+
+                    <div class="student-academic-card-header">
+
+                        <h3>Attendance</h3>
+
+                        <p>
+                            Current semester attendance
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-attendance-list">
+
+
+                        <div class="student-attendance-row">
+
+                            <label>DSA</label>
+
+                            <div class="student-attendance-bar">
+                                <span style="width: 92%;"></span>
+                            </div>
+
+                            <strong>92%</strong>
+
+                        </div>
+
+
+                        <div class="student-attendance-row">
+
+                            <label>DBMS</label>
+
+                            <div class="student-attendance-bar">
+                                <span style="width: 88%;"></span>
+                            </div>
+
+                            <strong>88%</strong>
+
+                        </div>
+
+
+                        <div class="student-attendance-row">
+
+                            <label>OS</label>
+
+                            <div class="student-attendance-bar">
+                                <span style="width: 84%;"></span>
+                            </div>
+
+                            <strong>84%</strong>
+
+                        </div>
+
+
+                        <div class="student-attendance-row">
+
+                            <label>Networks</label>
+
+                            <div class="student-attendance-bar">
+                                <span style="width: 86%;"></span>
+                            </div>
+
+                            <strong>86%</strong>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='js/student/common.js') }}">
+</script>
+
+</body>
+
+</html>

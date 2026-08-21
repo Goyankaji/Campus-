@@ -1,0 +1,671 @@
+/* =========================================================
+   CAMPUS — STUDENT MY UPLOADS
+========================================================= */
+
+.student-uploads-page {
+    padding: 24px 28px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-uploads-header {
+    margin-bottom: 20px;
+}
+
+.student-uploads-header h1 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+}
+
+.student-uploads-header p {
+    margin: 6px 0 0;
+
+    color: #697386;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.student-uploads-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+}
+
+.student-upload-summary-card {
+    min-height: 76px;
+
+    padding: 14px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e7ee;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 12px rgba(28, 35, 52, .035);
+}
+
+.student-upload-summary-icon {
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eee8ff;
+
+    color: #6938ef;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.student-upload-summary-card span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #8992a3;
+
+    font-size: 9px;
+}
+
+.student-upload-summary-card strong {
+    color: #172033;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   UPLOAD GRID
+========================================================= */
+
+.student-uploads-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   UPLOAD CARD
+========================================================= */
+
+.student-upload-card {
+    min-height: 315px;
+
+    padding: 19px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 4px 14px rgba(25, 32, 48, .035);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.student-upload-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d6cffb;
+
+    box-shadow:
+        0 9px 24px rgba(25, 32, 48, .07);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.student-upload-card-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.student-upload-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eee8ff;
+
+    color: #6938ef;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.student-upload-status {
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #f4f1ff;
+
+    color: #6938ef;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.student-upload-status.uploaded {
+    background: #e3f8ee;
+
+    color: #0a9560;
+}
+
+
+/* =========================================================
+   CARD TEXT
+========================================================= */
+
+.student-upload-card h2 {
+    margin: 0 0 7px;
+
+    color: #172033;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.student-upload-card > p {
+    margin: 0;
+
+    min-height: 42px;
+
+    color: #7b8496;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESUME FILE
+========================================================= */
+
+.student-upload-file {
+    margin-top: 16px;
+
+    padding: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #fafbfc;
+
+    border: 1px solid #edf0f4;
+
+    border-radius: 8px;
+}
+
+.student-upload-file-icon {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #ffecee;
+
+    color: #d84259;
+
+    font-size: 7px;
+    font-weight: 800;
+}
+
+.student-upload-file-info {
+    min-width: 0;
+}
+
+.student-upload-file-info strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #273044;
+
+    font-size: 9px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.student-upload-file-info span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #929aaa;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   CERTIFICATE LIST
+========================================================= */
+
+.student-upload-certificate-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-top: 16px;
+}
+
+.student-upload-mini-file {
+    padding: 8px 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    background: #fafbfc;
+
+    border: 1px solid #edf0f4;
+
+    border-radius: 7px;
+}
+
+.student-upload-mini-file > span {
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: #eee8ff;
+
+    font-size: 10px;
+}
+
+.student-upload-mini-file strong {
+    display: block;
+
+    color: #273044;
+
+    font-size: 8px;
+}
+
+.student-upload-mini-file small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #929aaa;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   INTERNSHIP LIST
+========================================================= */
+
+.student-internship-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 16px;
+}
+
+.student-internship-item {
+    padding: 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    background: #fafbfc;
+
+    border: 1px solid #edf0f4;
+
+    border-radius: 7px;
+}
+
+.student-internship-item strong {
+    display: block;
+
+    color: #273044;
+
+    font-size: 9px;
+}
+
+.student-internship-item span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #929aaa;
+
+    font-size: 7px;
+}
+
+.student-internship-item small {
+    color: #8992a3;
+
+    font-size: 7px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.student-upload-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: auto;
+
+    padding-top: 16px;
+}
+
+.student-upload-secondary,
+.student-upload-primary {
+    height: 31px;
+
+    padding: 0 11px;
+
+    border-radius: 6px;
+
+    font-family: inherit;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.student-upload-secondary {
+    background: #ffffff;
+
+    border: 1px solid #dfe3eb;
+
+    color: #697386;
+}
+
+.student-upload-secondary:hover {
+    border-color: #cfc4ff;
+
+    color: #6938ef;
+}
+
+.student-upload-primary {
+    margin-left: auto;
+
+    background: #6938ef;
+
+    border: 1px solid #6938ef;
+
+    color: #ffffff;
+}
+
+.student-upload-primary:hover {
+    background: #592bdc;
+
+    border-color: #592bdc;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   GUIDELINE NOTE
+========================================================= */
+
+.student-upload-note {
+    padding: 14px 16px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    background: #f8f7ff;
+
+    border: 1px solid #e6e0ff;
+
+    border-radius: 9px;
+}
+
+.student-upload-note-icon {
+    width: 25px;
+    height: 25px;
+
+    flex: 0 0 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #6938ef;
+
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.student-upload-note strong {
+    display: block;
+
+    color: #273044;
+
+    font-size: 9px;
+}
+
+.student-upload-note p {
+    margin: 4px 0 0;
+
+    color: #7b8496;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .student-uploads-header h1,
+body.dark-mode .student-upload-summary-card strong,
+body.dark-mode .student-upload-card h2,
+body.dark-mode .student-upload-file-info strong,
+body.dark-mode .student-upload-mini-file strong,
+body.dark-mode .student-internship-item strong,
+body.dark-mode .student-upload-note strong {
+    color: var(--student-text);
+}
+
+body.dark-mode .student-uploads-header p,
+body.dark-mode .student-upload-summary-card span,
+body.dark-mode .student-upload-card > p,
+body.dark-mode .student-upload-file-info span,
+body.dark-mode .student-upload-mini-file small,
+body.dark-mode .student-internship-item span,
+body.dark-mode .student-internship-item small,
+body.dark-mode .student-upload-note p {
+    color: var(--student-text-muted);
+}
+
+body.dark-mode .student-upload-summary-card,
+body.dark-mode .student-upload-card {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-upload-file,
+body.dark-mode .student-upload-mini-file,
+body.dark-mode .student-internship-item {
+    background: rgba(255,255,255,.035);
+
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-upload-secondary {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+
+    color: var(--student-text-soft);
+}
+
+body.dark-mode .student-upload-note {
+    background: rgba(105,56,239,.08);
+
+    border-color: var(--student-border);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .student-uploads-summary {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .student-uploads-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .student-uploads-page {
+        padding: 18px 14px 30px;
+    }
+
+    .student-uploads-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .student-upload-actions {
+        flex-wrap: wrap;
+    }
+
+    .student-upload-primary {
+        margin-left: 0;
+    }
+
+    .student-internship-item {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}

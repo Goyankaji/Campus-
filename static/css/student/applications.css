@@ -1,0 +1,553 @@
+/* =========================================================
+   STUDENT — MY APPLICATIONS
+========================================================= */
+
+.student-applications-page {
+    padding: 26px 30px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-applications-header {
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.student-applications-header h1 {
+    margin: 0;
+    color: var(--student-text);
+    font-size: 27px;
+    font-weight: 750;
+}
+
+.student-applications-header p {
+    margin: 7px 0 0;
+    color: var(--student-text-soft);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.student-applications-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.student-application-summary-card {
+    padding: 16px 18px;
+
+    background: var(--student-surface);
+
+    border: 1px solid var(--student-border);
+    border-radius: 10px;
+
+    box-shadow: var(--student-shadow);
+}
+
+.student-application-summary-card span {
+    display: block;
+
+    color: var(--student-text-muted);
+    font-size: 9px;
+}
+
+.student-application-summary-card strong {
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--student-text);
+    font-size: 21px;
+}
+
+.student-application-summary-card small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--student-text-muted);
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.student-applications-filter-bar {
+    margin-bottom: 18px;
+
+    padding: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    background: var(--student-surface);
+
+    border: 1px solid var(--student-border);
+    border-radius: 9px;
+}
+
+.student-applications-tabs {
+    display: flex;
+    gap: 7px;
+}
+
+.student-applications-tab {
+    padding: 8px 13px;
+
+    border: 1px solid var(--student-border);
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--student-text-soft);
+
+    font-size: 9px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.student-applications-tab:hover {
+    border-color: var(--student-primary);
+    color: var(--student-primary);
+}
+
+.student-applications-tab.active {
+    background: var(--student-primary);
+    border-color: var(--student-primary);
+    color: #fff;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.student-applications-search {
+    width: 210px;
+
+    padding: 8px 11px;
+
+    border: 1px solid var(--student-border);
+    border-radius: 6px;
+
+    background: var(--student-surface-soft);
+
+    color: var(--student-text);
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+.student-applications-search:focus {
+    border-color: var(--student-primary);
+}
+
+
+/* =========================================================
+   APPLICATION LIST
+========================================================= */
+
+.student-applications-list {
+    display: grid;
+    gap: 13px;
+}
+
+
+/* =========================================================
+   APPLICATION CARD
+========================================================= */
+
+.student-application-card {
+    padding: 17px;
+
+    display: grid;
+
+    grid-template-columns: 45px minmax(180px, 1fr) auto auto;
+
+    align-items: center;
+
+    gap: 15px;
+
+    background: var(--student-surface);
+
+    border: 1px solid var(--student-border);
+    border-radius: 10px;
+
+    box-shadow: var(--student-shadow);
+
+    transition: .2s ease;
+}
+
+.student-application-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 26px rgba(28, 39, 66, .10);
+}
+
+
+/* =========================================================
+   COMPANY LOGO
+========================================================= */
+
+.student-application-logo {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: var(--student-primary-soft);
+
+    color: var(--student-primary);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   COMPANY INFO
+========================================================= */
+
+.student-application-company strong {
+    display: block;
+
+    color: var(--student-text);
+
+    font-size: 12px;
+}
+
+.student-application-company span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+.student-application-company small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--student-text-soft);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   PACKAGE
+========================================================= */
+
+.student-application-package {
+    min-width: 80px;
+}
+
+.student-application-package span {
+    display: block;
+
+    color: var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+.student-application-package strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--student-text);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.student-application-status {
+    min-width: 105px;
+
+    padding: 6px 9px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.student-application-status.applied {
+    background: rgba(105, 56, 239, .12);
+    color: var(--student-primary);
+}
+
+.student-application-status.shortlisted {
+    background: rgba(34, 201, 130, .12);
+    color: var(--student-success);
+}
+
+.student-application-status.interview {
+    background: rgba(45, 146, 255, .12);
+    color: #2d92ff;
+}
+
+.student-application-status.rejected {
+    background: rgba(242, 85, 120, .12);
+    color: var(--student-danger);
+}
+
+
+/* =========================================================
+   APPLICATION ACTION
+========================================================= */
+
+.student-application-action {
+    padding: 8px 11px;
+
+    border: 1px solid var(--student-border);
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--student-text-soft);
+
+    font-size: 8px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+.student-application-action:hover {
+    border-color: var(--student-primary);
+    color: var(--student-primary);
+}
+
+
+/* =========================================================
+   NEXT STEP
+========================================================= */
+
+.student-application-next {
+    margin-top: 8px;
+
+    color: var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .student-applications-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .student-application-card {
+        grid-template-columns:
+            45px minmax(150px, 1fr) auto;
+    }
+
+    .student-application-package {
+        display: none;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .student-applications-page {
+        padding: 20px;
+    }
+
+    .student-applications-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .student-applications-filter-bar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .student-applications-tabs {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .student-applications-search {
+        width: 100%;
+    }
+
+    .student-applications-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .student-application-card {
+        grid-template-columns: 45px 1fr;
+    }
+
+    .student-application-status {
+        grid-column: 2;
+        width: fit-content;
+    }
+
+    .student-application-action {
+        grid-column: 2;
+        width: fit-content;
+    }
+}
+/* =========================================================
+   APPLICATION CARD — VIEW DETAILS
+========================================================= */
+
+.student-application-card {
+    position: relative;
+}
+
+
+/* Action button ko right side shift */
+
+.student-application-action {
+    position: absolute;
+
+    right: 24px;
+    bottom: 18px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 92px;
+    height: 32px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d9d0ff;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #6035e8;
+
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+
+/* Hover */
+
+.student-application-action:hover {
+
+    background: #6938ef;
+
+    border-color: #6938ef;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 14px rgba(105, 56, 239, .20);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   STATUS AREA
+========================================================= */
+
+.student-application-card > div:last-of-type {
+
+    min-width: 170px;
+
+    padding-right: 125px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .student-application-action {
+
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+
+    color: var(--student-primary);
+}
+
+body.dark-mode .student-application-action:hover {
+
+    background: var(--student-primary);
+
+    border-color: var(--student-primary);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .student-application-action {
+
+        position: static;
+
+        margin-top: 12px;
+
+        width: fit-content;
+    }
+
+    .student-application-card > div:last-of-type {
+
+        padding-right: 0;
+    }
+
+}

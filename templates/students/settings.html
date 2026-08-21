@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Campus</title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/settings.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+
+<div class="student-layout">
+
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <main class="student-main">
+
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-settings-page">
+
+
+            <div class="student-settings-header">
+
+                <h1>
+                    Settings
+                </h1>
+
+                <p>
+                    Manage your preferences, notifications and account settings.
+                </p>
+
+            </div>
+
+
+            <div class="student-settings-layout">
+
+
+                <!-- =================================================
+                     SETTINGS NAV
+                ================================================== -->
+
+                <aside class="student-settings-nav">
+
+                    <button class="active">
+                        ⚙
+                        General
+                    </button>
+
+                    <button>
+                        🔔
+                        Notifications
+                    </button>
+
+                    <button>
+                        🔒
+                        Privacy
+                    </button>
+
+                    <button>
+                        ◉
+                        Account
+                    </button>
+
+                </aside>
+
+
+                <!-- =================================================
+                     CONTENT
+                ================================================== -->
+
+                <div class="student-settings-content">
+
+
+                    <!-- GENERAL -->
+
+                    <div class="student-settings-card">
+
+                        <div class="student-settings-card-header">
+
+                            <h3>
+                                General Preferences
+                            </h3>
+
+                            <p>
+                                Customize your Campus experience.
+                            </p>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Language
+                                </strong>
+
+                                <span>
+                                    Choose your preferred language.
+                                </span>
+
+                            </div>
+
+
+                            <select class="student-setting-select">
+
+                                <option selected>
+                                    English
+                                </option>
+
+                                <option>
+                                    Hindi
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Email Notifications
+                                </strong>
+
+                                <span>
+                                    Receive important updates through email.
+                                </span>
+
+                            </div>
+
+
+                            <label class="student-setting-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span
+                                    class="student-setting-slider">
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Placement Alerts
+                                </strong>
+
+                                <span>
+                                    Get notified about new placement drives.
+                                </span>
+
+                            </div>
+
+
+                            <label class="student-setting-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span
+                                    class="student-setting-slider">
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NOTIFICATIONS -->
+
+                    <div class="student-settings-card">
+
+                        <div class="student-settings-card-header">
+
+                            <h3>
+                                Notification Preferences
+                            </h3>
+
+                            <p>
+                                Choose what notifications you want to receive.
+                            </p>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Interview Notifications
+                                </strong>
+
+                                <span>
+                                    Receive alerts when an interview is scheduled.
+                                </span>
+
+                            </div>
+
+
+                            <label class="student-setting-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span
+                                    class="student-setting-slider">
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Application Updates
+                                </strong>
+
+                                <span>
+                                    Get notified when your application status changes.
+                                </span>
+
+                            </div>
+
+
+                            <label class="student-setting-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span
+                                    class="student-setting-slider">
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Academic Announcements
+                                </strong>
+
+                                <span>
+                                    Receive important academic announcements.
+                                </span>
+
+                            </div>
+
+
+                            <label class="student-setting-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
+                                <span
+                                    class="student-setting-slider">
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACCOUNT -->
+
+                    <div class="student-settings-card">
+
+                        <div class="student-settings-card-header">
+
+                            <h3>
+                                Account
+                            </h3>
+
+                            <p>
+                                Your account information is managed by the administration.
+                            </p>
+
+                        </div>
+
+
+                        <div class="student-account-box">
+
+
+                            <div class="student-account-avatar">
+                                {{ student.name[0] }}
+                            </div>
+
+
+                            <div class="student-account-info">
+
+                                <strong>
+                                    {{ student.name }}
+                                </strong>
+
+                                <span>
+                                    {{ student.email }}
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="student-setting-row"
+                             style="margin-top: 15px;">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Student ID
+                                </strong>
+
+                                <span>
+                                    {{ student.student_id }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Department
+                                </strong>
+
+                                <span>
+                                    {{ student.department }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-setting-row">
+
+                            <div class="student-setting-info">
+
+                                <strong>
+                                    Batch
+                                </strong>
+
+                                <span>
+                                    {{ student.batch }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-settings-danger">
+
+                            <h4>
+                                Account Access
+                            </h4>
+
+                            <p>
+                                Account information and credentials are
+                                controlled by the administration.
+                            </p>
+
+                            <button
+                                class="student-settings-logout">
+
+                                Logout
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+
+</body>
+
+</html>

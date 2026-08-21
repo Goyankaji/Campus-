@@ -1,0 +1,320 @@
+/* =========================================================
+   STUDENT — ACADEMICS PAGE
+========================================================= */
+
+.student-academics-page {
+    padding: 26px 30px 40px;
+}
+
+/* Header */
+
+.student-academics-header {
+    margin-bottom: 22px;
+}
+
+.student-academics-header h1 {
+    margin: 0;
+    color: var(--student-text);
+    font-size: 27px;
+    font-weight: 750;
+}
+
+.student-academics-header p {
+    margin: 7px 0 0;
+    color: var(--student-text-soft);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.student-academic-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.student-academic-summary-card {
+    padding: 18px;
+    background: var(--student-surface);
+    border: 1px solid var(--student-border);
+    border-radius: 10px;
+    box-shadow: var(--student-shadow);
+}
+
+.student-academic-summary-card span {
+    color: var(--student-text-muted);
+    font-size: 9px;
+}
+
+.student-academic-summary-card strong {
+    display: block;
+    margin-top: 8px;
+    color: var(--student-text);
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.student-academics-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(300px, .8fr);
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.student-academic-card {
+    padding: 20px;
+    background: var(--student-surface);
+    border: 1px solid var(--student-border);
+    border-radius: 10px;
+    box-shadow: var(--student-shadow);
+}
+
+.student-academic-card-header {
+    margin-bottom: 16px;
+}
+
+.student-academic-card-header h3 {
+    margin: 0;
+    color: var(--student-text);
+    font-size: 15px;
+}
+
+.student-academic-card-header p {
+    margin: 5px 0 0;
+    color: var(--student-text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SEMESTER TABLE
+========================================================= */
+
+.student-semester-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-semester-table th {
+    padding: 10px;
+    text-align: left;
+    color: var(--student-text-muted);
+    background: var(--student-surface-soft);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.student-semester-table td {
+    padding: 12px 10px;
+    color: var(--student-text);
+    border-bottom: 1px solid var(--student-border);
+    font-size: 10px;
+}
+
+.student-semester-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.student-semester-table .good {
+    color: var(--student-success);
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CGPA CARD
+========================================================= */
+
+.student-cgpa-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 190px;
+}
+
+.student-cgpa-circle {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        conic-gradient(
+            var(--student-primary) 84.2%,
+            #e4e7ef 84.2%
+        );
+
+    position: relative;
+}
+
+body.dark-mode .student-cgpa-circle {
+    background:
+        conic-gradient(
+            var(--student-primary) 84.2%,
+            #273149 84.2%
+        );
+}
+
+.student-cgpa-circle::before {
+    content: "";
+    position: absolute;
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    background: var(--student-surface);
+}
+
+.student-cgpa-value {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.student-cgpa-value strong {
+    display: block;
+    color: var(--student-text);
+    font-size: 26px;
+}
+
+.student-cgpa-value span {
+    color: var(--student-text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SUBJECT PERFORMANCE
+========================================================= */
+
+.student-subject-list {
+    display: grid;
+    gap: 12px;
+}
+
+.student-subject-row {
+    display: grid;
+    grid-template-columns: 1fr 55px;
+    align-items: center;
+    gap: 12px;
+}
+
+.student-subject-info strong {
+    display: block;
+    color: var(--student-text);
+    font-size: 10px;
+}
+
+.student-subject-info span {
+    display: block;
+    margin-top: 5px;
+    height: 5px;
+    border-radius: 10px;
+    background: var(--student-border);
+    overflow: hidden;
+}
+
+.student-subject-info span i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--student-primary);
+}
+
+.student-subject-score {
+    text-align: right;
+    color: var(--student-text);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+.student-attendance-list {
+    display: grid;
+    gap: 12px;
+}
+
+.student-attendance-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 45px;
+    align-items: center;
+    gap: 10px;
+}
+
+.student-attendance-row label {
+    color: var(--student-text-soft);
+    font-size: 9px;
+}
+
+.student-attendance-bar {
+    height: 7px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--student-border);
+}
+
+.student-attendance-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--student-success);
+}
+
+.student-attendance-row strong {
+    text-align: right;
+    color: var(--student-text);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .student-academic-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .student-academics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .student-academics-page {
+        padding: 18px;
+    }
+
+    .student-academic-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .student-attendance-row {
+        grid-template-columns: 75px 1fr 40px;
+    }
+
+    .student-semester-table {
+        font-size: 8px;
+    }
+}

@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Drives | Campus</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/common.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/student/placement_drives.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- SIDEBAR -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- MAIN -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-drives-page">
+
+
+            <!-- =====================================================
+                 HEADER
+            ====================================================== -->
+
+            <div class="student-drives-header">
+
+                <div>
+
+                    <h1>
+                        Placement Drives
+                    </h1>
+
+                    <p>
+                        Explore placement opportunities you are eligible for.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 FILTERS
+            ====================================================== -->
+
+            <div class="student-drives-toolbar">
+
+
+                <!-- TABS -->
+
+                <div class="student-drives-tabs">
+
+                    <button
+                        type="button"
+                        class="student-drives-tab active"
+                        data-filter="all">
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-drives-tab"
+                        data-filter="applied">
+
+                        Applied
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-drives-tab"
+                        data-filter="not-applied">
+
+                        Not Applied
+
+                    </button>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <input
+                    type="text"
+                    class="student-drives-search"
+                    placeholder="Search company or role...">
+
+            </div>
+
+
+            <!-- =====================================================
+                 DRIVES GRID
+            ====================================================== -->
+
+            <div class="student-drives-grid">
+
+
+                <!-- =================================================
+                     TCS
+                ================================================== -->
+
+                <div
+                    class="student-drive-card"
+                    data-status="not-applied">
+
+
+                    <div class="student-drive-company">
+
+                        <div class="student-drive-company-logo">
+                            TCS
+                        </div>
+
+
+                        <div class="student-drive-company-info">
+
+                            <strong>
+                                Tata Consultancy Services
+                            </strong>
+
+                            <span>
+                                IT Services
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-role">
+                        Software Engineer
+                    </div>
+
+
+                    <div class="student-drive-details">
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Package
+                            </span>
+
+                            <strong>
+                                ₹7.5 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Eligibility
+                            </span>
+
+                            <strong>
+                                7.0 CGPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Backlogs
+                            </span>
+
+                            <strong>
+                                Not Allowed
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Intake
+                            </span>
+
+                            <strong>
+                                25 Students
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-skills">
+
+                        <div class="student-drive-skills-title">
+                            Required Skills
+                        </div>
+
+
+                        <div class="student-drive-skill-list">
+
+                            <span class="student-drive-skill">
+                                Java
+                            </span>
+
+                            <span class="student-drive-skill">
+                                SQL
+                            </span>
+
+                            <span class="student-drive-skill">
+                                DSA
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-eligibility">
+
+                        <div class="student-drive-eligibility-row">
+
+                            <span>
+                                Eligible
+                            </span>
+
+                            <strong>
+                                ✓ Yes
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-deadline">
+
+                        <span>
+                            Apply by 25 Aug 2026
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-drive-apply-btn">
+
+                            Apply Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     INFOSYS
+                ================================================== -->
+
+                <div
+                    class="student-drive-card"
+                    data-status="applied">
+
+
+                    <div class="student-drive-company">
+
+                        <div class="student-drive-company-logo">
+                            INF
+                        </div>
+
+
+                        <div class="student-drive-company-info">
+
+                            <strong>
+                                Infosys
+                            </strong>
+
+                            <span>
+                                Technology
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-role">
+                        Systems Engineer
+                    </div>
+
+
+                    <div class="student-drive-details">
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Package
+                            </span>
+
+                            <strong>
+                                ₹6.5 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Eligibility
+                            </span>
+
+                            <strong>
+                                6.5 CGPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Backlogs
+                            </span>
+
+                            <strong>
+                                Allowed
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Intake
+                            </span>
+
+                            <strong>
+                                40 Students
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-skills">
+
+                        <div class="student-drive-skills-title">
+                            Required Skills
+                        </div>
+
+
+                        <div class="student-drive-skill-list">
+
+                            <span class="student-drive-skill">
+                                Python
+                            </span>
+
+                            <span class="student-drive-skill">
+                                SQL
+                            </span>
+
+                            <span class="student-drive-skill">
+                                OOP
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-deadline">
+
+                        <span>
+                            Apply by 27 Aug 2026
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-drive-apply-btn"
+                            disabled>
+
+                            Applied
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     AMAZON
+                ================================================== -->
+
+                <div
+                    class="student-drive-card"
+                    data-status="not-applied">
+
+
+                    <div class="student-drive-company">
+
+                        <div class="student-drive-company-logo">
+                            AMZ
+                        </div>
+
+
+                        <div class="student-drive-company-info">
+
+                            <strong>
+                                Amazon
+                            </strong>
+
+                            <span>
+                                E-Commerce
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-role">
+                        SDE Intern
+                    </div>
+
+
+                    <div class="student-drive-details">
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Package
+                            </span>
+
+                            <strong>
+                                ₹12 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Eligibility
+                            </span>
+
+                            <strong>
+                                8.0 CGPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Backlogs
+                            </span>
+
+                            <strong>
+                                Not Allowed
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Intake
+                            </span>
+
+                            <strong>
+                                10 Students
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-skills">
+
+                        <div class="student-drive-skills-title">
+                            Required Skills
+                        </div>
+
+
+                        <div class="student-drive-skill-list">
+
+                            <span class="student-drive-skill">
+                                DSA
+                            </span>
+
+                            <span class="student-drive-skill">
+                                C++
+                            </span>
+
+                            <span class="student-drive-skill">
+                                Algorithms
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-deadline">
+
+                        <span>
+                            Apply by 30 Aug 2026
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-drive-apply-btn">
+
+                            Apply Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ACCENTURE
+                ================================================== -->
+
+                <div
+                    class="student-drive-card"
+                    data-status="not-applied">
+
+
+                    <div class="student-drive-company">
+
+                        <div class="student-drive-company-logo">
+                            ACC
+                        </div>
+
+
+                        <div class="student-drive-company-info">
+
+                            <strong>
+                                Accenture
+                            </strong>
+
+                            <span>
+                                Consulting &amp; Technology
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-role">
+                        Associate Software Engineer
+                    </div>
+
+
+                    <div class="student-drive-details">
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Package
+                            </span>
+
+                            <strong>
+                                ₹6 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Eligibility
+                            </span>
+
+                            <strong>
+                                6.0 CGPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Backlogs
+                            </span>
+
+                            <strong>
+                                Allowed
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Intake
+                            </span>
+
+                            <strong>
+                                60 Students
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-skills">
+
+                        <div class="student-drive-skills-title">
+                            Required Skills
+                        </div>
+
+
+                        <div class="student-drive-skill-list">
+
+                            <span class="student-drive-skill">
+                                Java
+                            </span>
+
+                            <span class="student-drive-skill">
+                                Python
+                            </span>
+
+                            <span class="student-drive-skill">
+                                Cloud
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-deadline">
+
+                        <span>
+                            Apply by 02 Sep 2026
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-drive-apply-btn">
+
+                            Apply Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     WIPRO
+                ================================================== -->
+
+                <div
+                    class="student-drive-card"
+                    data-status="applied">
+
+
+                    <div class="student-drive-company">
+
+                        <div class="student-drive-company-logo">
+                            WPR
+                        </div>
+
+
+                        <div class="student-drive-company-info">
+
+                            <strong>
+                                Wipro
+                            </strong>
+
+                            <span>
+                                IT Services
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-role">
+                        Project Engineer
+                    </div>
+
+
+                    <div class="student-drive-details">
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Package
+                            </span>
+
+                            <strong>
+                                ₹5.8 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Eligibility
+                            </span>
+
+                            <strong>
+                                6.0 CGPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Backlogs
+                            </span>
+
+                            <strong>
+                                Allowed
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Intake
+                            </span>
+
+                            <strong>
+                                45 Students
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-skills">
+
+                        <div class="student-drive-skills-title">
+                            Required Skills
+                        </div>
+
+
+                        <div class="student-drive-skill-list">
+
+                            <span class="student-drive-skill">
+                                C++
+                            </span>
+
+                            <span class="student-drive-skill">
+                                SQL
+                            </span>
+
+                            <span class="student-drive-skill">
+                                OOP
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-deadline">
+
+                        <span>
+                            Apply by 05 Sep 2026
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-drive-apply-btn"
+                            disabled>
+
+                            Applied
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     COGNIZANT
+                ================================================== -->
+
+                <div
+                    class="student-drive-card"
+                    data-status="not-applied">
+
+
+                    <div class="student-drive-company">
+
+                        <div class="student-drive-company-logo">
+                            CTS
+                        </div>
+
+
+                        <div class="student-drive-company-info">
+
+                            <strong>
+                                Cognizant
+                            </strong>
+
+                            <span>
+                                Technology
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-role">
+                        Programmer Analyst
+                    </div>
+
+
+                    <div class="student-drive-details">
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Package
+                            </span>
+
+                            <strong>
+                                ₹6.2 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Eligibility
+                            </span>
+
+                            <strong>
+                                6.5 CGPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Backlogs
+                            </span>
+
+                            <strong>
+                                Not Allowed
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-drive-detail">
+
+                            <span>
+                                Intake
+                            </span>
+
+                            <strong>
+                                30 Students
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-skills">
+
+                        <div class="student-drive-skills-title">
+                            Required Skills
+                        </div>
+
+
+                        <div class="student-drive-skill-list">
+
+                            <span class="student-drive-skill">
+                                Java
+                            </span>
+
+                            <span class="student-drive-skill">
+                                SQL
+                            </span>
+
+                            <span class="student-drive-skill">
+                                DSA
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-drive-deadline">
+
+                        <span>
+                            Apply by 08 Sep 2026
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-drive-apply-btn">
+
+                            Apply Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/student/common.js') }}">
+</script>
+
+
+<script
+    src="{{ url_for('static', filename='js/student/placement_drives.js') }}">
+</script>
+
+
+</body>
+
+</html>

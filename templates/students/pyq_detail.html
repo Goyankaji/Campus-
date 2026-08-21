@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ pyq.company }} PYQ | Campus
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/pyq_detail.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- SIDEBAR -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-pyq-detail-page">
+
+
+            <!-- =================================================
+                 BACK
+            ================================================== -->
+
+            <a
+                href="{{ url_for('student_preparation') }}"
+                class="student-pyq-back">
+
+                ← Back to Preparation
+
+            </a>
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-pyq-detail-header">
+
+
+                <div class="student-pyq-detail-company">
+
+                    <div class="student-pyq-detail-logo">
+
+                        {{ pyq.company[:3] | upper }}
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Previous Year Questions
+                        </span>
+
+                        <h1>
+                            {{ pyq.title }}
+                        </h1>
+
+                        <p>
+                            {{ pyq.type }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="student-pyq-detail-actions">
+
+                    <button
+                        type="button"
+                        class="student-pyq-primary-btn">
+
+                        Start Practice
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATS
+            ================================================== -->
+
+            <div class="student-pyq-detail-stats">
+
+
+                <div>
+
+                    <span>
+                        Questions
+                    </span>
+
+                    <strong>
+                        {{ pyq.questions }}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Year
+                    </span>
+
+                    <strong>
+                        {{ pyq.year }}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Difficulty
+                    </span>
+
+                    <strong>
+                        {{ pyq.difficulty }}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Sections
+                    </span>
+
+                    <strong>
+                        03
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 CONTENT
+            ================================================== -->
+
+            <div class="student-pyq-detail-content">
+
+
+                <div class="student-pyq-info-card">
+
+                    <h2>
+                        About this paper
+                    </h2>
+
+                    <p>
+                        Practice questions based on the
+                        placement assessment pattern of
+                        {{ pyq.company }}.
+                    </p>
+
+                </div>
+
+
+                <!-- SECTIONS -->
+
+                <div class="student-pyq-sections">
+
+
+                    <div class="student-pyq-section-card">
+
+                        <div>
+
+                            <strong>
+                                Aptitude
+                            </strong>
+
+                            <span>
+                                Quantitative & Logical Reasoning
+                            </span>
+
+                        </div>
+
+                        <b>
+                            15 Questions
+                        </b>
+
+                    </div>
+
+
+                    <div class="student-pyq-section-card">
+
+                        <div>
+
+                            <strong>
+                                Technical
+                            </strong>
+
+                            <span>
+                                Core CS Fundamentals
+                            </span>
+
+                        </div>
+
+                        <b>
+                            10 Questions
+                        </b>
+
+                    </div>
+
+
+                    <div class="student-pyq-section-card">
+
+                        <div>
+
+                            <strong>
+                                Coding
+                            </strong>
+
+                            <span>
+                                Programming & DSA
+                            </span>
+
+                        </div>
+
+                        <b>
+                            15 Questions
+                        </b>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+</body>
+
+</html>

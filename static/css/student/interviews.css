@@ -1,0 +1,748 @@
+/* =========================================================
+   CAMPUS — STUDENT INTERVIEWS
+========================================================= */
+
+.student-interviews-page {
+    padding: 24px 28px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-interviews-header {
+    margin-bottom: 20px;
+}
+
+.student-interviews-header h1 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+}
+
+.student-interviews-header p {
+    margin: 6px 0 0;
+
+    color: #697386;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.student-interviews-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+.student-interview-summary-card {
+    min-height: 92px;
+
+    padding: 17px 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e4e7ee;
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 3px 12px rgba(28, 35, 52, 0.035);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.student-interview-summary-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(28, 35, 52, 0.07);
+}
+
+.student-interview-summary-card span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #7b8496;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.student-interview-summary-card strong {
+    display: block;
+
+    color: #172033;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+.student-interview-summary-card small {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #9aa3b2;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.student-interviews-filter {
+    min-height: 58px;
+
+    margin-bottom: 20px;
+
+    padding: 9px 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e5ed;
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.student-interview-tabs {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.student-interview-tab {
+    height: 36px;
+
+    padding: 0 16px;
+
+    border: 1px solid #e0e4ec;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #667085;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
+}
+
+.student-interview-tab:hover {
+    color: #6938ef;
+
+    border-color: #cfc4ff;
+}
+
+.student-interview-tab.active {
+    color: #ffffff;
+
+    background: #6938ef;
+
+    border-color: #6938ef;
+
+    box-shadow:
+        0 5px 12px rgba(105, 56, 239, .20);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.student-interviews-search {
+    width: 260px;
+    height: 36px;
+
+    padding: 0 13px;
+
+    border: 1px solid #dfe3eb;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.student-interviews-search::placeholder {
+    color: #9ca5b4;
+}
+
+.student-interviews-search:focus {
+    border-color: #6938ef;
+
+    box-shadow:
+        0 0 0 3px rgba(105, 56, 239, .09);
+}
+
+
+/* =========================================================
+   INTERVIEW GRID
+========================================================= */
+
+.student-interviews-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   INTERVIEW CARD
+========================================================= */
+
+.student-interview-card {
+    padding: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 11px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 4px 14px rgba(25, 32, 48, 0.035);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.student-interview-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d6cffb;
+
+    box-shadow:
+        0 9px 24px rgba(25, 32, 48, 0.07);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.student-interview-top {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.student-interview-company {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 0;
+}
+
+.student-interview-logo {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eee8ff;
+
+    color: #6938ef;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.student-interview-company-info {
+    min-width: 0;
+}
+
+.student-interview-company-info strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #172033;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.student-interview-company-info span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #8a93a4;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.student-interview-status {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.student-interview-status.upcoming {
+    background: #fff4df;
+
+    color: #d98200;
+}
+
+.student-interview-status.completed {
+    background: #edf2ff;
+
+    color: #496bd8;
+}
+
+.student-interview-status.selected {
+    background: #e2f8ee;
+
+    color: #0a9a61;
+}
+
+.student-interview-status.rejected {
+    background: #ffe9ec;
+
+    color: #df4059;
+}
+
+
+/* =========================================================
+   ROLE
+========================================================= */
+
+.student-interview-role {
+    margin-bottom: 14px;
+
+    color: #172033;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.student-interview-details {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin-bottom: 13px;
+}
+
+.student-interview-detail {
+    padding: 10px;
+
+    background: #f7f8fb;
+
+    border-radius: 7px;
+
+    border: 1px solid #eef0f4;
+}
+
+.student-interview-detail span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #929aaa;
+
+    font-size: 7px;
+    font-weight: 600;
+}
+
+.student-interview-detail strong {
+    display: block;
+
+    color: #273044;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ROUND
+========================================================= */
+
+.student-interview-round {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 0;
+
+    border-top: 1px solid #edf0f4;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.student-interview-round span {
+    color: #8992a3;
+
+    font-size: 8px;
+}
+
+.student-interview-round strong {
+    color: #6938ef;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.student-interview-result {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    padding: 9px 11px;
+
+    border-radius: 7px;
+}
+
+.student-interview-result span {
+    font-size: 7px;
+    font-weight: 600;
+}
+
+.student-interview-result strong {
+    font-size: 9px;
+}
+
+.student-interview-result.success {
+    background: #ecfaf4;
+
+    color: #07965d;
+}
+
+.student-interview-result.failed {
+    background: #fff0f2;
+
+    color: #dc4057;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.student-interview-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 14px;
+}
+
+.student-interview-footer-info {
+    max-width: 65%;
+
+    color: #8c95a5;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+.student-interview-btn {
+    height: 31px;
+
+    padding: 0 13px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #d8cffc;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #6035e8;
+
+    font-family: inherit;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.student-interview-btn:hover {
+    background: #6938ef;
+
+    border-color: #6938ef;
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .student-interviews-header h1 {
+    color: var(--student-text);
+}
+
+body.dark-mode .student-interviews-header p {
+    color: var(--student-text-muted);
+}
+
+body.dark-mode .student-interview-summary-card,
+body.dark-mode .student-interviews-filter,
+body.dark-mode .student-interview-card {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-interview-summary-card strong,
+body.dark-mode .student-interview-company-info strong,
+body.dark-mode .student-interview-role,
+body.dark-mode .student-interview-detail strong {
+    color: var(--student-text);
+}
+
+body.dark-mode .student-interview-summary-card span,
+body.dark-mode .student-interview-summary-card small,
+body.dark-mode .student-interview-company-info span,
+body.dark-mode .student-interview-detail span,
+body.dark-mode .student-interview-round span,
+body.dark-mode .student-interview-footer-info {
+    color: var(--student-text-muted);
+}
+
+body.dark-mode .student-interview-tab {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+
+    color: var(--student-text-soft);
+}
+
+body.dark-mode .student-interview-tab.active {
+    background: var(--student-primary);
+
+    border-color: var(--student-primary);
+
+    color: #ffffff;
+}
+
+body.dark-mode .student-interviews-search {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+
+    color: var(--student-text);
+}
+
+body.dark-mode .student-interview-detail {
+    background: rgba(255,255,255,.035);
+
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-interview-round {
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-interview-btn {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+
+    color: var(--student-primary);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .student-interviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-interviews-summary {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .student-interviews-page {
+        padding: 18px 14px 30px;
+    }
+
+    .student-interviews-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .student-interviews-filter {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .student-interview-tabs {
+        width: 100%;
+
+        overflow-x: auto;
+    }
+
+    .student-interview-tab {
+        white-space: nowrap;
+    }
+
+    .student-interviews-search {
+        width: 100%;
+    }
+
+    .student-interview-top {
+        align-items: flex-start;
+    }
+
+    .student-interview-details {
+        grid-template-columns: 1fr;
+    }
+
+    .student-interview-footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .student-interview-footer-info {
+        max-width: 100%;
+    }
+
+}

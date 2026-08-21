@@ -1,0 +1,222 @@
+<header class="student-topbar">
+
+
+    <!-- SEARCH -->
+    <div class="student-search">
+
+        <span class="student-search-icon">
+            ⌕
+        </span>
+
+
+        <input
+            type="text"
+            placeholder="Search for drives, companies, roles...">
+
+
+        <span class="student-search-shortcut">
+            Ctrl + K
+        </span>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="student-topbar-right">
+
+
+        <!-- THEME TOGGLE -->
+        <button
+            type="button"
+            data-theme-toggle
+            class="theme-toggle">
+
+            ◐
+
+        </button>
+
+
+        <!-- NOTIFICATIONS -->
+<div class="student-notification-wrapper">
+
+    <button
+        type="button"
+        class="student-notification-btn"
+        aria-label="Notifications"
+        data-notification-toggle>
+
+        ♧
+
+        <span class="student-notification-dot"></span>
+
+    </button>
+
+
+    <!-- NOTIFICATION DROPDOWN -->
+    <div
+        data-notification-dropdown
+        class="notification-dropdown">
+
+        <div class="notification-dropdown-header">
+
+            <strong>
+                Notifications
+            </strong>
+
+            <span>
+                2 New
+            </span>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('student_announcements') }}"
+            class="notification-item">
+
+            <span class="notification-item-icon">
+                !
+            </span>
+
+            <div>
+
+                <strong>
+                    New Placement Drive
+                </strong>
+
+                <small>
+                    TCS placement drive is now open.
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('student_interviews') }}"
+            class="notification-item">
+
+            <span class="notification-item-icon">
+                ✓
+            </span>
+
+            <div>
+
+                <strong>
+                    Interview Scheduled
+                </strong>
+
+                <small>
+                    Your Infosys interview has been scheduled.
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('student_announcements') }}"
+            class="notification-view-all">
+
+            View all announcements →
+
+        </a>
+
+    </div>
+
+</div>
+
+
+        <!-- PROFILE -->
+<div class="student-profile-wrapper">
+
+
+    <button
+        type="button"
+        class="student-profile-button"
+        id="studentProfileButton"
+        data-profile-toggle>
+
+
+        <!-- AVATAR -->
+        <div class="student-profile-avatar">
+
+            {% if student is defined and student.name %}
+
+                {{ student.name[0] | upper }}
+
+            {% else %}
+
+                S
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- DETAILS -->
+        <div class="student-profile-details">
+
+            {% if student is defined %}
+
+                <strong>
+                    {{ student.name }}
+                </strong>
+
+                <span>
+                    {{ student.program }}
+                    ·
+                    {{ student.current_year }}
+                </span>
+
+            {% else %}
+
+                <strong>
+                    Student
+                </strong>
+
+                <span>
+                    Student Portal
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <span class="student-profile-arrow">
+            ▾
+        </span>
+
+    </button>
+
+
+    <!-- PROFILE DROPDOWN -->
+    <div
+        data-profile-dropdown
+        class="profile-dropdown">
+
+        <a href="{{ url_for('student_profile') }}">
+            My Profile
+        </a>
+
+        <a href="{{ url_for('student_settings') }}">
+            Settings
+        </a>
+
+        <button
+            type="button"
+            data-logout>
+            Logout
+        </button>
+
+    </div>
+
+
+</div>
+
+    </div>
+
+</header>

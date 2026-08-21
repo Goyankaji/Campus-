@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Interviews | Campus</title>
+
+
+    <!-- COMMON CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <!-- INTERVIEW CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/interviews.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+
+<div class="student-layout">
+
+
+    <!-- SIDEBAR -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- MAIN -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-interviews-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-interviews-header">
+
+                <div>
+
+                    <h1>
+                        Interviews
+                    </h1>
+
+                    <p>
+                        Track your upcoming interviews, recent interviews
+                        and final results.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="student-interviews-summary">
+
+
+                <div class="student-interview-summary-card">
+
+                    <span>
+                        Upcoming
+                    </span>
+
+                    <strong>
+                        02
+                    </strong>
+
+                    <small>
+                        Interviews scheduled
+                    </small>
+
+                </div>
+
+
+                <div class="student-interview-summary-card">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong>
+                        04
+                    </strong>
+
+                    <small>
+                        Interviews attended
+                    </small>
+
+                </div>
+
+
+                <div class="student-interview-summary-card">
+
+                    <span>
+                        Selected
+                    </span>
+
+                    <strong>
+                        01
+                    </strong>
+
+                    <small>
+                        Successful interviews
+                    </small>
+
+                </div>
+
+
+                <div class="student-interview-summary-card">
+
+                    <span>
+                        Not Selected
+                    </span>
+
+                    <strong>
+                        02
+                    </strong>
+
+                    <small>
+                        Interview results
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+     FILTERS
+================================================== -->
+
+<div class="student-interviews-filter">
+
+    <div class="student-interview-tabs">
+
+        <button
+            type="button"
+            class="student-interview-tab active"
+            data-filter="all">
+
+            All
+
+        </button>
+
+
+        <button
+            type="button"
+            class="student-interview-tab"
+            data-filter="upcoming">
+
+            Upcoming Interviews
+
+        </button>
+
+
+        <button
+            type="button"
+            class="student-interview-tab"
+            data-filter="recent">
+
+            Recent Interviews
+
+        </button>
+
+
+        <button
+            type="button"
+            class="student-interview-tab"
+            data-filter="results">
+
+            Results
+
+        </button>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <input
+        type="text"
+        class="student-interviews-search"
+        placeholder="Search company or role...">
+
+</div>
+
+
+            <!-- =================================================
+                 INTERVIEW GRID
+            ================================================== -->
+
+            <div class="student-interviews-grid">
+
+
+                <!-- =================================================
+                     TCS — UPCOMING
+                ================================================== -->
+
+                <div
+    class="student-interview-card"
+    data-category="upcoming">
+
+                    <div class="student-interview-top">
+
+
+                        <div class="student-interview-company">
+
+
+                            <div class="student-interview-logo">
+                                TCS
+                            </div>
+
+
+                            <div
+                                class="student-interview-company-info">
+
+                                <strong>
+                                    Tata Consultancy Services
+                                </strong>
+
+                                <span>
+                                    IT Services
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <span
+                            class="student-interview-status upcoming">
+
+                            Upcoming
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="student-interview-role">
+
+                        Software Engineer
+
+                    </div>
+
+
+                    <div class="student-interview-details">
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DATE
+                            </span>
+
+                            <strong>
+                                28 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                TIME
+                            </span>
+
+                            <strong>
+                                10:30 AM
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                MODE
+                            </span>
+
+                            <strong>
+                                Online
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DURATION
+                            </span>
+
+                            <strong>
+                                45 Min
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-interview-round">
+
+                        <span>
+                            Current Round
+                        </span>
+
+                        <strong>
+                            Technical Round
+                        </strong>
+
+                    </div>
+
+
+                    <div class="student-interview-footer">
+
+                        <div class="student-interview-footer-info">
+
+                            Meeting link will be available
+                            before the interview.
+
+                        </div>
+
+
+                        <button
+                            class="student-interview-btn">
+
+                            View Details
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     INFOSYS — UPCOMING
+                ================================================== -->
+
+                <div
+    class="student-interview-card"
+    data-category="upcoming">
+
+
+                    <div class="student-interview-top">
+
+
+                        <div class="student-interview-company">
+
+
+                            <div class="student-interview-logo">
+                                INF
+                            </div>
+
+
+                            <div
+                                class="student-interview-company-info">
+
+                                <strong>
+                                    Infosys
+                                </strong>
+
+                                <span>
+                                    Technology
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <span
+                            class="student-interview-status upcoming">
+
+                            Upcoming
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="student-interview-role">
+
+                        Systems Engineer
+
+                    </div>
+
+
+                    <div class="student-interview-details">
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DATE
+                            </span>
+
+                            <strong>
+                                02 Sep 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                TIME
+                            </span>
+
+                            <strong>
+                                02:00 PM
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                MODE
+                            </span>
+
+                            <strong>
+                                Online
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DURATION
+                            </span>
+
+                            <strong>
+                                60 Min
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-interview-round">
+
+                        <span>
+                            Current Round
+                        </span>
+
+                        <strong>
+                            HR Round
+                        </strong>
+
+                    </div>
+
+
+                    <div class="student-interview-footer">
+
+                        <div class="student-interview-footer-info">
+
+                            Interview schedule confirmed.
+
+                        </div>
+
+
+                        <button
+                            class="student-interview-btn">
+
+                            View Details
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     ACCENTURE — RECENT
+                ================================================== -->
+
+                <div
+    class="student-interview-card"
+    data-category="recent">
+
+
+                    <div class="student-interview-top">
+
+
+                        <div class="student-interview-company">
+
+
+                            <div class="student-interview-logo">
+                                ACC
+                            </div>
+
+
+                            <div
+                                class="student-interview-company-info">
+
+                                <strong>
+                                    Accenture
+                                </strong>
+
+                                <span>
+                                    Consulting & Technology
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <span
+                            class="student-interview-status completed">
+
+                            Completed
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="student-interview-role">
+
+                        Associate Software Engineer
+
+                    </div>
+
+
+                    <div class="student-interview-details">
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DATE
+                            </span>
+
+                            <strong>
+                                20 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                TIME
+                            </span>
+
+                            <strong>
+                                11:00 AM
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                MODE
+                            </span>
+
+                            <strong>
+                                Online
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                ROUND
+                            </span>
+
+                            <strong>
+                                Technical
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-interview-round">
+
+                        <span>
+                            Interview Status
+                        </span>
+
+                        <strong>
+                            Completed
+                        </strong>
+
+                    </div>
+
+
+                    <div class="student-interview-footer">
+
+                        <div class="student-interview-footer-info">
+
+                            Result pending.
+
+                        </div>
+
+
+                        <button
+                            class="student-interview-btn">
+
+                            View Details
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     AMAZON — SELECTED
+                ================================================== -->
+
+               <div
+    class="student-interview-card"
+    data-category="results">
+
+
+                    <div class="student-interview-top">
+
+
+                        <div class="student-interview-company">
+
+
+                            <div class="student-interview-logo">
+                                AMZ
+                            </div>
+
+
+                            <div
+                                class="student-interview-company-info">
+
+                                <strong>
+                                    Amazon
+                                </strong>
+
+                                <span>
+                                    E-Commerce
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <span
+                            class="student-interview-status selected">
+
+                            Selected
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="student-interview-role">
+
+                        SDE Intern
+
+                    </div>
+
+
+                    <div class="student-interview-details">
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DATE
+                            </span>
+
+                            <strong>
+                                16 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                MODE
+                            </span>
+
+                            <strong>
+                                Online
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                PACKAGE
+                            </span>
+
+                            <strong>
+                                ₹12 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                ROUND
+                            </span>
+
+                            <strong>
+                                Final
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div
+                        class="student-interview-result success">
+
+                        <span>
+                            FINAL RESULT
+                        </span>
+
+                        <strong>
+                            ✓ Selected
+                        </strong>
+
+                    </div>
+
+
+                    <div class="student-interview-footer">
+
+                        <div class="student-interview-footer-info">
+
+                            Offer process initiated.
+
+                        </div>
+
+
+                        <button
+                            class="student-interview-btn">
+
+                            View Result
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     WIPRO — REJECTED
+                ================================================== -->
+
+                <div
+    class="student-interview-card"
+    data-category="results">
+
+
+                    <div class="student-interview-top">
+
+
+                        <div class="student-interview-company">
+
+
+                            <div class="student-interview-logo">
+                                WPR
+                            </div>
+
+
+                            <div
+                                class="student-interview-company-info">
+
+                                <strong>
+                                    Wipro
+                                </strong>
+
+                                <span>
+                                    IT Services
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <span
+                            class="student-interview-status rejected">
+
+                            Not Selected
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="student-interview-role">
+
+                        Project Engineer
+
+                    </div>
+
+
+                    <div class="student-interview-details">
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DATE
+                            </span>
+
+                            <strong>
+                                12 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                MODE
+                            </span>
+
+                            <strong>
+                                Offline
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                ROUND
+                            </span>
+
+                            <strong>
+                                Technical
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                PACKAGE
+                            </span>
+
+                            <strong>
+                                ₹5.8 LPA
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div
+                        class="student-interview-result failed">
+
+                        <span>
+                            FINAL RESULT
+                        </span>
+
+                        <strong>
+                            ✕ Not Selected
+                        </strong>
+
+                    </div>
+
+
+                    <div class="student-interview-footer">
+
+                        <div class="student-interview-footer-info">
+
+                            Interview process completed.
+
+                        </div>
+
+
+                        <button
+                            class="student-interview-btn">
+
+                            View Result
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     COGNIZANT — REJECTED
+                ================================================== -->
+
+               <div
+    class="student-interview-card"
+    data-category="results">
+
+
+                    <div class="student-interview-top">
+
+
+                        <div class="student-interview-company">
+
+
+                            <div class="student-interview-logo">
+                                CTS
+                            </div>
+
+
+                            <div
+                                class="student-interview-company-info">
+
+                                <strong>
+                                    Cognizant
+                                </strong>
+
+                                <span>
+                                    Technology
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <span
+                            class="student-interview-status rejected">
+
+                            Not Selected
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="student-interview-role">
+
+                        Programmer Analyst
+
+                    </div>
+
+
+                    <div class="student-interview-details">
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                DATE
+                            </span>
+
+                            <strong>
+                                08 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                MODE
+                            </span>
+
+                            <strong>
+                                Online
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                ROUND
+                            </span>
+
+                            <strong>
+                                HR Round
+                            </strong>
+
+                        </div>
+
+
+                        <div class="student-interview-detail">
+
+                            <span>
+                                PACKAGE
+                            </span>
+
+                            <strong>
+                                ₹6.2 LPA
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div
+                        class="student-interview-result failed">
+
+                        <span>
+                            FINAL RESULT
+                        </span>
+
+                        <strong>
+                            ✕ Not Selected
+                        </strong>
+
+                    </div>
+
+
+                    <div class="student-interview-footer">
+
+                        <div class="student-interview-footer-info">
+
+                            Interview process completed.
+
+                        </div>
+
+
+                        <button
+                            class="student-interview-btn">
+
+                            View Result
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- COMMON JS -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/interviews.js'
+    ) }}">
+</script>
+
+
+</body>
+
+</html>

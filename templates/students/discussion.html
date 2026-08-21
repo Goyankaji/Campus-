@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Discussion | Campus</title>
+
+
+    <!-- COMMON CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <!-- DISCUSSION CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/discussion.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-discussion-page">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="student-discussion-header">
+
+                <div>
+
+                    <h1>
+                        Question Discussion
+                    </h1>
+
+                    <p>
+                        Ask doubts, share hints and discuss
+                        preparation questions with other students.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 TOOLBAR
+            ================================================== -->
+
+            <div class="student-discussion-toolbar">
+
+
+                <!-- TABS -->
+
+                <div class="student-discussion-tabs">
+
+                    <button
+                        type="button"
+                        class="student-discussion-tab active"
+                        data-filter="all">
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-discussion-tab"
+                        data-filter="doubt">
+
+                        My Doubts
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-discussion-tab"
+                        data-filter="hint">
+
+                        Hints
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-discussion-tab"
+                        data-filter="unanswered">
+
+                        Unanswered
+
+                    </button>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <input
+                    type="text"
+                    class="student-discussion-search"
+                    placeholder="Search questions or discussions...">
+
+            </div>
+
+
+            <!-- =================================================
+                 DISCUSSION LIST
+            ================================================== -->
+
+            <div class="student-discussion-list">
+
+
+                <!-- =================================================
+                     TCS DISCUSSION
+                ================================================== -->
+
+                <article
+                    class="student-discussion-card"
+                    data-type="doubt"
+                    data-search="tcs aptitude profit loss placement question">
+
+
+                    <!-- CARD HEADER -->
+
+                    <div class="student-discussion-card-top">
+
+                        <div>
+
+                            <span class="student-discussion-company">
+                                TCS · Aptitude
+                            </span>
+
+                            <h2>
+                                Profit & Loss — Placement Question
+                            </h2>
+
+                        </div>
+
+
+                        <span class="student-discussion-status">
+                            8 Comments
+                        </span>
+
+                    </div>
+
+
+                    <!-- QUESTION -->
+
+                    <div class="student-discussion-question">
+
+                        <strong>
+                            Question
+                        </strong>
+
+                        <p>
+                            An article is sold at a profit of 20%.
+                            If the cost price is increased by 25%
+                            while the selling price remains the same,
+                            what will be the new profit or loss?
+                        </p>
+
+                    </div>
+
+
+                    <!-- COMMENT -->
+
+                    <div class="student-discussion-preview">
+
+                        <div class="student-discussion-avatar">
+                            A
+                        </div>
+
+
+                        <div class="student-discussion-comment">
+
+                            <div class="student-discussion-comment-head">
+
+                                <strong>
+                                    Arpit
+                                </strong>
+
+                                <span>
+                                    Doubt · 12 min ago
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                I am getting a different answer.
+                                Can someone explain the calculation?
+                            </p>
+
+
+                            <div class="student-discussion-actions">
+
+                                <button
+                                    type="button"
+                                    data-reply>
+
+                                    Reply
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    data-hint>
+
+                                    Give Hint
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- WRITE -->
+
+                    <div class="student-discussion-write">
+
+                        <input
+                            type="text"
+                            placeholder="Write a doubt, hint or explanation...">
+
+
+                        <button
+                            type="button"
+                            data-post>
+
+                            Post
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- =================================================
+                     INFOSYS DISCUSSION
+                ================================================== -->
+
+                <article
+                    class="student-discussion-card"
+                    data-type="hint"
+                    data-search="infosys coding two sum dsa programming">
+
+
+                    <div class="student-discussion-card-top">
+
+                        <div>
+
+                            <span class="student-discussion-company">
+                                Infosys · Coding
+                            </span>
+
+                            <h2>
+                                Two Sum — Approach Discussion
+                            </h2>
+
+                        </div>
+
+
+                        <span class="student-discussion-status">
+                            5 Comments
+                        </span>
+
+                    </div>
+
+
+                    <div class="student-discussion-question">
+
+                        <strong>
+                            Question
+                        </strong>
+
+                        <p>
+                            Given an array of integers and a target,
+                            return the indices of two numbers whose
+                            sum equals the target.
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-discussion-preview">
+
+                        <div class="student-discussion-avatar">
+                            R
+                        </div>
+
+
+                        <div class="student-discussion-comment">
+
+                            <div class="student-discussion-comment-head">
+
+                                <strong>
+                                    Rahul
+                                </strong>
+
+                                <span>
+                                    Hint · 25 min ago
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                Try thinking about how a hash map can
+                                reduce the number of comparisons.
+                            </p>
+
+
+                            <div class="student-discussion-actions">
+
+                                <button
+                                    type="button"
+                                    data-reply>
+
+                                    Reply
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-discussion-write">
+
+                        <input
+                            type="text"
+                            placeholder="Write a doubt, hint or explanation...">
+
+
+                        <button
+                            type="button"
+                            data-post>
+
+                            Post
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+                <!-- =================================================
+                     AMAZON DISCUSSION
+                ================================================== -->
+
+                <article
+                    class="student-discussion-card"
+                    data-type="unanswered"
+                    data-search="amazon dbms normalization technical">
+
+
+                    <div class="student-discussion-card-top">
+
+                        <div>
+
+                            <span class="student-discussion-company">
+                                Amazon · Technical
+                            </span>
+
+                            <h2>
+                                DBMS Normalization Question
+                            </h2>
+
+                        </div>
+
+
+                        <span class="student-discussion-status">
+                            0 Comments
+                        </span>
+
+                    </div>
+
+
+                    <div class="student-discussion-question">
+
+                        <strong>
+                            Question
+                        </strong>
+
+                        <p>
+                            What is the difference between 2NF and
+                            3NF? Explain with a simple example.
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-discussion-preview">
+
+                        <div class="student-discussion-avatar">
+                            P
+                        </div>
+
+
+                        <div class="student-discussion-comment">
+
+                            <div class="student-discussion-comment-head">
+
+                                <strong>
+                                    Priya
+                                </strong>
+
+                                <span>
+                                    Doubt · 1 hr ago
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                Can someone give me a hint for this
+                                question?
+                            </p>
+
+
+                            <div class="student-discussion-actions">
+
+                                <button
+                                    type="button"
+                                    data-reply>
+
+                                    Reply
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    data-hint>
+
+                                    Give Hint
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-discussion-write">
+
+                        <input
+                            type="text"
+                            placeholder="Write a doubt, hint or explanation...">
+
+
+                        <button
+                            type="button"
+                            data-post>
+
+                            Post
+
+                        </button>
+
+                    </div>
+
+
+                </article>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="student-discussion-empty"
+                hidden>
+
+                <div class="student-discussion-empty-icon">
+                    ?
+                </div>
+
+                <h3>
+                    No discussions found
+                </h3>
+
+                <p>
+                    Try another search or select a different filter.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- COMMON JS -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+
+<!-- DISCUSSION JS -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/discussion.js'
+    ) }}">
+</script>
+
+
+</body>
+
+</html>

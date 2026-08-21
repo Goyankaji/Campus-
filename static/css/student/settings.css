@@ -1,0 +1,387 @@
+/* =========================================================
+   CAMPUS — STUDENT SETTINGS
+========================================================= */
+
+.student-settings-page {
+    padding: 26px 30px 40px;
+}
+
+.student-settings-header {
+    margin-bottom: 22px;
+}
+
+.student-settings-header h1 {
+    margin: 0;
+    color: var(--student-text);
+    font-size: 27px;
+    font-weight: 750;
+}
+
+.student-settings-header p {
+    margin: 7px 0 0;
+    color: var(--student-text-soft);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.student-settings-layout {
+    display: grid;
+    grid-template-columns: 205px minmax(0, 1fr);
+    gap: 18px;
+}
+
+
+/* =========================================================
+   SETTINGS NAV
+========================================================= */
+
+.student-settings-nav {
+    padding: 10px;
+
+    background: var(--student-surface);
+    border: 1px solid var(--student-border);
+    border-radius: 10px;
+
+    box-shadow: var(--student-shadow);
+
+    height: fit-content;
+}
+
+.student-settings-nav button {
+    width: 100%;
+
+    padding: 10px 11px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: transparent;
+    color: var(--student-text-soft);
+
+    text-align: left;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.student-settings-nav button:hover {
+    background: var(--student-surface-soft);
+    color: var(--student-text);
+}
+
+.student-settings-nav button.active {
+    background: var(--student-primary-soft);
+    color: var(--student-primary);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.student-settings-content {
+    display: grid;
+    gap: 16px;
+}
+
+.student-settings-card {
+    padding: 20px;
+
+    background: var(--student-surface);
+
+    border: 1px solid var(--student-border);
+    border-radius: 10px;
+
+    box-shadow: var(--student-shadow);
+}
+
+.student-settings-card-header {
+    margin-bottom: 18px;
+}
+
+.student-settings-card-header h3 {
+    margin: 0;
+
+    color: var(--student-text);
+
+    font-size: 14px;
+}
+
+.student-settings-card-header p {
+    margin: 5px 0 0;
+
+    color: var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   SETTING ROW
+========================================================= */
+
+.student-setting-row {
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-bottom: 1px solid var(--student-border);
+}
+
+.student-setting-row:last-child {
+    border-bottom: 0;
+}
+
+.student-setting-info {
+    min-width: 0;
+}
+
+.student-setting-info strong {
+    display: block;
+
+    color: var(--student-text);
+
+    font-size: 10px;
+}
+
+.student-setting-info span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.student-setting-toggle {
+    position: relative;
+
+    width: 35px;
+    height: 19px;
+
+    flex: 0 0 35px;
+}
+
+.student-setting-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.student-setting-slider {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 20px;
+
+    background: var(--student-border);
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.student-setting-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 13px;
+    height: 13px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    transition: .2s ease;
+}
+
+.student-setting-toggle input:checked + .student-setting-slider {
+    background: var(--student-primary);
+}
+
+.student-setting-toggle input:checked + .student-setting-slider::before {
+    transform: translateX(16px);
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.student-setting-select {
+    min-width: 145px;
+
+    padding: 8px 10px;
+
+    border: 1px solid var(--student-border);
+    border-radius: 6px;
+
+    background: var(--student-surface-soft);
+    color: var(--student-text);
+
+    font-size: 8px;
+
+    outline: none;
+}
+
+.student-setting-select:focus {
+    border-color: var(--student-primary);
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.student-account-box {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 12px;
+    align-items: center;
+}
+
+.student-account-avatar {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--student-primary-soft);
+    color: var(--student-primary);
+
+    font-size: 17px;
+    font-weight: 750;
+}
+
+.student-account-info strong {
+    display: block;
+
+    color: var(--student-text);
+
+    font-size: 12px;
+}
+
+.student-account-info span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   DANGER
+========================================================= */
+
+.student-settings-danger {
+    margin-top: 5px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid var(--student-border);
+}
+
+.student-settings-danger h4 {
+    margin: 0;
+
+    color: var(--student-danger);
+
+    font-size: 10px;
+}
+
+.student-settings-danger p {
+    margin: 5px 0 12px;
+
+    color: var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+.student-settings-logout {
+    padding: 8px 12px;
+
+    border: 1px solid rgba(242, 85, 120, .35);
+    border-radius: 6px;
+
+    background: rgba(242, 85, 120, .08);
+
+    color: var(--student-danger);
+
+    font-size: 8px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .student-settings-page {
+        padding: 20px;
+    }
+
+    .student-settings-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .student-settings-nav {
+        display: flex;
+        gap: 5px;
+
+        overflow-x: auto;
+    }
+
+    .student-settings-nav button {
+        width: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .student-setting-row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding: 13px 0;
+    }
+
+    .student-setting-select {
+        width: 100%;
+    }
+}

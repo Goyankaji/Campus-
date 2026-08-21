@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Offers & Joining | Campus</title>
+
+
+    <!-- COMMON CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <!-- PAGE CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/offers_joining.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-offers-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-offers-header">
+
+                <div>
+
+                    <h1>
+                        Offers & Joining
+                    </h1>
+
+                    <p>
+                        Track your placement offers and joining details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="student-offers-summary">
+
+
+                <div class="student-offer-summary-card">
+
+                    <span>
+                        Total Offers
+                    </span>
+
+                    <strong>
+                        02
+                    </strong>
+
+                    <small>
+                        Offers received
+                    </small>
+
+                </div>
+
+
+                <div class="student-offer-summary-card">
+
+                    <span>
+                        Accepted
+                    </span>
+
+                    <strong>
+                        01
+                    </strong>
+
+                    <small>
+                        Offer accepted
+                    </small>
+
+                </div>
+
+
+                <div class="student-offer-summary-card">
+
+                    <span>
+                        Joining Soon
+                    </span>
+
+                    <strong>
+                        01
+                    </strong>
+
+                    <small>
+                        Upcoming joining
+                    </small>
+
+                </div>
+
+
+                <div class="student-offer-summary-card">
+
+                    <span>
+                        Highest Package
+                    </span>
+
+                    <strong>
+                        ₹12 LPA
+                    </strong>
+
+                    <small>
+                        Best offer received
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTER BAR
+            ================================================== -->
+
+            <div class="student-offers-filter">
+
+                <div class="student-offer-tabs">
+
+
+                    <button
+                        type="button"
+                        class="student-offer-tab active"
+                        data-filter="all">
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-offer-tab"
+                        data-filter="offer">
+
+                        Offers
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-offer-tab"
+                        data-filter="joining">
+
+                        Joining
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-offer-tab"
+                        data-filter="accepted">
+
+                        Accepted
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="student-offer-tab"
+                        data-filter="rejected">
+
+                        Rejected
+
+                    </button>
+
+
+                </div>
+
+
+                <input
+                    type="text"
+                    class="student-offers-search"
+                    placeholder="Search company or role...">
+
+            </div>
+
+
+            <!-- =================================================
+                 OFFERS GRID
+            ================================================== -->
+
+            <div class="student-offers-grid">
+
+
+                <!-- =================================================
+                     TCS — ACCEPTED / JOINING
+                ================================================== -->
+
+                <div
+    class="student-offer-card"
+    data-category="accepted joining">
+
+
+                    <div class="student-offer-top">
+
+                        <div class="student-offer-company">
+
+                            <div class="student-offer-logo">
+                                TCS
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Tata Consultancy Services
+                                </strong>
+
+                                <span>
+                                    IT Services
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span
+                            class="student-offer-status accepted">
+
+                            Accepted
+
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Software Engineer
+                    </h3>
+
+
+                    <div class="student-offer-details">
+
+
+                        <div>
+
+                            <span>
+                                PACKAGE
+                            </span>
+
+                            <strong>
+                                ₹7.5 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                LOCATION
+                            </span>
+
+                            <strong>
+                                Pune
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                JOINING DATE
+                            </span>
+
+                            <strong>
+                                15 Sep 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                OFFER DATE
+                            </span>
+
+                            <strong>
+                                25 Aug 2026
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-offer-footer">
+
+                        <span>
+                            Joining confirmed
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-offer-btn">
+
+                            View Offer
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     AMAZON — OFFER
+                ================================================== -->
+
+                <div
+    class="student-offer-card"
+    data-category="offer">
+
+
+                    <div class="student-offer-top">
+
+                        <div class="student-offer-company">
+
+                            <div class="student-offer-logo">
+                                AMZ
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Amazon
+                                </strong>
+
+                                <span>
+                                    E-Commerce
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span
+                            class="student-offer-status offer">
+
+                            Offer Received
+
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        SDE Intern
+                    </h3>
+
+
+                    <div class="student-offer-details">
+
+
+                        <div>
+
+                            <span>
+                                PACKAGE
+                            </span>
+
+                            <strong>
+                                ₹12 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                LOCATION
+                            </span>
+
+                            <strong>
+                                Bengaluru
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                JOINING DATE
+                            </span>
+
+                            <strong>
+                                01 Oct 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                OFFER DATE
+                            </span>
+
+                            <strong>
+                                26 Aug 2026
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-offer-footer">
+
+                        <span>
+                            Action required
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-offer-btn primary">
+
+                            View Offer
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     WIPRO — REJECTED
+                ================================================== -->
+
+               <div
+    class="student-offer-card"
+    data-category="rejected">
+
+
+                    <div class="student-offer-top">
+
+                        <div class="student-offer-company">
+
+                            <div class="student-offer-logo">
+                                WPR
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Wipro
+                                </strong>
+
+                                <span>
+                                    IT Services
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span
+                            class="student-offer-status rejected">
+
+                            Not Selected
+
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Project Engineer
+                    </h3>
+
+
+                    <div class="student-offer-details">
+
+
+                        <div>
+
+                            <span>
+                                PACKAGE
+                            </span>
+
+                            <strong>
+                                ₹5.8 LPA
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                LOCATION
+                            </span>
+
+                            <strong>
+                                Noida
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                RESULT DATE
+                            </span>
+
+                            <strong>
+                                22 Aug 2026
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                ROUND
+                            </span>
+
+                            <strong>
+                                Technical
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-offer-footer">
+
+                        <span>
+                            Selection process closed
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="student-offer-btn">
+
+                            View Details
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =================================================
+     JAVASCRIPT
+================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/offers_joining.js'
+    ) }}">
+</script>
+
+</body>
+</html>

@@ -1,0 +1,552 @@
+/* =========================================================
+   CAMPUS — STUDENT OFFERS & JOINING
+========================================================= */
+
+.student-offers-page {
+    padding: 24px 28px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-offers-header {
+    margin-bottom: 20px;
+}
+
+.student-offers-header h1 {
+    margin: 0;
+    color: #172033;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+}
+
+.student-offers-header p {
+    margin: 6px 0 0;
+    color: #697386;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.student-offers-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.student-offer-summary-card {
+    min-height: 92px;
+    padding: 17px 18px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 1px solid #e4e7ee;
+    border-radius: 10px;
+
+    box-shadow: 0 3px 12px rgba(28, 35, 52, 0.035);
+}
+
+.student-offer-summary-card span {
+    display: block;
+    margin-bottom: 7px;
+
+    color: #7b8496;
+    font-size: 10px;
+}
+
+.student-offer-summary-card strong {
+    display: block;
+
+    color: #172033;
+    font-size: 23px;
+    line-height: 1;
+}
+
+.student-offer-summary-card small {
+    display: block;
+    margin-top: 7px;
+
+    color: #9aa3b2;
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.student-offers-filter {
+    min-height: 58px;
+
+    margin-bottom: 20px;
+    padding: 9px 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    background: #ffffff;
+    border: 1px solid #e1e5ed;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.student-offer-tabs {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.student-offer-tab {
+    height: 36px;
+    padding: 0 16px;
+
+    border: 1px solid #e0e4ec;
+    border-radius: 7px;
+
+    background: #ffffff;
+    color: #667085;
+
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.student-offer-tab:hover {
+    color: #6938ef;
+    border-color: #cfc4ff;
+}
+
+.student-offer-tab.active {
+    background: #6938ef;
+    border-color: #6938ef;
+    color: #ffffff;
+
+    box-shadow: 0 5px 12px rgba(105, 56, 239, .20);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.student-offers-search {
+    width: 260px;
+    height: 36px;
+
+    padding: 0 13px;
+
+    border: 1px solid #dfe3eb;
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+    color: #172033;
+
+    font-family: inherit;
+    font-size: 10px;
+
+    box-sizing: border-box;
+}
+
+.student-offers-search::placeholder {
+    color: #9ca5b4;
+}
+
+.student-offers-search:focus {
+    border-color: #6938ef;
+
+    box-shadow:
+        0 0 0 3px rgba(105, 56, 239, .09);
+}
+
+
+/* =========================================================
+   OFFER GRID
+========================================================= */
+
+.student-offers-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   OFFER CARD
+========================================================= */
+
+.student-offer-card {
+    padding: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+    border-radius: 11px;
+
+    box-shadow:
+        0 4px 14px rgba(25, 32, 48, .035);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.student-offer-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d6cffb;
+
+    box-shadow:
+        0 9px 24px rgba(25, 32, 48, .07);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.student-offer-top {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.student-offer-company {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.student-offer-logo {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eee8ff;
+    color: #6938ef;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.student-offer-company strong {
+    display: block;
+
+    color: #172033;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.student-offer-company span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #8a93a4;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.student-offer-status {
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.student-offer-status.offer {
+    background: #eee9ff;
+    color: #6938ef;
+}
+
+.student-offer-status.accepted {
+    background: #e2f8ee;
+    color: #0a9a61;
+}
+
+.student-offer-status.rejected {
+    background: #ffe9ec;
+    color: #df4059;
+}
+
+
+/* =========================================================
+   ROLE
+========================================================= */
+
+.student-offer-card h3 {
+    margin: 0 0 14px;
+
+    color: #172033;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.student-offer-details {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+}
+
+.student-offer-details > div {
+    padding: 10px;
+
+    background: #f7f8fb;
+
+    border: 1px solid #eef0f4;
+    border-radius: 7px;
+}
+
+.student-offer-details span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #929aaa;
+
+    font-size: 7px;
+    font-weight: 600;
+}
+
+.student-offer-details strong {
+    display: block;
+
+    color: #273044;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.student-offer-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 15px;
+    padding-top: 12px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+.student-offer-footer > span {
+    color: #8992a3;
+
+    font-size: 8px;
+}
+
+.student-offer-btn {
+    height: 31px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d8cffc;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #6035e8;
+
+    font-family: inherit;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.student-offer-btn:hover,
+.student-offer-btn.primary {
+    background: #6938ef;
+    border-color: #6938ef;
+    color: #ffffff;
+}
+
+.student-offer-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .student-offers-header h1,
+body.dark-mode .student-offer-summary-card strong,
+body.dark-mode .student-offer-company strong,
+body.dark-mode .student-offer-card h3,
+body.dark-mode .student-offer-details strong {
+    color: var(--student-text);
+}
+
+body.dark-mode .student-offers-header p,
+body.dark-mode .student-offer-summary-card span,
+body.dark-mode .student-offer-summary-card small,
+body.dark-mode .student-offer-company span,
+body.dark-mode .student-offer-details span,
+body.dark-mode .student-offer-footer > span {
+    color: var(--student-text-muted);
+}
+
+body.dark-mode .student-offer-summary-card,
+body.dark-mode .student-offers-filter,
+body.dark-mode .student-offer-card {
+    background: var(--student-surface);
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-offer-tab {
+    background: var(--student-surface);
+    border-color: var(--student-border);
+    color: var(--student-text-soft);
+}
+
+body.dark-mode .student-offer-tab.active {
+    background: var(--student-primary);
+    border-color: var(--student-primary);
+    color: #ffffff;
+}
+
+body.dark-mode .student-offers-search {
+    background: var(--student-surface);
+    border-color: var(--student-border);
+    color: var(--student-text);
+}
+
+body.dark-mode .student-offer-details > div {
+    background: rgba(255,255,255,.035);
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-offer-footer {
+    border-color: var(--student-border);
+}
+
+body.dark-mode .student-offer-btn {
+    background: var(--student-surface);
+    border-color: var(--student-border);
+    color: var(--student-primary);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .student-offers-summary {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .student-offers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .student-offers-page {
+        padding: 18px 14px 30px;
+    }
+
+    .student-offers-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .student-offers-filter {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .student-offer-tabs {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .student-offer-tab {
+        white-space: nowrap;
+    }
+
+    .student-offers-search {
+        width: 100%;
+    }
+
+    .student-offer-details {
+        grid-template-columns: 1fr;
+    }
+
+    .student-offer-footer {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+    }
+}

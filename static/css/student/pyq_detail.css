@@ -1,0 +1,436 @@
+/* =========================================================
+   CAMPUS — PYQ DETAIL PAGE
+========================================================= */
+
+.student-pyq-detail-page {
+    padding: 24px 28px 40px;
+}
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.student-pyq-back {
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+    color: #6938ef;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.student-pyq-back:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-pyq-detail-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 16px rgba(25, 32, 48, .04);
+
+    margin-bottom: 16px;
+}
+
+
+.student-pyq-detail-company {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+.student-pyq-detail-logo {
+    width: 58px;
+    height: 58px;
+
+    flex: 0 0 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #eee8ff;
+
+    color: #6938ef;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+.student-pyq-detail-company span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #7c8494;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: .4px;
+}
+
+
+.student-pyq-detail-company h1 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: -.3px;
+}
+
+
+.student-pyq-detail-company p {
+    margin: 7px 0 0;
+
+    color: #737d8f;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   START PRACTICE
+========================================================= */
+
+.student-pyq-detail-actions {
+    flex-shrink: 0;
+}
+
+
+.student-pyq-primary-btn {
+    height: 38px;
+
+    padding: 0 20px;
+
+    border: 1px solid #6938ef;
+
+    border-radius: 7px;
+
+    background: #6938ef;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 14px rgba(105, 56, 239, .20);
+
+    transition: .2s ease;
+}
+
+
+.student-pyq-primary-btn:hover {
+    background: #592bdc;
+
+    border-color: #592bdc;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.student-pyq-detail-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+
+.student-pyq-detail-stats > div {
+    min-height: 78px;
+
+    padding: 15px 17px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 12px rgba(25, 32, 48, .03);
+}
+
+
+.student-pyq-detail-stats span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #8992a3;
+
+    font-size: 9px;
+}
+
+
+.student-pyq-detail-stats strong {
+    color: #172033;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.student-pyq-detail-content {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr);
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   ABOUT CARD
+========================================================= */
+
+.student-pyq-info-card {
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 4px 14px rgba(25, 32, 48, .035);
+}
+
+
+.student-pyq-info-card h2 {
+    margin: 0 0 8px;
+
+    color: #172033;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.student-pyq-info-card p {
+    margin: 0;
+
+    color: #747e90;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SECTION CARDS
+========================================================= */
+
+.student-pyq-sections {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+.student-pyq-section-card {
+    min-height: 100px;
+
+    padding: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 14px rgba(25, 32, 48, .035);
+
+    transition: .2s ease;
+}
+
+
+.student-pyq-section-card:hover {
+    border-color: #d5ccfa;
+
+    transform: translateY(-2px);
+}
+
+
+.student-pyq-section-card div strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #273044;
+
+    font-size: 11px;
+}
+
+
+.student-pyq-section-card div span {
+    color: #8992a3;
+
+    font-size: 8px;
+}
+
+
+.student-pyq-section-card b {
+    margin-top: 14px;
+
+    color: #6938ef;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .student-pyq-detail-page {
+    color: var(--student-text);
+}
+
+
+body.dark-mode .student-pyq-detail-header,
+body.dark-mode .student-pyq-detail-stats > div,
+body.dark-mode .student-pyq-info-card,
+body.dark-mode .student-pyq-section-card {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+}
+
+
+body.dark-mode .student-pyq-detail-company h1,
+body.dark-mode .student-pyq-detail-stats strong,
+body.dark-mode .student-pyq-info-card h2,
+body.dark-mode .student-pyq-section-card div strong {
+    color: var(--student-text);
+}
+
+
+body.dark-mode .student-pyq-detail-company p,
+body.dark-mode .student-pyq-detail-company span,
+body.dark-mode .student-pyq-detail-stats span,
+body.dark-mode .student-pyq-info-card p,
+body.dark-mode .student-pyq-section-card div span {
+    color: var(--student-text-muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .student-pyq-detail-stats {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .student-pyq-sections {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .student-pyq-detail-page {
+        padding: 18px 14px 30px;
+    }
+
+    .student-pyq-detail-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .student-pyq-detail-company h1 {
+        font-size: 19px;
+    }
+
+    .student-pyq-detail-actions {
+        width: 100%;
+    }
+
+    .student-pyq-primary-btn {
+        width: 100%;
+    }
+
+    .student-pyq-detail-stats {
+        grid-template-columns: 1fr;
+    }
+
+}

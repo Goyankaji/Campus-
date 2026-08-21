@@ -1,0 +1,705 @@
+/* =========================================================
+   CAMPUS — STUDENT QUESTION DISCUSSION
+========================================================= */
+
+.student-discussion-page {
+    padding: 24px 28px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-discussion-header {
+    margin-bottom: 20px;
+}
+
+.student-discussion-header h1 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+}
+
+.student-discussion-header p {
+    margin: 6px 0 0;
+
+    color: #697386;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.student-discussion-toolbar {
+    min-height: 58px;
+
+    margin-bottom: 18px;
+    padding: 9px 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e5ed;
+
+    border-radius: 10px;
+}
+
+
+.student-discussion-tabs {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.student-discussion-tab {
+    height: 35px;
+
+    padding: 0 14px;
+
+    border: 1px solid #e0e4ec;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #697386;
+
+    font-family: inherit;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.student-discussion-tab:hover {
+    border-color: #cfc4ff;
+
+    color: #6938ef;
+}
+
+
+.student-discussion-tab.active {
+    background: #6938ef;
+
+    border-color: #6938ef;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 12px rgba(105, 56, 239, .18);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.student-discussion-search {
+    width: 285px;
+    height: 35px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dfe3eb;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+
+    transition: .2s ease;
+}
+
+
+.student-discussion-search::placeholder {
+    color: #9ca5b4;
+}
+
+
+.student-discussion-search:focus {
+    border-color: #6938ef;
+
+    box-shadow:
+        0 0 0 3px rgba(105, 56, 239, .08);
+}
+
+
+/* =========================================================
+   DISCUSSION LIST
+========================================================= */
+
+.student-discussion-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   DISCUSSION CARD
+========================================================= */
+
+.student-discussion-card {
+    padding: 19px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 4px 14px rgba(25, 32, 48, .035);
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+
+.student-discussion-card:hover {
+    border-color: #d8d0f8;
+
+    box-shadow:
+        0 7px 20px rgba(25, 32, 48, .055);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.student-discussion-card-top {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+
+.student-discussion-company {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #6938ef;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .35px;
+}
+
+
+.student-discussion-card-top h2 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.student-discussion-status {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #f4f1ff;
+
+    color: #6938ef;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   QUESTION BOX
+========================================================= */
+
+.student-discussion-question {
+    padding: 13px 14px;
+
+    margin-bottom: 13px;
+
+    background: #fafbfc;
+
+    border: 1px solid #edf0f4;
+
+    border-radius: 8px;
+}
+
+
+.student-discussion-question strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #273044;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.student-discussion-question p {
+    margin: 0;
+
+    color: #697386;
+
+    font-size: 9px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   COMMENT PREVIEW
+========================================================= */
+
+.student-discussion-preview {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 10px 0;
+}
+
+
+.student-discussion-avatar {
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eee8ff;
+
+    color: #6938ef;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.student-discussion-comment {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.student-discussion-comment-head {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 5px;
+}
+
+
+.student-discussion-comment-head strong {
+    color: #273044;
+
+    font-size: 9px;
+}
+
+
+.student-discussion-comment-head span {
+    color: #9aa2b1;
+
+    font-size: 7px;
+}
+
+
+.student-discussion-comment p {
+    margin: 0;
+
+    color: #697386;
+
+    font-size: 9px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   REPLY / HINT
+========================================================= */
+
+.student-discussion-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 7px;
+}
+
+
+.student-discussion-actions button {
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #6938ef;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.student-discussion-actions button:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   WRITE COMMENT
+========================================================= */
+
+.student-discussion-write {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 10px;
+    padding-top: 13px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+
+.student-discussion-write input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 34px;
+
+    padding: 0 11px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dfe3eb;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+
+    transition: .2s ease;
+}
+
+
+.student-discussion-write input::placeholder {
+    color: #a0a7b5;
+}
+
+
+.student-discussion-write input:focus {
+    border-color: #6938ef;
+
+    box-shadow:
+        0 0 0 3px rgba(105, 56, 239, .08);
+}
+
+
+.student-discussion-write button {
+    height: 34px;
+
+    padding: 0 16px;
+
+    border: 1px solid #6938ef;
+
+    border-radius: 7px;
+
+    background: #6938ef;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.student-discussion-write button:hover {
+    background: #592bdc;
+
+    border-color: #592bdc;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.student-discussion-empty {
+    padding: 45px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e6ed;
+
+    border-radius: 11px;
+}
+
+
+.student-discussion-empty-icon {
+    width: 40px;
+    height: 40px;
+
+    margin: 0 auto 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eee8ff;
+
+    color: #6938ef;
+
+    font-weight: 800;
+}
+
+
+.student-discussion-empty h3 {
+    margin: 0;
+
+    color: #273044;
+
+    font-size: 13px;
+}
+
+
+.student-discussion-empty p {
+    margin: 5px 0 0;
+
+    color: #8992a3;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .student-discussion-toolbar,
+body.dark-mode .student-discussion-card,
+body.dark-mode .student-discussion-empty {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+}
+
+
+body.dark-mode .student-discussion-header h1,
+body.dark-mode .student-discussion-card-top h2,
+body.dark-mode .student-discussion-question strong,
+body.dark-mode .student-discussion-comment-head strong,
+body.dark-mode .student-discussion-empty h3 {
+    color: var(--student-text);
+}
+
+
+body.dark-mode .student-discussion-header p,
+body.dark-mode .student-discussion-question p,
+body.dark-mode .student-discussion-comment p,
+body.dark-mode .student-discussion-empty p {
+    color: var(--student-text-muted);
+}
+
+
+body.dark-mode .student-discussion-tab {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+
+    color: var(--student-text-soft);
+}
+
+
+body.dark-mode .student-discussion-tab.active {
+    background: var(--student-primary);
+
+    border-color: var(--student-primary);
+
+    color: #ffffff;
+}
+
+
+body.dark-mode .student-discussion-search,
+body.dark-mode .student-discussion-write input {
+    background: var(--student-surface);
+
+    border-color: var(--student-border);
+
+    color: var(--student-text);
+}
+
+
+body.dark-mode .student-discussion-question {
+    background: rgba(255,255,255,.035);
+
+    border-color: var(--student-border);
+}
+
+
+body.dark-mode .student-discussion-write {
+    border-color: var(--student-border);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .student-discussion-toolbar {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .student-discussion-tabs {
+        overflow-x: auto;
+    }
+
+    .student-discussion-tab {
+        flex-shrink: 0;
+
+        white-space: nowrap;
+    }
+
+    .student-discussion-search {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .student-discussion-page {
+        padding: 18px 14px 30px;
+    }
+
+    .student-discussion-card {
+        padding: 15px;
+    }
+
+    .student-discussion-card-top {
+        flex-direction: column;
+    }
+
+    .student-discussion-status {
+        align-self: flex-start;
+    }
+
+    .student-discussion-write {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .student-discussion-write button {
+        width: 100%;
+    }
+
+}

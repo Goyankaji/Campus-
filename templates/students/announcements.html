@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Announcements | Campus</title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/announcements.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+
+<div class="student-layout">
+
+
+    <!-- SIDEBAR -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- MAIN -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-announcements-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-announcements-header">
+
+                <h1>
+                    Announcements
+                </h1>
+
+                <p>
+                    Stay updated with important academic,
+                    placement and campus announcements.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 TOOLBAR
+            ================================================== -->
+
+            <div class="student-announcements-toolbar">
+
+
+                <div class="student-announcement-tabs">
+
+
+                    <button
+                        class="student-announcement-tab active">
+
+                        All
+
+                    </button>
+
+
+                    <button
+                        class="student-announcement-tab">
+
+                        Unread
+
+                    </button>
+
+
+                    <button
+                        class="student-announcement-tab">
+
+                        Placement
+
+                    </button>
+
+
+                    <button
+                        class="student-announcement-tab">
+
+                        Academic
+
+                    </button>
+
+
+                    <button
+                        class="student-announcement-tab">
+
+                        General
+
+                    </button>
+
+
+                </div>
+
+
+                <input
+                    type="text"
+                    class="student-announcement-search"
+                    placeholder="Search announcements...">
+
+            </div>
+
+
+            <!-- =================================================
+                 ANNOUNCEMENTS
+            ================================================== -->
+
+            <div class="student-announcements-list">
+
+
+                <!-- =================================================
+                     PLACEMENT
+                ================================================== -->
+
+                <div class="student-announcement-card">
+
+
+                    <div class="student-announcement-icon">
+                        !
+                    </div>
+
+
+                    <div class="student-announcement-content">
+
+
+                        <div class="student-announcement-heading">
+
+                            <h3>
+                                TCS Placement Drive Registration Open
+                            </h3>
+
+                            <span
+                                class="student-announcement-badge placement">
+
+                                Placement
+
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Students meeting the eligibility criteria can
+                            apply for the TCS Software Engineer placement
+                            drive. The last date for registration is
+                            25 August 2026.
+                        </p>
+
+
+                        <div class="student-announcement-meta">
+
+                            <span>
+                                Posted by TPO Office
+                            </span>
+
+                            <span>
+                                20 Aug 2026 · 10:30 AM
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-announcement-action">
+
+                        <span
+                            class="student-announcement-unread">
+                        </span>
+
+                        <button
+                            class="student-announcement-btn">
+
+                            View
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     IMPORTANT
+                ================================================== -->
+
+                <div class="student-announcement-card">
+
+
+                    <div
+                        class="student-announcement-icon urgent">
+
+                        !
+
+                    </div>
+
+
+                    <div class="student-announcement-content">
+
+
+                        <div class="student-announcement-heading">
+
+                            <h3>
+                                Important: Placement Orientation Session
+                            </h3>
+
+                            <span
+                                class="student-announcement-badge important">
+
+                                Important
+
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            A placement orientation session will be held
+                            for eligible final and pre-final year students.
+                            Attendance is recommended for all students
+                            planning to participate in campus placements.
+                        </p>
+
+
+                        <div class="student-announcement-meta">
+
+                            <span>
+                                Posted by Placement Cell
+                            </span>
+
+                            <span>
+                                19 Aug 2026 · 04:15 PM
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-announcement-action">
+
+                        <span
+                            class="student-announcement-unread">
+                        </span>
+
+                        <button
+                            class="student-announcement-btn">
+
+                            View
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     ACADEMIC
+                ================================================== -->
+
+                <div class="student-announcement-card read">
+
+
+                    <div class="student-announcement-icon">
+                        A
+                    </div>
+
+
+                    <div class="student-announcement-content">
+
+
+                        <div class="student-announcement-heading">
+
+                            <h3>
+                                Mid-Semester Examination Schedule Released
+                            </h3>
+
+                            <span
+                                class="student-announcement-badge academic">
+
+                                Academic
+
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            The examination schedule for the current
+                            semester has been published. Students are
+                            requested to check their respective dates,
+                            timings and examination halls.
+                        </p>
+
+
+                        <div class="student-announcement-meta">
+
+                            <span>
+                                Posted by Academic Office
+                            </span>
+
+                            <span>
+                                18 Aug 2026 · 02:00 PM
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-announcement-action">
+
+                        <button
+                            class="student-announcement-btn">
+
+                            View
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     INTERVIEW
+                ================================================== -->
+
+                <div class="student-announcement-card">
+
+
+                    <div
+                        class="student-announcement-icon success">
+
+                        ✓
+
+                    </div>
+
+
+                    <div class="student-announcement-content">
+
+
+                        <div class="student-announcement-heading">
+
+                            <h3>
+                                Infosys Interview Schedule Updated
+                            </h3>
+
+                            <span
+                                class="student-announcement-badge placement">
+
+                                Placement
+
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            The interview schedule for shortlisted
+                            candidates has been updated. Students are
+                            requested to check their Interview section
+                            for their individual schedule.
+                        </p>
+
+
+                        <div class="student-announcement-meta">
+
+                            <span>
+                                Posted by TPO Office
+                            </span>
+
+                            <span>
+                                18 Aug 2026 · 11:20 AM
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-announcement-action">
+
+                        <span
+                            class="student-announcement-unread">
+                        </span>
+
+                        <button
+                            class="student-announcement-btn">
+
+                            View
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     GENERAL
+                ================================================== -->
+
+                <div class="student-announcement-card read">
+
+
+                    <div
+                        class="student-announcement-icon success">
+
+                        i
+
+                    </div>
+
+
+                    <div class="student-announcement-content">
+
+
+                        <div class="student-announcement-heading">
+
+                            <h3>
+                                Campus Recruitment Cell Working Hours
+                            </h3>
+
+                            <span
+                                class="student-announcement-badge general">
+
+                                General
+
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            The placement cell will remain available
+                            from 10:00 AM to 5:00 PM on working days
+                            for student queries and placement assistance.
+                        </p>
+
+
+                        <div class="student-announcement-meta">
+
+                            <span>
+                                Posted by Placement Cell
+                            </span>
+
+                            <span>
+                                16 Aug 2026 · 09:00 AM
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-announcement-action">
+
+                        <button
+                            class="student-announcement-btn">
+
+                            View
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     ACADEMIC
+                ================================================== -->
+
+                <div class="student-announcement-card read">
+
+
+                    <div class="student-announcement-icon">
+                        A
+                    </div>
+
+
+                    <div class="student-announcement-content">
+
+
+                        <div class="student-announcement-heading">
+
+                            <h3>
+                                Semester Registration Deadline
+                            </h3>
+
+                            <span
+                                class="student-announcement-badge academic">
+
+                                Academic
+
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Students are advised to complete their
+                            semester registration and verify their
+                            registered subjects before the deadline.
+                        </p>
+
+
+                        <div class="student-announcement-meta">
+
+                            <span>
+                                Posted by Academic Office
+                            </span>
+
+                            <span>
+                                14 Aug 2026 · 01:30 PM
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="student-announcement-action">
+
+                        <button
+                            class="student-announcement-btn">
+
+                            View
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+
+</body>
+
+</html>

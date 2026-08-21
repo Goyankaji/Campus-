@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Help & Support | Campus</title>
+
+
+    <!-- COMMON CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}">
+
+
+    <!-- PAGE CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/help.css'
+        ) }}">
+
+</head>
+
+
+<body>
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <section class="student-help-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="student-help-header">
+
+                <div>
+
+                    <h1>
+                        Help & Support
+                    </h1>
+
+                    <p>
+                        Facing an issue? Let us know and we'll
+                        help you resolve it.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CONTENT
+            ================================================== -->
+
+            <div class="student-help-layout">
+
+
+                <!-- =================================================
+                     COMPLAINT FORM
+                ================================================== -->
+
+                <div class="student-help-card">
+
+                    <div class="student-help-card-header">
+
+                        <div>
+
+                            <h2>
+                                Raise a Complaint
+                            </h2>
+
+                            <p>
+                                Tell us about the issue you're facing.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FLASH MESSAGE -->
+
+    {% with messages = get_flashed_messages(
+        with_categories=true
+    ) %}
+
+        {% if messages %}
+
+            <div class="student-help-messages">
+
+                {% for category, message in messages %}
+
+                    <div
+                        class="student-help-message {{ category }}">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+                    <form
+                        method="POST"
+                        action="{{ url_for('student_help') }}"
+                        enctype="multipart/form-data">
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="student-form-group">
+
+                            <label for="helpCategory">
+                                Issue Category
+                            </label>
+
+
+                            <select
+                                id="helpCategory"
+                                name="category"
+                                required>
+
+                                <option value="">
+                                    Select issue category
+                                </option>
+
+                                <option value="placement">
+                                    Placement Issue
+                                </option>
+
+                                <option value="technical">
+                                    Technical Problem
+                                </option>
+
+                                <option value="documents">
+                                    Document Issue
+                                </option>
+
+                                <option value="account">
+                                    Account / Profile Issue
+                                </option>
+
+                                <option value="interview">
+                                    Interview Issue
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- SUBJECT -->
+
+                        <div class="student-form-group">
+
+                            <label for="helpSubject">
+                                Subject
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="helpSubject"
+                                name="subject"
+                                placeholder="Briefly describe your issue"
+                                maxlength="150"
+                                required>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="student-form-group">
+
+                            <label for="helpDescription">
+                                Description
+                            </label>
+
+
+                            <textarea
+                                id="helpDescription"
+                                name="description"
+                                rows="6"
+                                placeholder="Explain your problem in detail..."
+                                maxlength="2000"
+                                required></textarea>
+
+                        </div>
+
+
+                        <!-- ATTACHMENT -->
+
+                        <div class="student-form-group">
+
+                            <label for="helpAttachment">
+                                Attachment
+                                <span>
+                                    Optional
+                                </span>
+                            </label>
+
+
+                            <input
+                                type="file"
+                                id="helpAttachment"
+                                name="attachment"
+                                accept=".pdf,.png,.jpg,.jpeg">
+
+                            <small>
+                                PDF, JPG or PNG · Maximum 5 MB
+                            </small>
+
+                        </div>
+
+
+                        <!-- SUBMIT -->
+
+                        <div class="student-help-form-actions">
+
+                            <button
+                                type="reset"
+                                class="student-help-secondary-btn">
+
+                                Clear
+
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="student-help-primary-btn">
+
+                                Submit Complaint
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+
+                <!-- =================================================
+                     SUPPORT INFORMATION
+                ================================================== -->
+
+                <div class="student-help-side">
+
+
+                    <!-- CONTACT -->
+
+                    <div class="student-help-info-card">
+
+                        <div class="student-help-info-icon">
+                            ?
+                        </div>
+
+
+                        <h3>
+                            Need Help?
+                        </h3>
+
+
+                        <p>
+                            Choose the category that best matches
+                            your problem so the concerned team can
+                            handle it faster.
+                        </p>
+
+                    </div>
+
+
+                    <!-- PROCESS -->
+
+                    <div class="student-help-info-card">
+
+                        <h3>
+                            How it works
+                        </h3>
+
+
+                        <div class="student-help-step">
+
+                            <span>
+                                01
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Submit your issue
+                                </strong>
+
+                                <p>
+                                    Provide the details of your problem.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-help-step">
+
+                            <span>
+                                02
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Team reviews it
+                                </strong>
+
+                                <p>
+                                    Your complaint is forwarded to
+                                    the concerned team.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="student-help-step">
+
+                            <span>
+                                03
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Get a response
+                                </strong>
+
+                                <p>
+                                    You'll receive an update once
+                                    the issue is reviewed.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- COMMON JS -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}">
+</script>
+
+
+<!-- PAGE JS -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/help.js'
+    ) }}">
+</script>
+
+
+</body>
+
+</html>
