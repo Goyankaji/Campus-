@@ -33,7 +33,12 @@ def get_db_connection():
     connection = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="arpit@2467",
+
+        # =================================================
+        # APNA MYSQL PASSWORD YAHAN DAALNA
+        # =================================================
+        password="MY_PASSWORD",
+
         database="campus_placement_manager",
         port=3306
     )
@@ -97,7 +102,7 @@ def role_required(required_role):
             # WRONG ROLE
             # -------------------------------------------------
 
-            if str(session.get("role_id")) != str(required_role):
+            if session.get("role_name") != required_role:
 
                 flash(
                     "You are not authorized to access this page.",
@@ -305,7 +310,7 @@ def login():
     try:
 
         # -------------------------------------------------
-        # DATABASE
+        # DATABASE CONNECTION
         # -------------------------------------------------
 
         connection = get_db_connection()
@@ -316,20 +321,28 @@ def login():
 
 
         # -------------------------------------------------
-        # FIND USER
+        # FIND USER + ROLE + CAMPUS
         # -------------------------------------------------
 
         cursor.execute(
             """
             SELECT
-                user_id,
-                username,
-                email,
-                password_hash,
-                role_id,
-                account_status
-            FROM users
-            WHERE email = %s
+                u.user_id,
+                u.campus_id,
+                u.username,
+                u.email,
+                u.password_hash,
+                u.role_id,
+                u.account_status,
+                r.role_name
+            FROM users u
+
+            INNER JOIN roles r
+                ON u.role_id = r.role_id
+
+            WHERE u.email = %s
+
+            LIMIT 1
             """,
             (email,)
         )
@@ -354,7 +367,7 @@ def login():
 
 
         # -------------------------------------------------
-        # PASSWORD
+        # PASSWORD VERIFICATION
         # -------------------------------------------------
 
         if not check_password_hash(
@@ -389,10 +402,14 @@ def login():
 
 
         # -------------------------------------------------
-        # SESSION
+        # CREATE SESSION
         # -------------------------------------------------
 
+        session.clear()
+
         session["user_id"] = user["user_id"]
+
+        session["campus_id"] = user["campus_id"]
 
         session["username"] = user["username"]
 
@@ -400,52 +417,76 @@ def login():
 
         session["role_id"] = user["role_id"]
 
+        session["role_name"] = user["role_name"]
+
 
         # -------------------------------------------------
-        # ROLE REDIRECT
+        # ROLE-BASED DASHBOARD
         # -------------------------------------------------
 
-        role_id = str(
-            user["role_id"]
-        )
+        role_name = user["role_name"]
 
 
-        if role_id == "1":
+        # -------------------------------------------------
+        # ADMIN
+        # -------------------------------------------------
+
+        if role_name == "ADMIN":
 
             return redirect(
                 url_for("admin_dashboard")
             )
 
 
-        elif role_id == "2":
+        # -------------------------------------------------
+        # STUDENT
+        # -------------------------------------------------
+
+        elif role_name == "STUDENT":
 
             return redirect(
                 url_for("student_dashboard")
             )
 
 
-        elif role_id == "3":
+        # -------------------------------------------------
+        # MENTOR
+        # -------------------------------------------------
+
+        elif role_name == "MENTOR":
 
             return redirect(
-                url_for("tutor_dashboard")
+                url_for("mentor_dashboard")
             )
 
 
-        elif role_id == "4":
+        # -------------------------------------------------
+        # HOD
+        # -------------------------------------------------
+
+        elif role_name == "HOD":
 
             return redirect(
                 url_for("hod_dashboard")
             )
 
 
-        elif role_id == "5":
+        # -------------------------------------------------
+        # TPO
+        # -------------------------------------------------
+
+        elif role_name == "TPO":
 
             return redirect(
                 url_for("tpo_dashboard")
             )
 
 
-        elif role_id == "6":
+        # -------------------------------------------------
+        # AUTHORITY
+        # -------------------------------------------------
+
+        elif role_name == "AUTHORITY":
 
             return redirect(
                 url_for("authority_dashboard")
@@ -531,7 +572,7 @@ def logout():
 
 @app.route("/student/dashboard")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_dashboard():
 
     student = get_student_data()
@@ -551,7 +592,7 @@ def student_dashboard():
 
 @app.route("/student/profile")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_profile():
 
     student = get_student_data()
@@ -571,7 +612,7 @@ def student_profile():
 
 @app.route("/student/academics")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_academics():
 
     student = get_student_data()
@@ -591,7 +632,7 @@ def student_academics():
 
 @app.route("/student/placement-drives")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def placement_drives():
 
     student = get_student_data()
@@ -611,7 +652,7 @@ def placement_drives():
 
 @app.route("/student/applications")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_applications():
 
     student = get_student_data()
@@ -631,7 +672,7 @@ def student_applications():
 
 @app.route("/student/interviews")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_interviews():
 
     student = get_student_data()
@@ -651,7 +692,7 @@ def student_interviews():
 
 @app.route("/student/preparation")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_preparation():
 
     student = get_student_data()
@@ -673,7 +714,7 @@ def student_preparation():
     "/student/preparation/pyq/<company>"
 )
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_pyq(company):
 
     student = get_student_data()
@@ -763,7 +804,7 @@ def student_pyq(company):
 
 @app.route("/student/my-uploads")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_my_uploads():
 
     student = get_student_data()
@@ -783,7 +824,7 @@ def student_my_uploads():
 
 @app.route("/student/announcements")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_announcements():
 
     student = get_student_data()
@@ -803,7 +844,7 @@ def student_announcements():
 
 @app.route("/student/settings")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_settings():
 
     student = get_student_data()
@@ -823,7 +864,7 @@ def student_settings():
 
 @app.route("/student/offers-joining")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_offers_joining():
 
     student = get_student_data()
@@ -846,7 +887,7 @@ def student_offers_joining():
     methods=["GET", "POST"]
 )
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_help():
 
     student = get_student_data()
@@ -985,7 +1026,7 @@ def student_help():
 
 @app.route("/student/discussion")
 @login_required
-@role_required("2")
+@role_required("STUDENT")
 def student_discussion():
 
     student = get_student_data()
@@ -1005,7 +1046,7 @@ def student_discussion():
 
 @app.route("/authority/dashboard")
 @login_required
-@role_required("6")
+@role_required("AUTHORITY")
 def authority_dashboard():
 
     return render_template(
@@ -1019,7 +1060,7 @@ def authority_dashboard():
 
 @app.route("/tpo/dashboard")
 @login_required
-@role_required("5")
+@role_required("TPO")
 def tpo_dashboard():
 
     return render_template(
@@ -1033,7 +1074,7 @@ def tpo_dashboard():
 
 @app.route("/hod/dashboard")
 @login_required
-@role_required("4")
+@role_required("HOD")
 def hod_dashboard():
 
     return render_template(
@@ -1047,7 +1088,7 @@ def hod_dashboard():
 
 @app.route("/admin/dashboard")
 @login_required
-@role_required("1")
+@role_required("ADMIN")
 def admin_dashboard():
 
     return render_template(
@@ -1056,12 +1097,26 @@ def admin_dashboard():
 
 
 # =========================================================
-# TUTOR DASHBOARD
+# MENTOR DASHBOARD
+# =========================================================
+
+@app.route("/mentor/dashboard")
+@login_required
+@role_required("MENTOR")
+def mentor_dashboard():
+
+    return render_template(
+        "tutor/dashboard.html"
+    )
+
+
+# =========================================================
+# OLD TUTOR URL SUPPORT
 # =========================================================
 
 @app.route("/tutor/dashboard")
 @login_required
-@role_required("3")
+@role_required("MENTOR")
 def tutor_dashboard():
 
     return render_template(
