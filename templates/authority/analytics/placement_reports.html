@@ -1,0 +1,818 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Placement Reports | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/placement_reports.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="reports-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="reports-header">
+
+        <div>
+
+            <span class="page-eyebrow">
+                ANALYTICS
+            </span>
+
+            <h1>
+                Placement Reports
+            </h1>
+
+            <p>
+                Detailed placement performance and institutional analytics.
+            </p>
+
+        </div>
+
+
+        <div class="report-header-actions">
+
+            <select
+                id="academicYear"
+                class="report-select"
+            >
+
+                <option value="2026-27">
+                    2026-27
+                </option>
+
+                <option value="2025-26">
+                    2025-26
+                </option>
+
+                <option value="2024-25">
+                    2024-25
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="export-btn"
+                id="exportReportBtn"
+            >
+                ↓ Export Report
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SUMMARY CARDS -->
+
+    <section class="report-stats">
+
+        <div class="report-stat-card">
+
+            <div class="report-stat-icon purple">
+                ◉
+            </div>
+
+            <div>
+
+                <span>
+                    Placement Rate
+                </span>
+
+                <strong>
+                    68.7%
+                </strong>
+
+                <small class="positive">
+                    ↑ 5.3% vs last year
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-stat-card">
+
+            <div class="report-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Students Placed
+                </span>
+
+                <strong>
+                    865
+                </strong>
+
+                <small class="positive">
+                    ↑ 11.3% vs last year
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-stat-card">
+
+            <div class="report-stat-icon blue">
+                ₹
+            </div>
+
+            <div>
+
+                <span>
+                    Average Package
+                </span>
+
+                <strong>
+                    ₹ 13.85 LPA
+                </strong>
+
+                <small class="positive">
+                    ↑ 8.2% vs last year
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-stat-card">
+
+            <div class="report-stat-icon orange">
+                ★
+            </div>
+
+            <div>
+
+                <span>
+                    Highest Package
+                </span>
+
+                <strong>
+                    ₹ 28.00 LPA
+                </strong>
+
+                <small>
+                    Microsoft
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- REPORT GRID -->
+
+    <section class="report-grid">
+
+
+        <!-- PLACEMENT PERFORMANCE -->
+
+        <div class="report-card placement-performance">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <h2>
+                        Placement Performance
+                    </h2>
+
+                    <p>
+                        Year-wise placement growth.
+                    </p>
+
+                </div>
+
+
+                <select
+                    id="trendFilter"
+                    class="mini-select"
+                >
+
+                    <option value="year">
+                        Year Wise
+                    </option>
+
+                    <option value="rate">
+                        Placement Rate
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="trend-chart">
+
+                <div class="chart-y-axis">
+
+                    <span>1000</span>
+                    <span>750</span>
+                    <span>500</span>
+                    <span>250</span>
+                    <span>0</span>
+
+                </div>
+
+
+                <div class="chart-area">
+
+                    <div class="chart-grid-line line-1"></div>
+                    <div class="chart-grid-line line-2"></div>
+                    <div class="chart-grid-line line-3"></div>
+                    <div class="chart-grid-line line-4"></div>
+                    <div class="chart-grid-line line-5"></div>
+
+
+                    <div class="chart-bars">
+
+                        <div
+                            class="chart-bar"
+                            style="height: 52%;"
+                        >
+                            <span>520</span>
+                        </div>
+
+                        <div
+                            class="chart-bar"
+                            style="height: 63%;"
+                        >
+                            <span>630</span>
+                        </div>
+
+                        <div
+                            class="chart-bar"
+                            style="height: 78%;"
+                        >
+                            <span>780</span>
+                        </div>
+
+                        <div
+                            class="chart-bar"
+                            style="height: 86%;"
+                        >
+                            <span>865</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-labels">
+
+                        <span>2022-23</span>
+                        <span>2023-24</span>
+                        <span>2024-25</span>
+                        <span>2025-26</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PLACEMENT STATUS -->
+
+        <div class="report-card status-card">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <h2>
+                        Student Placement Status
+                    </h2>
+
+                    <p>
+                        Current placement pipeline.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-list">
+
+                <div class="status-row">
+
+                    <div class="status-name">
+
+                        <span class="dot green-dot"></span>
+
+                        <span>
+                            Placed Students
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        865
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill green-fill"
+                        style="width:68.7%;"
+                    ></div>
+
+                </div>
+
+
+                <div class="status-row">
+
+                    <div class="status-name">
+
+                        <span class="dot blue-dot"></span>
+
+                        <span>
+                            In Drives
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        180
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill blue-fill"
+                        style="width:14.3%;"
+                    ></div>
+
+                </div>
+
+
+                <div class="status-row">
+
+                    <div class="status-name">
+
+                        <span class="dot orange-dot"></span>
+
+                        <span>
+                            Yet to Appear
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        215
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill orange-fill"
+                        style="width:17%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DEPARTMENT REPORT -->
+
+        <div class="report-card department-card">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <h2>
+                        Department-wise Performance
+                    </h2>
+
+                    <p>
+                        Placement rate across departments.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="department-list">
+
+
+                <div class="department-row">
+
+                    <div class="department-info">
+
+                        <strong>
+                            Computer Science & Engineering
+                        </strong>
+
+                        <span>
+                            312 / 420 students
+                        </span>
+
+                    </div>
+
+
+                    <div class="department-rate">
+
+                        <strong>
+                            74.29%
+                        </strong>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:74.29%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-row">
+
+                    <div class="department-info">
+
+                        <strong>
+                            Information Technology
+                        </strong>
+
+                        <span>
+                            196 / 280 students
+                        </span>
+
+                    </div>
+
+
+                    <div class="department-rate">
+
+                        <strong>
+                            70.00%
+                        </strong>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:70%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-row">
+
+                    <div class="department-info">
+
+                        <strong>
+                            Electronics & Communication
+                        </strong>
+
+                        <span>
+                            139 / 220 students
+                        </span>
+
+                    </div>
+
+
+                    <div class="department-rate">
+
+                        <strong>
+                            63.18%
+                        </strong>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:63.18%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-row">
+
+                    <div class="department-info">
+
+                        <strong>
+                            Mechanical Engineering
+                        </strong>
+
+                        <span>
+                            112 / 190 students
+                        </span>
+
+                    </div>
+
+
+                    <div class="department-rate">
+
+                        <strong>
+                            58.95%
+                        </strong>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:58.95%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-row">
+
+                    <div class="department-info">
+
+                        <strong>
+                            Civil Engineering
+                        </strong>
+
+                        <span>
+                            82 / 150 students
+                        </span>
+
+                    </div>
+
+
+                    <div class="department-rate">
+
+                        <strong>
+                            54.67%
+                        </strong>
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-fill"
+                                style="width:54.67%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PACKAGE REPORT -->
+
+        <div class="report-card package-card">
+
+            <div class="report-card-header">
+
+                <div>
+
+                    <h2>
+                        Package Distribution
+                    </h2>
+
+                    <p>
+                        Students by package range.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="package-list">
+
+
+                <div class="package-row">
+
+                    <div>
+
+                        <span>
+                            Below ₹5 LPA
+                        </span>
+
+                        <strong>
+                            145
+                        </strong>
+
+                    </div>
+
+                    <div class="package-bar">
+
+                        <div
+                            style="width:17%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div>
+
+                        <span>
+                            ₹5 - ₹10 LPA
+                        </span>
+
+                        <strong>
+                            326
+                        </strong>
+
+                    </div>
+
+                    <div class="package-bar">
+
+                        <div
+                            style="width:38%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div>
+
+                        <span>
+                            ₹10 - ₹15 LPA
+                        </span>
+
+                        <strong>
+                            214
+                        </strong>
+
+                    </div>
+
+                    <div class="package-bar">
+
+                        <div
+                            style="width:25%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div>
+
+                        <span>
+                            ₹15 - ₹20 LPA
+                        </span>
+
+                        <strong>
+                            104
+                        </strong>
+
+                    </div>
+
+                    <div class="package-bar">
+
+                        <div
+                            style="width:12%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div>
+
+                        <span>
+                            Above ₹20 LPA
+                        </span>
+
+                        <strong>
+                            76
+                        </strong>
+
+                    </div>
+
+                    <div class="package-bar">
+
+                        <div
+                            style="width:9%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- REPORT FOOTER -->
+
+    <div class="report-footer">
+
+        <span>
+            Report generated for academic session 2026-27
+        </span>
+
+        <span>
+            Campus Placement Portal
+        </span>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/placement_reports.js'
+    ) }}"
+></script>
+
+{% endblock %}

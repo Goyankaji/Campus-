@@ -1,0 +1,997 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Companies | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/companies.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="companies-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="companies-header">
+
+        <div class="companies-heading">
+
+            <span class="page-eyebrow">
+                PLACEMENT
+            </span>
+
+            <h1>
+                Companies
+            </h1>
+
+            <p>
+                View and monitor companies participating in campus placements.
+            </p>
+
+        </div>
+
+
+        <div class="companies-header-actions">
+
+            <div class="session-selector">
+
+                <span>
+                    Academic Year
+                </span>
+
+                <select id="academicYear">
+
+                    <option value="2026-27" selected>
+                        2026-27
+                    </option>
+
+                    <option value="2025-26">
+                        2025-26
+                    </option>
+
+                    <option value="2024-25">
+                        2024-25
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STAT CARDS
+    ====================================================== -->
+
+    <section class="company-stats">
+
+
+        <div class="company-stat-card">
+
+            <div class="stat-icon purple">
+                ▦
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Companies
+                </span>
+
+                <strong>
+                    68
+                </strong>
+
+                <small class="positive">
+                    ↑ 8.5% vs 2025-26
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="company-stat-card">
+
+            <div class="stat-icon green">
+                ✓
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Active Companies
+                </span>
+
+                <strong>
+                    42
+                </strong>
+
+                <small class="positive">
+                    ↑ 7.7% vs 2025-26
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="company-stat-card">
+
+            <div class="stat-icon orange">
+                ◷
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Upcoming Companies
+                </span>
+
+                <strong>
+                    14
+                </strong>
+
+                <small>
+                    Next 60 days
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="company-stat-card">
+
+            <div class="stat-icon blue">
+                ★
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Offers Generated
+                </span>
+
+                <strong>
+                    420
+                </strong>
+
+                <small class="positive">
+                    ↑ 12.4% this year
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COMPANY LIST CARD
+    ====================================================== -->
+
+    <section class="companies-card">
+
+
+        <!-- CARD HEADER -->
+
+        <div class="companies-card-header">
+
+            <div>
+
+                <h2>
+                    All Companies
+                </h2>
+
+                <p>
+                    Companies associated with your institution.
+                </p>
+
+            </div>
+
+
+            <div class="companies-tools">
+
+
+                <!-- SEARCH -->
+
+                <div class="company-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="companySearch"
+                        placeholder="Search companies..."
+                    >
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <select
+                    id="companyStatus"
+                    class="company-filter"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="upcoming">
+                        Upcoming
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+
+                <!-- TYPE -->
+
+                <select
+                    id="companyType"
+                    class="company-filter"
+                >
+
+                    <option value="all">
+                        All Types
+                    </option>
+
+                    <option value="on-campus">
+                        On Campus
+                    </option>
+
+                    <option value="off-campus">
+                        Off Campus
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             COMPANY TABLE
+        ================================================== -->
+
+        <div class="company-table-wrapper">
+
+            <table class="company-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            TYPE
+                        </th>
+
+                        <th>
+                            DRIVES
+                        </th>
+
+                        <th>
+                            STUDENTS SELECTED
+                        </th>
+
+                        <th>
+                            AVG PACKAGE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="companyTableBody">
+
+
+                    <!-- TCS -->
+
+                    <tr
+                        data-status="active"
+                        data-type="on-campus"
+                    >
+
+                        <td>
+
+                            <div class="company-name">
+
+                                <div class="company-logo">
+                                    TCS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        TCS
+                                    </strong>
+
+                                    <span>
+                                        Tata Consultancy Services
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            On Campus
+                        </td>
+
+
+                        <td>
+                            6
+                        </td>
+
+
+                        <td>
+                            82
+                        </td>
+
+
+                        <td>
+                            ₹ 7.20 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-company"
+                                data-company="TCS"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- INFOSYS -->
+
+                    <tr
+                        data-status="active"
+                        data-type="on-campus"
+                    >
+
+                        <td>
+
+                            <div class="company-name">
+
+                                <div class="company-logo">
+                                    IN
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Infosys
+                                    </strong>
+
+                                    <span>
+                                        Infosys Limited
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            On Campus
+                        </td>
+
+
+                        <td>
+                            5
+                        </td>
+
+
+                        <td>
+                            65
+                        </td>
+
+
+                        <td>
+                            ₹ 6.80 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-company"
+                                data-company="Infosys"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- WIPRO -->
+
+                    <tr
+                        data-status="active"
+                        data-type="off-campus"
+                    >
+
+                        <td>
+
+                            <div class="company-name">
+
+                                <div class="company-logo">
+                                    W
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Wipro
+                                    </strong>
+
+                                    <span>
+                                        Wipro Limited
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Off Campus
+                        </td>
+
+
+                        <td>
+                            4
+                        </td>
+
+
+                        <td>
+                            53
+                        </td>
+
+
+                        <td>
+                            ₹ 6.20 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-company"
+                                data-company="Wipro"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ACCENTURE -->
+
+                    <tr
+                        data-status="upcoming"
+                        data-type="on-campus"
+                    >
+
+                        <td>
+
+                            <div class="company-name">
+
+                                <div class="company-logo">
+                                    A
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Accenture
+                                    </strong>
+
+                                    <span>
+                                        Accenture India
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            On Campus
+                        </td>
+
+
+                        <td>
+                            3
+                        </td>
+
+
+                        <td>
+                            41
+                        </td>
+
+
+                        <td>
+                            ₹ 7.50 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge upcoming">
+                                Upcoming
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-company"
+                                data-company="Accenture"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- CAPGEMINI -->
+
+                    <tr
+                        data-status="completed"
+                        data-type="off-campus"
+                    >
+
+                        <td>
+
+                            <div class="company-name">
+
+                                <div class="company-logo">
+                                    C
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Capgemini
+                                    </strong>
+
+                                    <span>
+                                        Capgemini Technology
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Off Campus
+                        </td>
+
+
+                        <td>
+                            3
+                        </td>
+
+
+                        <td>
+                            38
+                        </td>
+
+
+                        <td>
+                            ₹ 6.30 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-company"
+                                data-company="Capgemini"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- DELOITTE -->
+
+                    <tr
+                        data-status="upcoming"
+                        data-type="off-campus"
+                    >
+
+                        <td>
+
+                            <div class="company-name">
+
+                                <div class="company-logo">
+                                    D
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Deloitte
+                                    </strong>
+
+                                    <span>
+                                        Deloitte India
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Off Campus
+                        </td>
+
+
+                        <td>
+                            2
+                        </td>
+
+
+                        <td>
+                            29
+                        </td>
+
+
+                        <td>
+                            ₹ 8.40 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge upcoming">
+                                Upcoming
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-company"
+                                data-company="Deloitte"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div
+            class="company-empty"
+            id="companyEmpty"
+        >
+
+            <div>
+                ⌕
+            </div>
+
+            <h3>
+                No companies found
+            </h3>
+
+            <p>
+                Try changing your search or filters.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="companies-footer">
+
+            <span id="companyCount">
+                Showing 6 companies
+            </span>
+
+
+            <div class="pagination">
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                    disabled
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COMPANY VIEW MODAL
+    ====================================================== -->
+
+    <div
+        class="company-modal"
+        id="companyModal"
+    >
+
+        <div class="company-modal-overlay"></div>
+
+
+        <div class="company-modal-box">
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="modalClose"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-company-logo">
+                C
+            </div>
+
+
+            <h2 id="modalCompanyName">
+                Company
+            </h2>
+
+
+            <p>
+                Company placement summary
+            </p>
+
+
+            <div class="modal-stats">
+
+                <div>
+                    <span>
+                        Drives
+                    </span>
+
+                    <strong id="modalDrives">
+                        0
+                    </strong>
+                </div>
+
+
+                <div>
+                    <span>
+                        Students Selected
+                    </span>
+
+                    <strong id="modalSelected">
+                        0
+                    </strong>
+                </div>
+
+
+                <div>
+                    <span>
+                        Average Package
+                    </span>
+
+                    <strong id="modalPackage">
+                        ₹ 0 LPA
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-action"
+                id="modalDone"
+            >
+                Close
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/companies.js'
+    ) }}"
+></script>
+
+{% endblock %}

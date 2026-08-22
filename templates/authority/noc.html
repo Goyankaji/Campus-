@@ -1,0 +1,1115 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+NOC | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/noc.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="noc-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="noc-header">
+
+        <div>
+
+            <span class="noc-eyebrow">
+                SPECIAL INITIATIVES
+            </span>
+
+            <h1>
+                NOC Management
+            </h1>
+
+            <p>
+                Review, approve and monitor student No Objection Certificates.
+            </p>
+
+        </div>
+
+
+        <div class="noc-header-actions">
+
+            <select
+                id="nocSession"
+                class="noc-select"
+            >
+
+                <option value="2026-27">
+                    2026-27
+                </option>
+
+                <option value="2025-26">
+                    2025-26
+                </option>
+
+                <option value="2024-25">
+                    2024-25
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="noc-refresh-btn"
+                id="nocRefreshBtn"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="noc-summary">
+
+
+        <div class="noc-summary-card">
+
+            <div class="noc-summary-icon purple">
+                ◇
+            </div>
+
+            <div>
+
+                <span>
+                    Total Requests
+                </span>
+
+                <strong>
+                    93
+                </strong>
+
+                <small>
+                    This academic session
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="noc-summary-card">
+
+            <div class="noc-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Approved
+                </span>
+
+                <strong>
+                    56
+                </strong>
+
+                <small class="positive">
+                    60.2% of requests
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="noc-summary-card">
+
+            <div class="noc-summary-icon orange">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    Pending
+                </span>
+
+                <strong>
+                    23
+                </strong>
+
+                <small class="warning">
+                    Requires review
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="noc-summary-card">
+
+            <div class="noc-summary-icon blue">
+                ◉
+            </div>
+
+            <div>
+
+                <span>
+                    Under Review
+                </span>
+
+                <strong>
+                    11
+                </strong>
+
+                <small>
+                    Currently processing
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN GRID
+    ====================================================== -->
+
+    <section class="noc-main-grid">
+
+
+        <!-- =================================================
+             REQUEST OVERVIEW
+        ================================================== -->
+
+        <div class="noc-card noc-overview-card">
+
+            <div class="noc-card-header">
+
+                <div>
+
+                    <h2>
+                        NOC Request Overview
+                    </h2>
+
+                    <p>
+                        Current status of NOC applications.
+                    </p>
+
+                </div>
+
+                <span class="noc-live">
+                    ● Live
+                </span>
+
+            </div>
+
+
+            <div class="noc-overview-content">
+
+
+                <div class="noc-donut">
+
+                    <div class="noc-donut-inner">
+
+                        <strong>
+                            93
+                        </strong>
+
+                        <span>
+                            Requests
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="noc-legend">
+
+
+                    <div class="noc-legend-row">
+
+                        <div>
+
+                            <span class="legend-dot green"></span>
+
+                            <span>
+                                Approved
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            56
+                        </strong>
+
+                    </div>
+
+
+                    <div class="noc-legend-row">
+
+                        <div>
+
+                            <span class="legend-dot orange"></span>
+
+                            <span>
+                                Pending
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            23
+                        </strong>
+
+                    </div>
+
+
+                    <div class="noc-legend-row">
+
+                        <div>
+
+                            <span class="legend-dot blue"></span>
+
+                            <span>
+                                Under Review
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            11
+                        </strong>
+
+                    </div>
+
+
+                    <div class="noc-legend-row">
+
+                        <div>
+
+                            <span class="legend-dot red"></span>
+
+                            <span>
+                                Rejected
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            03
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <div class="noc-card noc-actions-card">
+
+            <div class="noc-card-header">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Manage NOC requests.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="noc-actions-list">
+
+
+                <button
+                    type="button"
+                    class="noc-action"
+                    data-filter="pending"
+                >
+
+                    <span class="action-icon orange">
+                        ◷
+                    </span>
+
+                    <span class="action-text">
+
+                        <strong>
+                            Pending Requests
+                        </strong>
+
+                        <small>
+                            Review 23 pending applications
+                        </small>
+
+                    </span>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="noc-action"
+                    data-filter="review"
+                >
+
+                    <span class="action-icon blue">
+                        ◉
+                    </span>
+
+                    <span class="action-text">
+
+                        <strong>
+                            Under Review
+                        </strong>
+
+                        <small>
+                            Check 11 applications
+                        </small>
+
+                    </span>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="noc-action"
+                    data-filter="approved"
+                >
+
+                    <span class="action-icon green">
+                        ✓
+                    </span>
+
+                    <span class="action-text">
+
+                        <strong>
+                            Approved NOCs
+                        </strong>
+
+                        <small>
+                            View 56 approved requests
+                        </small>
+
+                    </span>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         REQUEST TABLE
+    ====================================================== -->
+
+    <section class="noc-card noc-table-card">
+
+
+        <div class="noc-card-header noc-table-header">
+
+            <div>
+
+                <h2>
+                    NOC Requests
+                </h2>
+
+                <p>
+                    Review and manage student NOC applications.
+                </p>
+
+            </div>
+
+
+            <div class="noc-filters">
+
+
+                <div class="noc-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="nocSearch"
+                        placeholder="Search student or company..."
+                    >
+
+                </div>
+
+
+                <select
+                    id="nocStatusFilter"
+                    class="noc-filter-select"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="approved">
+                        Approved
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="review">
+                        Under Review
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="noc-table-wrapper">
+
+            <table class="noc-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            STUDENT
+                        </th>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            DEPARTMENT
+                        </th>
+
+                        <th>
+                            REQUEST DATE
+                        </th>
+
+                        <th>
+                            PURPOSE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="nocTableBody">
+
+
+                    <tr
+                        data-status="approved"
+                        data-search="Rahul Sharma TCS Computer Science"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rahul Sharma
+                                    </strong>
+
+                                    <span>
+                                        22CSE01234
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            TCS
+                        </td>
+
+                        <td>
+                            CSE
+                        </td>
+
+                        <td>
+                            20 Aug 2026
+                        </td>
+
+                        <td>
+                            Placement
+                        </td>
+
+                        <td>
+
+                            <span class="noc-status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="noc-view-btn"
+                                data-student="Rahul Sharma"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="pending"
+                        data-search="Priya Meena Infosys Information Technology"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    PM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Priya Meena
+                                    </strong>
+
+                                    <span>
+                                        22IT00871
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            Infosys
+                        </td>
+
+                        <td>
+                            IT
+                        </td>
+
+                        <td>
+                            21 Aug 2026
+                        </td>
+
+                        <td>
+                            Placement
+                        </td>
+
+                        <td>
+
+                            <span class="noc-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="noc-view-btn"
+                                data-student="Priya Meena"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="review"
+                        data-search="Aman Verma Wipro Electronics Communication"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    AV
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Aman Verma
+                                    </strong>
+
+                                    <span>
+                                        22ECE00652
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            Wipro
+                        </td>
+
+                        <td>
+                            ECE
+                        </td>
+
+                        <td>
+                            21 Aug 2026
+                        </td>
+
+                        <td>
+                            Internship
+                        </td>
+
+                        <td>
+
+                            <span class="noc-status review">
+                                Under Review
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="noc-view-btn"
+                                data-student="Aman Verma"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="approved"
+                        data-search="Neha Gupta Accenture CSE"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    NG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Neha Gupta
+                                    </strong>
+
+                                    <span>
+                                        22CSE00941
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            Accenture
+                        </td>
+
+                        <td>
+                            CSE
+                        </td>
+
+                        <td>
+                            19 Aug 2026
+                        </td>
+
+                        <td>
+                            Placement
+                        </td>
+
+                        <td>
+
+                            <span class="noc-status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="noc-view-btn"
+                                data-student="Neha Gupta"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="rejected"
+                        data-search="Rohit Singh Capgemini Mechanical Engineering"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rohit Singh
+                                    </strong>
+
+                                    <span>
+                                        22ME00418
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            Capgemini
+                        </td>
+
+                        <td>
+                            ME
+                        </td>
+
+                        <td>
+                            18 Aug 2026
+                        </td>
+
+                        <td>
+                            Placement
+                        </td>
+
+                        <td>
+
+                            <span class="noc-status rejected">
+                                Rejected
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="noc-view-btn"
+                                data-student="Rohit Singh"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="noc-table-footer">
+
+            <span>
+                Showing 5 NOC requests
+            </span>
+
+            <div class="noc-pagination">
+
+                <button type="button">
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="active"
+                >
+                    1
+                </button>
+
+                <button type="button">
+                    2
+                </button>
+
+                <button type="button">
+                    3
+                </button>
+
+                <button type="button">
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFO
+    ====================================================== -->
+
+    <div class="noc-info">
+
+        <span>
+            ◆
+        </span>
+
+        NOC approval is handled by the college authority before
+        final placement processing.
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     NOC MODAL
+========================================================== -->
+
+<div
+    class="noc-modal"
+    id="nocModal"
+>
+
+    <div class="noc-modal-overlay"></div>
+
+
+    <div class="noc-modal-box">
+
+
+        <div class="noc-modal-header">
+
+            <div>
+
+                <span>
+                    NOC REQUEST
+                </span>
+
+                <h2 id="modalStudentName">
+                    Student Name
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="noc-modal-close"
+                id="nocModalClose"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="noc-modal-body">
+
+
+            <div class="modal-detail">
+
+                <span>
+                    Company
+                </span>
+
+                <strong id="modalCompany">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <span>
+                    Purpose
+                </span>
+
+                <strong id="modalPurpose">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <span>
+                    Request Status
+                </span>
+
+                <strong id="modalStatus">
+                    —
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="noc-modal-actions">
+
+            <button
+                type="button"
+                class="modal-secondary"
+                id="modalRejectBtn"
+            >
+                Reject
+            </button>
+
+            <button
+                type="button"
+                class="modal-primary"
+                id="modalApproveBtn"
+            >
+                Approve NOC
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/noc.js'
+    ) }}"
+></script>
+
+{% endblock %}

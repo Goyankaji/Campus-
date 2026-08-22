@@ -1,0 +1,1186 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Placement Drives | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/placement_drives.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="drives-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="drives-header">
+
+        <div class="drives-heading">
+
+            <span class="page-eyebrow">
+                PLACEMENT
+            </span>
+
+            <h1>
+                Placement Drives
+            </h1>
+
+            <p>
+                Monitor campus placement drives, schedules and student participation.
+            </p>
+
+        </div>
+
+
+        <div class="drives-header-actions">
+
+            <div class="session-selector">
+
+                <span>
+                    Academic Year
+                </span>
+
+                <select id="academicYear">
+
+                    <option value="2026-27" selected>
+                        2026-27
+                    </option>
+
+                    <option value="2025-26">
+                        2025-26
+                    </option>
+
+                    <option value="2024-25">
+                        2024-25
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STAT CARDS
+    ====================================================== -->
+
+    <section class="drive-stats">
+
+
+        <div class="drive-stat-card">
+
+            <div class="stat-icon purple">
+                ▦
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Drives
+                </span>
+
+                <strong>
+                    48
+                </strong>
+
+                <small class="positive">
+                    ↑ 6 vs last session
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="drive-stat-card">
+
+            <div class="stat-icon blue">
+                ▣
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    On Campus
+                </span>
+
+                <strong>
+                    32
+                </strong>
+
+                <small>
+                    66.7% of total
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="drive-stat-card">
+
+            <div class="stat-icon orange">
+                ◷
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Upcoming
+                </span>
+
+                <strong>
+                    06
+                </strong>
+
+                <small>
+                    Next 60 days
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="drive-stat-card">
+
+            <div class="stat-icon green">
+                ✓
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Completed
+                </span>
+
+                <strong>
+                    42
+                </strong>
+
+                <small class="positive">
+                    87.5% completed
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN DRIVES CARD
+    ====================================================== -->
+
+    <section class="drives-card">
+
+
+        <!-- CARD HEADER -->
+
+        <div class="drives-card-header">
+
+            <div>
+
+                <h2>
+                    All Placement Drives
+                </h2>
+
+                <p>
+                    Complete placement drive schedule and performance.
+                </p>
+
+            </div>
+
+
+            <div class="drives-tools">
+
+
+                <!-- SEARCH -->
+
+                <div class="drive-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="driveSearch"
+                        placeholder="Search drives..."
+                    >
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <select
+                    id="driveStatus"
+                    class="drive-filter"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="upcoming">
+                        Upcoming
+                    </option>
+
+                    <option value="ongoing">
+                        Ongoing
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                </select>
+
+
+                <!-- TYPE -->
+
+                <select
+                    id="driveType"
+                    class="drive-filter"
+                >
+
+                    <option value="all">
+                        All Types
+                    </option>
+
+                    <option value="on-campus">
+                        On Campus
+                    </option>
+
+                    <option value="off-campus">
+                        Off Campus
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="drive-table-wrapper">
+
+            <table class="drive-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            DRIVE DATE
+                        </th>
+
+                        <th>
+                            TYPE
+                        </th>
+
+                        <th>
+                            APPLICANTS
+                        </th>
+
+                        <th>
+                            SELECTED
+                        </th>
+
+                        <th>
+                            PACKAGE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="driveTableBody">
+
+
+                    <!-- =================================================
+                         TCS
+                    ================================================== -->
+
+                    <tr
+                        data-status="completed"
+                        data-type="on-campus"
+                    >
+
+                        <td>
+
+                            <div class="drive-company">
+
+                                <div class="company-logo">
+                                    TCS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        TCS
+                                    </strong>
+
+                                    <span>
+                                        Tata Consultancy Services
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            18 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="type-badge on-campus">
+                                On Campus
+                            </span>
+                        </td>
+
+
+                        <td>
+                            320
+                        </td>
+
+
+                        <td>
+                            82
+                        </td>
+
+
+                        <td>
+                            ₹ 7.20 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-drive"
+                                data-drive="TCS"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         INFOSYS
+                    ================================================== -->
+
+                    <tr
+                        data-status="completed"
+                        data-type="on-campus"
+                    >
+
+                        <td>
+
+                            <div class="drive-company">
+
+                                <div class="company-logo">
+                                    IN
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Infosys
+                                    </strong>
+
+                                    <span>
+                                        Infosys Limited
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            12 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="type-badge on-campus">
+                                On Campus
+                            </span>
+                        </td>
+
+
+                        <td>
+                            280
+                        </td>
+
+
+                        <td>
+                            65
+                        </td>
+
+
+                        <td>
+                            ₹ 6.80 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-drive"
+                                data-drive="Infosys"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         WIPRO
+                    ================================================== -->
+
+                    <tr
+                        data-status="ongoing"
+                        data-type="off-campus"
+                    >
+
+                        <td>
+
+                            <div class="drive-company">
+
+                                <div class="company-logo">
+                                    W
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Wipro
+                                    </strong>
+
+                                    <span>
+                                        Wipro Limited
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            22 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="type-badge off-campus">
+                                Off Campus
+                            </span>
+                        </td>
+
+
+                        <td>
+                            245
+                        </td>
+
+
+                        <td>
+                            53
+                        </td>
+
+
+                        <td>
+                            ₹ 6.20 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge ongoing">
+                                Ongoing
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-drive"
+                                data-drive="Wipro"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ACCENTURE
+                    ================================================== -->
+
+                    <tr
+                        data-status="upcoming"
+                        data-type="on-campus"
+                    >
+
+                        <td>
+
+                            <div class="drive-company">
+
+                                <div class="company-logo">
+                                    A
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Accenture
+                                    </strong>
+
+                                    <span>
+                                        Accenture India
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            28 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="type-badge on-campus">
+                                On Campus
+                            </span>
+                        </td>
+
+
+                        <td>
+                            310
+                        </td>
+
+
+                        <td>
+                            —
+                        </td>
+
+
+                        <td>
+                            ₹ 7.50 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge upcoming">
+                                Upcoming
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-drive"
+                                data-drive="Accenture"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         CAPGEMINI
+                    ================================================== -->
+
+                    <tr
+                        data-status="completed"
+                        data-type="off-campus"
+                    >
+
+                        <td>
+
+                            <div class="drive-company">
+
+                                <div class="company-logo">
+                                    C
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Capgemini
+                                    </strong>
+
+                                    <span>
+                                        Capgemini Technology
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            04 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="type-badge off-campus">
+                                Off Campus
+                            </span>
+                        </td>
+
+
+                        <td>
+                            210
+                        </td>
+
+
+                        <td>
+                            38
+                        </td>
+
+
+                        <td>
+                            ₹ 6.30 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge completed">
+                                Completed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-drive"
+                                data-drive="Capgemini"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         DELOITTE
+                    ================================================== -->
+
+                    <tr
+                        data-status="upcoming"
+                        data-type="off-campus"
+                    >
+
+                        <td>
+
+                            <div class="drive-company">
+
+                                <div class="company-logo">
+                                    D
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Deloitte
+                                    </strong>
+
+                                    <span>
+                                        Deloitte India
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            02 Sep 2026
+                        </td>
+
+
+                        <td>
+                            <span class="type-badge off-campus">
+                                Off Campus
+                            </span>
+                        </td>
+
+
+                        <td>
+                            260
+                        </td>
+
+
+                        <td>
+                            —
+                        </td>
+
+
+                        <td>
+                            ₹ 8.40 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge upcoming">
+                                Upcoming
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-drive"
+                                data-drive="Deloitte"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         MICROSOFT
+                    ================================================== -->
+
+                    <tr
+                        data-status="upcoming"
+                        data-type="on-campus"
+                    >
+
+                        <td>
+
+                            <div class="drive-company">
+
+                                <div class="company-logo">
+                                    MS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Microsoft
+                                    </strong>
+
+                                    <span>
+                                        Microsoft India
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            10 Sep 2026
+                        </td>
+
+
+                        <td>
+                            <span class="type-badge on-campus">
+                                On Campus
+                            </span>
+                        </td>
+
+
+                        <td>
+                            420
+                        </td>
+
+
+                        <td>
+                            —
+                        </td>
+
+
+                        <td>
+                            ₹ 28.00 LPA
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge upcoming">
+                                Upcoming
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-drive"
+                                data-drive="Microsoft"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div
+            class="drive-empty"
+            id="driveEmpty"
+        >
+
+            <div>
+                ⌕
+            </div>
+
+            <h3>
+                No placement drives found
+            </h3>
+
+            <p>
+                Try changing your search or filters.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="drives-footer">
+
+            <span id="driveCount">
+                Showing 7 placement drives
+            </span>
+
+
+            <div class="pagination">
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                    disabled
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DRIVE MODAL
+    ====================================================== -->
+
+    <div
+        class="drive-modal"
+        id="driveModal"
+    >
+
+        <div class="drive-modal-overlay"></div>
+
+
+        <div class="drive-modal-box">
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="modalClose"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-drive-logo">
+                C
+            </div>
+
+
+            <h2 id="modalDriveName">
+                Company
+            </h2>
+
+
+            <p>
+                Placement drive summary
+            </p>
+
+
+            <div class="modal-drive-info">
+
+                <div>
+
+                    <span>
+                        Drive Date
+                    </span>
+
+                    <strong id="modalDate">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Drive Type
+                    </span>
+
+                    <strong id="modalType">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Applicants
+                    </span>
+
+                    <strong id="modalApplicants">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Selected
+                    </span>
+
+                    <strong id="modalSelected">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Package
+                    </span>
+
+                    <strong id="modalPackage">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="modalStatus">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-action"
+                id="modalDone"
+            >
+                Close
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/placement_drives.js'
+    ) }}"
+></script>
+
+{% endblock %}

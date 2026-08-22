@@ -1,0 +1,779 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Notifications | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/notifications.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="notifications-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="notifications-header">
+
+        <div>
+
+            <span class="notifications-eyebrow">
+                SYSTEM
+            </span>
+
+            <h1>
+                Notifications
+            </h1>
+
+            <p>
+                Stay updated with important placement activities,
+                approvals and campus announcements.
+            </p>
+
+        </div>
+
+
+        <div class="notifications-header-actions">
+
+            <button
+                type="button"
+                class="mark-all-btn"
+                id="markAllReadBtn"
+            >
+                ✓ Mark all as read
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="notification-summary">
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon purple">
+                ♢
+            </div>
+
+            <div>
+
+                <span>
+                    Total Notifications
+                </span>
+
+                <strong>
+                    18
+                </strong>
+
+                <small>
+                    This week
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon orange">
+                ●
+            </div>
+
+            <div>
+
+                <span>
+                    Unread
+                </span>
+
+                <strong id="unreadCount">
+                    05
+                </strong>
+
+                <small class="warning">
+                    Requires attention
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Read
+                </span>
+
+                <strong id="readCount">
+                    13
+                </strong>
+
+                <small class="positive">
+                    Already reviewed
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon blue">
+                !
+            </div>
+
+            <div>
+
+                <span>
+                    Important
+                </span>
+
+                <strong>
+                    03
+                </strong>
+
+                <small>
+                    High priority
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN NOTIFICATIONS CARD
+    ====================================================== -->
+
+    <section class="notifications-card">
+
+
+        <!-- CARD HEADER -->
+
+        <div class="notifications-card-header">
+
+            <div>
+
+                <h2>
+                    Recent Notifications
+                </h2>
+
+                <p>
+                    Latest updates from the placement portal.
+                </p>
+
+            </div>
+
+
+            <div class="notification-controls">
+
+                <div class="notification-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="notificationSearch"
+                        placeholder="Search notifications..."
+                    >
+
+                </div>
+
+
+                <select
+                    id="notificationFilter"
+                    class="notification-filter"
+                >
+
+                    <option value="all">
+                        All
+                    </option>
+
+                    <option value="unread">
+                        Unread
+                    </option>
+
+                    <option value="important">
+                        Important
+                    </option>
+
+                    <option value="read">
+                        Read
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             NOTIFICATION LIST
+        ================================================== -->
+
+        <div
+            class="notification-list"
+            id="notificationList"
+        >
+
+
+            <!-- NOTIFICATION 1 -->
+
+            <div
+                class="notification-item unread important"
+                data-status="unread"
+                data-important="true"
+                data-search="TCS placement drive registration deadline"
+            >
+
+                <div class="notification-icon purple">
+                    ▣
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            TCS Placement Drive Registration Deadline
+                        </h3>
+
+                        <span class="notification-time">
+                            20 min ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        The registration deadline for the upcoming
+                        TCS placement drive is tomorrow at 5:00 PM.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag placement">
+                            Placement
+                        </span>
+
+                        <span class="important-label">
+                            Important
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="notification-menu-btn"
+                    title="Mark as read"
+                >
+                    •••
+                </button>
+
+            </div>
+
+
+
+            <!-- NOTIFICATION 2 -->
+
+            <div
+                class="notification-item unread"
+                data-status="unread"
+                data-important="false"
+                data-search="NOC request pending approval Rahul Sharma"
+            >
+
+                <div class="notification-icon orange">
+                    ◇
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            New NOC Request Received
+                        </h3>
+
+                        <span class="notification-time">
+                            1 hour ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Rahul Sharma has submitted a new NOC request
+                        for the TCS placement process.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag noc">
+                            NOC
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="notification-menu-btn"
+                    title="Mark as read"
+                >
+                    •••
+                </button>
+
+            </div>
+
+
+
+            <!-- NOTIFICATION 3 -->
+
+            <div
+                class="notification-item unread"
+                data-status="unread"
+                data-important="false"
+                data-search="startup idea submitted CampusPay Rohit Singh"
+            >
+
+                <div class="notification-icon blue">
+                    ✦
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            New Startup Idea Submitted
+                        </h3>
+
+                        <span class="notification-time">
+                            2 hours ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        A new startup idea named
+                        <strong>CampusPay</strong>
+                        has been submitted for authority review.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag startup">
+                            Startup
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="notification-menu-btn"
+                    title="Mark as read"
+                >
+                    •••
+                </button>
+
+            </div>
+
+
+
+            <!-- NOTIFICATION 4 -->
+
+            <div
+                class="notification-item unread important"
+                data-status="unread"
+                data-important="true"
+                data-search="placement drive Accenture selected students"
+            >
+
+                <div class="notification-icon green">
+                    ✓
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            Accenture Drive Results Published
+                        </h3>
+
+                        <span class="notification-time">
+                            4 hours ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Final results for the Accenture placement drive
+                        have been published successfully.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag placement">
+                            Placement
+                        </span>
+
+                        <span class="important-label">
+                            Important
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="notification-menu-btn"
+                    title="Mark as read"
+                >
+                    •••
+                </button>
+
+            </div>
+
+
+
+            <!-- NOTIFICATION 5 -->
+
+            <div
+                class="notification-item unread"
+                data-status="unread"
+                data-important="false"
+                data-search="placement report generated weekly report"
+            >
+
+                <div class="notification-icon purple">
+                    ▤
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            Weekly Placement Report Generated
+                        </h3>
+
+                        <span class="notification-time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        The weekly placement analytics report is now
+                        available in the Analytics section.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag report">
+                            Analytics
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="notification-menu-btn"
+                    title="Mark as read"
+                >
+                    •••
+                </button>
+
+            </div>
+
+
+
+            <!-- NOTIFICATION 6 -->
+
+            <div
+                class="notification-item read"
+                data-status="read"
+                data-important="false"
+                data-search="Infosys placement drive approved"
+            >
+
+                <div class="notification-icon blue">
+                    ◉
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            Infosys Placement Drive Approved
+                        </h3>
+
+                        <span class="notification-time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        The upcoming Infosys placement drive has been
+                        approved and added to the placement calendar.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag placement">
+                            Placement
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="notification-menu-btn"
+                    title="Mark as unread"
+                >
+                    •••
+                </button>
+
+            </div>
+
+
+
+            <!-- NOTIFICATION 7 -->
+
+            <div
+                class="notification-item read"
+                data-status="read"
+                data-important="true"
+                data-search="authority announcement placement week"
+            >
+
+                <div class="notification-icon orange">
+                    !
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            Important Authority Announcement
+                        </h3>
+
+                        <span class="notification-time">
+                            2 days ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        A new announcement regarding the upcoming
+                        placement week has been published.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag announcement">
+                            Announcement
+                        </span>
+
+                        <span class="important-label">
+                            Important
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="notification-menu-btn"
+                    title="Mark as unread"
+                >
+                    •••
+                </button>
+
+            </div>
+
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="notification-empty"
+                id="notificationEmpty"
+            >
+
+                <div class="empty-icon">
+                    ♢
+                </div>
+
+                <h3>
+                    No notifications found
+                </h3>
+
+                <p>
+                    Try changing your search or filter.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="notifications-footer">
+
+            <span id="notificationCount">
+                Showing 7 notifications
+            </span>
+
+
+            <div class="notification-pagination">
+
+                <button type="button">
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="active"
+                >
+                    1
+                </button>
+
+                <button type="button">
+                    2
+                </button>
+
+                <button type="button">
+                    3
+                </button>
+
+                <button type="button">
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFO
+    ====================================================== -->
+
+    <div class="notifications-info">
+
+        <span>
+            ♢
+        </span>
+
+        Notifications are generated automatically from placement,
+        NOC, startup and authority activities.
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/notifications.js'
+    ) }}"
+></script>
+
+{% endblock %}

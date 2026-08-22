@@ -336,6 +336,212 @@ a {
 
 }
 
+/* =========================================================
+   ANALYTICS DROPDOWN
+========================================================= */
+
+.analytics-section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.new-badge {
+
+    padding: 3px 7px;
+
+    border-radius: 8px;
+
+    background: #6937df;
+
+    color: white;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+}
+
+
+/* ANALYTICS BUTTON */
+
+.analytics-menu {
+
+    position: relative;
+
+}
+
+
+.analytics-toggle {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+}
+
+
+.analytics-toggle:hover {
+
+    background: rgba(255,255,255,0.07);
+
+}
+
+
+.analytics-toggle.analytics-open {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(91,53,232,0.16),
+            rgba(91,53,232,0.05)
+        );
+
+}
+
+
+/* ARROW */
+
+.analytics-arrow {
+
+    margin-left: auto;
+
+    color: #8794b5;
+
+    font-size: 13px;
+
+    transition: transform 0.25s ease;
+
+}
+
+
+.analytics-arrow.rotate {
+
+    transform: rotate(180deg);
+
+    color: #a88cff;
+
+}
+
+
+/* SUBMENU */
+
+.analytics-submenu {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    padding-left: 30px;
+
+    transition:
+        max-height 0.3s ease,
+        opacity 0.2s ease;
+
+}
+
+
+.analytics-submenu.open {
+
+    max-height: 150px;
+
+    opacity: 1;
+
+}
+
+
+/* SUBMENU LINKS */
+
+.analytics-sub-link {
+
+    min-height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+    color: #8d9abb;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+
+}
+
+
+.analytics-sub-link:hover {
+
+    color: white;
+
+    background: rgba(255,255,255,0.05);
+
+}
+
+
+.analytics-sub-link.active {
+
+    color: #ffffff;
+
+    background: rgba(91,53,232,0.12);
+
+}
+
+
+/* PURPLE DOT */
+
+.submenu-dot {
+
+    width: 5px;
+
+    height: 5px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #7044eb;
+
+    box-shadow:
+        0 0 7px rgba(112,68,235,0.65);
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 950px) {
+
+    .analytics-submenu {
+
+        padding-left: 27px;
+
+    }
+
+}
+
 
 /* THEME BUTTON */
 

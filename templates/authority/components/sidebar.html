@@ -1,0 +1,431 @@
+<aside
+    class="authority-sidebar"
+    id="authoritySidebar"
+>
+
+
+    <!-- =====================================================
+         BRAND
+    ====================================================== -->
+
+    <div class="sidebar-brand">
+
+        <a
+            href="{{ url_for('authority_dashboard') }}"
+            class="brand-link"
+        >
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/college-logo.jpeg'
+                ) }}"
+                alt="College Logo"
+                class="brand-logo"
+            >
+
+            <div class="brand-text">
+
+                <strong>
+                    CAMPUS
+                </strong>
+
+                <span>
+                    PLACEMENT PORTAL
+                </span>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav class="sidebar-navigation">
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
+        <div class="nav-section-title">
+            MAIN
+        </div>
+
+
+        <a
+            href="{{ url_for('authority_dashboard') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_dashboard' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            <span class="nav-text">
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             OVERVIEW
+        ================================================== -->
+
+        <div class="nav-section-title">
+            OVERVIEW
+        </div>
+
+
+        <a
+            href="{{ url_for('authority_placement_overview') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_placement_overview' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◉
+            </span>
+
+            <span class="nav-text">
+                Placement Overview
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('authority_companies') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_companies' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▣
+            </span>
+
+            <span class="nav-text">
+                Companies
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('authority_placement_drives') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_placement_drives' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▦
+            </span>
+
+            <span class="nav-text">
+                Placement Drives
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             ANALYTICS
+        ================================================== -->
+
+        <div class="nav-section-title analytics-title">
+
+            <span>
+                ANALYTICS
+            </span>
+
+            <span class="new-badge">
+                New
+            </span>
+
+        </div>
+
+
+        <div
+            class="analytics-menu"
+            id="analyticsMenu"
+        >
+
+
+            <button
+                type="button"
+                class="nav-link analytics-toggle"
+                id="analyticsToggle"
+            >
+
+                <span class="nav-icon">
+                    ▤
+                </span>
+
+                <span class="nav-text">
+                    Analytics
+                </span>
+
+                <span
+                    class="analytics-arrow"
+                    id="analyticsArrow"
+                >
+                    ⌄
+                </span>
+
+            </button>
+
+
+            <div
+                class="analytics-submenu"
+                id="analyticsSubmenu"
+            >
+
+                <a
+                    href="{{ url_for('authority_placement_reports') }}"
+                    class="analytics-sub-link
+                    {% if request.endpoint == 'authority_placement_reports' %}
+                        active
+                    {% endif %}"
+                >
+
+                    <span class="submenu-dot"></span>
+
+                    <span>
+                        Placement Reports
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('authority_drive_reports') }}"
+                    class="analytics-sub-link
+                    {% if request.endpoint == 'authority_drive_reports' %}
+                        active
+                    {% endif %}"
+                >
+
+                    <span class="submenu-dot"></span>
+
+                    <span>
+                        Drive Reports
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('authority_company_reports') }}"
+                    class="analytics-sub-link
+                    {% if request.endpoint == 'authority_company_reports' %}
+                        active
+                    {% endif %}"
+                >
+
+                    <span class="submenu-dot"></span>
+
+                    <span>
+                        Company Reports
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SPECIAL INITIATIVES
+        ================================================== -->
+
+        <div class="nav-section-title">
+            SPECIAL INITIATIVES
+        </div>
+
+
+        <a
+            href="{{ url_for('authority_noc') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_noc' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◇
+            </span>
+
+            <span class="nav-text">
+                NOC
+            </span>
+
+            <span class="nav-count noc-count">
+                04
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('authority_startup_ideas') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_startup_ideas' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ✦
+            </span>
+
+            <span class="nav-text">
+                Startup Ideas
+            </span>
+
+            <span class="nav-count startup-count">
+                07
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             SYSTEM
+        ================================================== -->
+
+        <div class="nav-section-title">
+            SYSTEM
+        </div>
+
+
+        <a
+            href="{{ url_for('authority_notifications') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_notifications' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ♢
+            </span>
+
+            <span class="nav-text">
+                Notifications
+            </span>
+
+            <span class="nav-count notification-count">
+                05
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('authority_announcements') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_announcements' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▧
+            </span>
+
+            <span class="nav-text">
+                Announcements
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('authority_settings') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_settings' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ⚙
+            </span>
+
+            <span class="nav-text">
+                Settings
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             LOGOUT
+        ================================================== -->
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="nav-link logout-link"
+        >
+
+            <span class="nav-icon">
+                ⇥
+            </span>
+
+            <span class="nav-text">
+                Logout
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- =====================================================
+         SIDEBAR THEME
+    ====================================================== -->
+
+    <button
+        type="button"
+        class="sidebar-theme-btn"
+        id="sidebarThemeBtn"
+    >
+
+        <span
+            class="theme-icon"
+            id="sidebarThemeIcon"
+        >
+            ☾
+        </span>
+
+        <span
+            class="theme-text"
+            id="sidebarThemeText"
+        >
+            Dark Mode
+        </span>
+
+        <span class="theme-arrow">
+            ›
+        </span>
+
+    </button>
+
+
+</aside>

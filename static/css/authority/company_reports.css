@@ -1,0 +1,641 @@
+/* =========================================================
+   AUTHORITY — COMPANY REPORTS
+========================================================= */
+
+.company-reports-page {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 34px 36px 50px;
+}
+
+
+/* HEADER */
+
+.company-reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 25px;
+    margin-bottom: 28px;
+}
+
+.page-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: #7c4dff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.company-reports-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.company-reports-header p {
+    margin: 7px 0 0;
+    color: #8290aa;
+    font-size: 14px;
+}
+
+.company-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.company-select,
+.mini-company-select {
+    height: 40px;
+    padding: 0 13px;
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    outline: none;
+    cursor: pointer;
+}
+
+.company-export-btn {
+    height: 40px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 9px;
+    background: #6d3df5;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.company-export-btn:hover {
+    background: #7c4dff;
+}
+
+
+/* SUMMARY */
+
+.company-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.company-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 105px;
+    padding: 19px;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background: var(--card-bg);
+}
+
+.company-summary-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.company-summary-icon.purple {
+    color: #8b5cf6;
+    background: rgba(124,77,255,.14);
+}
+
+.company-summary-icon.green {
+    color: #19c37d;
+    background: rgba(25,195,125,.14);
+}
+
+.company-summary-icon.orange {
+    color: #ff9f1c;
+    background: rgba(255,159,28,.14);
+}
+
+.company-summary-icon.blue {
+    color: #3d8bfd;
+    background: rgba(61,139,253,.14);
+}
+
+.company-summary-card span {
+    display: block;
+    margin-bottom: 5px;
+    color: #8290aa;
+    font-size: 11px;
+}
+
+.company-summary-card strong {
+    display: block;
+    font-size: 23px;
+}
+
+.company-summary-card small {
+    display: block;
+    margin-top: 5px;
+    color: #78869f;
+    font-size: 10px;
+}
+
+.company-summary-card small.positive {
+    color: #19c37d;
+}
+
+
+/* CARDS */
+
+.company-main-grid {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.company-secondary-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.company-card {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    background: var(--card-bg);
+}
+
+.company-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.company-card-header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.company-card-header p {
+    margin: 5px 0 0;
+    color: #7c89a2;
+    font-size: 11px;
+}
+
+
+/* HIRING PERFORMANCE */
+
+.company-performance-card {
+    min-height: 375px;
+}
+
+.company-chart {
+    padding: 23px 25px;
+}
+
+.company-chart-row {
+    display: grid;
+    grid-template-columns: 145px 1fr 40px;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.company-chart-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.company-chart-label strong {
+    font-size: 12px;
+}
+
+.company-chart-label span {
+    color: #74819a;
+    font-size: 9px;
+}
+
+.company-chart-track {
+    height: 9px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #283245;
+}
+
+.company-chart-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: #7040f5;
+}
+
+.company-chart-value {
+    font-size: 11px;
+    text-align: right;
+}
+
+
+/* STATUS */
+
+.company-status-card {
+    min-height: 375px;
+}
+
+.company-status-list {
+    padding: 10px 22px;
+}
+
+.company-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.company-status-row:last-child {
+    border-bottom: 0;
+}
+
+.company-status-row > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8996ad;
+    font-size: 12px;
+}
+
+.company-status-row strong {
+    font-size: 13px;
+}
+
+.company-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.company-status-dot.green {
+    background: #19c37d;
+}
+
+.company-status-dot.blue {
+    background: #3d8bfd;
+}
+
+.company-status-dot.purple {
+    background: #7040f5;
+}
+
+.company-status-dot.red {
+    background: #ef5b76;
+}
+
+
+/* PACKAGE */
+
+.package-card {
+    min-height: 350px;
+}
+
+.package-list {
+    padding: 12px 22px 20px;
+}
+
+.package-row {
+    display: grid;
+    grid-template-columns: 110px 110px 1fr;
+    align-items: center;
+    gap: 15px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.package-row:last-child {
+    border-bottom: 0;
+}
+
+.package-company {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.package-row > strong {
+    font-size: 10px;
+    text-align: right;
+}
+
+.package-track {
+    height: 7px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #283245;
+}
+
+.package-track div {
+    height: 100%;
+    border-radius: inherit;
+    background: #7040f5;
+}
+
+
+/* HIRING TYPE */
+
+.hiring-type-card {
+    min-height: 350px;
+}
+
+.hiring-donut-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 30px 25px;
+}
+
+.hiring-donut {
+    width: 165px;
+    height: 165px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background:
+        conic-gradient(
+            #3d8bfd 0deg 222deg,
+            #7040f5 222deg 360deg
+        );
+}
+
+.hiring-donut-inner {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 50%;
+    background: var(--card-bg);
+}
+
+.hiring-donut-inner strong {
+    font-size: 25px;
+}
+
+.hiring-donut-inner span {
+    margin-top: 3px;
+    color: #7d8aa2;
+    font-size: 9px;
+}
+
+.hiring-legend {
+    flex: 1;
+}
+
+.hiring-legend-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border-color);
+    color: #8996ad;
+    font-size: 11px;
+}
+
+.hiring-legend-item:last-child {
+    border-bottom: 0;
+}
+
+.hiring-legend-item > div {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.hiring-legend-item strong {
+    color: var(--text-primary);
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.legend-dot.blue {
+    background: #3d8bfd;
+}
+
+.legend-dot.purple {
+    background: #7040f5;
+}
+
+.legend-dot.orange {
+    background: #ff9f1c;
+}
+
+
+/* TABLE */
+
+.company-table-card {
+    margin-bottom: 0;
+}
+
+.company-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.company-report-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.company-report-table th {
+    padding: 14px 20px;
+    background: rgba(0,0,0,.08);
+    color: #697791;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.company-report-table td {
+    padding: 17px 20px;
+    border-top: 1px solid var(--border-color);
+    color: #8390a7;
+    font-size: 10px;
+    vertical-align: middle;
+}
+
+.company-report-table td:first-child {
+    min-width: 155px;
+}
+
+.company-report-table td:first-child strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: 11px;
+}
+
+.company-report-table td:first-child span {
+    display: block;
+    margin-top: 4px;
+    color: #697791;
+    font-size: 9px;
+}
+
+.table-rate {
+    min-width: 110px;
+}
+
+.table-rate strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+    font-size: 10px;
+}
+
+.table-rate > div {
+    width: 100%;
+    height: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #283245;
+}
+
+.table-rate > div span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #7040f5;
+}
+
+.table-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.table-status.active {
+    color: #19c37d;
+    background: rgba(25,195,125,.12);
+}
+
+.table-status.upcoming {
+    color: #3d8bfd;
+    background: rgba(61,139,253,.12);
+}
+
+.table-status.completed {
+    color: #a47aff;
+    background: rgba(112,64,245,.12);
+}
+
+
+/* FOOTER */
+
+.company-report-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    color: #65728a;
+    font-size: 10px;
+}
+
+
+/* LIGHT MODE */
+
+body:not(.dark-theme) .company-card,
+body:not(.dark-theme) .company-summary-card,
+body:not(.dark-theme) .company-select,
+body:not(.dark-theme) .mini-company-select {
+    background: #ffffff;
+}
+
+body:not(.dark-theme) .company-chart-track,
+body:not(.dark-theme) .package-track,
+body:not(.dark-theme) .table-rate > div {
+    background: #e8ebf1;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+
+    .company-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .company-main-grid,
+    .company-secondary-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .company-reports-page {
+        padding: 25px 18px 40px;
+    }
+
+    .company-reports-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .company-header-actions {
+        width: 100%;
+    }
+
+    .company-select,
+    .company-export-btn {
+        flex: 1;
+    }
+
+    .company-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .company-chart-row {
+        grid-template-columns: 100px 1fr 30px;
+        gap: 10px;
+    }
+
+    .hiring-donut-wrapper {
+        flex-direction: column;
+    }
+
+    .package-row {
+        grid-template-columns: 90px 100px 1fr;
+        gap: 10px;
+    }
+
+    .company-report-footer {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+}

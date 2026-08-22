@@ -1,0 +1,1155 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Startup Ideas | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/startup_ideas.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="startup-page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <section class="startup-header">
+
+        <div>
+
+            <span class="startup-eyebrow">
+                SPECIAL INITIATIVES
+            </span>
+
+            <h1>
+                Startup Ideas
+            </h1>
+
+            <p>
+                Review innovative student ideas and monitor their incubation progress.
+            </p>
+
+        </div>
+
+
+        <div class="startup-header-actions">
+
+            <select
+                class="startup-select"
+                id="startupStatusFilter"
+            >
+
+                <option value="all">
+                    All Ideas
+                </option>
+
+                <option value="submitted">
+                    Submitted
+                </option>
+
+                <option value="review">
+                    Under Review
+                </option>
+
+                <option value="shortlisted">
+                    Shortlisted
+                </option>
+
+                <option value="incubated">
+                    Incubated
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="startup-add-btn"
+                id="startupAddBtn"
+            >
+                + Add Idea
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="startup-summary">
+
+
+        <div class="startup-summary-card">
+
+            <div class="startup-summary-icon purple">
+                ✦
+            </div>
+
+            <div>
+
+                <span>
+                    Total Ideas
+                </span>
+
+                <strong>
+                    47
+                </strong>
+
+                <small>
+                    This academic year
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="startup-summary-card">
+
+            <div class="startup-summary-icon orange">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    Under Review
+                </span>
+
+                <strong>
+                    12
+                </strong>
+
+                <small class="warning">
+                    Awaiting evaluation
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="startup-summary-card">
+
+            <div class="startup-summary-icon blue">
+                ★
+            </div>
+
+            <div>
+
+                <span>
+                    Shortlisted
+                </span>
+
+                <strong>
+                    08
+                </strong>
+
+                <small>
+                    Selected for next stage
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="startup-summary-card">
+
+            <div class="startup-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Incubated
+                </span>
+
+                <strong>
+                    05
+                </strong>
+
+                <small class="positive">
+                    Active ventures
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <section class="startup-main-grid">
+
+
+        <!-- =================================================
+             IDEA PIPELINE
+        ================================================== -->
+
+        <div class="startup-card pipeline-card">
+
+            <div class="startup-card-header">
+
+                <div>
+
+                    <h2>
+                        Startup Pipeline
+                    </h2>
+
+                    <p>
+                        Current stage of submitted startup ideas.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-content">
+
+
+                <div class="pipeline-stage">
+
+                    <div class="pipeline-stage-top">
+
+                        <span>
+                            Submitted
+                        </span>
+
+                        <strong>
+                            22
+                        </strong>
+
+                    </div>
+
+                    <div class="pipeline-track">
+
+                        <div
+                            class="pipeline-fill purple"
+                            style="width:100%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="pipeline-stage">
+
+                    <div class="pipeline-stage-top">
+
+                        <span>
+                            Under Review
+                        </span>
+
+                        <strong>
+                            12
+                        </strong>
+
+                    </div>
+
+                    <div class="pipeline-track">
+
+                        <div
+                            class="pipeline-fill orange"
+                            style="width:55%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="pipeline-stage">
+
+                    <div class="pipeline-stage-top">
+
+                        <span>
+                            Shortlisted
+                        </span>
+
+                        <strong>
+                            08
+                        </strong>
+
+                    </div>
+
+                    <div class="pipeline-track">
+
+                        <div
+                            class="pipeline-fill blue"
+                            style="width:36%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="pipeline-stage">
+
+                    <div class="pipeline-stage-top">
+
+                        <span>
+                            Incubated
+                        </span>
+
+                        <strong>
+                            05
+                        </strong>
+
+                    </div>
+
+                    <div class="pipeline-track">
+
+                        <div
+                            class="pipeline-fill green"
+                            style="width:23%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK STATS
+        ================================================== -->
+
+        <div class="startup-card stats-card">
+
+            <div class="startup-card-header">
+
+                <div>
+
+                    <h2>
+                        Startup Highlights
+                    </h2>
+
+                    <p>
+                        Current ecosystem overview.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="startup-highlight-list">
+
+
+                <div class="startup-highlight">
+
+                    <span class="highlight-icon purple">
+                        ₹
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            ₹ 18.5L
+                        </strong>
+
+                        <small>
+                            Total funding raised
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="startup-highlight">
+
+                    <span class="highlight-icon blue">
+                        ♟
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            16
+                        </strong>
+
+                        <small>
+                            Student founders
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="startup-highlight">
+
+                    <span class="highlight-icon green">
+                        ↗
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            05
+                        </strong>
+
+                        <small>
+                            Active ventures
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="startup-highlight">
+
+                    <span class="highlight-icon orange">
+                        ★
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            09
+                        </strong>
+
+                        <small>
+                            Mentors assigned
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         IDEAS TABLE
+    ====================================================== -->
+
+    <section class="startup-card ideas-card">
+
+
+        <div class="startup-card-header ideas-header">
+
+            <div>
+
+                <h2>
+                    Student Startup Ideas
+                </h2>
+
+                <p>
+                    Review submitted ideas and track their progress.
+                </p>
+
+            </div>
+
+
+            <div class="startup-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="startupSearch"
+                    placeholder="Search idea, founder or category..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="startup-table-wrapper">
+
+            <table class="startup-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            STARTUP IDEA
+                        </th>
+
+                        <th>
+                            FOUNDER
+                        </th>
+
+                        <th>
+                            CATEGORY
+                        </th>
+
+                        <th>
+                            SUBMITTED
+                        </th>
+
+                        <th>
+                            STAGE
+                        </th>
+
+                        <th>
+                            SCORE
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="startupTableBody">
+
+
+                    <tr
+                        data-status="incubated"
+                        data-search="AgroConnect Rahul Sharma Agriculture"
+                    >
+
+                        <td>
+
+                            <div class="idea-cell">
+
+                                <div class="idea-icon">
+                                    AC
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        AgroConnect
+                                    </strong>
+
+                                    <span>
+                                        Smart farming marketplace
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Rahul Sharma
+                        </td>
+
+
+                        <td>
+                            Agriculture
+                        </td>
+
+
+                        <td>
+                            12 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="idea-status incubated">
+                                Incubated
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong class="idea-score high">
+                                91/100
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="idea-view-btn"
+                                data-idea="AgroConnect"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="shortlisted"
+                        data-search="MediTrack Priya Meena Healthcare"
+                    >
+
+                        <td>
+
+                            <div class="idea-cell">
+
+                                <div class="idea-icon">
+                                    MT
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        MediTrack
+                                    </strong>
+
+                                    <span>
+                                        Digital health monitoring
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Priya Meena
+                        </td>
+
+
+                        <td>
+                            Healthcare
+                        </td>
+
+
+                        <td>
+                            15 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="idea-status shortlisted">
+                                Shortlisted
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong class="idea-score high">
+                                87/100
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="idea-view-btn"
+                                data-idea="MediTrack"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="review"
+                        data-search="SkillBridge Aman Verma EdTech"
+                    >
+
+                        <td>
+
+                            <div class="idea-cell">
+
+                                <div class="idea-icon">
+                                    SB
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        SkillBridge
+                                    </strong>
+
+                                    <span>
+                                        Peer learning platform
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Aman Verma
+                        </td>
+
+
+                        <td>
+                            EdTech
+                        </td>
+
+
+                        <td>
+                            18 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="idea-status review">
+                                Under Review
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong class="idea-score medium">
+                                78/100
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="idea-view-btn"
+                                data-idea="SkillBridge"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="submitted"
+                        data-search="GreenKart Neha Gupta Sustainability"
+                    >
+
+                        <td>
+
+                            <div class="idea-cell">
+
+                                <div class="idea-icon">
+                                    GK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        GreenKart
+                                    </strong>
+
+                                    <span>
+                                        Sustainable shopping platform
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Neha Gupta
+                        </td>
+
+
+                        <td>
+                            Sustainability
+                        </td>
+
+
+                        <td>
+                            20 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="idea-status submitted">
+                                Submitted
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong class="idea-score low">
+                                71/100
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="idea-view-btn"
+                                data-idea="GreenKart"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr
+                        data-status="review"
+                        data-search="CampusPay Rohit Singh FinTech"
+                    >
+
+                        <td>
+
+                            <div class="idea-cell">
+
+                                <div class="idea-icon">
+                                    CP
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        CampusPay
+                                    </strong>
+
+                                    <span>
+                                        Student financial platform
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Rohit Singh
+                        </td>
+
+
+                        <td>
+                            FinTech
+                        </td>
+
+
+                        <td>
+                            21 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="idea-status review">
+                                Under Review
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong class="idea-score medium">
+                                82/100
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="idea-view-btn"
+                                data-idea="CampusPay"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="startup-table-footer">
+
+            <span id="startupCount">
+                Showing 5 startup ideas
+            </span>
+
+
+            <div class="startup-pagination">
+
+                <button type="button">
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="active"
+                >
+                    1
+                </button>
+
+                <button type="button">
+                    2
+                </button>
+
+                <button type="button">
+                    3
+                </button>
+
+                <button type="button">
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFO
+    ====================================================== -->
+
+    <div class="startup-info">
+
+        <span>
+            ✦
+        </span>
+
+        Startup ideas are evaluated by the authority before
+        moving into incubation and mentorship.
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     IDEA MODAL
+========================================================== -->
+
+<div
+    class="startup-modal"
+    id="startupModal"
+>
+
+    <div class="startup-modal-overlay"></div>
+
+
+    <div class="startup-modal-box">
+
+
+        <div class="startup-modal-header">
+
+            <div>
+
+                <span>
+                    STARTUP IDEA
+                </span>
+
+                <h2 id="modalIdeaName">
+                    Startup Idea
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="startup-modal-close"
+                id="startupModalClose"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="startup-modal-body">
+
+
+            <div class="startup-modal-detail">
+
+                <span>
+                    Founder
+                </span>
+
+                <strong id="modalFounder">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="startup-modal-detail">
+
+                <span>
+                    Category
+                </span>
+
+                <strong id="modalCategory">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="startup-modal-detail">
+
+                <span>
+                    Current Stage
+                </span>
+
+                <strong id="modalStage">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="startup-modal-detail">
+
+                <span>
+                    Evaluation Score
+                </span>
+
+                <strong id="modalScore">
+                    —
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="startup-modal-actions">
+
+            <button
+                type="button"
+                class="startup-secondary-btn"
+                id="startupRejectBtn"
+            >
+                Reject
+            </button>
+
+            <button
+                type="button"
+                class="startup-primary-btn"
+                id="startupShortlistBtn"
+            >
+                Shortlist Idea
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/startup_ideas.js'
+    ) }}"
+></script>
+
+{% endblock %}

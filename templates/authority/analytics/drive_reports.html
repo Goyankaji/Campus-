@@ -1,0 +1,1035 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Drive Reports | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/drive_reports.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="drive-reports-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="drive-reports-header">
+
+        <div>
+
+            <span class="page-eyebrow">
+                ANALYTICS
+            </span>
+
+            <h1>
+                Drive Reports
+            </h1>
+
+            <p>
+                Analyse placement drives, participation and drive performance.
+            </p>
+
+        </div>
+
+
+        <div class="drive-header-actions">
+
+            <select
+                id="driveAcademicYear"
+                class="drive-select"
+            >
+
+                <option value="2026-27">
+                    2026-27
+                </option>
+
+                <option value="2025-26">
+                    2025-26
+                </option>
+
+                <option value="2024-25">
+                    2024-25
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="drive-export-btn"
+                id="driveExportBtn"
+            >
+                ↓ Export Report
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SUMMARY -->
+
+    <section class="drive-summary">
+
+
+        <div class="drive-summary-card">
+
+            <div class="drive-summary-icon purple">
+                ▦
+            </div>
+
+            <div>
+
+                <span>
+                    Total Drives
+                </span>
+
+                <strong>
+                    48
+                </strong>
+
+                <small class="positive">
+                    ↑ 6 vs last session
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="drive-summary-card">
+
+            <div class="drive-summary-icon blue">
+                ▣
+            </div>
+
+            <div>
+
+                <span>
+                    On Campus
+                </span>
+
+                <strong>
+                    32
+                </strong>
+
+                <small>
+                    66.7% of total
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="drive-summary-card">
+
+            <div class="drive-summary-icon orange">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    Upcoming
+                </span>
+
+                <strong>
+                    06
+                </strong>
+
+                <small>
+                    Next 60 days
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="drive-summary-card">
+
+            <div class="drive-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Completed
+                </span>
+
+                <strong>
+                    42
+                </strong>
+
+                <small class="positive">
+                    87.5% completed
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- MAIN GRID -->
+
+    <section class="drive-report-grid">
+
+
+        <!-- DRIVE PERFORMANCE -->
+
+        <div class="drive-card performance-card">
+
+            <div class="drive-card-header">
+
+                <div>
+
+                    <h2>
+                        Drive Performance
+                    </h2>
+
+                    <p>
+                        Year-wise placement drive activity.
+                    </p>
+
+                </div>
+
+
+                <select
+                    id="driveTrendFilter"
+                    class="mini-drive-select"
+                >
+
+                    <option value="drives">
+                        Total Drives
+                    </option>
+
+                    <option value="selected">
+                        Students Selected
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="drive-chart">
+
+                <div class="drive-chart-axis">
+
+                    <span>50</span>
+                    <span>40</span>
+                    <span>30</span>
+                    <span>20</span>
+                    <span>10</span>
+                    <span>0</span>
+
+                </div>
+
+
+                <div class="drive-chart-area">
+
+                    <div class="drive-line-grid grid-a"></div>
+                    <div class="drive-line-grid grid-b"></div>
+                    <div class="drive-line-grid grid-c"></div>
+                    <div class="drive-line-grid grid-d"></div>
+                    <div class="drive-line-grid grid-e"></div>
+                    <div class="drive-line-grid grid-f"></div>
+
+
+                    <div class="drive-bars">
+
+                        <div
+                            class="drive-bar"
+                            style="height: 48%;"
+                        >
+                            <span>24</span>
+                        </div>
+
+                        <div
+                            class="drive-bar"
+                            style="height: 58%;"
+                        >
+                            <span>29</span>
+                        </div>
+
+                        <div
+                            class="drive-bar"
+                            style="height: 72%;"
+                        >
+                            <span>36</span>
+                        </div>
+
+                        <div
+                            class="drive-bar"
+                            style="height: 84%;"
+                        >
+                            <span>42</span>
+                        </div>
+
+                        <div
+                            class="drive-bar"
+                            style="height: 96%;"
+                        >
+                            <span>48</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="drive-chart-labels">
+
+                        <span>2022-23</span>
+                        <span>2023-24</span>
+                        <span>2024-25</span>
+                        <span>2025-26</span>
+                        <span>2026-27</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DRIVE TYPE -->
+
+        <div class="drive-card type-card">
+
+            <div class="drive-card-header">
+
+                <div>
+
+                    <h2>
+                        Drive Type Distribution
+                    </h2>
+
+                    <p>
+                        Campus and off-campus drives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="type-content">
+
+
+                <div class="type-donut">
+
+                    <div class="donut-inner">
+
+                        <strong>
+                            48
+                        </strong>
+
+                        <span>
+                            Total Drives
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="type-legend">
+
+
+                    <div class="legend-item">
+
+                        <div>
+
+                            <span class="legend-dot blue"></span>
+
+                            <span>
+                                On Campus
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            32
+                        </strong>
+
+                    </div>
+
+
+                    <div class="legend-progress">
+
+                        <div style="width:66.7%;"></div>
+
+                    </div>
+
+
+
+                    <div class="legend-item">
+
+                        <div>
+
+                            <span class="legend-dot purple"></span>
+
+                            <span>
+                                Off Campus
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            16
+                        </strong>
+
+                    </div>
+
+
+                    <div class="legend-progress">
+
+                        <div
+                            class="purple-progress"
+                            style="width:33.3%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DRIVE STATUS -->
+
+        <div class="drive-card status-drive-card">
+
+            <div class="drive-card-header">
+
+                <div>
+
+                    <h2>
+                        Drive Status
+                    </h2>
+
+                    <p>
+                        Current drive pipeline.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="drive-status-list">
+
+
+                <div class="drive-status-row">
+
+                    <div>
+
+                        <span class="status-dot green"></span>
+
+                        <span>
+                            Completed
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        42
+                    </strong>
+
+                </div>
+
+
+                <div class="drive-status-row">
+
+                    <div>
+
+                        <span class="status-dot orange"></span>
+
+                        <span>
+                            Upcoming
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        06
+                    </strong>
+
+                </div>
+
+
+                <div class="drive-status-row">
+
+                    <div>
+
+                        <span class="status-dot blue"></span>
+
+                        <span>
+                            Ongoing
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        04
+                    </strong>
+
+                </div>
+
+
+                <div class="drive-status-row">
+
+                    <div>
+
+                        <span class="status-dot red"></span>
+
+                        <span>
+                            Cancelled
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        02
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOP DRIVES -->
+
+        <div class="drive-card top-drives-card">
+
+            <div class="drive-card-header">
+
+                <div>
+
+                    <h2>
+                        Top Performing Drives
+                    </h2>
+
+                    <p>
+                        Drives with highest student selections.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="top-drive-table">
+
+                <div class="top-drive-head">
+
+                    <span>
+                        Company
+                    </span>
+
+                    <span>
+                        Applicants
+                    </span>
+
+                    <span>
+                        Selected
+                    </span>
+
+                    <span>
+                        Rate
+                    </span>
+
+                </div>
+
+
+                <div class="top-drive-row">
+
+                    <strong>
+                        TCS
+                    </strong>
+
+                    <span>
+                        210
+                    </span>
+
+                    <span>
+                        82
+                    </span>
+
+                    <b>
+                        39.0%
+                    </b>
+
+                </div>
+
+
+                <div class="top-drive-row">
+
+                    <strong>
+                        Infosys
+                    </strong>
+
+                    <span>
+                        185
+                    </span>
+
+                    <span>
+                        65
+                    </span>
+
+                    <b>
+                        35.1%
+                    </b>
+
+                </div>
+
+
+                <div class="top-drive-row">
+
+                    <strong>
+                        Wipro
+                    </strong>
+
+                    <span>
+                        245
+                    </span>
+
+                    <span>
+                        53
+                    </span>
+
+                    <b>
+                        21.6%
+                    </b>
+
+                </div>
+
+
+                <div class="top-drive-row">
+
+                    <strong>
+                        Accenture
+                    </strong>
+
+                    <span>
+                        192
+                    </span>
+
+                    <span>
+                        41
+                    </span>
+
+                    <b>
+                        21.4%
+                    </b>
+
+                </div>
+
+
+                <div class="top-drive-row">
+
+                    <strong>
+                        Capgemini
+                    </strong>
+
+                    <span>
+                        210
+                    </span>
+
+                    <span>
+                        38
+                    </span>
+
+                    <b>
+                        18.1%
+                    </b>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- APPLICATION FUNNEL -->
+
+        <div class="drive-card funnel-card">
+
+            <div class="drive-card-header">
+
+                <div>
+
+                    <h2>
+                        Drive Application Funnel
+                    </h2>
+
+                    <p>
+                        Student movement through drives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="funnel-list">
+
+
+                <div class="funnel-row">
+
+                    <div class="funnel-label">
+
+                        <span>
+                            Applications
+                        </span>
+
+                        <strong>
+                            2,145
+                        </strong>
+
+                    </div>
+
+                    <div class="funnel-track">
+
+                        <div
+                            style="width:100%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-row">
+
+                    <div class="funnel-label">
+
+                        <span>
+                            Eligible
+                        </span>
+
+                        <strong>
+                            1,420
+                        </strong>
+
+                    </div>
+
+                    <div class="funnel-track">
+
+                        <div
+                            style="width:66%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-row">
+
+                    <div class="funnel-label">
+
+                        <span>
+                            Shortlisted
+                        </span>
+
+                        <strong>
+                            615
+                        </strong>
+
+                    </div>
+
+                    <div class="funnel-track">
+
+                        <div
+                            style="width:43%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-row">
+
+                    <div class="funnel-label">
+
+                        <span>
+                            Selected
+                        </span>
+
+                        <strong>
+                            480
+                        </strong>
+
+                    </div>
+
+                    <div class="funnel-track">
+
+                        <div
+                            style="width:34%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DEPARTMENT DRIVE PARTICIPATION -->
+
+        <div class="drive-card department-drive-card">
+
+            <div class="drive-card-header">
+
+                <div>
+
+                    <h2>
+                        Department-wise Drive Participation
+                    </h2>
+
+                    <p>
+                        Student participation across drives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="department-drive-list">
+
+
+                <div class="department-drive-row">
+
+                    <div class="department-drive-name">
+
+                        <strong>
+                            Computer Science & Engineering
+                        </strong>
+
+                        <span>
+                            420 students
+                        </span>
+
+                    </div>
+
+                    <div class="department-drive-value">
+
+                        <strong>
+                            86%
+                        </strong>
+
+                        <div class="drive-progress">
+
+                            <div style="width:86%;"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-drive-row">
+
+                    <div class="department-drive-name">
+
+                        <strong>
+                            Information Technology
+                        </strong>
+
+                        <span>
+                            280 students
+                        </span>
+
+                    </div>
+
+                    <div class="department-drive-value">
+
+                        <strong>
+                            82%
+                        </strong>
+
+                        <div class="drive-progress">
+
+                            <div style="width:82%;"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-drive-row">
+
+                    <div class="department-drive-name">
+
+                        <strong>
+                            Electronics & Communication
+                        </strong>
+
+                        <span>
+                            220 students
+                        </span>
+
+                    </div>
+
+                    <div class="department-drive-value">
+
+                        <strong>
+                            74%
+                        </strong>
+
+                        <div class="drive-progress">
+
+                            <div style="width:74%;"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-drive-row">
+
+                    <div class="department-drive-name">
+
+                        <strong>
+                            Mechanical Engineering
+                        </strong>
+
+                        <span>
+                            190 students
+                        </span>
+
+                    </div>
+
+                    <div class="department-drive-value">
+
+                        <strong>
+                            68%
+                        </strong>
+
+                        <div class="drive-progress">
+
+                            <div style="width:68%;"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="department-drive-row">
+
+                    <div class="department-drive-name">
+
+                        <strong>
+                            Civil Engineering
+                        </strong>
+
+                        <span>
+                            150 students
+                        </span>
+
+                    </div>
+
+                    <div class="department-drive-value">
+
+                        <strong>
+                            61%
+                        </strong>
+
+                        <div class="drive-progress">
+
+                            <div style="width:61%;"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="drive-report-footer">
+
+        <span>
+            Report generated for academic session 2026-27
+        </span>
+
+        <span>
+            Campus Placement Portal
+        </span>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/drive_reports.js'
+    ) }}"
+></script>
+
+{% endblock %}

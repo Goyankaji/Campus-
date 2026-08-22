@@ -1,0 +1,991 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Announcements | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/announcements.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="announcements-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="announcements-header">
+
+        <div>
+
+            <span class="announcements-eyebrow">
+                SYSTEM
+            </span>
+
+            <h1>
+                Announcements
+            </h1>
+
+            <p>
+                Create, publish and manage important campus placement announcements.
+            </p>
+
+        </div>
+
+
+        <div class="announcements-header-actions">
+
+            <select
+                class="announcement-filter-select"
+                id="announcementStatusFilter"
+            >
+
+                <option value="all">
+                    All Announcements
+                </option>
+
+                <option value="published">
+                    Published
+                </option>
+
+                <option value="scheduled">
+                    Scheduled
+                </option>
+
+                <option value="draft">
+                    Drafts
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="create-announcement-btn"
+                id="createAnnouncementBtn"
+            >
+                + New Announcement
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="announcement-summary">
+
+
+        <div class="announcement-summary-card">
+
+            <div class="announcement-summary-icon purple">
+                ▤
+            </div>
+
+            <div>
+
+                <span>
+                    Total Announcements
+                </span>
+
+                <strong>
+                    24
+                </strong>
+
+                <small>
+                    This academic year
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="announcement-summary-card">
+
+            <div class="announcement-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Published
+                </span>
+
+                <strong>
+                    18
+                </strong>
+
+                <small class="positive">
+                    Currently visible
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="announcement-summary-card">
+
+            <div class="announcement-summary-icon orange">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    Scheduled
+                </span>
+
+                <strong>
+                    04
+                </strong>
+
+                <small class="warning">
+                    Upcoming announcements
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="announcement-summary-card">
+
+            <div class="announcement-summary-icon blue">
+                ✎
+            </div>
+
+            <div>
+
+                <span>
+                    Drafts
+                </span>
+
+                <strong>
+                    02
+                </strong>
+
+                <small>
+                    Not published yet
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN GRID
+    ====================================================== -->
+
+    <section class="announcements-main-grid">
+
+
+        <!-- =================================================
+             RECENT ANNOUNCEMENT
+        ================================================== -->
+
+        <div class="announcement-card featured-announcement">
+
+            <div class="announcement-card-header">
+
+                <div>
+
+                    <span class="featured-label">
+                        FEATURED
+                    </span>
+
+                    <h2>
+                        Upcoming Placement Week 2026
+                    </h2>
+
+                </div>
+
+
+                <span class="published-badge">
+                    Published
+                </span>
+
+            </div>
+
+
+            <div class="featured-body">
+
+                <p>
+                    The college placement week for the 2026 graduating
+                    batch will begin from 1 September 2026. Students are
+                    requested to keep their profiles and documents updated.
+                </p>
+
+
+                <div class="featured-meta">
+
+                    <span>
+                        ◷ 22 Aug 2026
+                    </span>
+
+                    <span>
+                        ♢ All Students
+                    </span>
+
+                    <span>
+                        ● High Priority
+                    </span>
+
+                </div>
+
+
+                <div class="featured-actions">
+
+                    <button
+                        type="button"
+                        class="outline-action"
+                        data-action="edit"
+                    >
+                        Edit
+                    </button>
+
+                    <button
+                        type="button"
+                        class="outline-action danger"
+                        data-action="archive"
+                    >
+                        Archive
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK STATS
+        ================================================== -->
+
+        <div class="announcement-card announcement-stats-card">
+
+            <div class="announcement-card-header">
+
+                <div>
+
+                    <h2>
+                        Audience Reach
+                    </h2>
+
+                    <p>
+                        Announcement visibility.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="audience-content">
+
+
+                <div class="audience-circle">
+
+                    <div class="audience-circle-inner">
+
+                        <strong>
+                            92%
+                        </strong>
+
+                        <span>
+                            Reached
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="audience-stats">
+
+                    <div>
+
+                        <strong>
+                            1,248
+                        </strong>
+
+                        <span>
+                            Total recipients
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            1,148
+                        </strong>
+
+                        <span>
+                            Viewed
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            100
+                        </strong>
+
+                        <span>
+                            Unread
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ANNOUNCEMENTS LIST
+    ====================================================== -->
+
+    <section class="announcement-card announcements-list-card">
+
+
+        <div class="announcement-card-header list-header">
+
+            <div>
+
+                <h2>
+                    All Announcements
+                </h2>
+
+                <p>
+                    Manage your campus placement communications.
+                </p>
+
+            </div>
+
+
+            <div class="announcement-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="announcementSearch"
+                    placeholder="Search announcements..."
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="announcements-list"
+            id="announcementsList"
+        >
+
+
+            <!-- ANNOUNCEMENT 1 -->
+
+            <article
+                class="announcement-item"
+                data-status="published"
+                data-search="placement week 2026 students profile documents"
+            >
+
+                <div class="announcement-type-icon purple">
+                    ▣
+                </div>
+
+
+                <div class="announcement-item-content">
+
+                    <div class="announcement-item-top">
+
+                        <div>
+
+                            <h3>
+                                Upcoming Placement Week 2026
+                            </h3>
+
+                            <div class="announcement-tags">
+
+                                <span class="announcement-tag placement">
+                                    Placement
+                                </span>
+
+                                <span class="announcement-tag priority">
+                                    High Priority
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="announcement-status published">
+                            Published
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Placement week for the graduating batch will
+                        begin from 1 September 2026.
+                    </p>
+
+
+                    <div class="announcement-item-footer">
+
+                        <span>
+                            Published 22 Aug 2026
+                        </span>
+
+                        <span>
+                            Audience: All Students
+                        </span>
+
+                        <button
+                            type="button"
+                            class="announcement-view-btn"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ANNOUNCEMENT 2 -->
+
+            <article
+                class="announcement-item"
+                data-status="published"
+                data-search="tcs registration deadline placement drive"
+            >
+
+                <div class="announcement-type-icon orange">
+                    ◷
+                </div>
+
+
+                <div class="announcement-item-content">
+
+                    <div class="announcement-item-top">
+
+                        <div>
+
+                            <h3>
+                                TCS Drive Registration Deadline
+                            </h3>
+
+                            <div class="announcement-tags">
+
+                                <span class="announcement-tag placement">
+                                    Placement
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="announcement-status published">
+                            Published
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Students interested in the TCS placement drive
+                        must complete their registration before the deadline.
+                    </p>
+
+
+                    <div class="announcement-item-footer">
+
+                        <span>
+                            Published 21 Aug 2026
+                        </span>
+
+                        <span>
+                            Audience: Eligible Students
+                        </span>
+
+                        <button
+                            type="button"
+                            class="announcement-view-btn"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ANNOUNCEMENT 3 -->
+
+            <article
+                class="announcement-item"
+                data-status="scheduled"
+                data-search="resume workshop placement preparation"
+            >
+
+                <div class="announcement-type-icon blue">
+                    ✦
+                </div>
+
+
+                <div class="announcement-item-content">
+
+                    <div class="announcement-item-top">
+
+                        <div>
+
+                            <h3>
+                                Resume Building Workshop
+                            </h3>
+
+                            <div class="announcement-tags">
+
+                                <span class="announcement-tag workshop">
+                                    Workshop
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="announcement-status scheduled">
+                            Scheduled
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        A resume building workshop will be conducted
+                        for final-year students before placement week.
+                    </p>
+
+
+                    <div class="announcement-item-footer">
+
+                        <span>
+                            Scheduled 28 Aug 2026
+                        </span>
+
+                        <span>
+                            Audience: Final Year
+                        </span>
+
+                        <button
+                            type="button"
+                            class="announcement-view-btn"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ANNOUNCEMENT 4 -->
+
+            <article
+                class="announcement-item"
+                data-status="published"
+                data-search="noc submission deadline students"
+            >
+
+                <div class="announcement-type-icon green">
+                    ◇
+                </div>
+
+
+                <div class="announcement-item-content">
+
+                    <div class="announcement-item-top">
+
+                        <div>
+
+                            <h3>
+                                NOC Submission Guidelines
+                            </h3>
+
+                            <div class="announcement-tags">
+
+                                <span class="announcement-tag noc">
+                                    NOC
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="announcement-status published">
+                            Published
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Students must submit their NOC requests through
+                        the portal before participating in selected drives.
+                    </p>
+
+
+                    <div class="announcement-item-footer">
+
+                        <span>
+                            Published 19 Aug 2026
+                        </span>
+
+                        <span>
+                            Audience: All Students
+                        </span>
+
+                        <button
+                            type="button"
+                            class="announcement-view-btn"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ANNOUNCEMENT 5 -->
+
+            <article
+                class="announcement-item"
+                data-status="draft"
+                data-search="startup innovation challenge 2026"
+            >
+
+                <div class="announcement-type-icon purple">
+                    ✎
+                </div>
+
+
+                <div class="announcement-item-content">
+
+                    <div class="announcement-item-top">
+
+                        <div>
+
+                            <h3>
+                                Campus Startup Innovation Challenge
+                            </h3>
+
+                            <div class="announcement-tags">
+
+                                <span class="announcement-tag startup">
+                                    Startup
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="announcement-status draft">
+                            Draft
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Announcement for the upcoming campus startup
+                        innovation challenge.
+                    </p>
+
+
+                    <div class="announcement-item-footer">
+
+                        <span>
+                            Last edited 18 Aug 2026
+                        </span>
+
+                        <span>
+                            Audience: All Students
+                        </span>
+
+                        <button
+                            type="button"
+                            class="announcement-view-btn"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="announcements-footer">
+
+            <span id="announcementCount">
+                Showing 5 announcements
+            </span>
+
+
+            <div class="announcement-pagination">
+
+                <button type="button">
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="active"
+                >
+                    1
+                </button>
+
+                <button type="button">
+                    2
+                </button>
+
+                <button type="button">
+                    3
+                </button>
+
+                <button type="button">
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFO
+    ====================================================== -->
+
+    <div class="announcements-info">
+
+        <span>
+            ▤
+        </span>
+
+        Published announcements are visible to their selected
+        audience through the placement portal.
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     ANNOUNCEMENT MODAL
+========================================================== -->
+
+<div
+    class="announcement-modal"
+    id="announcementModal"
+>
+
+    <div class="announcement-modal-overlay"></div>
+
+
+    <div class="announcement-modal-box">
+
+
+        <div class="announcement-modal-header">
+
+            <div>
+
+                <span>
+                    ANNOUNCEMENT
+                </span>
+
+                <h2 id="modalAnnouncementTitle">
+                    Announcement
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="announcement-modal-close"
+                id="announcementModalClose"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="announcement-modal-body">
+
+            <p id="modalAnnouncementText">
+                Announcement details.
+            </p>
+
+
+            <div class="modal-announcement-details">
+
+                <div>
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="modalAnnouncementStatus">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Audience
+                    </span>
+
+                    <strong id="modalAnnouncementAudience">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Date
+                    </span>
+
+                    <strong id="modalAnnouncementDate">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="announcement-modal-actions">
+
+            <button
+                type="button"
+                class="modal-secondary-btn"
+                id="modalArchiveBtn"
+            >
+                Archive
+            </button>
+
+            <button
+                type="button"
+                class="modal-primary-btn"
+                id="modalEditBtn"
+            >
+                Edit Announcement
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/announcements.js'
+    ) }}"
+></script>
+
+{% endblock %}

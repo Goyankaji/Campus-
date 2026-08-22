@@ -30,20 +30,13 @@ app.secret_key = "campus-placement-secret-key"
 
 def get_db_connection():
 
-    connection = mysql.connector.connect(
+    return mysql.connector.connect(
         host="localhost",
         user="root",
-
-        # =================================================
-        # APNA MYSQL PASSWORD YAHAN DAALNA
-        # =================================================
-        password="MY_PASSWORD",
-
+        password="arpit@2467",
         database="campus_placement_manager",
         port=3306
     )
-
-    return connection
 
 
 # =========================================================
@@ -82,10 +75,6 @@ def role_required(required_role):
         @wraps(f)
         def decorated_function(*args, **kwargs):
 
-            # -------------------------------------------------
-            # NOT LOGGED IN
-            # -------------------------------------------------
-
             if "user_id" not in session:
 
                 flash(
@@ -97,12 +86,7 @@ def role_required(required_role):
                     url_for("index")
                 )
 
-
-            # -------------------------------------------------
-            # WRONG ROLE
-            # -------------------------------------------------
-
-            if session.get("role_name") != required_role:
+            if str(session.get("role_id")) != str(required_role):
 
                 flash(
                     "You are not authorized to access this page.",
@@ -112,7 +96,6 @@ def role_required(required_role):
                 return redirect(
                     url_for("index")
                 )
-
 
             return f(*args, **kwargs)
 
@@ -130,51 +113,23 @@ def get_student_data():
     return {
 
         "name": "Student Name",
-
         "student_id": "22CSE01234",
-
         "profile_photo": None,
 
-
-        # -------------------------------------------------
-        # PERSONAL INFORMATION
-        # -------------------------------------------------
-
         "email": "student.email@college.edu.in",
-
         "phone": "+91 98765 43210",
-
         "dob": "12 May 2004",
-
         "gender": "Male",
-
         "address": "Jaipur, Rajasthan, India",
-
         "blood_group": "B+",
 
-
-        # -------------------------------------------------
-        # ACADEMIC INFORMATION
-        # -------------------------------------------------
-
         "program": "B.Tech Computer Science & Engineering",
-
         "department": "Computer Science & Engineering",
-
         "batch": "2022 - 2026",
-
         "current_year": "3rd Year",
-
         "current_semester": "5th Semester",
-
         "enrollment_no": "22CSE01234",
-
         "cgpa": "8.42 / 10.00",
-
-
-        # -------------------------------------------------
-        # ABOUT
-        # -------------------------------------------------
 
         "about": (
             "Passionate Computer Science student with strong "
@@ -184,11 +139,6 @@ def get_student_data():
         ),
 
         "about_updated_at": "18 Aug 2026",
-
-
-        # -------------------------------------------------
-        # PROFESSIONAL LINKS
-        # -------------------------------------------------
 
         "links": [
 
@@ -268,11 +218,6 @@ def login():
         ""
     )
 
-
-    # -------------------------------------------------
-    # BASIC VALIDATION
-    # -------------------------------------------------
-
     if not email or not password:
 
         flash(
@@ -283,11 +228,6 @@ def login():
         return redirect(
             url_for("index")
         )
-
-
-    # -------------------------------------------------
-    # POORNIMA EMAIL VALIDATION
-    # -------------------------------------------------
 
     if not email.endswith(
         "@poornima.org"
@@ -309,10 +249,6 @@ def login():
 
     try:
 
-        # -------------------------------------------------
-        # DATABASE CONNECTION
-        # -------------------------------------------------
-
         connection = get_db_connection()
 
         cursor = connection.cursor(
@@ -320,28 +256,17 @@ def login():
         )
 
 
-        # -------------------------------------------------
-        # FIND USER + ROLE + CAMPUS
-        # -------------------------------------------------
-
         cursor.execute(
             """
             SELECT
-                u.user_id,
-                u.campus_id,
-                u.username,
-                u.email,
-                u.password_hash,
-                u.role_id,
-                u.account_status,
-                r.role_name
-            FROM users u
-
-            INNER JOIN roles r
-                ON u.role_id = r.role_id
-
-            WHERE u.email = %s
-
+                user_id,
+                username,
+                email,
+                password_hash,
+                role_id,
+                account_status
+            FROM users
+            WHERE email = %s
             LIMIT 1
             """,
             (email,)
@@ -349,10 +274,6 @@ def login():
 
         user = cursor.fetchone()
 
-
-        # -------------------------------------------------
-        # USER NOT FOUND
-        # -------------------------------------------------
 
         if not user:
 
@@ -365,10 +286,6 @@ def login():
                 url_for("index")
             )
 
-
-        # -------------------------------------------------
-        # PASSWORD VERIFICATION
-        # -------------------------------------------------
 
         if not check_password_hash(
             user["password_hash"],
@@ -385,10 +302,6 @@ def login():
             )
 
 
-        # -------------------------------------------------
-        # ACCOUNT STATUS
-        # -------------------------------------------------
-
         if user["account_status"] != "ACTIVE":
 
             flash(
@@ -401,101 +314,55 @@ def login():
             )
 
 
-        # -------------------------------------------------
-        # CREATE SESSION
-        # -------------------------------------------------
-
         session.clear()
 
         session["user_id"] = user["user_id"]
-
-        session["campus_id"] = user["campus_id"]
-
         session["username"] = user["username"]
-
         session["email"] = user["email"]
-
         session["role_id"] = user["role_id"]
 
-        session["role_name"] = user["role_name"]
+
+        role_id = str(
+            user["role_id"]
+        )
 
 
-        # -------------------------------------------------
-        # ROLE-BASED DASHBOARD
-        # -------------------------------------------------
-
-        role_name = user["role_name"]
-
-
-        # -------------------------------------------------
-        # ADMIN
-        # -------------------------------------------------
-
-        if role_name == "ADMIN":
+        if role_id == "1":
 
             return redirect(
                 url_for("admin_dashboard")
             )
 
-
-        # -------------------------------------------------
-        # STUDENT
-        # -------------------------------------------------
-
-        elif role_name == "STUDENT":
+        elif role_id == "2":
 
             return redirect(
                 url_for("student_dashboard")
             )
 
-
-        # -------------------------------------------------
-        # MENTOR
-        # -------------------------------------------------
-
-        elif role_name == "MENTOR":
+        elif role_id == "3":
 
             return redirect(
-                url_for("mentor_dashboard")
+                url_for("tutor_dashboard")
             )
 
-
-        # -------------------------------------------------
-        # HOD
-        # -------------------------------------------------
-
-        elif role_name == "HOD":
+        elif role_id == "4":
 
             return redirect(
                 url_for("hod_dashboard")
             )
 
-
-        # -------------------------------------------------
-        # TPO
-        # -------------------------------------------------
-
-        elif role_name == "TPO":
+        elif role_id == "5":
 
             return redirect(
                 url_for("tpo_dashboard")
             )
 
-
-        # -------------------------------------------------
-        # AUTHORITY
-        # -------------------------------------------------
-
-        elif role_name == "AUTHORITY":
+        elif role_id == "6":
 
             return redirect(
                 url_for("authority_dashboard")
             )
 
-
-        # -------------------------------------------------
-        # INVALID ROLE
-        # -------------------------------------------------
 
         session.clear()
 
@@ -540,10 +407,32 @@ def login():
 
             cursor.close()
 
-
         if connection and connection.is_connected():
 
             connection.close()
+
+
+# =========================================================
+# AUTHORITY TEST LOGIN
+# =========================================================
+
+@app.route("/authority/test-login")
+def authority_test_login():
+
+    session.clear()
+
+    session["user_id"] = "AUTHORITY-TEST"
+    session["username"] = "College Authority"
+    session["email"] = "authority@poornima.org"
+
+    # Authority role ID
+    session["role_id"] = 6
+
+    session["role_name"] = "AUTHORITY"
+
+    return redirect(
+        url_for("authority_dashboard")
+    )
 
 
 # =========================================================
@@ -572,7 +461,7 @@ def logout():
 
 @app.route("/student/dashboard")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_dashboard():
 
     student = get_student_data()
@@ -592,7 +481,7 @@ def student_dashboard():
 
 @app.route("/student/profile")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_profile():
 
     student = get_student_data()
@@ -612,7 +501,7 @@ def student_profile():
 
 @app.route("/student/academics")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_academics():
 
     student = get_student_data()
@@ -632,7 +521,7 @@ def student_academics():
 
 @app.route("/student/placement-drives")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def placement_drives():
 
     student = get_student_data()
@@ -652,7 +541,7 @@ def placement_drives():
 
 @app.route("/student/applications")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_applications():
 
     student = get_student_data()
@@ -672,7 +561,7 @@ def student_applications():
 
 @app.route("/student/interviews")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_interviews():
 
     student = get_student_data()
@@ -692,7 +581,7 @@ def student_interviews():
 
 @app.route("/student/preparation")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_preparation():
 
     student = get_student_data()
@@ -714,7 +603,7 @@ def student_preparation():
     "/student/preparation/pyq/<company>"
 )
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_pyq(company):
 
     student = get_student_data()
@@ -727,49 +616,32 @@ def student_pyq(company):
         "tcs": {
 
             "company": "TCS",
-
             "title": "TCS Placement Paper 2025",
-
             "type": "Aptitude · Technical · Coding",
-
             "questions": 40,
-
             "year": "2025",
-
             "difficulty": "Moderate"
 
         },
-
 
         "infosys": {
 
             "company": "Infosys",
-
             "title": "Infosys Placement Paper 2025",
-
             "type": "Aptitude · Logical Reasoning",
-
             "questions": 35,
-
             "year": "2025",
-
             "difficulty": "Moderate"
 
         },
 
-
         "amazon": {
 
             "company": "Amazon",
-
             "title": "Amazon SDE Assessment",
-
             "type": "DSA · Coding · Problem Solving",
-
             "questions": 30,
-
             "year": "2025",
-
             "difficulty": "Advanced"
 
         }
@@ -804,7 +676,7 @@ def student_pyq(company):
 
 @app.route("/student/my-uploads")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_my_uploads():
 
     student = get_student_data()
@@ -824,7 +696,7 @@ def student_my_uploads():
 
 @app.route("/student/announcements")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_announcements():
 
     student = get_student_data()
@@ -844,7 +716,7 @@ def student_announcements():
 
 @app.route("/student/settings")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_settings():
 
     student = get_student_data()
@@ -864,7 +736,7 @@ def student_settings():
 
 @app.route("/student/offers-joining")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_offers_joining():
 
     student = get_student_data()
@@ -879,7 +751,7 @@ def student_offers_joining():
 
 
 # =========================================================
-# STUDENT HELP & SUPPORT
+# STUDENT HELP
 # =========================================================
 
 @app.route(
@@ -887,17 +759,13 @@ def student_offers_joining():
     methods=["GET", "POST"]
 )
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_help():
 
     student = get_student_data()
 
     profile_completion = get_profile_completion()
 
-
-    # =====================================================
-    # SUBMIT COMPLAINT
-    # =====================================================
 
     if request.method == "POST":
 
@@ -917,10 +785,6 @@ def student_help():
         ).strip()
 
 
-        # -------------------------------------------------
-        # CATEGORY
-        # -------------------------------------------------
-
         if not category:
 
             flash(
@@ -934,10 +798,6 @@ def student_help():
                 profile_completion=profile_completion
             )
 
-
-        # -------------------------------------------------
-        # SUBJECT
-        # -------------------------------------------------
 
         if not subject:
 
@@ -953,10 +813,6 @@ def student_help():
             )
 
 
-        # -------------------------------------------------
-        # DESCRIPTION
-        # -------------------------------------------------
-
         if not description:
 
             flash(
@@ -971,32 +827,16 @@ def student_help():
             )
 
 
-        # -------------------------------------------------
-        # TEMPORARY COMPLAINT DATA
-        # -------------------------------------------------
-
-        complaint = {
-
-            "category": category,
-
-            "subject": subject,
-
-            "description": description,
-
-            "status": "Submitted"
-
-        }
-
-
         print(
             "STUDENT COMPLAINT:",
-            complaint
+            {
+                "category": category,
+                "subject": subject,
+                "description": description,
+                "status": "Submitted"
+            }
         )
 
-
-        # -------------------------------------------------
-        # SUCCESS
-        # -------------------------------------------------
 
         flash(
             "Your complaint has been submitted successfully.",
@@ -1009,10 +849,6 @@ def student_help():
         )
 
 
-    # =====================================================
-    # GET
-    # =====================================================
-
     return render_template(
         "students/help.html",
         student=student,
@@ -1021,12 +857,12 @@ def student_help():
 
 
 # =========================================================
-# STUDENT QUESTION DISCUSSION
+# STUDENT DISCUSSION
 # =========================================================
 
 @app.route("/student/discussion")
 @login_required
-@role_required("STUDENT")
+@role_required("2")
 def student_discussion():
 
     student = get_student_data()
@@ -1041,12 +877,19 @@ def student_discussion():
 
 
 # =========================================================
+# =========================================================
+# AUTHORITY
+# =========================================================
+# =========================================================
+
+
+# =========================================================
 # AUTHORITY DASHBOARD
 # =========================================================
 
 @app.route("/authority/dashboard")
 @login_required
-@role_required("AUTHORITY")
+@role_required("6")
 def authority_dashboard():
 
     return render_template(
@@ -1055,40 +898,179 @@ def authority_dashboard():
 
 
 # =========================================================
-# TPO DASHBOARD
+# PLACEMENT OVERVIEW
 # =========================================================
 
-@app.route("/tpo/dashboard")
+@app.route("/authority/placement-overview")
 @login_required
-@role_required("TPO")
-def tpo_dashboard():
+@role_required("6")
+def authority_placement_overview():
 
     return render_template(
-        "tpo/dashboard.html"
+        "authority/placement_overview.html"
     )
 
 
 # =========================================================
-# HOD DASHBOARD
+# COMPANIES
 # =========================================================
 
-@app.route("/hod/dashboard")
+@app.route("/authority/companies")
 @login_required
-@role_required("HOD")
-def hod_dashboard():
+@role_required("6")
+def authority_companies():
 
     return render_template(
-        "hod/dashboard.html"
+        "authority/companies.html"
     )
 
 
 # =========================================================
-# ADMIN DASHBOARD
+# PLACEMENT DRIVES
+# =========================================================
+
+@app.route("/authority/placement-drives")
+@login_required
+@role_required("6")
+def authority_placement_drives():
+
+    return render_template(
+        "authority/placement_drives.html"
+    )
+
+
+# =========================================================
+# ANALYTICS — PLACEMENT REPORTS
+# =========================================================
+
+@app.route(
+    "/authority/analytics/placement-reports"
+)
+@login_required
+@role_required("6")
+def authority_placement_reports():
+
+    return render_template(
+        "authority/analytics/placement_reports.html"
+    )
+
+
+# =========================================================
+# ANALYTICS — DRIVE REPORTS
+# =========================================================
+
+@app.route(
+    "/authority/analytics/drive-reports"
+)
+@login_required
+@role_required("6")
+def authority_drive_reports():
+
+    return render_template(
+        "authority/analytics/drive_reports.html"
+    )
+
+
+# =========================================================
+# ANALYTICS — COMPANY REPORTS
+# =========================================================
+
+@app.route(
+    "/authority/analytics/company-reports"
+)
+@login_required
+@role_required("6")
+def authority_company_reports():
+
+    return render_template(
+        "authority/analytics/company_reports.html"
+    )
+
+
+# =========================================================
+# NOC
+# =========================================================
+
+@app.route("/authority/noc")
+@login_required
+@role_required("6")
+def authority_noc():
+
+    return render_template(
+        "authority/noc.html"
+    )
+
+
+# =========================================================
+# STARTUP IDEAS
+# =========================================================
+
+@app.route("/authority/startup-ideas")
+@login_required
+@role_required("6")
+def authority_startup_ideas():
+
+    return render_template(
+        "authority/startup_ideas.html"
+    )
+
+
+# =========================================================
+# NOTIFICATIONS
+# =========================================================
+
+@app.route("/authority/notifications")
+@login_required
+@role_required("6")
+def authority_notifications():
+
+    return render_template(
+        "authority/notifications.html"
+    )
+
+
+# =========================================================
+# ANNOUNCEMENTS
+# =========================================================
+
+@app.route("/authority/announcements")
+@login_required
+@role_required("6")
+def authority_announcements():
+
+    return render_template(
+        "authority/announcements.html"
+    )
+
+
+# =========================================================
+# SETTINGS
+# =========================================================
+
+@app.route("/authority/settings")
+@login_required
+@role_required("6")
+def authority_settings():
+
+    return render_template(
+        "authority/settings.html"
+    )
+
+
+# =========================================================
+# =========================================================
+# OTHER DASHBOARDS
+# =========================================================
+# =========================================================
+
+
+# =========================================================
+# ADMIN
 # =========================================================
 
 @app.route("/admin/dashboard")
 @login_required
-@role_required("ADMIN")
+@role_required("1")
 def admin_dashboard():
 
     return render_template(
@@ -1097,12 +1079,40 @@ def admin_dashboard():
 
 
 # =========================================================
-# MENTOR DASHBOARD
+# TPO
+# =========================================================
+
+@app.route("/tpo/dashboard")
+@login_required
+@role_required("5")
+def tpo_dashboard():
+
+    return render_template(
+        "tpo/dashboard.html"
+    )
+
+
+# =========================================================
+# HOD
+# =========================================================
+
+@app.route("/hod/dashboard")
+@login_required
+@role_required("4")
+def hod_dashboard():
+
+    return render_template(
+        "hod/dashboard.html"
+    )
+
+
+# =========================================================
+# MENTOR
 # =========================================================
 
 @app.route("/mentor/dashboard")
 @login_required
-@role_required("MENTOR")
+@role_required("3")
 def mentor_dashboard():
 
     return render_template(
@@ -1111,12 +1121,12 @@ def mentor_dashboard():
 
 
 # =========================================================
-# OLD TUTOR URL SUPPORT
+# OLD TUTOR URL
 # =========================================================
 
 @app.route("/tutor/dashboard")
 @login_required
-@role_required("MENTOR")
+@role_required("3")
 def tutor_dashboard():
 
     return render_template(

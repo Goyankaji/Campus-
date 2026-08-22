@@ -1,0 +1,1391 @@
+{% extends "authority/base.html" %}
+
+
+{% block title %}
+Placement Overview | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/placement_overview.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="authority-page placement-overview-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="overview-page-header">
+
+        <div class="overview-heading">
+
+            <span class="page-kicker">
+                PLACEMENT
+            </span>
+
+            <h1>
+                Placement Overview
+            </h1>
+
+            <p>
+                Real-time overview of placements, students and drives.
+            </p>
+
+        </div>
+
+
+        <div class="session-selector">
+
+            <div class="session-label">
+                <span>Academic Session</span>
+            </div>
+
+            <select id="academicSession">
+
+                <option value="2025-26">
+                    2025-26
+                </option>
+
+                <option value="2024-25">
+                    2024-25
+                </option>
+
+                <option value="2023-24">
+                    2023-24
+                </option>
+
+            </select>
+
+            <span class="calendar-icon">
+                ▣
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="overview-stat-grid">
+
+
+        <!-- TOTAL STUDENTS -->
+
+        <article class="overview-stat-card">
+
+            <div class="overview-stat-icon students-icon">
+                ♙
+            </div>
+
+            <div class="overview-stat-content">
+
+                <span>
+                    Total Students
+                </span>
+
+                <strong>
+                    1,260
+                </strong>
+
+                <small class="positive-change">
+                    ↑ 8.2%
+                    <span>vs 2024-25</span>
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- PLACED STUDENTS -->
+
+        <article class="overview-stat-card">
+
+            <div class="overview-stat-icon placed-icon">
+                ✓
+            </div>
+
+            <div class="overview-stat-content">
+
+                <span>
+                    Placed Students
+                </span>
+
+                <strong>
+                    865
+                </strong>
+
+                <small class="positive-change">
+                    ↑ 11.3%
+                    <span>vs 2024-25</span>
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- STUDENTS IN DRIVES -->
+
+        <article class="overview-stat-card">
+
+            <div class="overview-stat-icon drives-students-icon">
+                ♙
+            </div>
+
+            <div class="overview-stat-content">
+
+                <span>
+                    Students in Drives
+                </span>
+
+                <strong>
+                    1,045
+                </strong>
+
+                <small class="positive-change">
+                    ↑ 9.6%
+                    <span>vs 2024-25</span>
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ACTIVE COMPANIES -->
+
+        <article class="overview-stat-card">
+
+            <div class="overview-stat-icon companies-icon">
+                ▣
+            </div>
+
+            <div class="overview-stat-content">
+
+                <span>
+                    Active Companies
+                </span>
+
+                <strong>
+                    42
+                </strong>
+
+                <small class="positive-change">
+                    ↑ 7.7%
+                    <span>vs 2024-25</span>
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ACTIVE DRIVES -->
+
+        <article class="overview-stat-card">
+
+            <div class="overview-stat-icon active-drives-icon">
+                ▥
+            </div>
+
+            <div class="overview-stat-content">
+
+                <span>
+                    Active Drives
+                </span>
+
+                <strong>
+                    18
+                </strong>
+
+                <small class="negative-change">
+                    ↓ 5.3%
+                    <span>vs 2024-25</span>
+                </small>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FIRST CONTENT ROW
+    ====================================================== -->
+
+    <section class="overview-main-grid">
+
+
+        <!-- =================================================
+             CURRENT SESSION PLACEMENT
+        ================================================== -->
+
+        <article class="overview-card placement-session-card">
+
+            <div class="overview-card-header">
+
+                <div>
+
+                    <h2>
+                        Placement Overview (Current Session)
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="session-chart-area">
+
+
+                <!-- DONUT -->
+
+                <div class="session-donut-wrapper">
+
+                    <div class="session-donut">
+
+                        <div class="session-donut-center">
+
+                            <strong>
+                                1,260
+                            </strong>
+
+                            <span>
+                                Total Students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LEGEND -->
+
+                <div class="session-legend">
+
+
+                    <div class="session-legend-item">
+
+                        <span class="session-dot placed-dot"></span>
+
+                        <div>
+
+                            <strong>
+                                Placed Students
+                            </strong>
+
+                            <span>
+                                865 (68.7%)
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="session-legend-item">
+
+                        <span class="session-dot drives-dot"></span>
+
+                        <div>
+
+                            <strong>
+                                In Drives (Yet to Placed)
+                            </strong>
+
+                            <span>
+                                180 (14.3%)
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="session-legend-item">
+
+                        <span class="session-dot yet-dot"></span>
+
+                        <div>
+
+                            <strong>
+                                Yet to Appear
+                            </strong>
+
+                            <span>
+                                215 (17.0%)
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="placement-rate-message">
+
+                <span class="rate-message-icon">
+                    ↗
+                </span>
+
+                <span>
+                    Placement rate for 2025-26 is
+                    <strong>68.7%</strong>
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             YEAR-WISE TREND
+        ================================================== -->
+
+        <article class="overview-card year-trend-card">
+
+            <div class="overview-card-header">
+
+                <div>
+
+                    <h2>
+                        Year-wise Placement Trend
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="trend-chart-container">
+
+
+                <div class="trend-legend">
+
+                    <span class="trend-legend-item">
+
+                        <i class="trend-bar-legend"></i>
+
+                        Placed Students
+
+                    </span>
+
+
+                    <span class="trend-legend-item">
+
+                        <i class="trend-line-legend"></i>
+
+                        Placement Rate (%)
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="trend-chart">
+
+                    <div class="trend-y-axis">
+
+                        <span>1250</span>
+                        <span>1000</span>
+                        <span>750</span>
+                        <span>500</span>
+                        <span>250</span>
+                        <span>0</span>
+
+                    </div>
+
+
+                    <div class="trend-plot">
+
+
+                        <div class="trend-grid-line line-1"></div>
+                        <div class="trend-grid-line line-2"></div>
+                        <div class="trend-grid-line line-3"></div>
+                        <div class="trend-grid-line line-4"></div>
+                        <div class="trend-grid-line line-5"></div>
+                        <div class="trend-grid-line line-6"></div>
+
+
+
+                        <div
+                            class="trend-bar bar-2022"
+                            data-value="520"
+                        >
+                            <span>520</span>
+                        </div>
+
+
+                        <div
+                            class="trend-bar bar-2023"
+                            data-value="640"
+                        >
+                            <span>640</span>
+                        </div>
+
+
+                        <div
+                            class="trend-bar bar-2024"
+                            data-value="777"
+                        >
+                            <span>777</span>
+                        </div>
+
+
+                        <div
+                            class="trend-bar bar-2025"
+                            data-value="865"
+                        >
+                            <span>865</span>
+                        </div>
+
+
+
+                        <svg
+                            class="placement-rate-line"
+                            viewBox="0 0 500 220"
+                            preserveAspectRatio="none"
+                        >
+
+                            <polyline
+                                points="
+                                    55,118
+                                    185,91
+                                    315,65
+                                    445,45
+                                "
+                            />
+
+                            <circle
+                                cx="55"
+                                cy="118"
+                                r="5"
+                            />
+
+                            <circle
+                                cx="185"
+                                cy="91"
+                                r="5"
+                            />
+
+                            <circle
+                                cx="315"
+                                cy="65"
+                                r="5"
+                            />
+
+                            <circle
+                                cx="445"
+                                cy="45"
+                                r="5"
+                            />
+
+                        </svg>
+
+
+                        <div class="rate-label rate-1">
+                            52.1%
+                        </div>
+
+                        <div class="rate-label rate-2">
+                            58.7%
+                        </div>
+
+                        <div class="rate-label rate-3">
+                            63.4%
+                        </div>
+
+                        <div class="rate-label rate-4">
+                            68.7%
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="trend-x-axis">
+
+                        <span>
+                            2022-23
+                        </span>
+
+                        <span>
+                            2023-24
+                        </span>
+
+                        <span>
+                            2024-25
+                        </span>
+
+                        <span>
+                            2025-26
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             TOP COMPANIES
+        ================================================== -->
+
+        <article class="overview-card top-companies-card">
+
+            <div class="overview-card-header">
+
+                <h2>
+                    Top 5 Companies by Highest Placements
+                </h2>
+
+            </div>
+
+
+            <div class="companies-table">
+
+
+                <div class="companies-table-header">
+
+                    <span>
+                        Company
+                    </span>
+
+                    <span>
+                        Placed Students
+                    </span>
+
+                </div>
+
+
+
+                <div class="company-placement-row">
+
+                    <strong>
+                        TCS
+                    </strong>
+
+                    <div class="company-placement-value">
+
+                        <span>
+                            186
+                        </span>
+
+                        <div class="company-progress">
+                            <span style="width: 100%;"></span>
+                        </div>
+
+                        <small>
+                            21.5%
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="company-placement-row">
+
+                    <strong>
+                        Infosys
+                    </strong>
+
+                    <div class="company-placement-value">
+
+                        <span>
+                            142
+                        </span>
+
+                        <div class="company-progress">
+                            <span style="width: 76%;"></span>
+                        </div>
+
+                        <small>
+                            16.4%
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="company-placement-row">
+
+                    <strong>
+                        Wipro
+                    </strong>
+
+                    <div class="company-placement-value">
+
+                        <span>
+                            98
+                        </span>
+
+                        <div class="company-progress">
+                            <span style="width: 53%;"></span>
+                        </div>
+
+                        <small>
+                            11.3%
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="company-placement-row">
+
+                    <strong>
+                        Accenture
+                    </strong>
+
+                    <div class="company-placement-value">
+
+                        <span>
+                            76
+                        </span>
+
+                        <div class="company-progress">
+                            <span style="width: 41%;"></span>
+                        </div>
+
+                        <small>
+                            8.8%
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="company-placement-row">
+
+                    <strong>
+                        Capgemini
+                    </strong>
+
+                    <div class="company-placement-value">
+
+                        <span>
+                            65
+                        </span>
+
+                        <div class="company-progress">
+                            <span style="width: 35%;"></span>
+                        </div>
+
+                        <small>
+                            7.5%
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <a
+                href="{{ url_for('authority_companies') }}"
+                class="overview-bottom-link"
+            >
+                View all companies
+                <span>→</span>
+            </a>
+
+        </article>
+
+
+
+        <!-- =================================================
+             HIGHEST PACKAGE
+        ================================================== -->
+
+        <article class="overview-card highest-package-card">
+
+            <div class="package-card-heading">
+
+                <div>
+
+                    <h2>
+                        Highest Package Offered
+                    </h2>
+
+                </div>
+
+                <span class="package-trophy">
+                    🏆
+                </span>
+
+            </div>
+
+
+            <div class="highest-package-value">
+                ₹ 28.00
+                <span>LPA</span>
+            </div>
+
+
+            <p class="package-company">
+                by Microsoft
+            </p>
+
+
+            <div class="package-table">
+
+                <div class="package-table-heading">
+
+                    <span>
+                        Company
+                    </span>
+
+                    <span>
+                        Highest Package
+                    </span>
+
+                </div>
+
+
+                <div>
+                    <span>Microsoft</span>
+                    <span>₹ 28.00 LPA</span>
+                </div>
+
+                <div>
+                    <span>Adobe</span>
+                    <span>₹ 22.00 LPA</span>
+                </div>
+
+                <div>
+                    <span>Google</span>
+                    <span>₹ 21.50 LPA</span>
+                </div>
+
+                <div>
+                    <span>Amazon</span>
+                    <span>₹ 20.75 LPA</span>
+                </div>
+
+                <div>
+                    <span>Morgan Stanley</span>
+                    <span>₹ 19.50 LPA</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             AVERAGE PACKAGE
+        ================================================== -->
+
+        <article class="overview-card average-package-card">
+
+            <div class="overview-card-header">
+
+                <h2>
+                    Average Package by Company
+                </h2>
+
+            </div>
+
+
+            <div class="average-package-table">
+
+
+                <div class="average-package-heading">
+
+                    <span>
+                        Company
+                    </span>
+
+                    <span>
+                        Average Package (LPA)
+                    </span>
+
+                </div>
+
+
+
+                <div class="average-package-row">
+
+                    <strong>Microsoft</strong>
+
+                    <span>
+                        ₹ 16.80 LPA
+                    </span>
+
+                    <div class="average-progress">
+                        <span style="width: 100%;"></span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="average-package-row">
+
+                    <strong>Adobe</strong>
+
+                    <span>
+                        ₹ 14.50 LPA
+                    </span>
+
+                    <div class="average-progress">
+                        <span style="width: 86%;"></span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="average-package-row">
+
+                    <strong>Google</strong>
+
+                    <span>
+                        ₹ 13.90 LPA
+                    </span>
+
+                    <div class="average-progress">
+                        <span style="width: 83%;"></span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="average-package-row">
+
+                    <strong>Amazon</strong>
+
+                    <span>
+                        ₹ 12.60 LPA
+                    </span>
+
+                    <div class="average-progress">
+                        <span style="width: 75%;"></span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="average-package-row">
+
+                    <strong>TCS</strong>
+
+                    <span>
+                        ₹ 9.80 LPA
+                    </span>
+
+                    <div class="average-progress">
+                        <span style="width: 58%;"></span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <a
+                href="{{ url_for('authority_company_reports') }}"
+                class="overview-bottom-link"
+            >
+                View full report
+                <span>→</span>
+            </a>
+
+        </article>
+
+
+
+        <!-- =================================================
+             DRIVE STATISTICS
+        ================================================== -->
+
+        <article class="overview-card drive-statistics-card">
+
+            <div class="overview-card-header">
+
+                <h2>
+                    Drive Statistics
+                </h2>
+
+            </div>
+
+
+            <div class="drive-stat-list">
+
+
+                <div class="drive-stat-item">
+
+                    <span class="drive-stat-icon purple">
+                        ▣
+                    </span>
+
+                    <div>
+                        <span>
+                            Total Drives Conducted
+                        </span>
+
+                        <strong>
+                            48
+                        </strong>
+                    </div>
+
+                    <small class="positive-change">
+                        ↑ 6 vs last session
+                    </small>
+
+                </div>
+
+
+
+                <div class="drive-stat-item">
+
+                    <span class="drive-stat-icon blue">
+                        ▥
+                    </span>
+
+                    <div>
+                        <span>
+                            On Campus Drives
+                        </span>
+
+                        <strong>
+                            32
+                        </strong>
+                    </div>
+
+                    <small>
+                        66.7%
+                    </small>
+
+                </div>
+
+
+
+                <div class="drive-stat-item">
+
+                    <span class="drive-stat-icon purple">
+                        ▣
+                    </span>
+
+                    <div>
+                        <span>
+                            Off Campus Drives
+                        </span>
+
+                        <strong>
+                            16
+                        </strong>
+                    </div>
+
+                    <small>
+                        33.3%
+                    </small>
+
+                </div>
+
+
+
+                <div class="drive-stat-item">
+
+                    <span class="drive-stat-icon orange">
+                        ▣
+                    </span>
+
+                    <div>
+                        <span>
+                            Upcoming Drives
+                        </span>
+
+                        <strong>
+                            6
+                        </strong>
+                    </div>
+
+                    <small>
+                        In next 60 days
+                    </small>
+
+                </div>
+
+
+
+                <div class="drive-stat-item">
+
+                    <span class="drive-stat-icon green">
+                        ✓
+                    </span>
+
+                    <div>
+                        <span>
+                            Completed Drives
+                        </span>
+
+                        <strong>
+                            42
+                        </strong>
+                    </div>
+
+                    <small>
+                        87.5%
+                    </small>
+
+                </div>
+
+
+            </div>
+
+        </article>
+
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DEPARTMENT SUMMARY
+    ====================================================== -->
+
+    <section class="overview-card department-summary-card">
+
+        <div class="overview-card-header">
+
+            <div>
+
+                <h2>
+                    Department-wise Placement Summary
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="department-table-wrapper">
+
+            <table class="department-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            Total Students
+                        </th>
+
+                        <th>
+                            Placed Students
+                        </th>
+
+                        <th>
+                            Placement Rate
+                        </th>
+
+                        <th>
+                            Highest Package (LPA)
+                        </th>
+
+                        <th>
+                            Average Package (LPA)
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            Computer Science &amp; Engineering
+                        </td>
+
+                        <td>
+                            420
+                        </td>
+
+                        <td>
+                            312
+                        </td>
+
+                        <td>
+
+                            <div class="department-rate">
+
+                                <span>
+                                    74.29%
+                                </span>
+
+                                <div class="department-progress">
+                                    <span style="width: 74.29%;"></span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            28.00
+                        </td>
+
+                        <td>
+                            13.85
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            Information Technology
+                        </td>
+
+                        <td>
+                            280
+                        </td>
+
+                        <td>
+                            196
+                        </td>
+
+                        <td>
+
+                            <div class="department-rate">
+
+                                <span>
+                                    70.00%
+                                </span>
+
+                                <div class="department-progress">
+                                    <span style="width: 70%;"></span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            24.00
+                        </td>
+
+                        <td>
+                            12.60
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            Electronics &amp; Communication
+                        </td>
+
+                        <td>
+                            220
+                        </td>
+
+                        <td>
+                            139
+                        </td>
+
+                        <td>
+
+                            <div class="department-rate">
+
+                                <span>
+                                    63.18%
+                                </span>
+
+                                <div class="department-progress">
+                                    <span style="width: 63.18%;"></span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            18.50
+                        </td>
+
+                        <td>
+                            9.85
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            Mechanical Engineering
+                        </td>
+
+                        <td>
+                            190
+                        </td>
+
+                        <td>
+                            112
+                        </td>
+
+                        <td>
+
+                            <div class="department-rate">
+
+                                <span>
+                                    58.95%
+                                </span>
+
+                                <div class="department-progress">
+                                    <span style="width: 58.95%;"></span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            16.00
+                        </td>
+
+                        <td>
+                            8.90
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            Civil Engineering
+                        </td>
+
+                        <td>
+                            150
+                        </td>
+
+                        <td>
+                            82
+                        </td>
+
+                        <td>
+
+                            <div class="department-rate">
+
+                                <span>
+                                    54.67%
+                                </span>
+
+                                <div class="department-progress">
+                                    <span style="width: 54.67%;"></span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            14.50
+                        </td>
+
+                        <td>
+                            7.80
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/placement_overview.js'
+    ) }}"
+></script>
+
+{% endblock %}

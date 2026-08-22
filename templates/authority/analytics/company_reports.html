@@ -1,0 +1,1005 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Company Reports | Authority | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/authority/company_reports.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="company-reports-page">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="company-reports-header">
+
+        <div>
+
+            <span class="page-eyebrow">
+                ANALYTICS
+            </span>
+
+            <h1>
+                Company Reports
+            </h1>
+
+            <p>
+                Analyse company participation, hiring performance and packages.
+            </p>
+
+        </div>
+
+
+        <div class="company-header-actions">
+
+            <select
+                id="companyAcademicYear"
+                class="company-select"
+            >
+
+                <option value="2026-27">
+                    2026-27
+                </option>
+
+                <option value="2025-26">
+                    2025-26
+                </option>
+
+                <option value="2024-25">
+                    2024-25
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="company-export-btn"
+                id="companyExportBtn"
+            >
+                ↓ Export Report
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SUMMARY -->
+
+    <section class="company-summary">
+
+
+        <div class="company-summary-card">
+
+            <div class="company-summary-icon purple">
+                ▦
+            </div>
+
+            <div>
+
+                <span>
+                    Total Companies
+                </span>
+
+                <strong>
+                    68
+                </strong>
+
+                <small class="positive">
+                    ↑ 8.5% vs last year
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="company-summary-card">
+
+            <div class="company-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Active Companies
+                </span>
+
+                <strong>
+                    42
+                </strong>
+
+                <small class="positive">
+                    ↑ 7.7% vs last year
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="company-summary-card">
+
+            <div class="company-summary-icon orange">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    Upcoming Companies
+                </span>
+
+                <strong>
+                    14
+                </strong>
+
+                <small>
+                    Next 60 days
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="company-summary-card">
+
+            <div class="company-summary-icon blue">
+                ★
+            </div>
+
+            <div>
+
+                <span>
+                    Offers Generated
+                </span>
+
+                <strong>
+                    420
+                </strong>
+
+                <small class="positive">
+                    ↑ 12.4% this year
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- TOP COMPANY PERFORMANCE -->
+
+    <section class="company-main-grid">
+
+
+        <div class="company-card company-performance-card">
+
+            <div class="company-card-header">
+
+                <div>
+
+                    <h2>
+                        Company Hiring Performance
+                    </h2>
+
+                    <p>
+                        Students selected by top recruiting companies.
+                    </p>
+
+                </div>
+
+
+                <select
+                    id="companyPerformanceFilter"
+                    class="mini-company-select"
+                >
+
+                    <option value="selected">
+                        Students Selected
+                    </option>
+
+                    <option value="offers">
+                        Offers Generated
+                    </option>
+
+                    <option value="drives">
+                        Drives Conducted
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="company-chart">
+
+                <div class="company-chart-row">
+
+                    <div class="company-chart-label">
+                        <strong>TCS</strong>
+                        <span>82 students</span>
+                    </div>
+
+                    <div class="company-chart-track">
+
+                        <div
+                            class="company-chart-fill"
+                            style="width:100%;"
+                        ></div>
+
+                    </div>
+
+                    <strong class="company-chart-value">
+                        82
+                    </strong>
+
+                </div>
+
+
+
+                <div class="company-chart-row">
+
+                    <div class="company-chart-label">
+                        <strong>Infosys</strong>
+                        <span>65 students</span>
+                    </div>
+
+                    <div class="company-chart-track">
+
+                        <div
+                            class="company-chart-fill"
+                            style="width:79%;"
+                        ></div>
+
+                    </div>
+
+                    <strong class="company-chart-value">
+                        65
+                    </strong>
+
+                </div>
+
+
+
+                <div class="company-chart-row">
+
+                    <div class="company-chart-label">
+                        <strong>Wipro</strong>
+                        <span>53 students</span>
+                    </div>
+
+                    <div class="company-chart-track">
+
+                        <div
+                            class="company-chart-fill"
+                            style="width:65%;"
+                        ></div>
+
+                    </div>
+
+                    <strong class="company-chart-value">
+                        53
+                    </strong>
+
+                </div>
+
+
+
+                <div class="company-chart-row">
+
+                    <div class="company-chart-label">
+                        <strong>Accenture</strong>
+                        <span>41 students</span>
+                    </div>
+
+                    <div class="company-chart-track">
+
+                        <div
+                            class="company-chart-fill"
+                            style="width:50%;"
+                        ></div>
+
+                    </div>
+
+                    <strong class="company-chart-value">
+                        41
+                    </strong>
+
+                </div>
+
+
+
+                <div class="company-chart-row">
+
+                    <div class="company-chart-label">
+                        <strong>Capgemini</strong>
+                        <span>38 students</span>
+                    </div>
+
+                    <div class="company-chart-track">
+
+                        <div
+                            class="company-chart-fill"
+                            style="width:46%;"
+                        ></div>
+
+                    </div>
+
+                    <strong class="company-chart-value">
+                        38
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COMPANY STATUS -->
+
+        <div class="company-card company-status-card">
+
+            <div class="company-card-header">
+
+                <div>
+
+                    <h2>
+                        Company Status
+                    </h2>
+
+                    <p>
+                        Current company pipeline.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="company-status-list">
+
+
+                <div class="company-status-row">
+
+                    <div>
+
+                        <span class="company-status-dot green"></span>
+
+                        <span>
+                            Active
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        42
+                    </strong>
+
+                </div>
+
+
+                <div class="company-status-row">
+
+                    <div>
+
+                        <span class="company-status-dot blue"></span>
+
+                        <span>
+                            Upcoming
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        14
+                    </strong>
+
+                </div>
+
+
+                <div class="company-status-row">
+
+                    <div>
+
+                        <span class="company-status-dot purple"></span>
+
+                        <span>
+                            Completed
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        10
+                    </strong>
+
+                </div>
+
+
+                <div class="company-status-row">
+
+                    <div>
+
+                        <span class="company-status-dot red"></span>
+
+                        <span>
+                            Inactive
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        02
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- PACKAGE + RECRUITMENT -->
+
+    <section class="company-secondary-grid">
+
+
+        <!-- PACKAGE -->
+
+        <div class="company-card package-card">
+
+            <div class="company-card-header">
+
+                <div>
+
+                    <h2>
+                        Average Package by Company
+                    </h2>
+
+                    <p>
+                        Average package offered by leading recruiters.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="package-list">
+
+
+                <div class="package-row">
+
+                    <div class="package-company">
+                        Microsoft
+                    </div>
+
+                    <strong>
+                        ₹ 16.80 LPA
+                    </strong>
+
+                    <div class="package-track">
+                        <div style="width:100%;"></div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div class="package-company">
+                        Adobe
+                    </div>
+
+                    <strong>
+                        ₹ 14.50 LPA
+                    </strong>
+
+                    <div class="package-track">
+                        <div style="width:86%;"></div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div class="package-company">
+                        Google
+                    </div>
+
+                    <strong>
+                        ₹ 13.90 LPA
+                    </strong>
+
+                    <div class="package-track">
+                        <div style="width:83%;"></div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div class="package-company">
+                        Amazon
+                    </div>
+
+                    <strong>
+                        ₹ 12.60 LPA
+                    </strong>
+
+                    <div class="package-track">
+                        <div style="width:75%;"></div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="package-row">
+
+                    <div class="package-company">
+                        TCS
+                    </div>
+
+                    <strong>
+                        ₹ 9.80 LPA
+                    </strong>
+
+                    <div class="package-track">
+                        <div style="width:58%;"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- HIRING TYPE -->
+
+        <div class="company-card hiring-type-card">
+
+            <div class="company-card-header">
+
+                <div>
+
+                    <h2>
+                        Hiring Type
+                    </h2>
+
+                    <p>
+                        Distribution of company participation.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="hiring-donut-wrapper">
+
+                <div class="hiring-donut">
+
+                    <div class="hiring-donut-inner">
+
+                        <strong>
+                            68
+                        </strong>
+
+                        <span>
+                            Companies
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hiring-legend">
+
+
+                    <div class="hiring-legend-item">
+
+                        <div>
+
+                            <span class="legend-dot blue"></span>
+
+                            <span>
+                                On Campus
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            42
+                        </strong>
+
+                    </div>
+
+
+                    <div class="hiring-legend-item">
+
+                        <div>
+
+                            <span class="legend-dot purple"></span>
+
+                            <span>
+                                Off Campus
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            26
+                        </strong>
+
+                    </div>
+
+
+                    <div class="hiring-legend-item">
+
+                        <div>
+
+                            <span class="legend-dot orange"></span>
+
+                            <span>
+                                New Recruiters
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            18
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- COMPANY TABLE -->
+
+    <section class="company-card company-table-card">
+
+        <div class="company-card-header">
+
+            <div>
+
+                <h2>
+                    Company-wise Placement Performance
+                </h2>
+
+                <p>
+                    Detailed performance of participating companies.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="company-table-wrapper">
+
+            <table class="company-report-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Company
+                        </th>
+
+                        <th>
+                            Drives
+                        </th>
+
+                        <th>
+                            Applicants
+                        </th>
+
+                        <th>
+                            Selected
+                        </th>
+
+                        <th>
+                            Selection Rate
+                        </th>
+
+                        <th>
+                            Avg Package
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>TCS</strong>
+                            <span>Tata Consultancy Services</span>
+                        </td>
+
+                        <td>6</td>
+
+                        <td>210</td>
+
+                        <td>82</td>
+
+                        <td>
+                            <div class="table-rate">
+
+                                <strong>39.0%</strong>
+
+                                <div>
+                                    <span style="width:39%;"></span>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            ₹ 7.20 LPA
+                        </td>
+
+                        <td>
+                            <span class="table-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Infosys</strong>
+                            <span>Infosys Limited</span>
+                        </td>
+
+                        <td>5</td>
+
+                        <td>185</td>
+
+                        <td>65</td>
+
+                        <td>
+                            <div class="table-rate">
+
+                                <strong>35.1%</strong>
+
+                                <div>
+                                    <span style="width:35%;"></span>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            ₹ 6.80 LPA
+                        </td>
+
+                        <td>
+                            <span class="table-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Wipro</strong>
+                            <span>Wipro Limited</span>
+                        </td>
+
+                        <td>4</td>
+
+                        <td>245</td>
+
+                        <td>53</td>
+
+                        <td>
+                            <div class="table-rate">
+
+                                <strong>21.6%</strong>
+
+                                <div>
+                                    <span style="width:22%;"></span>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            ₹ 6.20 LPA
+                        </td>
+
+                        <td>
+                            <span class="table-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Accenture</strong>
+                            <span>Accenture India</span>
+                        </td>
+
+                        <td>3</td>
+
+                        <td>192</td>
+
+                        <td>41</td>
+
+                        <td>
+                            <div class="table-rate">
+
+                                <strong>21.4%</strong>
+
+                                <div>
+                                    <span style="width:21%;"></span>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            ₹ 7.50 LPA
+                        </td>
+
+                        <td>
+                            <span class="table-status upcoming">
+                                Upcoming
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Capgemini</strong>
+                            <span>Capgemini Technology</span>
+                        </td>
+
+                        <td>3</td>
+
+                        <td>210</td>
+
+                        <td>38</td>
+
+                        <td>
+                            <div class="table-rate">
+
+                                <strong>18.1%</strong>
+
+                                <div>
+                                    <span style="width:18%;"></span>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            ₹ 6.30 LPA
+                        </td>
+
+                        <td>
+                            <span class="table-status completed">
+                                Completed
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="company-report-footer">
+
+        <span>
+            Report generated for academic session 2026-27
+        </span>
+
+        <span>
+            Campus Placement Portal
+        </span>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/authority/company_reports.js'
+    ) }}"
+></script>
+
+{% endblock %}
