@@ -1,0 +1,1545 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    NOC Management | Admin
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/noc.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="noc-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="noc-header">
+
+        <div>
+
+            <div class="noc-breadcrumb">
+                <span>Students</span>
+                <span>›</span>
+                <strong>NOC Management</strong>
+            </div>
+
+            <h1>NOC Management</h1>
+
+            <p>
+                Review and manage student No Objection Certificate requests.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="noc-primary-btn"
+            id="addNocBtn"
+        >
+            <span>＋</span>
+            Create NOC
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="noc-stats">
+
+        <article class="noc-stat-card">
+
+            <div class="noc-stat-icon purple">
+                ◫
+            </div>
+
+            <div>
+                <span>Total Requests</span>
+                <strong>184</strong>
+                <small>This academic session</small>
+            </div>
+
+        </article>
+
+
+        <article class="noc-stat-card">
+
+            <div class="noc-stat-icon orange">
+                ◷
+            </div>
+
+            <div>
+                <span>Pending</span>
+                <strong>27</strong>
+                <small>Awaiting review</small>
+            </div>
+
+        </article>
+
+
+        <article class="noc-stat-card">
+
+            <div class="noc-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Approved</span>
+                <strong>142</strong>
+                <small>NOC issued</small>
+            </div>
+
+        </article>
+
+
+        <article class="noc-stat-card">
+
+            <div class="noc-stat-icon red">
+                !
+            </div>
+
+            <div>
+                <span>Rejected</span>
+                <strong>15</strong>
+                <small>Requires correction</small>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLEGE DISTRIBUTION
+    ====================================================== -->
+
+    <section class="noc-college-card">
+
+        <div class="noc-section-title">
+
+            <div>
+
+                <h2>NOC Requests by College</h2>
+
+                <p>
+                    Current distribution of NOC applications.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="noc-college-grid">
+
+            <div class="noc-college-item">
+
+                <div class="noc-college-top">
+                    <strong>PCE</strong>
+                    <span>62 requests</span>
+                </div>
+
+                <div class="noc-progress">
+                    <span style="width: 84%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="noc-college-item">
+
+                <div class="noc-college-top">
+                    <strong>PIET</strong>
+                    <span>48 requests</span>
+                </div>
+
+                <div class="noc-progress">
+                    <span style="width: 67%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="noc-college-item">
+
+                <div class="noc-college-top">
+                    <strong>PU</strong>
+                    <span>41 requests</span>
+                </div>
+
+                <div class="noc-progress">
+                    <span style="width: 57%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="noc-college-item">
+
+                <div class="noc-college-top">
+                    <strong>JIET</strong>
+                    <span>33 requests</span>
+                </div>
+
+                <div class="noc-progress">
+                    <span style="width: 46%;"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NOC RECORD CARD
+    ====================================================== -->
+
+    <section class="noc-record-card">
+
+        <div class="noc-record-header">
+
+            <div>
+
+                <h2>NOC Requests</h2>
+
+                <p>
+                    Review submitted NOC requests and their current status.
+                </p>
+
+            </div>
+
+
+            <div class="noc-record-count">
+
+                <strong id="nocRecordCount">
+                    8
+                </strong>
+
+                requests
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="noc-toolbar">
+
+            <div class="noc-search">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+
+                </svg>
+
+
+                <input
+                    type="text"
+                    id="nocSearch"
+                    placeholder="Search student, roll number or purpose..."
+                >
+
+            </div>
+
+
+            <div class="noc-filters">
+
+                <select
+                    class="admin-select"
+                    id="nocCollege"
+                >
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="nocStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="approved">
+                        Approved
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="nocType"
+                >
+
+                    <option value="all">
+                        All Types
+                    </option>
+
+                    <option value="off-campus">
+                        Off-Campus
+                    </option>
+
+                    <option value="higher-studies">
+                        Higher Studies
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="noc-table-wrapper">
+
+            <table class="noc-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+                        <th>College</th>
+                        <th>Roll Number</th>
+                        <th>Purpose</th>
+                        <th>Submitted</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="nocTableBody">
+
+
+                    <!-- =================================================
+                         RECORD 1
+                    ================================================== -->
+
+                    <tr
+                        data-name="rahul sharma"
+                        data-roll="22pce001"
+                        data-college="pce"
+                        data-purpose="off-campus"
+                        data-status="approved"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rahul Sharma
+                                    </strong>
+
+                                    <span>
+                                        rahul.sharma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PCE001
+                        </td>
+
+
+                        <td>
+                            Off-Campus
+                        </td>
+
+
+                        <td>
+                            20 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="noc-actions">
+
+                                <button
+                                    class="noc-view-btn"
+                                    data-view-noc
+                                >
+                                    View
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 2
+                    ================================================== -->
+
+                    <tr
+                        data-name="priya verma"
+                        data-roll="22piet014"
+                        data-college="piet"
+                        data-purpose="off-campus"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    PV
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Priya Verma
+                                    </strong>
+
+                                    <span>
+                                        priya.verma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PIET014
+                        </td>
+
+
+                        <td>
+                            Off-Campus
+                        </td>
+
+
+                        <td>
+                            22 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="noc-actions">
+
+                                <button
+                                    class="noc-view-btn"
+                                    data-view-noc
+                                >
+                                    View
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 3
+                    ================================================== -->
+
+                    <tr
+                        data-name="aman gupta"
+                        data-roll="22pu031"
+                        data-college="pu"
+                        data-purpose="higher-studies"
+                        data-status="approved"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    AG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Aman Gupta
+                                    </strong>
+
+                                    <span>
+                                        aman.gupta@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PU031
+                        </td>
+
+
+                        <td>
+                            Higher Studies
+                        </td>
+
+
+                        <td>
+                            21 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="noc-view-btn"
+                                data-view-noc
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 4
+                    ================================================== -->
+
+                    <tr
+                        data-name="neha singh"
+                        data-roll="22jiet042"
+                        data-college="jiet"
+                        data-purpose="off-campus"
+                        data-status="rejected"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    NS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Neha Singh
+                                    </strong>
+
+                                    <span>
+                                        neha.singh@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22JIET042
+                        </td>
+
+
+                        <td>
+                            Off-Campus
+                        </td>
+
+
+                        <td>
+                            19 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status rejected">
+                                Rejected
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="noc-view-btn"
+                                data-view-noc
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 5
+                    ================================================== -->
+
+                    <tr
+                        data-name="rohit meena"
+                        data-roll="22pce058"
+                        data-college="pce"
+                        data-purpose="other"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    RM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rohit Meena
+                                    </strong>
+
+                                    <span>
+                                        rohit.meena@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PCE058
+                        </td>
+
+
+                        <td>
+                            Other
+                        </td>
+
+
+                        <td>
+                            23 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="noc-view-btn"
+                                data-view-noc
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 6
+                    ================================================== -->
+
+                    <tr
+                        data-name="kajal joshi"
+                        data-roll="22piet076"
+                        data-college="piet"
+                        data-purpose="higher-studies"
+                        data-status="approved"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    KJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Kajal Joshi
+                                    </strong>
+
+                                    <span>
+                                        kajal.joshi@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PIET076
+                        </td>
+
+
+                        <td>
+                            Higher Studies
+                        </td>
+
+
+                        <td>
+                            18 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="noc-view-btn"
+                                data-view-noc
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 7
+                    ================================================== -->
+
+                    <tr
+                        data-name="vivek kumar"
+                        data-roll="22pu089"
+                        data-college="pu"
+                        data-purpose="off-campus"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    VK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Vivek Kumar
+                                    </strong>
+
+                                    <span>
+                                        vivek.kumar@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PU089
+                        </td>
+
+
+                        <td>
+                            Off-Campus
+                        </td>
+
+
+                        <td>
+                            23 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="noc-view-btn"
+                                data-view-noc
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 8
+                    ================================================== -->
+
+                    <tr
+                        data-name="simran kaur"
+                        data-roll="22jiet101"
+                        data-college="jiet"
+                        data-purpose="other"
+                        data-status="approved"
+                    >
+
+                        <td>
+
+                            <div class="noc-student-cell">
+
+                                <div class="noc-avatar">
+                                    SK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Simran Kaur
+                                    </strong>
+
+                                    <span>
+                                        simran.kaur@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="noc-college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22JIET101
+                        </td>
+
+
+                        <td>
+                            Other
+                        </td>
+
+
+                        <td>
+                            17 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="noc-status approved">
+                                Approved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="noc-view-btn"
+                                data-view-noc
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="noc-empty"
+                id="nocEmpty"
+                hidden
+            >
+
+                <div class="noc-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No NOC requests found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    class="noc-secondary-btn"
+                    id="clearNocFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="noc-footer">
+
+            <span>
+                Showing
+                <strong id="nocFooterCount">
+                    8
+                </strong>
+                requests
+            </span>
+
+
+            <div class="noc-pagination">
+
+                <button
+                    type="button"
+                    class="noc-page-btn disabled"
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="noc-page-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="noc-page-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="noc-page-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="noc-page-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NOC DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="noc-modal"
+        id="nocDetailsModal"
+        hidden
+    >
+
+        <div
+            class="noc-modal-backdrop"
+            data-close-noc
+        ></div>
+
+
+        <div class="noc-modal-card">
+
+            <div class="noc-modal-header">
+
+                <div>
+
+                    <span>
+                        NOC REQUEST
+                    </span>
+
+                    <h2 id="modalNocStudent">
+                        Rahul Sharma
+                    </h2>
+
+                    <p id="modalNocRoll">
+                        22PCE001
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="noc-modal-close"
+                    data-close-noc
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="noc-modal-body">
+
+                <div class="noc-profile">
+
+                    <div
+                        class="noc-modal-avatar"
+                        id="modalNocAvatar"
+                    >
+                        RS
+                    </div>
+
+                    <div>
+
+                        <strong id="modalNocCollege">
+                            PCE
+                        </strong>
+
+                        <span id="modalNocPurpose">
+                            Off-Campus
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="noc-detail-grid">
+
+                    <div>
+
+                        <span>
+                            Student
+                        </span>
+
+                        <strong id="modalNocName">
+                            Rahul Sharma
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Roll Number
+                        </span>
+
+                        <strong id="modalNocRollDetail">
+                            22PCE001
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Request Type
+                        </span>
+
+                        <strong id="modalNocType">
+                            Off-Campus
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Submitted
+                        </span>
+
+                        <strong id="modalNocDate">
+                            20 Aug 2026
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="noc-reason-box">
+
+                    <span>
+                        Student Declaration
+                    </span>
+
+                    <p>
+                        I request the institution to issue an NOC
+                        for the stated purpose and confirm that the
+                        information submitted by me is correct.
+                    </p>
+
+                </div>
+
+
+                <div class="noc-review-box">
+
+                    <div>
+
+                        <span>
+                            Current Status
+                        </span>
+
+                        <strong id="modalNocStatus">
+                            Approved
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Academic Session
+                        </span>
+
+                        <strong>
+                            2025-26
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="noc-modal-footer">
+
+                <button
+                    type="button"
+                    class="noc-secondary-btn"
+                    data-close-noc
+                >
+                    Close
+                </button>
+
+
+                <button
+                    type="button"
+                    class="noc-danger-btn"
+                    id="rejectNocBtn"
+                >
+                    Reject
+                </button>
+
+
+                <button
+                    type="button"
+                    class="noc-primary-btn"
+                    id="approveNocBtn"
+                >
+                    Approve NOC
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CREATE NOC MODAL
+    ====================================================== -->
+
+    <div
+        class="noc-modal"
+        id="addNocModal"
+        hidden
+    >
+
+        <div
+            class="noc-modal-backdrop"
+            data-close-add-noc
+        ></div>
+
+
+        <div class="noc-modal-card add-noc-card">
+
+            <div class="noc-modal-header">
+
+                <div>
+
+                    <span>
+                        NOC MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Create NOC
+                    </h2>
+
+                    <p>
+                        Create a new NOC request record.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="noc-modal-close"
+                    data-close-add-noc
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="addNocForm"
+                class="add-noc-form"
+            >
+
+                <div class="noc-form-grid">
+
+                    <div class="noc-form-field full">
+
+                        <label>
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newNocStudent"
+                            placeholder="Enter student name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="noc-form-field">
+
+                        <label>
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="22PCE001"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="noc-form-field">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select College
+                            </option>
+
+                            <option>PCE</option>
+                            <option>PIET</option>
+                            <option>PU</option>
+                            <option>JIET</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="noc-form-field full">
+
+                        <label>
+                            Request Type
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select Request Type
+                            </option>
+
+                            <option>
+                                Off-Campus
+                            </option>
+
+                            <option>
+                                Higher Studies
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="noc-form-field full">
+
+                        <label>
+                            Remarks
+                        </label>
+
+                        <textarea
+                            placeholder="Enter remarks or purpose..."
+                            rows="4"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="noc-form-footer">
+
+                    <button
+                        type="button"
+                        class="noc-secondary-btn"
+                        data-close-add-noc
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="noc-primary-btn"
+                    >
+                        Create NOC
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/noc.js') }}"
+></script>
+
+{% endblock %}

@@ -1,0 +1,462 @@
+/* =========================================================
+   COLLEGE ANALYTICS
+========================================================= */
+
+.college-analytics-page {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.college-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.college-eyebrow {
+    color: var(--admin-primary-light);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+}
+
+.college-page-header h1 {
+    margin: 6px 0 5px;
+    color: var(--admin-text);
+    font-size: 27px;
+}
+
+.college-page-header p {
+    margin: 0;
+    color: var(--admin-muted);
+    font-size: 11px;
+}
+
+.college-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   YEAR SELECT
+========================================================= */
+
+.college-year-select {
+    min-height: 42px;
+    padding: 0 34px 0 13px;
+    border: 1px solid var(--admin-border);
+    border-radius: 10px;
+    background: var(--admin-card-bg);
+    color: var(--admin-text);
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+.college-export-btn {
+    min-height: 42px;
+    padding: 0 17px;
+    border: 0;
+    border-radius: 10px;
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #9333ea
+    );
+    color: #fff;
+    font-size: 11px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.college-export-btn:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 10px 25px
+        rgba(124, 58, 237, 0.25);
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.college-summary-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.college-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 95px;
+    padding: 16px;
+    border: 1px solid var(--admin-border);
+    border-radius: 14px;
+    background: var(--admin-card-bg);
+}
+
+.college-stat-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background:
+        rgba(124, 58, 237, 0.12);
+    color:
+        var(--admin-primary-light);
+    font-size: 17px;
+}
+
+.college-stat-card span {
+    display: block;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.college-stat-card strong {
+    display: block;
+    margin: 4px 0;
+    color: var(--admin-text);
+    font-size: 20px;
+}
+
+.college-stat-card small {
+    color: var(--admin-muted);
+    font-size: 8px;
+}
+
+.college-stat-card small.positive {
+    color: var(--admin-success);
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.college-panel {
+    margin-bottom: 18px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border);
+    border-radius: 14px;
+    background: var(--admin-card-bg);
+}
+
+.college-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 17px 18px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.college-panel-header h2 {
+    margin: 0;
+    color: var(--admin-text);
+    font-size: 15px;
+}
+
+.college-panel-header p {
+    margin: 4px 0 0;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   COLLEGE CARDS
+========================================================= */
+
+.college-comparison-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding: 16px;
+}
+
+.college-performance-card {
+    padding: 17px;
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+    background:
+        rgba(255, 255, 255, 0.015);
+}
+
+.college-card-top {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.college-logo {
+    width: 39px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background:
+        rgba(124, 58, 237, 0.14);
+    color:
+        var(--admin-primary-light);
+    font-weight: 800;
+}
+
+.college-card-top h3 {
+    margin: 0 0 3px;
+    color: var(--admin-text);
+    font-size: 13px;
+}
+
+.college-card-top span {
+    color: var(--admin-muted);
+    font-size: 8px;
+}
+
+.college-rate {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 17px;
+}
+
+.college-rate strong {
+    color: var(--admin-text);
+    font-size: 25px;
+}
+
+.college-rate span {
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.college-progress {
+    height: 7px;
+    margin-top: 9px;
+    overflow: hidden;
+    border-radius: 99px;
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+.college-progress-bar {
+    height: 100%;
+    border-radius: inherit;
+    background:
+        linear-gradient(
+            90deg,
+            #6d28d9,
+            #a855f7
+        );
+}
+
+.college-mini-stats {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.college-mini-stats div {
+    padding: 9px;
+    border-radius: 8px;
+    background:
+        rgba(255, 255, 255, 0.025);
+}
+
+.college-mini-stats span {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--admin-muted);
+    font-size: 7px;
+}
+
+.college-mini-stats strong {
+    color: var(--admin-text);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   PACKAGE
+========================================================= */
+
+.package-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 12px;
+    padding: 16px;
+}
+
+.package-card {
+    padding: 16px;
+    border-radius: 11px;
+    background:
+        rgba(124, 58, 237, 0.08);
+}
+
+.package-card span {
+    display: block;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.package-card strong {
+    display: block;
+    margin: 6px 0;
+    color: var(--admin-text);
+    font-size: 19px;
+}
+
+.package-card small {
+    color: var(--admin-muted);
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.college-search {
+    width: 190px;
+    min-height: 34px;
+    padding: 0 11px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    outline: none;
+    background: var(--admin-bg);
+    color: var(--admin-text);
+    font-size: 9px;
+}
+
+.college-search::placeholder {
+    color: var(--admin-muted);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.college-table-wrapper {
+    overflow-x: auto;
+}
+
+.college-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.college-table th {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--admin-border);
+    color: var(--admin-muted);
+    font-size: 8px;
+    letter-spacing: 0.5px;
+}
+
+.college-table td {
+    padding: 14px 15px;
+    border-bottom: 1px solid var(--admin-border);
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.college-table tbody tr {
+    transition: 0.15s ease;
+}
+
+.college-table tbody tr:hover {
+    background:
+        rgba(124, 58, 237, 0.035);
+}
+
+.college-table td strong {
+    color: var(--admin-text);
+}
+
+.rate-badge {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background:
+        rgba(25, 201, 139, 0.12);
+    color:
+        var(--admin-success);
+    font-weight: 750;
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .college-summary-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .package-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .college-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .college-header-actions {
+        width: 100%;
+    }
+
+    .college-year-select,
+    .college-export-btn {
+        flex: 1;
+    }
+
+    .college-summary-grid,
+    .college-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .package-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -1,0 +1,595 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Placement Analytics | Admin
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/analytics/placement_analytics.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="analytics-page">
+
+    <!-- HEADER -->
+
+    <section class="analytics-header">
+
+        <div>
+
+            <div class="analytics-breadcrumb">
+                <span>Analytics</span>
+                <span>›</span>
+                <strong>Placement Analytics</strong>
+            </div>
+
+            <h1>
+                Placement Analytics
+            </h1>
+
+            <p>
+                Analyse placement performance, packages,
+                offers and college-wise outcomes.
+            </p>
+
+        </div>
+
+
+        <div class="analytics-actions">
+
+            <select
+                class="admin-select"
+                id="placementYear"
+            >
+                <option>2026</option>
+                <option>2025</option>
+                <option>2024</option>
+            </select>
+
+
+            <button
+                type="button"
+                class="analytics-export-btn"
+                id="exportPlacement"
+            >
+                ↓ Export Report
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- KPI -->
+
+    <section class="placement-kpis">
+
+        <article class="placement-kpi">
+
+            <div class="kpi-icon purple">
+                ◈
+            </div>
+
+            <div>
+                <span>Total Students</span>
+                <strong>1,248</strong>
+                <small>Registered for placements</small>
+            </div>
+
+        </article>
+
+
+        <article class="placement-kpi">
+
+            <div class="kpi-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Placed Students</span>
+                <strong>684</strong>
+                <small>54.8% placement rate</small>
+            </div>
+
+        </article>
+
+
+        <article class="placement-kpi">
+
+            <div class="kpi-icon blue">
+                ₹
+            </div>
+
+            <div>
+                <span>Highest Package</span>
+                <strong>₹18.5 LPA</strong>
+                <small>Current placement season</small>
+            </div>
+
+        </article>
+
+
+        <article class="placement-kpi">
+
+            <div class="kpi-icon orange">
+                ₹
+            </div>
+
+            <div>
+                <span>Average Package</span>
+                <strong>₹6.42 LPA</strong>
+                <small>Across placed students</small>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- CHART ROW -->
+
+    <section class="placement-chart-grid">
+
+        <article class="analytics-card large-chart">
+
+            <div class="analytics-card-header">
+
+                <div>
+                    <h2>Placement Performance</h2>
+                    <p>Year-wise placement percentage</p>
+                </div>
+
+                <span class="chart-badge">
+                    2022–2026
+                </span>
+
+            </div>
+
+
+            <div class="line-chart">
+
+                <div class="chart-y-axis">
+                    <span>100%</span>
+                    <span>75%</span>
+                    <span>50%</span>
+                    <span>25%</span>
+                    <span>0%</span>
+                </div>
+
+
+                <div class="chart-area">
+
+                    <div class="grid-line one"></div>
+                    <div class="grid-line two"></div>
+                    <div class="grid-line three"></div>
+                    <div class="grid-line four"></div>
+                    <div class="grid-line five"></div>
+
+
+                    <svg
+                        viewBox="0 0 700 260"
+                        preserveAspectRatio="none"
+                    >
+
+                        <defs>
+
+                            <linearGradient
+                                id="placementGradient"
+                                x1="0"
+                                y1="0"
+                                x2="0"
+                                y2="1"
+                            >
+
+                                <stop
+                                    offset="0%"
+                                    stop-opacity=".28"
+                                />
+
+                                <stop
+                                    offset="100%"
+                                    stop-opacity="0"
+                                />
+
+                            </linearGradient>
+
+                        </defs>
+
+
+                        <path
+                            class="area-path"
+                            d="M0 155
+                               L140 137
+                               L280 121
+                               L420 103
+                               L560 74
+                               L700 48
+                               L700 260
+                               L0 260 Z"
+                        ></path>
+
+
+                        <path
+                            class="line-path"
+                            d="M0 155
+                               L140 137
+                               L280 121
+                               L420 103
+                               L560 74
+                               L700 48"
+                        ></path>
+
+
+                        <circle cx="0" cy="155" r="5"></circle>
+                        <circle cx="140" cy="137" r="5"></circle>
+                        <circle cx="280" cy="121" r="5"></circle>
+                        <circle cx="420" cy="103" r="5"></circle>
+                        <circle cx="560" cy="74" r="5"></circle>
+                        <circle cx="700" cy="48" r="5"></circle>
+
+                    </svg>
+
+
+                    <div class="chart-labels">
+
+                        <span>2021-22</span>
+                        <span>2022-23</span>
+                        <span>2023-24</span>
+                        <span>2024-25</span>
+                        <span>2025-26</span>
+                        <span>2026</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PLACEMENT BY COLLEGE -->
+
+        <article class="analytics-card">
+
+            <div class="analytics-card-header">
+
+                <div>
+                    <h2>College Performance</h2>
+                    <p>Placement rate by college</p>
+                </div>
+
+            </div>
+
+
+            <div class="college-bars">
+
+                <div class="college-bar">
+
+                    <div>
+                        <span>PCE</span>
+                        <strong>68%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill purple"
+                            style="width:68%"
+                        ></div>
+                    </div>
+
+                </div>
+
+
+                <div class="college-bar">
+
+                    <div>
+                        <span>PIET</span>
+                        <strong>61%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill blue"
+                            style="width:61%"
+                        ></div>
+                    </div>
+
+                </div>
+
+
+                <div class="college-bar">
+
+                    <div>
+                        <span>PU</span>
+                        <strong>54%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill green"
+                            style="width:54%"
+                        ></div>
+                    </div>
+
+                </div>
+
+
+                <div class="college-bar">
+
+                    <div>
+                        <span>JIET</span>
+                        <strong>47%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill orange"
+                            style="width:47%"
+                        ></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- SECOND ROW -->
+
+    <section class="placement-chart-grid second">
+
+        <!-- PACKAGE DISTRIBUTION -->
+
+        <article class="analytics-card">
+
+            <div class="analytics-card-header">
+
+                <div>
+                    <h2>Package Distribution</h2>
+                    <p>Placed students by package range</p>
+                </div>
+
+            </div>
+
+
+            <div class="package-bars">
+
+                <div class="package-item">
+
+                    <span>3–5 LPA</span>
+
+                    <div class="package-track">
+                        <div style="width:62%"></div>
+                    </div>
+
+                    <strong>284</strong>
+
+                </div>
+
+
+                <div class="package-item">
+
+                    <span>5–8 LPA</span>
+
+                    <div class="package-track">
+                        <div style="width:74%"></div>
+                    </div>
+
+                    <strong>216</strong>
+
+                </div>
+
+
+                <div class="package-item">
+
+                    <span>8–12 LPA</span>
+
+                    <div class="package-track">
+                        <div style="width:45%"></div>
+                    </div>
+
+                    <strong>121</strong>
+
+                </div>
+
+
+                <div class="package-item">
+
+                    <span>12–18 LPA</span>
+
+                    <div class="package-track">
+                        <div style="width:22%"></div>
+                    </div>
+
+                    <strong>49</strong>
+
+                </div>
+
+
+                <div class="package-item">
+
+                    <span>18+ LPA</span>
+
+                    <div class="package-track">
+                        <div style="width:8%"></div>
+                    </div>
+
+                    <strong>14</strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PLACEMENT STATUS -->
+
+        <article class="analytics-card">
+
+            <div class="analytics-card-header">
+
+                <div>
+                    <h2>Student Status</h2>
+                    <p>Current placement pipeline</p>
+                </div>
+
+            </div>
+
+
+            <div class="status-donut">
+
+                <div class="donut">
+                    <div class="donut-center">
+                        <strong>1,248</strong>
+                        <span>Students</span>
+                    </div>
+                </div>
+
+
+                <div class="status-legend">
+
+                    <div>
+                        <i class="placed"></i>
+                        <span>Placed</span>
+                        <strong>684</strong>
+                    </div>
+
+                    <div>
+                        <i class="process"></i>
+                        <span>In Process</span>
+                        <strong>214</strong>
+                    </div>
+
+                    <div>
+                        <i class="eligible"></i>
+                        <span>Eligible</span>
+                        <strong>238</strong>
+                    </div>
+
+                    <div>
+                        <i class="notplaced"></i>
+                        <span>Not Placed</span>
+                        <strong>112</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- TOP COMPANIES -->
+
+    <section class="analytics-card">
+
+        <div class="analytics-card-header">
+
+            <div>
+                <h2>Top Placement Companies</h2>
+                <p>Companies with highest student selections</p>
+            </div>
+
+        </div>
+
+
+        <div class="company-table-wrapper">
+
+            <table class="analytics-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Company</th>
+                        <th>Students Selected</th>
+                        <th>Package</th>
+                        <th>College Coverage</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>TCS</strong></td>
+                        <td>86</td>
+                        <td>₹7.2 LPA</td>
+                        <td>4 Colleges</td>
+                        <td>
+                            <span class="table-status success">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Infosys</strong></td>
+                        <td>74</td>
+                        <td>₹6.5 LPA</td>
+                        <td>4 Colleges</td>
+                        <td>
+                            <span class="table-status success">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Accenture</strong></td>
+                        <td>61</td>
+                        <td>₹7.8 LPA</td>
+                        <td>3 Colleges</td>
+                        <td>
+                            <span class="table-status success">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Capgemini</strong></td>
+                        <td>48</td>
+                        <td>₹6.1 LPA</td>
+                        <td>4 Colleges</td>
+                        <td>
+                            <span class="table-status success">
+                                Active
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/analytics/placement_analytics.js') }}"
+></script>
+
+{% endblock %}

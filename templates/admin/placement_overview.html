@@ -1,0 +1,1226 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Placement Overview | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/admin/placement_overview.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="placement-overview-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="po-page-header">
+
+        <div class="po-header-left">
+
+            <div class="po-breadcrumb">
+                <span>Admin</span>
+                <span class="po-breadcrumb-separator">/</span>
+                <span>Placement</span>
+                <span class="po-breadcrumb-separator">/</span>
+                <strong>Overview</strong>
+            </div>
+
+            <div class="po-title-row">
+
+                <div>
+
+                    <h1>
+                        Placement Overview
+                    </h1>
+
+                    <p>
+                        Monitor placement activity, student progress
+                        and recruitment performance.
+                    </p>
+
+                </div>
+
+                <div class="po-live-indicator">
+
+                    <span class="po-live-dot"></span>
+
+                    <span>
+                        Live Overview
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="po-header-actions">
+
+            <select
+                class="po-select"
+                id="academicYearFilter"
+                aria-label="Academic year"
+            >
+
+                <option value="2025-26">
+                    2025-26
+                </option>
+
+                <option value="2024-25">
+                    2024-25
+                </option>
+
+                <option value="2023-24">
+                    2023-24
+                </option>
+
+                <option value="2022-23">
+                    2022-23
+                </option>
+
+            </select>
+
+
+            <button
+                class="po-btn po-btn-secondary"
+                id="refreshOverview"
+                type="button"
+            >
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11a8.1 8.1 0 0 0-15.5-2"></path>
+                    <path d="M4 5v4h4"></path>
+                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2"></path>
+                    <path d="M20 19v-4h-4"></path>
+                </svg>
+
+                Refresh
+
+            </button>
+
+
+            <button
+                class="po-btn po-btn-primary"
+                id="exportOverview"
+                type="button"
+            >
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3v12"></path>
+                    <path d="m7 10 5 5 5-5"></path>
+                    <path d="M5 21h14"></path>
+                </svg>
+
+                Export Report
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         KPI CARDS
+    ====================================================== -->
+
+    <section class="po-kpi-grid">
+
+
+        <!-- TOTAL STUDENTS -->
+
+        <article class="po-kpi-card">
+
+            <div class="po-kpi-top">
+
+                <div class="po-kpi-icon po-icon-blue">
+
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="9" cy="8" r="3"></circle>
+                        <path d="M3.5 20c.5-3.5 2.5-5.5 5.5-5.5s5 2 5.5 5.5"></path>
+                        <path d="M16 5.5a3 3 0 0 1 0 5.8"></path>
+                        <path d="M17 14.5c2 .7 3.2 2.4 3.5 5.5"></path>
+                    </svg>
+
+                </div>
+
+                <span class="po-kpi-trend positive">
+                    ↑ 8.2%
+                </span>
+
+            </div>
+
+            <div class="po-kpi-value">
+                1,260
+            </div>
+
+            <div class="po-kpi-label">
+                Total Students
+            </div>
+
+            <div class="po-kpi-foot">
+                Compared with last year
+            </div>
+
+        </article>
+
+
+
+        <!-- PLACED -->
+
+        <article class="po-kpi-card">
+
+            <div class="po-kpi-top">
+
+                <div class="po-kpi-icon po-icon-green">
+
+                    <svg viewBox="0 0 24 24">
+                        <path d="m5 12 4 4L19 6"></path>
+                        <circle cx="12" cy="12" r="9"></circle>
+                    </svg>
+
+                </div>
+
+                <span class="po-kpi-trend positive">
+                    ↑ 6.8%
+                </span>
+
+            </div>
+
+            <div class="po-kpi-value">
+                865
+            </div>
+
+            <div class="po-kpi-label">
+                Students Placed
+            </div>
+
+            <div class="po-kpi-foot">
+                68.7% placement rate
+            </div>
+
+        </article>
+
+
+
+        <!-- COMPANIES -->
+
+        <article class="po-kpi-card">
+
+            <div class="po-kpi-top">
+
+                <div class="po-kpi-icon po-icon-purple">
+
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 20V7h16v13"></path>
+                        <path d="M8 7V4h8v3"></path>
+                        <path d="M8 11h2"></path>
+                        <path d="M14 11h2"></path>
+                        <path d="M8 15h2"></path>
+                        <path d="M14 15h2"></path>
+                    </svg>
+
+                </div>
+
+                <span class="po-kpi-trend positive">
+                    ↑ 12.5%
+                </span>
+
+            </div>
+
+            <div class="po-kpi-value">
+                42
+            </div>
+
+            <div class="po-kpi-label">
+                Recruiting Companies
+            </div>
+
+            <div class="po-kpi-foot">
+                Active this academic year
+            </div>
+
+        </article>
+
+
+
+        <!-- DRIVES -->
+
+        <article class="po-kpi-card">
+
+            <div class="po-kpi-top">
+
+                <div class="po-kpi-icon po-icon-orange">
+
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        <path d="M8 5V3h8v2"></path>
+                        <path d="M8 12h8"></path>
+                    </svg>
+
+                </div>
+
+                <span class="po-kpi-trend warning">
+                    6 closing soon
+                </span>
+
+            </div>
+
+            <div class="po-kpi-value">
+                18
+            </div>
+
+            <div class="po-kpi-label">
+                Active Placement Drives
+            </div>
+
+            <div class="po-kpi-foot">
+                Recruitment currently active
+            </div>
+
+        </article>
+
+
+
+        <!-- OFFERS -->
+
+        <article class="po-kpi-card">
+
+            <div class="po-kpi-top">
+
+                <div class="po-kpi-icon po-icon-pink">
+
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 7h10v14H7z"></path>
+                        <path d="M9 7V5h6v2"></path>
+                        <path d="m10 14 2 2 4-4"></path>
+                    </svg>
+
+                </div>
+
+                <span class="po-kpi-trend positive">
+                    +45 pending
+                </span>
+
+            </div>
+
+            <div class="po-kpi-value">
+                910
+            </div>
+
+            <div class="po-kpi-label">
+                Offers Received
+            </div>
+
+            <div class="po-kpi-foot">
+                Including multiple offers
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN ANALYTICS ROW
+    ====================================================== -->
+
+    <section class="po-main-grid">
+
+
+        <!-- =================================================
+             PLACEMENT STATUS
+        ================================================== -->
+
+        <article class="po-panel po-status-panel">
+
+            <div class="po-panel-header">
+
+                <div>
+
+                    <h2>
+                        Placement Status
+                    </h2>
+
+                    <p>
+                        Current student placement journey
+                    </p>
+
+                </div>
+
+                <span class="po-panel-badge">
+                    2025-26
+                </span>
+
+            </div>
+
+
+            <div class="po-status-content">
+
+
+                <!-- DONUT -->
+
+                <div class="po-donut-wrap">
+
+                    <div class="po-donut">
+
+                        <div class="po-donut-center">
+
+                            <strong>
+                                1,260
+                            </strong>
+
+                            <span>
+                                Students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LEGEND -->
+
+                <div class="po-status-legend">
+
+                    <div class="po-legend-item">
+
+                        <div class="po-legend-name">
+
+                            <span class="po-dot placed"></span>
+
+                            <span>
+                                Placed
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            865
+                        </strong>
+
+                        <small>
+                            68.7%
+                        </small>
+
+                    </div>
+
+
+                    <div class="po-legend-item">
+
+                        <div class="po-legend-name">
+
+                            <span class="po-dot interview"></span>
+
+                            <span>
+                                In Interview
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            215
+                        </strong>
+
+                        <small>
+                            17.1%
+                        </small>
+
+                    </div>
+
+
+                    <div class="po-legend-item">
+
+                        <div class="po-legend-name">
+
+                            <span class="po-dot upcoming"></span>
+
+                            <span>
+                                Yet to Appear
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            180
+                        </strong>
+
+                        <small>
+                            14.3%
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="po-status-footer">
+
+                <div class="po-progress-heading">
+
+                    <span>
+                        Overall Placement Rate
+                    </span>
+
+                    <strong>
+                        68.7%
+                    </strong>
+
+                </div>
+
+                <div class="po-progress">
+
+                    <span style="width: 68.7%;"></span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             COLLEGE PERFORMANCE
+        ================================================== -->
+
+        <article class="po-panel po-college-panel">
+
+            <div class="po-panel-header">
+
+                <div>
+
+                    <h2>
+                        College-wise Performance
+                    </h2>
+
+                    <p>
+                        Placement performance across campuses
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="po-text-btn"
+                    id="collegeDetailsBtn"
+                >
+                    View Details
+                </button>
+
+            </div>
+
+
+            <div class="po-college-list">
+
+
+                <!-- PCE -->
+
+                <div class="po-college-row">
+
+                    <div class="po-college-info">
+
+                        <div class="po-college-code">
+                            PCE
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Poornima College of Engineering
+                            </strong>
+
+                            <span>
+                                420 students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="po-college-rate">
+
+                        <strong>
+                            74.5%
+                        </strong>
+
+                        <div class="po-mini-progress">
+                            <span style="width:74.5%;"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PIET -->
+
+                <div class="po-college-row">
+
+                    <div class="po-college-info">
+
+                        <div class="po-college-code">
+                            PIET
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Poornima Institute of Engineering
+                            </strong>
+
+                            <span>
+                                310 students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="po-college-rate">
+
+                        <strong>
+                            70.2%
+                        </strong>
+
+                        <div class="po-mini-progress">
+                            <span style="width:70.2%;"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PU -->
+
+                <div class="po-college-row">
+
+                    <div class="po-college-info">
+
+                        <div class="po-college-code">
+                            PU
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Poornima University
+                            </strong>
+
+                            <span>
+                                290 students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="po-college-rate">
+
+                        <strong>
+                            66.8%
+                        </strong>
+
+                        <div class="po-mini-progress">
+                            <span style="width:66.8%;"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- JIET -->
+
+                <div class="po-college-row">
+
+                    <div class="po-college-info">
+
+                        <div class="po-college-code">
+                            JIET
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                JIET Group of Institutions
+                            </strong>
+
+                            <span>
+                                240 students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="po-college-rate">
+
+                        <strong>
+                            61.7%
+                        </strong>
+
+                        <div class="po-mini-progress">
+                            <span style="width:61.7%;"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         YEAR WISE PERFORMANCE
+    ====================================================== -->
+
+    <section class="po-panel po-year-panel">
+
+        <div class="po-panel-header">
+
+            <div>
+
+                <h2>
+                    Year-wise Placement Performance
+                </h2>
+
+                <p>
+                    Students placed across academic sessions
+                </p>
+
+            </div>
+
+
+            <select
+                class="po-select po-small-select"
+                id="yearRangeFilter"
+            >
+
+                <option value="4">
+                    Last 4 Years
+                </option>
+
+                <option value="3">
+                    Last 3 Years
+                </option>
+
+                <option value="2">
+                    Last 2 Years
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            class="po-chart"
+            id="yearChart"
+        >
+
+            <div class="po-chart-y-axis">
+
+                <span>1000</span>
+                <span>800</span>
+                <span>600</span>
+                <span>400</span>
+                <span>200</span>
+                <span>0</span>
+
+            </div>
+
+
+            <div class="po-chart-area">
+
+                <div class="po-chart-grid-line line-1"></div>
+                <div class="po-chart-grid-line line-2"></div>
+                <div class="po-chart-grid-line line-3"></div>
+                <div class="po-chart-grid-line line-4"></div>
+                <div class="po-chart-grid-line line-5"></div>
+                <div class="po-chart-grid-line line-6"></div>
+
+
+                <div class="po-bars">
+
+
+                    <div class="po-bar-column">
+
+                        <div
+                            class="po-bar"
+                            style="height:61%;"
+                            data-value="610"
+                        >
+                            <span>
+                                610
+                            </span>
+                        </div>
+
+                        <small>
+                            2022-23
+                        </small>
+
+                    </div>
+
+
+                    <div class="po-bar-column">
+
+                        <div
+                            class="po-bar"
+                            style="height:71%;"
+                            data-value="710"
+                        >
+                            <span>
+                                710
+                            </span>
+                        </div>
+
+                        <small>
+                            2023-24
+                        </small>
+
+                    </div>
+
+
+                    <div class="po-bar-column">
+
+                        <div
+                            class="po-bar"
+                            style="height:79%;"
+                            data-value="790"
+                        >
+                            <span>
+                                790
+                            </span>
+                        </div>
+
+                        <small>
+                            2024-25
+                        </small>
+
+                    </div>
+
+
+                    <div class="po-bar-column active">
+
+                        <div
+                            class="po-bar"
+                            style="height:86.5%;"
+                            data-value="865"
+                        >
+                            <span>
+                                865
+                            </span>
+                        </div>
+
+                        <small>
+                            2025-26
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LOWER GRID
+    ====================================================== -->
+
+    <section class="po-lower-grid">
+
+
+        <!-- =================================================
+             TOP COMPANIES
+        ================================================== -->
+
+        <article class="po-panel">
+
+            <div class="po-panel-header">
+
+                <div>
+
+                    <h2>
+                        Top Recruiting Companies
+                    </h2>
+
+                    <p>
+                        Companies with highest student selections
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="po-text-btn"
+                    id="companiesBtn"
+                >
+                    View All
+                </button>
+
+            </div>
+
+
+            <div class="po-company-table">
+
+                <div class="po-table-head">
+
+                    <span>
+                        COMPANY
+                    </span>
+
+                    <span>
+                        STUDENTS
+                    </span>
+
+                    <span>
+                        AVG. PACKAGE
+                    </span>
+
+                </div>
+
+
+                <div class="po-table-row">
+
+                    <div class="po-company-name">
+
+                        <div class="po-company-logo">
+                            T
+                        </div>
+
+                        <strong>
+                            TCS
+                        </strong>
+
+                    </div>
+
+                    <span>
+                        148
+                    </span>
+
+                    <strong>
+                        ₹7.2 LPA
+                    </strong>
+
+                </div>
+
+
+                <div class="po-table-row">
+
+                    <div class="po-company-name">
+
+                        <div class="po-company-logo">
+                            I
+                        </div>
+
+                        <strong>
+                            Infosys
+                        </strong>
+
+                    </div>
+
+                    <span>
+                        126
+                    </span>
+
+                    <strong>
+                        ₹6.8 LPA
+                    </strong>
+
+                </div>
+
+
+                <div class="po-table-row">
+
+                    <div class="po-company-name">
+
+                        <div class="po-company-logo">
+                            W
+                        </div>
+
+                        <strong>
+                            Wipro
+                        </strong>
+
+                    </div>
+
+                    <span>
+                        104
+                    </span>
+
+                    <strong>
+                        ₹6.4 LPA
+                    </strong>
+
+                </div>
+
+
+                <div class="po-table-row">
+
+                    <div class="po-company-name">
+
+                        <div class="po-company-logo">
+                            A
+                        </div>
+
+                        <strong>
+                            Accenture
+                        </strong>
+
+                    </div>
+
+                    <span>
+                        91
+                    </span>
+
+                    <strong>
+                        ₹7.1 LPA
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             UPCOMING DRIVES
+        ================================================== -->
+
+        <article class="po-panel">
+
+            <div class="po-panel-header">
+
+                <div>
+
+                    <h2>
+                        Upcoming Drives
+                    </h2>
+
+                    <p>
+                        Recruitment opportunities
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="po-text-btn"
+                    id="drivesBtn"
+                >
+                    View All
+                </button>
+
+            </div>
+
+
+            <div class="po-drive-list">
+
+
+                <div class="po-drive-item">
+
+                    <div class="po-drive-company">
+                        TCS
+                    </div>
+
+                    <div class="po-drive-info">
+
+                        <strong>
+                            Software Engineer
+                        </strong>
+
+                        <span>
+                            25 Aug 2026
+                        </span>
+
+                    </div>
+
+                    <span class="po-drive-status open">
+                        Open
+                    </span>
+
+                </div>
+
+
+                <div class="po-drive-item">
+
+                    <div class="po-drive-company">
+                        INFY
+                    </div>
+
+                    <div class="po-drive-info">
+
+                        <strong>
+                            System Engineer
+                        </strong>
+
+                        <span>
+                            30 Aug 2026
+                        </span>
+
+                    </div>
+
+                    <span class="po-drive-status open">
+                        Open
+                    </span>
+
+                </div>
+
+
+                <div class="po-drive-item">
+
+                    <div class="po-drive-company">
+                        W
+                    </div>
+
+                    <div class="po-drive-info">
+
+                        <strong>
+                            Project Engineer
+                        </strong>
+
+                        <span>
+                            02 Sep 2026
+                        </span>
+
+                    </div>
+
+                    <span class="po-drive-status closing">
+                        Closing
+                    </span>
+
+                </div>
+
+
+                <div class="po-drive-item">
+
+                    <div class="po-drive-company">
+                        A
+                    </div>
+
+                    <div class="po-drive-info">
+
+                        <strong>
+                            Associate Engineer
+                        </strong>
+
+                        <span>
+                            05 Sep 2026
+                        </span>
+
+                    </div>
+
+                    <span class="po-drive-status open">
+                        Open
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PERFORMANCE INSIGHT
+    ====================================================== -->
+
+    <section class="po-insight-card">
+
+        <div class="po-insight-icon">
+
+            <svg viewBox="0 0 24 24">
+                <path d="M12 3v18"></path>
+                <path d="M5 8h9a3 3 0 0 1 0 6H7a3 3 0 0 0 0 6h10"></path>
+            </svg>
+
+        </div>
+
+
+        <div class="po-insight-content">
+
+            <strong>
+                Placement performance is improving
+            </strong>
+
+            <p>
+                The current academic session has crossed
+                <b>68%</b> placement with strong recruitment
+                activity across all four colleges.
+            </p>
+
+        </div>
+
+
+        <div class="po-insight-value">
+
+            <strong>
+                +8.2%
+            </strong>
+
+            <span>
+                vs last year
+            </span>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/admin/placement_overview.js'
+    ) }}"
+></script>
+
+{% endblock %}

@@ -1,0 +1,1560 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    User Management | Admin
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/administration/users.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="users-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="users-header">
+
+        <div>
+
+            <div class="users-breadcrumb">
+
+                <span>Administration</span>
+                <span>›</span>
+
+                <strong>
+                    User Management
+                </strong>
+
+            </div>
+
+
+            <h1>
+                User Management
+            </h1>
+
+
+            <p>
+                Manage portal users, roles, colleges and account access.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="users-primary-btn"
+            id="addUserBtn"
+        >
+            <span>＋</span>
+            Add User
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="users-stats">
+
+        <article class="users-stat-card">
+
+            <div class="users-stat-icon purple">
+                ◉
+            </div>
+
+            <div>
+
+                <span>
+                    Total Users
+                </span>
+
+                <strong>
+                    186
+                </strong>
+
+                <small>
+                    Registered portal accounts
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="users-stat-card">
+
+            <div class="users-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Active Users
+                </span>
+
+                <strong>
+                    174
+                </strong>
+
+                <small>
+                    Currently active accounts
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="users-stat-card">
+
+            <div class="users-stat-icon blue">
+                ◇
+            </div>
+
+            <div>
+
+                <span>
+                    TPO / HOD / Mentor
+                </span>
+
+                <strong>
+                    38
+                </strong>
+
+                <small>
+                    Placement stakeholders
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="users-stat-card">
+
+            <div class="users-stat-icon orange">
+                !
+            </div>
+
+            <div>
+
+                <span>
+                    Pending Verification
+                </span>
+
+                <strong>
+                    7
+                </strong>
+
+                <small>
+                    Accounts requiring review
+                </small>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         USER MANAGEMENT CARD
+    ====================================================== -->
+
+    <section class="users-card">
+
+        <div class="users-card-header">
+
+            <div>
+
+                <h2>
+                    Portal Users
+                </h2>
+
+                <p>
+                    View and manage all registered system users.
+                </p>
+
+            </div>
+
+
+            <div class="users-total">
+
+                <strong id="usersCount">
+                    8
+                </strong>
+
+                users
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="users-toolbar">
+
+            <div class="users-search">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+
+                </svg>
+
+
+                <input
+                    type="text"
+                    id="usersSearch"
+                    placeholder="Search name, email or user ID..."
+                >
+
+            </div>
+
+
+            <div class="users-filters">
+
+                <select
+                    class="admin-select"
+                    id="usersRole"
+                >
+
+                    <option value="all">
+                        All Roles
+                    </option>
+
+                    <option value="admin">
+                        Admin
+                    </option>
+
+                    <option value="tpo">
+                        TPO
+                    </option>
+
+                    <option value="hod">
+                        HOD
+                    </option>
+
+                    <option value="mentor">
+                        Mentor
+                    </option>
+
+                    <option value="student">
+                        Student
+                    </option>
+
+                    <option value="authority">
+                        Authority
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="usersCollege"
+                >
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                    <option value="central">
+                        Central
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="usersStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="users-table-wrapper">
+
+            <table class="users-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            User
+                        </th>
+
+                        <th>
+                            Role
+                        </th>
+
+                        <th>
+                            College
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Last Login
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="usersTableBody">
+
+
+                    <!-- ADMIN -->
+
+                    <tr
+                        data-name="admin"
+                        data-email="admin@poornima.org"
+                        data-userid="ADMIN-001"
+                        data-role="admin"
+                        data-college="central"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar admin">
+                                    AD
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Admin
+                                    </strong>
+
+                                    <span>
+                                        ADMIN-001
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role admin">
+                                Admin
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            Central
+                        </td>
+
+
+                        <td>
+                            admin@poornima.org
+                        </td>
+
+
+                        <td>
+                            Today, 10:42 AM
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- TPO -->
+
+                    <tr
+                        data-name="rahul sharma"
+                        data-email="rahul.tpo@poornima.org"
+                        data-userid="TPO-001"
+                        data-role="tpo"
+                        data-college="central"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar tpo">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rahul Sharma
+                                    </strong>
+
+                                    <span>
+                                        TPO-001
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role tpo">
+                                TPO
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            Central
+                        </td>
+
+
+                        <td>
+                            rahul.tpo@poornima.org
+                        </td>
+
+
+                        <td>
+                            Today, 09:31 AM
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- HOD -->
+
+                    <tr
+                        data-name="dr neha agarwal"
+                        data-email="neha.hod@poornima.org"
+                        data-userid="HOD-001"
+                        data-role="hod"
+                        data-college="pce"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar hod">
+                                    NA
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Dr. Neha Agarwal
+                                    </strong>
+
+                                    <span>
+                                        HOD-001
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role hod">
+                                HOD
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            PCE
+                        </td>
+
+
+                        <td>
+                            neha.hod@poornima.org
+                        </td>
+
+
+                        <td>
+                            Today, 08:45 AM
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- MENTOR -->
+
+                    <tr
+                        data-name="amit joshi"
+                        data-email="amit.mentor@poornima.org"
+                        data-userid="MEN-021"
+                        data-role="mentor"
+                        data-college="piet"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar mentor">
+                                    AJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Amit Joshi
+                                    </strong>
+
+                                    <span>
+                                        MEN-021
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role mentor">
+                                Mentor
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            PIET
+                        </td>
+
+
+                        <td>
+                            amit.mentor@poornima.org
+                        </td>
+
+
+                        <td>
+                            Yesterday, 04:22 PM
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- STUDENT -->
+
+                    <tr
+                        data-name="arjun sharma"
+                        data-email="22pce018@student.poornima.org"
+                        data-userid="22PCE018"
+                        data-role="student"
+                        data-college="pce"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar student">
+                                    AS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Arjun Sharma
+                                    </strong>
+
+                                    <span>
+                                        22PCE018
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role student">
+                                Student
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            PCE
+                        </td>
+
+
+                        <td>
+                            22pce018@student.poornima.org
+                        </td>
+
+
+                        <td>
+                            Today, 07:18 AM
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- STUDENT PIET -->
+
+                    <tr
+                        data-name="neha gupta"
+                        data-email="22piet031@student.poornima.org"
+                        data-userid="22PIET031"
+                        data-role="student"
+                        data-college="piet"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar student">
+                                    NG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Neha Gupta
+                                    </strong>
+
+                                    <span>
+                                        22PIET031
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role student">
+                                Student
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            PIET
+                        </td>
+
+
+                        <td>
+                            22piet031@student.poornima.org
+                        </td>
+
+
+                        <td>
+                            Yesterday, 11:12 AM
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- AUTHORITY -->
+
+                    <tr
+                        data-name="placement authority"
+                        data-email="authority@poornima.org"
+                        data-userid="AUTH-001"
+                        data-role="authority"
+                        data-college="central"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar authority">
+                                    PA
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Placement Authority
+                                    </strong>
+
+                                    <span>
+                                        AUTH-001
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role authority">
+                                Authority
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            Central
+                        </td>
+
+
+                        <td>
+                            authority@poornima.org
+                        </td>
+
+
+                        <td>
+                            Never
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- PU -->
+
+                    <tr
+                        data-name="vikas meena"
+                        data-email="22pu044@student.poornima.org"
+                        data-userid="22PU044"
+                        data-role="student"
+                        data-college="pu"
+                        data-status="inactive"
+                    >
+
+                        <td>
+
+                            <div class="users-user-cell">
+
+                                <div class="users-avatar student">
+                                    VM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Vikas Meena
+                                    </strong>
+
+                                    <span>
+                                        22PU044
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-role student">
+                                Student
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            PU
+                        </td>
+
+
+                        <td>
+                            22pu044@student.poornima.org
+                        </td>
+
+
+                        <td>
+                            18 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="users-status inactive">
+                                Inactive
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="users-view-btn"
+                                data-user-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- EMPTY -->
+
+            <div
+                class="users-empty"
+                id="usersEmpty"
+                hidden
+            >
+
+                <div class="users-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No users found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    class="users-secondary-btn"
+                    id="clearUsersFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="users-footer">
+
+            <span>
+                Showing
+                <strong id="usersFooterCount">
+                    8
+                </strong>
+                users
+            </span>
+
+
+            <div class="users-pagination">
+
+                <button class="users-page-btn disabled">
+                    ‹
+                </button>
+
+                <button class="users-page-btn active">
+                    1
+                </button>
+
+                <button class="users-page-btn">
+                    2
+                </button>
+
+                <button class="users-page-btn">
+                    3
+                </button>
+
+                <button class="users-page-btn">
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         USER DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="users-modal"
+        id="userDetailsModal"
+        hidden
+    >
+
+        <div
+            class="users-modal-backdrop"
+            data-close-user-modal
+        ></div>
+
+
+        <div class="users-modal-card">
+
+            <div class="users-modal-header">
+
+                <div>
+
+                    <span>
+                        USER ACCOUNT
+                    </span>
+
+                    <h2 id="modalUserName">
+                        Admin
+                    </h2>
+
+                    <p id="modalUserId">
+                        ADMIN-001
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="users-modal-close"
+                    data-close-user-modal
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="users-modal-body">
+
+                <div class="users-profile">
+
+                    <div
+                        class="users-modal-avatar"
+                        id="modalUserAvatar"
+                    >
+                        AD
+                    </div>
+
+                    <div>
+
+                        <strong id="modalUserRole">
+                            Admin
+                        </strong>
+
+                        <span id="modalUserCollege">
+                            Central
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="users-detail-grid">
+
+                    <div>
+
+                        <span>
+                            User ID
+                        </span>
+
+                        <strong id="modalDetailId">
+                            ADMIN-001
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Role
+                        </span>
+
+                        <strong id="modalDetailRole">
+                            Admin
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            College
+                        </span>
+
+                        <strong id="modalDetailCollege">
+                            Central
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong id="modalDetailStatus">
+                            Active
+                        </strong>
+
+                    </div>
+
+
+                    <div class="full">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong id="modalDetailEmail">
+                            admin@poornima.org
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="users-access-box">
+
+                    <div>
+
+                        <span>
+                            Account Access
+                        </span>
+
+                        <strong id="modalAccessText">
+                            Full system access
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="users-modal-footer">
+
+                <button
+                    type="button"
+                    class="users-secondary-btn"
+                    data-close-user-modal
+                >
+                    Close
+                </button>
+
+                <button
+                    type="button"
+                    class="users-danger-btn"
+                    id="toggleUserStatus"
+                >
+                    Deactivate User
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD USER MODAL
+    ====================================================== -->
+
+    <div
+        class="users-modal"
+        id="addUserModal"
+        hidden
+    >
+
+        <div
+            class="users-modal-backdrop"
+            data-close-add-user
+        ></div>
+
+
+        <div class="users-modal-card add-user-card">
+
+            <div class="users-modal-header">
+
+                <div>
+
+                    <span>
+                        ADMINISTRATION
+                    </span>
+
+                    <h2>
+                        Add New User
+                    </h2>
+
+                    <p>
+                        Create a new portal account.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="users-modal-close"
+                    data-close-add-user
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="addUserForm"
+                class="add-user-form"
+            >
+
+                <div class="users-form-grid">
+
+                    <div class="users-form-field">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newUserName"
+                            placeholder="Enter full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="users-form-field">
+
+                        <label>
+                            User ID
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="USER-001"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="users-form-field">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="user@poornima.org"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="users-form-field">
+
+                        <label>
+                            Role
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select Role
+                            </option>
+
+                            <option>
+                                Admin
+                            </option>
+
+                            <option>
+                                TPO
+                            </option>
+
+                            <option>
+                                HOD
+                            </option>
+
+                            <option>
+                                Mentor
+                            </option>
+
+                            <option>
+                                Student
+                            </option>
+
+                            <option>
+                                Authority
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="users-form-field">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select College
+                            </option>
+
+                            <option>
+                                PCE
+                            </option>
+
+                            <option>
+                                PIET
+                            </option>
+
+                            <option>
+                                PU
+                            </option>
+
+                            <option>
+                                JIET
+                            </option>
+
+                            <option>
+                                Central
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="users-form-field">
+
+                        <label>
+                            Account Status
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Active
+                            </option>
+
+                            <option>
+                                Pending
+                            </option>
+
+                            <option>
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="users-form-footer">
+
+                    <button
+                        type="button"
+                        class="users-secondary-btn"
+                        data-close-add-user
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="users-primary-btn"
+                    >
+                        Create User
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/administration/users.js') }}"
+></script>
+
+{% endblock %}

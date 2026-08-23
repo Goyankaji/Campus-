@@ -1,0 +1,1545 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Pre-Placed Students | Admin
+{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/pre_placed.css') }}"
+>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="preplaced-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <section class="preplaced-header">
+
+        <div>
+
+            <div class="preplaced-breadcrumb">
+                <span>Students</span>
+                <span>›</span>
+                <strong>Pre-Placed</strong>
+            </div>
+
+            <h1>Pre-Placed Students</h1>
+
+            <p>
+                Track students who secured placement offers before
+                the regular placement process.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="preplaced-primary-btn"
+            id="addPreplacedBtn"
+        >
+            <span>＋</span>
+            Add Record
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="preplaced-stats">
+
+        <article class="preplaced-stat-card">
+
+            <div class="preplaced-stat-icon purple">
+                ◈
+            </div>
+
+            <div>
+                <span>Total Pre-Placed</span>
+                <strong>96</strong>
+                <small>Current session</small>
+            </div>
+
+        </article>
+
+
+        <article class="preplaced-stat-card">
+
+            <div class="preplaced-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Confirmed</span>
+                <strong>82</strong>
+                <small>Offer confirmed</small>
+            </div>
+
+        </article>
+
+
+        <article class="preplaced-stat-card">
+
+            <div class="preplaced-stat-icon blue">
+                ₹
+            </div>
+
+            <div>
+                <span>Average Package</span>
+                <strong>8.7</strong>
+                <small>LPA</small>
+            </div>
+
+        </article>
+
+
+        <article class="preplaced-stat-card">
+
+            <div class="preplaced-stat-icon orange">
+                ★
+            </div>
+
+            <div>
+                <span>Highest Package</span>
+                <strong>24.5</strong>
+                <small>LPA</small>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLEGE DISTRIBUTION
+    ====================================================== -->
+
+    <section class="preplaced-college-card">
+
+        <div class="preplaced-section-title">
+
+            <div>
+
+                <h2>College-wise Pre-Placement</h2>
+
+                <p>
+                    Distribution of pre-placed students across colleges.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="preplaced-college-grid">
+
+            <div class="preplaced-college-item">
+
+                <div class="preplaced-college-top">
+                    <strong>PCE</strong>
+                    <span>31 students</span>
+                </div>
+
+                <div class="preplaced-progress">
+                    <span style="width: 82%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="preplaced-college-item">
+
+                <div class="preplaced-college-top">
+                    <strong>PIET</strong>
+                    <span>26 students</span>
+                </div>
+
+                <div class="preplaced-progress">
+                    <span style="width: 69%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="preplaced-college-item">
+
+                <div class="preplaced-college-top">
+                    <strong>PU</strong>
+                    <span>22 students</span>
+                </div>
+
+                <div class="preplaced-progress">
+                    <span style="width: 58%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="preplaced-college-item">
+
+                <div class="preplaced-college-top">
+                    <strong>JIET</strong>
+                    <span>17 students</span>
+                </div>
+
+                <div class="preplaced-progress">
+                    <span style="width: 45%;"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECORDS
+    ====================================================== -->
+
+    <section class="preplaced-record-card">
+
+        <div class="preplaced-record-header">
+
+            <div>
+
+                <h2>Pre-Placed Records</h2>
+
+                <p>
+                    Students who already received placement offers.
+                </p>
+
+            </div>
+
+
+            <div class="preplaced-record-count">
+
+                <strong id="preplacedRecordCount">
+                    8
+                </strong>
+
+                records
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="preplaced-toolbar">
+
+            <div class="preplaced-search">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+
+                </svg>
+
+
+                <input
+                    type="text"
+                    id="preplacedSearch"
+                    placeholder="Search student, company or role..."
+                >
+
+            </div>
+
+
+            <div class="preplaced-filters">
+
+                <select
+                    class="admin-select"
+                    id="preplacedCollege"
+                >
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="preplacedStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="confirmed">
+                        Confirmed
+                    </option>
+
+                    <option value="joined">
+                        Joined
+                    </option>
+
+                    <option value="pending">
+                        Joining Pending
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="preplacedYear"
+                >
+
+                    <option value="2025-26">
+                        2025-26
+                    </option>
+
+                    <option value="2024-25">
+                        2024-25
+                    </option>
+
+                    <option value="2023-24">
+                        2023-24
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="preplaced-table-wrapper">
+
+            <table class="preplaced-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+                        <th>College</th>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Package</th>
+                        <th>Offer Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="preplacedTableBody">
+
+
+                    <!-- RECORD 1 -->
+
+                    <tr
+                        data-name="aditya singh"
+                        data-company="microsoft"
+                        data-role="software engineer"
+                        data-college="pce"
+                        data-status="confirmed"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    AS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Aditya Singh
+                                    </strong>
+
+                                    <span>
+                                        22PCE012
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Microsoft</strong>
+                        </td>
+
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹18.5 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            12 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 2 -->
+
+                    <tr
+                        data-name="sakshi sharma"
+                        data-company="amazon"
+                        data-role="business analyst"
+                        data-college="piet"
+                        data-status="joined"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    SS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Sakshi Sharma
+                                    </strong>
+
+                                    <span>
+                                        22PIET021
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Amazon</strong>
+                        </td>
+
+
+                        <td>
+                            Business Analyst
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹12.2 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            10 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status joined">
+                                Joined
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 3 -->
+
+                    <tr
+                        data-name="rohan meena"
+                        data-company="deloitte"
+                        data-role="analyst"
+                        data-college="pu"
+                        data-status="confirmed"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    RM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rohan Meena
+                                    </strong>
+
+                                    <span>
+                                        22PU034
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Deloitte</strong>
+                        </td>
+
+
+                        <td>
+                            Analyst
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹9.1 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            08 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 4 -->
+
+                    <tr
+                        data-name="tanvi joshi"
+                        data-company="google"
+                        data-role="associate engineer"
+                        data-college="jiet"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    TJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Tanvi Joshi
+                                    </strong>
+
+                                    <span>
+                                        22JIET049
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Google</strong>
+                        </td>
+
+
+                        <td>
+                            Associate Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹15.8 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            07 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status pending">
+                                Joining Pending
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 5 -->
+
+                    <tr
+                        data-name="manish kumar"
+                        data-company="accenture"
+                        data-role="software developer"
+                        data-college="pce"
+                        data-status="joined"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    MK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Manish Kumar
+                                    </strong>
+
+                                    <span>
+                                        22PCE087
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Accenture</strong>
+                        </td>
+
+
+                        <td>
+                            Software Developer
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹7.9 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            05 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status joined">
+                                Joined
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 6 -->
+
+                    <tr
+                        data-name="riya gupta"
+                        data-company="ey"
+                        data-role="consultant"
+                        data-college="piet"
+                        data-status="confirmed"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    RG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Riya Gupta
+                                    </strong>
+
+                                    <span>
+                                        22PIET093
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>EY</strong>
+                        </td>
+
+
+                        <td>
+                            Consultant
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹9.6 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            04 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 7 -->
+
+                    <tr
+                        data-name="harshit yadav"
+                        data-company="adobe"
+                        data-role="frontend engineer"
+                        data-college="pu"
+                        data-status="joined"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    HY
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Harshit Yadav
+                                    </strong>
+
+                                    <span>
+                                        22PU121
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Adobe</strong>
+                        </td>
+
+
+                        <td>
+                            Frontend Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹13.2 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            02 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status joined">
+                                Joined
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 8 -->
+
+                    <tr
+                        data-name="muskan verma"
+                        data-company="infosys"
+                        data-role="system engineer"
+                        data-college="jiet"
+                        data-status="confirmed"
+                    >
+
+                        <td>
+
+                            <div class="preplaced-student-cell">
+
+                                <div class="preplaced-avatar">
+                                    MV
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Muskan Verma
+                                    </strong>
+
+                                    <span>
+                                        22JIET137
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Infosys</strong>
+                        </td>
+
+
+                        <td>
+                            System Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="preplaced-package">
+                                ₹6.9 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            01 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="preplaced-status confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <button
+                                class="preplaced-view-btn"
+                                data-view-preplaced
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- EMPTY -->
+
+            <div
+                class="preplaced-empty"
+                id="preplacedEmpty"
+                hidden
+            >
+
+                <div class="preplaced-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No pre-placed students found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    class="preplaced-secondary-btn"
+                    id="clearPreplacedFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="preplaced-footer">
+
+            <span>
+                Showing
+                <strong id="preplacedFooterCount">
+                    8
+                </strong>
+                records
+            </span>
+
+
+            <div class="preplaced-pagination">
+
+                <button
+                    type="button"
+                    class="preplaced-page-btn disabled"
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="preplaced-page-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="preplaced-page-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="preplaced-page-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="preplaced-page-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="preplaced-modal"
+        id="preplacedDetailsModal"
+        hidden
+    >
+
+        <div
+            class="preplaced-modal-backdrop"
+            data-close-preplaced
+        ></div>
+
+
+        <div class="preplaced-modal-card">
+
+            <div class="preplaced-modal-header">
+
+                <div>
+
+                    <span>
+                        PRE-PLACEMENT RECORD
+                    </span>
+
+                    <h2 id="modalPreplacedStudent">
+                        Aditya Singh
+                    </h2>
+
+                    <p id="modalPreplacedCompanyRole">
+                        Software Engineer · Microsoft
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="preplaced-modal-close"
+                    data-close-preplaced
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="preplaced-modal-body">
+
+                <div class="preplaced-profile">
+
+                    <div
+                        class="preplaced-modal-avatar"
+                        id="modalPreplacedAvatar"
+                    >
+                        AS
+                    </div>
+
+                    <div>
+
+                        <strong id="modalPreplacedCompany">
+                            Microsoft
+                        </strong>
+
+                        <span id="modalPreplacedCollege">
+                            PCE
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preplaced-detail-grid">
+
+                    <div>
+
+                        <span>
+                            Job Role
+                        </span>
+
+                        <strong id="modalPreplacedRole">
+                            Software Engineer
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Package
+                        </span>
+
+                        <strong id="modalPreplacedPackage">
+                            ₹18.5 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Offer Date
+                        </span>
+
+                        <strong id="modalPreplacedDate">
+                            12 Aug 2026
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong id="modalPreplacedStatus">
+                            Confirmed
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preplaced-note-box">
+
+                    <div>
+
+                        <span>
+                            Placement Category
+                        </span>
+
+                        <strong>
+                            Pre-Placed
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Academic Session
+                        </span>
+
+                        <strong>
+                            2025-26
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="preplaced-modal-footer">
+
+                <button
+                    type="button"
+                    class="preplaced-secondary-btn"
+                    data-close-preplaced
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD RECORD MODAL
+    ====================================================== -->
+
+    <div
+        class="preplaced-modal"
+        id="addPreplacedModal"
+        hidden
+    >
+
+        <div
+            class="preplaced-modal-backdrop"
+            data-close-add-preplaced
+        ></div>
+
+
+        <div class="preplaced-modal-card add-preplaced-card">
+
+            <div class="preplaced-modal-header">
+
+                <div>
+
+                    <span>
+                        PLACEMENT MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Add Pre-Placed Record
+                    </h2>
+
+                    <p>
+                        Record a student who was placed before regular drives.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="preplaced-modal-close"
+                    data-close-add-preplaced
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="addPreplacedForm"
+                class="add-preplaced-form"
+            >
+
+                <div class="preplaced-form-grid">
+
+                    <div class="preplaced-form-field full">
+
+                        <label>
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newPreplacedStudent"
+                            placeholder="Enter student name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="preplaced-form-field">
+
+                        <label>
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="22PCE001"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="preplaced-form-field">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select College
+                            </option>
+
+                            <option>PCE</option>
+                            <option>PIET</option>
+                            <option>PU</option>
+                            <option>JIET</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="preplaced-form-field">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Company name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="preplaced-form-field">
+
+                        <label>
+                            Job Role
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Software Engineer"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="preplaced-form-field">
+
+                        <label>
+                            Package
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="₹8 LPA"
+                        >
+
+                    </div>
+
+
+                    <div class="preplaced-form-field">
+
+                        <label>
+                            Offer Date
+                        </label>
+
+                        <input
+                            type="date"
+                        >
+
+                    </div>
+
+
+                    <div class="preplaced-form-field">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Confirmed
+                            </option>
+
+                            <option>
+                                Joined
+                            </option>
+
+                            <option>
+                                Joining Pending
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preplaced-form-footer">
+
+                    <button
+                        type="button"
+                        class="preplaced-secondary-btn"
+                        data-close-add-preplaced
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="preplaced-primary-btn"
+                    >
+                        Save Record
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/pre_placed.js') }}"
+></script>
+
+{% endblock %}

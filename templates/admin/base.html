@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b1224"
+    >
+
+    <title>
+        {% block title %}
+            Admin | Campus Placement Portal
+        {% endblock %}
+    </title>
+
+
+    <!-- =====================================================
+         COMMON ADMIN CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin/common.css') }}"
+    >
+
+
+    <!-- =====================================================
+         ADMIN COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin/admin.css') }}"
+    >
+
+
+    <!-- PAGE-SPECIFIC CSS -->
+    {% block page_css %}
+    {% endblock %}
+
+</head>
+
+
+<body class="admin-body">
+
+
+    <!-- =====================================================
+         ADMIN LAYOUT
+    ====================================================== -->
+
+    <div class="admin-layout">
+
+
+        <!-- COMMON SIDEBAR -->
+
+        {% include 'admin/components/sidebar.html' %}
+
+
+        <!-- =================================================
+             MAIN AREA
+        ================================================== -->
+
+        <div class="admin-main">
+
+
+            <!-- COMMON TOPBAR -->
+
+            {% include 'admin/components/topbar.html' %}
+
+
+            <!-- =================================================
+                 PAGE CONTENT
+            ================================================== -->
+
+            <main class="admin-content">
+
+                {% block content %}
+                {% endblock %}
+
+            </main>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         COMMON ADMIN JS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/admin/common.js') }}"
+    ></script>
+
+
+    <!-- =====================================================
+         ADMIN COMMON JS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/admin/admin.js') }}"
+    ></script>
+
+
+    <!-- PAGE-SPECIFIC JS -->
+    {% block page_js %}
+    {% endblock %}
+
+</body>
+
+</html>

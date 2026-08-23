@@ -1,0 +1,1048 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Settings | Campus Admin
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/admin/settings.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="settings-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <section class="settings-header">
+
+        <div>
+
+            <span class="settings-eyebrow">
+                SYSTEM CONFIGURATION
+            </span>
+
+            <h1>
+                Settings
+            </h1>
+
+            <p>
+                Manage your admin profile, portal preferences
+                and notification settings.
+            </p>
+
+        </div>
+
+        <div class="settings-save-indicator" id="saveIndicator">
+            <span></span>
+            All changes saved
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SETTINGS LAYOUT
+    ====================================================== -->
+
+    <div class="settings-layout">
+
+
+        <!-- =================================================
+             SETTINGS NAVIGATION
+        ================================================== -->
+
+        <aside class="settings-navigation">
+
+            <button
+                type="button"
+                class="settings-nav-item active"
+                data-section="profile"
+            >
+                <span class="settings-nav-icon">
+                    ◉
+                </span>
+
+                <span>
+                    <strong>Profile</strong>
+                    <small>Admin information</small>
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="settings-nav-item"
+                data-section="portal"
+            >
+                <span class="settings-nav-icon">
+                    ◇
+                </span>
+
+                <span>
+                    <strong>Portal</strong>
+                    <small>Portal preferences</small>
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="settings-nav-item"
+                data-section="notifications"
+            >
+                <span class="settings-nav-icon">
+                    ♢
+                </span>
+
+                <span>
+                    <strong>Notifications</strong>
+                    <small>Alerts and updates</small>
+                </span>
+            </button>
+
+
+            <button
+                type="button"
+                class="settings-nav-item"
+                data-section="security"
+            >
+                <span class="settings-nav-icon">
+                    ◈
+                </span>
+
+                <span>
+                    <strong>Security</strong>
+                    <small>Account security</small>
+                </span>
+            </button>
+
+        </aside>
+
+
+        <!-- =================================================
+             SETTINGS CONTENT
+        ================================================== -->
+
+        <main class="settings-content">
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================== -->
+
+            <section
+                class="settings-section active"
+                id="settings-profile"
+                data-settings-section="profile"
+            >
+
+                <div class="settings-section-heading">
+
+                    <div>
+
+                        <h2>
+                            Profile Settings
+                        </h2>
+
+                        <p>
+                            Manage the information associated
+                            with your administrator account.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="settings-profile-top">
+
+                        <div class="settings-profile-avatar">
+                            A
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Admin
+                            </h3>
+
+                            <p>
+                                System Administrator
+                            </p>
+
+                            <span>
+                                ADMIN
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-form-grid">
+
+
+                        <div class="settings-form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="adminName"
+                                value="Admin"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-form-group">
+
+                            <label>
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                id="adminUsername"
+                                value="admin"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-form-group">
+
+                            <label>
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="adminEmail"
+                                value="admin@poornima.org"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-form-group">
+
+                            <label>
+                                Role
+                            </label>
+
+                            <input
+                                type="text"
+                                value="ADMIN"
+                                disabled
+                            >
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PORTAL
+            ================================================== -->
+
+            <section
+                class="settings-section"
+                id="settings-portal"
+                data-settings-section="portal"
+            >
+
+                <div class="settings-section-heading">
+
+                    <div>
+
+                        <h2>
+                            Portal Preferences
+                        </h2>
+
+                        <p>
+                            Configure how the admin portal
+                            behaves and displays information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                Compact Sidebar
+                            </strong>
+
+                            <p>
+                                Use a compact navigation sidebar
+                                to provide more workspace.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="compactSidebar"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                Confirm Before Delete
+                            </strong>
+
+                            <p>
+                                Ask for confirmation before
+                                deleting records.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="confirmDelete"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                Auto Refresh Dashboard
+                            </strong>
+
+                            <p>
+                                Automatically refresh dashboard
+                                information periodically.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="autoRefresh"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-select-row">
+
+                        <div>
+
+                            <strong>
+                                Default Academic Year
+                            </strong>
+
+                            <p>
+                                Academic year shown by default
+                                throughout the portal.
+                            </p>
+
+                        </div>
+
+
+                        <select id="academicYear">
+
+                            <option>
+                                2026-27
+                            </option>
+
+                            <option>
+                                2025-26
+                            </option>
+
+                            <option>
+                                2024-25
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-select-row">
+
+                        <div>
+
+                            <strong>
+                                Default College
+                            </strong>
+
+                            <p>
+                                Select the default college filter
+                                used across admin pages.
+                            </p>
+
+                        </div>
+
+
+                        <select id="defaultCollege">
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="pce">
+                                PCE
+                            </option>
+
+                            <option value="piet">
+                                PIET
+                            </option>
+
+                            <option value="pu">
+                                PU
+                            </option>
+
+                            <option value="jiet">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NOTIFICATIONS
+            ================================================== -->
+
+            <section
+                class="settings-section"
+                id="settings-notifications"
+                data-settings-section="notifications"
+            >
+
+                <div class="settings-section-heading">
+
+                    <div>
+
+                        <h2>
+                            Notification Preferences
+                        </h2>
+
+                        <p>
+                            Choose which system events should
+                            generate admin notifications.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                New Placement Drive
+                            </strong>
+
+                            <p>
+                                Notify when a new company placement
+                                drive is created.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="notifyDrive"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                New Feedback
+                            </strong>
+
+                            <p>
+                                Notify when users submit new
+                                feedback or suggestions.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="notifyFeedback"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                Verification Requests
+                            </strong>
+
+                            <p>
+                                Notify when pending verification
+                                requests require attention.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="notifyVerification"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                System Alerts
+                            </strong>
+
+                            <p>
+                                Receive important system and
+                                administrative alerts.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="notifySystem"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-select-row">
+
+                        <div>
+
+                            <strong>
+                                Notification Frequency
+                            </strong>
+
+                            <p>
+                                Control how frequently non-critical
+                                alerts are delivered.
+                            </p>
+
+                        </div>
+
+
+                        <select id="notificationFrequency">
+
+                            <option value="instant">
+                                Instant
+                            </option>
+
+                            <option value="daily">
+                                Daily Summary
+                            </option>
+
+                            <option value="weekly">
+                                Weekly Summary
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SECURITY
+            ================================================== -->
+
+            <section
+                class="settings-section"
+                id="settings-security"
+                data-settings-section="security"
+            >
+
+                <div class="settings-section-heading">
+
+                    <div>
+
+                        <h2>
+                            Security
+                        </h2>
+
+                        <p>
+                            Manage administrator account security
+                            and session preferences.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="security-status">
+
+                        <div class="security-status-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Account Secure
+                            </strong>
+
+                            <p>
+                                Your current admin session is active
+                                and protected.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                Session Timeout
+                            </strong>
+
+                            <p>
+                                Automatically end inactive admin
+                                sessions.
+                            </p>
+
+                        </div>
+
+
+                        <select
+                            id="sessionTimeout"
+                            class="security-select"
+                        >
+
+                            <option value="15">
+                                15 minutes
+                            </option>
+
+                            <option value="30">
+                                30 minutes
+                            </option>
+
+                            <option value="60" selected>
+                                1 hour
+                            </option>
+
+                            <option value="120">
+                                2 hours
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>
+                                Login Alerts
+                            </strong>
+
+                            <p>
+                                Receive an alert whenever the admin
+                                account is accessed.
+                            </p>
+
+                        </div>
+
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="loginAlerts"
+                                checked
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="security-password-row">
+
+                        <div>
+
+                            <strong>
+                                Password
+                            </strong>
+
+                            <p>
+                                Update the administrator password.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="changePasswordBtn"
+                            class="settings-secondary-btn"
+                        >
+                            Change Password
+                        </button>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="security-session-row">
+
+                        <div>
+
+                            <strong>
+                                Current Session
+                            </strong>
+
+                            <p>
+                                Admin · Current browser session
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="logoutSettingsBtn"
+                            class="settings-danger-btn"
+                        >
+                            Logout
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SAVE ACTIONS
+            ================================================== -->
+
+            <div class="settings-bottom-actions">
+
+                <button
+                    type="button"
+                    id="resetSettings"
+                    class="settings-reset-btn"
+                >
+                    Reset
+                </button>
+
+
+                <button
+                    type="button"
+                    id="saveSettings"
+                    class="settings-save-btn"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     PASSWORD MODAL
+========================================================= -->
+
+<div
+    id="passwordModal"
+    class="settings-modal"
+    aria-hidden="true"
+>
+
+    <div class="settings-modal-overlay"></div>
+
+
+    <div class="settings-modal-box">
+
+        <div class="settings-modal-header">
+
+            <div>
+
+                <span>
+                    SECURITY
+                </span>
+
+                <h2>
+                    Change Password
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closePasswordModal"
+                class="settings-modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="passwordForm">
+
+            <div class="settings-form-group">
+
+                <label>
+                    Current Password
+                </label>
+
+                <input
+                    type="password"
+                    id="currentPassword"
+                    required
+                >
+
+            </div>
+
+
+            <div class="settings-form-group">
+
+                <label>
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    required
+                >
+
+            </div>
+
+
+            <div class="settings-form-group">
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    required
+                >
+
+            </div>
+
+
+            <div class="settings-modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelPassword"
+                    class="settings-reset-btn"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="settings-save-btn"
+                >
+                    Update Password
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/admin/settings.js'
+    ) }}"
+></script>
+
+{% endblock %}

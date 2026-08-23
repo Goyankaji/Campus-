@@ -1,0 +1,1045 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Placements | Admin
+{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/placements.css') }}"
+>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="placements-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="placements-header">
+
+        <div>
+
+            <div class="placements-breadcrumb">
+                <span>Placement</span>
+                <span>›</span>
+                <strong>Placements</strong>
+            </div>
+
+            <h1>Placements</h1>
+
+            <p>
+                Monitor selected, placed and joining students.
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="placement-refresh-btn"
+            id="refreshPlacements"
+        >
+            <span>↻</span>
+            Refresh
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         STAT CARDS
+    ====================================================== -->
+
+    <section class="placement-stats">
+
+        <article class="placement-stat-card">
+
+            <div class="placement-stat-icon purple">
+                ✓
+            </div>
+
+            <div>
+                <span>Selected</span>
+                <strong>214</strong>
+                <small>Students selected</small>
+            </div>
+
+        </article>
+
+
+        <article class="placement-stat-card">
+
+            <div class="placement-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Placed</span>
+                <strong>865</strong>
+                <small>Successfully placed</small>
+            </div>
+
+        </article>
+
+
+        <article class="placement-stat-card">
+
+            <div class="placement-stat-icon orange">
+                ◷
+            </div>
+
+            <div>
+                <span>Joining Pending</span>
+                <strong>45</strong>
+                <small>Awaiting joining</small>
+            </div>
+
+        </article>
+
+
+        <article class="placement-stat-card">
+
+            <div class="placement-stat-icon blue">
+                %
+            </div>
+
+            <div>
+                <span>Placement Rate</span>
+                <strong>68.7%</strong>
+                <small>Current session</small>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTER BAR
+    ====================================================== -->
+
+    <section class="placement-toolbar">
+
+        <div class="placement-search">
+
+            <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-4-4"></path>
+            </svg>
+
+            <input
+                type="text"
+                id="placementSearch"
+                placeholder="Search student, company or role..."
+            >
+
+        </div>
+
+
+        <div class="placement-filters">
+
+            <select
+                class="admin-select"
+                id="placementStatus"
+            >
+                <option value="all">All Status</option>
+                <option value="selected">Selected</option>
+                <option value="placed">Placed</option>
+                <option value="joining">Joining Pending</option>
+                <option value="rejected">Not Joined</option>
+            </select>
+
+
+            <select
+                class="admin-select"
+                id="placementCollege"
+            >
+                <option value="all">All Colleges</option>
+                <option value="PCE">PCE</option>
+                <option value="PIET">PIET</option>
+                <option value="PU">PU</option>
+                <option value="JIET">JIET</option>
+            </select>
+
+
+            <select
+                class="admin-select"
+                id="placementSession"
+            >
+                <option value="2025-26">2025-26</option>
+                <option value="2024-25">2024-25</option>
+                <option value="2023-24">2023-24</option>
+            </select>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TABLE CARD
+    ====================================================== -->
+
+    <section class="placements-card">
+
+        <div class="placements-card-header">
+
+            <div>
+
+                <h2>Placement Records</h2>
+
+                <p>
+                    Student placement and joining information.
+                </p>
+
+            </div>
+
+            <div class="records-count">
+                <strong id="recordCount">8</strong>
+                records
+            </div>
+
+        </div>
+
+
+        <div class="placements-table-wrapper">
+
+            <table class="placements-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Student</th>
+                        <th>College</th>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Package</th>
+                        <th>Selected On</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="placementsTableBody">
+
+
+                    <!-- =================================================
+                         RAHUL
+                    ================================================== -->
+
+                    <tr
+                        data-student="rahul sharma"
+                        data-company="tcs"
+                        data-role="software engineer"
+                        data-college="pce"
+                        data-status="placed"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+                                    <strong>Rahul Sharma</strong>
+                                    <span>22PCE001</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>TCS</strong>
+                        </td>
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹7.2 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            18 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status placed">
+                                Placed
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Rahul Sharma"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         PRIYA
+                    ================================================== -->
+
+                    <tr
+                        data-student="priya verma"
+                        data-company="infosys"
+                        data-role="system engineer"
+                        data-college="piet"
+                        data-status="joining"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    PV
+                                </div>
+
+                                <div>
+                                    <strong>Priya Verma</strong>
+                                    <span>22PIET014</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>Infosys</strong>
+                        </td>
+
+                        <td>
+                            System Engineer
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹6.5 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            17 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status joining">
+                                Joining Pending
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Priya Verma"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         AMAN
+                    ================================================== -->
+
+                    <tr
+                        data-student="aman gupta"
+                        data-company="wipro"
+                        data-role="project engineer"
+                        data-college="pu"
+                        data-status="selected"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    AG
+                                </div>
+
+                                <div>
+                                    <strong>Aman Gupta</strong>
+                                    <span>22PU031</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>Wipro</strong>
+                        </td>
+
+                        <td>
+                            Project Engineer
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹5.8 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            16 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status selected">
+                                Selected
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Aman Gupta"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         NEHA
+                    ================================================== -->
+
+                    <tr
+                        data-student="neha singh"
+                        data-company="accenture"
+                        data-role="associate engineer"
+                        data-college="jiet"
+                        data-status="placed"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    NS
+                                </div>
+
+                                <div>
+                                    <strong>Neha Singh</strong>
+                                    <span>22JIET042</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>Accenture</strong>
+                        </td>
+
+                        <td>
+                            Associate Engineer
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹6.8 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            15 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status placed">
+                                Placed
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Neha Singh"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         ROHIT
+                    ================================================== -->
+
+                    <tr
+                        data-student="rohit meena"
+                        data-company="tcs"
+                        data-role="developer"
+                        data-college="pce"
+                        data-status="selected"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RM
+                                </div>
+
+                                <div>
+                                    <strong>Rohit Meena</strong>
+                                    <span>22PCE058</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>TCS</strong>
+                        </td>
+
+                        <td>
+                            Developer
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹8.1 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            14 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status selected">
+                                Selected
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Rohit Meena"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         KAJAL
+                    ================================================== -->
+
+                    <tr
+                        data-student="kajal joshi"
+                        data-company="capgemini"
+                        data-role="analyst"
+                        data-college="piet"
+                        data-status="placed"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    KJ
+                                </div>
+
+                                <div>
+                                    <strong>Kajal Joshi</strong>
+                                    <span>22PIET076</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>Capgemini</strong>
+                        </td>
+
+                        <td>
+                            Analyst
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹5.5 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            12 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status placed">
+                                Placed
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Kajal Joshi"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         VIVEK
+                    ================================================== -->
+
+                    <tr
+                        data-student="vivek kumar"
+                        data-company="wipro"
+                        data-role="project engineer"
+                        data-college="pu"
+                        data-status="joining"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    VK
+                                </div>
+
+                                <div>
+                                    <strong>Vivek Kumar</strong>
+                                    <span>22PU089</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>Wipro</strong>
+                        </td>
+
+                        <td>
+                            Project Engineer
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹5.8 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            10 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status joining">
+                                Joining Pending
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Vivek Kumar"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         SIMRAN
+                    ================================================== -->
+
+                    <tr
+                        data-student="simran kaur"
+                        data-company="accenture"
+                        data-role="associate software engineer"
+                        data-college="jiet"
+                        data-status="placed"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    SK
+                                </div>
+
+                                <div>
+                                    <strong>Simran Kaur</strong>
+                                    <span>22JIET101</span>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <span class="college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong>Accenture</strong>
+                        </td>
+
+                        <td>
+                            Associate Software Engineer
+                        </td>
+
+                        <td>
+                            <strong class="package">
+                                ₹7.0 LPA
+                            </strong>
+                        </td>
+
+                        <td>
+                            09 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="placement-status placed">
+                                Placed
+                            </span>
+                        </td>
+
+                        <td>
+                            <button
+                                class="placement-view-btn"
+                                data-student="Simran Kaur"
+                            >
+                                View
+                            </button>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- EMPTY -->
+
+            <div
+                class="placements-empty"
+                id="placementsEmpty"
+                hidden
+            >
+
+                <div class="empty-placement-icon">
+                    ⌕
+                </div>
+
+                <h3>No placement records found</h3>
+
+                <p>
+                    Try changing the search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    id="clearPlacementFilters"
+                    class="placement-refresh-btn"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+        <div class="placements-footer">
+
+            <span>
+                Showing
+                <strong id="footerRecordCount">8</strong>
+                placement records
+            </span>
+
+            <div class="placement-pagination">
+
+                <button
+                    type="button"
+                    class="page-btn disabled"
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="page-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="page-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="page-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="page-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="placement-modal"
+        id="placementDetailsModal"
+        hidden
+    >
+
+        <div
+            class="placement-modal-backdrop"
+            data-close-placement
+        ></div>
+
+
+        <div class="placement-modal-card">
+
+            <div class="placement-modal-header">
+
+                <div>
+
+                    <span>
+                        PLACEMENT RECORD
+                    </span>
+
+                    <h2 id="modalStudentName">
+                        Rahul Sharma
+                    </h2>
+
+                    <p id="modalStudentRole">
+                        Software Engineer · TCS
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close-btn"
+                    data-close-placement
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="placement-modal-body">
+
+                <div class="modal-profile">
+
+                    <div
+                        class="modal-avatar"
+                        id="modalAvatar"
+                    >
+                        RS
+                    </div>
+
+                    <div>
+
+                        <strong id="modalCompany">
+                            TCS
+                        </strong>
+
+                        <span id="modalCollege">
+                            PCE
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-details-grid">
+
+                    <div>
+                        <span>Job Role</span>
+                        <strong id="modalRole">
+                            Software Engineer
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Package</span>
+                        <strong id="modalPackage">
+                            ₹7.2 LPA
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Selected On</span>
+                        <strong id="modalDate">
+                            18 Aug 2026
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Status</span>
+                        <strong id="modalStatus">
+                            Placed
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="joining-box">
+
+                    <div>
+                        <span>Joining Status</span>
+                        <strong id="modalJoining">
+                            Joined / Confirmed
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Academic Session</span>
+                        <strong>
+                            2025-26
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="placement-modal-footer">
+
+                <button
+                    type="button"
+                    class="placement-refresh-btn"
+                    data-close-placement
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/placements.js') }}"
+></script>
+
+{% endblock %}

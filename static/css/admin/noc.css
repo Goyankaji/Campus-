@@ -1,0 +1,969 @@
+/* =========================================================
+   CAMPUS ADMIN
+   NOC MANAGEMENT
+========================================================= */
+
+.noc-page {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.noc-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 21px;
+}
+
+.noc-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+    color: var(--admin-muted);
+    font-size: 10px;
+}
+
+.noc-breadcrumb strong {
+    color: var(--admin-primary-light);
+}
+
+.noc-header h1 {
+    margin: 0;
+    color: var(--admin-text);
+    font-size: 27px;
+    letter-spacing: -0.5px;
+}
+
+.noc-header p {
+    margin: 7px 0 0;
+    color: var(--admin-muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.noc-primary-btn,
+.noc-secondary-btn,
+.noc-danger-btn {
+    min-height: 37px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 14px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.noc-primary-btn {
+    border: 1px solid transparent;
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #8b45f4
+    );
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(124,58,237,0.18);
+}
+
+.noc-primary-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 27px rgba(124,58,237,0.25);
+}
+
+.noc-secondary-btn {
+    border: 1px solid var(--admin-border);
+    background: var(--admin-card-bg);
+    color: var(--admin-text);
+}
+
+.noc-secondary-btn:hover {
+    border-color: rgba(155,108,255,0.55);
+    background: rgba(124,58,237,0.07);
+}
+
+.noc-danger-btn {
+    border: 1px solid rgba(239,71,111,0.22);
+    background: rgba(239,71,111,0.09);
+    color: #ff718f;
+}
+
+.noc-danger-btn:hover {
+    background: rgba(239,71,111,0.15);
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.noc-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+    margin-bottom: 18px;
+}
+
+.noc-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid var(--admin-border);
+    border-radius: 13px;
+    background: var(--admin-card-bg);
+}
+
+.noc-stat-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 11px;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.noc-stat-icon.purple {
+    background: rgba(124,58,237,0.12);
+    color: #ac7cff;
+}
+
+.noc-stat-icon.orange {
+    background: rgba(244,183,64,0.11);
+    color: #f4c15b;
+}
+
+.noc-stat-icon.green {
+    background: rgba(25,201,139,0.11);
+    color: #2ed99a;
+}
+
+.noc-stat-icon.red {
+    background: rgba(239,71,111,0.11);
+    color: #ff718f;
+}
+
+.noc-stat-card span {
+    display: block;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.noc-stat-card strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--admin-text);
+    font-size: 21px;
+}
+
+.noc-stat-card small {
+    display: block;
+    margin-top: 3px;
+    color: var(--admin-muted);
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   COLLEGE SUMMARY
+========================================================= */
+
+.noc-college-card {
+    margin-bottom: 18px;
+    padding: 16px;
+    border: 1px solid var(--admin-border);
+    border-radius: 14px;
+    background: var(--admin-card-bg);
+}
+
+.noc-section-title h2 {
+    margin: 0;
+    color: var(--admin-text);
+    font-size: 14px;
+}
+
+.noc-section-title p {
+    margin: 5px 0 13px;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.noc-college-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.noc-college-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+}
+
+.noc-college-top strong {
+    color: var(--admin-text);
+    font-size: 10px;
+}
+
+.noc-college-top span {
+    color: var(--admin-muted);
+    font-size: 8px;
+}
+
+.noc-progress {
+    height: 5px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+}
+
+.noc-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(
+        90deg,
+        #7139e9,
+        #a36dff
+    );
+}
+
+
+/* =========================================================
+   RECORD CARD
+========================================================= */
+
+.noc-record-card {
+    overflow: hidden;
+    border: 1px solid var(--admin-border);
+    border-radius: 14px;
+    background: var(--admin-card-bg);
+}
+
+.noc-record-header {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 14px 17px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.noc-record-header h2 {
+    margin: 0;
+    color: var(--admin-text);
+    font-size: 14px;
+}
+
+.noc-record-header p {
+    margin: 5px 0 0;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.noc-record-count {
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.noc-record-count strong {
+    color: var(--admin-primary-light);
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.noc-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 17px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.noc-search {
+    width: min(390px, 100%);
+    height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 11px;
+    border: 1px solid var(--admin-border);
+    border-radius: 9px;
+    background: rgba(4,12,31,0.28);
+}
+
+.noc-search svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: var(--admin-muted);
+    stroke-width: 1.8;
+}
+
+.noc-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--admin-text);
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.noc-search input::placeholder {
+    color: var(--admin-muted);
+}
+
+.noc-filters {
+    display: flex;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.noc-table-wrapper {
+    overflow-x: auto;
+}
+
+.noc-table {
+    width: 100%;
+    min-width: 980px;
+    border-collapse: collapse;
+}
+
+.noc-table th {
+    height: 41px;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--admin-border);
+    background: rgba(4,12,31,0.22);
+    color: var(--admin-muted);
+    text-align: left;
+    white-space: nowrap;
+    font-size: 8px;
+    letter-spacing: 0.55px;
+    text-transform: uppercase;
+}
+
+.noc-table td {
+    padding: 11px 12px;
+    border-bottom: 1px solid rgba(48,64,99,0.42);
+    color: var(--admin-text);
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.noc-table tbody tr:hover {
+    background: rgba(124,58,237,0.035);
+}
+
+.noc-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   STUDENT
+========================================================= */
+
+.noc-student-cell {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.noc-avatar,
+.noc-modal-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: rgba(124,58,237,0.12);
+    color: #b184ff;
+    font-weight: 800;
+}
+
+.noc-avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 9px;
+}
+
+.noc-student-cell strong {
+    display: block;
+    color: var(--admin-text);
+    font-size: 9px;
+}
+
+.noc-student-cell span {
+    display: block;
+    margin-top: 3px;
+    color: var(--admin-muted);
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   COLLEGE BADGES
+========================================================= */
+
+.noc-college-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 37px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: 6px;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.noc-college-badge.pce {
+    background: rgba(66,165,255,0.11);
+    color: #6cb0ff;
+}
+
+.noc-college-badge.piet {
+    background: rgba(124,58,237,0.11);
+    color: #ad80ff;
+}
+
+.noc-college-badge.pu {
+    background: rgba(25,201,139,0.10);
+    color: #36d99e;
+}
+
+.noc-college-badge.jiet {
+    background: rgba(244,183,64,0.11);
+    color: #f4c25d;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.noc-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 23px;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 750;
+}
+
+.noc-status.approved {
+    background: rgba(25,201,139,0.11);
+    color: #31d99b;
+}
+
+.noc-status.pending {
+    background: rgba(244,183,64,0.11);
+    color: #f4c25d;
+}
+
+.noc-status.rejected {
+    background: rgba(239,71,111,0.11);
+    color: #ff718f;
+}
+
+
+/* =========================================================
+   ACTION
+========================================================= */
+
+.noc-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.noc-view-btn {
+    min-height: 28px;
+    padding: 0 10px;
+    border: 1px solid var(--admin-border);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--admin-primary-light);
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.noc-view-btn:hover {
+    border-color: rgba(155,108,255,0.5);
+    background: rgba(124,58,237,0.09);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.noc-empty {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.noc-empty[hidden] {
+    display: none;
+}
+
+.noc-empty-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border-radius: 14px;
+    background: rgba(124,58,237,0.10);
+    color: var(--admin-primary-light);
+    font-size: 20px;
+}
+
+.noc-empty h3 {
+    margin: 0;
+    color: var(--admin-text);
+    font-size: 14px;
+}
+
+.noc-empty p {
+    margin: 6px 0 14px;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.noc-footer {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 17px;
+    border-top: 1px solid var(--admin-border);
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.noc-footer strong {
+    color: var(--admin-text);
+}
+
+.noc-pagination {
+    display: flex;
+    gap: 4px;
+}
+
+.noc-page-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--admin-border);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--admin-muted);
+    font-family: inherit;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.noc-page-btn.active {
+    border-color: transparent;
+    background: #7139e9;
+    color: #fff;
+}
+
+.noc-page-btn.disabled {
+    opacity: 0.4;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.noc-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.noc-modal[hidden] {
+    display: none;
+}
+
+.noc-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(2,7,20,0.78);
+    backdrop-filter: blur(5px);
+}
+
+.noc-modal-card {
+    position: relative;
+    z-index: 1;
+    width: min(600px, 100%);
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    border: 1px solid rgba(125,105,190,0.35);
+    border-radius: 16px;
+    background: #111d37;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.42);
+}
+
+.noc-modal-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 19px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.noc-modal-header > div > span {
+    color: var(--admin-primary-light);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.noc-modal-header h2 {
+    margin: 6px 0 0;
+    color: var(--admin-text);
+    font-size: 18px;
+}
+
+.noc-modal-header p {
+    margin: 5px 0 0;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.noc-modal-close {
+    width: 31px;
+    height: 31px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--admin-muted);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.noc-modal-body {
+    padding: 20px;
+}
+
+.noc-profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 17px;
+}
+
+.noc-modal-avatar {
+    width: 46px;
+    height: 46px;
+    font-size: 11px;
+}
+
+.noc-profile strong {
+    display: block;
+    color: var(--admin-text);
+    font-size: 11px;
+}
+
+.noc-profile span {
+    display: block;
+    margin-top: 4px;
+    color: var(--admin-muted);
+    font-size: 9px;
+}
+
+.noc-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+}
+
+.noc-detail-grid > div {
+    padding: 12px;
+    border: 1px solid var(--admin-border);
+    border-radius: 9px;
+}
+
+.noc-detail-grid span,
+.noc-reason-box > span,
+.noc-review-box span {
+    display: block;
+    color: var(--admin-muted);
+    font-size: 8px;
+}
+
+.noc-detail-grid strong,
+.noc-review-box strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--admin-text);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   REASON
+========================================================= */
+
+.noc-reason-box {
+    margin-top: 10px;
+    padding: 13px;
+    border: 1px solid var(--admin-border);
+    border-radius: 9px;
+}
+
+.noc-reason-box p {
+    margin: 7px 0 0;
+    color: var(--admin-muted);
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   REVIEW BOX
+========================================================= */
+
+.noc-review-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 10px;
+    padding: 13px;
+    border: 1px solid rgba(124,58,237,0.18);
+    border-radius: 9px;
+    background: rgba(124,58,237,0.05);
+}
+
+.noc-review-box strong {
+    color: var(--admin-primary-light);
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.noc-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 7px;
+    padding: 14px 19px;
+    border-top: 1px solid var(--admin-border);
+}
+
+
+/* =========================================================
+   CREATE FORM
+========================================================= */
+
+.add-noc-card {
+    width: min(680px, 100%);
+}
+
+.add-noc-form {
+    padding: 19px;
+}
+
+.noc-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+}
+
+.noc-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.noc-form-field.full {
+    grid-column: 1 / -1;
+}
+
+.noc-form-field label {
+    color: var(--admin-muted);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.noc-form-field input,
+.noc-form-field select,
+.noc-form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    outline: none;
+    background: rgba(4,12,31,0.3);
+    color: var(--admin-text);
+    font-family: inherit;
+    font-size: 9px;
+}
+
+.noc-form-field input,
+.noc-form-field select {
+    min-height: 37px;
+}
+
+.noc-form-field textarea {
+    resize: vertical;
+}
+
+.noc-form-field input::placeholder,
+.noc-form-field textarea::placeholder {
+    color: var(--admin-muted);
+}
+
+.noc-form-field input:focus,
+.noc-form-field select:focus,
+.noc-form-field textarea:focus {
+    border-color: rgba(155,108,255,0.65);
+}
+
+.noc-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid var(--admin-border);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .noc-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .noc-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .noc-search {
+        width: 100%;
+    }
+
+    .noc-filters {
+        flex-wrap: wrap;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .noc-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .noc-college-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .noc-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .noc-college-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .noc-filters {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .noc-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        padding: 13px 17px;
+    }
+
+    .noc-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .noc-review-box {
+        flex-direction: column;
+    }
+
+    .noc-modal-footer {
+        flex-wrap: wrap;
+    }
+
+    .noc-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .noc-form-field.full {
+        grid-column: auto;
+    }
+
+}

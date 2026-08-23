@@ -1,0 +1,1767 @@
+/* =========================================================
+   CAMPUS ADMIN
+   PLACEMENT OVERVIEW
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.placement-overview-page {
+
+    width: 100%;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    animation: poPageIn 0.45s ease;
+}
+
+
+@keyframes poPageIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.po-page-header {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 22px;
+}
+
+
+.po-breadcrumb {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 8px;
+
+    color: var(--admin-muted);
+
+    font-size: 9px;
+
+    letter-spacing: 0.02em;
+}
+
+
+.po-breadcrumb strong {
+
+    color: var(--admin-primary-light);
+
+    font-weight: 700;
+}
+
+
+.po-breadcrumb-separator {
+
+    opacity: 0.45;
+}
+
+
+.po-title-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.po-title-row h1 {
+
+    margin: 0;
+
+    color: var(--admin-text);
+
+    font-size: 25px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    letter-spacing: -0.02em;
+}
+
+
+.po-title-row p {
+
+    margin: 7px 0 0;
+
+    color: var(--admin-muted);
+
+    font-size: 11px;
+}
+
+
+.po-live-indicator {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 10px;
+
+    border: 1px solid
+        rgba(25, 201, 139, 0.18);
+
+    border-radius: 999px;
+
+    background:
+        rgba(25, 201, 139, 0.06);
+
+    color: var(--admin-success);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.po-live-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--admin-success);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(25, 201, 139, 0.08);
+
+    animation: poPulse 2s infinite;
+}
+
+
+@keyframes poPulse {
+
+    50% {
+        opacity: 0.45;
+    }
+}
+
+
+.po-header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.po-btn {
+
+    min-height: 37px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 12px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+
+.po-btn:hover {
+
+    transform: translateY(-1px);
+}
+
+
+.po-btn svg {
+
+    width: 14px;
+
+    height: 14px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.po-btn-primary {
+
+    border: 1px solid
+        rgba(139, 92, 246, 0.6);
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #6d35dc
+        );
+
+    color: #fff;
+
+    box-shadow:
+        0 8px 20px
+        rgba(124, 58, 237, 0.16);
+}
+
+
+.po-btn-secondary {
+
+    border: 1px solid var(--admin-border);
+
+    background: var(--admin-card-bg);
+
+    color: var(--admin-text);
+}
+
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.po-select {
+
+    min-height: 37px;
+
+    padding: 0 30px 0 11px;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 9px;
+
+    background: var(--admin-card-bg);
+
+    color: var(--admin-text);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+
+.po-small-select {
+
+    min-height: 34px;
+}
+
+
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.po-kpi-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 14px;
+}
+
+
+.po-kpi-card {
+
+    min-height: 142px;
+
+    padding: 16px;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--admin-card-bg),
+            rgba(20, 31, 55, 0.78)
+        );
+
+    box-shadow:
+        0 8px 28px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.po-kpi-card:hover {
+
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(139, 92, 246, 0.28);
+}
+
+
+.po-kpi-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.po-kpi-icon {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+}
+
+
+.po-kpi-icon svg {
+
+    width: 17px;
+
+    height: 17px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.po-icon-blue {
+
+    background: rgba(66, 165, 255, 0.11);
+
+    color: #42a5ff;
+}
+
+
+.po-icon-green {
+
+    background: rgba(25, 201, 139, 0.11);
+
+    color: #19c98b;
+}
+
+
+.po-icon-purple {
+
+    background: rgba(139, 92, 246, 0.12);
+
+    color: #9b6cff;
+}
+
+
+.po-icon-orange {
+
+    background: rgba(244, 183, 64, 0.12);
+
+    color: #f4b740;
+}
+
+
+.po-icon-pink {
+
+    background: rgba(239, 71, 111, 0.11);
+
+    color: #ef476f;
+}
+
+
+.po-kpi-trend {
+
+    padding: 5px 7px;
+
+    border-radius: 999px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.po-kpi-trend.positive {
+
+    background: rgba(25, 201, 139, 0.09);
+
+    color: var(--admin-success);
+}
+
+
+.po-kpi-trend.warning {
+
+    background: rgba(244, 183, 64, 0.10);
+
+    color: var(--admin-warning);
+}
+
+
+.po-kpi-value {
+
+    margin-top: 15px;
+
+    color: var(--admin-text);
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+
+.po-kpi-label {
+
+    margin-top: 7px;
+
+    color: var(--admin-text);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.po-kpi-foot {
+
+    margin-top: 6px;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.po-panel {
+
+    overflow: hidden;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 13px;
+
+    background: var(--admin-card-bg);
+
+    box-shadow:
+        0 8px 28px
+        rgba(0, 0, 0, 0.07);
+}
+
+
+.po-panel-header {
+
+    min-height: 68px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding: 14px 16px;
+
+    border-bottom: 1px solid var(--admin-border);
+}
+
+
+.po-panel-header h2 {
+
+    margin: 0;
+
+    color: var(--admin-text);
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.po-panel-header p {
+
+    margin: 4px 0 0;
+
+    color: var(--admin-muted);
+
+    font-size: 9px;
+}
+
+
+.po-panel-badge {
+
+    padding: 6px 9px;
+
+    border: 1px solid
+        rgba(139, 92, 246, 0.22);
+
+    border-radius: 7px;
+
+    background:
+        rgba(124, 58, 237, 0.07);
+
+    color: var(--admin-primary-light);
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.po-text-btn {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--admin-primary-light);
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.po-text-btn:hover {
+
+    text-decoration: underline;
+}
+
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.po-main-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1.08fr);
+
+    gap: 14px;
+
+    margin-bottom: 14px;
+}
+
+
+
+/* =========================================================
+   STATUS PANEL
+========================================================= */
+
+.po-status-content {
+
+    min-height: 230px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+    padding: 20px;
+}
+
+
+.po-donut-wrap {
+
+    flex: 0 0 190px;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+
+.po-donut {
+
+    width: 172px;
+
+    height: 172px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #2f8de4 0 68.7%,
+            #8b5cf6 68.7% 85.8%,
+            #19c98b 85.8% 100%
+        );
+}
+
+
+.po-donut::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 116px;
+
+    height: 116px;
+
+    border-radius: 50%;
+
+    background: var(--admin-card-bg);
+}
+
+
+.po-donut-center {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.po-donut-center strong {
+
+    color: var(--admin-text);
+
+    font-size: 23px;
+
+    font-weight: 800;
+}
+
+
+.po-donut-center span {
+
+    margin-top: 4px;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+.po-status-legend {
+
+    flex: 1;
+}
+
+
+.po-legend-item {
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 3px 12px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid
+        rgba(255, 255, 255, 0.035);
+}
+
+
+.po-legend-item:last-child {
+
+    border-bottom: 0;
+}
+
+
+.po-legend-name {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--admin-text);
+
+    font-size: 9px;
+
+    font-weight: 650;
+}
+
+
+.po-legend-item strong {
+
+    color: var(--admin-text);
+
+    font-size: 11px;
+}
+
+
+.po-legend-item small {
+
+    grid-column: 1 / -1;
+
+    padding-left: 15px;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+.po-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+}
+
+
+.po-dot.placed {
+    background: #2f8de4;
+}
+
+
+.po-dot.interview {
+    background: #8b5cf6;
+}
+
+
+.po-dot.upcoming {
+    background: #19c98b;
+}
+
+
+.po-status-footer {
+
+    padding: 0 20px 17px;
+}
+
+
+.po-progress-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+.po-progress-heading strong {
+
+    color: var(--admin-success);
+}
+
+
+.po-progress {
+
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+}
+
+
+.po-progress span {
+
+    display: block;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #19c98b,
+            #42dba7
+        );
+}
+
+
+
+/* =========================================================
+   COLLEGE PANEL
+========================================================= */
+
+.po-college-list {
+
+    padding: 7px 16px;
+}
+
+
+.po-college-row {
+
+    min-height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom: 1px solid
+        rgba(255, 255, 255, 0.035);
+}
+
+
+.po-college-row:last-child {
+
+    border-bottom: 0;
+}
+
+
+.po-college-info {
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.po-college-code {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 38px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(124, 58, 237, 0.09);
+
+    color: var(--admin-primary-light);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.po-college-info strong {
+
+    display: block;
+
+    max-width: 270px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: var(--admin-text);
+
+    font-size: 9px;
+}
+
+
+.po-college-info span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+.po-college-rate {
+
+    width: 105px;
+
+    flex: 0 0 105px;
+}
+
+
+.po-college-rate strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--admin-text);
+
+    font-size: 9px;
+
+    text-align: right;
+}
+
+
+.po-mini-progress {
+
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+}
+
+
+.po-mini-progress span {
+
+    display: block;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7140e8,
+            #9b6cff
+        );
+}
+
+
+
+/* =========================================================
+   YEAR CHART
+========================================================= */
+
+.po-year-panel {
+
+    margin-bottom: 14px;
+}
+
+
+.po-chart {
+
+    height: 330px;
+
+    display: flex;
+
+    padding: 18px 22px 22px;
+}
+
+
+.po-chart-y-axis {
+
+    width: 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding: 0 8px 28px 0;
+
+    color: var(--admin-muted);
+
+    font-size: 7px;
+
+    text-align: right;
+}
+
+
+.po-chart-area {
+
+    position: relative;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.po-chart-grid-line {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    height: 1px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+
+.po-chart-grid-line.line-1 {
+    top: 0;
+}
+
+.po-chart-grid-line.line-2 {
+    top: 20%;
+}
+
+.po-chart-grid-line.line-3 {
+    top: 40%;
+}
+
+.po-chart-grid-line.line-4 {
+    top: 60%;
+}
+
+.po-chart-grid-line.line-5 {
+    top: 80%;
+}
+
+.po-chart-grid-line.line-6 {
+    bottom: 0;
+}
+
+
+.po-bars {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content:
+        space-around;
+
+    padding:
+        0 8% 0;
+}
+
+
+.po-bar-column {
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 9px;
+}
+
+
+.po-bar {
+
+    position: relative;
+
+    width: clamp(50px, 8vw, 92px);
+
+    min-height: 25px;
+
+    border-radius:
+        8px 8px 3px 3px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #c9b5ff,
+            #9b78e8
+        );
+
+    cursor: pointer;
+
+    transition:
+        filter 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.po-bar-column.active .po-bar {
+
+    background:
+        linear-gradient(
+            180deg,
+            #9b6cff,
+            #713be5
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(124, 58, 237, 0.22);
+}
+
+
+.po-bar:hover {
+
+    filter: brightness(1.1);
+
+    transform:
+        translateY(-3px);
+}
+
+
+.po-bar span {
+
+    position: absolute;
+
+    top: -22px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: var(--admin-text);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    opacity: 0;
+
+    transition: opacity 0.2s ease;
+}
+
+
+.po-bar:hover span {
+
+    opacity: 1;
+}
+
+
+.po-bar-column small {
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+
+    white-space: nowrap;
+}
+
+
+
+/* =========================================================
+   LOWER GRID
+========================================================= */
+
+.po-lower-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 14px;
+
+    margin-bottom: 14px;
+}
+
+
+
+/* =========================================================
+   COMPANY TABLE
+========================================================= */
+
+.po-company-table {
+
+    padding: 5px 16px 10px;
+}
+
+
+.po-table-head,
+.po-table-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        0.7fr
+        0.9fr;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.po-table-head {
+
+    min-height: 34px;
+
+    border-bottom: 1px solid var(--admin-border);
+
+    color: var(--admin-muted);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.04em;
+}
+
+
+.po-table-row {
+
+    min-height: 57px;
+
+    border-bottom: 1px solid
+        rgba(255, 255, 255, 0.035);
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+.po-table-row:last-child {
+
+    border-bottom: 0;
+}
+
+
+.po-table-row strong {
+
+    color: var(--admin-text);
+
+    font-size: 8px;
+}
+
+
+.po-company-name {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.po-company-logo {
+
+    width: 30px;
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        rgba(124, 58, 237, 0.10);
+
+    color: var(--admin-primary-light);
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+
+/* =========================================================
+   DRIVE LIST
+========================================================= */
+
+.po-drive-list {
+
+    padding: 5px 16px 10px;
+}
+
+
+.po-drive-item {
+
+    min-height: 57px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border-bottom: 1px solid
+        rgba(255, 255, 255, 0.035);
+}
+
+
+.po-drive-item:last-child {
+
+    border-bottom: 0;
+}
+
+
+.po-drive-company {
+
+    width: 35px;
+
+    height: 35px;
+
+    flex: 0 0 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(66, 165, 255, 0.08);
+
+    color: #42a5ff;
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.po-drive-info {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.po-drive-info strong {
+
+    display: block;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: var(--admin-text);
+
+    font-size: 9px;
+}
+
+
+.po-drive-info span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+.po-drive-status {
+
+    padding: 5px 8px;
+
+    border-radius: 999px;
+
+    font-size: 7px;
+
+    font-weight: 800;
+}
+
+
+.po-drive-status.open {
+
+    background:
+        rgba(25, 201, 139, 0.10);
+
+    color: var(--admin-success);
+}
+
+
+.po-drive-status.closing {
+
+    background:
+        rgba(244, 183, 64, 0.10);
+
+    color: var(--admin-warning);
+}
+
+
+
+/* =========================================================
+   INSIGHT
+========================================================= */
+
+.po-insight-card {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 14px 16px;
+
+    margin-bottom: 5px;
+
+    border: 1px solid
+        rgba(124, 58, 237, 0.18);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            100deg,
+            rgba(124, 58, 237, 0.12),
+            rgba(72, 48, 145, 0.08)
+        );
+}
+
+
+.po-insight-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        rgba(124, 58, 237, 0.16);
+
+    color: var(--admin-primary-light);
+}
+
+
+.po-insight-icon svg {
+
+    width: 18px;
+
+    height: 18px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.po-insight-content {
+
+    flex: 1;
+}
+
+
+.po-insight-content strong {
+
+    color: var(--admin-text);
+
+    font-size: 10px;
+}
+
+
+.po-insight-content p {
+
+    margin: 4px 0 0;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+.po-insight-value {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+}
+
+
+.po-insight-value strong {
+
+    color: var(--admin-success);
+
+    font-size: 15px;
+}
+
+
+.po-insight-value span {
+
+    margin-top: 3px;
+
+    color: var(--admin-muted);
+
+    font-size: 7px;
+}
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .po-kpi-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .po-main-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .po-page-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .po-header-actions {
+
+        width: 100%;
+    }
+
+
+    .po-header-actions .po-select {
+
+        flex: 1;
+    }
+
+
+    .po-kpi-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .po-lower-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .po-kpi-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .po-title-row {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .po-header-actions {
+
+        flex-wrap: wrap;
+    }
+
+
+    .po-status-content {
+
+        flex-direction: column;
+
+        padding-top: 25px;
+    }
+
+
+    .po-donut-wrap {
+
+        flex-basis: auto;
+    }
+
+
+    .po-college-info strong {
+
+        max-width: 170px;
+    }
+
+
+    .po-chart {
+
+        height: 260px;
+
+        padding-left: 8px;
+
+        padding-right: 8px;
+    }
+
+
+    .po-bars {
+
+        padding-left: 2%;
+
+        padding-right: 2%;
+    }
+
+
+    .po-bar {
+
+        width: 42px;
+    }
+
+
+    .po-insight-card {
+
+        align-items: flex-start;
+    }
+
+
+    .po-insight-value {
+
+        display: none;
+    }
+
+}

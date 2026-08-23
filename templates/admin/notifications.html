@@ -1,0 +1,894 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Notifications | Campus Admin
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/admin/notifications.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="notifications-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="notifications-header">
+
+        <div>
+
+            <span class="notifications-eyebrow">
+                SYSTEM
+            </span>
+
+            <h1>
+                Notifications
+            </h1>
+
+            <p>
+                Stay updated with placement activity,
+                verification requests and system updates.
+            </p>
+
+        </div>
+
+
+        <div class="notifications-header-actions">
+
+            <button
+                type="button"
+                id="markAllRead"
+                class="notifications-outline-btn"
+            >
+                ✓ Mark all as read
+            </button>
+
+            <button
+                type="button"
+                id="clearAllNotifications"
+                class="notifications-danger-btn"
+            >
+                Clear all
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <div class="notification-summary-grid">
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon purple">
+                🔔
+            </div>
+
+            <div>
+
+                <span>
+                    Total Notifications
+                </span>
+
+                <strong id="totalNotifications">
+                    8
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon red">
+                ●
+            </div>
+
+            <div>
+
+                <span>
+                    Unread
+                </span>
+
+                <strong id="unreadNotifications">
+                    5
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Read
+                </span>
+
+                <strong id="readNotifications">
+                    3
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="notification-summary-card">
+
+            <div class="notification-summary-icon blue">
+                ⚡
+            </div>
+
+            <div>
+
+                <span>
+                    Today
+                </span>
+
+                <strong>
+                    3
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FILTER BAR
+    ====================================================== -->
+
+    <section class="notifications-panel">
+
+
+        <div class="notifications-filter-bar">
+
+
+            <div class="notification-search-wrapper">
+
+                <span class="notification-search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="search"
+                    id="notificationSearch"
+                    placeholder="Search notifications..."
+                >
+
+            </div>
+
+
+            <select
+                id="notificationType"
+                class="notification-filter"
+            >
+
+                <option value="all">
+                    All Types
+                </option>
+
+                <option value="placement">
+                    Placement
+                </option>
+
+                <option value="verification">
+                    Verification
+                </option>
+
+                <option value="system">
+                    System
+                </option>
+
+                <option value="announcement">
+                    Announcement
+                </option>
+
+            </select>
+
+
+            <select
+                id="notificationStatus"
+                class="notification-filter"
+            >
+
+                <option value="all">
+                    All
+                </option>
+
+                <option value="unread">
+                    Unread
+                </option>
+
+                <option value="read">
+                    Read
+                </option>
+
+            </select>
+
+
+        </div>
+
+
+        <!-- =================================================
+             NOTIFICATION LIST
+        ================================================== -->
+
+        <div
+            class="notification-list"
+            id="notificationList"
+        >
+
+
+            <!-- =================================================
+                 NOTIFICATION 1
+            ================================================== -->
+
+            <article
+                class="notification-item unread"
+                data-type="placement"
+                data-status="unread"
+            >
+
+                <div class="notification-item-icon placement">
+                    ◉
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            TCS Technical Interview
+                        </h3>
+
+                        <span class="notification-time">
+                            10 min ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Technical interviews have been
+                        scheduled for eligible students.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag placement-tag">
+                            Placement
+                        </span>
+
+                        <span>
+                            TCS
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <span class="unread-dot"></span>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                        title="Mark as read"
+                    >
+                        ✓
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                        title="Delete"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 NOTIFICATION 2
+            ================================================== -->
+
+            <article
+                class="notification-item unread"
+                data-type="placement"
+                data-status="unread"
+            >
+
+                <div class="notification-item-icon placement">
+                    ◉
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            New Placement Drive
+                        </h3>
+
+                        <span class="notification-time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Infosys placement drive has been
+                        published successfully.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag placement-tag">
+                            Placement
+                        </span>
+
+                        <span>
+                            Infosys
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <span class="unread-dot"></span>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                    >
+                        ✓
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 NOTIFICATION 3
+            ================================================== -->
+
+            <article
+                class="notification-item unread"
+                data-type="verification"
+                data-status="unread"
+            >
+
+                <div class="notification-item-icon verification">
+                    !
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            Pending User Verification
+                        </h3>
+
+                        <span class="notification-time">
+                            2 days ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        12 new accounts require administrator
+                        verification.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag verification-tag">
+                            Verification
+                        </span>
+
+                        <span>
+                            User Management
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <span class="unread-dot"></span>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                    >
+                        ✓
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 NOTIFICATION 4
+            ================================================== -->
+
+            <article
+                class="notification-item unread"
+                data-type="announcement"
+                data-status="unread"
+            >
+
+                <div class="notification-item-icon announcement">
+                    ◇
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            New Campus Announcement
+                        </h3>
+
+                        <span class="notification-time">
+                            2 days ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        A new campus-wide placement announcement
+                        has been published.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag announcement-tag">
+                            Announcement
+                        </span>
+
+                        <span>
+                            Administration
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <span class="unread-dot"></span>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                    >
+                        ✓
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 NOTIFICATION 5
+            ================================================== -->
+
+            <article
+                class="notification-item unread"
+                data-type="system"
+                data-status="unread"
+            >
+
+                <div class="notification-item-icon system">
+                    ⚙
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            System Maintenance Reminder
+                        </h3>
+
+                        <span class="notification-time">
+                            3 days ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Scheduled system maintenance is planned
+                        for this weekend.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag system-tag">
+                            System
+                        </span>
+
+                        <span>
+                            Campus Portal
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <span class="unread-dot"></span>
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                    >
+                        ✓
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 READ NOTIFICATION
+            ================================================== -->
+
+            <article
+                class="notification-item"
+                data-type="placement"
+                data-status="read"
+            >
+
+                <div class="notification-item-icon placement">
+                    ◉
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            Placement Drive Closed
+                        </h3>
+
+                        <span class="notification-time">
+                            4 days ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Wipro placement drive application
+                        window has been closed.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag placement-tag">
+                            Placement
+                        </span>
+
+                        <span>
+                            Wipro
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                        title="Mark as unread"
+                    >
+                        ○
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 READ NOTIFICATION
+            ================================================== -->
+
+            <article
+                class="notification-item"
+                data-type="verification"
+                data-status="read"
+            >
+
+                <div class="notification-item-icon verification">
+                    !
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            User Verification Completed
+                        </h3>
+
+                        <span class="notification-time">
+                            5 days ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        8 pending user verification requests
+                        have been approved.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag verification-tag">
+                            Verification
+                        </span>
+
+                        <span>
+                            User Management
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                    >
+                        ○
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 READ NOTIFICATION
+            ================================================== -->
+
+            <article
+                class="notification-item"
+                data-type="system"
+                data-status="read"
+            >
+
+                <div class="notification-item-icon system">
+                    ⚙
+                </div>
+
+
+                <div class="notification-item-content">
+
+                    <div class="notification-item-top">
+
+                        <h3>
+                            Backup Completed
+                        </h3>
+
+                        <span class="notification-time">
+                            6 days ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Campus placement portal data backup
+                        completed successfully.
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span class="notification-tag system-tag">
+                            System
+                        </span>
+
+                        <span>
+                            System Administration
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-item-actions">
+
+                    <button
+                        type="button"
+                        class="notification-read-btn"
+                    >
+                        ○
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-delete-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div
+            id="notificationEmpty"
+            class="notification-empty"
+            style="display:none;"
+        >
+
+            <div class="notification-empty-icon">
+                ✓
+            </div>
+
+            <h3>
+                No notifications found
+            </h3>
+
+            <p>
+                Try changing your search or filter.
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/admin/notifications.js'
+    ) }}"
+></script>
+
+{% endblock %}

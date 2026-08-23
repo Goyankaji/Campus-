@@ -105,6 +105,43 @@ def role_required(required_role):
 
 
 # =========================================================
+# ADMIN LOGIN REQUIRED
+# =========================================================
+# Used for Admin UI test-login mode.
+#
+# Later, when normal DB login is being used, Admin pages
+# can use @login_required + @role_required("1").
+# =========================================================
+
+def admin_required(f):
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+
+        # Allow Admin test session
+        if session.get("admin_logged_in") is True:
+            return f(*args, **kwargs)
+
+        # Also allow real DB Admin session
+        if (
+            "user_id" in session
+            and str(session.get("role_id")) == "1"
+        ):
+            return f(*args, **kwargs)
+
+        flash(
+            "Please login as Admin first.",
+            "error"
+        )
+
+        return redirect(
+            url_for("index")
+        )
+
+    return decorated_function
+
+
+# =========================================================
 # COMMON STUDENT DATA
 # =========================================================
 
@@ -242,10 +279,8 @@ def login():
             url_for("index")
         )
 
-
     connection = None
     cursor = None
-
 
     try:
 
@@ -254,7 +289,6 @@ def login():
         cursor = connection.cursor(
             dictionary=True
         )
-
 
         cursor.execute(
             """
@@ -274,7 +308,6 @@ def login():
 
         user = cursor.fetchone()
 
-
         if not user:
 
             flash(
@@ -285,7 +318,6 @@ def login():
             return redirect(
                 url_for("index")
             )
-
 
         if not check_password_hash(
             user["password_hash"],
@@ -301,7 +333,6 @@ def login():
                 url_for("index")
             )
 
-
         if user["account_status"] != "ACTIVE":
 
             flash(
@@ -313,7 +344,6 @@ def login():
                 url_for("index")
             )
 
-
         session.clear()
 
         session["user_id"] = user["user_id"]
@@ -321,11 +351,9 @@ def login():
         session["email"] = user["email"]
         session["role_id"] = user["role_id"]
 
-
         role_id = str(
             user["role_id"]
         )
-
 
         if role_id == "1":
 
@@ -363,7 +391,6 @@ def login():
                 url_for("authority_dashboard")
             )
 
-
         session.clear()
 
         flash(
@@ -374,7 +401,6 @@ def login():
         return redirect(
             url_for("index")
         )
-
 
     except mysql.connector.Error as error:
 
@@ -400,15 +426,12 @@ def login():
             url_for("index")
         )
 
-
     finally:
 
         if cursor:
-
             cursor.close()
 
         if connection and connection.is_connected():
-
             connection.close()
 
 
@@ -425,13 +448,36 @@ def authority_test_login():
     session["username"] = "College Authority"
     session["email"] = "authority@poornima.org"
 
-    # Authority role ID
     session["role_id"] = 6
-
     session["role_name"] = "AUTHORITY"
 
     return redirect(
         url_for("authority_dashboard")
+    )
+
+
+# =========================================================
+# ADMIN TEST LOGIN
+# =========================================================
+# Keeps Admin UI test mode available without DB.
+# =========================================================
+
+@app.route("/admin/test-login")
+def admin_test_login():
+
+    session.clear()
+
+    session["admin_logged_in"] = True
+
+    session["user_id"] = "ADMIN-TEST-001"
+    session["username"] = "Admin"
+    session["email"] = "admin@poornima.org"
+
+    session["role_id"] = 1
+    session["role_name"] = "ADMIN"
+
+    return redirect(
+        url_for("admin_dashboard")
     )
 
 
@@ -453,6 +499,35 @@ def logout():
     return redirect(
         url_for("index")
     )
+
+
+# =========================================================
+# ADMIN LOGOUT
+# =========================================================
+# Kept separately because the Admin UI currently uses
+# /admin/logout.
+# =========================================================
+
+@app.route("/admin/logout")
+def admin_logout():
+
+    session.clear()
+
+    flash(
+        "Admin session ended.",
+        "success"
+    )
+
+    return redirect(
+        url_for("index")
+    )
+
+
+# =========================================================
+# =========================================================
+# STUDENT
+# =========================================================
+# =========================================================
 
 
 # =========================================================
@@ -610,7 +685,6 @@ def student_pyq(company):
 
     profile_completion = get_profile_completion()
 
-
     pyq_data = {
 
         "tcs": {
@@ -648,11 +722,9 @@ def student_pyq(company):
 
     }
 
-
     pyq = pyq_data.get(
         company.lower()
     )
-
 
     if not pyq:
 
@@ -660,7 +732,6 @@ def student_pyq(company):
             "PYQ not found",
             404
         )
-
 
     return render_template(
         "students/pyq_detail.html",
@@ -766,7 +837,6 @@ def student_help():
 
     profile_completion = get_profile_completion()
 
-
     if request.method == "POST":
 
         category = request.form.get(
@@ -784,7 +854,6 @@ def student_help():
             ""
         ).strip()
 
-
         if not category:
 
             flash(
@@ -797,7 +866,6 @@ def student_help():
                 student=student,
                 profile_completion=profile_completion
             )
-
 
         if not subject:
 
@@ -812,7 +880,6 @@ def student_help():
                 profile_completion=profile_completion
             )
 
-
         if not description:
 
             flash(
@@ -826,7 +893,6 @@ def student_help():
                 profile_completion=profile_completion
             )
 
-
         print(
             "STUDENT COMPLAINT:",
             {
@@ -837,17 +903,14 @@ def student_help():
             }
         )
 
-
         flash(
             "Your complaint has been submitted successfully.",
             "success"
         )
 
-
         return redirect(
             url_for("student_help")
         )
-
 
     return render_template(
         "students/help.html",
@@ -898,7 +961,7 @@ def authority_dashboard():
 
 
 # =========================================================
-# PLACEMENT OVERVIEW
+# AUTHORITY PLACEMENT OVERVIEW
 # =========================================================
 
 @app.route("/authority/placement-overview")
@@ -912,7 +975,7 @@ def authority_placement_overview():
 
 
 # =========================================================
-# COMPANIES
+# AUTHORITY COMPANIES
 # =========================================================
 
 @app.route("/authority/companies")
@@ -926,7 +989,7 @@ def authority_companies():
 
 
 # =========================================================
-# PLACEMENT DRIVES
+# AUTHORITY PLACEMENT DRIVES
 # =========================================================
 
 @app.route("/authority/placement-drives")
@@ -940,7 +1003,7 @@ def authority_placement_drives():
 
 
 # =========================================================
-# ANALYTICS — PLACEMENT REPORTS
+# AUTHORITY ANALYTICS — PLACEMENT REPORTS
 # =========================================================
 
 @app.route(
@@ -956,7 +1019,7 @@ def authority_placement_reports():
 
 
 # =========================================================
-# ANALYTICS — DRIVE REPORTS
+# AUTHORITY ANALYTICS — DRIVE REPORTS
 # =========================================================
 
 @app.route(
@@ -972,7 +1035,7 @@ def authority_drive_reports():
 
 
 # =========================================================
-# ANALYTICS — COMPANY REPORTS
+# AUTHORITY ANALYTICS — COMPANY REPORTS
 # =========================================================
 
 @app.route(
@@ -988,7 +1051,7 @@ def authority_company_reports():
 
 
 # =========================================================
-# NOC
+# AUTHORITY NOC
 # =========================================================
 
 @app.route("/authority/noc")
@@ -1002,7 +1065,7 @@ def authority_noc():
 
 
 # =========================================================
-# STARTUP IDEAS
+# AUTHORITY STARTUP IDEAS
 # =========================================================
 
 @app.route("/authority/startup-ideas")
@@ -1016,7 +1079,7 @@ def authority_startup_ideas():
 
 
 # =========================================================
-# NOTIFICATIONS
+# AUTHORITY NOTIFICATIONS
 # =========================================================
 
 @app.route("/authority/notifications")
@@ -1030,7 +1093,7 @@ def authority_notifications():
 
 
 # =========================================================
-# ANNOUNCEMENTS
+# AUTHORITY ANNOUNCEMENTS
 # =========================================================
 
 @app.route("/authority/announcements")
@@ -1044,7 +1107,7 @@ def authority_announcements():
 
 
 # =========================================================
-# SETTINGS
+# AUTHORITY SETTINGS
 # =========================================================
 
 @app.route("/authority/settings")
@@ -1059,23 +1122,314 @@ def authority_settings():
 
 # =========================================================
 # =========================================================
-# OTHER DASHBOARDS
-# =========================================================
-# =========================================================
-
-
-# =========================================================
 # ADMIN
+# =========================================================
+# =========================================================
+
+
+# =========================================================
+# ADMIN DASHBOARD
 # =========================================================
 
 @app.route("/admin/dashboard")
-@login_required
-@role_required("1")
+@admin_required
 def admin_dashboard():
 
     return render_template(
         "admin/dashboard.html"
     )
+
+
+# =========================================================
+# PLACEMENT MANAGEMENT
+# =========================================================
+
+
+# =========================================================
+# PLACEMENT OVERVIEW
+# =========================================================
+
+@app.route("/admin/placement-overview")
+@admin_required
+def placement_overview():
+
+    return render_template(
+        "admin/placement_overview.html"
+    )
+
+
+# =========================================================
+# COMPANIES
+# =========================================================
+
+@app.route("/admin/companies")
+@admin_required
+def admin_companies():
+
+    return render_template(
+        "admin/companies.html"
+    )
+
+
+# =========================================================
+# PLACEMENT DRIVES
+# =========================================================
+
+@app.route("/admin/placement-drives")
+@admin_required
+def admin_drives():
+
+    return render_template(
+        "admin/placement_drives.html"
+    )
+
+
+# =========================================================
+# PLACEMENTS
+# =========================================================
+
+@app.route("/admin/placements")
+@admin_required
+def admin_placements():
+
+    return render_template(
+        "admin/placements.html"
+    )
+
+
+# =========================================================
+# ANALYTICS
+# =========================================================
+
+
+# =========================================================
+# ANALYTICS MAIN
+# =========================================================
+
+@app.route("/admin/analytics")
+@admin_required
+def admin_analytics():
+
+    return render_template(
+        "admin/analytics/placement_analytics.html"
+    )
+
+
+# =========================================================
+# PLACEMENT ANALYTICS
+# =========================================================
+
+@app.route("/admin/analytics/placement")
+@admin_required
+def admin_placement_analytics():
+
+    return render_template(
+        "admin/analytics/placement_analytics.html"
+    )
+
+
+# =========================================================
+# COMPANY ANALYTICS
+# =========================================================
+
+@app.route("/admin/analytics/company")
+@admin_required
+def admin_company_analytics():
+
+    return render_template(
+        "admin/analytics/company_analytics.html"
+    )
+
+
+# =========================================================
+# COLLEGE ANALYTICS
+# =========================================================
+
+@app.route("/admin/analytics/college")
+@admin_required
+def admin_college_analytics():
+
+    return render_template(
+        "admin/analytics/college_analytics.html"
+    )
+
+
+# =========================================================
+# STUDENT MANAGEMENT
+# =========================================================
+
+
+# =========================================================
+# STUDENTS
+# =========================================================
+
+@app.route("/admin/students")
+@admin_required
+def admin_students():
+
+    return render_template(
+        "admin/students.html"
+    )
+
+
+# =========================================================
+# OFF-CAMPUS
+# =========================================================
+
+@app.route("/admin/off-campus")
+@admin_required
+def admin_off_campus():
+
+    return render_template(
+        "admin/off_campus.html"
+    )
+
+
+# =========================================================
+# NOC
+# =========================================================
+
+@app.route("/admin/noc")
+@admin_required
+def admin_noc():
+
+    return render_template(
+        "admin/noc.html"
+    )
+
+
+# =========================================================
+# PRE-PLACED
+# =========================================================
+
+@app.route("/admin/pre-placed")
+@admin_required
+def admin_pre_placed():
+
+    return render_template(
+        "admin/pre_placed.html"
+    )
+
+
+# =========================================================
+# STARTUP STUDENTS
+# =========================================================
+
+@app.route("/admin/startup-students")
+@admin_required
+def admin_startup_students():
+
+    return render_template(
+        "admin/startup_students.html"
+    )
+
+
+# =========================================================
+# ADMINISTRATION
+# =========================================================
+
+
+# =========================================================
+# USERS
+# =========================================================
+
+@app.route("/admin/users")
+@admin_required
+def admin_users():
+
+    return render_template(
+        "admin/users.html"
+    )
+
+
+# =========================================================
+# ROLES
+# =========================================================
+
+@app.route("/admin/roles")
+@admin_required
+def admin_roles():
+
+    return render_template(
+        "admin/roles.html"
+    )
+
+
+# =========================================================
+# VERIFICATION
+# =========================================================
+
+@app.route("/admin/verification")
+@admin_required
+def admin_verification():
+
+    return render_template(
+        "admin/verification.html"
+    )
+
+
+# =========================================================
+# SYSTEM
+# =========================================================
+
+
+# =========================================================
+# NOTIFICATIONS
+# =========================================================
+
+@app.route("/admin/notifications")
+@admin_required
+def admin_notifications():
+
+    return render_template(
+        "admin/notifications.html"
+    )
+
+
+# =========================================================
+# FEEDBACK
+# =========================================================
+
+@app.route("/admin/feedback")
+@admin_required
+def admin_feedback():
+
+    return render_template(
+        "admin/feedback.html"
+    )
+
+
+# =========================================================
+# ANNOUNCEMENTS
+# =========================================================
+
+@app.route("/admin/announcements")
+@admin_required
+def admin_announcements():
+
+    return render_template(
+        "admin/announcements.html"
+    )
+
+
+# =========================================================
+# SETTINGS
+# =========================================================
+
+@app.route("/admin/settings")
+@admin_required
+def admin_settings():
+
+    return render_template(
+        "admin/settings.html"
+    )
+
+
+# =========================================================
+# =========================================================
+# OTHER DASHBOARDS
+# =========================================================
+# =========================================================
 
 
 # =========================================================

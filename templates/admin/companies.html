@@ -1,0 +1,779 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Companies | Admin | Campus Placement Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/companies.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="companies-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="companies-header">
+
+        <div class="companies-header-left">
+
+            <div class="companies-breadcrumb">
+                <span>PLACEMENT</span>
+                <span class="breadcrumb-arrow">›</span>
+                <strong>COMPANIES</strong>
+            </div>
+
+            <h1>
+                Companies
+            </h1>
+
+            <p>
+                Manage company records, placement partners and recruitment activity.
+            </p>
+
+        </div>
+
+
+        <div class="companies-header-actions">
+
+            <button
+                type="button"
+                class="companies-btn companies-btn-secondary"
+                id="exportCompaniesBtn"
+            >
+
+                <span class="btn-icon">
+                    ↓
+                </span>
+
+                Export
+
+            </button>
+
+
+            <button
+                type="button"
+                class="companies-btn companies-btn-primary"
+                id="addCompanyBtn"
+            >
+
+                <span class="btn-icon">
+                    +
+                </span>
+
+                Add Company
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="company-summary-grid">
+
+
+        <!-- TOTAL COMPANIES -->
+
+        <article class="company-summary-card">
+
+            <div class="summary-card-top">
+
+                <div class="summary-icon summary-icon-purple">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 20V7h16v13"></path>
+                        <path d="M8 7V4h8v3"></path>
+                        <path d="M8 11h2"></path>
+                        <path d="M14 11h2"></path>
+                        <path d="M8 15h2"></path>
+                        <path d="M14 15h2"></path>
+                    </svg>
+                </div>
+
+                <span class="summary-trend positive">
+                    +12.5%
+                </span>
+
+            </div>
+
+            <span class="summary-label">
+                Total Companies
+            </span>
+
+            <strong class="summary-value">
+                42
+            </strong>
+
+            <span class="summary-helper">
+                Registered placement partners
+            </span>
+
+        </article>
+
+
+
+        <!-- ACTIVE COMPANIES -->
+
+        <article class="company-summary-card">
+
+            <div class="summary-card-top">
+
+                <div class="summary-icon summary-icon-green">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="m8 12 2.5 2.5L16 9"></path>
+                    </svg>
+                </div>
+
+                <span class="summary-trend positive">
+                    Active
+                </span>
+
+            </div>
+
+            <span class="summary-label">
+                Active Companies
+            </span>
+
+            <strong class="summary-value">
+                31
+            </strong>
+
+            <span class="summary-helper">
+                Currently recruiting
+            </span>
+
+        </article>
+
+
+
+        <!-- NEW COMPANIES -->
+
+        <article class="company-summary-card">
+
+            <div class="summary-card-top">
+
+                <div class="summary-icon summary-icon-blue">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="3"></circle>
+                        <path d="M5 20c.5-3.5 2.5-5.5 7-5.5s6.5 2 7 5.5"></path>
+                        <path d="M19 8v5"></path>
+                        <path d="M16.5 10.5h5"></path>
+                    </svg>
+                </div>
+
+                <span class="summary-trend">
+                    This year
+                </span>
+
+            </div>
+
+            <span class="summary-label">
+                New Companies
+            </span>
+
+            <strong class="summary-value">
+                8
+            </strong>
+
+            <span class="summary-helper">
+                Added in 2025-26
+            </span>
+
+        </article>
+
+
+
+        <!-- COMPANIES WITH DRIVES -->
+
+        <article class="company-summary-card">
+
+            <div class="summary-card-top">
+
+                <div class="summary-icon summary-icon-orange">
+                    <svg viewBox="0 0 24 24">
+                        <rect
+                            x="3"
+                            y="5"
+                            width="18"
+                            height="14"
+                            rx="2"
+                        ></rect>
+
+                        <path d="M8 5V3h8v2"></path>
+                        <path d="M8 12h8"></path>
+                    </svg>
+                </div>
+
+                <span class="summary-trend positive">
+                    18 drives
+                </span>
+
+            </div>
+
+            <span class="summary-label">
+                Recruiting Companies
+            </span>
+
+            <strong class="summary-value">
+                18
+            </strong>
+
+            <span class="summary-helper">
+                With active placement drives
+            </span>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FILTER / SEARCH PANEL
+    ====================================================== -->
+
+    <section class="companies-control-panel">
+
+
+        <div class="company-search-box">
+
+            <svg viewBox="0 0 24 24">
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="7"
+                ></circle>
+
+                <path d="m20 20-4-4"></path>
+            </svg>
+
+            <input
+                type="search"
+                id="companySearch"
+                placeholder="Search companies..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="company-filters">
+
+
+            <select
+                id="companyStatusFilter"
+                class="company-select"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="active">
+                    Active
+                </option>
+
+                <option value="inactive">
+                    Inactive
+                </option>
+
+            </select>
+
+
+            <select
+                id="companyTypeFilter"
+                class="company-select"
+            >
+
+                <option value="all">
+                    All Types
+                </option>
+
+                <option value="it">
+                    IT / Software
+                </option>
+
+                <option value="core">
+                    Core Engineering
+                </option>
+
+                <option value="consulting">
+                    Consulting
+                </option>
+
+                <option value="finance">
+                    Finance
+                </option>
+
+                <option value="startup">
+                    Startup
+                </option>
+
+            </select>
+
+
+            <select
+                id="companyDriveFilter"
+                class="company-select"
+            >
+
+                <option value="all">
+                    Drive Activity
+                </option>
+
+                <option value="active">
+                    Active Drives
+                </option>
+
+                <option value="none">
+                    No Active Drive
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="clear-filter-btn"
+                id="clearFiltersBtn"
+            >
+                Clear
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COMPANY TABLE CARD
+    ====================================================== -->
+
+    <section class="companies-table-card">
+
+
+        <!-- TABLE HEADER -->
+
+        <div class="table-card-header">
+
+            <div>
+
+                <h2>
+                    Company Directory
+                </h2>
+
+                <p>
+                    All registered companies and placement partners
+                </p>
+
+            </div>
+
+
+            <div class="table-header-right">
+
+                <span
+                    class="company-result-count"
+                    id="companyResultCount"
+                >
+                    42 companies
+                </span>
+
+                <button
+                    type="button"
+                    class="table-view-btn active"
+                    data-view="table"
+                    title="Table View"
+                >
+                    ☷
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TABLE -->
+
+        <div class="companies-table-wrapper">
+
+            <table class="companies-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            TYPE
+                        </th>
+
+                        <th>
+                            LOCATION
+                        </th>
+
+                        <th>
+                            DRIVES
+                        </th>
+
+                        <th>
+                            STUDENTS PLACED
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="companiesTableBody">
+
+                    <!-- JavaScript renders companies -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- PAGINATION -->
+
+        <div class="companies-pagination">
+
+            <span id="paginationInfo">
+                Showing 1–8 of 42 companies
+            </span>
+
+
+            <div class="pagination-buttons">
+
+                <button
+                    type="button"
+                    id="prevPageBtn"
+                    class="pagination-btn"
+                    disabled
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-page active"
+                    data-page="1"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-page"
+                    data-page="2"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="pagination-page"
+                    data-page="3"
+                >
+                    3
+                </button>
+
+                <span class="pagination-dots">
+                    ...
+                </span>
+
+                <button
+                    type="button"
+                    class="pagination-page"
+                    data-page="6"
+                >
+                    6
+                </button>
+
+                <button
+                    type="button"
+                    id="nextPageBtn"
+                    class="pagination-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COMPANY DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="company-modal"
+        id="companyModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="company-modal-overlay"
+            id="companyModalOverlay"
+        ></div>
+
+
+        <div
+            class="company-modal-dialog"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <button
+                type="button"
+                class="company-modal-close"
+                id="closeCompanyModal"
+            >
+                ×
+            </button>
+
+
+            <div
+                class="company-modal-content"
+                id="companyModalContent"
+            >
+
+                <!-- JavaScript content -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ADD COMPANY MODAL
+    ====================================================== -->
+
+    <div
+        class="company-modal"
+        id="addCompanyModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="company-modal-overlay"
+            data-close-add-company
+        ></div>
+
+
+        <div class="company-modal-dialog add-company-dialog">
+
+            <button
+                type="button"
+                class="company-modal-close"
+                data-close-add-company
+            >
+                ×
+            </button>
+
+
+            <div class="add-company-header">
+
+                <div class="summary-icon summary-icon-purple">
+                    +
+                </div>
+
+                <div>
+
+                    <h2>
+                        Add Company
+                    </h2>
+
+                    <p>
+                        Register a new placement partner.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form id="addCompanyForm">
+
+                <div class="form-grid">
+
+                    <div class="form-field form-field-full">
+
+                        <label>
+                            Company Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newCompanyName"
+                            placeholder="Enter company name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Company Type
+                        </label>
+
+                        <select
+                            id="newCompanyType"
+                            required
+                        >
+
+                            <option value="">
+                                Select type
+                            </option>
+
+                            <option value="IT / Software">
+                                IT / Software
+                            </option>
+
+                            <option value="Core Engineering">
+                                Core Engineering
+                            </option>
+
+                            <option value="Consulting">
+                                Consulting
+                            </option>
+
+                            <option value="Finance">
+                                Finance
+                            </option>
+
+                            <option value="Startup">
+                                Startup
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newCompanyLocation"
+                            placeholder="Jaipur, Rajasthan"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Contact Person
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newCompanyContact"
+                            placeholder="Contact person"
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Contact Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="newCompanyEmail"
+                            placeholder="company@example.com"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="companies-btn companies-btn-secondary"
+                        data-close-add-company
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="companies-btn companies-btn-primary"
+                    >
+                        Add Company
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/companies.js') }}"
+></script>
+
+{% endblock %}

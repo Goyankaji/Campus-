@@ -1,0 +1,1454 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Role Management | Admin
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/administration/roles.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="roles-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="roles-header">
+
+        <div>
+
+            <div class="roles-breadcrumb">
+
+                <span>
+                    Administration
+                </span>
+
+                <span>›</span>
+
+                <strong>
+                    Role Management
+                </strong>
+
+            </div>
+
+
+            <h1>
+                Role Management
+            </h1>
+
+
+            <p>
+                Manage system roles and control access permissions
+                across the Campus Placement Portal.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="roles-primary-btn"
+            id="addRoleBtn"
+        >
+            <span>＋</span>
+            Add Role
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="roles-stats">
+
+        <article class="roles-stat-card">
+
+            <div class="roles-stat-icon purple">
+                ◈
+            </div>
+
+            <div>
+
+                <span>
+                    Total Roles
+                </span>
+
+                <strong>
+                    6
+                </strong>
+
+                <small>
+                    Configured system roles
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="roles-stat-card">
+
+            <div class="roles-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Active Roles
+                </span>
+
+                <strong>
+                    6
+                </strong>
+
+                <small>
+                    Currently available roles
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="roles-stat-card">
+
+            <div class="roles-stat-icon blue">
+                ◉
+            </div>
+
+            <div>
+
+                <span>
+                    Assigned Users
+                </span>
+
+                <strong>
+                    186
+                </strong>
+
+                <small>
+                    Users mapped to roles
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="roles-stat-card">
+
+            <div class="roles-stat-icon orange">
+                ⚿
+            </div>
+
+            <div>
+
+                <span>
+                    Permissions
+                </span>
+
+                <strong>
+                    32
+                </strong>
+
+                <small>
+                    Available access controls
+                </small>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         ROLE OVERVIEW
+    ====================================================== -->
+
+    <section class="roles-overview">
+
+        <div class="roles-section-heading">
+
+            <div>
+
+                <h2>
+                    Access Roles
+                </h2>
+
+                <p>
+                    Define what each user category can access
+                    within the portal.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="roles-grid">
+
+
+            <!-- ADMIN -->
+
+            <article
+                class="role-card"
+                data-role="admin"
+                data-status="active"
+            >
+
+                <div class="role-card-top">
+
+                    <div class="role-icon admin">
+                        AD
+                    </div>
+
+                    <span class="role-active">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Admin
+                </h3>
+
+
+                <p>
+                    Full platform administration,
+                    configuration and management access.
+                </p>
+
+
+                <div class="role-meta">
+
+                    <span>
+                        Users
+                    </span>
+
+                    <strong>
+                        3
+                    </strong>
+
+                </div>
+
+
+                <div class="role-permissions">
+
+                    <span>
+                        12 Permissions
+                    </span>
+
+                    <span>
+                        Full Access
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="role-view-btn"
+                    data-role-view
+                >
+                    Manage Permissions
+                </button>
+
+            </article>
+
+
+            <!-- TPO -->
+
+            <article
+                class="role-card"
+                data-role="tpo"
+                data-status="active"
+            >
+
+                <div class="role-card-top">
+
+                    <div class="role-icon tpo">
+                        TP
+                    </div>
+
+                    <span class="role-active">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    TPO
+                </h3>
+
+
+                <p>
+                    Placement operations, drives,
+                    companies and placement records.
+                </p>
+
+
+                <div class="role-meta">
+
+                    <span>
+                        Users
+                    </span>
+
+                    <strong>
+                        8
+                    </strong>
+
+                </div>
+
+
+                <div class="role-permissions">
+
+                    <span>
+                        9 Permissions
+                    </span>
+
+                    <span>
+                        Placement
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="role-view-btn"
+                    data-role-view
+                >
+                    Manage Permissions
+                </button>
+
+            </article>
+
+
+            <!-- HOD -->
+
+            <article
+                class="role-card"
+                data-role="hod"
+                data-status="active"
+            >
+
+                <div class="role-card-top">
+
+                    <div class="role-icon hod">
+                        HD
+                    </div>
+
+                    <span class="role-active">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    HOD
+                </h3>
+
+
+                <p>
+                    Department-level student and
+                    placement monitoring access.
+                </p>
+
+
+                <div class="role-meta">
+
+                    <span>
+                        Users
+                    </span>
+
+                    <strong>
+                        16
+                    </strong>
+
+                </div>
+
+
+                <div class="role-permissions">
+
+                    <span>
+                        7 Permissions
+                    </span>
+
+                    <span>
+                        Department
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="role-view-btn"
+                    data-role-view
+                >
+                    Manage Permissions
+                </button>
+
+            </article>
+
+
+            <!-- MENTOR -->
+
+            <article
+                class="role-card"
+                data-role="mentor"
+                data-status="active"
+            >
+
+                <div class="role-card-top">
+
+                    <div class="role-icon mentor">
+                        MT
+                    </div>
+
+                    <span class="role-active">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Mentor
+                </h3>
+
+
+                <p>
+                    Assigned student monitoring,
+                    guidance and placement support.
+                </p>
+
+
+                <div class="role-meta">
+
+                    <span>
+                        Users
+                    </span>
+
+                    <strong>
+                        27
+                    </strong>
+
+                </div>
+
+
+                <div class="role-permissions">
+
+                    <span>
+                        5 Permissions
+                    </span>
+
+                    <span>
+                        Students
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="role-view-btn"
+                    data-role-view
+                >
+                    Manage Permissions
+                </button>
+
+            </article>
+
+
+            <!-- STUDENT -->
+
+            <article
+                class="role-card"
+                data-role="student"
+                data-status="active"
+            >
+
+                <div class="role-card-top">
+
+                    <div class="role-icon student">
+                        ST
+                    </div>
+
+                    <span class="role-active">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Student
+                </h3>
+
+
+                <p>
+                    Student profile, applications,
+                    drives and placement activities.
+                </p>
+
+
+                <div class="role-meta">
+
+                    <span>
+                        Users
+                    </span>
+
+                    <strong>
+                        126
+                    </strong>
+
+                </div>
+
+
+                <div class="role-permissions">
+
+                    <span>
+                        6 Permissions
+                    </span>
+
+                    <span>
+                        Personal
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="role-view-btn"
+                    data-role-view
+                >
+                    Manage Permissions
+                </button>
+
+            </article>
+
+
+            <!-- AUTHORITY -->
+
+            <article
+                class="role-card"
+                data-role="authority"
+                data-status="active"
+            >
+
+                <div class="role-card-top">
+
+                    <div class="role-icon authority">
+                        AU
+                    </div>
+
+                    <span class="role-active">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Authority
+                </h3>
+
+
+                <p>
+                    Institution-level placement visibility
+                    and monitoring access.
+                </p>
+
+
+                <div class="role-meta">
+
+                    <span>
+                        Users
+                    </span>
+
+                    <strong>
+                        6
+                    </strong>
+
+                </div>
+
+
+                <div class="role-permissions">
+
+                    <span>
+                        8 Permissions
+                    </span>
+
+                    <span>
+                        Monitoring
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="role-view-btn"
+                    data-role-view
+                >
+                    Manage Permissions
+                </button>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PERMISSION TABLE
+    ====================================================== -->
+
+    <section class="roles-permission-card">
+
+        <div class="roles-card-header">
+
+            <div>
+
+                <h2>
+                    Permission Matrix
+                </h2>
+
+                <p>
+                    Quick overview of role-level access.
+                </p>
+
+            </div>
+
+
+            <div class="roles-toolbar">
+
+                <div class="roles-search">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="11"
+                            cy="11"
+                            r="7"
+                        ></circle>
+
+                        <path
+                            d="m20 20-4-4"
+                        ></path>
+
+                    </svg>
+
+
+                    <input
+                        type="text"
+                        id="roleSearch"
+                        placeholder="Search role..."
+                    >
+
+                </div>
+
+
+                <select
+                    class="admin-select"
+                    id="roleStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="roles-table-wrapper">
+
+            <table class="roles-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Role
+                        </th>
+
+                        <th>
+                            Users
+                        </th>
+
+                        <th>
+                            Students
+                        </th>
+
+                        <th>
+                            Placements
+                        </th>
+
+                        <th>
+                            Analytics
+                        </th>
+
+                        <th>
+                            Administration
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="rolesTableBody">
+
+
+                    <tr
+                        data-role="admin"
+                        data-status="active"
+                    >
+
+                        <td>
+                            <strong>
+                                Admin
+                            </strong>
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Full
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Full
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Full
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Full
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="roles-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-role="tpo"
+                        data-status="active"
+                    >
+
+                        <td>
+                            <strong>
+                                TPO
+                            </strong>
+                        </td>
+
+                        <td>
+                            8
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Manage
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Full
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                View
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission no">
+                                None
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="roles-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-role="hod"
+                        data-status="active"
+                    >
+
+                        <td>
+                            <strong>
+                                HOD
+                            </strong>
+                        </td>
+
+                        <td>
+                            16
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Manage
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                View
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                View
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission no">
+                                None
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="roles-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-role="mentor"
+                        data-status="active"
+                    >
+
+                        <td>
+                            <strong>
+                                Mentor
+                            </strong>
+                        </td>
+
+                        <td>
+                            27
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Assigned
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                View
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission no">
+                                None
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission no">
+                                None
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="roles-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-role="student"
+                        data-status="active"
+                    >
+
+                        <td>
+                            <strong>
+                                Student
+                            </strong>
+                        </td>
+
+                        <td>
+                            126
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Own
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Apply
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Own
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission no">
+                                None
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="roles-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr
+                        data-role="authority"
+                        data-status="active"
+                    >
+
+                        <td>
+                            <strong>
+                                Authority
+                            </strong>
+                        </td>
+
+                        <td>
+                            6
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                View
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                View
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission yes">
+                                Full
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="permission no">
+                                Limited
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="roles-status active">
+                                Active
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <div
+                class="roles-empty"
+                id="rolesEmpty"
+                hidden
+            >
+
+                <div class="roles-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No roles found
+                </h3>
+
+                <p>
+                    Try changing your search or status filter.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ROLE PERMISSION MODAL
+    ====================================================== -->
+
+    <div
+        class="roles-modal"
+        id="roleModal"
+        hidden
+    >
+
+        <div
+            class="roles-modal-backdrop"
+            data-close-role
+        ></div>
+
+
+        <div class="roles-modal-card">
+
+            <div class="roles-modal-header">
+
+                <div>
+
+                    <span>
+                        ROLE CONFIGURATION
+                    </span>
+
+                    <h2 id="modalRoleName">
+                        Admin
+                    </h2>
+
+                    <p id="modalRoleDescription">
+                        Full platform administration access.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="roles-modal-close"
+                    data-close-role
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="roles-modal-body">
+
+                <div class="modal-role-summary">
+
+                    <div
+                        class="modal-role-icon"
+                        id="modalRoleIcon"
+                    >
+                        AD
+                    </div>
+
+                    <div>
+
+                        <strong id="modalRoleUsers">
+                            3 Users
+                        </strong>
+
+                        <span>
+                            Assigned accounts
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="permissions-heading">
+
+                    <h3>
+                        Permissions
+                    </h3>
+
+                    <span>
+                        Phase-1 preview
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="permission-list"
+                    id="permissionList"
+                >
+
+                    <label class="permission-row">
+
+                        <span>
+
+                            <strong>
+                                View Dashboard
+                            </strong>
+
+                            <small>
+                                Access role dashboard
+                            </small>
+
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                    </label>
+
+
+                    <label class="permission-row">
+
+                        <span>
+
+                            <strong>
+                                Manage Students
+                            </strong>
+
+                            <small>
+                                View and manage student records
+                            </small>
+
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                    </label>
+
+
+                    <label class="permission-row">
+
+                        <span>
+
+                            <strong>
+                                Manage Placements
+                            </strong>
+
+                            <small>
+                                Access placement operations
+                            </small>
+
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                    </label>
+
+
+                    <label class="permission-row">
+
+                        <span>
+
+                            <strong>
+                                View Analytics
+                            </strong>
+
+                            <small>
+                                Access placement analytics
+                            </small>
+
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                    </label>
+
+
+                    <label class="permission-row">
+
+                        <span>
+
+                            <strong>
+                                Manage Users
+                            </strong>
+
+                            <small>
+                                Create and manage portal users
+                            </small>
+
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                    </label>
+
+
+                    <label class="permission-row">
+
+                        <span>
+
+                            <strong>
+                                Manage Roles
+                            </strong>
+
+                            <small>
+                                Configure system roles
+                            </small>
+
+                        </span>
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="roles-modal-footer">
+
+                <button
+                    type="button"
+                    class="roles-secondary-btn"
+                    data-close-role
+                >
+                    Close
+                </button>
+
+
+                <button
+                    type="button"
+                    class="roles-primary-btn"
+                    id="saveRolePermissions"
+                >
+                    Save Permissions
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD ROLE MODAL
+    ====================================================== -->
+
+    <div
+        class="roles-modal"
+        id="addRoleModal"
+        hidden
+    >
+
+        <div
+            class="roles-modal-backdrop"
+            data-close-add-role
+        ></div>
+
+
+        <div class="roles-modal-card add-role-card">
+
+            <div class="roles-modal-header">
+
+                <div>
+
+                    <span>
+                        ADMINISTRATION
+                    </span>
+
+                    <h2>
+                        Create New Role
+                    </h2>
+
+                    <p>
+                        Add a custom access role.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="roles-modal-close"
+                    data-close-add-role
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="addRoleForm"
+                class="add-role-form"
+            >
+
+                <div class="roles-form-field">
+
+                    <label>
+                        Role Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="newRoleName"
+                        placeholder="e.g. Placement Coordinator"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="roles-form-field">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        id="newRoleDescription"
+                        placeholder="Describe the role responsibilities..."
+                        rows="4"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="roles-form-field">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select>
+
+                        <option>
+                            Active
+                        </option>
+
+                        <option>
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="roles-form-footer">
+
+                    <button
+                        type="button"
+                        class="roles-secondary-btn"
+                        data-close-add-role
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="roles-primary-btn"
+                    >
+                        Create Role
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/administration/roles.js') }}"
+></script>
+
+{% endblock %}

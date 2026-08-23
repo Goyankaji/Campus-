@@ -1,0 +1,1878 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Startup Students | Admin
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/startup_students.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="startup-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="startup-header">
+
+        <div>
+
+            <div class="startup-breadcrumb">
+
+                <span>Students</span>
+                <span>›</span>
+
+                <strong>
+                    Startup Students
+                </strong>
+
+            </div>
+
+
+            <h1>
+                Startup Students
+            </h1>
+
+
+            <p>
+                Track students pursuing entrepreneurship,
+                startup ventures and independent business initiatives.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="startup-primary-btn"
+            id="addStartupBtn"
+        >
+            <span>＋</span>
+            Add Startup
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="startup-stats">
+
+        <article class="startup-stat-card">
+
+            <div class="startup-stat-icon purple">
+                ◈
+            </div>
+
+            <div>
+
+                <span>
+                    Total Students
+                </span>
+
+                <strong>
+                    42
+                </strong>
+
+                <small>
+                    Registered startup students
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="startup-stat-card">
+
+            <div class="startup-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Active Startups
+                </span>
+
+                <strong>
+                    27
+                </strong>
+
+                <small>
+                    Currently active ventures
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="startup-stat-card">
+
+            <div class="startup-stat-icon blue">
+                ₹
+            </div>
+
+            <div>
+
+                <span>
+                    Funded Startups
+                </span>
+
+                <strong>
+                    9
+                </strong>
+
+                <small>
+                    Received external funding
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="startup-stat-card">
+
+            <div class="startup-stat-icon orange">
+                ★
+            </div>
+
+            <div>
+
+                <span>
+                    Incubated
+                </span>
+
+                <strong>
+                    16
+                </strong>
+
+                <small>
+                    Incubation / accelerator support
+                </small>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLEGE DISTRIBUTION
+    ====================================================== -->
+
+    <section class="startup-college-card">
+
+        <div class="startup-section-title">
+
+            <div>
+
+                <h2>
+                    College-wise Startup Students
+                </h2>
+
+                <p>
+                    Distribution of registered startup students
+                    across the four colleges.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="startup-college-grid">
+
+
+            <div class="startup-college-item">
+
+                <div class="startup-college-top">
+
+                    <strong>
+                        PCE
+                    </strong>
+
+                    <span>
+                        15 students
+                    </span>
+
+                </div>
+
+
+                <div class="startup-progress">
+
+                    <span
+                        style="width: 82%;"
+                    ></span>
+
+                </div>
+
+            </div>
+
+
+            <div class="startup-college-item">
+
+                <div class="startup-college-top">
+
+                    <strong>
+                        PIET
+                    </strong>
+
+                    <span>
+                        11 students
+                    </span>
+
+                </div>
+
+
+                <div class="startup-progress">
+
+                    <span
+                        style="width: 61%;"
+                    ></span>
+
+                </div>
+
+            </div>
+
+
+            <div class="startup-college-item">
+
+                <div class="startup-college-top">
+
+                    <strong>
+                        PU
+                    </strong>
+
+                    <span>
+                        9 students
+                    </span>
+
+                </div>
+
+
+                <div class="startup-progress">
+
+                    <span
+                        style="width: 50%;"
+                    ></span>
+
+                </div>
+
+            </div>
+
+
+            <div class="startup-college-item">
+
+                <div class="startup-college-top">
+
+                    <strong>
+                        JIET
+                    </strong>
+
+                    <span>
+                        7 students
+                    </span>
+
+                </div>
+
+
+                <div class="startup-progress">
+
+                    <span
+                        style="width: 39%;"
+                    ></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STARTUP RECORDS
+    ====================================================== -->
+
+    <section class="startup-record-card">
+
+        <div class="startup-record-header">
+
+            <div>
+
+                <h2>
+                    Startup Student Records
+                </h2>
+
+                <p>
+                    Students registered with startup or
+                    entrepreneurship activities.
+                </p>
+
+            </div>
+
+
+            <div class="startup-record-count">
+
+                <strong id="startupRecordCount">
+                    8
+                </strong>
+
+                records
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="startup-toolbar">
+
+            <div class="startup-search">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+
+                </svg>
+
+
+                <input
+                    type="text"
+                    id="startupSearch"
+                    placeholder="Search student, startup or sector..."
+                >
+
+            </div>
+
+
+            <div class="startup-filters">
+
+                <select
+                    class="admin-select"
+                    id="startupCollege"
+                >
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="startupStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="incubated">
+                        Incubated
+                    </option>
+
+                    <option value="funded">
+                        Funded
+                    </option>
+
+                    <option value="closed">
+                        Closed
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="startupSector"
+                >
+
+                    <option value="all">
+                        All Sectors
+                    </option>
+
+                    <option value="technology">
+                        Technology
+                    </option>
+
+                    <option value="fintech">
+                        FinTech
+                    </option>
+
+                    <option value="edtech">
+                        EdTech
+                    </option>
+
+                    <option value="healthcare">
+                        Healthcare
+                    </option>
+
+                    <option value="ecommerce">
+                        E-Commerce
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="startup-table-wrapper">
+
+            <table class="startup-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Student
+                        </th>
+
+                        <th>
+                            College
+                        </th>
+
+                        <th>
+                            Startup
+                        </th>
+
+                        <th>
+                            Sector
+                        </th>
+
+                        <th>
+                            Stage
+                        </th>
+
+                        <th>
+                            Founded
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="startupTableBody">
+
+
+                    <!-- =================================================
+                         RECORD 1
+                    ================================================== -->
+
+                    <tr
+                        data-name="arjun sharma"
+                        data-startup="techverse"
+                        data-sector="technology"
+                        data-college="pce"
+                        data-status="funded"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    AS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Arjun Sharma
+                                    </strong>
+
+                                    <span>
+                                        22PCE018
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge pce"
+                            >
+                                PCE
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                TechVerse
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            Technology
+                        </td>
+
+
+                        <td>
+                            Seed
+                        </td>
+
+
+                        <td>
+                            2025
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status funded"
+                            >
+                                Funded
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 2 -->
+
+                    <tr
+                        data-name="neha agarwal"
+                        data-startup="learnify"
+                        data-sector="edtech"
+                        data-college="piet"
+                        data-status="incubated"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    NA
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Neha Agarwal
+                                    </strong>
+
+                                    <span>
+                                        22PIET031
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge piet"
+                            >
+                                PIET
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                Learnify
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            EdTech
+                        </td>
+
+
+                        <td>
+                            Incubation
+                        </td>
+
+
+                        <td>
+                            2026
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status incubated"
+                            >
+                                Incubated
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 3 -->
+
+                    <tr
+                        data-name="rahul meena"
+                        data-startup="finbridge"
+                        data-sector="fintech"
+                        data-college="pu"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    RM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rahul Meena
+                                    </strong>
+
+                                    <span>
+                                        22PU044
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge pu"
+                            >
+                                PU
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                FinBridge
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            FinTech
+                        </td>
+
+
+                        <td>
+                            Early Stage
+                        </td>
+
+
+                        <td>
+                            2025
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status active"
+                            >
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 4 -->
+
+                    <tr
+                        data-name="simran kaur"
+                        data-startup="medassist"
+                        data-sector="healthcare"
+                        data-college="jiet"
+                        data-status="funded"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    SK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Simran Kaur
+                                    </strong>
+
+                                    <span>
+                                        22JIET056
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge jiet"
+                            >
+                                JIET
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                MedAssist
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            Healthcare
+                        </td>
+
+
+                        <td>
+                            Seed
+                        </td>
+
+
+                        <td>
+                            2025
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status funded"
+                            >
+                                Funded
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 5 -->
+
+                    <tr
+                        data-name="vikas joshi"
+                        data-startup="shopkart"
+                        data-sector="ecommerce"
+                        data-college="pce"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    VJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Vikas Joshi
+                                    </strong>
+
+                                    <span>
+                                        22PCE071
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge pce"
+                            >
+                                PCE
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ShopKart
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            E-Commerce
+                        </td>
+
+
+                        <td>
+                            Growth
+                        </td>
+
+
+                        <td>
+                            2024
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status active"
+                            >
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 6 -->
+
+                    <tr
+                        data-name="riya gupta"
+                        data-startup="campusconnect"
+                        data-sector="technology"
+                        data-college="piet"
+                        data-status="incubated"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    RG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Riya Gupta
+                                    </strong>
+
+                                    <span>
+                                        22PIET088
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge piet"
+                            >
+                                PIET
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                CampusConnect
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            Technology
+                        </td>
+
+
+                        <td>
+                            Incubation
+                        </td>
+
+
+                        <td>
+                            2026
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status incubated"
+                            >
+                                Incubated
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 7 -->
+
+                    <tr
+                        data-name="harshit yadav"
+                        data-startup="agrovision"
+                        data-sector="technology"
+                        data-college="pu"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    HY
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Harshit Yadav
+                                    </strong>
+
+                                    <span>
+                                        22PU116
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge pu"
+                            >
+                                PU
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                AgroVision
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            Technology
+                        </td>
+
+
+                        <td>
+                            Early Stage
+                        </td>
+
+
+                        <td>
+                            2025
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status active"
+                            >
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RECORD 8 -->
+
+                    <tr
+                        data-name="muskan verma"
+                        data-startup="greenbasket"
+                        data-sector="ecommerce"
+                        data-college="jiet"
+                        data-status="closed"
+                    >
+
+                        <td>
+
+                            <div class="startup-student-cell">
+
+                                <div class="startup-avatar">
+                                    MV
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Muskan Verma
+                                    </strong>
+
+                                    <span>
+                                        22JIET137
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-college-badge jiet"
+                            >
+                                JIET
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                GreenBasket
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            E-Commerce
+                        </td>
+
+
+                        <td>
+                            Early Stage
+                        </td>
+
+
+                        <td>
+                            2024
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="startup-status closed"
+                            >
+                                Closed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="startup-view-btn"
+                                data-view-startup
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="startup-empty"
+                id="startupEmpty"
+                hidden
+            >
+
+                <div class="startup-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No startup records found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    class="startup-secondary-btn"
+                    id="clearStartupFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="startup-footer">
+
+            <span>
+
+                Showing
+
+                <strong id="startupFooterCount">
+                    8
+                </strong>
+
+                records
+
+            </span>
+
+
+            <div class="startup-pagination">
+
+                <button
+                    type="button"
+                    class="startup-page-btn disabled"
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="startup-page-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="startup-page-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="startup-page-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="startup-page-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="startup-modal"
+        id="startupDetailsModal"
+        hidden
+    >
+
+        <div
+            class="startup-modal-backdrop"
+            data-close-startup
+        ></div>
+
+
+        <div class="startup-modal-card">
+
+            <div class="startup-modal-header">
+
+                <div>
+
+                    <span>
+                        STARTUP RECORD
+                    </span>
+
+                    <h2 id="modalStartupStudent">
+                        Arjun Sharma
+                    </h2>
+
+                    <p id="modalStartupCompany">
+                        TechVerse
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="startup-modal-close"
+                    data-close-startup
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="startup-modal-body">
+
+                <div class="startup-profile">
+
+                    <div
+                        class="startup-modal-avatar"
+                        id="modalStartupAvatar"
+                    >
+                        AS
+                    </div>
+
+
+                    <div>
+
+                        <strong id="modalStartupName">
+                            TechVerse
+                        </strong>
+
+                        <span id="modalStartupCollege">
+                            PCE
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="startup-detail-grid">
+
+                    <div>
+
+                        <span>
+                            Student
+                        </span>
+
+                        <strong id="modalStartupStudentDetail">
+                            Arjun Sharma
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Startup
+                        </span>
+
+                        <strong id="modalStartupNameDetail">
+                            TechVerse
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Sector
+                        </span>
+
+                        <strong id="modalStartupSector">
+                            Technology
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Stage
+                        </span>
+
+                        <strong id="modalStartupStage">
+                            Seed
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Founded
+                        </span>
+
+                        <strong id="modalStartupFounded">
+                            2025
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong id="modalStartupStatus">
+                            Funded
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="startup-note-box">
+
+                    <div>
+
+                        <span>
+                            Student Category
+                        </span>
+
+                        <strong>
+                            Startup / Entrepreneur
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Academic Session
+                        </span>
+
+                        <strong>
+                            2025-26
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="startup-modal-footer">
+
+                <button
+                    type="button"
+                    class="startup-secondary-btn"
+                    data-close-startup
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD STARTUP MODAL
+    ====================================================== -->
+
+    <div
+        class="startup-modal"
+        id="addStartupModal"
+        hidden
+    >
+
+        <div
+            class="startup-modal-backdrop"
+            data-close-add-startup
+        ></div>
+
+
+        <div class="startup-modal-card add-startup-card">
+
+            <div class="startup-modal-header">
+
+                <div>
+
+                    <span>
+                        STUDENT MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Add Startup Record
+                    </h2>
+
+                    <p>
+                        Register a student's startup venture.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="startup-modal-close"
+                    data-close-add-startup
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="addStartupForm"
+                class="add-startup-form"
+            >
+
+                <div class="startup-form-grid">
+
+
+                    <div class="startup-form-field full">
+
+                        <label>
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newStartupStudent"
+                            placeholder="Enter student name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="startup-form-field">
+
+                        <label>
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="22PCE001"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="startup-form-field">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select College
+                            </option>
+
+                            <option>
+                                PCE
+                            </option>
+
+                            <option>
+                                PIET
+                            </option>
+
+                            <option>
+                                PU
+                            </option>
+
+                            <option>
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="startup-form-field">
+
+                        <label>
+                            Startup Name
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter startup name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="startup-form-field">
+
+                        <label>
+                            Sector
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select Sector
+                            </option>
+
+                            <option>
+                                Technology
+                            </option>
+
+                            <option>
+                                FinTech
+                            </option>
+
+                            <option>
+                                EdTech
+                            </option>
+
+                            <option>
+                                Healthcare
+                            </option>
+
+                            <option>
+                                E-Commerce
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="startup-form-field">
+
+                        <label>
+                            Stage
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Idea
+                            </option>
+
+                            <option>
+                                Early Stage
+                            </option>
+
+                            <option>
+                                Seed
+                            </option>
+
+                            <option>
+                                Growth
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="startup-form-field">
+
+                        <label>
+                            Founded Year
+                        </label>
+
+                        <input
+                            type="number"
+                            min="2000"
+                            max="2100"
+                            placeholder="2026"
+                        >
+
+                    </div>
+
+
+                    <div class="startup-form-field">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Active
+                            </option>
+
+                            <option>
+                                Incubated
+                            </option>
+
+                            <option>
+                                Funded
+                            </option>
+
+                            <option>
+                                Closed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="startup-form-footer">
+
+                    <button
+                        type="button"
+                        class="startup-secondary-btn"
+                        data-close-add-startup
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="startup-primary-btn"
+                    >
+                        Save Startup
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/startup_students.js') }}"
+></script>
+
+{% endblock %}

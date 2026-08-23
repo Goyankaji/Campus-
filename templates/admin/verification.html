@@ -1,0 +1,1371 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Verification | Admin
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/administration/verification.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="verification-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="verification-header">
+
+        <div>
+
+            <div class="verification-breadcrumb">
+
+                <span>
+                    Administration
+                </span>
+
+                <span>›</span>
+
+                <strong>
+                    Verification
+                </strong>
+
+            </div>
+
+
+            <h1>
+                Verification
+            </h1>
+
+
+            <p>
+                Review and verify student and user records
+                before granting portal access.
+            </p>
+
+        </div>
+
+
+        <div class="verification-header-actions">
+
+            <button
+                type="button"
+                class="verification-secondary-btn"
+                id="refreshVerification"
+            >
+                ↻
+                Refresh
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="verification-stats">
+
+        <article class="verification-stat-card">
+
+            <div class="verification-stat-icon orange">
+                !
+            </div>
+
+            <div>
+
+                <span>
+                    Pending Review
+                </span>
+
+                <strong>
+                    18
+                </strong>
+
+                <small>
+                    Records awaiting verification
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="verification-stat-card">
+
+            <div class="verification-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Verified
+                </span>
+
+                <strong>
+                    162
+                </strong>
+
+                <small>
+                    Successfully verified records
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="verification-stat-card">
+
+            <div class="verification-stat-icon red">
+                ×
+            </div>
+
+            <div>
+
+                <span>
+                    Rejected
+                </span>
+
+                <strong>
+                    6
+                </strong>
+
+                <small>
+                    Records requiring correction
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="verification-stat-card">
+
+            <div class="verification-stat-icon blue">
+                ◇
+            </div>
+
+            <div>
+
+                <span>
+                    Documents
+                </span>
+
+                <strong>
+                    31
+                </strong>
+
+                <small>
+                    Documents under review
+                </small>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         VERIFICATION QUEUE
+    ====================================================== -->
+
+    <section class="verification-card">
+
+        <div class="verification-card-header">
+
+            <div>
+
+                <h2>
+                    Verification Queue
+                </h2>
+
+                <p>
+                    Review submitted records and verification documents.
+                </p>
+
+            </div>
+
+
+            <div class="verification-queue-count">
+
+                <strong id="verificationCount">
+                    7
+                </strong>
+
+                pending
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="verification-toolbar">
+
+            <div class="verification-search">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+
+                </svg>
+
+
+                <input
+                    type="text"
+                    id="verificationSearch"
+                    placeholder="Search name, enrollment or email..."
+                >
+
+            </div>
+
+
+            <div class="verification-filters">
+
+                <select
+                    class="admin-select"
+                    id="verificationCollege"
+                >
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="verificationType"
+                >
+
+                    <option value="all">
+                        All Types
+                    </option>
+
+                    <option value="profile">
+                        Profile
+                    </option>
+
+                    <option value="document">
+                        Document
+                    </option>
+
+                    <option value="placement">
+                        Placement
+                    </option>
+
+                    <option value="noc">
+                        NOC
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="verificationStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="verified">
+                        Verified
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                    <option value="changes">
+                        Changes Required
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="verification-table-wrapper">
+
+            <table class="verification-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Applicant
+                        </th>
+
+                        <th>
+                            College
+                        </th>
+
+                        <th>
+                            Verification Type
+                        </th>
+
+                        <th>
+                            Submitted
+                        </th>
+
+                        <th>
+                            Documents
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="verificationTableBody">
+
+
+                    <!-- ROW 1 -->
+
+                    <tr
+                        data-name="arjun sharma"
+                        data-enrollment="22pce018"
+                        data-email="22pce018@student.poornima.org"
+                        data-college="pce"
+                        data-type="profile"
+                        data-status="pending"
+                        data-documents="4"
+                    >
+
+                        <td>
+
+                            <div class="verification-user">
+
+                                <div class="verification-avatar">
+                                    AS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Arjun Sharma
+                                    </strong>
+
+                                    <span>
+                                        22PCE018
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCE
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-type profile">
+                                Profile
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            24 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="document-count">
+                                4 Files
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="verification-view-btn"
+                                data-verification-view
+                            >
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- ROW 2 -->
+
+                    <tr
+                        data-name="neha gupta"
+                        data-enrollment="22piet031"
+                        data-email="22piet031@student.poornima.org"
+                        data-college="piet"
+                        data-type="document"
+                        data-status="pending"
+                        data-documents="6"
+                    >
+
+                        <td>
+
+                            <div class="verification-user">
+
+                                <div class="verification-avatar">
+                                    NG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Neha Gupta
+                                    </strong>
+
+                                    <span>
+                                        22PIET031
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PIET
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-type document">
+                                Document
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            24 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="document-count">
+                                6 Files
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="verification-view-btn"
+                                data-verification-view
+                            >
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- ROW 3 -->
+
+                    <tr
+                        data-name="vikas meena"
+                        data-enrollment="22pu044"
+                        data-email="22pu044@student.poornima.org"
+                        data-college="pu"
+                        data-type="placement"
+                        data-status="pending"
+                        data-documents="3"
+                    >
+
+                        <td>
+
+                            <div class="verification-user">
+
+                                <div class="verification-avatar">
+                                    VM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Vikas Meena
+                                    </strong>
+
+                                    <span>
+                                        22PU044
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PU
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-type placement">
+                                Placement
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            23 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="document-count">
+                                3 Files
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="verification-view-btn"
+                                data-verification-view
+                            >
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- ROW 4 -->
+
+                    <tr
+                        data-name="rohit singh"
+                        data-enrollment="22jiet072"
+                        data-email="22jiet072@student.poornima.org"
+                        data-college="jiet"
+                        data-type="noc"
+                        data-status="changes"
+                        data-documents="2"
+                    >
+
+                        <td>
+
+                            <div class="verification-user">
+
+                                <div class="verification-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rohit Singh
+                                    </strong>
+
+                                    <span>
+                                        22JIET072
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            JIET
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-type noc">
+                                NOC
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            22 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="document-count">
+                                2 Files
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-status changes">
+                                Changes Required
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="verification-view-btn"
+                                data-verification-view
+                            >
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- ROW 5 -->
+
+                    <tr
+                        data-name="priya joshi"
+                        data-enrollment="22pce041"
+                        data-email="22pce041@student.poornima.org"
+                        data-college="pce"
+                        data-type="document"
+                        data-status="verified"
+                        data-documents="5"
+                    >
+
+                        <td>
+
+                            <div class="verification-user">
+
+                                <div class="verification-avatar">
+                                    PJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Priya Joshi
+                                    </strong>
+
+                                    <span>
+                                        22PCE041
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCE
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-type document">
+                                Document
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            21 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="document-count">
+                                5 Files
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-status verified">
+                                Verified
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="verification-view-btn"
+                                data-verification-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- ROW 6 -->
+
+                    <tr
+                        data-name="aman kumar"
+                        data-enrollment="22piet052"
+                        data-email="22piet052@student.poornima.org"
+                        data-college="piet"
+                        data-type="profile"
+                        data-status="rejected"
+                        data-documents="4"
+                    >
+
+                        <td>
+
+                            <div class="verification-user">
+
+                                <div class="verification-avatar">
+                                    AK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Aman Kumar
+                                    </strong>
+
+                                    <span>
+                                        22PIET052
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PIET
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-type profile">
+                                Profile
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            20 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="document-count">
+                                4 Files
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-status rejected">
+                                Rejected
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="verification-view-btn"
+                                data-verification-view
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- ROW 7 -->
+
+                    <tr
+                        data-name="sneha choudhary"
+                        data-enrollment="22jiet019"
+                        data-email="22jiet019@student.poornima.org"
+                        data-college="jiet"
+                        data-type="profile"
+                        data-status="pending"
+                        data-documents="5"
+                    >
+
+                        <td>
+
+                            <div class="verification-user">
+
+                                <div class="verification-avatar">
+                                    SC
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Sneha Choudhary
+                                    </strong>
+
+                                    <span>
+                                        22JIET019
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            JIET
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-type profile">
+                                Profile
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            24 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="document-count">
+                                5 Files
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="verification-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="verification-view-btn"
+                                data-verification-view
+                            >
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- EMPTY -->
+
+            <div
+                class="verification-empty"
+                id="verificationEmpty"
+                hidden
+            >
+
+                <div class="verification-empty-icon">
+                    ✓
+                </div>
+
+                <h3>
+                    No verification records found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="verification-footer">
+
+            <span>
+
+                Showing
+                <strong id="verificationFooterCount">
+                    7
+                </strong>
+                records
+
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VERIFICATION DETAIL MODAL
+    ====================================================== -->
+
+    <div
+        class="verification-modal"
+        id="verificationModal"
+        hidden
+    >
+
+        <div
+            class="verification-modal-backdrop"
+            data-close-verification
+        ></div>
+
+
+        <div class="verification-modal-card">
+
+            <!-- HEADER -->
+
+            <div class="verification-modal-header">
+
+                <div>
+
+                    <span>
+                        VERIFICATION REVIEW
+                    </span>
+
+                    <h2 id="modalStudentName">
+                        Arjun Sharma
+                    </h2>
+
+                    <p id="modalStudentId">
+                        22PCE018
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="verification-modal-close"
+                    data-close-verification
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- BODY -->
+
+            <div class="verification-modal-body">
+
+
+                <!-- PROFILE -->
+
+                <div class="verification-profile">
+
+                    <div
+                        class="verification-modal-avatar"
+                        id="modalAvatar"
+                    >
+                        AS
+                    </div>
+
+                    <div>
+
+                        <strong id="modalCollege">
+                            PCE
+                        </strong>
+
+                        <span id="modalEmail">
+                            22pce018@student.poornima.org
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="verification-detail-grid">
+
+                    <div>
+
+                        <span>
+                            Enrollment
+                        </span>
+
+                        <strong id="modalEnrollment">
+                            22PCE018
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            College
+                        </span>
+
+                        <strong id="modalCollegeDetail">
+                            PCE
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Verification Type
+                        </span>
+
+                        <strong id="modalType">
+                            Profile
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Documents
+                        </span>
+
+                        <strong id="modalDocuments">
+                            4 Files
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DOCUMENTS -->
+
+                <div class="verification-document-section">
+
+                    <div class="verification-subheading">
+
+                        <h3>
+                            Submitted Documents
+                        </h3>
+
+                        <span>
+                            Preview
+                        </span>
+
+                    </div>
+
+
+                    <div class="verification-documents">
+
+                        <div class="verification-document">
+
+                            <div class="verification-document-icon">
+                                PDF
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Aadhaar Card
+                                </strong>
+
+                                <span>
+                                    Identity document
+                                </span>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="document-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+
+                        <div class="verification-document">
+
+                            <div class="verification-document-icon">
+                                PDF
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Marksheet
+                                </strong>
+
+                                <span>
+                                    Academic document
+                                </span>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="document-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+
+                        <div class="verification-document">
+
+                            <div class="verification-document-icon">
+                                IMG
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Profile Photo
+                                </strong>
+
+                                <span>
+                                    Student profile
+                                </span>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="document-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REMARK -->
+
+                <div class="verification-remark">
+
+                    <label>
+                        Verification Remark
+                    </label>
+
+                    <textarea
+                        id="verificationRemark"
+                        rows="3"
+                        placeholder="Add a remark for this verification..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="verification-modal-footer">
+
+                <button
+                    type="button"
+                    class="verification-reject-btn"
+                    id="rejectVerification"
+                >
+                    Reject
+                </button>
+
+
+                <button
+                    type="button"
+                    class="verification-change-btn"
+                    id="requestChanges"
+                >
+                    Request Changes
+                </button>
+
+
+                <button
+                    type="button"
+                    class="verification-approve-btn"
+                    id="approveVerification"
+                >
+                    ✓ Approve
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/administration/verification.js') }}"
+></script>
+
+{% endblock %}

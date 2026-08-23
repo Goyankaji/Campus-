@@ -1,0 +1,936 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Announcements | Campus Admin
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/admin/announcements.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="announcements-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <section class="announcements-header">
+
+        <div>
+
+            <span class="announcements-eyebrow">
+                COMMUNICATION
+            </span>
+
+            <h1>
+                Announcements
+            </h1>
+
+            <p>
+                Create, publish and manage important
+                campus placement announcements.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="createAnnouncementBtn"
+            class="create-announcement-btn"
+        >
+            <span>+</span>
+            Create Announcement
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="announcement-summary">
+
+        <div class="announcement-stat-card">
+
+            <div class="announcement-stat-icon purple">
+                ◇
+            </div>
+
+            <div>
+                <span>Total</span>
+                <strong id="totalAnnouncements">6</strong>
+            </div>
+
+        </div>
+
+
+        <div class="announcement-stat-card">
+
+            <div class="announcement-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Published</span>
+                <strong id="publishedAnnouncements">4</strong>
+            </div>
+
+        </div>
+
+
+        <div class="announcement-stat-card">
+
+            <div class="announcement-stat-icon orange">
+                ◷
+            </div>
+
+            <div>
+                <span>Drafts</span>
+                <strong id="draftAnnouncements">2</strong>
+            </div>
+
+        </div>
+
+
+        <div class="announcement-stat-card">
+
+            <div class="announcement-stat-icon blue">
+                👁
+            </div>
+
+            <div>
+                <span>Total Views</span>
+                <strong id="announcementViews">2,846</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTER BAR
+    ====================================================== -->
+
+    <section class="announcement-panel">
+
+        <div class="announcement-toolbar">
+
+            <div class="announcement-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="search"
+                    id="announcementSearch"
+                    placeholder="Search announcements..."
+                >
+
+            </div>
+
+
+            <select
+                id="announcementCategory"
+                class="announcement-filter"
+            >
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="placement">
+                    Placement
+                </option>
+
+                <option value="general">
+                    General
+                </option>
+
+                <option value="deadline">
+                    Deadline
+                </option>
+
+                <option value="event">
+                    Event
+                </option>
+
+            </select>
+
+
+            <select
+                id="announcementStatus"
+                class="announcement-filter"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="published">
+                    Published
+                </option>
+
+                <option value="draft">
+                    Draft
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- =================================================
+             ANNOUNCEMENT LIST
+        ================================================== -->
+
+        <div
+            class="announcement-list"
+            id="announcementList"
+        >
+
+
+            <!-- ANNOUNCEMENT 1 -->
+
+            <article
+                class="announcement-item"
+                data-category="placement"
+                data-status="published"
+            >
+
+                <div class="announcement-type-icon placement">
+                    ◉
+                </div>
+
+
+                <div class="announcement-content">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            TCS Placement Drive 2026
+                        </h3>
+
+                        <span class="announcement-status published">
+                            Published
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        TCS placement drive registration is now
+                        open for eligible students across all
+                        participating colleges.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category placement">
+                            Placement
+                        </span>
+
+                        <span>
+                            Published 10 Aug 2026
+                        </span>
+
+                        <span>
+                            842 views
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-actions">
+
+                    <button
+                        type="button"
+                        class="announcement-edit"
+                        title="Edit"
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-toggle"
+                        title="Unpublish"
+                    >
+                        ●
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-delete"
+                        title="Delete"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ANNOUNCEMENT 2 -->
+
+            <article
+                class="announcement-item"
+                data-category="deadline"
+                data-status="published"
+            >
+
+                <div class="announcement-type-icon deadline">
+                    !
+                </div>
+
+
+                <div class="announcement-content">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Registration Deadline Extended
+                        </h3>
+
+                        <span class="announcement-status published">
+                            Published
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        The deadline for submitting placement
+                        registration details has been extended
+                        until 18 August 2026.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category deadline">
+                            Deadline
+                        </span>
+
+                        <span>
+                            Published 12 Aug 2026
+                        </span>
+
+                        <span>
+                            614 views
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-actions">
+
+                    <button
+                        type="button"
+                        class="announcement-edit"
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-toggle"
+                    >
+                        ●
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-delete"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ANNOUNCEMENT 3 -->
+
+            <article
+                class="announcement-item"
+                data-category="event"
+                data-status="published"
+            >
+
+                <div class="announcement-type-icon event">
+                    ◇
+                </div>
+
+
+                <div class="announcement-content">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Pre-Placement Talk Scheduled
+                        </h3>
+
+                        <span class="announcement-status published">
+                            Published
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        A pre-placement talk by the recruiting
+                        team has been scheduled for eligible
+                        students.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category event">
+                            Event
+                        </span>
+
+                        <span>
+                            Published 14 Aug 2026
+                        </span>
+
+                        <span>
+                            438 views
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-actions">
+
+                    <button
+                        type="button"
+                        class="announcement-edit"
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-toggle"
+                    >
+                        ●
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-delete"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- ANNOUNCEMENT 4 -->
+
+            <article
+                class="announcement-item"
+                data-category="general"
+                data-status="published"
+            >
+
+                <div class="announcement-type-icon general">
+                    i
+                </div>
+
+
+                <div class="announcement-content">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Placement Policy Update
+                        </h3>
+
+                        <span class="announcement-status published">
+                            Published
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        The placement policy for the current
+                        academic session has been updated.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category general">
+                            General
+                        </span>
+
+                        <span>
+                            Published 16 Aug 2026
+                        </span>
+
+                        <span>
+                            392 views
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-actions">
+
+                    <button
+                        type="button"
+                        class="announcement-edit"
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-toggle"
+                    >
+                        ●
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-delete"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DRAFT 1 -->
+
+            <article
+                class="announcement-item draft-item"
+                data-category="placement"
+                data-status="draft"
+            >
+
+                <div class="announcement-type-icon placement">
+                    ◉
+                </div>
+
+
+                <div class="announcement-content">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Infosys Placement Drive
+                        </h3>
+
+                        <span class="announcement-status draft">
+                            Draft
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Draft announcement for the upcoming
+                        Infosys recruitment drive.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category placement">
+                            Placement
+                        </span>
+
+                        <span>
+                            Last edited 18 Aug 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-actions">
+
+                    <button
+                        type="button"
+                        class="announcement-edit"
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-toggle"
+                    >
+                        ▶
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-delete"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DRAFT 2 -->
+
+            <article
+                class="announcement-item draft-item"
+                data-category="event"
+                data-status="draft"
+            >
+
+                <div class="announcement-type-icon event">
+                    ◇
+                </div>
+
+
+                <div class="announcement-content">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Campus Career Awareness Session
+                        </h3>
+
+                        <span class="announcement-status draft">
+                            Draft
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        Draft announcement for an upcoming
+                        career awareness session.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category event">
+                            Event
+                        </span>
+
+                        <span>
+                            Last edited 19 Aug 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-actions">
+
+                    <button
+                        type="button"
+                        class="announcement-edit"
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-toggle"
+                    >
+                        ▶
+                    </button>
+
+                    <button
+                        type="button"
+                        class="announcement-delete"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- EMPTY -->
+
+        <div
+            id="announcementEmpty"
+            class="announcement-empty"
+            style="display:none;"
+        >
+
+            <div>
+                ◇
+            </div>
+
+            <h3>
+                No announcements found
+            </h3>
+
+            <p>
+                Try changing your search or filters.
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<!-- =========================================================
+     CREATE / EDIT MODAL
+========================================================= -->
+
+<div
+    id="announcementModal"
+    class="announcement-modal"
+    aria-hidden="true"
+>
+
+    <div class="announcement-modal-overlay"></div>
+
+
+    <div class="announcement-modal-box">
+
+        <div class="announcement-modal-header">
+
+            <div>
+
+                <span>
+                    COMMUNICATION
+                </span>
+
+                <h2 id="modalTitle">
+                    Create Announcement
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeAnnouncementModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="announcementForm">
+
+
+            <div class="announcement-form-group">
+
+                <label>
+                    Title
+                </label>
+
+                <input
+                    type="text"
+                    id="announcementTitle"
+                    placeholder="Enter announcement title"
+                    required
+                >
+
+            </div>
+
+
+            <div class="announcement-form-row">
+
+                <div class="announcement-form-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select
+                        id="announcementFormCategory"
+                        required
+                    >
+
+                        <option value="placement">
+                            Placement
+                        </option>
+
+                        <option value="general">
+                            General
+                        </option>
+
+                        <option value="deadline">
+                            Deadline
+                        </option>
+
+                        <option value="event">
+                            Event
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="announcement-form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select
+                        id="announcementFormStatus"
+                    >
+
+                        <option value="published">
+                            Publish Now
+                        </option>
+
+                        <option value="draft">
+                            Save as Draft
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="announcement-form-group">
+
+                <label>
+                    Audience
+                </label>
+
+                <select
+                    id="announcementAudience"
+                >
+
+                    <option value="all">
+                        All Users
+                    </option>
+
+                    <option value="students">
+                        Students
+                    </option>
+
+                    <option value="tpo">
+                        TPO
+                    </option>
+
+                    <option value="hod">
+                        HOD
+                    </option>
+
+                    <option value="authority">
+                        Authority
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="announcement-form-group">
+
+                <label>
+                    Message
+                </label>
+
+                <textarea
+                    id="announcementMessage"
+                    rows="5"
+                    placeholder="Write announcement details..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="announcement-form-actions">
+
+                <button
+                    type="button"
+                    id="cancelAnnouncement"
+                    class="modal-cancel-btn"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-submit-btn"
+                >
+                    Save Announcement
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/admin/announcements.js'
+    ) }}"
+></script>
+
+{% endblock %}

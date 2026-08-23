@@ -1,1438 +1,1836 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "admin/base.html" %}
 
-    <title>Admin Dashboard | Campus Placement Portal</title>
+{% block title %}
+    Admin Dashboard | Campus Placement Portal
+{% endblock %}
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/admin.css') }}">
-</head>
 
-<body>
+{% block page_css %}
 
-<div class="app-shell">
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/dashboard.css') }}"
+>
 
-    <!-- ================= SIDEBAR ================= -->
-    <aside class="sidebar" id="sidebar">
+{% endblock %}
 
-        <div class="brand">
-            <img src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
-                 alt="Campus Logo">
-            <div>
-                <strong>CAMPUS</strong>
-                <span>PLACEMENT PORTAL</span>
-            </div>
-        </div>
 
-        <nav class="sidebar-nav">
+{% block content %}
 
-            <div class="nav-group">
-                <div class="nav-label">MAIN</div>
+<div class="admin-dashboard">
 
-                <button class="nav-item active" data-view="dashboard">
-                    <span class="nav-icon">⌂</span>
-                    <span>Dashboard</span>
-                </button>
 
-                <button class="nav-item" data-view="users">
-                    <span class="nav-icon">♙</span>
-                    <span>User Management</span>
-                    <span class="nav-badge">12</span>
-                </button>
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
 
-                <button class="nav-item" data-view="roles">
-                    <span class="nav-icon">◆</span>
-                    <span>Role Management</span>
-                </button>
+    <section class="dashboard-header">
 
-                <button class="nav-item" data-view="companies">
-                    <span class="nav-icon">▣</span>
-                    <span>Companies</span>
-                </button>
-            </div>
+        <div class="dashboard-heading">
 
-            <div class="nav-group">
-                <div class="nav-label">PLACEMENT</div>
+            <span class="dashboard-eyebrow">
+                ADMINISTRATION
+            </span>
 
-                <button class="nav-item" data-view="drives">
-                    <span class="nav-icon">◉</span>
-                    <span>Placement Drives</span>
-                </button>
+            <h1>
+                Good Evening, Admin <span>👋</span>
+            </h1>
 
-                <button class="nav-item" data-view="placements">
-                    <span class="nav-icon">✓</span>
-                    <span>Placements</span>
-                </button>
-
-                <button class="nav-item" data-view="analytics">
-                    <span class="nav-icon">▥</span>
-                    <span>Analytics</span>
-                </button>
-            </div>
-
-            <div class="nav-group">
-                <div class="nav-label">SYSTEM</div>
-
-                <button class="nav-item" data-view="notifications">
-                    <span class="nav-icon">♧</span>
-                    <span>Notifications</span>
-                    <span class="nav-badge danger">5</span>
-                </button>
-
-                <button class="nav-item" data-view="feedback">
-                    <span class="nav-icon">◌</span>
-                    <span>Feedback</span>
-                    <span class="nav-badge danger">3</span>
-                </button>
-
-                <button class="nav-item" data-view="announcements">
-                    <span class="nav-icon">◇</span>
-                    <span>Announcements</span>
-                </button>
-
-                <button class="nav-item" data-view="settings">
-                    <span class="nav-icon">⚙</span>
-                    <span>Settings</span>
-                </button>
-            </div>
-
-        </nav>
-
-        <div class="sidebar-bottom">
-
-            <div class="progress-card">
-                <strong>Keep going, you're doing great! 💪</strong>
-                <div class="progress-meta">
-                    <span>System Completed</span>
-                    <b>80%</b>
-                </div>
-                <div class="progress-track">
-                    <div class="progress-fill"></div>
-                </div>
-            </div>
-
-            <button class="logout-btn" onclick="window.location.href='/'">
-                ↪ &nbsp; Logout
-            </button>
+            <p>
+                Here's your placement and system overview for
+                the current academic year.
+            </p>
 
         </div>
 
-    </aside>
 
+        <div class="dashboard-filters">
 
-    <!-- ================= MAIN ================= -->
-    <main class="main-content">
+            <div class="dashboard-filter">
 
-        <header class="top-header">
-
-            <button class="mobile-menu" id="menuToggle">☰</button>
-
-            <div class="search-box">
-                <span>⌕</span>
-                <input id="globalSearch"
-                       type="text"
-                       placeholder="Search for students, companies, drives...">
-                <kbd>Ctrl + K</kbd>
-            </div>
-
-            <div class="header-right">
-
-                <button class="header-icon"
-                        id="themeToggle"
-                        title="Toggle light / dark mode">
-                    ☼
-                </button>
-
-                <button class="header-icon notification-icon"
-                        data-view="notifications"
-                        title="Notifications">
-                    ♧
-                    <span></span>
-                </button>
-
-                <div class="admin-profile">
-                    <div class="avatar">A</div>
-                    <div>
-                        <strong>Admin</strong>
-                        <small>Administrator</small>
-                    </div>
-                    <span>⌄</span>
-                </div>
-
-            </div>
-
-        </header>
-
-
-        <section class="page-content">
-
-            <!-- =================================================
-                 DASHBOARD VIEW
-            ================================================== -->
-            <section class="view active" id="view-dashboard">
-
-                <div class="welcome-row">
-                    <div>
-                        <h1>Welcome back! 👋</h1>
-                        <p>Here's your placement overview.</p>
-                    </div>
-
-                    <div class="session-info">
-                        <span>Academic Session</span>
-                        <strong>2025-26</strong>
-                    </div>
-                </div>
-
-
-                <!-- STAT CARDS -->
-                <div class="stats-grid">
-
-                    <div class="stat-card">
-                        <div class="stat-icon mint">🎓</div>
-                        <div>
-                            <span>Total Students</span>
-                            <strong>1260</strong>
-                            <small class="positive">↑ 8.2% from last year</small>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon blue">▣</div>
-                        <div>
-                            <span>Companies</span>
-                            <strong>42</strong>
-                            <small class="positive">↑ 12.5% from last year</small>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon purple">◉</div>
-                        <div>
-                            <span>Active Drives</span>
-                            <strong>18</strong>
-                            <small>06 closing soon</small>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon yellow">✓</div>
-                        <div>
-                            <span>Students Placed</span>
-                            <strong>865</strong>
-                            <small class="positive">68.7% placement rate</small>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon pink">◇</div>
-                        <div>
-                            <span>Offers Received</span>
-                            <strong>910</strong>
-                            <small>45 joining pending</small>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <!-- DRIVES + OVERVIEW -->
-                <div class="dashboard-two-col">
-
-                    <div class="panel">
-                        <div class="panel-header">
-                            <div>
-                                <h2>Upcoming Placement Drives</h2>
-                                <p>Latest recruitment opportunities</p>
-                            </div>
-                            <button class="outline-btn" data-view="drives">View All</button>
-                        </div>
-
-                        <div class="drive-list">
-
-                            <div class="drive-row">
-                                <div class="company-logo">tcs</div>
-                                <div class="drive-main">
-                                    <strong>TCS</strong>
-                                    <span>Software Engineer</span>
-                                    <div>
-                                        <em>On Campus</em>
-                                        <em>Multiple Roles</em>
-                                    </div>
-                                </div>
-                                <div class="deadline">
-                                    <span>Apply by</span>
-                                    <strong>25 Aug 2026</strong>
-                                </div>
-                            </div>
-
-                            <div class="drive-row">
-                                <div class="company-logo">I</div>
-                                <div class="drive-main">
-                                    <strong>Infosys</strong>
-                                    <span>System Engineer</span>
-                                    <div>
-                                        <em>On Campus</em>
-                                        <em>System Engineer</em>
-                                    </div>
-                                </div>
-                                <div class="deadline">
-                                    <span>Apply by</span>
-                                    <strong>30 Aug 2026</strong>
-                                </div>
-                            </div>
-
-                            <div class="drive-row">
-                                <div class="company-logo">W</div>
-                                <div class="drive-main">
-                                    <strong>Wipro</strong>
-                                    <span>Project Engineer</span>
-                                    <div>
-                                        <em>On Campus</em>
-                                        <em>Project Engineer</em>
-                                    </div>
-                                </div>
-                                <div class="deadline">
-                                    <span>Apply by</span>
-                                    <strong>02 Sep 2026</strong>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <div class="panel overview-panel">
-
-                        <div class="panel-header">
-                            <div>
-                                <h2>Placement Overview</h2>
-                                <p>Current academic session</p>
-                            </div>
-
-                            <select id="overviewYear">
-                                <option value="2025-26">2025-26</option>
-                                <option value="2024-25">2024-25</option>
-                                <option value="2023-24">2023-24</option>
-                                <option value="2022-23">2022-23</option>
-                            </select>
-                        </div>
-
-                        <div class="overview-body">
-
-                            <div class="admin-donut"
-                                 id="placementDonut">
-
-                                <div class="donut-center">
-                                    <strong id="totalStudents">1260</strong>
-                                    <span>Total Students</span>
-                                </div>
-
-                            </div>
-
-                            <div class="overview-legend">
-
-                                <div>
-                                    <span class="dot blue-dot"></span>
-                                    <div>
-                                        <b>Placed Students</b>
-                                        <small id="placedValue">480 (38.1%)</small>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span class="dot purple-dot"></span>
-                                    <div>
-                                        <b>In Interview</b>
-                                        <small id="interviewValue">215 (17.1%)</small>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span class="dot green-dot"></span>
-                                    <div>
-                                        <b>Yet to Appear</b>
-                                        <small id="remainingValue">565 (44.8%)</small>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="overview-message">
-                            <div>✦</div>
-                            <p>
-                                <strong>Great progress!</strong>
-                                Placement activity is progressing well this academic session.
-                            </p>
-                            <span>🚀</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- YEAR WISE CHART -->
-                <div class="panel chart-panel">
-
-                    <div class="panel-header">
-                        <div>
-                            <h2>Year-wise Placement Performance</h2>
-                            <p>Students placed across academic sessions</p>
-                        </div>
-
-                        <select id="performanceRange">
-                            <option value="4">Last 4 Years</option>
-                            <option value="3">Last 3 Years</option>
-                        </select>
-                    </div>
-
-                    <div class="chart-container">
-                        <canvas id="placementPerformanceChart"></canvas>
-                    </div>
-
-                </div>
-
-
-                <!-- RECENT ACTIVITY + NOTIFICATIONS -->
-                <div class="dashboard-two-col lower-grid">
-
-                    <div class="panel">
-
-                        <div class="panel-header">
-                            <div>
-                                <h2>Recent Placement Activity</h2>
-                                <p>Latest student placement updates</p>
-                            </div>
-                            <button class="outline-btn">View All</button>
-                        </div>
-
-                        <div class="table-wrap">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>STUDENT</th>
-                                        <th>COMPANY</th>
-                                        <th>ROLE</th>
-                                        <th>APPLIED ON</th>
-                                        <th>STATUS</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>Rahul Sharma</td>
-                                        <td>TCS</td>
-                                        <td>Software Engineer</td>
-                                        <td>18 Aug 2026</td>
-                                        <td><span class="status selected">Selected</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Priya Verma</td>
-                                        <td>Infosys</td>
-                                        <td>System Engineer</td>
-                                        <td>17 Aug 2026</td>
-                                        <td><span class="status interview">Interview</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Aman Gupta</td>
-                                        <td>Wipro</td>
-                                        <td>Project Engineer</td>
-                                        <td>16 Aug 2026</td>
-                                        <td><span class="status applied">Applied</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Neha Singh</td>
-                                        <td>Accenture</td>
-                                        <td>Associate Engineer</td>
-                                        <td>15 Aug 2026</td>
-                                        <td><span class="status placed">Placed</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-
-                    <div class="panel">
-
-                        <div class="panel-header">
-                            <div>
-                                <h2>Latest Notifications</h2>
-                                <p>Recent system updates</p>
-                            </div>
-                            <button class="outline-btn" data-view="notifications">View All</button>
-                        </div>
-
-                        <div class="notification-list">
-
-                            <div class="notification-row">
-                                <div class="notification-symbol yellow">▣</div>
-                                <div>
-                                    <strong>TCS Technical Interview</strong>
-                                    <p>Technical interviews scheduled for eligible students.</p>
-                                    <small>10 min ago</small>
-                                </div>
-                            </div>
-
-                            <div class="notification-row">
-                                <div class="notification-symbol blue">◉</div>
-                                <div>
-                                    <strong>New Placement Drive</strong>
-                                    <p>Infosys drive has been published.</p>
-                                    <small>Yesterday</small>
-                                </div>
-                            </div>
-
-                            <div class="notification-row">
-                                <div class="notification-symbol purple">♙</div>
-                                <div>
-                                    <strong>Pending User Verification</strong>
-                                    <p>12 new accounts require verification.</p>
-                                    <small>2 days ago</small>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- QUICK MANAGEMENT -->
-                <div class="panel quick-panel">
-
-                    <div class="panel-header">
-                        <div>
-                            <h2>Quick Management</h2>
-                            <p>Frequently used administrative actions</p>
-                        </div>
-                    </div>
-
-                    <div class="quick-grid">
-
-                        <button class="quick-card" data-view="users">
-                            <span>♙</span>
-                            <div>
-                                <strong>Manage Users</strong>
-                                <small>12 pending verification</small>
-                            </div>
-                            <b>→</b>
-                        </button>
-
-                        <button class="quick-card" data-view="companies">
-                            <span>▣</span>
-                            <div>
-                                <strong>Manage Companies</strong>
-                                <small>42 companies</small>
-                            </div>
-                            <b>→</b>
-                        </button>
-
-                        <button class="quick-card" data-view="drives">
-                            <span>◉</span>
-                            <div>
-                                <strong>Placement Drives</strong>
-                                <small>18 active drives</small>
-                            </div>
-                            <b>→</b>
-                        </button>
-
-                        <button class="quick-card" data-view="feedback">
-                            <span>◌</span>
-                            <div>
-                                <strong>Feedback</strong>
-                                <small>3 unresolved</small>
-                            </div>
-                            <b>→</b>
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 USER MANAGEMENT VIEW
-            ================================================== -->
-            <section class="view" id="view-users">
-
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">ADMINISTRATION</span>
-                        <h1>User Management</h1>
-                        <p>Manage students, TPOs and faculty accounts.</p>
-                    </div>
-
-                    <div class="user-page-actions">
-                        <select class="role-filter" id="topUserRoleFilter" aria-label="Filter users by role">
-                            <option value="All">All</option>
-                            <option value="Student">Student</option>
-                            <option value="TPO">TPO</option>
-                            <option value="HOD">HOD</option>
-                            <option value="Tutor">Tutor</option>
-                            <option value="Higher Authority">Higher Authority</option>
-                        </select>
-                        <button class="primary-btn" id="addUserBtn">+ Add User</button>
-                    </div>
-                </div>
-
-                <div class="panel management-panel">
-
-                    <div class="management-toolbar">
-                        <div>
-                            <h2>All Users</h2>
-                            <p>New users created by the administrator will appear here.</p>
-                        </div>
-
-                        <div class="toolbar-controls">
-                            <input id="userSearch" type="search" placeholder="Search users...">
-
-                            <select id="userRoleFilter">
-                                <option value="All">All Roles</option>
-                                <option value="Student">Student</option>
-                                <option value="TPO">TPO</option>
-                                <option value="HOD">HOD</option>
-                                <option value="Tutor">Tutor</option>
-                                <option value="Higher Authority">Higher Authority</option>
-                            </select>
-
-                            <select id="userStatusFilter">
-                                <option value="All">All Status</option>
-                                <option value="Active">Active</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Blocked">Blocked</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="users-empty-state" id="usersEmptyState">
-                        <div class="empty-user-icon">♙</div>
-                        <h3>No users added yet</h3>
-                        <p>Create a user with login credentials and profile details using <b>+ Add User</b>.</p>
-                        <button class="primary-btn" id="emptyAddUserBtn">+ Add First User</button>
-                    </div>
-
-                    <div class="table-wrap" id="usersTableWrap" style="display:none;">
-                        <table id="usersTable">
-                            <thead>
-                                <tr>
-                                    <th>USER</th>
-                                    <th>ROLE</th>
-                                    <th>DEPARTMENT</th>
-                                    <th>STATUS</th>
-                                    <th>LAST ACTIVE</th>
-                                    <th>ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- =================================================
-                 ROLE MANAGEMENT VIEW
-            ================================================== -->
-            <section class="view" id="view-roles">
-
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">ACCESS CONTROL</span>
-                        <h1>Role Management</h1>
-                        <p>Define what each role can view, edit and manage.</p>
-                    </div>
-                </div>
-
-                <div class="role-layout">
-
-                    <div class="role-list">
-
-                        <button class="role-card active" data-role-panel="student">
-                            <span class="role-symbol blue-bg">🎓</span>
-                            <div>
-                                <strong>Student</strong>
-                                <small>1,126 users</small>
-                            </div>
-                            <span>→</span>
-                        </button>
-
-                        <button class="role-card" data-role-panel="tpo">
-                            <span class="role-symbol purple-bg">◉</span>
-                            <div>
-                                <strong>TPO</strong>
-                                <small>12 users</small>
-                            </div>
-                            <span>→</span>
-                        </button>
-
-                        <button class="role-card" data-role-panel="hod">
-                            <span class="role-symbol green-bg">♙</span>
-                            <div>
-                                <strong>HOD</strong>
-                                <small>8 users</small>
-                            </div>
-                            <span>→</span>
-                        </button>
-
-                        <button class="role-card" data-role-panel="tutor">
-                            <span class="role-symbol yellow-bg">♧</span>
-                            <div>
-                                <strong>Tutor</strong>
-                                <small>64 users</small>
-                            </div>
-                            <span>→</span>
-                        </button>
-
-                        <button class="role-card" data-role-panel="authority">
-                            <span class="role-symbol pink-bg">◆</span>
-                            <div>
-                                <strong>Higher Authority</strong>
-                                <small>12 users</small>
-                            </div>
-                            <span>→</span>
-                        </button>
-
-                    </div>
-
-
-                    <div class="panel permissions-panel">
-
-                        <div class="permission-header">
-                            <div>
-                                <span class="eyebrow">ROLE</span>
-                                <h2 id="permissionRoleTitle">Student</h2>
-                                <p id="permissionRoleDescription">
-                                    Student portal access and placement journey.
-                                </p>
-                            </div>
-
-                            <span class="role-status">System Role</span>
-                        </div>
-
-                        <div class="permission-grid" id="permissionGrid">
-
-                            <!-- populated by JS -->
-
-                        </div>
-
-                        <div class="permission-footer">
-                            <span>Changes apply to all users with this role.</span>
-                            <button class="primary-btn" id="savePermissions">
-                                Save Changes
-                            </button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 SIMPLE PLACEHOLDER VIEWS
-            ================================================== -->
-            <section class="view simple-view" id="view-companies">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">PLACEMENT</span>
-                        <h1>Companies</h1>
-                        <p>Company records and placement partners.</p>
-                    </div>
-                </div>
-                <div class="empty-panel">
-                    <div>▣</div>
-                    <h2>Company Management</h2>
-                    <p>This section is ready for company CRUD and history.</p>
-                </div>
-            </section>
-
-            <section class="view simple-view" id="view-drives">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">PLACEMENT</span>
-                        <h1>Placement Drives</h1>
-                        <p>Create, edit and manage recruitment drives.</p>
-                    </div>
-                </div>
-                <div class="empty-panel">
-                    <div>◉</div>
-                    <h2>Placement Drive Management</h2>
-                    <p>Drive management can be connected to the TPO module later.</p>
-                </div>
-            </section>
-
-            <section class="view simple-view" id="view-placements">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">PLACEMENT</span>
-                        <h1>Placements</h1>
-                        <p>Monitor selected, placed and joining students.</p>
-                    </div>
-                </div>
-                <div class="empty-panel">
-                    <div>✓</div>
-                    <h2>Placement Management</h2>
-                    <p>Placement records and joining status will appear here.</p>
-                </div>
-            </section>
-
-            <section class="view simple-view" id="view-analytics">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">REPORTING</span>
-                        <h1>Analytics</h1>
-                        <p>Placement analytics and year-wise reports.</p>
-                    </div>
-                </div>
-                <div class="empty-panel">
-                    <div>▥</div>
-                    <h2>Analytics</h2>
-                    <p>Use the dashboard chart for the current overview.</p>
-                </div>
-            </section>
-
-            <section class="view simple-view" id="view-notifications">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">SYSTEM</span>
-                        <h1>Notifications</h1>
-                        <p>System and placement notifications.</p>
-                    </div>
-                </div>
-                <div class="empty-panel">
-                    <div>♧</div>
-                    <h2>Notifications</h2>
-                    <p>Notification management will appear here.</p>
-                </div>
-            </section>
-
-            <section class="view simple-view" id="view-feedback">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">SYSTEM</span>
-                        <h1>Feedback</h1>
-                        <p>Review feedback submitted by users.</p>
-                    </div>
-                </div>
-                <div class="feedback-list">
-                    <div class="feedback-card">
-                        <div class="feedback-avatar">RS</div>
-                        <div>
-                            <strong>Rahul Sharma</strong>
-                            <p>Placement drive information was very useful.</p>
-                            <small>Student • 10 min ago</small>
-                        </div>
-                        <span class="status new">New</span>
-                    </div>
-
-                    <div class="feedback-card">
-                        <div class="feedback-avatar">PV</div>
-                        <div>
-                            <strong>Priya Verma</strong>
-                            <p>Please add more technical preparation material.</p>
-                            <small>Student • Yesterday</small>
-                        </div>
-                        <span class="status review">Review</span>
-                    </div>
-
-                    <div class="feedback-card">
-                        <div class="feedback-avatar">AK</div>
-                        <div>
-                            <strong>Ankit Kumar</strong>
-                            <p>Company management workflow is easy to use.</p>
-                            <small>TPO • 2 days ago</small>
-                        </div>
-                        <span class="status resolved">Resolved</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="view simple-view" id="view-announcements">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">SYSTEM</span>
-                        <h1>Announcements</h1>
-                        <p>Publish important campus-wide announcements.</p>
-                    </div>
-                    <button class="primary-btn">+ New Announcement</button>
-                </div>
-                <div class="empty-panel">
-                    <div>◇</div>
-                    <h2>Announcement Management</h2>
-                    <p>Create, publish and manage announcements.</p>
-                </div>
-            </section>
-
-            <section class="view simple-view" id="view-settings">
-                <div class="page-title-row">
-                    <div>
-                        <span class="eyebrow">SYSTEM</span>
-                        <h1>Settings</h1>
-                        <p>Configure system-wide administration settings.</p>
-                    </div>
-                </div>
-                <div class="empty-panel">
-                    <div>⚙</div>
-                    <h2>System Settings</h2>
-                    <p>Settings will be connected to the database later.</p>
-                </div>
-            </section>
-
-        </section>
-
-    </main>
-
-</div>
-
-
-<!-- =================================================
-     ADD USER MODAL
-================================================= -->
-
-<div class="modal-backdrop"
-     id="userModal">
-
-    <div class="modal user-modal">
-
-        <!-- MODAL HEADER -->
-
-        <div class="modal-header">
-
-            <div>
-
-                <span class="eyebrow">
-                    USER MANAGEMENT
+                <span>
+                    Academic Year
                 </span>
 
-                <h2 id="modalTitle">
-                    Create Login Account
+                <select id="dashboardYear">
+
+                    <option value="2026-27">
+                        2026–27
+                    </option>
+
+                    <option value="2025-26">
+                        2025–26
+                    </option>
+
+                    <option value="2024-25">
+                        2024–25
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="dashboard-filter">
+
+                <span>
+                    College
+                </span>
+
+                <select id="dashboardCollege">
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         KPI CARDS
+    ====================================================== -->
+
+    <section class="dashboard-kpi-grid">
+
+
+        <!-- TOTAL STUDENTS -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="kpi-card-top">
+
+                <div class="kpi-icon kpi-icon-purple">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="9"
+                            cy="8"
+                            r="3"
+                        ></circle>
+
+                        <path
+                            d="M3.5 20c.5-3.5 2.5-5.5 5.5-5.5s5 2 5.5 5.5"
+                        ></path>
+
+                        <path
+                            d="M16 8h5"
+                        ></path>
+
+                        <path
+                            d="M18.5 5.5v5"
+                        ></path>
+
+                    </svg>
+
+                </div>
+
+                <span class="kpi-label">
+                    TOTAL STUDENTS
+                </span>
+
+            </div>
+
+
+            <div class="kpi-value">
+                1,248
+            </div>
+
+
+            <div class="kpi-footer">
+
+                <span class="kpi-positive">
+                    ↑ 8.4%
+                </span>
+
+                <span>
+                    vs last session
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ACTIVE DRIVES -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="kpi-card-top">
+
+                <div class="kpi-icon kpi-icon-blue">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect
+                            x="3"
+                            y="5"
+                            width="18"
+                            height="14"
+                            rx="2"
+                        ></rect>
+
+                        <path
+                            d="M8 5V3h8v2"
+                        ></path>
+
+                        <path
+                            d="M8 12h8"
+                        ></path>
+
+                        <path
+                            d="M8 15h5"
+                        ></path>
+
+                    </svg>
+
+                </div>
+
+                <span class="kpi-label">
+                    ACTIVE DRIVES
+                </span>
+
+            </div>
+
+
+            <div class="kpi-value">
+                18
+            </div>
+
+
+            <div class="kpi-footer">
+
+                <span class="kpi-blue">
+                    5 this week
+                </span>
+
+                <span>
+                    scheduled
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- STUDENTS PLACED -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="kpi-card-top">
+
+                <div class="kpi-icon kpi-icon-green">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="9"
+                        ></circle>
+
+                        <path
+                            d="m8 12 2.5 2.5L16 9"
+                        ></path>
+
+                    </svg>
+
+                </div>
+
+                <span class="kpi-label">
+                    STUDENTS PLACED
+                </span>
+
+            </div>
+
+
+            <div class="kpi-value">
+                436
+            </div>
+
+
+            <div class="kpi-footer">
+
+                <span class="kpi-positive">
+                    34.9%
+                </span>
+
+                <span>
+                    placement rate
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- OFFERS -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="kpi-card-top">
+
+                <div class="kpi-icon kpi-icon-orange">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M4 7h16v13H4z"
+                        ></path>
+
+                        <path
+                            d="M8 7V5h8v2"
+                        ></path>
+
+                        <path
+                            d="M8 14h8"
+                        ></path>
+
+                    </svg>
+
+                </div>
+
+                <span class="kpi-label">
+                    OFFERS RECEIVED
+                </span>
+
+            </div>
+
+
+            <div class="kpi-value">
+                512
+            </div>
+
+
+            <div class="kpi-footer">
+
+                <span class="kpi-orange">
+                    76
+                </span>
+
+                <span>
+                    multiple offers
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- AVERAGE PACKAGE -->
+
+        <article class="dashboard-kpi-card">
+
+            <div class="kpi-card-top">
+
+                <div class="kpi-icon kpi-icon-cyan">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M12 3v18"
+                        ></path>
+
+                        <path
+                            d="M17 7c0-2-2-3-5-3s-5 1-5 3 1.5 3 5 4 5 2 5 4-2 3-5 3-5-1-5-3"
+                        ></path>
+
+                    </svg>
+
+                </div>
+
+                <span class="kpi-label">
+                    AVERAGE PACKAGE
+                </span>
+
+            </div>
+
+
+            <div class="kpi-value">
+                ₹6.82 <small>LPA</small>
+            </div>
+
+
+            <div class="kpi-footer">
+
+                <span class="kpi-positive">
+                    ↑ 7.2%
+                </span>
+
+                <span>
+                    vs last year
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- HIGHEST PACKAGE -->
+
+        <article class="dashboard-kpi-card dashboard-kpi-highlight">
+
+            <div class="kpi-card-top">
+
+                <div class="kpi-icon kpi-icon-gold">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M12 3 14 8l5 .5-3.8 3.4 1.2 5.1L12 14.3 7.6 17l1.2-5.1L5 8.5 10 8z"
+                        ></path>
+
+                    </svg>
+
+                </div>
+
+                <span class="kpi-label">
+                    HIGHEST PACKAGE
+                </span>
+
+            </div>
+
+
+            <div class="kpi-value">
+                ₹42 <small>LPA</small>
+            </div>
+
+
+            <div class="kpi-footer">
+
+                <span class="kpi-gold">
+                    Top offer
+                </span>
+
+                <span>
+                    this session
+                </span>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN ANALYTICS GRID
+    ====================================================== -->
+
+    <section class="dashboard-main-grid">
+
+
+        <!-- =================================================
+             PLACEMENT FUNNEL
+        ================================================== -->
+
+        <article class="dashboard-panel funnel-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        PLACEMENT JOURNEY
+                    </span>
+
+                    <h2>
+                        Placement Funnel
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="panel-action"
+                >
+                    View Details →
+                </button>
+
+            </div>
+
+
+            <div class="funnel-wrapper">
+
+
+                <div class="funnel-step">
+
+                    <div class="funnel-number">
+                        1,012
+                    </div>
+
+                    <div class="funnel-label">
+                        Eligible
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-arrow">
+                    →
+                </div>
+
+
+                <div class="funnel-step">
+
+                    <div class="funnel-number">
+                        824
+                    </div>
+
+                    <div class="funnel-label">
+                        Nominated
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-arrow">
+                    →
+                </div>
+
+
+                <div class="funnel-step">
+
+                    <div class="funnel-number">
+                        702
+                    </div>
+
+                    <div class="funnel-label">
+                        Participated
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-arrow">
+                    →
+                </div>
+
+
+                <div class="funnel-step">
+
+                    <div class="funnel-number">
+                        534
+                    </div>
+
+                    <div class="funnel-label">
+                        Round 1
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-arrow">
+                    →
+                </div>
+
+
+                <div class="funnel-step">
+
+                    <div class="funnel-number">
+                        462
+                    </div>
+
+                    <div class="funnel-label">
+                        Round 2
+                    </div>
+
+                </div>
+
+
+                <div class="funnel-arrow">
+                    →
+                </div>
+
+
+                <div class="funnel-step funnel-final">
+
+                    <div class="funnel-number">
+                        436
+                    </div>
+
+                    <div class="funnel-label">
+                        Selected
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="funnel-footer">
+
+                <div>
+
+                    <span>
+                        Overall conversion
+                    </span>
+
+                    <strong>
+                        43.1%
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Selection rate
+                    </span>
+
+                    <strong>
+                        61.4%
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Active candidates
+                    </span>
+
+                    <strong>
+                        576
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             COLLEGE PERFORMANCE
+        ================================================== -->
+
+        <article class="dashboard-panel college-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        INSTITUTION PERFORMANCE
+                    </span>
+
+                    <h2>
+                        College-wise Placements
+                    </h2>
+
+                </div>
+
+
+                <select
+                    class="panel-select"
+                    id="collegeMetric"
+                >
+
+                    <option value="placed">
+                        Students Placed
+                    </option>
+
+                    <option value="rate">
+                        Placement Rate
+                    </option>
+
+                    <option value="package">
+                        Avg. Package
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="college-list">
+
+
+                <div
+                    class="college-row"
+                    data-college="pce"
+                >
+
+                    <div class="college-name">
+                        <span class="college-dot pce"></span>
+                        PCE
+                    </div>
+
+                    <div class="college-bar-wrap">
+
+                        <div class="college-bar">
+
+                            <span
+                                style="width: 86%"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        142
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="college-row"
+                    data-college="piet"
+                >
+
+                    <div class="college-name">
+                        <span class="college-dot piet"></span>
+                        PIET
+                    </div>
+
+                    <div class="college-bar-wrap">
+
+                        <div class="college-bar">
+
+                            <span
+                                style="width: 73%"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        118
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="college-row"
+                    data-college="pu"
+                >
+
+                    <div class="college-name">
+                        <span class="college-dot pu"></span>
+                        PU
+                    </div>
+
+                    <div class="college-bar-wrap">
+
+                        <span
+                            class="college-bar"
+                        >
+
+                            <span
+                                style="width: 67%"
+                            ></span>
+
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        104
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="college-row"
+                    data-college="jiet"
+                >
+
+                    <div class="college-name">
+                        <span class="college-dot jiet"></span>
+                        JIET
+                    </div>
+
+                    <div class="college-bar-wrap">
+
+                        <div class="college-bar">
+
+                            <span
+                                style="width: 46%"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                    <strong>
+                        72
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="college-total">
+
+                <span>
+                    Total selections
+                </span>
+
+                <strong>
+                    436
+                </strong>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SECOND ANALYTICS ROW
+    ====================================================== -->
+
+    <section class="dashboard-secondary-grid">
+
+
+        <!-- =================================================
+             BRANCH PERFORMANCE
+        ================================================== -->
+
+        <article class="dashboard-panel branch-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        ACADEMIC PERFORMANCE
+                    </span>
+
+                    <h2>
+                        Branch-wise Placements
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="panel-action"
+                >
+                    Full Report →
+                </button>
+
+            </div>
+
+
+            <div class="branch-chart">
+
+
+                <div class="branch-row">
+
+                    <span>
+                        CSE
+                    </span>
+
+                    <div class="branch-track">
+                        <span style="width: 92%"></span>
+                    </div>
+
+                    <strong>
+                        168
+                    </strong>
+
+                </div>
+
+
+                <div class="branch-row">
+
+                    <span>
+                        AI
+                    </span>
+
+                    <div class="branch-track">
+                        <span style="width: 84%"></span>
+                    </div>
+
+                    <strong>
+                        94
+                    </strong>
+
+                </div>
+
+
+                <div class="branch-row">
+
+                    <span>
+                        IT
+                    </span>
+
+                    <div class="branch-track">
+                        <span style="width: 76%"></span>
+                    </div>
+
+                    <strong>
+                        71
+                    </strong>
+
+                </div>
+
+
+                <div class="branch-row">
+
+                    <span>
+                        AI&DS
+                    </span>
+
+                    <div class="branch-track">
+                        <span style="width: 69%"></span>
+                    </div>
+
+                    <strong>
+                        52
+                    </strong>
+
+                </div>
+
+
+                <div class="branch-row">
+
+                    <span>
+                        ECE
+                    </span>
+
+                    <div class="branch-track">
+                        <span style="width: 58%"></span>
+                    </div>
+
+                    <strong>
+                        31
+                    </strong>
+
+                </div>
+
+
+                <div class="branch-row">
+
+                    <span>
+                        ME
+                    </span>
+
+                    <div class="branch-track">
+                        <span style="width: 39%"></span>
+                    </div>
+
+                    <strong>
+                        20
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             PACKAGE INSIGHTS
+        ================================================== -->
+
+        <article class="dashboard-panel package-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        COMPENSATION
+                    </span>
+
+                    <h2>
+                        Package Insights
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="package-highlight">
+
+                <span>
+                    Highest Package
+                </span>
+
+                <strong>
+                    ₹42.0 LPA
+                </strong>
+
+                <small>
+                    Top offer this session
+                </small>
+
+            </div>
+
+
+            <div class="package-stats">
+
+
+                <div class="package-stat">
+
+                    <span>
+                        Average
+                    </span>
+
+                    <strong>
+                        ₹6.82
+                    </strong>
+
+                    <small>
+                        LPA
+                    </small>
+
+                </div>
+
+
+                <div class="package-stat">
+
+                    <span>
+                        Median
+                    </span>
+
+                    <strong>
+                        ₹5.80
+                    </strong>
+
+                    <small>
+                        LPA
+                    </small>
+
+                </div>
+
+
+                <div class="package-stat">
+
+                    <span>
+                        Offers
+                    </span>
+
+                    <strong>
+                        512
+                    </strong>
+
+                    <small>
+                        total
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="package-distribution">
+
+                <div>
+
+                    <span>
+                        ₹3–5 LPA
+                    </span>
+
+                    <div>
+                        <i style="width: 38%"></i>
+                    </div>
+
+                    <strong>
+                        38%
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        ₹5–10 LPA
+                    </span>
+
+                    <div>
+                        <i style="width: 44%"></i>
+                    </div>
+
+                    <strong>
+                        44%
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        ₹10+ LPA
+                    </span>
+
+                    <div>
+                        <i style="width: 18%"></i>
+                    </div>
+
+                    <strong>
+                        18%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         THIRD ROW
+    ====================================================== -->
+
+    <section class="dashboard-bottom-grid">
+
+
+        <!-- =================================================
+             UPCOMING DRIVES
+        ================================================== -->
+
+        <article class="dashboard-panel drives-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        PLACEMENT OPERATIONS
+                    </span>
+
+                    <h2>
+                        Upcoming Placement Drives
+                    </h2>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('admin_drives') }}"
+                    class="panel-action"
+                >
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div class="drive-list">
+
+
+                <div class="drive-row">
+
+                    <div class="drive-company-logo">
+                        T
+                    </div>
+
+
+                    <div class="drive-main">
+
+                        <strong>
+                            TCS
+                        </strong>
+
+                        <span>
+                            Software Engineer · PCE / PIET
+                        </span>
+
+                    </div>
+
+
+                    <div class="drive-package">
+                        ₹7.2 LPA
+                    </div>
+
+
+                    <div class="drive-date">
+
+                        <strong>
+                            25
+                        </strong>
+
+                        <span>
+                            AUG
+                        </span>
+
+                    </div>
+
+
+                    <span class="drive-status status-open">
+                        Open
+                    </span>
+
+                </div>
+
+
+                <div class="drive-row">
+
+                    <div class="drive-company-logo">
+                        I
+                    </div>
+
+
+                    <div class="drive-main">
+
+                        <strong>
+                            Infosys
+                        </strong>
+
+                        <span>
+                            Systems Engineer · All Eligible
+                        </span>
+
+                    </div>
+
+
+                    <div class="drive-package">
+                        ₹6.5 LPA
+                    </div>
+
+
+                    <div class="drive-date">
+
+                        <strong>
+                            30
+                        </strong>
+
+                        <span>
+                            AUG
+                        </span>
+
+                    </div>
+
+
+                    <span class="drive-status status-open">
+                        Open
+                    </span>
+
+                </div>
+
+
+                <div class="drive-row">
+
+                    <div class="drive-company-logo">
+                        W
+                    </div>
+
+
+                    <div class="drive-main">
+
+                        <strong>
+                            Wipro
+                        </strong>
+
+                        <span>
+                            Project Engineer · PU / JIET
+                        </span>
+
+                    </div>
+
+
+                    <div class="drive-package">
+                        ₹5.8 LPA
+                    </div>
+
+
+                    <div class="drive-date">
+
+                        <strong>
+                            02
+                        </strong>
+
+                        <span>
+                            SEP
+                        </span>
+
+                    </div>
+
+
+                    <span class="drive-status status-upcoming">
+                        Soon
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             ADMIN ALERTS
+        ================================================== -->
+
+        <article class="dashboard-panel alerts-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        ATTENTION REQUIRED
+                    </span>
+
+                    <h2>
+                        Admin Alerts
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="alert-list">
+
+
+                <div class="admin-alert alert-danger">
+
+                    <div class="alert-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Pending verification
+                        </strong>
+
+                        <span>
+                            12 user accounts need review
+                        </span>
+
+                    </div>
+
+                    <b>
+                        12
+                    </b>
+
+                </div>
+
+
+                <div class="admin-alert alert-warning">
+
+                    <div class="alert-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Drives closing soon
+                        </strong>
+
+                        <span>
+                            3 drives close this week
+                        </span>
+
+                    </div>
+
+                    <b>
+                        3
+                    </b>
+
+                </div>
+
+
+                <div class="admin-alert alert-info">
+
+                    <div class="alert-icon">
+                        i
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Feedback pending
+                        </strong>
+
+                        <span>
+                            8 feedback items need action
+                        </span>
+
+                    </div>
+
+                    <b>
+                        8
+                    </b>
+
+                </div>
+
+
+                <div class="admin-alert alert-success">
+
+                    <div class="alert-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            System status
+                        </strong>
+
+                        <span>
+                            All services are operating normally
+                        </span>
+
+                    </div>
+
+                    <b>
+                        OK
+                    </b>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RECENT ACTIVITY
+    ====================================================== -->
+
+    <section class="dashboard-panel activity-panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <span class="panel-eyebrow">
+                    SYSTEM ACTIVITY
+                </span>
+
+                <h2>
+                    Recent Placement Activity
                 </h2>
 
             </div>
 
+
             <button
-                class="modal-close"
-                id="closeUserModal">
-
-                ×
-
+                type="button"
+                class="panel-action"
+            >
+                View Activity →
             </button>
 
         </div>
 
 
-        <!-- STEPS -->
+        <div class="activity-table-wrap">
 
-        <div class="user-steps">
+            <table class="activity-table">
 
-            <div class="user-step active"
-                 id="stepIndicator1">
+                <thead>
 
-                <span>1</span>
+                    <tr>
 
-                <div>
-                    <strong>
-                        Login Account
-                    </strong>
-
-                    <small>
-                        Credentials & role
-                    </small>
-                </div>
-
-            </div>
-
-
-            <div class="step-line"></div>
-
-
-            <div class="user-step"
-                 id="stepIndicator2">
-
-                <span>2</span>
-
-                <div>
-                    <strong>
-                        Profile Details
-                    </strong>
-
-                    <small>
-                        Personal & academic information
-                    </small>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================================
-             STEP 1
-        ========================================== -->
-
-        <div class="user-form-step active"
-             id="userStep1">
-
-            <div class="form-section-title">
-
-                <h3>
-                    Login Credentials
-                </h3>
-
-                <p>
-                    These credentials will be used
-                    by the user to log in.
-                </p>
-
-            </div>
-
-
-            <div class="modal-grid">
-
-                <label>
-
-                    Full Name
-
-                    <input
-                        id="newUserName"
-                        type="text"
-                        placeholder="Enter full name"
-                    >
-
-                </label>
-
-
-                <label>
-
-                    Email / Login ID
-
-                    <input
-                        id="newUserEmail"
-                        type="email"
-                        placeholder="name@campus.edu"
-                    >
-
-                </label>
-
-
-                <label>
-
-                    Password
-
-                    <input
-                        id="newUserPassword"
-                        type="password"
-                        placeholder="Create password"
-                    >
-
-                </label>
-
-
-                <label>
-
-                    Confirm Password
-
-                    <input
-                        id="newUserConfirmPassword"
-                        type="password"
-                        placeholder="Confirm password"
-                    >
-
-                </label>
-
-
-                <label class="full-width">
-
-                    Role
-
-                    <select id="newUserRole">
-
-                        <option value="">
-                            Select Role
-                        </option>
-
-                        <option value="Student">
+                        <th>
                             Student
-                        </option>
+                        </th>
 
-                        <option value="TPO">
-                            TPO
-                        </option>
+                        <th>
+                            Company
+                        </th>
 
-                        <option value="HOD">
-                            HOD
-                        </option>
+                        <th>
+                            College
+                        </th>
 
-                        <option value="Tutor">
-                            Tutor
-                        </option>
+                        <th>
+                            Package
+                        </th>
 
-                        <option value="Higher Authority">
-                            Higher Authority
-                        </option>
+                        <th>
+                            Activity
+                        </th>
 
-                    </select>
+                        <th>
+                            Status
+                        </th>
 
-                </label>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            <div class="student-cell">
+
+                                <span class="student-avatar">
+                                    RS
+                                </span>
+
+                                <span>
+                                    Rahul Sharma
+                                </span>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            TCS
+                        </td>
+
+                        <td>
+                            PCE
+                        </td>
+
+                        <td>
+                            ₹7.2 LPA
+                        </td>
+
+                        <td>
+                            Final selection
+                        </td>
+
+                        <td>
+                            <span class="table-status selected">
+                                Selected
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <div class="student-cell">
+
+                                <span class="student-avatar">
+                                    PV
+                                </span>
+
+                                <span>
+                                    Priya Verma
+                                </span>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            Infosys
+                        </td>
+
+                        <td>
+                            PIET
+                        </td>
+
+                        <td>
+                            ₹6.5 LPA
+                        </td>
+
+                        <td>
+                            PI / HR round
+                        </td>
+
+                        <td>
+                            <span class="table-status interview">
+                                Interview
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <div class="student-cell">
+
+                                <span class="student-avatar">
+                                    AG
+                                </span>
+
+                                <span>
+                                    Aman Gupta
+                                </span>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            Wipro
+                        </td>
+
+                        <td>
+                            PU
+                        </td>
+
+                        <td>
+                            ₹5.8 LPA
+                        </td>
+
+                        <td>
+                            Round 2 cleared
+                        </td>
+
+                        <td>
+                            <span class="table-status progress">
+                                In Progress
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <div class="student-cell">
+
+                                <span class="student-avatar">
+                                    SK
+                                </span>
+
+                                <span>
+                                    Sneha Kapoor
+                                </span>
+
+                            </div>
+                        </td>
+
+                        <td>
+                            Accenture
+                        </td>
+
+                        <td>
+                            JIET
+                        </td>
+
+                        <td>
+                            ₹8.1 LPA
+                        </td>
+
+                        <td>
+                            Selected
+                        </td>
+
+                        <td>
+                            <span class="table-status selected">
+                                Selected
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+    <section class="quick-actions">
+
+        <div class="quick-actions-heading">
+
+            <div>
+
+                <span class="panel-eyebrow">
+                    ADMIN TOOLS
+                </span>
+
+                <h2>
+                    Quick Management
+                </h2>
 
             </div>
 
+        </div>
 
-            <div class="credential-note">
 
-                <span>🔐</span>
+        <div class="quick-action-grid">
 
-                <div>
+
+            <a
+                href="{{ url_for('admin_users') }}"
+                class="quick-action-card"
+            >
+
+                <span class="quick-action-icon">
+                    +
+                </span>
+
+                <span>
 
                     <strong>
-                        Login credentials
+                        Manage Users
                     </strong>
 
-                    <p>
-                        The email and password entered here
-                        will be linked to the user's account
-                        after database integration.
-                    </p>
+                    <small>
+                        Users & accounts
+                    </small>
 
-                </div>
+                </span>
 
-            </div>
+                <b>
+                    →
+                </b>
 
-        </div>
-
-
-        <!-- =========================================
-             STEP 2
-        ========================================== -->
-
-        <div class="user-form-step"
-             id="userStep2">
-
-            <div class="form-section-title">
-
-                <h3 id="profileFormTitle">
-                    Profile Details
-                </h3>
-
-                <p id="profileFormDescription">
-                    Enter information that will appear
-                    on the user's profile.
-                </p>
-
-            </div>
+            </a>
 
 
-            <!-- STUDENT FORM -->
+            <a
+                href="{{ url_for('admin_companies') }}"
+                class="quick-action-card"
+            >
 
-            <div class="role-profile-form"
-                 id="studentProfileForm">
+                <span class="quick-action-icon">
+                    +
+                </span>
 
-                <div class="form-subheading">
-                    Personal Information
-                </div>
+                <span>
 
-                <div class="modal-grid">
+                    <strong>
+                        Add Company
+                    </strong>
 
-                    <label>
-                        First Name
-                        <input
-                            id="studentFirstName"
-                            placeholder="First name"
-                        >
-                    </label>
+                    <small>
+                        Company management
+                    </small>
 
-                    <label>
-                        Last Name
-                        <input
-                            id="studentLastName"
-                            placeholder="Last name"
-                        >
-                    </label>
+                </span>
 
-                    <label>
-                        Date of Birth
-                        <input
-                            id="studentDob"
-                            type="date"
-                        >
-                    </label>
+                <b>
+                    →
+                </b>
 
-                    <label>
-                        Gender
-                        <select id="studentGender">
-
-                            <option value="">
-                                Select
-                            </option>
-
-                            <option>
-                                Male
-                            </option>
-
-                            <option>
-                                Female
-                            </option>
-
-                            <option>
-                                Other
-                            </option>
-
-                        </select>
-                    </label>
-
-                    <label>
-                        Phone Number
-                        <input
-                            id="studentPhone"
-                            placeholder="Phone number"
-                        >
-                    </label>
-
-                    <label>
-                        Alternate Phone
-                        <input
-                            id="studentAltPhone"
-                            placeholder="Alternate phone"
-                        >
-                    </label>
-
-                </div>
+            </a>
 
 
-                <div class="form-subheading">
-                    Academic Information
-                </div>
+            <a
+                href="{{ url_for('admin_drives') }}"
+                class="quick-action-card"
+            >
 
-                <div class="modal-grid">
+                <span class="quick-action-icon">
+                    +
+                </span>
 
-                    <label>
-                        Enrollment / Roll Number
-                        <input
-                            id="studentRollNo"
-                            placeholder="Enrollment number"
-                        >
-                    </label>
+                <span>
 
-                    <label>
-                        Department
-                        <input
-                            id="studentDepartment"
-                            placeholder="CSE / IT / ECE"
-                        >
-                    </label>
+                    <strong>
+                        New Placement Drive
+                    </strong>
 
-                    <label>
-                        Program
-                        <input
-                            id="studentProgram"
-                            placeholder="B.Tech / MCA / etc."
-                        >
-                    </label>
+                    <small>
+                        Schedule a drive
+                    </small>
 
-                    <label>
-                        Batch
-                        <input
-                            id="studentBatch"
-                            placeholder="2023-27"
-                        >
-                    </label>
+                </span>
 
-                    <label>
-                        Semester
-                        <select id="studentSemester">
+                <b>
+                    →
+                </b>
 
-                            <option value="">
-                                Select semester
-                            </option>
-
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-
-                        </select>
-                    </label>
-
-                    <label>
-                        CGPA
-                        <input
-                            id="studentCgpa"
-                            type="number"
-                            step="0.01"
-                            placeholder="0.00"
-                        >
-                    </label>
-
-                </div>
+            </a>
 
 
-                <div class="form-subheading">
-                    Address
-                </div>
+            <a
+                href="{{ url_for('admin_analytics') }}"
+                class="quick-action-card"
+            >
 
-                <div class="modal-grid">
+                <span class="quick-action-icon">
+                    ↗
+                </span>
 
-                    <label class="full-width">
-                        Address
-                        <input
-                            id="studentAddress"
-                            placeholder="Full address"
-                        >
-                    </label>
+                <span>
 
-                    <label>
-                        City
-                        <input
-                            id="studentCity"
-                            placeholder="City"
-                        >
-                    </label>
+                    <strong>
+                        View Analytics
+                    </strong>
 
-                    <label>
-                        State
-                        <input
-                            id="studentState"
-                            placeholder="State"
-                        >
-                    </label>
+                    <small>
+                        Placement insights
+                    </small>
 
-                </div>
+                </span>
 
-            </div>
+                <b>
+                    →
+                </b>
 
-
-            <!-- GENERIC STAFF FORM -->
-
-            <div class="role-profile-form"
-                 id="staffProfileForm">
-
-                <div class="form-subheading">
-                    Professional Information
-                </div>
-
-                <div class="modal-grid">
-
-                    <label>
-                        Full Name
-                        <input
-                            id="staffFullName"
-                            placeholder="Full name"
-                        >
-                    </label>
-
-                    <label>
-                        Employee ID
-                        <input
-                            id="staffEmployeeId"
-                            placeholder="Employee ID"
-                        >
-                    </label>
-
-                    <label>
-                        Department
-                        <input
-                            id="staffDepartment"
-                            placeholder="Department"
-                        >
-                    </label>
-
-                    <label>
-                        Designation
-                        <input
-                            id="staffDesignation"
-                            placeholder="Designation"
-                        >
-                    </label>
-
-                    <label>
-                        Phone Number
-                        <input
-                            id="staffPhone"
-                            placeholder="Phone number"
-                        >
-                    </label>
-
-                    <label>
-                        Joining Date
-                        <input
-                            id="staffJoiningDate"
-                            type="date"
-                        >
-                    </label>
-
-                </div>
-
-            </div>
+            </a>
 
         </div>
 
+    </section>
 
-        <!-- MODAL FOOTER -->
-
-        <div class="modal-footer">
-
-            <button
-                class="outline-btn"
-                id="cancelUserModal">
-
-                Cancel
-
-            </button>
-
-
-            <button
-                class="outline-btn"
-                id="backUserStep"
-                style="display:none;">
-
-                ← Back
-
-            </button>
-
-
-            <button
-                class="primary-btn"
-                id="continueUserStep">
-
-                Continue →
-
-            </button>
-
-
-            <button
-                class="primary-btn"
-                id="createUser"
-                style="display:none;">
-
-                Create User
-
-            </button>
-
-        </div>
-
-    </div>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
 
-<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 
-</body>
-</html>
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/dashboard.js') }}"
+></script>
+
+{% endblock %}

@@ -1,0 +1,784 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    College Analytics | Campus Admin
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/admin/analytics/college_analytics.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="college-analytics-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="college-page-header">
+
+        <div>
+
+            <span class="college-eyebrow">
+                ANALYTICS
+            </span>
+
+            <h1>
+                College Analytics
+            </h1>
+
+            <p>
+                Compare placement performance across
+                PCE, PIET, PU and JIET.
+            </p>
+
+        </div>
+
+
+        <div class="college-header-actions">
+
+            <select
+                id="collegeYear"
+                class="college-year-select"
+            >
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+            </select>
+
+
+            <button
+                type="button"
+                id="exportCollege"
+                class="college-export-btn"
+            >
+                ↓ Export Report
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <div class="college-summary-grid">
+
+
+        <div class="college-stat-card">
+
+            <div class="college-stat-icon">
+                🎓
+            </div>
+
+            <div>
+
+                <span>
+                    Total Students
+                </span>
+
+                <strong>
+                    1,248
+                </strong>
+
+                <small>
+                    Across 4 colleges
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="college-stat-card">
+
+            <div class="college-stat-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Students Placed
+                </span>
+
+                <strong>
+                    684
+                </strong>
+
+                <small class="positive">
+                    54.8% overall rate
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="college-stat-card">
+
+            <div class="college-stat-icon">
+                ◈
+            </div>
+
+            <div>
+
+                <span>
+                    Highest Placement
+                </span>
+
+                <strong>
+                    PCE
+                </strong>
+
+                <small class="positive">
+                    68% placement rate
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="college-stat-card">
+
+            <div class="college-stat-icon">
+                ₹
+            </div>
+
+            <div>
+
+                <span>
+                    Highest Package
+                </span>
+
+                <strong>
+                    18.5 LPA
+                </strong>
+
+                <small>
+                    Across all colleges
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         COLLEGE COMPARISON
+    ====================================================== -->
+
+    <section class="college-panel">
+
+
+        <div class="college-panel-header">
+
+            <div>
+
+                <h2>
+                    College-wise Placement Performance
+                </h2>
+
+                <p>
+                    Placement comparison for the selected
+                    academic year.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="college-comparison-grid">
+
+
+            <!-- PCE -->
+
+            <div class="college-performance-card">
+
+                <div class="college-card-top">
+
+                    <div class="college-logo">
+                        P
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            PCE
+                        </h3>
+
+                        <span>
+                            Poornima College of Engineering
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="college-rate">
+
+                    <strong>
+                        68%
+                    </strong>
+
+                    <span>
+                        Placement Rate
+                    </span>
+
+                </div>
+
+
+                <div class="college-progress">
+
+                    <div
+                        class="college-progress-bar"
+                        style="width:68%"
+                    ></div>
+
+                </div>
+
+
+                <div class="college-mini-stats">
+
+                    <div>
+                        <span>Students</span>
+                        <strong>420</strong>
+                    </div>
+
+                    <div>
+                        <span>Placed</span>
+                        <strong>286</strong>
+                    </div>
+
+                    <div>
+                        <span>Avg. Package</span>
+                        <strong>6.8 LPA</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PIET -->
+
+            <div class="college-performance-card">
+
+                <div class="college-card-top">
+
+                    <div class="college-logo">
+                        P
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            PIET
+                        </h3>
+
+                        <span>
+                            Poornima Institute of Engineering
+                            & Technology
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="college-rate">
+
+                    <strong>
+                        61%
+                    </strong>
+
+                    <span>
+                        Placement Rate
+                    </span>
+
+                </div>
+
+
+                <div class="college-progress">
+
+                    <div
+                        class="college-progress-bar"
+                        style="width:61%"
+                    ></div>
+
+                </div>
+
+
+                <div class="college-mini-stats">
+
+                    <div>
+                        <span>Students</span>
+                        <strong>318</strong>
+                    </div>
+
+                    <div>
+                        <span>Placed</span>
+                        <strong>194</strong>
+                    </div>
+
+                    <div>
+                        <span>Avg. Package</span>
+                        <strong>6.3 LPA</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PU -->
+
+            <div class="college-performance-card">
+
+                <div class="college-card-top">
+
+                    <div class="college-logo">
+                        P
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            PU
+                        </h3>
+
+                        <span>
+                            Poornima University
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="college-rate">
+
+                    <strong>
+                        54%
+                    </strong>
+
+                    <span>
+                        Placement Rate
+                    </span>
+
+                </div>
+
+
+                <div class="college-progress">
+
+                    <div
+                        class="college-progress-bar"
+                        style="width:54%"
+                    ></div>
+
+                </div>
+
+
+                <div class="college-mini-stats">
+
+                    <div>
+                        <span>Students</span>
+                        <strong>292</strong>
+                    </div>
+
+                    <div>
+                        <span>Placed</span>
+                        <strong>158</strong>
+                    </div>
+
+                    <div>
+                        <span>Avg. Package</span>
+                        <strong>5.9 LPA</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- JIET -->
+
+            <div class="college-performance-card">
+
+                <div class="college-card-top">
+
+                    <div class="college-logo">
+                        J
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            JIET
+                        </h3>
+
+                        <span>
+                            Jodhpur Institute of Engineering
+                            & Technology
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="college-rate">
+
+                    <strong>
+                        47%
+                    </strong>
+
+                    <span>
+                        Placement Rate
+                    </span>
+
+                </div>
+
+
+                <div class="college-progress">
+
+                    <div
+                        class="college-progress-bar"
+                        style="width:47%"
+                    ></div>
+
+                </div>
+
+
+                <div class="college-mini-stats">
+
+                    <div>
+                        <span>Students</span>
+                        <strong>218</strong>
+                    </div>
+
+                    <div>
+                        <span>Placed</span>
+                        <strong>103</strong>
+                    </div>
+
+                    <div>
+                        <span>Avg. Package</span>
+                        <strong>5.4 LPA</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PACKAGE COMPARISON
+    ====================================================== -->
+
+    <section class="college-panel">
+
+        <div class="college-panel-header">
+
+            <div>
+
+                <h2>
+                    Package Comparison
+                </h2>
+
+                <p>
+                    Salary performance across colleges.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="package-grid">
+
+
+            <div class="package-card">
+
+                <span>
+                    PCE
+                </span>
+
+                <strong>
+                    18.5 LPA
+                </strong>
+
+                <small>
+                    Highest Package
+                </small>
+
+            </div>
+
+
+            <div class="package-card">
+
+                <span>
+                    PIET
+                </span>
+
+                <strong>
+                    16.2 LPA
+                </strong>
+
+                <small>
+                    Highest Package
+                </small>
+
+            </div>
+
+
+            <div class="package-card">
+
+                <span>
+                    PU
+                </span>
+
+                <strong>
+                    14.8 LPA
+                </strong>
+
+                <small>
+                    Highest Package
+                </small>
+
+            </div>
+
+
+            <div class="package-card">
+
+                <span>
+                    JIET
+                </span>
+
+                <strong>
+                    12.6 LPA
+                </strong>
+
+                <small>
+                    Highest Package
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DETAILED TABLE
+    ====================================================== -->
+
+    <section class="college-panel">
+
+        <div class="college-panel-header">
+
+            <div>
+
+                <h2>
+                    Detailed College Report
+                </h2>
+
+                <p>
+                    Complete placement statistics.
+                </p>
+
+            </div>
+
+
+            <input
+                type="search"
+                id="collegeSearch"
+                class="college-search"
+                placeholder="Search college..."
+            >
+
+        </div>
+
+
+        <div class="college-table-wrapper">
+
+            <table class="college-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>COLLEGE</th>
+                        <th>STUDENTS</th>
+                        <th>PLACED</th>
+                        <th>RATE</th>
+                        <th>AVG PACKAGE</th>
+                        <th>HIGHEST PACKAGE</th>
+                        <th>COMPANIES</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="collegeTableBody">
+
+                    <tr>
+
+                        <td>
+                            <strong>PCE</strong>
+                        </td>
+
+                        <td>420</td>
+
+                        <td>286</td>
+
+                        <td>
+                            <span class="rate-badge">
+                                68%
+                            </span>
+                        </td>
+
+                        <td>6.8 LPA</td>
+
+                        <td>18.5 LPA</td>
+
+                        <td>72</td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>PIET</strong>
+                        </td>
+
+                        <td>318</td>
+
+                        <td>194</td>
+
+                        <td>
+                            <span class="rate-badge">
+                                61%
+                            </span>
+                        </td>
+
+                        <td>6.3 LPA</td>
+
+                        <td>16.2 LPA</td>
+
+                        <td>61</td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>PU</strong>
+                        </td>
+
+                        <td>292</td>
+
+                        <td>158</td>
+
+                        <td>
+                            <span class="rate-badge">
+                                54%
+                            </span>
+                        </td>
+
+                        <td>5.9 LPA</td>
+
+                        <td>14.8 LPA</td>
+
+                        <td>54</td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>JIET</strong>
+                        </td>
+
+                        <td>218</td>
+
+                        <td>103</td>
+
+                        <td>
+                            <span class="rate-badge">
+                                47%
+                            </span>
+                        </td>
+
+                        <td>5.4 LPA</td>
+
+                        <td>12.6 LPA</td>
+
+                        <td>43</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/admin/analytics/college_analytics.js'
+    ) }}"
+></script>
+
+{% endblock %}

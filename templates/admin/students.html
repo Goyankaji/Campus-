@@ -1,0 +1,1695 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Student Management | Admin
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/students.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="students-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="students-header">
+
+        <div>
+
+            <div class="students-breadcrumb">
+                <span>Students</span>
+                <span>›</span>
+                <strong>Student Management</strong>
+            </div>
+
+            <h1>Student Management</h1>
+
+            <p>
+                Manage student profiles, academic details and placement status.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="student-primary-btn"
+            id="addStudentBtn"
+        >
+            <span>＋</span>
+            Add Student
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="student-stats">
+
+        <article class="student-stat-card">
+
+            <div class="student-stat-icon purple">
+                👨‍🎓
+            </div>
+
+            <div>
+                <span>Total Students</span>
+                <strong>1,260</strong>
+                <small>All registered students</small>
+            </div>
+
+        </article>
+
+
+        <article class="student-stat-card">
+
+            <div class="student-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Eligible</span>
+                <strong>980</strong>
+                <small>Placement eligible</small>
+            </div>
+
+        </article>
+
+
+        <article class="student-stat-card">
+
+            <div class="student-stat-icon blue">
+                ●
+            </div>
+
+            <div>
+                <span>Active</span>
+                <strong>1,185</strong>
+                <small>Active student accounts</small>
+            </div>
+
+        </article>
+
+
+        <article class="student-stat-card">
+
+            <div class="student-stat-icon orange">
+                !
+            </div>
+
+            <div>
+                <span>Verification Pending</span>
+                <strong>12</strong>
+                <small>Require verification</small>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLEGE DISTRIBUTION
+    ====================================================== -->
+
+    <section class="college-summary">
+
+        <div class="section-title">
+
+            <div>
+                <h2>Students by College</h2>
+
+                <p>
+                    Current student distribution across colleges.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="college-summary-grid">
+
+            <div class="college-summary-item">
+
+                <div class="college-summary-top">
+                    <strong>PCE</strong>
+                    <span>420 students</span>
+                </div>
+
+                <div class="college-progress">
+                    <span style="width: 78%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="college-summary-item">
+
+                <div class="college-summary-top">
+                    <strong>PIET</strong>
+                    <span>360 students</span>
+                </div>
+
+                <div class="college-progress">
+                    <span style="width: 68%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="college-summary-item">
+
+                <div class="college-summary-top">
+                    <strong>PU</strong>
+                    <span>285 students</span>
+                </div>
+
+                <div class="college-progress">
+                    <span style="width: 54%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="college-summary-item">
+
+                <div class="college-summary-top">
+                    <strong>JIET</strong>
+                    <span>195 students</span>
+                </div>
+
+                <div class="college-progress">
+                    <span style="width: 38%;"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STUDENT MANAGEMENT CARD
+    ====================================================== -->
+
+    <section class="students-card">
+
+        <div class="students-card-header">
+
+            <div>
+
+                <h2>All Students</h2>
+
+                <p>
+                    Search and manage registered student accounts.
+                </p>
+
+            </div>
+
+
+            <div class="student-record-count">
+
+                <strong id="studentRecordCount">
+                    8
+                </strong>
+
+                students
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="student-toolbar">
+
+            <div class="student-search">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+
+                </svg>
+
+
+                <input
+                    type="text"
+                    id="studentSearch"
+                    placeholder="Search by name, roll number or email..."
+                >
+
+            </div>
+
+
+            <div class="student-filters">
+
+                <select
+                    class="admin-select"
+                    id="studentCollege"
+                >
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="studentDepartment"
+                >
+
+                    <option value="all">
+                        All Departments
+                    </option>
+
+                    <option value="cse">
+                        CSE
+                    </option>
+
+                    <option value="it">
+                        IT
+                    </option>
+
+                    <option value="ece">
+                        ECE
+                    </option>
+
+                    <option value="me">
+                        Mechanical
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="studentStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="pending">
+                        Verification Pending
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="studentBatch"
+                >
+
+                    <option value="all">
+                        All Batches
+                    </option>
+
+                    <option value="2023-27">
+                        2023-27
+                    </option>
+
+                    <option value="2024-28">
+                        2024-28
+                    </option>
+
+                    <option value="2025-29">
+                        2025-29
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="students-table-wrapper">
+
+            <table class="students-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+
+                        <th>College</th>
+
+                        <th>Roll Number</th>
+
+                        <th>Department</th>
+
+                        <th>Batch</th>
+
+                        <th>CGPA</th>
+
+                        <th>Placement</th>
+
+                        <th>Account</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="studentsTableBody">
+
+
+                    <!-- =================================================
+                         STUDENT 1
+                    ================================================== -->
+
+                    <tr
+                        data-name="rahul sharma"
+                        data-roll="22pce001"
+                        data-email="rahul.sharma@poornima.org"
+                        data-college="pce"
+                        data-department="cse"
+                        data-batch="2023-27"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rahul Sharma
+                                    </strong>
+
+                                    <span>
+                                        rahul.sharma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="college-badge pce">
+                                PCE
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            22PCE001
+                        </td>
+
+
+                        <td>
+                            CSE
+                        </td>
+
+
+                        <td>
+                            2023-27
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                8.72
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <span class="placement-badge placed">
+                                Placed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="account-status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Rahul Sharma"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         STUDENT 2
+                    ================================================== -->
+
+                    <tr
+                        data-name="priya verma"
+                        data-roll="22piet014"
+                        data-email="priya.verma@poornima.org"
+                        data-college="piet"
+                        data-department="it"
+                        data-batch="2023-27"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    PV
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Priya Verma
+                                    </strong>
+
+                                    <span>
+                                        priya.verma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PIET014
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            2023-27
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                8.41
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            <span class="placement-badge joining">
+                                Joining
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="account-status active">
+                                Active
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Priya Verma"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         STUDENT 3
+                    ================================================== -->
+
+                    <tr
+                        data-name="aman gupta"
+                        data-roll="22pu031"
+                        data-email="aman.gupta@poornima.org"
+                        data-college="pu"
+                        data-department="ece"
+                        data-batch="2023-27"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    AG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Aman Gupta
+                                    </strong>
+
+                                    <span>
+                                        aman.gupta@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PU031
+                        </td>
+
+
+                        <td>
+                            ECE
+                        </td>
+
+
+                        <td>
+                            2023-27
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                7.96
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            <span class="placement-badge selected">
+                                Selected
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="account-status active">
+                                Active
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Aman Gupta"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         STUDENT 4
+                    ================================================== -->
+
+                    <tr
+                        data-name="neha singh"
+                        data-roll="22jiet042"
+                        data-email="neha.singh@poornima.org"
+                        data-college="jiet"
+                        data-department="cse"
+                        data-batch="2023-27"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    NS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Neha Singh
+                                    </strong>
+
+                                    <span>
+                                        neha.singh@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22JIET042
+                        </td>
+
+
+                        <td>
+                            CSE
+                        </td>
+
+
+                        <td>
+                            2023-27
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                9.01
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            <span class="placement-badge placed">
+                                Placed
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="account-status active">
+                                Active
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Neha Singh"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         STUDENT 5
+                    ================================================== -->
+
+                    <tr
+                        data-name="rohit meena"
+                        data-roll="22pce058"
+                        data-email="rohit.meena@poornima.org"
+                        data-college="pce"
+                        data-department="me"
+                        data-batch="2023-27"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rohit Meena
+                                    </strong>
+
+                                    <span>
+                                        rohit.meena@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PCE058
+                        </td>
+
+
+                        <td>
+                            Mechanical
+                        </td>
+
+
+                        <td>
+                            2023-27
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                7.64
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            <span class="placement-badge selected">
+                                Selected
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="account-status active">
+                                Active
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Rohit Meena"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         STUDENT 6
+                    ================================================== -->
+
+                    <tr
+                        data-name="kajal joshi"
+                        data-roll="22piet076"
+                        data-email="kajal.joshi@poornima.org"
+                        data-college="piet"
+                        data-department="cse"
+                        data-batch="2024-28"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    KJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Kajal Joshi
+                                    </strong>
+
+                                    <span>
+                                        kajal.joshi@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PIET076
+                        </td>
+
+
+                        <td>
+                            CSE
+                        </td>
+
+
+                        <td>
+                            2024-28
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                8.13
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            <span class="placement-badge not-eligible">
+                                Not Eligible
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="account-status active">
+                                Active
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Kajal Joshi"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         STUDENT 7
+                    ================================================== -->
+
+                    <tr
+                        data-name="vivek kumar"
+                        data-roll="22pu089"
+                        data-email="vivek.kumar@poornima.org"
+                        data-college="pu"
+                        data-department="it"
+                        data-batch="2024-28"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    VK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Vivek Kumar
+                                    </strong>
+
+                                    <span>
+                                        vivek.kumar@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22PU089
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            2024-28
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                7.88
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            <span class="placement-badge not-eligible">
+                                Not Eligible
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="account-status pending">
+                                Pending
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Vivek Kumar"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         STUDENT 8
+                    ================================================== -->
+
+                    <tr
+                        data-name="simran kaur"
+                        data-roll="22jiet101"
+                        data-email="simran.kaur@poornima.org"
+                        data-college="jiet"
+                        data-department="cse"
+                        data-batch="2024-28"
+                        data-status="active"
+                    >
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    SK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Simran Kaur
+                                    </strong>
+
+                                    <span>
+                                        simran.kaur@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            22JIET101
+                        </td>
+
+
+                        <td>
+                            CSE
+                        </td>
+
+
+                        <td>
+                            2024-28
+                        </td>
+
+
+                        <td>
+                            <strong class="cgpa">
+                                8.66
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            <span class="placement-badge placed">
+                                Placed
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <span class="account-status active">
+                                Active
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="student-view-btn"
+                                data-student="Simran Kaur"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="students-empty"
+                id="studentsEmpty"
+                hidden
+            >
+
+                <div class="students-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No students found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    class="student-secondary-btn"
+                    id="clearStudentFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="students-footer">
+
+            <span>
+                Showing
+                <strong id="studentFooterCount">
+                    8
+                </strong>
+                students
+            </span>
+
+
+            <div class="student-pagination">
+
+                <button
+                    type="button"
+                    class="student-page-btn disabled"
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="student-page-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="student-page-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="student-page-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="student-page-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STUDENT DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="student-modal"
+        id="studentDetailsModal"
+        hidden
+    >
+
+        <div
+            class="student-modal-backdrop"
+            data-close-student
+        ></div>
+
+
+        <div class="student-modal-card">
+
+            <div class="student-modal-header">
+
+                <div>
+
+                    <span>
+                        STUDENT PROFILE
+                    </span>
+
+                    <h2 id="modalStudentName">
+                        Rahul Sharma
+                    </h2>
+
+                    <p id="modalStudentEmail">
+                        rahul.sharma@poornima.org
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="student-modal-close"
+                    data-close-student
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="student-modal-body">
+
+                <div class="modal-student-profile">
+
+                    <div
+                        class="modal-student-avatar"
+                        id="modalStudentAvatar"
+                    >
+                        RS
+                    </div>
+
+                    <div>
+
+                        <strong id="modalStudentRoll">
+                            22PCE001
+                        </strong>
+
+                        <span id="modalStudentCollege">
+                            PCE
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="student-detail-grid">
+
+                    <div>
+                        <span>Department</span>
+                        <strong id="modalStudentDepartment">
+                            CSE
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Batch</span>
+                        <strong id="modalStudentBatch">
+                            2023-27
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>CGPA</span>
+                        <strong id="modalStudentCgpa">
+                            8.72
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Account Status</span>
+                        <strong id="modalStudentStatus">
+                            Active
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="student-placement-box">
+
+                    <div>
+
+                        <span>
+                            Placement Status
+                        </span>
+
+                        <strong id="modalPlacementStatus">
+                            Placed
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Academic Session
+                        </span>
+
+                        <strong>
+                            2025-26
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="student-modal-footer">
+
+                <button
+                    type="button"
+                    class="student-secondary-btn"
+                    data-close-student
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD STUDENT MODAL
+    ====================================================== -->
+
+    <div
+        class="student-modal"
+        id="addStudentModal"
+        hidden
+    >
+
+        <div
+            class="student-modal-backdrop"
+            data-close-add-student
+        ></div>
+
+
+        <div class="student-modal-card add-student-card">
+
+            <div class="student-modal-header">
+
+                <div>
+
+                    <span>
+                        STUDENT MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Add Student
+                    </h2>
+
+                    <p>
+                        Create a new student profile.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="student-modal-close"
+                    data-close-add-student
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="addStudentForm"
+                class="add-student-form"
+            >
+
+                <div class="form-grid">
+
+                    <div class="form-field full">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newStudentName"
+                            placeholder="Enter full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="22PCE001"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="student@poornima.org"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select College
+                            </option>
+
+                            <option>
+                                PCE
+                            </option>
+
+                            <option>
+                                PIET
+                            </option>
+
+                            <option>
+                                PU
+                            </option>
+
+                            <option>
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select Department
+                            </option>
+
+                            <option>
+                                CSE
+                            </option>
+
+                            <option>
+                                IT
+                            </option>
+
+                            <option>
+                                ECE
+                            </option>
+
+                            <option>
+                                Mechanical
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            Batch
+                        </label>
+
+                        <select required>
+
+                            <option>
+                                2023-27
+                            </option>
+
+                            <option>
+                                2024-28
+                            </option>
+
+                            <option>
+                                2025-29
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label>
+                            CGPA
+                        </label>
+
+                        <input
+                            type="number"
+                            min="0"
+                            max="10"
+                            step="0.01"
+                            placeholder="8.50"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="add-student-form-footer">
+
+                    <button
+                        type="button"
+                        class="student-secondary-btn"
+                        data-close-add-student
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="student-primary-btn"
+                    >
+                        Create Student
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/students.js') }}"
+></script>
+
+{% endblock %}

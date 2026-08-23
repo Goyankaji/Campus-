@@ -1,0 +1,226 @@
+<!-- =========================================================
+     ADMIN COMMON TOPBAR
+========================================================= -->
+
+<header class="admin-topbar">
+
+
+    <!-- =====================================================
+         LEFT
+    ====================================================== -->
+
+    <div class="admin-topbar-left">
+
+
+        <!-- MOBILE MENU -->
+
+        <button
+            type="button"
+            class="admin-menu-btn"
+            id="adminMenuBtn"
+            aria-label="Open navigation"
+        >
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16"></path>
+                <path d="M4 12h16"></path>
+                <path d="M4 18h16"></path>
+            </svg>
+
+        </button>
+
+
+        <!-- SEARCH -->
+
+        <div class="admin-search">
+
+            <span class="admin-search-icon">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="11" cy="11" r="6.5"></circle>
+                    <path d="m16 16 4 4"></path>
+                </svg>
+
+            </span>
+
+
+            <input
+                type="search"
+                id="adminGlobalSearch"
+                placeholder="Search students, companies, drives..."
+                autocomplete="off"
+            >
+
+
+            <kbd>
+                Ctrl K
+            </kbd>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RIGHT
+    ====================================================== -->
+
+    <div class="admin-topbar-right">
+
+
+        <!-- ACADEMIC YEAR -->
+
+        <div class="admin-session-selector">
+
+            <span>
+                Academic Year
+            </span>
+
+            <select
+                id="adminAcademicYear"
+                aria-label="Academic Year"
+            >
+
+                <option value="2026-27">
+                    2026–27
+                </option>
+
+                <option value="2025-26">
+                    2025–26
+                </option>
+
+                <option value="2024-25">
+                    2024–25
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- THEME -->
+
+        <button
+            type="button"
+            class="admin-topbar-btn admin-theme-toggle"
+            id="adminThemeToggle"
+            title="Toggle theme"
+            aria-label="Toggle theme"
+        >
+
+            <svg
+                class="admin-theme-icon admin-sun-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m4.93 19.07 1.41-1.41"></path>
+                <path d="m17.66 6.34 1.41-1.41"></path>
+            </svg>
+
+            <svg
+                class="admin-theme-icon admin-moon-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"></path>
+            </svg>
+
+        </button>
+
+
+        <!-- NOTIFICATIONS -->
+
+        <a
+            href="{{ url_for('admin_notifications') }}"
+            class="admin-topbar-btn admin-notification-btn"
+            title="Notifications"
+            aria-label="Notifications"
+        >
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+                <path d="M10 21h4"></path>
+            </svg>
+
+            <span class="admin-notification-dot"></span>
+
+        </a>
+
+
+        <!-- PROFILE -->
+
+        <div
+            class="admin-profile"
+            id="adminProfile"
+            tabindex="0"
+        >
+
+            <div class="admin-profile-avatar">
+                A
+            </div>
+
+
+            <div class="admin-profile-info">
+
+                <strong>
+                    Admin
+                </strong>
+
+                <small>
+                    Administrator
+                </small>
+
+            </div>
+
+
+            <span class="admin-profile-arrow">
+                ▾
+            </span>
+
+
+            <!-- PROFILE DROPDOWN -->
+
+            <div
+                class="admin-profile-menu"
+                id="adminProfileMenu"
+            >
+
+                <div class="admin-profile-menu-header">
+
+                    <strong>
+                        Admin
+                    </strong>
+
+                    <span>
+                        System Administrator
+                    </span>
+
+                </div>
+
+
+                <a href="{{ url_for('admin_settings') }}">
+                    ⚙
+                    Settings
+                </a>
+
+
+                <a href="{{ url_for('logout') }}">
+                    ↪
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>

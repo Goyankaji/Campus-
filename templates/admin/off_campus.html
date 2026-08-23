@@ -1,0 +1,1577 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    Off-Campus | Admin
+{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin/off_campus.css') }}"
+>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="off-campus-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="off-campus-header">
+
+        <div>
+
+            <div class="off-campus-breadcrumb">
+                <span>Students</span>
+                <span>›</span>
+                <strong>Off-Campus</strong>
+            </div>
+
+            <h1>Off-Campus Placements</h1>
+
+            <p>
+                Track students placed through off-campus opportunities.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="off-primary-btn"
+            id="addOffCampusBtn"
+        >
+            <span>＋</span>
+            Add Record
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="off-stats">
+
+        <article class="off-stat-card">
+
+            <div class="off-stat-icon purple">
+                ↗
+            </div>
+
+            <div>
+                <span>Total Records</span>
+                <strong>146</strong>
+                <small>Off-campus placements</small>
+            </div>
+
+        </article>
+
+
+        <article class="off-stat-card">
+
+            <div class="off-stat-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Confirmed</span>
+                <strong>118</strong>
+                <small>Offer confirmed</small>
+            </div>
+
+        </article>
+
+
+        <article class="off-stat-card">
+
+            <div class="off-stat-icon orange">
+                ◷
+            </div>
+
+            <div>
+                <span>Offer Pending</span>
+                <strong>19</strong>
+                <small>Awaiting confirmation</small>
+            </div>
+
+        </article>
+
+
+        <article class="off-stat-card">
+
+            <div class="off-stat-icon blue">
+                ₹
+            </div>
+
+            <div>
+                <span>Average Package</span>
+                <strong>7.4</strong>
+                <small>LPA average</small>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLEGE DISTRIBUTION
+    ====================================================== -->
+
+    <section class="off-college-card">
+
+        <div class="off-section-title">
+
+            <div>
+                <h2>College-wise Off-Campus Records</h2>
+
+                <p>
+                    Distribution of reported off-campus placements.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="off-college-grid">
+
+            <div class="off-college-item">
+
+                <div class="off-college-top">
+                    <strong>PCE</strong>
+                    <span>51 records</span>
+                </div>
+
+                <div class="off-progress">
+                    <span style="width: 82%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="off-college-item">
+
+                <div class="off-college-top">
+                    <strong>PIET</strong>
+                    <span>39 records</span>
+                </div>
+
+                <div class="off-progress">
+                    <span style="width: 65%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="off-college-item">
+
+                <div class="off-college-top">
+                    <strong>PU</strong>
+                    <span>32 records</span>
+                </div>
+
+                <div class="off-progress">
+                    <span style="width: 53%;"></span>
+                </div>
+
+            </div>
+
+
+            <div class="off-college-item">
+
+                <div class="off-college-top">
+                    <strong>JIET</strong>
+                    <span>24 records</span>
+                </div>
+
+                <div class="off-progress">
+                    <span style="width: 41%;"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECORD CARD
+    ====================================================== -->
+
+    <section class="off-record-card">
+
+        <div class="off-record-header">
+
+            <div>
+
+                <h2>Off-Campus Records</h2>
+
+                <p>
+                    Students who secured opportunities independently
+                    or outside campus placement drives.
+                </p>
+
+            </div>
+
+
+            <div class="off-record-count">
+
+                <strong id="offRecordCount">
+                    8
+                </strong>
+
+                records
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <div class="off-toolbar">
+
+            <div class="off-search">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="7"
+                    ></circle>
+
+                    <path
+                        d="m20 20-4-4"
+                    ></path>
+
+                </svg>
+
+
+                <input
+                    type="text"
+                    id="offSearch"
+                    placeholder="Search student, company or role..."
+                >
+
+            </div>
+
+
+            <div class="off-filters">
+
+                <select
+                    class="admin-select"
+                    id="offCollege"
+                >
+
+                    <option value="all">
+                        All Colleges
+                    </option>
+
+                    <option value="pce">
+                        PCE
+                    </option>
+
+                    <option value="piet">
+                        PIET
+                    </option>
+
+                    <option value="pu">
+                        PU
+                    </option>
+
+                    <option value="jiet">
+                        JIET
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="offStatus"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="confirmed">
+                        Confirmed
+                    </option>
+
+                    <option value="pending">
+                        Offer Pending
+                    </option>
+
+                    <option value="joined">
+                        Joined
+                    </option>
+
+                </select>
+
+
+                <select
+                    class="admin-select"
+                    id="offSession"
+                >
+
+                    <option value="2025-26">
+                        2025-26
+                    </option>
+
+                    <option value="2024-25">
+                        2024-25
+                    </option>
+
+                    <option value="2023-24">
+                        2023-24
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="off-table-wrapper">
+
+            <table class="off-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+                        <th>College</th>
+                        <th>Company</th>
+                        <th>Role</th>
+                        <th>Package</th>
+                        <th>Offer Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="offTableBody">
+
+
+                    <!-- =================================================
+                         RECORD 1
+                    ================================================== -->
+
+                    <tr
+                        data-name="arjun meena"
+                        data-company="microsoft"
+                        data-role="software engineer"
+                        data-college="pce"
+                        data-status="confirmed"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    AM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Arjun Meena
+                                    </strong>
+
+                                    <span>
+                                        22PCE018
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Microsoft</strong>
+                        </td>
+
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹18.5 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            19 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Arjun Meena"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 2
+                    ================================================== -->
+
+                    <tr
+                        data-name="shreya gupta"
+                        data-company="amazon"
+                        data-role="business analyst"
+                        data-college="piet"
+                        data-status="joined"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    SG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Shreya Gupta
+                                    </strong>
+
+                                    <span>
+                                        22PIET026
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Amazon</strong>
+                        </td>
+
+
+                        <td>
+                            Business Analyst
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹11.2 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            17 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status joined">
+                                Joined
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Shreya Gupta"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 3
+                    ================================================== -->
+
+                    <tr
+                        data-name="mohit sharma"
+                        data-company="deloitte"
+                        data-role="analyst"
+                        data-college="pu"
+                        data-status="confirmed"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    MS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Mohit Sharma
+                                    </strong>
+
+                                    <span>
+                                        22PU047
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Deloitte</strong>
+                        </td>
+
+
+                        <td>
+                            Analyst
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹8.4 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            16 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Mohit Sharma"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 4
+                    ================================================== -->
+
+                    <tr
+                        data-name="ananya singh"
+                        data-company="google"
+                        data-role="associate engineer"
+                        data-college="jiet"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    AS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Ananya Singh
+                                    </strong>
+
+                                    <span>
+                                        22JIET061
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Google</strong>
+                        </td>
+
+
+                        <td>
+                            Associate Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹14.8 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            15 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status pending">
+                                Offer Pending
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Ananya Singh"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 5
+                    ================================================== -->
+
+                    <tr
+                        data-name="deepak kumar"
+                        data-company="accenture"
+                        data-role="software developer"
+                        data-college="pce"
+                        data-status="joined"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    DK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Deepak Kumar
+                                    </strong>
+
+                                    <span>
+                                        22PCE083
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge pce">
+                                PCE
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Accenture</strong>
+                        </td>
+
+
+                        <td>
+                            Software Developer
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹7.8 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            13 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status joined">
+                                Joined
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Deepak Kumar"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 6
+                    ================================================== -->
+
+                    <tr
+                        data-name="riya joshi"
+                        data-company="ey"
+                        data-role="consultant"
+                        data-college="piet"
+                        data-status="confirmed"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    RJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Riya Joshi
+                                    </strong>
+
+                                    <span>
+                                        22PIET095
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge piet">
+                                PIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>EY</strong>
+                        </td>
+
+
+                        <td>
+                            Consultant
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹9.2 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            12 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Riya Joshi"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 7
+                    ================================================== -->
+
+                    <tr
+                        data-name="harsh vardhan"
+                        data-company="adobe"
+                        data-role="frontend engineer"
+                        data-college="pu"
+                        data-status="joined"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    HV
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Harsh Vardhan
+                                    </strong>
+
+                                    <span>
+                                        22PU118
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge pu">
+                                PU
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Adobe</strong>
+                        </td>
+
+
+                        <td>
+                            Frontend Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹12.5 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            10 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status joined">
+                                Joined
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Harsh Vardhan"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         RECORD 8
+                    ================================================== -->
+
+                    <tr
+                        data-name="muskan yadav"
+                        data-company="infosys"
+                        data-role="system engineer"
+                        data-college="jiet"
+                        data-status="pending"
+                    >
+
+                        <td>
+
+                            <div class="off-student-cell">
+
+                                <div class="off-avatar">
+                                    MY
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Muskan Yadav
+                                    </strong>
+
+                                    <span>
+                                        22JIET139
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="off-college-badge jiet">
+                                JIET
+                            </span>
+                        </td>
+
+
+                        <td>
+                            <strong>Infosys</strong>
+                        </td>
+
+
+                        <td>
+                            System Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="off-package">
+                                ₹6.7 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            09 Aug 2026
+                        </td>
+
+
+                        <td>
+                            <span class="off-status pending">
+                                Offer Pending
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="off-view-btn"
+                                data-record="Muskan Yadav"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="off-empty"
+                id="offEmpty"
+                hidden
+            >
+
+                <div class="off-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No off-campus records found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    class="off-secondary-btn"
+                    id="clearOffFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="off-footer">
+
+            <span>
+                Showing
+                <strong id="offFooterCount">
+                    8
+                </strong>
+                records
+            </span>
+
+
+            <div class="off-pagination">
+
+                <button
+                    type="button"
+                    class="off-page-btn disabled"
+                >
+                    ‹
+                </button>
+
+                <button
+                    type="button"
+                    class="off-page-btn active"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="off-page-btn"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="off-page-btn"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="off-page-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="off-modal"
+        id="offDetailsModal"
+        hidden
+    >
+
+        <div
+            class="off-modal-backdrop"
+            data-close-off
+        ></div>
+
+
+        <div class="off-modal-card">
+
+            <div class="off-modal-header">
+
+                <div>
+
+                    <span>
+                        OFF-CAMPUS RECORD
+                    </span>
+
+                    <h2 id="modalOffStudent">
+                        Arjun Meena
+                    </h2>
+
+                    <p id="modalOffCompanyRole">
+                        Software Engineer · Microsoft
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="off-modal-close"
+                    data-close-off
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="off-modal-body">
+
+                <div class="off-profile">
+
+                    <div
+                        class="off-modal-avatar"
+                        id="modalOffAvatar"
+                    >
+                        AM
+                    </div>
+
+                    <div>
+
+                        <strong id="modalOffCompany">
+                            Microsoft
+                        </strong>
+
+                        <span id="modalOffCollege">
+                            PCE
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="off-detail-grid">
+
+                    <div>
+
+                        <span>
+                            Job Role
+                        </span>
+
+                        <strong id="modalOffRole">
+                            Software Engineer
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Package
+                        </span>
+
+                        <strong id="modalOffPackage">
+                            ₹18.5 LPA
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Offer Date
+                        </span>
+
+                        <strong id="modalOffDate">
+                            19 Aug 2026
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong id="modalOffStatus">
+                            Confirmed
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="off-note-box">
+
+                    <div>
+
+                        <span>
+                            Source
+                        </span>
+
+                        <strong>
+                            Student Reported
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Academic Session
+                        </span>
+
+                        <strong>
+                            2025-26
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="off-modal-footer">
+
+                <button
+                    type="button"
+                    class="off-secondary-btn"
+                    data-close-off
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADD RECORD MODAL
+    ====================================================== -->
+
+    <div
+        class="off-modal"
+        id="addOffModal"
+        hidden
+    >
+
+        <div
+            class="off-modal-backdrop"
+            data-close-add-off
+        ></div>
+
+
+        <div class="off-modal-card add-off-card">
+
+            <div class="off-modal-header">
+
+                <div>
+
+                    <span>
+                        PLACEMENT MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Add Off-Campus Record
+                    </h2>
+
+                    <p>
+                        Record an independently secured placement.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="off-modal-close"
+                    data-close-add-off
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                id="addOffForm"
+                class="add-off-form"
+            >
+
+                <div class="off-form-grid">
+
+                    <div class="off-form-field full">
+
+                        <label>
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="newOffStudent"
+                            placeholder="Enter student name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="off-form-field">
+
+                        <label>
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="22PCE001"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="off-form-field">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Company name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="off-form-field">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select required>
+
+                            <option value="">
+                                Select College
+                            </option>
+
+                            <option>PCE</option>
+                            <option>PIET</option>
+                            <option>PU</option>
+                            <option>JIET</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="off-form-field">
+
+                        <label>
+                            Job Role
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Software Engineer"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="off-form-field">
+
+                        <label>
+                            Package
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="₹8 LPA"
+                        >
+
+                    </div>
+
+
+                    <div class="off-form-field">
+
+                        <label>
+                            Offer Date
+                        </label>
+
+                        <input
+                            type="date"
+                        >
+
+                    </div>
+
+
+                    <div class="off-form-field">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Confirmed
+                            </option>
+
+                            <option>
+                                Offer Pending
+                            </option>
+
+                            <option>
+                                Joined
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="off-form-footer">
+
+                    <button
+                        type="button"
+                        class="off-secondary-btn"
+                        data-close-add-off
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="off-primary-btn"
+                    >
+                        Save Record
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/admin/off_campus.js') }}"
+></script>
+
+{% endblock %}
