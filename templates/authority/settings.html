@@ -1,386 +1,94 @@
 {% extends "authority/base.html" %}
 
-{% block title %}
-Settings | Authority | Campus Placement Portal
-{% endblock %}
-
-
-{% block page_css %}
-
-<link
-    rel="stylesheet"
-    href="{{ url_for(
-        'static',
-        filename='css/authority/settings.css'
-    ) }}"
->
-
-{% endblock %}
-
+{% block title %}Settings | Authority{% endblock %}
 
 {% block content %}
 
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/authority/settings.css') }}"
+>
+
 <div class="settings-page">
 
+    <!-- HEADER -->
 
-    <!-- =====================================================
-         PAGE HEADER
-    ====================================================== -->
-
-    <section class="settings-header">
+    <div class="settings-header">
 
         <div>
 
-            <span class="settings-eyebrow">
+            <div class="page-eyebrow">
                 SYSTEM
-            </span>
+            </div>
 
             <h1>
                 Settings
             </h1>
 
             <p>
-                Manage your authority account, portal preferences
-                and notification settings.
+                Manage your authority profile, preferences and portal settings.
             </p>
 
         </div>
 
-    </section>
+    </div>
 
 
+    <!-- SCOPE -->
 
-    <!-- =====================================================
-         SETTINGS LAYOUT
-    ====================================================== -->
+    <div class="scope-card">
 
-    <section class="settings-layout">
+        <div class="scope-icon">
+            ⚙
+        </div>
 
+        <div class="scope-info">
 
-        <!-- =================================================
-             SETTINGS NAVIGATION
-        ================================================== -->
+            <span>
+                AUTHORITY ACCOUNT
+            </span>
 
-        <aside class="settings-navigation">
+            <strong>
+                College Authority
+            </strong>
 
+            <small>
+                Settings and preferences for your assigned college account.
+            </small>
 
-            <button
-                type="button"
-                class="settings-nav-item active"
-                data-section="account"
-            >
+        </div>
 
-                <span class="settings-nav-icon">
-                    ◉
-                </span>
+        <div class="scope-code">
+            ● {{ session.get("college_code", "PCE") }}
+        </div>
 
-                <span>
-
-                    <strong>
-                        Account
-                    </strong>
-
-                    <small>
-                        Profile information
-                    </small>
-
-                </span>
-
-            </button>
+    </div>
 
 
-            <button
-                type="button"
-                class="settings-nav-item"
-                data-section="security"
-            >
+    <!-- SETTINGS LAYOUT -->
 
-                <span class="settings-nav-icon">
-                    ◇
-                </span>
-
-                <span>
-
-                    <strong>
-                        Security
-                    </strong>
-
-                    <small>
-                        Password & access
-                    </small>
-
-                </span>
-
-            </button>
+    <div class="settings-layout">
 
 
-            <button
-                type="button"
-                class="settings-nav-item"
-                data-section="notifications"
-            >
+        <!-- LEFT -->
 
-                <span class="settings-nav-icon">
-                    ♢
-                </span>
-
-                <span>
-
-                    <strong>
-                        Notifications
-                    </strong>
-
-                    <small>
-                        Alerts & updates
-                    </small>
-
-                </span>
-
-            </button>
+        <div class="settings-main">
 
 
-            <button
-                type="button"
-                class="settings-nav-item"
-                data-section="appearance"
-            >
+            <!-- PROFILE -->
 
-                <span class="settings-nav-icon">
-                    ☼
-                </span>
+            <section class="settings-card">
 
-                <span>
-
-                    <strong>
-                        Appearance
-                    </strong>
-
-                    <small>
-                        Theme preferences
-                    </small>
-
-                </span>
-
-            </button>
-
-
-            <button
-                type="button"
-                class="settings-nav-item"
-                data-section="portal"
-            >
-
-                <span class="settings-nav-icon">
-                    ⚙
-                </span>
-
-                <span>
-
-                    <strong>
-                        Portal
-                    </strong>
-
-                    <small>
-                        System preferences
-                    </small>
-
-                </span>
-
-            </button>
-
-
-        </aside>
-
-
-
-        <!-- =================================================
-             SETTINGS CONTENT
-        ================================================== -->
-
-        <div class="settings-content">
-
-
-            <!-- =================================================
-                 ACCOUNT
-            ================================================== -->
-
-            <section
-                class="settings-section active"
-                id="settings-account"
-            >
-
-                <div class="settings-section-header">
+                <div class="card-header">
 
                     <div>
 
                         <h2>
-                            Account Information
+                            Authority Profile
                         </h2>
 
                         <p>
-                            Manage your authority profile information.
-                        </p>
-
-                    </div>
-
-                    <span class="section-status">
-                        Active
-                    </span>
-
-                </div>
-
-
-                <div class="profile-settings-card">
-
-
-                    <div class="profile-settings-top">
-
-                        <div class="settings-avatar">
-                            A
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                College Authority
-                            </h3>
-
-                            <p>
-                                Principal / Director
-                            </p>
-
-                            <span>
-                                Authority Account
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="settings-form-grid">
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Full Name
-                            </label>
-
-                            <input
-                                type="text"
-                                value="College Authority"
-                                id="authorityName"
-                            >
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Designation
-                            </label>
-
-                            <input
-                                type="text"
-                                value="Principal / Director"
-                                id="authorityDesignation"
-                            >
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Email Address
-                            </label>
-
-                            <input
-                                type="email"
-                                value="authority@poornima.org"
-                                id="authorityEmail"
-                            >
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Phone Number
-                            </label>
-
-                            <input
-                                type="text"
-                                value="+91 98765 43210"
-                                id="authorityPhone"
-                            >
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="settings-form-actions">
-
-                        <button
-                            type="button"
-                            class="secondary-btn"
-                            id="accountResetBtn"
-                        >
-                            Reset
-                        </button>
-
-                        <button
-                            type="button"
-                            class="primary-btn"
-                            id="accountSaveBtn"
-                        >
-                            Save Changes
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="settings-info-box">
-
-                    <span>
-                        ℹ
-                    </span>
-
-                    Your authority account has administrative
-                    access to placement-related information.
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 SECURITY
-            ================================================== -->
-
-            <section
-                class="settings-section"
-                id="settings-security"
-            >
-
-                <div class="settings-section-header">
-
-                    <div>
-
-                        <h2>
-                            Security
-                        </h2>
-
-                        <p>
-                            Manage your password and account security.
+                            Basic information associated with your authority account.
                         </p>
 
                     </div>
@@ -388,214 +96,116 @@ Settings | Authority | Campus Placement Portal
                 </div>
 
 
-                <div class="settings-card">
+                <div class="profile-section">
 
-
-                    <div class="settings-card-title">
-
-                        <div class="settings-card-icon purple">
-                            ◇
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Change Password
-                            </h3>
-
-                            <p>
-                                Use a strong password to keep your
-                                account secure.
-                            </p>
-
-                        </div>
-
+                    <div class="profile-avatar">
+                        CA
                     </div>
 
 
-                    <div class="settings-form-grid single-column">
+                    <div class="profile-details">
 
+                        <strong>
+                            {{ session.get("username", "College Authority") }}
+                        </strong>
 
-                        <div class="settings-field">
+                        <span>
+                            {{ session.get("email", "authority@poornima.org") }}
+                        </span>
 
-                            <label>
-                                Current Password
-                            </label>
-
-                            <div class="password-field">
-
-                                <input
-                                    type="password"
-                                    id="currentPassword"
-                                    placeholder="Enter current password"
-                                >
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    data-target="currentPassword"
-                                >
-                                    ◉
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                New Password
-                            </label>
-
-                            <div class="password-field">
-
-                                <input
-                                    type="password"
-                                    id="newPassword"
-                                    placeholder="Enter new password"
-                                >
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    data-target="newPassword"
-                                >
-                                    ◉
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Confirm New Password
-                            </label>
-
-                            <div class="password-field">
-
-                                <input
-                                    type="password"
-                                    id="confirmPassword"
-                                    placeholder="Confirm new password"
-                                >
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    data-target="confirmPassword"
-                                >
-                                    ◉
-                                </button>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="settings-form-actions">
-
-                        <button
-                            type="button"
-                            class="primary-btn"
-                            id="changePasswordBtn"
-                        >
-                            Update Password
-                        </button>
+                        <small>
+                            Authority · College Scoped Account
+                        </small>
 
                     </div>
 
                 </div>
 
 
-                <div class="settings-card security-status-card">
+                <div class="form-grid">
 
-                    <div class="settings-card-title">
+                    <div class="form-group">
 
-                        <div class="settings-card-icon green">
-                            ✓
-                        </div>
+                        <label>
+                            Full Name
+                        </label>
 
-                        <div>
-
-                            <h3>
-                                Account Security
-                            </h3>
-
-                            <p>
-                                Your account security status.
-                            </p>
-
-                        </div>
+                        <input
+                            type="text"
+                            id="authorityName"
+                            value="{{ session.get('username', 'College Authority') }}"
+                        >
 
                     </div>
 
 
-                    <div class="security-status-list">
+                    <div class="form-group">
 
-                        <div>
+                        <label>
+                            Email Address
+                        </label>
 
-                            <span>
-                                Password
-                            </span>
-
-                            <strong class="status-good">
-                                Protected
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Account Status
-                            </span>
-
-                            <strong class="status-good">
-                                Active
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Last Login
-                            </span>
-
-                            <strong>
-                                Today, 09:42 AM
-                            </strong>
-
-                        </div>
+                        <input
+                            type="email"
+                            id="authorityEmail"
+                            value="{{ session.get('email', 'authority@poornima.org') }}"
+                        >
 
                     </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            College
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ session.get('college_name', 'Poornima College of Engineering') }}"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            College Code
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ session.get('college_code', 'PCE') }}"
+                            readonly
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-actions">
+
+                    <button
+                        type="button"
+                        id="saveProfile"
+                        class="primary-btn"
+                    >
+                        Save Changes
+                    </button>
 
                 </div>
 
             </section>
 
 
+            <!-- NOTIFICATION SETTINGS -->
 
-            <!-- =================================================
-                 NOTIFICATIONS
-            ================================================== -->
+            <section class="settings-card">
 
-            <section
-                class="settings-section"
-                id="settings-notifications"
-            >
-
-                <div class="settings-section-header">
+                <div class="card-header">
 
                     <div>
 
@@ -604,7 +214,7 @@ Settings | Authority | Campus Placement Portal
                         </h2>
 
                         <p>
-                            Choose which notifications you want to receive.
+                            Choose which portal activities should generate notifications.
                         </p>
 
                     </div>
@@ -612,161 +222,125 @@ Settings | Authority | Campus Placement Portal
                 </div>
 
 
-                <div class="settings-card">
+                <div class="setting-list">
 
 
-                    <div class="preference-row">
+                    <div class="setting-row">
 
-                        <div>
+                        <div class="setting-info">
 
-                            <h3>
+                            <strong>
                                 Placement Updates
-                            </h3>
+                            </strong>
 
-                            <p>
-                                Receive notifications about new placement
-                                drives and placement activities.
-                            </p>
+                            <span>
+                                Receive notifications for placement drives and selection updates.
+                            </span>
 
                         </div>
 
-                        <label class="switch">
+
+                        <label class="toggle">
 
                             <input
                                 type="checkbox"
+                                id="placementNotifications"
                                 checked
                             >
 
-                            <span class="slider"></span>
+                            <span class="toggle-slider"></span>
 
                         </label>
 
                     </div>
 
 
-                    <div class="preference-row">
+                    <div class="setting-row">
 
-                        <div>
+                        <div class="setting-info">
 
-                            <h3>
-                                NOC Requests
-                            </h3>
+                            <strong>
+                                NOC Updates
+                            </strong>
 
-                            <p>
-                                Get notified when students submit new NOC
-                                requests.
-                            </p>
+                            <span>
+                                Get notified about new and pending NOC applications.
+                            </span>
 
                         </div>
 
-                        <label class="switch">
+
+                        <label class="toggle">
 
                             <input
                                 type="checkbox"
+                                id="nocNotifications"
                                 checked
                             >
 
-                            <span class="slider"></span>
+                            <span class="toggle-slider"></span>
 
                         </label>
 
                     </div>
 
 
-                    <div class="preference-row">
+                    <div class="setting-row">
 
-                        <div>
+                        <div class="setting-info">
 
-                            <h3>
-                                Startup Ideas
-                            </h3>
+                            <strong>
+                                Announcements
+                            </strong>
 
-                            <p>
-                                Receive updates when new startup ideas
-                                are submitted.
-                            </p>
+                            <span>
+                                Receive notifications when important announcements are published.
+                            </span>
 
                         </div>
 
-                        <label class="switch">
+
+                        <label class="toggle">
 
                             <input
                                 type="checkbox"
+                                id="announcementNotifications"
                                 checked
                             >
 
-                            <span class="slider"></span>
+                            <span class="toggle-slider"></span>
 
                         </label>
 
                     </div>
 
 
-                    <div class="preference-row">
+                    <div class="setting-row">
 
-                        <div>
+                        <div class="setting-info">
 
-                            <h3>
-                                System Announcements
-                            </h3>
+                            <strong>
+                                System Notifications
+                            </strong>
 
-                            <p>
-                                Receive important authority and system
-                                announcements.
-                            </p>
+                            <span>
+                                Receive important portal and system updates.
+                            </span>
 
                         </div>
 
-                        <label class="switch">
+
+                        <label class="toggle">
 
                             <input
                                 type="checkbox"
+                                id="systemNotifications"
                                 checked
                             >
 
-                            <span class="slider"></span>
+                            <span class="toggle-slider"></span>
 
                         </label>
-
-                    </div>
-
-
-                    <div class="preference-row">
-
-                        <div>
-
-                            <h3>
-                                Weekly Reports
-                            </h3>
-
-                            <p>
-                                Receive weekly placement analytics reports.
-                            </p>
-
-                        </div>
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                            >
-
-                            <span class="slider"></span>
-
-                        </label>
-
-                    </div>
-
-
-                    <div class="settings-form-actions">
-
-                        <button
-                            type="button"
-                            class="primary-btn"
-                            id="notificationSaveBtn"
-                        >
-                            Save Preferences
-                        </button>
 
                     </div>
 
@@ -775,26 +349,20 @@ Settings | Authority | Campus Placement Portal
             </section>
 
 
+            <!-- DISPLAY -->
 
-            <!-- =================================================
-                 APPEARANCE
-            ================================================== -->
+            <section class="settings-card">
 
-            <section
-                class="settings-section"
-                id="settings-appearance"
-            >
-
-                <div class="settings-section-header">
+                <div class="card-header">
 
                     <div>
 
                         <h2>
-                            Appearance
+                            Dashboard Preferences
                         </h2>
 
                         <p>
-                            Customize how the authority portal looks.
+                            Configure how information is displayed across the authority portal.
                         </p>
 
                     </div>
@@ -802,318 +370,73 @@ Settings | Authority | Campus Placement Portal
                 </div>
 
 
-                <div class="settings-card">
+                <div class="form-grid">
 
 
-                    <div class="appearance-option">
+                    <div class="form-group">
 
-                        <div>
-
-                            <h3>
-                                Theme
-                            </h3>
-
-                            <p>
-                                Select your preferred portal theme.
-                            </p>
-
-                        </div>
-
-
-                        <div class="theme-options">
-
-
-                            <button
-                                type="button"
-                                class="theme-option"
-                                data-theme-option="light"
-                            >
-
-                                <span class="theme-preview light-preview">
-
-                                    <span></span>
-
-                                </span>
-
-                                <strong>
-                                    Light
-                                </strong>
-
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="theme-option"
-                                data-theme-option="dark"
-                            >
-
-                                <span class="theme-preview dark-preview">
-
-                                    <span></span>
-
-                                </span>
-
-                                <strong>
-                                    Dark
-                                </strong>
-
-                            </button>
-
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="preference-row">
-
-                        <div>
-
-                            <h3>
-                                Compact Interface
-                            </h3>
-
-                            <p>
-                                Reduce spacing to display more information
-                                on the screen.
-                            </p>
-
-                        </div>
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="compactModeToggle"
-                            >
-
-                            <span class="slider"></span>
-
+                        <label>
+                            Default Academic Year
                         </label>
 
+                        <select id="defaultAcademicYear">
+
+                            <option value="2026-27">
+                                2026 - 27
+                            </option>
+
+                            <option value="2025-26">
+                                2025 - 26
+                            </option>
+
+                            <option value="2024-25">
+                                2024 - 25
+                            </option>
+
+                        </select>
+
                     </div>
 
 
-                    <div class="preference-row">
+                    <div class="form-group">
 
-                        <div>
-
-                            <h3>
-                                Animations
-                            </h3>
-
-                            <p>
-                                Enable interface transitions and animations.
-                            </p>
-
-                        </div>
-
-                        <label class="switch">
-
-                            <input
-                                type="checkbox"
-                                id="animationsToggle"
-                                checked
-                            >
-
-                            <span class="slider"></span>
-
+                        <label>
+                            Default Report View
                         </label>
 
-                    </div>
+                        <select id="defaultReportView">
 
+                            <option value="placement">
+                                Placement Overview
+                            </option>
 
-                </div>
+                            <option value="drive">
+                                Drive Reports
+                            </option>
 
-            </section>
+                            <option value="company">
+                                Company Reports
+                            </option>
 
+                            <option value="branch">
+                                Branch-wise Reports
+                            </option>
 
-
-            <!-- =================================================
-                 PORTAL
-            ================================================== -->
-
-            <section
-                class="settings-section"
-                id="settings-portal"
-            >
-
-                <div class="settings-section-header">
-
-                    <div>
-
-                        <h2>
-                            Portal Settings
-                        </h2>
-
-                        <p>
-                            Configure general authority portal preferences.
-                        </p>
+                        </select>
 
                     </div>
 
                 </div>
 
 
-                <div class="settings-card">
-
-
-                    <div class="settings-form-grid">
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Academic Year
-                            </label>
-
-                            <select id="academicYear">
-
-                                <option selected>
-                                    2026 - 2027
-                                </option>
-
-                                <option>
-                                    2025 - 2026
-                                </option>
-
-                                <option>
-                                    2024 - 2025
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Default Dashboard View
-                            </label>
-
-                            <select id="dashboardView">
-
-                                <option selected>
-                                    Placement Summary
-                                </option>
-
-                                <option>
-                                    Placement Analytics
-                                </option>
-
-                                <option>
-                                    Recent Activities
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Default Notification View
-                            </label>
-
-                            <select id="notificationView">
-
-                                <option selected>
-                                    All Notifications
-                                </option>
-
-                                <option>
-                                    Unread Only
-                                </option>
-
-                                <option>
-                                    Important Only
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="settings-field">
-
-                            <label>
-                                Records Per Page
-                            </label>
-
-                            <select id="recordsPerPage">
-
-                                <option selected>
-                                    10
-                                </option>
-
-                                <option>
-                                    25
-                                </option>
-
-                                <option>
-                                    50
-                                </option>
-
-                                <option>
-                                    100
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="settings-form-actions">
-
-                        <button
-                            type="button"
-                            class="primary-btn"
-                            id="portalSaveBtn"
-                        >
-                            Save Portal Settings
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="danger-zone">
-
-                    <div>
-
-                        <span class="danger-icon">
-                            !
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Reset Portal Preferences
-                            </h3>
-
-                            <p>
-                                Restore your portal preferences to
-                                their default values.
-                            </p>
-
-                        </div>
-
-                    </div>
-
+                <div class="card-actions">
 
                     <button
                         type="button"
-                        class="danger-btn"
-                        id="resetPortalBtn"
+                        id="savePreferences"
+                        class="secondary-btn"
                     >
-                        Reset Preferences
+                        Save Preferences
                     </button>
 
                 </div>
@@ -1121,52 +444,239 @@ Settings | Authority | Campus Placement Portal
             </section>
 
 
+            <!-- SECURITY -->
+
+            <section class="settings-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Security & Session
+                        </h2>
+
+                        <p>
+                            Manage your current authority session.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="security-row">
+
+                    <div>
+
+                        <strong>
+                            Current Session
+                        </strong>
+
+                        <span>
+                            Authority account is currently active.
+                        </span>
+
+                    </div>
+
+
+                    <span class="active-badge">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="security-row">
+
+                    <div>
+
+                        <strong>
+                            Role
+                        </strong>
+
+                        <span>
+                            Authority · Role ID 6
+                        </span>
+
+                    </div>
+
+                    <span class="role-badge">
+                        AUTHORITY
+                    </span>
+
+                </div>
+
+
+                <div class="card-actions">
+
+                    <a
+                        href="{{ url_for('logout') }}"
+                        class="logout-btn"
+                    >
+                        Logout
+                    </a>
+
+                </div>
+
+            </section>
+
+
         </div>
 
-    </section>
+
+        <!-- RIGHT -->
+
+        <aside class="settings-side">
 
 
-    <!-- =====================================================
-         TOAST
-    ====================================================== -->
+            <!-- COLLEGE -->
 
-    <div
-        class="settings-toast"
-        id="settingsToast"
-    >
+            <section class="side-card">
 
-        <span>
-            ✓
-        </span>
+                <div class="side-card-header">
 
-        <div>
+                    <span class="side-icon purple">
+                        ◉
+                    </span>
 
-            <strong>
-                Settings saved
-            </strong>
+                    <div>
 
-            <small>
-                Your changes have been saved successfully.
-            </small>
+                        <strong>
+                            College Scope
+                        </strong>
 
-        </div>
+                        <small>
+                            Assigned institution
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="college-box">
+
+                    <strong>
+                        {{ session.get(
+                            "college_name",
+                            "Poornima College of Engineering"
+                        ) }}
+                    </strong>
+
+                    <span>
+                        {{ session.get("college_code", "PCE") }}
+                    </span>
+
+                </div>
+
+                <p>
+                    All authority data, reports and activities are restricted to this college.
+                </p>
+
+            </section>
+
+
+            <!-- ROLE -->
+
+            <section class="side-card">
+
+                <div class="side-card-header">
+
+                    <span class="side-icon blue">
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Account Role
+                        </strong>
+
+                        <small>
+                            Current access level
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="role-box">
+
+                    <strong>
+                        College Authority
+                    </strong>
+
+                    <span>
+                        Role ID: 6
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- INFO -->
+
+            <section class="side-card info-card">
+
+                <div class="side-card-header">
+
+                    <span class="side-icon green">
+                        i
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Important
+                        </strong>
+
+                        <small>
+                            Authority access
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Your authority account can only access data belonging to the assigned college.
+                </p>
+
+                <p>
+                    College scope will be automatically assigned from the authenticated account when the database login is integrated.
+                </p>
+
+            </section>
+
+
+        </aside>
 
     </div>
 
 
+    <!-- FOOTER -->
+
+    <div class="settings-footer">
+
+        <span>
+            Campus Placement Portal
+        </span>
+
+        <span>
+            Authority Settings
+        </span>
+
+    </div>
+
 </div>
 
-{% endblock %}
-
-
-
-{% block page_js %}
 
 <script
-    src="{{ url_for(
-        'static',
-        filename='js/authority/settings.js'
-    ) }}"
+    src="{{ url_for('static', filename='js/authority/settings.js') }}"
 ></script>
 
 {% endblock %}

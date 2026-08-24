@@ -8,35 +8,60 @@
          BRAND
     ====================================================== -->
 
-    <div class="sidebar-brand">
+    <div class="brand">
 
-        <a
-            href="{{ url_for('authority_dashboard') }}"
-            class="brand-link"
+        <img
+            src="{{ url_for(
+                'static',
+                filename='images/college-logo.jpeg'
+            ) }}"
+            alt="College Logo"
         >
 
-            <img
-                src="{{ url_for(
-                    'static',
-                    filename='images/college-logo.jpeg'
-                ) }}"
-                alt="College Logo"
-                class="brand-logo"
-            >
+        <div class="brand-text">
 
-            <div class="brand-text">
+            <h2>CAMPUS</h2>
 
-                <strong>
-                    CAMPUS
-                </strong>
+            <span>
+                PLACEMENT PORTAL
+            </span>
 
-                <span>
-                    PLACEMENT PORTAL
-                </span>
+        </div>
 
-            </div>
+    </div>
 
-        </a>
+
+    <!-- =====================================================
+         AUTHORITY COLLEGE
+    ====================================================== -->
+
+    <div class="authority-college-badge">
+
+        <span class="college-badge-label">
+            AUTHORITY
+        </span>
+
+        <strong>
+
+            {% if authority is defined and authority.college_name %}
+
+                {{ authority.college_name }}
+
+            {% elif session.get("college_name") %}
+
+                {{ session.get("college_name") }}
+
+            {% elif session.get("college_code") %}
+
+                {{ session.get("college_code") }}
+
+            {% else %}
+
+                College Authority
+
+            {% endif %}
+
+        </strong>
 
     </div>
 
@@ -52,7 +77,7 @@
              MAIN
         ================================================== -->
 
-        <div class="nav-section-title">
+        <div class="nav-section">
             MAIN
         </div>
 
@@ -69,7 +94,7 @@
                 ⌂
             </span>
 
-            <span class="nav-text">
+            <span>
                 Dashboard
             </span>
 
@@ -77,13 +102,15 @@
 
 
         <!-- =================================================
-             OVERVIEW
+             PLACEMENT
         ================================================== -->
 
-        <div class="nav-section-title">
-            OVERVIEW
+        <div class="nav-section">
+            PLACEMENT
         </div>
 
+
+        <!-- Placement Overview -->
 
         <a
             href="{{ url_for('authority_placement_overview') }}"
@@ -97,12 +124,14 @@
                 ◉
             </span>
 
-            <span class="nav-text">
+            <span>
                 Placement Overview
             </span>
 
         </a>
 
+
+        <!-- Companies -->
 
         <a
             href="{{ url_for('authority_companies') }}"
@@ -116,12 +145,14 @@
                 ▣
             </span>
 
-            <span class="nav-text">
+            <span>
                 Companies
             </span>
 
         </a>
 
+
+        <!-- Placement Drives -->
 
         <a
             href="{{ url_for('authority_placement_drives') }}"
@@ -135,8 +166,29 @@
                 ▦
             </span>
 
-            <span class="nav-text">
+            <span>
                 Placement Drives
+            </span>
+
+        </a>
+
+
+        <!-- Placement Pipeline -->
+
+        <a
+            href="{{ url_for('authority_placement_pipeline') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_placement_pipeline' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◈
+            </span>
+
+            <span>
+                Placement Pipeline
             </span>
 
         </a>
@@ -146,24 +198,21 @@
              ANALYTICS
         ================================================== -->
 
-        <div class="nav-section-title analytics-title">
-
-            <span>
-                ANALYTICS
-            </span>
-
-            <span class="new-badge">
-                New
-            </span>
-
-        </div>
-
-
         <div
-            class="analytics-menu"
+            class="analytics-menu
+            {% if request.endpoint in [
+                'authority_placement_reports',
+                'authority_drive_reports',
+                'authority_company_reports',
+                'authority_branch_reports'
+            ] %}
+                expanded
+            {% endif %}"
             id="analyticsMenu"
         >
 
+
+            <!-- Analytics Main Button -->
 
             <button
                 type="button"
@@ -175,12 +224,20 @@
                     ▤
                 </span>
 
-                <span class="nav-text">
+                <span>
                     Analytics
                 </span>
 
                 <span
-                    class="analytics-arrow"
+                    class="analytics-arrow
+                    {% if request.endpoint in [
+                        'authority_placement_reports',
+                        'authority_drive_reports',
+                        'authority_company_reports',
+                        'authority_branch_reports'
+                    ] %}
+                        rotate
+                    {% endif %}"
                     id="analyticsArrow"
                 >
                     ⌄
@@ -189,13 +246,20 @@
             </button>
 
 
+            <!-- Analytics Submenu -->
+
             <div
                 class="analytics-submenu"
                 id="analyticsSubmenu"
             >
 
+
+                <!-- Placement Reports -->
+
                 <a
-                    href="{{ url_for('authority_placement_reports') }}"
+                    href="{{ url_for(
+                        'authority_placement_reports'
+                    ) }}"
                     class="analytics-sub-link
                     {% if request.endpoint == 'authority_placement_reports' %}
                         active
@@ -211,8 +275,12 @@
                 </a>
 
 
+                <!-- Drive Reports -->
+
                 <a
-                    href="{{ url_for('authority_drive_reports') }}"
+                    href="{{ url_for(
+                        'authority_drive_reports'
+                    ) }}"
                     class="analytics-sub-link
                     {% if request.endpoint == 'authority_drive_reports' %}
                         active
@@ -228,8 +296,12 @@
                 </a>
 
 
+                <!-- Company Reports -->
+
                 <a
-                    href="{{ url_for('authority_company_reports') }}"
+                    href="{{ url_for(
+                        'authority_company_reports'
+                    ) }}"
                     class="analytics-sub-link
                     {% if request.endpoint == 'authority_company_reports' %}
                         active
@@ -244,6 +316,28 @@
 
                 </a>
 
+
+                <!-- Branch-wise Reports -->
+
+                <a
+                    href="{{ url_for(
+                        'authority_branch_reports'
+                    ) }}"
+                    class="analytics-sub-link
+                    {% if request.endpoint == 'authority_branch_reports' %}
+                        active
+                    {% endif %}"
+                >
+
+                    <span class="submenu-dot"></span>
+
+                    <span>
+                        Branch-wise Reports
+                    </span>
+
+                </a>
+
+
             </div>
 
         </div>
@@ -253,10 +347,12 @@
              SPECIAL INITIATIVES
         ================================================== -->
 
-        <div class="nav-section-title">
+        <div class="nav-section">
             SPECIAL INITIATIVES
         </div>
 
+
+        <!-- NOC Management -->
 
         <a
             href="{{ url_for('authority_noc') }}"
@@ -270,8 +366,8 @@
                 ◇
             </span>
 
-            <span class="nav-text">
-                NOC
+            <span>
+                NOC Management
             </span>
 
             <span class="nav-count noc-count">
@@ -280,6 +376,50 @@
 
         </a>
 
+
+        <!-- Off Campus -->
+
+        <a
+            href="{{ url_for('authority_off_campus') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_off_campus' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ↗
+            </span>
+
+            <span>
+                Off-Campus Placements
+            </span>
+
+        </a>
+
+
+        <!-- Pre-Placed -->
+
+        <a
+            href="{{ url_for('authority_pre_placed') }}"
+            class="nav-link
+            {% if request.endpoint == 'authority_pre_placed' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ✓
+            </span>
+
+            <span>
+                Pre-Placed Students
+            </span>
+
+        </a>
+
+
+        <!-- Startup Ideas -->
 
         <a
             href="{{ url_for('authority_startup_ideas') }}"
@@ -293,7 +433,7 @@
                 ✦
             </span>
 
-            <span class="nav-text">
+            <span>
                 Startup Ideas
             </span>
 
@@ -308,10 +448,12 @@
              SYSTEM
         ================================================== -->
 
-        <div class="nav-section-title">
+        <div class="nav-section">
             SYSTEM
         </div>
 
+
+        <!-- Notifications -->
 
         <a
             href="{{ url_for('authority_notifications') }}"
@@ -325,7 +467,7 @@
                 ♢
             </span>
 
-            <span class="nav-text">
+            <span>
                 Notifications
             </span>
 
@@ -335,6 +477,8 @@
 
         </a>
 
+
+        <!-- Announcements -->
 
         <a
             href="{{ url_for('authority_announcements') }}"
@@ -348,12 +492,14 @@
                 ▧
             </span>
 
-            <span class="nav-text">
+            <span>
                 Announcements
             </span>
 
         </a>
 
+
+        <!-- Settings -->
 
         <a
             href="{{ url_for('authority_settings') }}"
@@ -367,16 +513,14 @@
                 ⚙
             </span>
 
-            <span class="nav-text">
+            <span>
                 Settings
             </span>
 
         </a>
 
 
-        <!-- =================================================
-             LOGOUT
-        ================================================== -->
+        <!-- Logout -->
 
         <a
             href="{{ url_for('logout') }}"
@@ -387,7 +531,7 @@
                 ⇥
             </span>
 
-            <span class="nav-text">
+            <span>
                 Logout
             </span>
 
@@ -398,7 +542,7 @@
 
 
     <!-- =====================================================
-         SIDEBAR THEME
+         THEME TOGGLE
     ====================================================== -->
 
     <button
@@ -407,17 +551,11 @@
         id="sidebarThemeBtn"
     >
 
-        <span
-            class="theme-icon"
-            id="sidebarThemeIcon"
-        >
+        <span id="sidebarThemeIcon">
             ☾
         </span>
 
-        <span
-            class="theme-text"
-            id="sidebarThemeText"
-        >
+        <span id="sidebarThemeText">
             Dark Mode
         </span>
 

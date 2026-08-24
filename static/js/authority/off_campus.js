@@ -3,20 +3,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const academicYear =
         document.getElementById("academicYear");
 
-    const nocStatus =
-        document.getElementById("nocStatus");
+    const placementStatus =
+        document.getElementById("placementStatus");
 
-    const nocSearch =
-        document.getElementById("nocSearch");
+    const placementSearch =
+        document.getElementById("placementSearch");
 
     const tableBody =
-        document.getElementById("nocTableBody");
+        document.getElementById("placementTableBody");
 
     const footerYear =
         document.getElementById("footerYear");
 
-    const exportNocReport =
-        document.getElementById("exportNocReport");
+    const exportOffCampusReport =
+        document.getElementById("exportOffCampusReport");
 
 
     /* =====================================================
@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
        STATUS FILTER
        ===================================================== */
 
-    if (nocStatus) {
+    if (placementStatus) {
 
-        nocStatus.addEventListener(
+        placementStatus.addEventListener(
             "change",
-            filterApplications
+            filterPlacements
         );
 
     }
@@ -60,21 +60,21 @@ document.addEventListener("DOMContentLoaded", function () {
        SEARCH
        ===================================================== */
 
-    if (nocSearch) {
+    if (placementSearch) {
 
-        nocSearch.addEventListener(
+        placementSearch.addEventListener(
             "input",
-            filterApplications
+            filterPlacements
         );
 
     }
 
 
     /* =====================================================
-       FILTER APPLICATIONS
+       FILTER PLACEMENTS
        ===================================================== */
 
-    function filterApplications() {
+    function filterPlacements() {
 
         if (!tableBody) {
             return;
@@ -82,16 +82,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const searchValue =
-            nocSearch
-                ? nocSearch.value
+            placementSearch
+                ? placementSearch.value
                     .trim()
                     .toLowerCase()
                 : "";
 
 
         const selectedStatus =
-            nocStatus
-                ? nocStatus.value
+            placementStatus
+                ? placementStatus.value
                 : "all";
 
 
@@ -133,12 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       EXPORT
+       EXPORT REPORT
        ===================================================== */
 
-    if (exportNocReport) {
+    if (exportOffCampusReport) {
 
-        exportNocReport.addEventListener(
+        exportOffCampusReport.addEventListener(
             "click",
             exportReport
         );
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (rows.length === 0) {
 
             alert(
-                "No NOC applications available to export."
+                "No placement records available to export."
             );
 
             return;
@@ -179,8 +179,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "Branch",
             "Roll No.",
             "Company",
-            "Type",
-            "Applied On",
+            "Package",
+            "Placed On",
             "Status"
         ];
 
@@ -230,13 +230,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     : "";
 
 
-            const type =
+            const packageValue =
                 cells[4]
                     ? cells[4].innerText.trim()
                     : "";
 
 
-            const appliedOn =
+            const placedOn =
                 cells[5]
                     ? cells[5].innerText.trim()
                     : "";
@@ -253,8 +253,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 branch,
                 rollNo,
                 company,
-                type,
-                appliedOn,
+                packageValue,
+                placedOn,
                 status
             ].map(csvEscape).join(","));
 
@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         link.download =
-            `NOC_Report_${year}.csv`;
+            `Off_Campus_Placements_${year}.csv`;
 
 
         document.body.appendChild(link);

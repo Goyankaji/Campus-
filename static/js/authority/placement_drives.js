@@ -1,193 +1,96 @@
-/* =========================================================
-   AUTHORITY — PLACEMENT DRIVES
-========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        initDriveSearch();
-
-        initDriveFilters();
-
-        initDriveModal();
-
-        initDrivePagination();
-
-    }
-);
-
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-function initDriveSearch() {
-
-    const searchInput =
-        document.getElementById("driveSearch");
-
-    if (!searchInput) {
-        return;
-    }
-
-
-    searchInput.addEventListener(
-        "input",
-        applyDriveFilters
-    );
-
-}
-
-
-
-/* =========================================================
-   FILTERS
-========================================================= */
-
-function initDriveFilters() {
-
-    const statusFilter =
-        document.getElementById("driveStatus");
-
-    const typeFilter =
-        document.getElementById("driveType");
-
-
-    if (statusFilter) {
-
-        statusFilter.addEventListener(
-            "change",
-            applyDriveFilters
-        );
-
-    }
-
-
-    if (typeFilter) {
-
-        typeFilter.addEventListener(
-            "change",
-            applyDriveFilters
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   APPLY SEARCH + FILTER
-========================================================= */
-
-function applyDriveFilters() {
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
 
     const searchInput =
         document.getElementById("driveSearch");
 
     const statusFilter =
-        document.getElementById("driveStatus");
+        document.getElementById("statusFilter");
 
     const typeFilter =
-        document.getElementById("driveType");
+        document.getElementById("typeFilter");
+
+    const clearFilters =
+        document.getElementById("clearFilters");
+
+    const tableBody =
+        document.getElementById("drivesTableBody");
+
+    const emptyState =
+        document.getElementById("emptyState");
+
+    const resultsCount =
+        document.getElementById("resultsCount");
+
+    const academicYear =
+        document.getElementById("academicYear");
 
 
-    const searchValue =
-        searchInput
-            ? searchInput.value
+    /* =====================================================
+       FILTER
+    ====================================================== */
+
+    function filterDrives() {
+
+        const search =
+            searchInput.value
                 .trim()
-                .toLowerCase()
-            : "";
+                .toLowerCase();
+
+        const status =
+            statusFilter.value;
+
+        const type =
+            typeFilter.value;
+
+        const rows =
+            Array.from(
+                tableBody.querySelectorAll(
+                    ".drive-row"
+                )
+            );
 
 
-    const selectedStatus =
-        statusFilter
-            ? statusFilter.value
-            : "all";
+        let visible = 0;
 
 
-    const selectedType =
-        typeFilter
-            ? typeFilter.value
-            : "all";
+        rows.forEach(function (row) {
 
-
-    const rows =
-        document.querySelectorAll(
-            "#driveTableBody tr"
-        );
-
-
-    let visibleCount = 0;
-
-
-    rows.forEach(
-        function (row) {
-
-            const companyName =
-                row
-                    .querySelector(
-                        ".drive-company strong"
-                    )
-                    ?.textContent
-                    .toLowerCase() || "";
-
-
-            const companyDescription =
-                row
-                    .querySelector(
-                        ".drive-company span"
-                    )
-                    ?.textContent
-                    .toLowerCase() || "";
-
-
-            const driveDate =
-                row
-                    .querySelector(
-                        "td:nth-child(2)"
-                    )
-                    ?.textContent
-                    .toLowerCase() || "";
-
+            const company =
+                (
+                    row.dataset.company || ""
+                ).toLowerCase();
 
             const rowStatus =
                 row.dataset.status || "";
-
 
             const rowType =
                 row.dataset.type || "";
 
 
             const searchMatch =
-                searchValue === "" ||
-                companyName.includes(searchValue) ||
-                companyDescription.includes(searchValue) ||
-                driveDate.includes(searchValue);
-
+                company.includes(search);
 
             const statusMatch =
-                selectedStatus === "all" ||
-                rowStatus === selectedStatus;
-
+                status === "all"
+                || rowStatus === status;
 
             const typeMatch =
-                selectedType === "all" ||
-                rowType === selectedType;
+                type === "all"
+                || rowType === type;
 
 
             if (
-                searchMatch &&
-                statusMatch &&
-                typeMatch
+                searchMatch
+                && statusMatch
+                && typeMatch
             ) {
 
                 row.style.display = "";
-
-                visibleCount++;
+                visible++;
 
             } else {
 
@@ -195,188 +98,303 @@ function applyDriveFilters() {
 
             }
 
+        });
+
+
+        updateResults(visible);
+
+    }
+
+
+    /* =====================================================
+       RESULTS
+    ====================================================== */
+
+    function updateResults(count) {
+
+        resultsCount.textContent =
+            `Showing ${count} placement ${
+                count === 1
+                    ? "drive"
+                    : "drives"
+            }`;
+
+
+        if (count === 0) {
+
+            emptyState.classList.add("show");
+
+        } else {
+
+            emptyState.classList.remove("show");
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CLEAR
+    ====================================================== */
+
+    clearFilters.addEventListener(
+        "click",
+        function () {
+
+            searchInput.value = "";
+
+            statusFilter.value = "all";
+
+            typeFilter.value = "all";
+
+            filterDrives();
+
         }
     );
 
 
-    updateDriveCount(
-        visibleCount
+    /* =====================================================
+       EVENTS
+    ====================================================== */
+
+    searchInput.addEventListener(
+        "input",
+        filterDrives
+    );
+
+    statusFilter.addEventListener(
+        "change",
+        filterDrives
+    );
+
+    typeFilter.addEventListener(
+        "change",
+        filterDrives
     );
 
 
-    updateDriveEmptyState(
-        visibleCount
-    );
+    academicYear.addEventListener(
+        "change",
+        function () {
 
-}
-
-
-
-/* =========================================================
-   COUNT
-========================================================= */
-
-function updateDriveCount(
-    count
-) {
-
-    const countElement =
-        document.getElementById(
-            "driveCount"
-        );
-
-
-    if (!countElement) {
-        return;
-    }
-
-
-    if (count === 0) {
-
-        countElement.textContent =
-            "No placement drives found";
-
-        return;
-
-    }
-
-
-    countElement.textContent =
-        "Showing " +
-        count +
-        " placement drive" +
-        (count === 1 ? "" : "s");
-
-}
-
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-function updateDriveEmptyState(
-    count
-) {
-
-    const emptyState =
-        document.getElementById(
-            "driveEmpty"
-        );
-
-
-    if (!emptyState) {
-        return;
-    }
-
-
-    if (count === 0) {
-
-        emptyState.classList.add(
-            "show"
-        );
-
-    } else {
-
-        emptyState.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   DRIVE MODAL
-========================================================= */
-
-function initDriveModal() {
-
-    const modal =
-        document.getElementById(
-            "driveModal"
-        );
-
-    if (!modal) {
-        return;
-    }
-
-
-    const closeButton =
-        document.getElementById(
-            "modalClose"
-        );
-
-
-    const doneButton =
-        document.getElementById(
-            "modalDone"
-        );
-
-
-    const overlay =
-        document.querySelector(
-            ".drive-modal-overlay"
-        );
-
-
-    const viewButtons =
-        document.querySelectorAll(
-            ".view-drive"
-        );
-
-
-    viewButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    const company =
-                        button.dataset.drive;
-
-                    openDriveModal(
-                        company
-                    );
-
-                }
+            console.log(
+                "Selected academic year:",
+                academicYear.value
             );
 
         }
     );
 
 
-    if (closeButton) {
+    /* =====================================================
+       MODAL
+    ====================================================== */
 
-        closeButton.addEventListener(
-            "click",
-            closeDriveModal
-        );
+    const modal =
+        document.getElementById("driveModal");
+
+    const modalBackdrop =
+        document.getElementById("modalBackdrop");
+
+    const modalClose =
+        document.getElementById("modalClose");
+
+
+    const modalLogo =
+        document.getElementById("modalLogo");
+
+    const modalCompany =
+        document.getElementById("modalCompany");
+
+    const modalSubtitle =
+        document.getElementById("modalSubtitle");
+
+    const modalDate =
+        document.getElementById("modalDate");
+
+    const modalType =
+        document.getElementById("modalType");
+
+    const modalApplicants =
+        document.getElementById("modalApplicants");
+
+    const modalSelected =
+        document.getElementById("modalSelected");
+
+    const modalPackage =
+        document.getElementById("modalPackage");
+
+    const modalStatus =
+        document.getElementById("modalStatus");
+
+
+    const driveDetails = {
+
+        Wipro: {
+            logo: "W",
+            subtitle: "Wipro Limited",
+            date: "22 Aug 2026",
+            type: "Off Campus",
+            applicants: "245",
+            selected: "53",
+            package: "₹6.20 LPA",
+            status: "Ongoing"
+        },
+
+        TCS: {
+            logo: "T",
+            subtitle: "Tata Consultancy Services",
+            date: "18 Jul 2026",
+            type: "On Campus",
+            applicants: "310",
+            selected: "82",
+            package: "₹7.20 LPA",
+            status: "Completed"
+        },
+
+        Infosys: {
+            logo: "I",
+            subtitle: "Infosys Limited",
+            date: "12 Jul 2026",
+            type: "On Campus",
+            applicants: "285",
+            selected: "65",
+            package: "₹6.80 LPA",
+            status: "Completed"
+        },
+
+        Capgemini: {
+            logo: "C",
+            subtitle: "Capgemini Technology",
+            date: "04 Aug 2026",
+            type: "Off Campus",
+            applicants: "210",
+            selected: "38",
+            package: "₹6.30 LPA",
+            status: "Completed"
+        },
+
+        Deloitte: {
+            logo: "D",
+            subtitle: "Deloitte India",
+            date: "02 Sep 2026",
+            type: "Off Campus",
+            applicants: "260",
+            selected: "—",
+            package: "₹8.40 LPA",
+            status: "Upcoming"
+        },
+
+        Accenture: {
+            logo: "A",
+            subtitle: "Accenture India",
+            date: "18 Sep 2026",
+            type: "On Campus",
+            applicants: "275",
+            selected: "—",
+            package: "₹7.50 LPA",
+            status: "Upcoming"
+        }
+
+    };
+
+
+    /* =====================================================
+       OPEN MODAL
+    ====================================================== */
+
+    function openModal(company) {
+
+        const data =
+            driveDetails[company];
+
+        if (!data) {
+            return;
+        }
+
+
+        modalLogo.textContent =
+            data.logo;
+
+        modalCompany.textContent =
+            company;
+
+        modalSubtitle.textContent =
+            data.subtitle;
+
+        modalDate.textContent =
+            data.date;
+
+        modalType.textContent =
+            data.type;
+
+        modalApplicants.textContent =
+            data.applicants;
+
+        modalSelected.textContent =
+            data.selected;
+
+        modalPackage.textContent =
+            data.package;
+
+        modalStatus.textContent =
+            data.status;
+
+
+        modal.classList.add("show");
+
+        document.body.style.overflow =
+            "hidden";
 
     }
 
 
-    if (doneButton) {
+    /* =====================================================
+       CLOSE MODAL
+    ====================================================== */
 
-        doneButton.addEventListener(
-            "click",
-            closeDriveModal
-        );
+    function closeModal() {
 
-    }
+        modal.classList.remove("show");
 
-
-    if (overlay) {
-
-        overlay.addEventListener(
-            "click",
-            closeDriveModal
-        );
+        document.body.style.overflow =
+            "";
 
     }
+
+
+    /* =====================================================
+       VIEW BUTTONS
+    ====================================================== */
+
+    document
+        .querySelectorAll(".view-drive")
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    openModal(
+                        button.dataset.company
+                    );
+
+                }
+            );
+
+        });
+
+
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    modalBackdrop.addEventListener(
+        "click",
+        closeModal
+    );
 
 
     document.addEventListener(
@@ -384,363 +402,22 @@ function initDriveModal() {
         function (event) {
 
             if (
-                event.key === "Escape" &&
-                modal.classList.contains("show")
+                event.key === "Escape"
+                && modal.classList.contains("show")
             ) {
 
-                closeDriveModal();
+                closeModal();
 
             }
 
         }
     );
 
-}
 
+    /* =====================================================
+       INITIAL LOAD
+    ====================================================== */
 
+    filterDrives();
 
-/* =========================================================
-   MODAL DATA
-========================================================= */
-
-function openDriveModal(
-    company
-) {
-
-    const driveData = {
-
-        "TCS": {
-            logo: "TCS",
-            date: "18 Aug 2026",
-            type: "On Campus",
-            applicants: "320",
-            selected: "82",
-            package: "₹ 7.20 LPA",
-            status: "Completed"
-        },
-
-
-        "Infosys": {
-            logo: "IN",
-            date: "12 Aug 2026",
-            type: "On Campus",
-            applicants: "280",
-            selected: "65",
-            package: "₹ 6.80 LPA",
-            status: "Completed"
-        },
-
-
-        "Wipro": {
-            logo: "W",
-            date: "22 Aug 2026",
-            type: "Off Campus",
-            applicants: "245",
-            selected: "53",
-            package: "₹ 6.20 LPA",
-            status: "Ongoing"
-        },
-
-
-        "Accenture": {
-            logo: "A",
-            date: "28 Aug 2026",
-            type: "On Campus",
-            applicants: "310",
-            selected: "—",
-            package: "₹ 7.50 LPA",
-            status: "Upcoming"
-        },
-
-
-        "Capgemini": {
-            logo: "C",
-            date: "04 Aug 2026",
-            type: "Off Campus",
-            applicants: "210",
-            selected: "38",
-            package: "₹ 6.30 LPA",
-            status: "Completed"
-        },
-
-
-        "Deloitte": {
-            logo: "D",
-            date: "02 Sep 2026",
-            type: "Off Campus",
-            applicants: "260",
-            selected: "—",
-            package: "₹ 8.40 LPA",
-            status: "Upcoming"
-        },
-
-
-        "Microsoft": {
-            logo: "MS",
-            date: "10 Sep 2026",
-            type: "On Campus",
-            applicants: "420",
-            selected: "—",
-            package: "₹ 28.00 LPA",
-            status: "Upcoming"
-        }
-
-    };
-
-
-    const data =
-        driveData[company] || {
-
-            logo:
-                company
-                    .substring(0, 2)
-                    .toUpperCase(),
-
-            date: "—",
-            type: "—",
-            applicants: "—",
-            selected: "—",
-            package: "—",
-            status: "—"
-
-        };
-
-
-    const modal =
-        document.getElementById(
-            "driveModal"
-        );
-
-
-    const modalLogo =
-        document.querySelector(
-            ".modal-drive-logo"
-        );
-
-
-    const modalName =
-        document.getElementById(
-            "modalDriveName"
-        );
-
-
-    const modalDate =
-        document.getElementById(
-            "modalDate"
-        );
-
-
-    const modalType =
-        document.getElementById(
-            "modalType"
-        );
-
-
-    const modalApplicants =
-        document.getElementById(
-            "modalApplicants"
-        );
-
-
-    const modalSelected =
-        document.getElementById(
-            "modalSelected"
-        );
-
-
-    const modalPackage =
-        document.getElementById(
-            "modalPackage"
-        );
-
-
-    const modalStatus =
-        document.getElementById(
-            "modalStatus"
-        );
-
-
-    if (modalLogo) {
-        modalLogo.textContent =
-            data.logo;
-    }
-
-
-    if (modalName) {
-        modalName.textContent =
-            company;
-    }
-
-
-    if (modalDate) {
-        modalDate.textContent =
-            data.date;
-    }
-
-
-    if (modalType) {
-        modalType.textContent =
-            data.type;
-    }
-
-
-    if (modalApplicants) {
-        modalApplicants.textContent =
-            data.applicants;
-    }
-
-
-    if (modalSelected) {
-        modalSelected.textContent =
-            data.selected;
-    }
-
-
-    if (modalPackage) {
-        modalPackage.textContent =
-            data.package;
-    }
-
-
-    if (modalStatus) {
-        modalStatus.textContent =
-            data.status;
-    }
-
-
-    if (modal) {
-
-        modal.classList.add(
-            "show"
-        );
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-
-}
-
-
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeDriveModal() {
-
-    const modal =
-        document.getElementById(
-            "driveModal"
-        );
-
-
-    if (!modal) {
-        return;
-    }
-
-
-    modal.classList.remove(
-        "show"
-    );
-
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-
-/* =========================================================
-   PAGINATION UI
-========================================================= */
-
-function initDrivePagination() {
-
-    const buttons =
-        document.querySelectorAll(
-            ".pagination-btn"
-        );
-
-
-    buttons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        button.disabled ||
-                        button.classList.contains(
-                            "active"
-                        )
-                    ) {
-                        return;
-                    }
-
-
-                    const number =
-                        button.textContent
-                            .trim();
-
-
-                    if (
-                        /^[0-9]+$/.test(
-                            number
-                        )
-                    ) {
-
-                        buttons.forEach(
-                            function (item) {
-
-                                item.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                        button.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
-   ACADEMIC YEAR
-========================================================= */
-
-const academicYear =
-    document.getElementById(
-        "academicYear"
-    );
-
-
-if (academicYear) {
-
-    academicYear.addEventListener(
-        "change",
-        function () {
-
-            console.log(
-                "Academic year:",
-                academicYear.value
-            );
-
-        }
-    );
-
-}
+});

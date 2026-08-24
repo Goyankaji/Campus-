@@ -3,95 +3,86 @@ document.addEventListener("DOMContentLoaded", function () {
     const academicYear =
         document.getElementById("academicYear");
 
-    const nocStatus =
-        document.getElementById("nocStatus");
+    const companyStatus =
+        document.getElementById("companyStatus");
 
-    const nocSearch =
-        document.getElementById("nocSearch");
+    const companySearch =
+        document.getElementById("companySearch");
 
     const tableBody =
-        document.getElementById("nocTableBody");
+        document.getElementById("companyTableBody");
 
     const footerYear =
         document.getElementById("footerYear");
 
-    const exportNocReport =
-        document.getElementById("exportNocReport");
+    const exportCompanyReport =
+        document.getElementById("exportCompanyReport");
 
 
-    /* =====================================================
-       ACADEMIC YEAR
-       ===================================================== */
+    /* ============================= */
+    /* ACADEMIC YEAR */
+    /* ============================= */
 
     if (academicYear) {
 
-        academicYear.addEventListener(
-            "change",
-            function () {
+        academicYear.addEventListener("change", function () {
 
-                if (footerYear) {
-
-                    footerYear.textContent =
-                        academicYear.value;
-
-                }
-
+            if (footerYear) {
+                footerYear.textContent =
+                    academicYear.value;
             }
-        );
+
+        });
 
     }
 
 
-    /* =====================================================
-       STATUS FILTER
-       ===================================================== */
+    /* ============================= */
+    /* STATUS FILTER */
+    /* ============================= */
 
-    if (nocStatus) {
+    if (companyStatus) {
 
-        nocStatus.addEventListener(
+        companyStatus.addEventListener(
             "change",
-            filterApplications
+            filterCompanies
         );
 
     }
 
 
-    /* =====================================================
-       SEARCH
-       ===================================================== */
+    /* ============================= */
+    /* SEARCH */
+    /* ============================= */
 
-    if (nocSearch) {
+    if (companySearch) {
 
-        nocSearch.addEventListener(
+        companySearch.addEventListener(
             "input",
-            filterApplications
+            filterCompanies
         );
 
     }
 
 
-    /* =====================================================
-       FILTER APPLICATIONS
-       ===================================================== */
+    /* ============================= */
+    /* FILTER COMPANIES */
+    /* ============================= */
 
-    function filterApplications() {
+    function filterCompanies() {
 
         if (!tableBody) {
             return;
         }
 
-
         const searchValue =
-            nocSearch
-                ? nocSearch.value
-                    .trim()
-                    .toLowerCase()
+            companySearch
+                ? companySearch.value.trim().toLowerCase()
                 : "";
 
-
         const selectedStatus =
-            nocStatus
-                ? nocStatus.value
+            companyStatus
+                ? companyStatus.value
                 : "all";
 
 
@@ -101,29 +92,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         rows.forEach(function (row) {
 
-            const rowStatus =
-                (
-                    row.dataset.status || ""
-                ).toLowerCase();
+            const company =
+                (row.dataset.company || "")
+                    .toLowerCase();
+
+            const status =
+                (row.dataset.status || "")
+                    .toLowerCase();
 
 
-            const rowSearch =
-                (
-                    row.dataset.search || ""
-                ).toLowerCase();
+            const matchesSearch =
+                company.includes(searchValue);
 
-
-            const searchMatch =
-                rowSearch.includes(searchValue);
-
-
-            const statusMatch =
+            const matchesStatus =
                 selectedStatus === "all" ||
-                rowStatus === selectedStatus;
+                status === selectedStatus;
 
 
             row.style.display =
-                searchMatch && statusMatch
+                matchesSearch && matchesStatus
                     ? ""
                     : "none";
 
@@ -132,13 +119,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =====================================================
-       EXPORT
-       ===================================================== */
+    /* ============================= */
+    /* EXPORT COMPANY REPORT */
+    /* ============================= */
 
-    if (exportNocReport) {
+    if (exportCompanyReport) {
 
-        exportNocReport.addEventListener(
+        exportCompanyReport.addEventListener(
             "click",
             exportReport
         );
@@ -165,9 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (rows.length === 0) {
 
-            alert(
-                "No NOC applications available to export."
-            );
+            alert("No company data available to export.");
 
             return;
 
@@ -175,12 +160,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const headers = [
-            "Student",
-            "Branch",
-            "Roll No.",
             "Company",
             "Type",
-            "Applied On",
+            "Drives",
+            "Students Selected",
+            "Average Package",
             "Status"
         ];
 
@@ -206,55 +190,43 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            const student =
+            const company =
                 cells[0]
                     ? cells[0].innerText.trim()
                     : "";
 
-
-            const branch =
+            const type =
                 cells[1]
                     ? cells[1].innerText.trim()
                     : "";
 
-
-            const rollNo =
+            const drives =
                 cells[2]
                     ? cells[2].innerText.trim()
                     : "";
 
-
-            const company =
+            const students =
                 cells[3]
                     ? cells[3].innerText.trim()
                     : "";
 
-
-            const type =
+            const packageValue =
                 cells[4]
                     ? cells[4].innerText.trim()
                     : "";
 
-
-            const appliedOn =
+            const status =
                 cells[5]
                     ? cells[5].innerText.trim()
                     : "";
 
 
-            const status =
-                cells[6]
-                    ? cells[6].innerText.trim()
-                    : "";
-
-
             csvRows.push([
-                student,
-                branch,
-                rollNo,
                 company,
                 type,
-                appliedOn,
+                drives,
+                students,
+                packageValue,
                 status
             ].map(csvEscape).join(","));
 
@@ -269,8 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
             new Blob(
                 [csvContent],
                 {
-                    type:
-                        "text/csv;charset=utf-8;"
+                    type: "text/csv;charset=utf-8;"
                 }
             );
 
@@ -291,28 +262,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         link.href = url;
 
-
         link.download =
-            `NOC_Report_${year}.csv`;
+            `Company_Report_${year}.csv`;
 
 
         document.body.appendChild(link);
 
-
         link.click();
 
-
         document.body.removeChild(link);
-
 
         URL.revokeObjectURL(url);
 
     }
 
 
-    /* =====================================================
-       CSV ESCAPE
-       ===================================================== */
+    /* ============================= */
+    /* CSV ESCAPE */
+    /* ============================= */
 
     function csvEscape(value) {
 

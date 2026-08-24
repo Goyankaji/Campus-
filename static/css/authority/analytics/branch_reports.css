@@ -1,15 +1,15 @@
 /* =====================================================
-   NOC MANAGEMENT
+   BRANCH-WISE REPORTS
    ===================================================== */
 
-.noc-page {
+.branch-reports-page {
     width: 100%;
 }
 
 
 /* HEADER */
 
-.noc-header {
+.branch-reports-header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -25,14 +25,14 @@
     letter-spacing: 1.2px;
 }
 
-.noc-header h1 {
+.branch-reports-header h1 {
     margin: 0;
     color: #f5f7fb;
     font-size: 30px;
     font-weight: 800;
 }
 
-.noc-header p {
+.branch-reports-header p {
     margin: 6px 0 0;
     color: #8993aa;
     font-size: 11px;
@@ -44,7 +44,7 @@
     gap: 9px;
 }
 
-.noc-select {
+.report-select {
     height: 39px;
     min-width: 120px;
     padding: 0 10px;
@@ -179,9 +179,9 @@
     background: #25163f;
 }
 
-.summary-icon.orange {
-    color: #ff9f25;
-    background: #362617;
+.summary-icon.blue {
+    color: #4591f5;
+    background: #132d4d;
 }
 
 .summary-icon.green {
@@ -189,9 +189,9 @@
     background: #102f25;
 }
 
-.summary-icon.red {
-    color: #ff5f67;
-    background: #351b20;
+.summary-icon.orange {
+    color: #ff9f25;
+    background: #362617;
 }
 
 .summary-card span {
@@ -224,10 +224,6 @@
     background: #17151f;
 }
 
-.noc-applications-card {
-    margin-bottom: 18px;
-}
-
 .card-header {
     display: flex;
     align-items: center;
@@ -254,7 +250,7 @@
 /* SEARCH */
 
 .search-box {
-    width: 190px;
+    width: 170px;
     height: 32px;
     display: flex;
     align-items: center;
@@ -285,18 +281,22 @@
 
 /* TABLE */
 
+.branch-performance-card {
+    margin-bottom: 18px;
+}
+
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
 }
 
-.noc-table {
+.branch-table {
     width: 100%;
-    min-width: 900px;
+    min-width: 950px;
     border-collapse: collapse;
 }
 
-.noc-table th {
+.branch-table th {
     padding: 10px 15px;
     border-bottom: 1px solid #302d3b;
     color: #707a92;
@@ -307,7 +307,7 @@
     white-space: nowrap;
 }
 
-.noc-table td {
+.branch-table td {
     padding: 12px 15px;
     border-bottom: 1px solid #252936;
     color: #929caf;
@@ -315,24 +315,25 @@
     white-space: nowrap;
 }
 
-.noc-table td strong {
+.branch-table td strong {
     display: block;
     color: #edf0f6;
     font-size: 9px;
 }
 
-.noc-table td small {
+.branch-table td small {
     display: block;
     margin-top: 3px;
     color: #69738a;
     font-size: 7px;
 }
 
+.branch-table td.selected {
+    color: #20c889;
+    font-weight: 800;
+}
 
-/* BADGES */
-
-.type-badge,
-.status-badge {
+.placement-rate {
     display: inline-flex;
     padding: 5px 8px;
     border-radius: 20px;
@@ -340,29 +341,117 @@
     font-weight: 800;
 }
 
-.type-badge.campus {
-    color: #438cf4;
-    background: #132c4b;
-}
-
-.type-badge.offcampus {
-    color: #8140ff;
-    background: #25163f;
-}
-
-.status-badge.pending {
-    color: #ff9f20;
-    background: #352616;
-}
-
-.status-badge.approved {
+.placement-rate.high {
     color: #20c889;
     background: #102e24;
 }
 
-.status-badge.rejected {
-    color: #ff6670;
-    background: #351b20;
+.placement-rate.medium {
+    color: #438cf4;
+    background: #132c4b;
+}
+
+.placement-rate.low {
+    color: #ff9f20;
+    background: #352616;
+}
+
+
+/* LOWER GRID */
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+
+/* PLACEMENT BARS */
+
+.placement-bars {
+    padding: 18px;
+}
+
+.bar-item {
+    margin-bottom: 17px;
+}
+
+.bar-item:last-child {
+    margin-bottom: 0;
+}
+
+.bar-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.bar-heading span {
+    color: #9aa4b8;
+    font-size: 9px;
+}
+
+.bar-heading strong {
+    color: #eef1f7;
+    font-size: 9px;
+}
+
+.bar-track {
+    width: 100%;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #292f3d;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: #713cff;
+}
+
+
+/* PACKAGE COMPARISON */
+
+.package-comparison {
+    padding: 8px 18px;
+}
+
+.package-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid #292d38;
+}
+
+.package-row:last-child {
+    border-bottom: none;
+}
+
+.package-branch {
+    color: #edf0f6;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.package-values {
+    text-align: right;
+}
+
+.package-values span {
+    display: block;
+    color: #737d94;
+    font-size: 7px;
+}
+
+.package-values strong {
+    display: block;
+    margin-top: 3px;
+    color: #20c889;
+    font-size: 9px;
 }
 
 
@@ -389,11 +478,15 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 @media (max-width: 700px) {
 
-    .noc-header {
+    .branch-reports-header {
         align-items: stretch;
         flex-direction: column;
     }
@@ -403,7 +496,7 @@
         flex-wrap: wrap;
     }
 
-    .noc-select {
+    .report-select {
         flex: 1;
     }
 

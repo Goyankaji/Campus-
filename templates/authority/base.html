@@ -16,7 +16,10 @@
         {% endblock %}
     </title>
 
-    <!-- GOOGLE FONT -->
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
 
     <link
         rel="preconnect"
@@ -35,7 +38,9 @@
     >
 
 
-    <!-- COMMON AUTHORITY CSS -->
+    <!-- =====================================================
+         COMMON AUTHORITY CSS
+    ====================================================== -->
 
     <link
         rel="stylesheet"
@@ -46,7 +51,9 @@
     >
 
 
-    <!-- PAGE SPECIFIC CSS -->
+    <!-- =====================================================
+         PAGE SPECIFIC CSS
+    ====================================================== -->
 
     {% block page_css %}
     {% endblock %}
@@ -54,11 +61,11 @@
 </head>
 
 
-<body class="authority-body">
+<body>
 
 
     <!-- =====================================================
-         AUTHORITY APPLICATION
+         AUTHORITY APP
     ====================================================== -->
 
     <div class="authority-app">
@@ -72,7 +79,7 @@
 
 
         <!-- =================================================
-             MAIN AREA
+             MAIN CONTENT AREA
         ================================================== -->
 
         <main class="authority-main">
@@ -89,7 +96,7 @@
                  PAGE CONTENT
             ============================================== -->
 
-            <div class="authority-content">
+            <div class="authority-page">
 
                 {% block content %}
                 {% endblock %}

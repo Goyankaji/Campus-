@@ -1,26 +1,27 @@
-<header class="authority-topbar" id="authorityTopbar">
+<header class="top-header">
+
 
     <!-- =====================================================
-         LEFT SIDE
+         MOBILE MENU
     ====================================================== -->
 
-    <div class="topbar-left">
-
-        <!-- MOBILE MENU -->
-
-        <button
-            type="button"
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Open navigation"
-        >
-            ☰
-        </button>
+    <button
+        type="button"
+        class="mobile-menu-btn"
+        id="mobileMenuBtn"
+        aria-label="Open navigation"
+    >
+        ☰
+    </button>
 
 
-        <!-- SEARCH -->
+    <!-- =====================================================
+         PAGE / SEARCH AREA
+    ====================================================== -->
 
-        <div class="authority-search">
+    <div class="header-left">
+
+        <div class="search-container">
 
             <span class="search-icon">
                 ⌕
@@ -46,14 +47,16 @@
          RIGHT SIDE
     ====================================================== -->
 
-    <div class="topbar-right">
+    <div class="header-right">
 
 
-        <!-- THEME -->
+        <!-- =================================================
+             THEME TOGGLE
+        ================================================== -->
 
         <button
             type="button"
-            class="topbar-action-btn"
+            class="header-action"
             id="headerThemeBtn"
             title="Toggle theme"
             aria-label="Toggle theme"
@@ -62,12 +65,14 @@
         </button>
 
 
-        <!-- NOTIFICATIONS -->
+        <!-- =================================================
+             NOTIFICATIONS
+        ================================================== -->
 
         <button
             type="button"
-            class="topbar-action-btn notification-btn"
-            id="notificationTopbarBtn"
+            class="header-action notification-action"
+            id="headerNotificationBtn"
             title="Notifications"
             aria-label="Notifications"
         >
@@ -81,11 +86,6 @@
         </button>
 
 
-        <!-- DIVIDER -->
-
-        <span class="topbar-divider"></span>
-
-
         <!-- =================================================
              AUTHORITY PROFILE
         ================================================== -->
@@ -95,36 +95,184 @@
             id="authorityProfile"
         >
 
-            <!-- AVATAR -->
+
+            <!-- Avatar -->
 
             <div class="authority-avatar">
-                A
+
+                {% if authority is defined and authority.initial %}
+                    {{ authority.initial }}
+                {% else %}
+                    A
+                {% endif %}
+
             </div>
 
 
-            <!-- DETAILS -->
+            <!-- Profile Information -->
 
-            <div class="authority-profile-info">
+            <div class="authority-profile-text">
 
                 <strong>
-                    College Authority
+
+                    {% if authority is defined and authority.name %}
+
+                        {{ authority.name }}
+
+                    {% elif session.get("username") %}
+
+                        {{ session.get("username") }}
+
+                    {% else %}
+
+                        College Authority
+
+                    {% endif %}
+
                 </strong>
 
+
                 <span>
-                    Principal / Director
+
+                    {% if authority is defined and authority.college_code %}
+
+                        {{ authority.college_code }} Authority
+
+                    {% elif session.get("college_code") %}
+
+                        {{ session.get("college_code") }} Authority
+
+                    {% else %}
+
+                        Principal / Director
+
+                    {% endif %}
+
                 </span>
 
             </div>
 
 
-            <!-- ARROW -->
+            <!-- Arrow -->
 
-            <span class="profile-arrow">
+            <span
+                class="profile-arrow"
+                id="profileArrow"
+            >
                 ⌄
             </span>
 
+
         </div>
 
+
     </div>
+
+
+    <!-- =====================================================
+         PROFILE DROPDOWN
+    ====================================================== -->
+
+    <div
+        class="authority-profile-menu"
+        id="authorityProfileMenu"
+    >
+
+
+        <!-- College Information -->
+
+        <div class="profile-menu-header">
+
+            <span class="profile-menu-label">
+                COLLEGE
+            </span>
+
+            <strong>
+
+                {% if authority is defined and authority.college_name %}
+
+                    {{ authority.college_name }}
+
+                {% elif session.get("college_name") %}
+
+                    {{ session.get("college_name") }}
+
+                {% elif session.get("college_code") %}
+
+                    {{ session.get("college_code") }}
+
+                {% else %}
+
+                    College Authority
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+        <div class="profile-menu-divider"></div>
+
+
+        <!-- Profile -->
+
+        <a
+            href="{{ url_for('authority_settings') }}"
+            class="profile-menu-item"
+        >
+
+            <span class="profile-menu-icon">
+                ◉
+            </span>
+
+            <span>
+                My Profile
+            </span>
+
+        </a>
+
+
+        <!-- Settings -->
+
+        <a
+            href="{{ url_for('authority_settings') }}"
+            class="profile-menu-item"
+        >
+
+            <span class="profile-menu-icon">
+                ⚙
+            </span>
+
+            <span>
+                Settings
+            </span>
+
+        </a>
+
+
+        <div class="profile-menu-divider"></div>
+
+
+        <!-- Logout -->
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="profile-menu-item profile-logout"
+        >
+
+            <span class="profile-menu-icon">
+                ⇥
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+
+    </div>
+
 
 </header>

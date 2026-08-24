@@ -1,19 +1,19 @@
 {% extends "authority/base.html" %}
 
-{% block title %}NOC Management | Authority{% endblock %}
+{% block title %}Pre-Placed Students | Authority{% endblock %}
 
 {% block content %}
 
 <link
     rel="stylesheet"
-    href="{{ url_for('static', filename='css/authority/noc.css') }}"
+    href="{{ url_for('static', filename='css/authority/pre_placed.css') }}"
 >
 
-<div class="noc-page">
+<div class="pre-placed-page">
 
     <!-- HEADER -->
 
-    <div class="noc-header">
+    <div class="pre-placed-header">
 
         <div>
 
@@ -22,11 +22,11 @@
             </div>
 
             <h1>
-                NOC Management
+                Pre-Placed Students
             </h1>
 
             <p>
-                Manage and review student No Objection Certificate applications.
+                Track students who secured placements before the regular placement process.
             </p>
 
         </div>
@@ -36,7 +36,7 @@
 
             <select
                 id="academicYear"
-                class="noc-select"
+                class="pre-placed-select"
             >
                 <option value="2026-27">
                     2026 - 27
@@ -53,30 +53,26 @@
 
 
             <select
-                id="nocStatus"
-                class="noc-select"
+                id="placementStatus"
+                class="pre-placed-select"
             >
                 <option value="all">
                     All Status
                 </option>
 
+                <option value="confirmed">
+                    Confirmed
+                </option>
+
                 <option value="pending">
                     Pending
-                </option>
-
-                <option value="approved">
-                    Approved
-                </option>
-
-                <option value="rejected">
-                    Rejected
                 </option>
             </select>
 
 
             <button
                 type="button"
-                id="exportNocReport"
+                id="exportPrePlacedReport"
                 class="export-btn"
             >
                 ↓ Export Report
@@ -92,7 +88,7 @@
     <div class="scope-card">
 
         <div class="scope-icon">
-            ◉
+            ✓
         </div>
 
 
@@ -107,7 +103,7 @@
             </strong>
 
             <small>
-                NOC applications are restricted to your assigned college.
+                Pre-placement records are restricted to your assigned college.
             </small>
 
         </div>
@@ -127,21 +123,46 @@
         <div class="summary-card">
 
             <div class="summary-icon purple">
-                ▦
+                ✓
             </div>
 
             <div>
 
                 <span>
-                    Total Applications
+                    Pre-Placed Students
                 </span>
 
                 <strong>
-                    186
+                    126
                 </strong>
 
                 <small>
-                    NOC applications received
+                    Students placed before drives
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon green">
+                ◉
+            </div>
+
+            <div>
+
+                <span>
+                    Confirmed
+                </span>
+
+                <strong>
+                    118
+                </strong>
+
+                <small>
+                    Confirmed placements
                 </small>
 
             </div>
@@ -162,11 +183,11 @@
                 </span>
 
                 <strong>
-                    24
+                    8
                 </strong>
 
                 <small>
-                    Awaiting authority action
+                    Awaiting confirmation
                 </small>
 
             </div>
@@ -176,47 +197,22 @@
 
         <div class="summary-card">
 
-            <div class="summary-icon green">
-                ✓
+            <div class="summary-icon blue">
+                ₹
             </div>
 
             <div>
 
                 <span>
-                    Approved
+                    Average Package
                 </span>
 
                 <strong>
-                    148
+                    ₹8.40 LPA
                 </strong>
 
                 <small>
-                    NOCs approved
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-icon red">
-                ×
-            </div>
-
-            <div>
-
-                <span>
-                    Rejected
-                </span>
-
-                <strong>
-                    14
-                </strong>
-
-                <small>
-                    Applications rejected
+                    Across confirmed placements
                 </small>
 
             </div>
@@ -226,20 +222,200 @@
     </div>
 
 
-    <!-- APPLICATIONS -->
+    <!-- PERFORMANCE -->
 
-    <section class="report-card noc-applications-card">
+    <div class="reports-grid">
+
+        <section class="report-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Pre-Placement Overview
+                    </h2>
+
+                    <p>
+                        Overall placement status of pre-placed students.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="performance-content">
+
+                <div class="performance-stat">
+
+                    <span>
+                        Total Students
+                    </span>
+
+                    <strong>
+                        126
+                    </strong>
+
+                    <small>
+                        Pre-placed students
+                    </small>
+
+                </div>
+
+
+                <div class="performance-stat">
+
+                    <span>
+                        Companies
+                    </span>
+
+                    <strong>
+                        34
+                    </strong>
+
+                    <small>
+                        Hiring companies
+                    </small>
+
+                </div>
+
+
+                <div class="performance-stat">
+
+                    <span>
+                        Highest Package
+                    </span>
+
+                    <strong>
+                        ₹24.00 LPA
+                    </strong>
+
+                    <small>
+                        Highest confirmed package
+                    </small>
+
+                </div>
+
+
+                <div class="performance-stat">
+
+                    <span>
+                        Average Package
+                    </span>
+
+                    <strong>
+                        ₹8.40 LPA
+                    </strong>
+
+                    <small>
+                        Average confirmed package
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATUS -->
+
+        <section class="report-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Placement Status
+                    </h2>
+
+                    <p>
+                        Current confirmation status of pre-placements.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-list">
+
+                <div class="status-row">
+
+                    <div class="status-label">
+
+                        <span class="dot green"></span>
+
+                        Confirmed
+
+                    </div>
+
+                    <strong>
+                        118
+                    </strong>
+
+                </div>
+
+
+                <div class="status-track">
+
+                    <div
+                        class="status-fill green"
+                        style="width:93.65%;"
+                    ></div>
+
+                </div>
+
+
+                <div class="status-row">
+
+                    <div class="status-label">
+
+                        <span class="dot orange"></span>
+
+                        Pending
+
+                    </div>
+
+                    <strong>
+                        8
+                    </strong>
+
+                </div>
+
+
+                <div class="status-track">
+
+                    <div
+                        class="status-fill orange"
+                        style="width:6.35%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- STUDENT TABLE -->
+
+    <section class="report-card student-table-card">
 
         <div class="card-header">
 
             <div>
 
                 <h2>
-                    NOC Applications
+                    Pre-Placed Student Records
                 </h2>
 
                 <p>
-                    Review student applications and their current NOC status.
+                    Student-wise company, package and placement details.
                 </p>
 
             </div>
@@ -253,7 +429,7 @@
 
                 <input
                     type="text"
-                    id="nocSearch"
+                    id="studentSearch"
                     placeholder="Search student or company..."
                 >
 
@@ -264,7 +440,7 @@
 
         <div class="table-wrapper">
 
-            <table class="noc-table">
+            <table class="student-table">
 
                 <thead>
 
@@ -287,11 +463,11 @@
                         </th>
 
                         <th>
-                            TYPE
+                            PACKAGE
                         </th>
 
                         <th>
-                            APPLIED ON
+                            PLACED ON
                         </th>
 
                         <th>
@@ -303,12 +479,12 @@
                 </thead>
 
 
-                <tbody id="nocTableBody">
+                <tbody id="studentTableBody">
 
 
                     <tr
-                        data-status="pending"
-                        data-search="rahul sharma tcs"
+                        data-status="confirmed"
+                        data-search="rahul sharma microsoft"
                     >
 
                         <td>
@@ -332,25 +508,21 @@
                         </td>
 
                         <td>
-                            TCS
+                            Microsoft
+                        </td>
+
+                        <td class="package">
+                            ₹24.00 LPA
+                        </td>
+
+                        <td>
+                            12 Jul 2026
                         </td>
 
                         <td>
 
-                            <span class="type-badge campus">
-                                On Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            20 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
+                            <span class="status-badge confirmed">
+                                Confirmed
                             </span>
 
                         </td>
@@ -359,7 +531,7 @@
 
 
                     <tr
-                        data-status="approved"
+                        data-status="confirmed"
                         data-search="priya meena infosys"
                     >
 
@@ -387,22 +559,18 @@
                             Infosys
                         </td>
 
-                        <td>
-
-                            <span class="type-badge campus">
-                                On Campus
-                            </span>
-
+                        <td class="package">
+                            ₹8.20 LPA
                         </td>
 
                         <td>
-                            18 Aug 2026
+                            15 Jul 2026
                         </td>
 
                         <td>
 
-                            <span class="status-badge approved">
-                                Approved
+                            <span class="status-badge confirmed">
+                                Confirmed
                             </span>
 
                         </td>
@@ -439,16 +607,12 @@
                             Wipro
                         </td>
 
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
+                        <td class="package">
+                            ₹7.00 LPA
                         </td>
 
                         <td>
-                            21 Aug 2026
+                            18 Aug 2026
                         </td>
 
                         <td>
@@ -463,7 +627,7 @@
 
 
                     <tr
-                        data-status="approved"
+                        data-status="confirmed"
                         data-search="neha joshi accenture"
                     >
 
@@ -491,22 +655,18 @@
                             Accenture
                         </td>
 
-                        <td>
-
-                            <span class="type-badge campus">
-                                On Campus
-                            </span>
-
+                        <td class="package">
+                            ₹9.00 LPA
                         </td>
 
                         <td>
-                            16 Aug 2026
+                            10 Jul 2026
                         </td>
 
                         <td>
 
-                            <span class="status-badge approved">
-                                Approved
+                            <span class="status-badge confirmed">
+                                Confirmed
                             </span>
 
                         </td>
@@ -515,7 +675,7 @@
 
 
                     <tr
-                        data-status="rejected"
+                        data-status="confirmed"
                         data-search="mohit singh capgemini"
                     >
 
@@ -543,22 +703,18 @@
                             Capgemini
                         </td>
 
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
+                        <td class="package">
+                            ₹6.50 LPA
                         </td>
 
                         <td>
-                            14 Aug 2026
+                            08 Jul 2026
                         </td>
 
                         <td>
 
-                            <span class="status-badge rejected">
-                                Rejected
+                            <span class="status-badge confirmed">
+                                Confirmed
                             </span>
 
                         </td>
@@ -595,16 +751,12 @@
                             Deloitte
                         </td>
 
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
+                        <td class="package">
+                            ₹10.50 LPA
                         </td>
 
                         <td>
-                            22 Aug 2026
+                            21 Aug 2026
                         </td>
 
                         <td>
@@ -619,7 +771,7 @@
 
 
                     <tr
-                        data-status="approved"
+                        data-status="confirmed"
                         data-search="simran kaur amazon"
                     >
 
@@ -647,22 +799,18 @@
                             Amazon
                         </td>
 
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
+                        <td class="package">
+                            ₹12.00 LPA
                         </td>
 
                         <td>
-                            11 Aug 2026
+                            05 Jul 2026
                         </td>
 
                         <td>
 
-                            <span class="status-badge approved">
-                                Approved
+                            <span class="status-badge confirmed">
+                                Confirmed
                             </span>
 
                         </td>
@@ -699,7 +847,7 @@
 
 
 <script
-    src="{{ url_for('static', filename='js/authority/noc.js') }}"
+    src="{{ url_for('static', filename='js/authority/pre_placed.js') }}"
 ></script>
 
 {% endblock %}

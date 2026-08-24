@@ -3,20 +3,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const academicYear =
         document.getElementById("academicYear");
 
-    const nocStatus =
-        document.getElementById("nocStatus");
+    const branchFilter =
+        document.getElementById("branchFilter");
 
-    const nocSearch =
-        document.getElementById("nocSearch");
+    const branchSearch =
+        document.getElementById("branchSearch");
 
     const tableBody =
-        document.getElementById("nocTableBody");
+        document.getElementById("branchTableBody");
 
     const footerYear =
         document.getElementById("footerYear");
 
-    const exportNocReport =
-        document.getElementById("exportNocReport");
+    const exportBranchReport =
+        document.getElementById("exportBranchReport");
 
 
     /* =====================================================
@@ -30,10 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
                 if (footerYear) {
-
                     footerYear.textContent =
                         academicYear.value;
-
                 }
 
             }
@@ -43,14 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       STATUS FILTER
+       BRANCH FILTER
        ===================================================== */
 
-    if (nocStatus) {
+    if (branchFilter) {
 
-        nocStatus.addEventListener(
+        branchFilter.addEventListener(
             "change",
-            filterApplications
+            filterBranches
         );
 
     }
@@ -60,21 +58,21 @@ document.addEventListener("DOMContentLoaded", function () {
        SEARCH
        ===================================================== */
 
-    if (nocSearch) {
+    if (branchSearch) {
 
-        nocSearch.addEventListener(
+        branchSearch.addEventListener(
             "input",
-            filterApplications
+            filterBranches
         );
 
     }
 
 
     /* =====================================================
-       FILTER APPLICATIONS
+       FILTER BRANCHES
        ===================================================== */
 
-    function filterApplications() {
+    function filterBranches() {
 
         if (!tableBody) {
             return;
@@ -82,16 +80,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const searchValue =
-            nocSearch
-                ? nocSearch.value
+            branchSearch
+                ? branchSearch.value
                     .trim()
                     .toLowerCase()
                 : "";
 
 
-        const selectedStatus =
-            nocStatus
-                ? nocStatus.value
+        const selectedBranch =
+            branchFilter
+                ? branchFilter.value
                 : "all";
 
 
@@ -101,29 +99,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
         rows.forEach(function (row) {
 
-            const rowStatus =
+            const branch =
                 (
-                    row.dataset.status || ""
+                    row.dataset.branch || ""
                 ).toLowerCase();
 
 
-            const rowSearch =
-                (
-                    row.dataset.search || ""
-                ).toLowerCase();
+            const branchName =
+                row.querySelector("td")
+                    ? row.querySelector("td")
+                        .innerText
+                        .toLowerCase()
+                    : "";
 
 
             const searchMatch =
-                rowSearch.includes(searchValue);
+                branchName.includes(searchValue);
 
 
-            const statusMatch =
-                selectedStatus === "all" ||
-                rowStatus === selectedStatus;
+            const branchMatch =
+                selectedBranch === "all" ||
+                branch === selectedBranch;
 
 
             row.style.display =
-                searchMatch && statusMatch
+                searchMatch && branchMatch
                     ? ""
                     : "none";
 
@@ -133,12 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       EXPORT
+       EXPORT BRANCH REPORT
        ===================================================== */
 
-    if (exportNocReport) {
+    if (exportBranchReport) {
 
-        exportNocReport.addEventListener(
+        exportBranchReport.addEventListener(
             "click",
             exportReport
         );
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (rows.length === 0) {
 
             alert(
-                "No NOC applications available to export."
+                "No branch data available to export."
             );
 
             return;
@@ -175,13 +175,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const headers = [
-            "Student",
             "Branch",
-            "Roll No.",
-            "Company",
-            "Type",
-            "Applied On",
-            "Status"
+            "Students",
+            "Eligible",
+            "Appeared",
+            "Selected",
+            "Placement %",
+            "Average Package",
+            "Highest Package"
         ];
 
 
@@ -206,56 +207,63 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            const student =
+            const branch =
                 cells[0]
                     ? cells[0].innerText.trim()
                     : "";
 
 
-            const branch =
+            const students =
                 cells[1]
                     ? cells[1].innerText.trim()
                     : "";
 
 
-            const rollNo =
+            const eligible =
                 cells[2]
                     ? cells[2].innerText.trim()
                     : "";
 
 
-            const company =
+            const appeared =
                 cells[3]
                     ? cells[3].innerText.trim()
                     : "";
 
 
-            const type =
+            const selected =
                 cells[4]
                     ? cells[4].innerText.trim()
                     : "";
 
 
-            const appliedOn =
+            const placementRate =
                 cells[5]
                     ? cells[5].innerText.trim()
                     : "";
 
 
-            const status =
+            const averagePackage =
                 cells[6]
                     ? cells[6].innerText.trim()
                     : "";
 
 
+            const highestPackage =
+                cells[7]
+                    ? cells[7].innerText.trim()
+                    : "";
+
+
             csvRows.push([
-                student,
                 branch,
-                rollNo,
-                company,
-                type,
-                appliedOn,
-                status
+                students,
+                eligible,
+                appeared,
+                selected,
+                placementRate,
+                averagePackage,
+                highestPackage
             ].map(csvEscape).join(","));
 
         });
@@ -293,7 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         link.download =
-            `NOC_Report_${year}.csv`;
+            `Branch_Wise_Report_${year}.csv`;
 
 
         document.body.appendChild(link);

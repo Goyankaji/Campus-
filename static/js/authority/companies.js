@@ -1,639 +1,656 @@
 /* =========================================================
-   AUTHORITY — COMPANIES PAGE
+   AUTHORITY COMPANIES JS
 ========================================================= */
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-        initCompanySearch();
+const companiesYear =
+    document.getElementById(
+        "companiesYear"
+    );
 
-        initCompanyFilters();
+const companySearch =
+    document.getElementById(
+        "companySearch"
+    );
 
-        initCompanyModal();
+const industryFilter =
+    document.getElementById(
+        "industryFilter"
+    );
 
-        initPagination();
+const companyStatusFilter =
+    document.getElementById(
+        "companyStatusFilter"
+    );
+
+const companySort =
+    document.getElementById(
+        "companySort"
+    );
+
+const clearFiltersBtn =
+    document.getElementById(
+        "clearFiltersBtn"
+    );
+
+const filterToggleBtn =
+    document.getElementById(
+        "filterToggleBtn"
+    );
+
+const companyFilters =
+    document.getElementById(
+        "companyFilters"
+    );
+
+const companyTableBody =
+    document.getElementById(
+        "companyTableBody"
+    );
+
+const companyEmptyState =
+    document.getElementById(
+        "companyEmptyState"
+    );
+
+const companyResultCount =
+    document.getElementById(
+        "companyResultCount"
+    );
+
+const exportCompaniesBtn =
+    document.getElementById(
+        "exportCompaniesBtn"
+    );
+
+const companiesCollegeName =
+    document.getElementById(
+        "companiesCollegeName"
+    );
+
+
+/* =========================================================
+   COLLEGE SCOPE
+========================================================= */
+
+function getAuthorityCollege() {
+
+    const collegeName =
+        document.body.dataset.collegeName;
+
+    const collegeCode =
+        document.body.dataset.collegeCode;
+
+
+    if (collegeName) {
+
+        return collegeName;
 
     }
-);
 
+
+    if (collegeCode) {
+
+        return collegeCode;
+
+    }
+
+
+    return "College Authority";
+
+}
+
+
+if (companiesCollegeName) {
+
+    companiesCollegeName.textContent =
+        getAuthorityCollege();
+
+}
+
+
+/* =========================================================
+   COMPANY ROWS
+========================================================= */
+
+function getCompanyRows() {
+
+    return Array.from(
+        document.querySelectorAll(
+            ".company-row"
+        )
+    );
+
+}
+
+
+/* =========================================================
+   FILTER COMPANIES
+========================================================= */
+
+function filterCompanies() {
+
+    const searchValue =
+        companySearch
+            ? companySearch.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+    const industryValue =
+        industryFilter
+            ? industryFilter.value
+            : "all";
+
+    const statusValue =
+        companyStatusFilter
+            ? companyStatusFilter.value
+            : "all";
+
+
+    const rows =
+        getCompanyRows();
+
+
+    let visibleCount = 0;
+
+
+    rows.forEach(
+        function (row) {
+
+            const name =
+                row.dataset.name || "";
+
+            const industry =
+                row.dataset.industry || "";
+
+            const status =
+                row.dataset.status || "";
+
+
+            const matchesSearch =
+                !searchValue ||
+                name.includes(
+                    searchValue
+                );
+
+
+            const matchesIndustry =
+                industryValue === "all" ||
+                industry === industryValue;
+
+
+            const matchesStatus =
+                statusValue === "all" ||
+                status === statusValue;
+
+
+            const shouldShow =
+                matchesSearch &&
+                matchesIndustry &&
+                matchesStatus;
+
+
+            if (shouldShow) {
+
+                row.style.display =
+                    "";
+
+                visibleCount++;
+
+            } else {
+
+                row.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    updateCompanyResult(
+        visibleCount
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE RESULT COUNT
+========================================================= */
+
+function updateCompanyResult(
+    count
+) {
+
+    if (!companyResultCount) {
+
+        return;
+
+    }
+
+
+    companyResultCount.textContent =
+        `Showing ${count} companies`;
+
+
+    if (
+        companyEmptyState
+    ) {
+
+        if (count === 0) {
+
+            companyEmptyState.style.display =
+                "flex";
+
+        } else {
+
+            companyEmptyState.style.display =
+                "none";
+
+        }
+
+    }
+
+}
 
 
 /* =========================================================
    SEARCH
 ========================================================= */
 
-function initCompanySearch() {
+if (companySearch) {
 
-    const searchInput =
-        document.getElementById("companySearch");
-
-    const rows =
-        document.querySelectorAll(
-            "#companyTableBody tr"
-        );
-
-    if (!searchInput) {
-        return;
-    }
-
-
-    searchInput.addEventListener(
+    companySearch.addEventListener(
         "input",
         function () {
 
-            filterCompanies(
-                searchInput.value.trim().toLowerCase()
-            );
+            filterCompanies();
 
         }
     );
 
-
-    function filterCompanies(searchValue) {
-
-        let visibleCount = 0;
-
-
-        rows.forEach(
-            function (row) {
-
-                const companyName =
-                    row
-                        .querySelector(".company-name strong")
-                        ?.textContent
-                        .toLowerCase() || "";
-
-                const companyDescription =
-                    row
-                        .querySelector(".company-name span")
-                        ?.textContent
-                        .toLowerCase() || "";
-
-
-                const matches =
-                    companyName.includes(searchValue) ||
-                    companyDescription.includes(searchValue);
-
-
-                if (matches) {
-
-                    row.style.display = "";
-
-                    visibleCount++;
-
-                } else {
-
-                    row.style.display = "none";
-
-                }
-
-            }
-        );
-
-
-        updateCompanyCount(
-            visibleCount
-        );
-
-        updateEmptyState(
-            visibleCount
-        );
-
-    }
-
 }
 
 
-
 /* =========================================================
-   FILTERS
+   INDUSTRY FILTER
 ========================================================= */
 
-function initCompanyFilters() {
+if (industryFilter) {
 
-    const statusFilter =
-        document.getElementById("companyStatus");
+    industryFilter.addEventListener(
+        "change",
+        function () {
 
-    const typeFilter =
-        document.getElementById("companyType");
-
-    if (statusFilter) {
-
-        statusFilter.addEventListener(
-            "change",
-            applyFilters
-        );
-
-    }
-
-
-    if (typeFilter) {
-
-        typeFilter.addEventListener(
-            "change",
-            applyFilters
-        );
-
-    }
-
-
-    function applyFilters() {
-
-        const selectedStatus =
-            statusFilter
-                ? statusFilter.value
-                : "all";
-
-        const selectedType =
-            typeFilter
-                ? typeFilter.value
-                : "all";
-
-
-        const rows =
-            document.querySelectorAll(
-                "#companyTableBody tr"
-            );
-
-
-        let visibleCount = 0;
-
-
-        rows.forEach(
-            function (row) {
-
-                const rowStatus =
-                    row.dataset.status || "";
-
-                const rowType =
-                    row.dataset.type || "";
-
-
-                const statusMatch =
-                    selectedStatus === "all" ||
-                    rowStatus === selectedStatus;
-
-
-                const typeMatch =
-                    selectedType === "all" ||
-                    rowType === selectedType;
-
-
-                if (
-                    statusMatch &&
-                    typeMatch
-                ) {
-
-                    row.style.display = "";
-
-                    visibleCount++;
-
-                } else {
-
-                    row.style.display = "none";
-
-                }
-
-            }
-        );
-
-
-        updateCompanyCount(
-            visibleCount
-        );
-
-        updateEmptyState(
-            visibleCount
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   COUNT
-========================================================= */
-
-function updateCompanyCount(
-    count
-) {
-
-    const countElement =
-        document.getElementById(
-            "companyCount"
-        );
-
-    if (!countElement) {
-        return;
-    }
-
-
-    if (count === 0) {
-
-        countElement.textContent =
-            "No companies found";
-
-    } else {
-
-        countElement.textContent =
-            "Showing " +
-            count +
-            " compan" +
-            (count === 1 ? "y" : "ies");
-
-    }
-
-}
-
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-function updateEmptyState(
-    count
-) {
-
-    const emptyState =
-        document.getElementById(
-            "companyEmpty"
-        );
-
-    if (!emptyState) {
-        return;
-    }
-
-
-    if (count === 0) {
-
-        emptyState.classList.add(
-            "show"
-        );
-
-    } else {
-
-        emptyState.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   COMPANY MODAL
-========================================================= */
-
-function initCompanyModal() {
-
-    const modal =
-        document.getElementById(
-            "companyModal"
-        );
-
-    const closeButton =
-        document.getElementById(
-            "modalClose"
-        );
-
-    const doneButton =
-        document.getElementById(
-            "modalDone"
-        );
-
-    const overlay =
-        document.querySelector(
-            ".company-modal-overlay"
-        );
-
-
-    const viewButtons =
-        document.querySelectorAll(
-            ".view-company"
-        );
-
-
-    if (!modal) {
-        return;
-    }
-
-
-    viewButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    const company =
-                        button.dataset.company ||
-                        "Company";
-
-                    openCompanyModal(
-                        company
-                    );
-
-                }
-            );
+            filterCompanies();
 
         }
     );
 
-
-    if (closeButton) {
-
-        closeButton.addEventListener(
-            "click",
-            closeCompanyModal
-        );
-
-    }
+}
 
 
-    if (doneButton) {
+/* =========================================================
+   STATUS FILTER
+========================================================= */
 
-        doneButton.addEventListener(
-            "click",
-            closeCompanyModal
-        );
+if (companyStatusFilter) {
 
-    }
+    companyStatusFilter.addEventListener(
+        "change",
+        function () {
 
-
-    if (overlay) {
-
-        overlay.addEventListener(
-            "click",
-            closeCompanyModal
-        );
-
-    }
-
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "Escape" &&
-                modal.classList.contains("show")
-            ) {
-
-                closeCompanyModal();
-
-            }
+            filterCompanies();
 
         }
     );
 
+}
 
-    function openCompanyModal(
-        company
+
+/* =========================================================
+   SORT
+========================================================= */
+
+function sortCompanies() {
+
+    if (
+        !companyTableBody ||
+        !companySort
     ) {
 
-        const modalName =
-            document.getElementById(
-                "modalCompanyName"
-            );
+        return;
 
-        const modalLogo =
-            document.querySelector(
-                ".modal-company-logo"
-            );
-
-        const modalDrives =
-            document.getElementById(
-                "modalDrives"
-            );
-
-        const modalSelected =
-            document.getElementById(
-                "modalSelected"
-            );
-
-        const modalPackage =
-            document.getElementById(
-                "modalPackage"
-            );
+    }
 
 
-        const companyData = {
+    const rows =
+        getCompanyRows();
 
-            "TCS": {
-                logo: "TCS",
-                drives: "6",
-                selected: "82",
-                package: "₹ 7.20 LPA"
-            },
 
-            "Infosys": {
-                logo: "IN",
-                drives: "5",
-                selected: "65",
-                package: "₹ 6.80 LPA"
-            },
+    const sortType =
+        companySort.value;
 
-            "Wipro": {
-                logo: "W",
-                drives: "4",
-                selected: "53",
-                package: "₹ 6.20 LPA"
-            },
 
-            "Accenture": {
-                logo: "A",
-                drives: "3",
-                selected: "41",
-                package: "₹ 7.50 LPA"
-            },
+    rows.sort(
+        function (
+            rowA,
+            rowB
+        ) {
 
-            "Capgemini": {
-                logo: "C",
-                drives: "3",
-                selected: "38",
-                package: "₹ 6.30 LPA"
-            },
+            if (
+                sortType === "name"
+            ) {
 
-            "Deloitte": {
-                logo: "D",
-                drives: "2",
-                selected: "29",
-                package: "₹ 8.40 LPA"
+                return (
+                    rowA.dataset.name
+                        .localeCompare(
+                            rowB.dataset.name
+                        )
+                );
+
             }
 
-        };
+
+            if (
+                sortType === "offers"
+            ) {
+
+                return (
+                    Number(
+                        rowB.dataset.offers
+                    ) -
+                    Number(
+                        rowA.dataset.offers
+                    )
+                );
+
+            }
 
 
-        const data =
-            companyData[company] || {
+            if (
+                sortType === "package"
+            ) {
 
-                logo: company
-                    .substring(0, 2)
-                    .toUpperCase(),
+                return (
+                    Number(
+                        rowB.dataset.package
+                    ) -
+                    Number(
+                        rowA.dataset.package
+                    )
+                );
 
-                drives: "—",
-
-                selected: "—",
-
-                package: "—"
-
-            };
-
-
-        if (modalName) {
-
-            modalName.textContent =
-                company;
-
-        }
+            }
 
 
-        if (modalLogo) {
+            if (
+                sortType === "drives"
+            ) {
 
-            modalLogo.textContent =
-                data.logo;
+                return (
+                    Number(
+                        rowB.dataset.drives
+                    ) -
+                    Number(
+                        rowA.dataset.drives
+                    )
+                );
 
-        }
-
-
-        if (modalDrives) {
-
-            modalDrives.textContent =
-                data.drives;
-
-        }
-
-
-        if (modalSelected) {
-
-            modalSelected.textContent =
-                data.selected;
-
-        }
+            }
 
 
-        if (modalPackage) {
-
-            modalPackage.textContent =
-                data.package;
+            return 0;
 
         }
+    );
 
 
-        modal.classList.add(
-            "show"
-        );
+    rows.forEach(
+        function (row) {
 
-        document.body.style.overflow =
-            "hidden";
+            companyTableBody.appendChild(
+                row
+            );
 
-    }
+        }
+    );
 
 
-    function closeCompanyModal() {
-
-        modal.classList.remove(
-            "show"
-        );
-
-        document.body.style.overflow =
-            "";
-
-    }
+    filterCompanies();
 
 }
 
 
+if (companySort) {
 
-/* =========================================================
-   PAGINATION UI
-========================================================= */
+    companySort.addEventListener(
+        "change",
+        function () {
 
-function initPagination() {
-
-    const buttons =
-        document.querySelectorAll(
-            ".pagination-btn"
-        );
-
-
-    buttons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        button.disabled ||
-                        button.classList.contains("active")
-                    ) {
-                        return;
-                    }
-
-
-                    buttons.forEach(
-                        function (item) {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                    if (
-                        /^[0-9]+$/.test(
-                            button.textContent.trim()
-                        )
-                    ) {
-
-                        button.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
+            sortCompanies();
 
         }
     );
 
 }
 
+
+/* =========================================================
+   CLEAR FILTERS
+========================================================= */
+
+if (clearFiltersBtn) {
+
+    clearFiltersBtn.addEventListener(
+        "click",
+        function () {
+
+            if (companySearch) {
+
+                companySearch.value =
+                    "";
+
+            }
+
+
+            if (industryFilter) {
+
+                industryFilter.value =
+                    "all";
+
+            }
+
+
+            if (companyStatusFilter) {
+
+                companyStatusFilter.value =
+                    "all";
+
+            }
+
+
+            if (companySort) {
+
+                companySort.value =
+                    "name";
+
+            }
+
+
+            sortCompanies();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FILTER TOGGLE
+========================================================= */
+
+if (
+    filterToggleBtn &&
+    companyFilters
+) {
+
+    filterToggleBtn.addEventListener(
+        "click",
+        function () {
+
+            companyFilters.classList.toggle(
+                "filters-hidden"
+            );
+
+
+            const hidden =
+                companyFilters.classList.contains(
+                    "filters-hidden"
+                );
+
+
+            filterToggleBtn.textContent =
+                hidden
+                    ? "⚙ Filters"
+                    : "✕ Hide Filters";
+
+        }
+    );
+
+}
 
 
 /* =========================================================
    ACADEMIC YEAR
 ========================================================= */
 
-const academicYear =
-    document.getElementById(
-        "academicYear"
-    );
+if (companiesYear) {
+
+    const savedYear =
+        localStorage.getItem(
+            "authorityCompaniesYear"
+        );
 
 
-if (academicYear) {
+    if (
+        savedYear &&
+        companiesYear.querySelector(
+            `option[value="${savedYear}"]`
+        )
+    ) {
 
-    academicYear.addEventListener(
+        companiesYear.value =
+            savedYear;
+
+    }
+
+
+    companiesYear.addEventListener(
         "change",
         function () {
 
-            console.log(
-                "Academic year changed:",
-                academicYear.value
+            const year =
+                companiesYear.value;
+
+
+            localStorage.setItem(
+                "authorityCompaniesYear",
+                year
+            );
+
+
+            document.dispatchEvent(
+                new CustomEvent(
+                    "companiesYearChanged",
+                    {
+                        detail: {
+                            year: year
+                        }
+                    }
+                )
             );
 
         }
     );
 
 }
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+if (exportCompaniesBtn) {
+
+    exportCompaniesBtn.addEventListener(
+        "click",
+        function () {
+
+            /*
+             * UI phase:
+             * browser print dialog.
+             *
+             * Later:
+             * Flask will generate proper
+             * Excel/PDF export.
+             */
+
+            window.print();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   YEAR CHANGE EVENT
+========================================================= */
+
+document.addEventListener(
+    "companiesYearChanged",
+    function (event) {
+
+        const year =
+            event.detail.year;
+
+
+        /*
+         * Future backend/API integration point.
+         *
+         * The selected year will eventually be sent to
+         * Flask, which will return only the companies
+         * belonging to the logged-in Authority's college.
+         */
+
+
+        console.log(
+            "Companies academic year:",
+            year
+        );
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        sortCompanies();
+
+        filterCompanies();
+
+    }
+);

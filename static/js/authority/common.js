@@ -1,14 +1,19 @@
 /* =========================================================
    CAMPUS PLACEMENT PORTAL
    AUTHORITY COMMON JS
-   ========================================================= */
+   ---------------------------------------------------------
+   Applies to:
+   - sidebar.html
+   - topbar.html
+   - base.html
+========================================================= */
 
 
 /* =========================================================
-   ELEMENTS
-   ========================================================= */
+   1. DOM ELEMENTS
+========================================================= */
 
-const authoritySidebar =
+const sidebar =
     document.getElementById("authoritySidebar");
 
 const mobileMenuBtn =
@@ -29,22 +34,35 @@ const sidebarThemeText =
 const searchInput =
     document.getElementById("authoritySearch");
 
-const analyticsToggle =
-    document.getElementById("analyticsToggle");
-
 const analyticsMenu =
     document.getElementById("analyticsMenu");
+
+const analyticsToggle =
+    document.getElementById("analyticsToggle");
 
 const analyticsArrow =
     document.getElementById("analyticsArrow");
 
-const notificationTopbarBtn =
-    document.getElementById("notificationTopbarBtn");
+const authorityProfile =
+    document.getElementById("authorityProfile");
+
+const profileArrow =
+    document.getElementById("profileArrow");
+
+const authorityProfileMenu =
+    document.getElementById(
+        "authorityProfileMenu"
+    );
+
+const headerNotificationBtn =
+    document.getElementById(
+        "headerNotificationBtn"
+    );
 
 
 /* =========================================================
-   THEME
-   ========================================================= */
+   2. THEME
+========================================================= */
 
 function applyAuthorityTheme(theme) {
 
@@ -55,10 +73,11 @@ function applyAuthorityTheme(theme) {
         );
 
 
+        /* Sidebar */
+
         if (sidebarThemeIcon) {
 
-            sidebarThemeIcon.textContent =
-                "☀";
+            sidebarThemeIcon.textContent = "☀";
 
         }
 
@@ -71,10 +90,11 @@ function applyAuthorityTheme(theme) {
         }
 
 
+        /* Header */
+
         if (headerThemeBtn) {
 
-            headerThemeBtn.textContent =
-                "☀";
+            headerThemeBtn.textContent = "☀";
 
         }
 
@@ -85,10 +105,11 @@ function applyAuthorityTheme(theme) {
         );
 
 
+        /* Sidebar */
+
         if (sidebarThemeIcon) {
 
-            sidebarThemeIcon.textContent =
-                "☾";
+            sidebarThemeIcon.textContent = "☾";
 
         }
 
@@ -101,10 +122,11 @@ function applyAuthorityTheme(theme) {
         }
 
 
+        /* Header */
+
         if (headerThemeBtn) {
 
-            headerThemeBtn.textContent =
-                "☼";
+            headerThemeBtn.textContent = "☼";
 
         }
 
@@ -120,23 +142,23 @@ function applyAuthorityTheme(theme) {
 
 
 /* =========================================================
-   LOAD SAVED THEME
-   ========================================================= */
+   3. LOAD SAVED THEME
+========================================================= */
 
-const savedAuthorityTheme =
+const savedTheme =
     localStorage.getItem(
         "authorityTheme"
     ) || "light";
 
 
 applyAuthorityTheme(
-    savedAuthorityTheme
+    savedTheme
 );
 
 
 /* =========================================================
-   THEME TOGGLE FUNCTION
-   ========================================================= */
+   4. THEME TOGGLE HELPER
+========================================================= */
 
 function toggleAuthorityTheme() {
 
@@ -154,8 +176,8 @@ function toggleAuthorityTheme() {
 
 
 /* =========================================================
-   SIDEBAR THEME BUTTON
-   ========================================================= */
+   5. SIDEBAR THEME BUTTON
+========================================================= */
 
 if (sidebarThemeBtn) {
 
@@ -172,8 +194,8 @@ if (sidebarThemeBtn) {
 
 
 /* =========================================================
-   HEADER THEME BUTTON
-   ========================================================= */
+   6. HEADER THEME BUTTON
+========================================================= */
 
 if (headerThemeBtn) {
 
@@ -190,19 +212,21 @@ if (headerThemeBtn) {
 
 
 /* =========================================================
-   MOBILE SIDEBAR
-   ========================================================= */
+   7. MOBILE SIDEBAR
+========================================================= */
 
 if (
     mobileMenuBtn &&
-    authoritySidebar
+    sidebar
 ) {
 
     mobileMenuBtn.addEventListener(
         "click",
-        function () {
+        function (event) {
 
-            authoritySidebar.classList.toggle(
+            event.stopPropagation();
+
+            sidebar.classList.toggle(
                 "open"
             );
 
@@ -213,93 +237,15 @@ if (
 
 
 /* =========================================================
-   CLOSE MOBILE SIDEBAR
-   ========================================================= */
+   8. ANALYTICS DROPDOWN
+========================================================= */
 
-document
-    .querySelectorAll(
-        ".nav-link, .analytics-sub-link"
-    )
-    .forEach(
-        function (link) {
+function openAnalytics() {
 
-            link.addEventListener(
-                "click",
-                function () {
+    if (!analyticsMenu) {
+        return;
+    }
 
-                    if (
-                        window.innerWidth <= 950 &&
-                        authoritySidebar
-                    ) {
-
-                        authoritySidebar.classList.remove(
-                            "open"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
-   ANALYTICS DROPDOWN
-   ========================================================= */
-
-if (
-    analyticsToggle &&
-    analyticsMenu
-) {
-
-    analyticsToggle.addEventListener(
-        "click",
-        function () {
-
-            const isExpanded =
-                analyticsMenu.classList.contains(
-                    "expanded"
-                );
-
-
-            analyticsMenu.classList.toggle(
-                "expanded",
-                !isExpanded
-            );
-
-
-            if (analyticsArrow) {
-
-                analyticsArrow.classList.toggle(
-                    "rotate",
-                    !isExpanded
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   AUTO OPEN ANALYTICS
-   WHEN ANALYTICS PAGE IS ACTIVE
-   ========================================================= */
-
-const activeAnalyticsLink =
-    document.querySelector(
-        ".analytics-sub-link.active"
-    );
-
-
-if (
-    activeAnalyticsLink &&
-    analyticsMenu
-) {
 
     analyticsMenu.classList.add(
         "expanded"
@@ -317,16 +263,234 @@ if (
 }
 
 
+function closeAnalytics() {
+
+    if (!analyticsMenu) {
+        return;
+    }
+
+
+    analyticsMenu.classList.remove(
+        "expanded"
+    );
+
+
+    if (analyticsArrow) {
+
+        analyticsArrow.classList.remove(
+            "rotate"
+        );
+
+    }
+
+}
+
+
+function toggleAnalytics() {
+
+    if (!analyticsMenu) {
+        return;
+    }
+
+
+    const isExpanded =
+        analyticsMenu.classList.contains(
+            "expanded"
+        );
+
+
+    if (isExpanded) {
+
+        closeAnalytics();
+
+    } else {
+
+        openAnalytics();
+
+    }
+
+}
+
+
+if (
+    analyticsToggle &&
+    analyticsMenu
+) {
+
+    analyticsToggle.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            toggleAnalytics();
+
+        }
+    );
+
+}
+
+
 /* =========================================================
-   CTRL + K SEARCH
-   ========================================================= */
+   9. ANALYTICS INITIAL STATE
+   ---------------------------------------------------------
+   If a report page is currently active, the sidebar
+   already receives "expanded" from Jinja.
+========================================================= */
+
+if (
+    analyticsMenu &&
+    analyticsMenu.classList.contains(
+        "expanded"
+    )
+) {
+
+    openAnalytics();
+
+}
+
+
+/* =========================================================
+   10. PROFILE DROPDOWN
+========================================================= */
+
+function openProfileMenu() {
+
+    if (!authorityProfileMenu) {
+        return;
+    }
+
+
+    authorityProfileMenu.classList.add(
+        "open"
+    );
+
+
+    if (profileArrow) {
+
+        profileArrow.style.transform =
+            "rotate(180deg)";
+
+    }
+
+}
+
+
+function closeProfileMenu() {
+
+    if (!authorityProfileMenu) {
+        return;
+    }
+
+
+    authorityProfileMenu.classList.remove(
+        "open"
+    );
+
+
+    if (profileArrow) {
+
+        profileArrow.style.transform =
+            "rotate(0deg)";
+
+    }
+
+}
+
+
+function toggleProfileMenu() {
+
+    if (!authorityProfileMenu) {
+        return;
+    }
+
+
+    const isOpen =
+        authorityProfileMenu.classList.contains(
+            "open"
+        );
+
+
+    if (isOpen) {
+
+        closeProfileMenu();
+
+    } else {
+
+        openProfileMenu();
+
+    }
+
+}
+
+
+if (authorityProfile) {
+
+    authorityProfile.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+            toggleProfileMenu();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   11. NOTIFICATION BUTTON
+========================================================= */
+
+if (headerNotificationBtn) {
+
+    headerNotificationBtn.addEventListener(
+        "click",
+        function () {
+
+            /*
+             * Notification page is already available.
+             * For now clicking the bell opens the
+             * Authority Notifications page.
+             */
+
+            const notificationUrl =
+                headerNotificationBtn.dataset.url;
+
+
+            if (notificationUrl) {
+
+                window.location.href =
+                    notificationUrl;
+
+            } else {
+
+                window.location.href =
+                    "/authority/notifications";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   12. CTRL + K SEARCH SHORTCUT
+========================================================= */
 
 document.addEventListener(
     "keydown",
     function (event) {
 
         if (
-            (event.ctrlKey || event.metaKey) &&
+            (event.ctrlKey ||
+                event.metaKey) &&
             event.key.toLowerCase() === "k"
         ) {
 
@@ -348,8 +512,8 @@ document.addEventListener(
 
 
 /* =========================================================
-   SEARCH
-   ========================================================= */
+   13. SEARCH INPUT
+========================================================= */
 
 if (searchInput) {
 
@@ -358,21 +522,12 @@ if (searchInput) {
         function (event) {
 
             if (
-                event.key === "Enter"
+                event.key === "Escape"
             ) {
 
-                const value =
-                    searchInput.value.trim();
+                searchInput.value = "";
 
-
-                if (value !== "") {
-
-                    console.log(
-                        "Authority search:",
-                        value
-                    );
-
-                }
+                searchInput.blur();
 
             }
 
@@ -383,26 +538,150 @@ if (searchInput) {
 
 
 /* =========================================================
-   NOTIFICATION BUTTON
-   ========================================================= */
+   14. CLOSE SIDEBAR AFTER NAVIGATION
+========================================================= */
 
-if (notificationTopbarBtn) {
+document
+    .querySelectorAll(
+        ".nav-link, .analytics-sub-link"
+    )
+    .forEach(
+        function (link) {
 
-    notificationTopbarBtn.addEventListener(
-        "click",
-        function () {
+            link.addEventListener(
+                "click",
+                function () {
 
-            /*
-                Notifications page ka route
-                baad mein add hoga.
+                    if (
+                        window.innerWidth <= 950 &&
+                        sidebar
+                    ) {
 
-                Abhi button intentionally
-                non-navigational hai.
-            */
+                        sidebar.classList.remove(
+                            "open"
+                        );
 
-            console.log(
-                "Authority notifications clicked"
+                    }
+
+                }
             );
+
+        }
+    );
+
+
+/* =========================================================
+   15. OUTSIDE CLICK
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+
+        /* -----------------------------------------
+           Profile dropdown
+        ----------------------------------------- */
+
+        if (
+            authorityProfileMenu &&
+            authorityProfile &&
+            !authorityProfile.contains(
+                event.target
+            ) &&
+            !authorityProfileMenu.contains(
+                event.target
+            )
+        ) {
+
+            closeProfileMenu();
+
+        }
+
+
+        /* -----------------------------------------
+           Mobile sidebar
+        ----------------------------------------- */
+
+        if (
+            window.innerWidth <= 950 &&
+            sidebar &&
+            sidebar.classList.contains(
+                "open"
+            ) &&
+            !sidebar.contains(
+                event.target
+            ) &&
+            mobileMenuBtn &&
+            !mobileMenuBtn.contains(
+                event.target
+            )
+        ) {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   16. ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeProfileMenu();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   17. WINDOW RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    function () {
+
+        if (
+            window.innerWidth > 950 &&
+            sidebar
+        ) {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   18. PREVENT PROFILE MENU CLICK FROM CLOSING ITSELF
+========================================================= */
+
+if (authorityProfileMenu) {
+
+    authorityProfileMenu.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
 
         }
     );
@@ -411,115 +690,42 @@ if (notificationTopbarBtn) {
 
 
 /* =========================================================
-   CLOSE SIDEBAR ON OUTSIDE CLICK
-   ========================================================= */
-
-document.addEventListener(
-    "click",
-    function (event) {
-
-        if (
-            window.innerWidth > 950 ||
-            !authoritySidebar ||
-            !authoritySidebar.classList.contains(
-                "open"
-            )
-        ) {
-
-            return;
-
-        }
-
-
-        const clickedInsideSidebar =
-            authoritySidebar.contains(
-                event.target
-            );
-
-
-        const clickedMenuButton =
-            mobileMenuBtn &&
-            mobileMenuBtn.contains(
-                event.target
-            );
-
-
-        if (
-            !clickedInsideSidebar &&
-            !clickedMenuButton
-        ) {
-
-            authoritySidebar.classList.remove(
-                "open"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   ESCAPE KEY
-   ========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape" &&
-            authoritySidebar
-        ) {
-
-            authoritySidebar.classList.remove(
-                "open"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   RESIZE
-   ========================================================= */
-
-window.addEventListener(
-    "resize",
-    function () {
-
-        if (
-            window.innerWidth > 950 &&
-            authoritySidebar
-        ) {
-
-            authoritySidebar.classList.remove(
-                "open"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   PAGE LOAD
-   ========================================================= */
+   19. PAGE LOAD
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
         /*
-            Common Authority shell is ready.
-        */
+         * Re-check saved theme after DOM is ready.
+         */
 
-        console.log(
-            "Authority common system loaded."
+        const currentTheme =
+            localStorage.getItem(
+                "authorityTheme"
+            ) || "light";
+
+
+        applyAuthorityTheme(
+            currentTheme
         );
+
+
+        /*
+         * Keep Analytics open on report pages.
+         */
+
+        if (
+            analyticsMenu &&
+            analyticsMenu.classList.contains(
+                "expanded"
+            )
+        ) {
+
+            openAnalytics();
+
+        }
 
     }
 );

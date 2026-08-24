@@ -1,0 +1,941 @@
+{% extends "authority/base.html" %}
+
+{% block title %}Branch-wise Reports | Authority{% endblock %}
+
+{% block content %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/authority/analytics/branch_reports.css') }}"
+>
+
+<div class="branch-reports-page">
+
+    <!-- HEADER -->
+
+    <div class="branch-reports-header">
+
+        <div>
+
+            <div class="page-eyebrow">
+                ANALYTICS
+            </div>
+
+            <h1>
+                Branch-wise Reports
+            </h1>
+
+            <p>
+                Analyse placement performance across academic branches.
+            </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <select
+                id="academicYear"
+                class="report-select"
+            >
+                <option value="2026-27">
+                    2026 - 27
+                </option>
+
+                <option value="2025-26">
+                    2025 - 26
+                </option>
+
+                <option value="2024-25">
+                    2024 - 25
+                </option>
+            </select>
+
+
+            <select
+                id="branchFilter"
+                class="report-select"
+            >
+                <option value="all">
+                    All Branches
+                </option>
+
+                <option value="cse">
+                    CSE
+                </option>
+
+                <option value="it">
+                    IT
+                </option>
+
+                <option value="ece">
+                    ECE
+                </option>
+
+                <option value="ee">
+                    EE
+                </option>
+
+                <option value="me">
+                    ME
+                </option>
+
+                <option value="civil">
+                    Civil
+                </option>
+            </select>
+
+
+            <button
+                type="button"
+                id="exportBranchReport"
+                class="export-btn"
+            >
+                ↓ Export Report
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SCOPE -->
+
+    <div class="scope-card">
+
+        <div class="scope-icon">
+            ◉
+        </div>
+
+
+        <div class="scope-info">
+
+            <span>
+                AUTHORITY DATA SCOPE
+            </span>
+
+            <strong>
+                College Authority
+            </strong>
+
+            <small>
+                Branch reports are restricted to your assigned college.
+            </small>
+
+        </div>
+
+
+        <div class="scope-code">
+            ● {{ session.get("college_code", "PCE") }}
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+
+            <div class="summary-icon purple">
+                ▦
+            </div>
+
+            <div>
+
+                <span>
+                    Total Students
+                </span>
+
+                <strong>
+                    3,240
+                </strong>
+
+                <small>
+                    Across all branches
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon blue">
+                ◉
+            </div>
+
+            <div>
+
+                <span>
+                    Eligible Students
+                </span>
+
+                <strong>
+                    2,685
+                </strong>
+
+                <small>
+                    Placement eligible
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Students Placed
+                </span>
+
+                <strong>
+                    865
+                </strong>
+
+                <small>
+                    Successfully placed
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon orange">
+                %
+            </div>
+
+            <div>
+
+                <span>
+                    Placement Rate
+                </span>
+
+                <strong>
+                    32.22%
+                </strong>
+
+                <small>
+                    Overall placement rate
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BRANCH PERFORMANCE -->
+
+    <section class="report-card branch-performance-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Branch Performance
+                </h2>
+
+                <p>
+                    Placement performance across individual branches.
+                </p>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="branchSearch"
+                    placeholder="Search branch..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table class="branch-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            BRANCH
+                        </th>
+
+                        <th>
+                            STUDENTS
+                        </th>
+
+                        <th>
+                            ELIGIBLE
+                        </th>
+
+                        <th>
+                            APPEARED
+                        </th>
+
+                        <th>
+                            SELECTED
+                        </th>
+
+                        <th>
+                            PLACEMENT %
+                        </th>
+
+                        <th>
+                            AVG PACKAGE
+                        </th>
+
+                        <th>
+                            HIGHEST PACKAGE
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="branchTableBody">
+
+
+                    <tr data-branch="cse">
+
+                        <td>
+
+                            <strong>
+                                CSE
+                            </strong>
+
+                            <small>
+                                Computer Science & Engineering
+                            </small>
+
+                        </td>
+
+                        <td>
+                            720
+                        </td>
+
+                        <td>
+                            625
+                        </td>
+
+                        <td>
+                            580
+                        </td>
+
+                        <td class="selected">
+                            245
+                        </td>
+
+                        <td>
+
+                            <span class="placement-rate high">
+                                39.20%
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ₹8.40 LPA
+                        </td>
+
+                        <td>
+                            ₹18.00 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-branch="it">
+
+                        <td>
+
+                            <strong>
+                                IT
+                            </strong>
+
+                            <small>
+                                Information Technology
+                            </small>
+
+                        </td>
+
+                        <td>
+                            610
+                        </td>
+
+                        <td>
+                            520
+                        </td>
+
+                        <td>
+                            490
+                        </td>
+
+                        <td class="selected">
+                            178
+                        </td>
+
+                        <td>
+
+                            <span class="placement-rate high">
+                                34.23%
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ₹7.80 LPA
+                        </td>
+
+                        <td>
+                            ₹15.00 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-branch="ece">
+
+                        <td>
+
+                            <strong>
+                                ECE
+                            </strong>
+
+                            <small>
+                                Electronics & Communication
+                            </small>
+
+                        </td>
+
+                        <td>
+                            540
+                        </td>
+
+                        <td>
+                            455
+                        </td>
+
+                        <td>
+                            420
+                        </td>
+
+                        <td class="selected">
+                            142
+                        </td>
+
+                        <td>
+
+                            <span class="placement-rate medium">
+                                31.21%
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ₹7.20 LPA
+                        </td>
+
+                        <td>
+                            ₹14.00 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-branch="ee">
+
+                        <td>
+
+                            <strong>
+                                EE
+                            </strong>
+
+                            <small>
+                                Electrical Engineering
+                            </small>
+
+                        </td>
+
+                        <td>
+                            420
+                        </td>
+
+                        <td>
+                            350
+                        </td>
+
+                        <td>
+                            320
+                        </td>
+
+                        <td class="selected">
+                            96
+                        </td>
+
+                        <td>
+
+                            <span class="placement-rate medium">
+                                27.43%
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ₹6.70 LPA
+                        </td>
+
+                        <td>
+                            ₹12.00 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-branch="me">
+
+                        <td>
+
+                            <strong>
+                                ME
+                            </strong>
+
+                            <small>
+                                Mechanical Engineering
+                            </small>
+
+                        </td>
+
+                        <td>
+                            510
+                        </td>
+
+                        <td>
+                            390
+                        </td>
+
+                        <td>
+                            360
+                        </td>
+
+                        <td class="selected">
+                            112
+                        </td>
+
+                        <td>
+
+                            <span class="placement-rate medium">
+                                28.72%
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ₹6.40 LPA
+                        </td>
+
+                        <td>
+                            ₹11.50 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-branch="civil">
+
+                        <td>
+
+                            <strong>
+                                Civil
+                            </strong>
+
+                            <small>
+                                Civil Engineering
+                            </small>
+
+                        </td>
+
+                        <td>
+                            440
+                        </td>
+
+                        <td>
+                            345
+                        </td>
+
+                        <td>
+                            310
+                        </td>
+
+                        <td class="selected">
+                            92
+                        </td>
+
+                        <td>
+
+                            <span class="placement-rate low">
+                                26.67%
+                            </span>
+
+                        </td>
+
+                        <td>
+                            ₹5.90 LPA
+                        </td>
+
+                        <td>
+                            ₹10.00 LPA
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- PLACEMENT RATE -->
+
+    <div class="reports-grid">
+
+        <section class="report-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Branch-wise Placement Rate
+                    </h2>
+
+                    <p>
+                        Percentage of eligible students placed.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="placement-bars">
+
+                <div class="bar-item">
+
+                    <div class="bar-heading">
+                        <span>CSE</span>
+                        <strong>39.20%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:78.4%;"
+                        ></div>
+                    </div>
+
+                </div>
+
+
+                <div class="bar-item">
+
+                    <div class="bar-heading">
+                        <span>IT</span>
+                        <strong>34.23%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:68.46%;"
+                        ></div>
+                    </div>
+
+                </div>
+
+
+                <div class="bar-item">
+
+                    <div class="bar-heading">
+                        <span>ECE</span>
+                        <strong>31.21%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:62.42%;"
+                        ></div>
+                    </div>
+
+                </div>
+
+
+                <div class="bar-item">
+
+                    <div class="bar-heading">
+                        <span>ME</span>
+                        <strong>28.72%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:57.44%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bar-item">
+
+                    <div class="bar-heading">
+                        <span>EE</span>
+                        <strong>27.43%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:54.86%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bar-item">
+
+                    <div class="bar-heading">
+                        <span>Civil</span>
+                        <strong>26.67%</strong>
+                    </div>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:53.34%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PACKAGE COMPARISON -->
+
+        <section class="report-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Package Comparison
+                    </h2>
+
+                    <p>
+                        Average and highest package by branch.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="package-comparison">
+
+                <div class="package-row">
+
+                    <div class="package-branch">
+                        CSE
+                    </div>
+
+                    <div class="package-values">
+
+                        <span>
+                            Avg ₹8.40 LPA
+                        </span>
+
+                        <strong>
+                            ₹18.00 LPA
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="package-row">
+
+                    <div class="package-branch">
+                        IT
+                    </div>
+
+                    <div class="package-values">
+
+                        <span>
+                            Avg ₹7.80 LPA
+                        </span>
+
+                        <strong>
+                            ₹15.00 LPA
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="package-row">
+
+                    <div class="package-branch">
+                        ECE
+                    </div>
+
+                    <div class="package-values">
+
+                        <span>
+                            Avg ₹7.20 LPA
+                        </span>
+
+                        <strong>
+                            ₹14.00 LPA
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="package-row">
+
+                    <div class="package-branch">
+                        EE
+                    </div>
+
+                    <div class="package-values">
+
+                        <span>
+                            Avg ₹6.70 LPA
+                        </span>
+
+                        <strong>
+                            ₹12.00 LPA
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="package-row">
+
+                    <div class="package-branch">
+                        ME
+                    </div>
+
+                    <div class="package-values">
+
+                        <span>
+                            Avg ₹6.40 LPA
+                        </span>
+
+                        <strong>
+                            ₹11.50 LPA
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="package-row">
+
+                    <div class="package-branch">
+                        Civil
+                    </div>
+
+                    <div class="package-values">
+
+                        <span>
+                            Avg ₹5.90 LPA
+                        </span>
+
+                        <strong>
+                            ₹10.00 LPA
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="reports-footer">
+
+        <span>
+            Report generated for
+            <strong id="footerYear">
+                2026-27
+            </strong>
+        </span>
+
+        <span>
+            Campus Placement Portal
+        </span>
+
+    </div>
+
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='js/authority/analytics/branch_reports.js') }}"
+></script>
+
+{% endblock %}

@@ -1,15 +1,14 @@
 /* =====================================================
-   NOC MANAGEMENT
+   DRIVE REPORTS
    ===================================================== */
 
-.noc-page {
+.drive-reports-page {
     width: 100%;
 }
 
-
 /* HEADER */
 
-.noc-header {
+.drive-reports-header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -25,14 +24,14 @@
     letter-spacing: 1.2px;
 }
 
-.noc-header h1 {
+.drive-reports-header h1 {
     margin: 0;
     color: #f5f7fb;
     font-size: 30px;
     font-weight: 800;
 }
 
-.noc-header p {
+.drive-reports-header p {
     margin: 6px 0 0;
     color: #8993aa;
     font-size: 11px;
@@ -44,7 +43,7 @@
     gap: 9px;
 }
 
-.noc-select {
+.academic-select {
     height: 39px;
     min-width: 120px;
     padding: 0 10px;
@@ -55,6 +54,8 @@
     background: #171b27;
     font-size: 9px;
 }
+
+/* EXPORT */
 
 .export-btn {
     height: 39px;
@@ -79,6 +80,10 @@
     transform: translateY(0);
 }
 
+.export-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 /* SCOPE */
 
@@ -141,7 +146,6 @@
     font-weight: 800;
 }
 
-
 /* SUMMARY */
 
 .summary-grid {
@@ -179,6 +183,11 @@
     background: #25163f;
 }
 
+.summary-icon.blue {
+    color: #4591f5;
+    background: #132d4d;
+}
+
 .summary-icon.orange {
     color: #ff9f25;
     background: #362617;
@@ -187,11 +196,6 @@
 .summary-icon.green {
     color: #20c989;
     background: #102f25;
-}
-
-.summary-icon.red {
-    color: #ff5f67;
-    background: #351b20;
 }
 
 .summary-card span {
@@ -214,18 +218,20 @@
     font-size: 7px;
 }
 
+/* GRID */
 
-/* CARD */
+.reports-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 15px;
+    margin-bottom: 18px;
+}
 
 .report-card {
     overflow: hidden;
     border: 1px solid #302d3b;
     border-radius: 17px;
     background: #17151f;
-}
-
-.noc-applications-card {
-    margin-bottom: 18px;
 }
 
 .card-header {
@@ -250,11 +256,193 @@
     font-size: 8px;
 }
 
+/* PERFORMANCE */
 
-/* SEARCH */
+.performance-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 17px;
+}
+
+.performance-stat {
+    padding: 15px;
+    border: 1px solid #292d3a;
+    border-radius: 11px;
+    background: #131722;
+}
+
+.performance-stat span {
+    display: block;
+    color: #7f899f;
+    font-size: 8px;
+}
+
+.performance-stat strong {
+    display: block;
+    margin-top: 5px;
+    color: #f4f6fb;
+    font-size: 20px;
+}
+
+.performance-stat small {
+    display: block;
+    margin-top: 4px;
+    color: #68738b;
+    font-size: 7px;
+}
+
+/* STATUS */
+
+.status-list {
+    padding: 20px 18px;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.status-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #9aa4b9;
+    font-size: 9px;
+}
+
+.status-row strong {
+    color: #eef1f7;
+    font-size: 10px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot.green {
+    background: #20c889;
+}
+
+.dot.blue {
+    background: #438cf4;
+}
+
+.dot.orange {
+    background: #ff9f20;
+}
+
+.status-track {
+    width: 100%;
+    height: 6px;
+    margin-bottom: 19px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #292f3d;
+}
+
+.status-fill {
+    height: 100%;
+    border-radius: inherit;
+}
+
+.status-fill.green {
+    background: #20c889;
+}
+
+.status-fill.blue {
+    background: #438cf4;
+}
+
+.status-fill.orange {
+    background: #ff9f20;
+}
+
+/* DRIVE TYPE */
+
+.drive-type-card {
+    margin-bottom: 18px;
+}
+
+.drive-type-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding: 20px 18px;
+}
+
+.type-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.type-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.type-icon.purple {
+    color: #8140ff;
+    background: #25163f;
+}
+
+.type-icon.blue {
+    color: #438cf4;
+    background: #132d4c;
+}
+
+.type-info {
+    flex: 1;
+}
+
+.type-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.type-heading span {
+    color: #9aa4b8;
+    font-size: 9px;
+}
+
+.type-heading strong {
+    color: #eef1f7;
+    font-size: 9px;
+}
+
+.type-track {
+    height: 6px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #292f3d;
+}
+
+.type-track div {
+    height: 100%;
+    border-radius: inherit;
+    background: #713cff;
+}
+
+/* TABLE */
+
+.company-drive-card {
+    margin-bottom: 18px;
+}
 
 .search-box {
-    width: 190px;
+    width: 170px;
     height: 32px;
     display: flex;
     align-items: center;
@@ -282,21 +470,18 @@
     color: #68738b;
 }
 
-
-/* TABLE */
-
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
 }
 
-.noc-table {
+.drive-table {
     width: 100%;
     min-width: 900px;
     border-collapse: collapse;
 }
 
-.noc-table th {
+.drive-table th {
     padding: 10px 15px;
     border-bottom: 1px solid #302d3b;
     color: #707a92;
@@ -307,7 +492,7 @@
     white-space: nowrap;
 }
 
-.noc-table td {
+.drive-table td {
     padding: 12px 15px;
     border-bottom: 1px solid #252936;
     color: #929caf;
@@ -315,21 +500,15 @@
     white-space: nowrap;
 }
 
-.noc-table td strong {
-    display: block;
+.drive-table td strong {
     color: #edf0f6;
     font-size: 9px;
 }
 
-.noc-table td small {
-    display: block;
-    margin-top: 3px;
-    color: #69738a;
-    font-size: 7px;
+.drive-table td.selected {
+    color: #20c889;
+    font-weight: 800;
 }
-
-
-/* BADGES */
 
 .type-badge,
 .status-badge {
@@ -350,21 +529,20 @@
     background: #25163f;
 }
 
-.status-badge.pending {
-    color: #ff9f20;
-    background: #352616;
-}
-
-.status-badge.approved {
+.status-badge.completed {
     color: #20c889;
     background: #102e24;
 }
 
-.status-badge.rejected {
-    color: #ff6670;
-    background: #351b20;
+.status-badge.ongoing {
+    color: #438cf4;
+    background: #132c4b;
 }
 
+.status-badge.upcoming {
+    color: #ff9f20;
+    background: #352616;
+}
 
 /* FOOTER */
 
@@ -380,7 +558,6 @@
     color: #8993aa;
 }
 
-
 /* RESPONSIVE */
 
 @media (max-width: 1100px) {
@@ -389,11 +566,15 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 @media (max-width: 700px) {
 
-    .noc-header {
+    .drive-reports-header {
         align-items: stretch;
         flex-direction: column;
     }
@@ -403,7 +584,7 @@
         flex-wrap: wrap;
     }
 
-    .noc-select {
+    .academic-select {
         flex: 1;
     }
 
@@ -412,6 +593,10 @@
     }
 
     .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .drive-type-content {
         grid-template-columns: 1fr;
     }
 

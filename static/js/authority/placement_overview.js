@@ -1,29 +1,126 @@
 /* =========================================================
-   AUTHORITY
-   PLACEMENT OVERVIEW JS
-   ========================================================= */
+   AUTHORITY PLACEMENT OVERVIEW JS
+========================================================= */
 
 
 /* =========================================================
-   ACADEMIC SESSION
-   ========================================================= */
+   ELEMENTS
+========================================================= */
 
-const academicSession =
-    document.getElementById("academicSession");
+const overviewYear =
+    document.getElementById(
+        "overviewYear"
+    );
+
+const performancePeriod =
+    document.getElementById(
+        "performancePeriod"
+    );
+
+const exportButton =
+    document.getElementById(
+        "overviewExportBtn"
+    );
+
+const performanceColumns =
+    document.querySelectorAll(
+        ".performance-column"
+    );
+
+const overviewCollegeName =
+    document.getElementById(
+        "overviewCollegeName"
+    );
 
 
-if (academicSession) {
+/* =========================================================
+   COLLEGE SCOPE
+========================================================= */
 
-    academicSession.addEventListener(
+function getCollegeScope() {
+
+    const collegeName =
+        document.body.dataset.collegeName;
+
+    const collegeCode =
+        document.body.dataset.collegeCode;
+
+
+    if (collegeName) {
+
+        return collegeName;
+
+    }
+
+
+    if (collegeCode) {
+
+        return collegeCode;
+
+    }
+
+
+    return "College Authority";
+
+}
+
+
+if (overviewCollegeName) {
+
+    overviewCollegeName.textContent =
+        getCollegeScope();
+
+}
+
+
+/* =========================================================
+   ACADEMIC YEAR
+========================================================= */
+
+if (overviewYear) {
+
+    const savedYear =
+        localStorage.getItem(
+            "authorityOverviewYear"
+        );
+
+
+    if (
+        savedYear &&
+        overviewYear.querySelector(
+            `option[value="${savedYear}"]`
+        )
+    ) {
+
+        overviewYear.value =
+            savedYear;
+
+    }
+
+
+    overviewYear.addEventListener(
         "change",
         function () {
 
-            const selectedSession =
-                this.value;
+            const year =
+                overviewYear.value;
 
-            console.log(
-                "Academic session selected:",
-                selectedSession
+
+            localStorage.setItem(
+                "authorityOverviewYear",
+                year
+            );
+
+
+            document.dispatchEvent(
+                new CustomEvent(
+                    "overviewYearChanged",
+                    {
+                        detail: {
+                            year: year
+                        }
+                    }
+                )
             );
 
         }
@@ -33,34 +130,163 @@ if (academicSession) {
 
 
 /* =========================================================
-   COMPANY PROGRESS ANIMATION
-   ========================================================= */
+   PERFORMANCE PERIOD
+========================================================= */
 
-function animateProgressBars() {
+function applyPerformancePeriod(
+    period
+) {
 
-    const bars =
-        document.querySelectorAll(
-            ".company-progress span"
+    if (
+        !performanceColumns.length
+    ) {
+
+        return;
+
+    }
+
+
+    performanceColumns.forEach(
+        function (
+            column,
+            index
+        ) {
+
+            if (
+                period === "3" &&
+                index < 2
+            ) {
+
+                column.style.display =
+                    "none";
+
+            } else {
+
+                column.style.display =
+                    "flex";
+
+            }
+
+        }
+    );
+
+}
+
+
+if (performancePeriod) {
+
+    const savedPeriod =
+        localStorage.getItem(
+            "authorityOverviewPeriod"
         );
 
 
-    bars.forEach(
-        function (bar) {
+    if (
+        savedPeriod &&
+        performancePeriod.querySelector(
+            `option[value="${savedPeriod}"]`
+        )
+    ) {
 
-            const finalWidth =
-                bar.style.width;
+        performancePeriod.value =
+            savedPeriod;
 
-            bar.style.width = "0";
+        applyPerformancePeriod(
+            savedPeriod
+        );
+
+    }
+
+
+    performancePeriod.addEventListener(
+        "change",
+        function () {
+
+            const period =
+                performancePeriod.value;
+
+
+            localStorage.setItem(
+                "authorityOverviewPeriod",
+                period
+            );
+
+
+            applyPerformancePeriod(
+                period
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT REPORT
+========================================================= */
+
+if (exportButton) {
+
+    exportButton.addEventListener(
+        "click",
+        function () {
+
+            /*
+             * Frontend phase:
+             * temporary browser print/export.
+             *
+             * Later this button will call Flask and
+             * generate a proper PDF/Excel report.
+             */
+
+            window.print();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STAT CARD ANIMATION
+========================================================= */
+
+function animateStatCards() {
+
+    const cards =
+        document.querySelectorAll(
+            ".overview-stat-card"
+        );
+
+
+    cards.forEach(
+        function (
+            card,
+            index
+        ) {
+
+            card.style.opacity =
+                "0";
+
+            card.style.transform =
+                "translateY(8px)";
 
 
             setTimeout(
                 function () {
 
-                    bar.style.width =
-                        finalWidth;
+                    card.style.transition =
+                        "opacity 0.35s ease, transform 0.35s ease";
+
+                    card.style.opacity =
+                        "1";
+
+                    card.style.transform =
+                        "translateY(0)";
 
                 },
-                150
+                index * 60
             );
 
         }
@@ -70,68 +296,33 @@ function animateProgressBars() {
 
 
 /* =========================================================
-   AVERAGE PACKAGE PROGRESS
-   ========================================================= */
+   PERFORMANCE BAR ANIMATION
+========================================================= */
 
-function animateAveragePackageBars() {
+function animatePerformanceBars() {
 
     const bars =
         document.querySelectorAll(
-            ".average-progress span"
+            ".performance-bar"
         );
 
 
     bars.forEach(
         function (bar) {
 
-            const finalWidth =
-                bar.style.width;
-
-            bar.style.width = "0";
+            const originalHeight =
+                bar.style.height;
 
 
-            setTimeout(
-                function () {
-
-                    bar.style.width =
-                        finalWidth;
-
-                },
-                200
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   DEPARTMENT PROGRESS
-   ========================================================= */
-
-function animateDepartmentBars() {
-
-    const bars =
-        document.querySelectorAll(
-            ".department-progress span"
-        );
-
-
-    bars.forEach(
-        function (bar) {
-
-            const finalWidth =
-                bar.style.width;
-
-            bar.style.width = "0";
+            bar.style.height =
+                "0";
 
 
             setTimeout(
                 function () {
 
-                    bar.style.width =
-                        finalWidth;
+                    bar.style.height =
+                        originalHeight;
 
                 },
                 250
@@ -144,33 +335,39 @@ function animateDepartmentBars() {
 
 
 /* =========================================================
-   TREND BAR TOOLTIP
-   ========================================================= */
+   TABLE PROGRESS ANIMATION
+========================================================= */
 
-function initTrendBars() {
+function animateTableProgress() {
 
     const bars =
         document.querySelectorAll(
-            ".trend-bar"
+            ".table-progress div"
         );
 
 
     bars.forEach(
         function (bar) {
 
-            bar.addEventListener(
-                "mouseenter",
+            const originalWidth =
+                bar.style.width;
+
+
+            bar.style.width =
+                "0";
+
+
+            setTimeout(
                 function () {
 
-                    const value =
-                        this.dataset.value;
+                    bar.style.transition =
+                        "width 0.7s ease";
 
-                    console.log(
-                        "Placed students:",
-                        value
-                    );
+                    bar.style.width =
+                        originalWidth;
 
-                }
+                },
+                300
             );
 
         }
@@ -180,24 +377,53 @@ function initTrendBars() {
 
 
 /* =========================================================
-   PAGE LOAD
-   ========================================================= */
+   YEAR CHANGE EVENT
+========================================================= */
+
+document.addEventListener(
+    "overviewYearChanged",
+    function (event) {
+
+        const year =
+            event.detail.year;
+
+
+        /*
+         * Future backend integration point.
+         *
+         * Later:
+         *
+         * fetch(
+         *   `/authority/api/overview?year=${year}`
+         * )
+         *
+         * Backend will return ONLY the logged-in
+         * Authority's college data.
+         */
+
+
+        console.log(
+            "Placement Overview year:",
+            year
+        );
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-        animateProgressBars();
+        animateStatCards();
 
-        animateAveragePackageBars();
+        animatePerformanceBars();
 
-        animateDepartmentBars();
-
-        initTrendBars();
-
-        console.log(
-            "Authority Placement Overview loaded."
-        );
+        animateTableProgress();
 
     }
 );

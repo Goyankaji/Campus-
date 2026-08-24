@@ -1,560 +1,329 @@
-/* =========================================================
-   AUTHORITY — STARTUP IDEAS
-========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
+    const academicYear =
+        document.getElementById("academicYear");
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+    const ideaStatus =
+        document.getElementById("ideaStatus");
 
-const startupSearch =
-    document.getElementById("startupSearch");
+    const ideaSearch =
+        document.getElementById("ideaSearch");
 
-const startupStatusFilter =
-    document.getElementById("startupStatusFilter");
+    const tableBody =
+        document.getElementById("startupTableBody");
 
-const startupTableBody =
-    document.getElementById("startupTableBody");
+    const footerYear =
+        document.getElementById("footerYear");
 
-const startupCount =
-    document.getElementById("startupCount");
+    const exportStartupReport =
+        document.getElementById("exportStartupReport");
 
-const startupModal =
-    document.getElementById("startupModal");
 
-const startupModalClose =
-    document.getElementById("startupModalClose");
+    /* =====================================================
+       ACADEMIC YEAR
+       ===================================================== */
 
-const startupModalOverlay =
-    document.querySelector(
-        ".startup-modal-overlay"
-    );
+    if (academicYear) {
 
-const modalIdeaName =
-    document.getElementById("modalIdeaName");
-
-const modalFounder =
-    document.getElementById("modalFounder");
-
-const modalCategory =
-    document.getElementById("modalCategory");
-
-const modalStage =
-    document.getElementById("modalStage");
-
-const modalScore =
-    document.getElementById("modalScore");
-
-const startupShortlistBtn =
-    document.getElementById(
-        "startupShortlistBtn"
-    );
-
-const startupRejectBtn =
-    document.getElementById(
-        "startupRejectBtn"
-    );
-
-const startupAddBtn =
-    document.getElementById(
-        "startupAddBtn"
-    );
-
-
-/* =========================================================
-   FILTER TABLE
-========================================================= */
-
-function filterStartupTable() {
-
-    if (!startupTableBody) {
-        return;
-    }
-
-
-    const searchValue =
-        startupSearch
-            ? startupSearch.value
-                .toLowerCase()
-                .trim()
-            : "";
-
-
-    const statusValue =
-        startupStatusFilter
-            ? startupStatusFilter.value
-            : "all";
-
-
-    const rows =
-        startupTableBody.querySelectorAll("tr");
-
-
-    let visibleCount = 0;
-
-
-    rows.forEach(function (row) {
-
-        const rowStatus =
-            row.dataset.status || "";
-
-
-        const rowSearch =
-            row.dataset.search
-                ? row.dataset.search.toLowerCase()
-                : "";
-
-
-        const searchMatch =
-            rowSearch.includes(searchValue);
-
-
-        const statusMatch =
-            statusValue === "all" ||
-            rowStatus === statusValue;
-
-
-        if (
-            searchMatch &&
-            statusMatch
-        ) {
-
-            row.style.display = "";
-
-            visibleCount++;
-
-        } else {
-
-            row.style.display = "none";
-
-        }
-
-    });
-
-
-    updateStartupCount(
-        visibleCount
-    );
-
-}
-
-
-/* =========================================================
-   COUNT
-========================================================= */
-
-function updateStartupCount(count) {
-
-    if (!startupCount) {
-        return;
-    }
-
-
-    startupCount.textContent =
-        `Showing ${count} startup idea${count === 1 ? "" : "s"}`;
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-if (startupSearch) {
-
-    startupSearch.addEventListener(
-        "input",
-        filterStartupTable
-    );
-
-}
-
-
-/* =========================================================
-   STATUS FILTER
-========================================================= */
-
-if (startupStatusFilter) {
-
-    startupStatusFilter.addEventListener(
-        "change",
-        filterStartupTable
-    );
-
-}
-
-
-/* =========================================================
-   OPEN MODAL
-========================================================= */
-
-function openStartupModal(row) {
-
-    if (!startupModal || !row) {
-        return;
-    }
-
-
-    const idea =
-        row.querySelector(
-            ".idea-cell strong"
-        );
-
-    const founder =
-        row.children[1];
-
-    const category =
-        row.children[2];
-
-    const stage =
-        row.querySelector(
-            ".idea-status"
-        );
-
-    const score =
-        row.querySelector(
-            ".idea-score"
-        );
-
-
-    if (modalIdeaName) {
-
-        modalIdeaName.textContent =
-            idea
-                ? idea.textContent.trim()
-                : "Startup Idea";
-
-    }
-
-
-    if (modalFounder) {
-
-        modalFounder.textContent =
-            founder
-                ? founder.textContent.trim()
-                : "—";
-
-    }
-
-
-    if (modalCategory) {
-
-        modalCategory.textContent =
-            category
-                ? category.textContent.trim()
-                : "—";
-
-    }
-
-
-    if (modalStage) {
-
-        modalStage.textContent =
-            stage
-                ? stage.textContent.trim()
-                : "—";
-
-    }
-
-
-    if (modalScore) {
-
-        modalScore.textContent =
-            score
-                ? score.textContent.trim()
-                : "—";
-
-    }
-
-
-    startupModal.dataset.currentRow =
-        Array.from(
-            startupTableBody.querySelectorAll("tr")
-        ).indexOf(row);
-
-
-    startupModal.classList.add("show");
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-/* =========================================================
-   VIEW BUTTONS
-========================================================= */
-
-document
-    .querySelectorAll(".idea-view-btn")
-    .forEach(function (button) {
-
-        button.addEventListener(
-            "click",
+        academicYear.addEventListener(
+            "change",
             function () {
 
-                const row =
-                    button.closest("tr");
+                if (footerYear) {
 
-                openStartupModal(row);
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeStartupModal() {
-
-    if (!startupModal) {
-        return;
-    }
-
-
-    startupModal.classList.remove("show");
-
-    document.body.style.overflow = "";
-
-}
-
-
-if (startupModalClose) {
-
-    startupModalClose.addEventListener(
-        "click",
-        closeStartupModal
-    );
-
-}
-
-
-if (startupModalOverlay) {
-
-    startupModalOverlay.addEventListener(
-        "click",
-        closeStartupModal
-    );
-
-}
-
-
-/* =========================================================
-   ESC
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape" &&
-            startupModal &&
-            startupModal.classList.contains("show")
-        ) {
-
-            closeStartupModal();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   SHORTLIST
-========================================================= */
-
-if (startupShortlistBtn) {
-
-    startupShortlistBtn.addEventListener(
-        "click",
-        function () {
-
-            const index =
-                Number(
-                    startupModal.dataset.currentRow
-                );
-
-
-            const rows =
-                startupTableBody
-                    ? startupTableBody.querySelectorAll("tr")
-                    : [];
-
-
-            const row =
-                rows[index];
-
-
-            if (!row) {
-                return;
-            }
-
-
-            row.dataset.status =
-                "shortlisted";
-
-
-            const status =
-                row.querySelector(
-                    ".idea-status"
-                );
-
-
-            if (status) {
-
-                status.textContent =
-                    "Shortlisted";
-
-                status.className =
-                    "idea-status shortlisted";
-
-            }
-
-
-            closeStartupModal();
-
-            filterStartupTable();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   REJECT
-========================================================= */
-
-if (startupRejectBtn) {
-
-    startupRejectBtn.addEventListener(
-        "click",
-        function () {
-
-            const index =
-                Number(
-                    startupModal.dataset.currentRow
-                );
-
-
-            const rows =
-                startupTableBody
-                    ? startupTableBody.querySelectorAll("tr")
-                    : [];
-
-
-            const row =
-                rows[index];
-
-
-            if (!row) {
-                return;
-            }
-
-
-            row.dataset.status =
-                "rejected";
-
-
-            const status =
-                row.querySelector(
-                    ".idea-status"
-                );
-
-
-            if (status) {
-
-                status.textContent =
-                    "Rejected";
-
-                status.className =
-                    "idea-status rejected";
-
-            }
-
-
-            closeStartupModal();
-
-            filterStartupTable();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   ADD IDEA
-========================================================= */
-
-if (startupAddBtn) {
-
-    startupAddBtn.addEventListener(
-        "click",
-        function () {
-
-            alert(
-                "Startup idea creation will be connected to the database later."
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   PAGINATION DEMO
-========================================================= */
-
-document
-    .querySelectorAll(".startup-pagination button")
-    .forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                if (
-                    button.textContent === "‹" ||
-                    button.textContent === "›"
-                ) {
-
-                    return;
+                    footerYear.textContent =
+                        academicYear.value;
 
                 }
 
-
-                document
-                    .querySelectorAll(
-                        ".startup-pagination button"
-                    )
-                    .forEach(function (item) {
-
-                        item.classList.remove(
-                            "active"
-                        );
-
-                    });
-
-
-                button.classList.add(
-                    "active"
-                );
-
             }
         );
 
-    });
+    }
 
 
-/* =========================================================
-   INITIAL LOAD
-========================================================= */
+    /* =====================================================
+       STATUS FILTER
+       ===================================================== */
 
-filterStartupTable();
+    if (ideaStatus) {
+
+        ideaStatus.addEventListener(
+            "change",
+            filterIdeas
+        );
+
+    }
+
+
+    /* =====================================================
+       SEARCH
+       ===================================================== */
+
+    if (ideaSearch) {
+
+        ideaSearch.addEventListener(
+            "input",
+            filterIdeas
+        );
+
+    }
+
+
+    /* =====================================================
+       FILTER IDEAS
+       ===================================================== */
+
+    function filterIdeas() {
+
+        if (!tableBody) {
+            return;
+        }
+
+
+        const searchValue =
+            ideaSearch
+                ? ideaSearch.value
+                    .trim()
+                    .toLowerCase()
+                : "";
+
+
+        const selectedStatus =
+            ideaStatus
+                ? ideaStatus.value
+                : "all";
+
+
+        const rows =
+            tableBody.querySelectorAll("tr");
+
+
+        rows.forEach(function (row) {
+
+            const rowStatus =
+                (
+                    row.dataset.status || ""
+                ).toLowerCase();
+
+
+            const rowSearch =
+                (
+                    row.dataset.search || ""
+                ).toLowerCase();
+
+
+            const searchMatch =
+                rowSearch.includes(searchValue);
+
+
+            const statusMatch =
+                selectedStatus === "all" ||
+                rowStatus === selectedStatus;
+
+
+            row.style.display =
+                searchMatch && statusMatch
+                    ? ""
+                    : "none";
+
+        });
+
+    }
+
+
+    /* =====================================================
+       EXPORT
+       ===================================================== */
+
+    if (exportStartupReport) {
+
+        exportStartupReport.addEventListener(
+            "click",
+            exportReport
+        );
+
+    }
+
+
+    function exportReport() {
+
+        if (!tableBody) {
+            return;
+        }
+
+
+        const rows =
+            Array.from(
+                tableBody.querySelectorAll("tr")
+            ).filter(function (row) {
+
+                return row.style.display !== "none";
+
+            });
+
+
+        if (rows.length === 0) {
+
+            alert(
+                "No startup ideas available to export."
+            );
+
+            return;
+
+        }
+
+
+        const headers = [
+            "Startup Idea",
+            "Team Lead",
+            "Branch",
+            "Team",
+            "Category",
+            "Submitted",
+            "Status"
+        ];
+
+
+        const csvRows = [];
+
+
+        csvRows.push(
+            headers.map(csvEscape).join(",")
+        );
+
+
+        rows.forEach(function (row) {
+
+            const cells =
+                Array.from(
+                    row.querySelectorAll("td")
+                );
+
+
+            if (cells.length === 0) {
+                return;
+            }
+
+
+            const idea =
+                cells[0]
+                    ? cells[0].innerText.trim()
+                    : "";
+
+
+            const teamLead =
+                cells[1]
+                    ? cells[1].innerText.trim()
+                    : "";
+
+
+            const branch =
+                cells[2]
+                    ? cells[2].innerText.trim()
+                    : "";
+
+
+            const team =
+                cells[3]
+                    ? cells[3].innerText.trim()
+                    : "";
+
+
+            const category =
+                cells[4]
+                    ? cells[4].innerText.trim()
+                    : "";
+
+
+            const submitted =
+                cells[5]
+                    ? cells[5].innerText.trim()
+                    : "";
+
+
+            const status =
+                cells[6]
+                    ? cells[6].innerText.trim()
+                    : "";
+
+
+            csvRows.push([
+                idea,
+                teamLead,
+                branch,
+                team,
+                category,
+                submitted,
+                status
+            ].map(csvEscape).join(","));
+
+        });
+
+
+        const csvContent =
+            "\uFEFF" + csvRows.join("\n");
+
+
+        const blob =
+            new Blob(
+                [csvContent],
+                {
+                    type:
+                        "text/csv;charset=utf-8;"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const link =
+            document.createElement("a");
+
+
+        const year =
+            academicYear
+                ? academicYear.value
+                : "2026-27";
+
+
+        link.href = url;
+
+
+        link.download =
+            `Startup_Ideas_Report_${year}.csv`;
+
+
+        document.body.appendChild(link);
+
+
+        link.click();
+
+
+        document.body.removeChild(link);
+
+
+        URL.revokeObjectURL(url);
+
+    }
+
+
+    /* =====================================================
+       CSV ESCAPE
+       ===================================================== */
+
+    function csvEscape(value) {
+
+        const text =
+            String(value || "")
+                .replace(/\r?\n|\r/g, " ")
+                .trim();
+
+
+        return `"${text.replace(/"/g, '""')}"`;
+
+    }
+
+});

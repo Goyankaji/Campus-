@@ -142,6 +142,25 @@ def admin_required(f):
 
 
 # =========================================================
+# AUTHORITY COLLEGE SCOPE
+# =========================================================
+
+def get_authority_college():
+
+    return {
+        "code": session.get(
+            "college_code",
+            "PCE"
+        ),
+
+        "name": session.get(
+            "college_name",
+            "Poornima College of Engineering"
+        )
+    }
+
+
+# =========================================================
 # COMMON STUDENT DATA
 # =========================================================
 
@@ -387,6 +406,12 @@ def login():
 
         elif role_id == "6":
 
+            session["role_name"] = "AUTHORITY"
+            session["college_code"] = "PCE"
+            session["college_name"] = (
+                "Poornima College of Engineering"
+            )
+
             return redirect(
                 url_for("authority_dashboard")
             )
@@ -450,6 +475,11 @@ def authority_test_login():
 
     session["role_id"] = 6
     session["role_name"] = "AUTHORITY"
+
+    session["college_code"] = "PCE"
+    session["college_name"] = (
+        "Poornima College of Engineering"
+    )
 
     return redirect(
         url_for("authority_dashboard")
@@ -955,8 +985,11 @@ def student_discussion():
 @role_required("6")
 def authority_dashboard():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/dashboard.html"
+        "authority/dashboard.html",
+        college=college
     )
 
 
@@ -969,8 +1002,11 @@ def authority_dashboard():
 @role_required("6")
 def authority_placement_overview():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/placement_overview.html"
+        "authority/placement_overview.html",
+        college=college
     )
 
 
@@ -983,8 +1019,11 @@ def authority_placement_overview():
 @role_required("6")
 def authority_companies():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/companies.html"
+        "authority/companies.html",
+        college=college
     )
 
 
@@ -997,9 +1036,81 @@ def authority_companies():
 @role_required("6")
 def authority_placement_drives():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/placement_drives.html"
+        "authority/placement_drives.html",
+        college=college
     )
+
+
+# =========================================================
+# AUTHORITY PLACEMENT PIPELINE
+# =========================================================
+
+@app.route("/authority/placement-pipeline")
+@login_required
+@role_required("6")
+def authority_placement_pipeline():
+
+    college = get_authority_college()
+
+    return render_template(
+        "authority/placement_pipeline.html",
+        college=college
+    )
+
+
+# =========================================================
+# AUTHORITY BRANCH-WISE REPORTS
+# =========================================================
+
+@app.route("/authority/analytics/branch-reports")
+@login_required
+@role_required("6")
+def authority_branch_reports():
+
+    college = get_authority_college()
+
+    return render_template(
+        "authority/analytics/branch_reports.html",
+        college=college
+    )
+
+
+# =========================================================
+# AUTHORITY OFF-CAMPUS PLACEMENTS
+# =========================================================
+
+@app.route("/authority/off-campus")
+@login_required
+@role_required("6")
+def authority_off_campus():
+
+    college = get_authority_college()
+
+    return render_template(
+        "authority/off_campus.html",
+        college=college
+    )
+
+
+# =========================================================
+# AUTHORITY PRE-PLACED STUDENTS
+# =========================================================
+
+@app.route("/authority/pre-placed")
+@login_required
+@role_required("6")
+def authority_pre_placed():
+
+    college = get_authority_college()
+
+    return render_template(
+        "authority/pre_placed.html",
+        college=college
+    )
+
 
 
 # =========================================================
@@ -1013,8 +1124,11 @@ def authority_placement_drives():
 @role_required("6")
 def authority_placement_reports():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/analytics/placement_reports.html"
+        "authority/analytics/placement_reports.html",
+        college=college
     )
 
 
@@ -1029,8 +1143,11 @@ def authority_placement_reports():
 @role_required("6")
 def authority_drive_reports():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/analytics/drive_reports.html"
+        "authority/analytics/drive_reports.html",
+        college=college
     )
 
 
@@ -1045,8 +1162,11 @@ def authority_drive_reports():
 @role_required("6")
 def authority_company_reports():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/analytics/company_reports.html"
+        "authority/analytics/company_reports.html",
+        college=college
     )
 
 
@@ -1059,8 +1179,11 @@ def authority_company_reports():
 @role_required("6")
 def authority_noc():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/noc.html"
+        "authority/noc.html",
+        college=college
     )
 
 
@@ -1073,8 +1196,11 @@ def authority_noc():
 @role_required("6")
 def authority_startup_ideas():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/startup_ideas.html"
+        "authority/startup_ideas.html",
+        college=college
     )
 
 
@@ -1087,8 +1213,11 @@ def authority_startup_ideas():
 @role_required("6")
 def authority_notifications():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/notifications.html"
+        "authority/notifications.html",
+        college=college
     )
 
 
@@ -1101,8 +1230,11 @@ def authority_notifications():
 @role_required("6")
 def authority_announcements():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/announcements.html"
+        "authority/announcements.html",
+        college=college
     )
 
 
@@ -1115,8 +1247,11 @@ def authority_announcements():
 @role_required("6")
 def authority_settings():
 
+    college = get_authority_college()
+
     return render_template(
-        "authority/settings.html"
+        "authority/settings.html",
+        college=college
     )
 
 

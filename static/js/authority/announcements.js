@@ -1,545 +1,280 @@
-/* =========================================================
-   AUTHORITY — ANNOUNCEMENTS JS
-========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
+
+    const filter =
+        document.getElementById("announcementFilter");
+
+    const search =
+        document.getElementById("announcementSearch");
+
+    const tableBody =
+        document.getElementById("announcementTableBody");
+
+    const emptyState =
+        document.getElementById("emptyState");
+
+    const resultCount =
+        document.getElementById("resultCount");
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+    const addBtn =
+        document.getElementById("addAnnouncementBtn");
 
-const announcementSearch =
-    document.getElementById(
-        "announcementSearch"
-    );
+    const modal =
+        document.getElementById("announcementModal");
 
-const announcementStatusFilter =
-    document.getElementById(
-        "announcementStatusFilter"
-    );
+    const closeBtn =
+        document.getElementById("closeAnnouncementModal");
 
-const announcementsList =
-    document.getElementById(
-        "announcementsList"
-    );
+    const cancelBtn =
+        document.getElementById("cancelAnnouncement");
 
-const announcementCount =
-    document.getElementById(
-        "announcementCount"
-    );
+    const form =
+        document.getElementById("announcementForm");
 
-const createAnnouncementBtn =
-    document.getElementById(
-        "createAnnouncementBtn"
-    );
+    const status =
+        document.getElementById("announcementStatus");
 
-const announcementModal =
-    document.getElementById(
-        "announcementModal"
-    );
-
-const announcementModalClose =
-    document.getElementById(
-        "announcementModalClose"
-    );
-
-const announcementModalOverlay =
-    document.querySelector(
-        ".announcement-modal-overlay"
-    );
-
-const modalAnnouncementTitle =
-    document.getElementById(
-        "modalAnnouncementTitle"
-    );
-
-const modalAnnouncementText =
-    document.getElementById(
-        "modalAnnouncementText"
-    );
-
-const modalAnnouncementStatus =
-    document.getElementById(
-        "modalAnnouncementStatus"
-    );
-
-const modalAnnouncementAudience =
-    document.getElementById(
-        "modalAnnouncementAudience"
-    );
-
-const modalAnnouncementDate =
-    document.getElementById(
-        "modalAnnouncementDate"
-    );
-
-const modalArchiveBtn =
-    document.getElementById(
-        "modalArchiveBtn"
-    );
-
-const modalEditBtn =
-    document.getElementById(
-        "modalEditBtn"
-    );
+    const scheduleGroup =
+        document.getElementById("scheduleGroup");
 
 
-/* =========================================================
-   GET ITEMS
-========================================================= */
+    /* =====================================================
+       FILTER
+       ===================================================== */
 
-function getAnnouncementItems() {
+    function filterAnnouncements() {
 
-    if (!announcementsList) {
-        return [];
-    }
+        if (!tableBody) {
+            return;
+        }
 
-    return Array.from(
-        announcementsList.querySelectorAll(
-            ".announcement-item"
-        )
-    );
+        const selectedStatus =
+            filter
+                ? filter.value
+                : "all";
 
-}
-
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-function filterAnnouncements() {
-
-    const items =
-        getAnnouncementItems();
-
-
-    const searchValue =
-        announcementSearch
-            ? announcementSearch.value
-                .toLowerCase()
-                .trim()
-            : "";
-
-
-    const statusValue =
-        announcementStatusFilter
-            ? announcementStatusFilter.value
-            : "all";
-
-
-    let visibleCount = 0;
-
-
-    items.forEach(function (item) {
-
-        const status =
-            item.dataset.status || "";
-
-
-        const searchText =
-            item.dataset.search
-                ? item.dataset.search.toLowerCase()
+        const searchValue =
+            search
+                ? search.value
+                    .trim()
+                    .toLowerCase()
                 : "";
 
 
-        const searchMatch =
-            searchText.includes(
-                searchValue
-            );
+        const rows =
+            tableBody.querySelectorAll("tr");
 
 
-        const statusMatch =
-            statusValue === "all" ||
-            status === statusValue;
+        let visibleRows = 0;
 
 
-        if (
-            searchMatch &&
-            statusMatch
-        ) {
+        rows.forEach(function (row) {
 
-            item.style.display = "";
+            const rowStatus =
+                (
+                    row.dataset.status || ""
+                ).toLowerCase();
 
-            visibleCount++;
 
-        } else {
+            const rowSearch =
+                (
+                    row.dataset.search || ""
+                ).toLowerCase();
 
-            item.style.display = "none";
+
+            const statusMatch =
+                selectedStatus === "all" ||
+                rowStatus === selectedStatus;
+
+
+            const searchMatch =
+                rowSearch.includes(
+                    searchValue
+                );
+
+
+            if (
+                statusMatch &&
+                searchMatch
+            ) {
+
+                row.style.display = "";
+
+                visibleRows++;
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+
+        if (emptyState) {
+
+            emptyState.style.display =
+                visibleRows === 0
+                    ? "flex"
+                    : "none";
 
         }
 
-    });
 
+        if (resultCount) {
 
-    updateAnnouncementCount(
-        visibleCount
-    );
+            resultCount.textContent =
+                visibleRows === 0
+                    ? "No announcements found"
+                    : `Showing ${visibleRows} announcements`;
 
-}
-
-
-/* =========================================================
-   COUNT
-========================================================= */
-
-function updateAnnouncementCount(
-    count
-) {
-
-    if (!announcementCount) {
-        return;
-    }
-
-
-    announcementCount.textContent =
-        `Showing ${count} announcement${count === 1 ? "" : "s"}`;
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-if (announcementSearch) {
-
-    announcementSearch.addEventListener(
-        "input",
-        filterAnnouncements
-    );
-
-}
-
-
-/* =========================================================
-   STATUS FILTER
-========================================================= */
-
-if (announcementStatusFilter) {
-
-    announcementStatusFilter.addEventListener(
-        "change",
-        filterAnnouncements
-    );
-
-}
-
-
-/* =========================================================
-   OPEN MODAL
-========================================================= */
-
-function openAnnouncementModal(item) {
-
-    if (
-        !announcementModal ||
-        !item
-    ) {
-
-        return;
+        }
 
     }
 
 
-    const title =
-        item.querySelector(
-            ".announcement-item-top h3"
+    if (filter) {
+
+        filter.addEventListener(
+            "change",
+            filterAnnouncements
         );
 
-    const description =
-        item.querySelector(
-            ".announcement-item-content > p"
+    }
+
+
+    if (search) {
+
+        search.addEventListener(
+            "input",
+            filterAnnouncements
         );
 
-    const status =
-        item.querySelector(
-            ".announcement-status"
-        );
-
-    const footerSpans =
-        item.querySelectorAll(
-            ".announcement-item-footer > span"
-        );
-
-
-    if (modalAnnouncementTitle) {
-
-        modalAnnouncementTitle.textContent =
-            title
-                ? title.textContent.trim()
-                : "Announcement";
-
     }
 
 
-    if (modalAnnouncementText) {
+    /* =====================================================
+       OPEN MODAL
+       ===================================================== */
 
-        modalAnnouncementText.textContent =
-            description
-                ? description.textContent.trim()
-                : "Announcement details.";
+    if (addBtn && modal) {
 
-    }
-
-
-    if (modalAnnouncementStatus) {
-
-        modalAnnouncementStatus.textContent =
-            status
-                ? status.textContent.trim()
-                : "—";
-
-    }
-
-
-    if (modalAnnouncementDate) {
-
-        modalAnnouncementDate.textContent =
-            footerSpans[0]
-                ? footerSpans[0].textContent.trim()
-                : "—";
-
-    }
-
-
-    if (modalAnnouncementAudience) {
-
-        modalAnnouncementAudience.textContent =
-            footerSpans[1]
-                ? footerSpans[1].textContent
-                    .replace(
-                        "Audience:",
-                        ""
-                    )
-                    .trim()
-                : "—";
-
-    }
-
-
-    announcementModal.dataset.currentIndex =
-        getAnnouncementItems().indexOf(
-            item
-        );
-
-
-    announcementModal.classList.add(
-        "show"
-    );
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-/* =========================================================
-   VIEW BUTTONS
-========================================================= */
-
-document
-    .querySelectorAll(
-        ".announcement-view-btn"
-    )
-    .forEach(function (button) {
-
-        button.addEventListener(
+        addBtn.addEventListener(
             "click",
             function () {
 
-                const item =
-                    button.closest(
-                        ".announcement-item"
-                    );
+                modal.classList.add("show");
 
-                openAnnouncementModal(
-                    item
-                );
+                document.body.style.overflow =
+                    "hidden";
 
             }
         );
 
-    });
-
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeAnnouncementModal() {
-
-    if (!announcementModal) {
-        return;
     }
 
 
-    announcementModal.classList.remove(
-        "show"
-    );
+    /* =====================================================
+       CLOSE MODAL
+       ===================================================== */
 
-    document.body.style.overflow =
-        "";
+    function closeModal() {
 
-}
-
-
-if (announcementModalClose) {
-
-    announcementModalClose.addEventListener(
-        "click",
-        closeAnnouncementModal
-    );
-
-}
-
-
-if (announcementModalOverlay) {
-
-    announcementModalOverlay.addEventListener(
-        "click",
-        closeAnnouncementModal
-    );
-
-}
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape" &&
-            announcementModal &&
-            announcementModal.classList.contains(
-                "show"
-            )
-        ) {
-
-            closeAnnouncementModal();
-
+        if (!modal) {
+            return;
         }
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
 
     }
-);
 
 
-/* =========================================================
-   CREATE ANNOUNCEMENT
-========================================================= */
+    if (closeBtn) {
 
-if (createAnnouncementBtn) {
-
-    createAnnouncementBtn.addEventListener(
-        "click",
-        function () {
-
-            alert(
-                "Announcement creation will be connected to the database later."
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   ARCHIVE
-========================================================= */
-
-if (modalArchiveBtn) {
-
-    modalArchiveBtn.addEventListener(
-        "click",
-        function () {
-
-            const index =
-                Number(
-                    announcementModal.dataset.currentIndex
-                );
-
-
-            const items =
-                getAnnouncementItems();
-
-
-            const item =
-                items[index];
-
-
-            if (!item) {
-                return;
-            }
-
-
-            item.style.display =
-                "none";
-
-
-            closeAnnouncementModal();
-
-            filterAnnouncements();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   EDIT
-========================================================= */
-
-if (modalEditBtn) {
-
-    modalEditBtn.addEventListener(
-        "click",
-        function () {
-
-            alert(
-                "Announcement editing will be connected to the database later."
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   FEATURED ACTIONS
-========================================================= */
-
-document
-    .querySelectorAll(
-        ".featured-actions button"
-    )
-    .forEach(function (button) {
-
-        button.addEventListener(
+        closeBtn.addEventListener(
             "click",
-            function () {
+            closeModal
+        );
 
-                const action =
-                    button.dataset.action;
+    }
 
 
-                if (action === "edit") {
+    if (cancelBtn) {
 
-                    alert(
-                        "Announcement editing will be connected later."
-                    );
+        cancelBtn.addEventListener(
+            "click",
+            closeModal
+        );
+
+    }
+
+
+    if (modal) {
+
+        modal.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    closeModal();
 
                 }
 
+            }
+        );
 
-                if (action === "archive") {
+    }
 
-                    alert(
-                        "Featured announcement archived."
+
+    /* =====================================================
+       ESC KEY
+       ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                modal &&
+                modal.classList.contains("show")
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       SCHEDULE FIELD
+       ===================================================== */
+
+    if (status && scheduleGroup) {
+
+        status.addEventListener(
+            "change",
+            function () {
+
+                if (
+                    status.value === "scheduled"
+                ) {
+
+                    scheduleGroup.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    scheduleGroup.classList.remove(
+                        "show"
                     );
 
                 }
@@ -547,62 +282,302 @@ document
             }
         );
 
-    });
+    }
 
 
-/* =========================================================
-   PAGINATION
-========================================================= */
+    /* =====================================================
+       FORM SUBMIT
+       ===================================================== */
 
-document
-    .querySelectorAll(
-        ".announcement-pagination button"
-    )
-    .forEach(function (button) {
+    if (form) {
 
-        button.addEventListener(
-            "click",
-            function () {
+        form.addEventListener(
+            "submit",
+            function (event) {
 
-                const value =
-                    button.textContent.trim();
+                event.preventDefault();
+
+
+                const titleInput =
+                    document.getElementById(
+                        "announcementTitle"
+                    );
+
+                const descriptionInput =
+                    document.getElementById(
+                        "announcementDescription"
+                    );
+
+                const audienceInput =
+                    document.getElementById(
+                        "announcementAudience"
+                    );
+
+                const statusInput =
+                    document.getElementById(
+                        "announcementStatus"
+                    );
+
+                const dateInput =
+                    document.getElementById(
+                        "announcementDate"
+                    );
+
+
+                const title =
+                    titleInput.value.trim();
+
+                const description =
+                    descriptionInput.value.trim();
+
+                const audience =
+                    audienceInput.value;
+
+                const announcementStatus =
+                    statusInput.value;
+
+                const date =
+                    dateInput.value;
 
 
                 if (
-                    value === "‹" ||
-                    value === "›"
+                    title === "" ||
+                    description === ""
                 ) {
+
+                    alert(
+                        "Please enter title and description."
+                    );
 
                     return;
 
                 }
 
 
-                document
-                    .querySelectorAll(
-                        ".announcement-pagination button"
-                    )
-                    .forEach(function (item) {
+                if (
+                    announcementStatus === "scheduled" &&
+                    date === ""
+                ) {
 
-                        item.classList.remove(
-                            "active"
-                        );
+                    alert(
+                        "Please select schedule date."
+                    );
 
-                    });
+                    return;
+
+                }
 
 
-                button.classList.add(
-                    "active"
+                const row =
+                    document.createElement("tr");
+
+
+                row.dataset.status =
+                    announcementStatus;
+
+
+                row.dataset.search =
+                    (
+                        title +
+                        " " +
+                        description
+                    ).toLowerCase();
+
+
+                let iconClass = "purple";
+
+                if (
+                    announcementStatus === "published"
+                ) {
+
+                    iconClass = "green";
+
+                } else if (
+                    announcementStatus === "scheduled"
+                ) {
+
+                    iconClass = "orange";
+
+                }
+
+
+                let statusText = "Draft";
+
+                if (
+                    announcementStatus === "published"
+                ) {
+
+                    statusText = "Published";
+
+                } else if (
+                    announcementStatus === "scheduled"
+                ) {
+
+                    statusText = "Scheduled";
+
+                }
+
+
+                let displayDate = "—";
+
+                if (
+                    announcementStatus === "published"
+                ) {
+
+                    displayDate = "Today";
+
+                } else if (
+                    announcementStatus === "scheduled"
+                ) {
+
+                    displayDate = date;
+
+                }
+
+
+                let audienceText = "Students";
+
+                if (
+                    audience === "authority"
+                ) {
+
+                    audienceText = "Authority";
+
+                } else if (
+                    audience === "all"
+                ) {
+
+                    audienceText = "Everyone";
+
+                }
+
+
+                let audienceClass =
+                    audience === "authority"
+                        ? "authority"
+                        : "students";
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <div class="announcement-title">
+
+                            <div class="announcement-icon ${iconClass}">
+                                ◈
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    ${escapeHTML(title)}
+                                </strong>
+
+                                <small>
+                                    ${escapeHTML(description)}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="audience-badge ${audienceClass}">
+                            ${audienceText}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="status-badge ${announcementStatus}">
+                            ${statusText}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${displayDate}
+                    </td>
+
+
+                    <td>
+                        College Authority
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            type="button"
+                            class="action-btn"
+                        >
+                            ⋮
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                tableBody.prepend(row);
+
+
+                form.reset();
+
+
+                if (scheduleGroup) {
+
+                    scheduleGroup.classList.remove(
+                        "show"
+                    );
+
+                }
+
+
+                closeModal();
+
+
+                filterAnnouncements();
+
+
+                alert(
+                    "Announcement created successfully."
                 );
 
             }
         );
 
-    });
+    }
 
 
-/* =========================================================
-   INITIAL LOAD
-========================================================= */
+    /* =====================================================
+       ESCAPE HTML
+       ===================================================== */
 
-filterAnnouncements();
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================================
+       INITIAL LOAD
+       ===================================================== */
+
+    filterAnnouncements();
+
+});

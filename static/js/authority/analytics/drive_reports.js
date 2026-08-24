@@ -3,20 +3,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const academicYear =
         document.getElementById("academicYear");
 
-    const nocStatus =
-        document.getElementById("nocStatus");
+    const driveType =
+        document.getElementById("driveType");
 
-    const nocSearch =
-        document.getElementById("nocSearch");
+    const companySearch =
+        document.getElementById("companySearch");
 
     const tableBody =
-        document.getElementById("nocTableBody");
+        document.getElementById("driveTableBody");
 
     const footerYear =
         document.getElementById("footerYear");
 
-    const exportNocReport =
-        document.getElementById("exportNocReport");
+    const exportDriveReport =
+        document.getElementById("exportDriveReport");
 
 
     /* =====================================================
@@ -43,87 +43,104 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       STATUS FILTER
+       DRIVE TYPE
        ===================================================== */
 
-    if (nocStatus) {
+    if (driveType) {
 
-        nocStatus.addEventListener(
+        driveType.addEventListener(
             "change",
-            filterApplications
+            filterTable
         );
 
     }
 
 
     /* =====================================================
-       SEARCH
+       COMPANY SEARCH
        ===================================================== */
 
-    if (nocSearch) {
+    if (companySearch) {
 
-        nocSearch.addEventListener(
+        companySearch.addEventListener(
             "input",
-            filterApplications
+            filterTable
         );
 
     }
 
 
     /* =====================================================
-       FILTER APPLICATIONS
+       FILTER TABLE
        ===================================================== */
 
-    function filterApplications() {
-
-        if (!tableBody) {
-            return;
-        }
-
+    function filterTable() {
 
         const searchValue =
-            nocSearch
-                ? nocSearch.value
+            companySearch
+                ? companySearch.value
                     .trim()
                     .toLowerCase()
                 : "";
 
 
-        const selectedStatus =
-            nocStatus
-                ? nocStatus.value
+        const selectedType =
+            driveType
+                ? driveType.value
                 : "all";
 
 
         const rows =
-            tableBody.querySelectorAll("tr");
+            tableBody
+                ? tableBody.querySelectorAll("tr")
+                : [];
 
 
         rows.forEach(function (row) {
 
-            const rowStatus =
+            const company =
                 (
-                    row.dataset.status || ""
+                    row.dataset.company || ""
                 ).toLowerCase();
 
 
-            const rowSearch =
-                (
-                    row.dataset.search || ""
-                ).toLowerCase();
+            const typeElement =
+                row.querySelector(".type-badge");
+
+
+            const typeText =
+                typeElement
+                    ? typeElement.textContent
+                        .trim()
+                        .toLowerCase()
+                    : "";
 
 
             const searchMatch =
-                rowSearch.includes(searchValue);
+                company.includes(searchValue);
 
 
-            const statusMatch =
-                selectedStatus === "all" ||
-                rowStatus === selectedStatus;
+            let typeMatch = true;
+
+
+            if (selectedType === "on-campus") {
+
+                typeMatch =
+                    typeText === "on campus";
+
+            }
+
+
+            if (selectedType === "off-campus") {
+
+                typeMatch =
+                    typeText === "off campus";
+
+            }
 
 
             row.style.display =
-                searchMatch && statusMatch
+                searchMatch && typeMatch
                     ? ""
                     : "none";
 
@@ -133,12 +150,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       EXPORT
+       EXPORT DRIVE REPORT
        ===================================================== */
 
-    if (exportNocReport) {
+    if (exportDriveReport) {
 
-        exportNocReport.addEventListener(
+        exportDriveReport.addEventListener(
             "click",
             exportReport
         );
@@ -166,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (rows.length === 0) {
 
             alert(
-                "No NOC applications available to export."
+                "No drive data available to export."
             );
 
             return;
@@ -175,12 +192,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         const headers = [
-            "Student",
-            "Branch",
-            "Roll No.",
             "Company",
+            "Date",
             "Type",
-            "Applied On",
+            "Applicants",
+            "Shortlisted",
+            "Selected",
+            "Package",
             "Status"
         ];
 
@@ -206,55 +224,62 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            const student =
+            const company =
                 cells[0]
                     ? cells[0].innerText.trim()
                     : "";
 
 
-            const branch =
+            const date =
                 cells[1]
                     ? cells[1].innerText.trim()
                     : "";
 
 
-            const rollNo =
+            const type =
                 cells[2]
                     ? cells[2].innerText.trim()
                     : "";
 
 
-            const company =
+            const applicants =
                 cells[3]
                     ? cells[3].innerText.trim()
                     : "";
 
 
-            const type =
+            const shortlisted =
                 cells[4]
                     ? cells[4].innerText.trim()
                     : "";
 
 
-            const appliedOn =
+            const selected =
                 cells[5]
                     ? cells[5].innerText.trim()
                     : "";
 
 
-            const status =
+            const packageValue =
                 cells[6]
                     ? cells[6].innerText.trim()
                     : "";
 
 
+            const status =
+                cells[7]
+                    ? cells[7].innerText.trim()
+                    : "";
+
+
             csvRows.push([
-                student,
-                branch,
-                rollNo,
                 company,
+                date,
                 type,
-                appliedOn,
+                applicants,
+                shortlisted,
+                selected,
+                packageValue,
                 status
             ].map(csvEscape).join(","));
 
@@ -293,7 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         link.download =
-            `NOC_Report_${year}.csv`;
+            `Drive_Report_${year}.csv`;
 
 
         document.body.appendChild(link);

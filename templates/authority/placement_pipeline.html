@@ -1,0 +1,501 @@
+{% extends "authority/base.html" %}
+
+{% block title %}
+Placement Pipeline | Authority
+{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/authority/placement_pipeline.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="pipeline-page">
+
+    <!-- PAGE HEADER -->
+    <div class="pipeline-header">
+
+        <div>
+            <span class="page-eyebrow">PLACEMENT</span>
+
+            <h1>Placement Pipeline</h1>
+
+            <p>
+                Track students through the complete placement process.
+            </p>
+        </div>
+
+        <div class="year-selector">
+
+            <label for="academicYear">
+                Academic Year
+            </label>
+
+            <select id="academicYear">
+                <option value="2026-27">2026 - 27</option>
+                <option value="2025-26">2025 - 26</option>
+                <option value="2024-25">2024 - 25</option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- PIPELINE SUMMARY -->
+    <div class="pipeline-summary">
+
+        <div class="summary-card">
+
+            <div class="summary-icon purple">
+                ◉
+            </div>
+
+            <div>
+                <span>Total Students</span>
+                <strong>1,260</strong>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon blue">
+                ✓
+            </div>
+
+            <div>
+                <span>Eligible Students</span>
+                <strong>1,045</strong>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon orange">
+                ◷
+            </div>
+
+            <div>
+                <span>In Drives</span>
+                <strong>180</strong>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon green">
+                ★
+            </div>
+
+            <div>
+                <span>Placed Students</span>
+                <strong>865</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PIPELINE -->
+    <section class="pipeline-card">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Student Placement Pipeline</h2>
+
+                <p>
+                    Current placement stage of students.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="pipeline-flow">
+
+            <div class="pipeline-stage">
+
+                <div class="stage-number">01</div>
+
+                <div class="stage-content">
+
+                    <span>Eligible</span>
+
+                    <strong>1,045</strong>
+
+                    <small>
+                        Students eligible for placements
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <div class="pipeline-stage">
+
+                <div class="stage-number">02</div>
+
+                <div class="stage-content">
+
+                    <span>Applied</span>
+
+                    <strong>920</strong>
+
+                    <small>
+                        Students applied for drives
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <div class="pipeline-stage">
+
+                <div class="stage-number">03</div>
+
+                <div class="stage-content">
+
+                    <span>Shortlisted</span>
+
+                    <strong>615</strong>
+
+                    <small>
+                        Students shortlisted
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <div class="pipeline-stage">
+
+                <div class="stage-number">04</div>
+
+                <div class="stage-content">
+
+                    <span>Selected</span>
+
+                    <strong>480</strong>
+
+                    <small>
+                        Students selected
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="pipeline-arrow">
+                →
+            </div>
+
+
+            <div class="pipeline-stage">
+
+                <div class="stage-number">05</div>
+
+                <div class="stage-content">
+
+                    <span>Placed</span>
+
+                    <strong>865</strong>
+
+                    <small>
+                        Final placed students
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATUS BREAKDOWN -->
+    <section class="status-card">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Placement Status</h2>
+
+                <p>
+                    Student distribution across placement stages.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="status-list">
+
+            <div class="status-row">
+
+                <div class="status-info">
+
+                    <span class="status-dot green"></span>
+
+                    <span>Placed Students</span>
+
+                </div>
+
+                <strong>865</strong>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    class="progress-fill green"
+                    style="width: 68.7%;"
+                ></div>
+
+            </div>
+
+
+            <div class="status-row">
+
+                <div class="status-info">
+
+                    <span class="status-dot blue"></span>
+
+                    <span>In Drives</span>
+
+                </div>
+
+                <strong>180</strong>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    class="progress-fill blue"
+                    style="width: 14.3%;"
+                ></div>
+
+            </div>
+
+
+            <div class="status-row">
+
+                <div class="status-info">
+
+                    <span class="status-dot orange"></span>
+
+                    <span>Yet to Appear</span>
+
+                </div>
+
+                <strong>215</strong>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    class="progress-fill orange"
+                    style="width: 17%;"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMPANY PIPELINE -->
+    <section class="company-pipeline-card">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Company-wise Selection</h2>
+
+                <p>
+                    Students selected through major placement drives.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="company-table-wrapper">
+
+            <table class="company-table">
+
+                <thead>
+
+                    <tr>
+                        <th>COMPANY</th>
+                        <th>APPLICANTS</th>
+                        <th>SHORTLISTED</th>
+                        <th>SELECTED</th>
+                        <th>PACKAGE</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            <strong>TCS</strong>
+                        </td>
+
+                        <td>310</td>
+
+                        <td>125</td>
+
+                        <td class="selected">
+                            82
+                        </td>
+
+                        <td>
+                            ₹7.20 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Infosys</strong>
+                        </td>
+
+                        <td>285</td>
+
+                        <td>105</td>
+
+                        <td class="selected">
+                            65
+                        </td>
+
+                        <td>
+                            ₹6.80 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Wipro</strong>
+                        </td>
+
+                        <td>245</td>
+
+                        <td>92</td>
+
+                        <td class="selected">
+                            53
+                        </td>
+
+                        <td>
+                            ₹6.20 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Accenture</strong>
+                        </td>
+
+                        <td>210</td>
+
+                        <td>78</td>
+
+                        <td class="selected">
+                            41
+                        </td>
+
+                        <td>
+                            ₹7.50 LPA
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>Capgemini</strong>
+                        </td>
+
+                        <td>210</td>
+
+                        <td>70</td>
+
+                        <td class="selected">
+                            38
+                        </td>
+
+                        <td>
+                            ₹6.30 LPA
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/authority/placement_pipeline.js') }}"
+></script>
+
+{% endblock %}
