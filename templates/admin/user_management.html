@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>User Management</title>
+
+
+    <!-- =====================================================
+         COMMON ADMIN CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin.css') }}"
+    >
+
+
+    <!-- =====================================================
+         USER MANAGEMENT CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin/user_management.css') }}"
+    >
+
+</head>
+
+
+<body >
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    {% include "admin/components/sidebar.html" %}
+
+
+
+    <!-- =====================================================
+         MAIN AREA
+         ===================================================== -->
+
+    <div class="admin-layout">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        {% include "admin/components/topbar.html" %}
+
+
+
+        <!-- =================================================
+             PAGE CONTENT
+             ================================================= -->
+
+        <main class="admin-main">
+
+
+            <div class="user-management-page">
+
+
+                <!-- =================================================
+                     PAGE HEADER
+                     ================================================= -->
+
+                <div class="user-page-header">
+
+
+                    <div>
+
+                        <span class="page-eyebrow">
+                            ADMINISTRATION
+                        </span>
+
+
+                        <h1>
+                            User Management
+                        </h1>
+
+
+                        <p>
+                            Manage students, TPOs and faculty accounts.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="user-header-actions">
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            onclick="openAddUserModal()">
+
+                            + Add User
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STATISTICS
+                     ================================================= -->
+
+                <div class="user-stat-grid">
+
+
+                    <!-- TOTAL USERS -->
+
+                    <div class="user-stat-card">
+
+                        <div class="user-stat-icon purple">
+                            ♙
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Total Users
+                            </span>
+
+                            <strong>
+                                1,226
+                            </strong>
+
+                            <small>
+                                All registered users
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STUDENTS -->
+
+                    <div class="user-stat-card">
+
+                        <div class="user-stat-icon blue">
+                            🎓
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Students
+                            </span>
+
+                            <strong>
+                                1,126
+                            </strong>
+
+                            <small>
+                                Student accounts
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STAFF -->
+
+                    <div class="user-stat-card">
+
+                        <div class="user-stat-icon orange">
+                            ♙
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Staff
+                            </span>
+
+                            <strong>
+                                88
+                            </strong>
+
+                            <small>
+                                Faculty and staff
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ACTIVE USERS -->
+
+                    <div class="user-stat-card">
+
+                        <div class="user-stat-icon green">
+                            ✓
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Active Users
+                            </span>
+
+                            <strong>
+                                1,210
+                            </strong>
+
+                            <small>
+                                Currently active
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ALL USERS PANEL
+                     ================================================= -->
+
+                <section class="users-panel dashboard-card">
+
+
+                    <!-- PANEL HEADER -->
+
+                    <div class="users-panel-header">
+
+
+                        <div>
+
+                            <h2>
+                                All Users
+                            </h2>
+
+                            <p>
+                                List of all users in the system.
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="users-filters">
+
+
+                            <input
+                                type="text"
+                                id="userSearch"
+                                class="user-search"
+                                placeholder="Search users..."
+                                autocomplete="off"
+                            >
+
+
+                            <select id="tableRoleFilter">
+
+                                <option value="all">
+                                    All Roles
+                                </option>
+
+                                <option value="admin">
+                                    Admin
+                                </option>
+
+                                <option value="student">
+                                    Student
+                                </option>
+
+                                <option value="mentor">
+                                    Mentor
+                                </option>
+
+                                <option value="hod">
+                                    HOD
+                                </option>
+
+                                <option value="tpo">
+                                    TPO
+                                </option>
+
+                                <option value="authority">
+                                    Authority
+                                </option>
+
+                            </select>
+
+
+
+                            <select id="tableStatusFilter">
+
+                                <option value="all">
+                                    All Status
+                                </option>
+
+                                <option value="active">
+                                    Active
+                                </option>
+
+                                <option value="inactive">
+                                    Inactive
+                                </option>
+
+                                <option value="pending">
+                                    Pending
+                                </option>
+
+                            </select>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         USERS TABLE
+                         ================================================= -->
+
+                    <div class="users-table-wrap">
+
+
+                        <table class="users-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        USER
+                                    </th>
+
+                                    <th>
+                                        EMAIL
+                                    </th>
+
+                                    <th>
+                                        ROLE
+                                    </th>
+
+                                    <th>
+                                        CAMPUS
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                    <th>
+                                        CREATED ON
+                                    </th>
+
+                                    <th>
+                                        ACTIONS
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+
+                            <tbody id="usersTableBody">
+
+
+                                <!-- =================================================
+                                     ADMIN
+                                     ================================================= -->
+
+                                <tr
+                                    data-role="admin"
+                                    data-status="active">
+
+
+                                    <td>
+
+                                        <div class="user-cell">
+
+
+                                            <div class="user-avatar purple-avatar">
+                                                A
+                                            </div>
+
+
+                                            <div class="user-name">
+                                                admin
+                                            </div>
+
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        admin@poornima.org
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="role-badge role-admin">
+                                            ADMIN
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        Campus 1
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status-badge status-active">
+                                            Active
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        21 Aug 2026
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            type="button"
+                                            class="user-action"
+                                            onclick="toggleUserMenu(this)">
+
+                                            ⋮
+
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     STUDENT
+                                     ================================================= -->
+
+                                <tr
+                                    data-role="student"
+                                    data-status="active">
+
+
+                                    <td>
+
+                                        <div class="user-cell">
+
+
+                                            <div class="user-avatar blue-avatar">
+                                                S
+                                            </div>
+
+
+                                            <div class="user-name">
+                                                student001
+                                            </div>
+
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        student001@poornima.org
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="role-badge role-student">
+                                            STUDENT
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        Campus 1
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status-badge status-active">
+                                            Active
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        20 Aug 2026
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            type="button"
+                                            class="user-action"
+                                            onclick="toggleUserMenu(this)">
+
+                                            ⋮
+
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     MENTOR
+                                     ================================================= -->
+
+                                <tr
+                                    data-role="mentor"
+                                    data-status="active">
+
+
+                                    <td>
+
+                                        <div class="user-cell">
+
+
+                                            <div class="user-avatar orange-avatar">
+                                                M
+                                            </div>
+
+
+                                            <div class="user-name">
+                                                mentor_it
+                                            </div>
+
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        mentor.it@poornima.org
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="role-badge role-mentor">
+                                            MENTOR
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        Campus 1
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status-badge status-active">
+                                            Active
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        19 Aug 2026
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            type="button"
+                                            class="user-action"
+                                            onclick="toggleUserMenu(this)">
+
+                                            ⋮
+
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     HOD
+                                     ================================================= -->
+
+                                <tr
+                                    data-role="hod"
+                                    data-status="active">
+
+
+                                    <td>
+
+                                        <div class="user-cell">
+
+
+                                            <div class="user-avatar green-avatar">
+                                                H
+                                            </div>
+
+
+                                            <div class="user-name">
+                                                hod_it
+                                            </div>
+
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        hod.it@poornima.org
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="role-badge role-hod">
+                                            HOD
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        Campus 1
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status-badge status-active">
+                                            Active
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        18 Aug 2026
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            type="button"
+                                            class="user-action"
+                                            onclick="toggleUserMenu(this)">
+
+                                            ⋮
+
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     TPO
+                                     ================================================= -->
+
+                                <tr
+                                    data-role="tpo"
+                                    data-status="active">
+
+
+                                    <td>
+
+                                        <div class="user-cell">
+
+
+                                            <div class="user-avatar purple-avatar">
+                                                T
+                                            </div>
+
+
+                                            <div class="user-name">
+                                                tpo
+                                            </div>
+
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        tpo@poornima.org
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="role-badge role-tpo">
+                                            TPO
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        Campus 1
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status-badge status-active">
+                                            Active
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        17 Aug 2026
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            type="button"
+                                            class="user-action"
+                                            onclick="toggleUserMenu(this)">
+
+                                            ⋮
+
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     AUTHORITY
+                                     ================================================= -->
+
+                                <tr
+                                    data-role="authority"
+                                    data-status="active">
+
+
+                                    <td>
+
+                                        <div class="user-cell">
+
+
+                                            <div class="user-avatar pink-avatar">
+                                                H
+                                            </div>
+
+
+                                            <div class="user-name">
+                                                authority
+                                            </div>
+
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        authority@poornima.org
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="role-badge role-authority">
+                                            AUTHORITY
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        Campus 1
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status-badge status-active">
+                                            Active
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+                                        16 Aug 2026
+                                    </td>
+
+
+                                    <td>
+
+                                        <button
+                                            type="button"
+                                            class="user-action"
+                                            onclick="toggleUserMenu(this)">
+
+                                            ⋮
+
+                                        </button>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         TABLE FOOTER
+                         ================================================= -->
+
+                    <div class="users-footer">
+
+
+                        <span id="userCount">
+                            Showing 1 to 6 of 6 users
+                        </span>
+
+
+                        <div class="pagination">
+
+
+                            <button type="button">
+                                ←
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="active">
+
+                                1
+
+                            </button>
+
+
+                            <button type="button">
+                                2
+                            </button>
+
+
+                            <button type="button">
+                                3
+                            </button>
+
+
+                            <button type="button">
+                                →
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADD USER MODAL
+                 ================================================= -->
+
+            <div
+                class="user-modal"
+                id="addUserModal">
+
+
+                <div class="user-modal-box">
+
+
+                    <div class="modal-header">
+
+
+                        <div>
+
+                            <span>
+                                ADMINISTRATION
+                            </span>
+
+                            <h2>
+                                Add New User
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            onclick="closeAddUserModal()">
+
+                            ×
+
+                        </button>
+
+
+                    </div>
+
+
+
+                    <form>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-field">
+
+                                <label>
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="Enter full name"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label>
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    placeholder="Enter email"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label>
+                                    Role
+                                </label>
+
+                                <select>
+
+                                    <option>
+                                        Student
+                                    </option>
+
+                                    <option>
+                                        Mentor
+                                    </option>
+
+                                    <option>
+                                        HOD
+                                    </option>
+
+                                    <option>
+                                        TPO
+                                    </option>
+
+                                    <option>
+                                        Authority
+                                    </option>
+
+                                    <option>
+                                        Admin
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label>
+                                    Campus
+                                </label>
+
+                                <select>
+
+                                    <option>
+                                        Campus 1
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="modal-actions">
+
+
+                            <button
+                                type="button"
+                                class="cancel-btn"
+                                onclick="closeAddUserModal()">
+
+                                Cancel
+
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="primary-btn">
+
+                                Create User
+
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ADMIN JS
+         ===================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/admin.js') }}">
+    </script>
+
+
+    <!-- =====================================================
+         USER MANAGEMENT JS
+         ===================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/admin/user_management.js') }}">
+    </script>
+
+
+</body>
+
+</html>

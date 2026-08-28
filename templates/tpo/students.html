@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Students | Campus Placement Portal</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON TPO CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/tpo/tpo-common.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/tpo/tpo-sidebar.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/tpo/tpo-topbar.css') }}">
+
+
+    <!-- =====================================================
+         STUDENTS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/tpo/students.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             STUDENTS CONTENT
+        ================================================== -->
+
+        <section class="students-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="students-page-header">
+
+                <div>
+
+                    <h1>
+                        Students
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Students
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="student-header-actions">
+
+    <!-- ADD STUDENT -->
+
+    <button
+        class="add-student-btn"
+        id="addStudentBtn"
+        type="button"
+    >
+
+        <span>
+            +
+        </span>
+
+        Add New Student
+
+    </button>
+
+
+    <!-- IMPORT EXCEL -->
+
+    <button
+        class="import-excel-btn"
+        id="importStudentExcelBtn"
+        type="button"
+    >
+
+        <span>
+            ↑
+        </span>
+
+        Import Excel
+
+    </button>
+
+
+    <!-- HIDDEN FILE INPUT -->
+
+    <input
+        type="file"
+        id="studentExcelInput"
+        accept=".xlsx,.xls,.csv"
+        hidden
+    >
+
+</div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <section class="student-stats">
+
+
+                <!-- TOTAL -->
+
+                <div class="student-stat-card">
+
+                    <div class="student-stat-icon purple">
+                        ♙
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Students
+                        </span>
+
+                        <strong>
+                           {{ total_students }}
+                        </strong>
+
+                        <small>
+                            ↑ 8.5% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ELIGIBLE -->
+
+                <div class="student-stat-card">
+
+                    <div class="student-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Eligible Students
+                        </span>
+
+                        <strong>
+                           {{ eligible_students }}
+                        </strong>
+
+                        <small>
+                            ↑ 6.3% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PLACED -->
+
+                <div class="student-stat-card">
+
+                    <div class="student-stat-icon blue">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Placed Students
+                        </span>
+
+                        <strong>
+                            {{ placed_students}}
+                        </strong>
+
+                        <small>
+                            ↑ 10.8% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PLACEMENT % -->
+
+                <div class="student-stat-card">
+
+                    <div class="student-stat-icon orange">
+                        ◔
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Placement Percentage
+                        </span>
+
+                        <strong>
+                            {{ "%.2f"|format(placement_percentage) }}%
+                        </strong>
+
+                        <small>
+                            ↑ 4.2% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 STUDENTS TABLE CARD
+            ================================================== -->
+
+            <section class="students-table-card">
+
+
+               <!-- =================================================
+     FILTER BAR
+================================================== -->
+
+<form
+    method="GET"
+    action="{{ url_for('tpo_students') }}"
+    class="student-filter-bar"
+    id="studentFilterForm"
+>
+
+
+    <!-- =================================================
+         SEARCH
+    ================================================== -->
+
+    <div class="student-search">
+
+        <span>
+            ⌕
+        </span>
+
+        <input
+            type="text"
+            id="studentSearch"
+            name="search"
+            value="{{ search or '' }}"
+            placeholder="Search name, reg. no., email..."
+            autocomplete="off"
+        >
+
+    </div>
+
+
+
+    <!-- =================================================
+         COLLEGE
+    ================================================== -->
+
+    <div class="filter-control">
+
+        <label>
+            College
+        </label>
+
+        <select
+            id="collegeFilter"
+            name="college"
+        >
+
+            <option value="">
+                All Colleges
+            </option>
+
+
+            {% for college in colleges %}
+
+            <option
+                value="{{ college.campus_id }}"
+                {% if selected_college == college.campus_id %}
+                    selected
+                {% endif %}
+            >
+
+                {{ college.campus_name }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+
+
+    <!-- =================================================
+         COURSE
+         NOT AVAILABLE IN CURRENT DB
+    ================================================== -->
+
+    <div class="filter-control">
+
+        <label>
+            Course
+        </label>
+
+        <select
+            id="courseFilter"
+            name="course"
+        >
+            <option value="">All Courses</option>
+            {% for course in courses %}
+            <option value="{{ course.course_id }}" {% if selected_course == course.course_id %}selected{% endif %}>
+                {{ course.course_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+    </div>
+
+
+
+    <!-- =================================================
+         BRANCH
+         NOT AVAILABLE IN CURRENT DB
+    ================================================== -->
+
+    <div class="filter-control">
+
+        <label>
+            Branch
+        </label>
+
+        <select
+            id="branchFilter"
+            name="branch"
+        >
+            <option value="">All Branches</option>
+            {% for branch in branches %}
+            <option value="{{ branch.branch_id }}" data-course-id="{{ branch.course_id }}" {% if selected_branch == branch.branch_id %}selected{% endif %}>
+                {{ branch.branch_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECTION
+         NOT AVAILABLE IN CURRENT DB
+    ================================================== -->
+
+    <div class="filter-control">
+
+        <label>
+            Section
+        </label>
+
+        <select
+            id="sectionFilter"
+            name="section"
+        >
+            <option value="">All Sections</option>
+            {% for section in sections %}
+            <option value="{{ section.section_id }}" data-branch-id="{{ section.branch_id }}" data-session-id="{{ section.session_id }}" {% if selected_section == section.section_id %}selected{% endif %}>
+                {{ section.section_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+    </div>
+
+
+
+    <!-- =================================================
+         BATCH
+    ================================================== -->
+
+    <div class="filter-control">
+
+        <label>
+            Batch
+        </label>
+
+        <select
+            id="batchFilter"
+            name="batch"
+        >
+
+            <option value="">
+                All Batches
+            </option>
+
+
+            {% for batch in batches %}
+
+            <option
+                value="{{ batch.session_id }}"
+                {% if selected_batch == batch.session_id %}
+                    selected
+                {% endif %}
+            >
+
+                {{ batch.session_name }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ELIGIBILITY
+    ================================================== -->
+
+    <div class="filter-control">
+
+        <label>
+            Eligibility
+        </label>
+
+        <select
+            id="eligibilityFilter"
+            name="eligibility"
+        >
+
+            <option value="">
+                All
+            </option>
+
+            <option
+                value="eligible"
+                {% if selected_eligibility == 'eligible' %}
+                    selected
+                {% endif %}
+            >
+                Eligible
+            </option>
+
+            <option
+                value="not_eligible"
+                {% if selected_eligibility == 'not_eligible' %}
+                    selected
+                {% endif %}
+            >
+                Not Eligible
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- =================================================
+         PLACEMENT
+    ================================================== -->
+
+    <div class="filter-control">
+
+        <label>
+            Placement
+        </label>
+
+        <select
+            id="placementFilter"
+            name="placement"
+        >
+
+            <option value="">
+                All Status
+            </option>
+
+            <option
+                value="placed"
+                {% if selected_placement == 'placed' %}
+                    selected
+                {% endif %}
+            >
+                Placed
+            </option>
+
+            <option
+                value="not_placed"
+                {% if selected_placement == 'not_placed' %}
+                    selected
+                {% endif %}
+            >
+                Not Placed
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- =================================================
+         FILTER
+    ================================================== -->
+
+    <button
+        class="filter-btn"
+        id="filterBtn"
+        type="submit"
+    >
+
+        <span>
+            ⚱
+        </span>
+
+        Filters
+
+    </button>
+
+
+
+    <!-- =================================================
+         CLEAR FILTERS
+    ================================================== -->
+
+    <a
+        href="{{ url_for('tpo_students') }}"
+        class="filter-btn"
+        style="text-decoration:none;"
+    >
+
+        Clear
+
+    </a>
+
+
+
+    <!-- =================================================
+         EXPORT
+    ================================================== -->
+
+    <button
+        class="export-btn"
+        id="exportBtn"
+        type="button"
+    >
+
+        <span>
+            ↓
+        </span>
+
+        Export
+
+    </button>
+
+
+</form>
+
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="students-table-wrapper">
+
+                    <table class="students-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    #
+                                </th>
+
+                                <th>
+                                    Student Details
+                                </th>
+
+                                <th>
+                                    Reg. No.
+                                </th>
+
+                                <th>
+                                    Gender
+                                </th>
+
+                                <th>
+                                    College
+                                </th>
+
+                                <th>
+                                    Course
+                                </th>
+
+                                <th>
+                                    Branch
+                                </th>
+
+                                <th>
+                                    Section
+                                </th>
+
+                                <th>
+                                    Batch
+                                </th>
+
+                                <th>
+                                    CGPA
+                                </th>
+
+                                <th>
+                                    Eligibility
+                                </th>
+
+                                <th>
+                                    Placement Status
+                                </th>
+
+                                <th>
+                                    Company
+                                </th>
+
+                                <th>
+                                    Package (LPA)
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="studentsTableBody">
+
+    {% if students %}
+
+        {% for student in students %}
+
+        <tr
+            data-name="{{ student.first_name }} {{ student.last_name or '' }}"
+            data-reg="{{ student.registration_no }}"
+            data-email="{{ student.email or '' }}"
+            data-mobile="{{ student.phone or '' }}"
+            data-college="{{ student.campus_id }}"
+            data-course="{{ student.course_id or '' }}"
+            data-branch="{{ student.branch_id or '' }}"
+            data-section="{{ student.section_id or '' }}"
+            data-batch="{{ student.session_id or '' }}"
+        >
+
+            <!-- # -->
+
+            <td>
+                {{ loop.index }}
+            </td>
+
+
+            <!-- STUDENT DETAILS -->
+
+            <td>
+
+                <div class="student-info">
+
+                    <div class="student-avatar">
+
+                        {{
+                            (
+                                student.first_name[0]
+                                ~
+                                (
+                                    student.last_name[0]
+                                    if student.last_name
+                                    else ''
+                                )
+                            ) | upper
+                        }}
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+
+                            {{ student.first_name }}
+
+                            {% if student.middle_name %}
+                                {{ student.middle_name }}
+                            {% endif %}
+
+                            {% if student.last_name %}
+                                {{ student.last_name }}
+                            {% endif %}
+
+                        </strong>
+
+
+                        <span>
+                            {{ student.email or '-' }}
+                        </span>
+
+
+                        <small>
+                            {{ student.phone or '-' }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <!-- REGISTRATION NUMBER -->
+
+            <td>
+                {{ student.registration_no }}
+            </td>
+
+
+            <!-- GENDER -->
+
+            <td>
+                {{ student.gender or '-' }}
+            </td>
+
+
+            <!-- COLLEGE -->
+
+            <td>
+
+                <span class="college-badge">
+
+                    {{ student.campus_code or '-' }}
+
+                </span>
+
+            </td>
+
+
+            <!-- COURSE -->
+
+            <td>
+                {{ student.course_name or '-' }}
+            </td>
+
+
+            <!-- BRANCH -->
+
+            <td>
+                {{ student.branch_name or '-' }}
+            </td>
+
+
+            <!-- SECTION -->
+
+            <td>
+                {{ student.section_name or '-' }}
+            </td>
+
+
+            <!-- BATCH -->
+
+            <td>
+                {{ student.session_name or '-' }}
+            </td>
+
+
+            <!-- CGPA -->
+
+            <td>
+                {{ student.cgpa or '-' }}
+            </td>
+
+
+            <!-- ELIGIBILITY -->
+
+            <td>
+
+                {% if
+                    student.cgpa is not none
+                    and
+                    student.backlogs is not none
+                    and
+                    student.backlogs <= 0
+                %}
+
+                    <span class="status-badge eligible">
+                        Eligible
+                    </span>
+
+                {% else %}
+
+                    <span class="status-badge not-eligible">
+                        Not Eligible
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+
+            <!-- PLACEMENT STATUS -->
+
+            <td>
+
+                <span class="status-badge yet">
+                    Yet to Appear
+                </span>
+
+            </td>
+
+
+            <!-- COMPANY -->
+
+            <td>
+                -
+            </td>
+
+
+            <!-- PACKAGE -->
+
+            <td class="package-value empty">
+                -
+            </td>
+
+
+            <!-- ACTIONS -->
+
+            <td>
+
+                <div class="action-buttons">
+
+                    <button
+                        class="action-btn view-btn"
+                        type="button"
+                        title="View Student"
+                        onclick="window.location.href='{{ url_for(
+                            'tpo_student_detail',
+                            registration_no=student.registration_no
+                        ) }}'"
+                    >
+                        ◉
+                    </button>
+
+
+                    <button
+                        class="action-btn menu-btn"
+                        type="button"
+                        title="More"
+                    >
+                        ⋮
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <tr>
+
+            <td
+                colspan="15"
+                style="text-align:center; padding:40px;"
+            >
+
+                No students found in database.
+
+            </td>
+
+        </tr>
+
+    {% endif %}
+
+</tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TABLE FOOTER
+                ================================================== -->
+
+                <div class="students-table-footer">
+
+                    <span id="studentCount">
+                        Showing
+                        {{ students|length }}
+                        students
+                    </span>
+
+                    <div class="pagination"
+                         id="pagination">
+
+                        <button
+                            type="button"
+                            data-page="prev"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                            data-page="1"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            type="button"
+                            data-page="2"
+                        >
+                            2
+                        </button>
+
+                        <button
+                            type="button"
+                            data-page="3"
+                        >
+                            3
+                        </button>
+
+                        <button
+                            type="button"
+                            data-page="4"
+                        >
+                            ...
+                        </button>
+
+                        <button
+                            type="button"
+                            data-page="158"
+                        >
+                            158
+                        </button>
+
+                        <button
+                            type="button"
+                            data-page="next"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADD STUDENT MODAL
+====================================================== -->
+
+<div class="tpo-student-modal" id="studentModal" aria-hidden="true">
+
+    <div class="tpo-student-modal-backdrop" data-close-student-modal></div>
+
+    <section class="tpo-student-modal-card" role="dialog" aria-modal="true" aria-labelledby="studentModalTitle">
+
+        <div class="tpo-student-modal-header">
+            <div>
+                <span class="tpo-modal-eyebrow">STUDENT MANAGEMENT</span>
+                <h2 id="studentModalTitle">Add New Student</h2>
+                <p>Create a student account and academic profile.</p>
+            </div>
+            <button type="button" class="tpo-modal-close" id="closeStudentModal" aria-label="Close">×</button>
+        </div>
+
+        <div class="tpo-student-modal-body">
+
+            <div class="tpo-form-message" id="studentFormMessage" hidden></div>
+
+            <form id="addStudentForm" autocomplete="off">
+
+                <div class="tpo-form-section">
+                    <div class="tpo-form-section-title">Academic Information</div>
+
+                    <div class="tpo-form-grid">
+
+                        <div class="tpo-form-field">
+                            <label>College</label>
+                            <input type="text" id="studentCampusName" value="{{ colleges[0].campus_name if colleges else 'PCE' }}" readonly>
+                        </div>
+
+                        <div class="tpo-form-field">
+                            <label>Course <span>*</span></label>
+                            <select id="studentCourse" name="course_id" required>
+                                <option value="">Select Course</option>
+                            </select>
+                        </div>
+
+                        <div class="tpo-form-field">
+                            <label>Branch <span>*</span></label>
+                            <select id="studentBranch" name="branch_id" required disabled>
+                                <option value="">Select Branch</option>
+                            </select>
+                        </div>
+
+                        <div class="tpo-form-field">
+                            <label>Batch <span>*</span></label>
+                            <select id="studentSession" name="session_id" required>
+                                <option value="">Select Batch</option>
+                            </select>
+                        </div>
+
+                        <div class="tpo-form-field">
+                            <label>Section <span>*</span></label>
+                            <select id="studentSection" name="section_id" required disabled>
+                                <option value="">Select Section</option>
+                            </select>
+                        </div>
+
+                        <div class="tpo-form-field">
+                            <label>Registration No. <span>*</span></label>
+                            <input type="text" name="registration_no" required placeholder="e.g. PCE2027002">
+                        </div>
+
+                        <div class="tpo-form-field">
+                            <label>Enrollment No. <span>*</span></label>
+                            <input type="text" name="enrollment_no" required placeholder="Enrollment number">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tpo-form-section">
+                    <div class="tpo-form-section-title">Personal Information</div>
+                    <div class="tpo-form-grid">
+                        <div class="tpo-form-field"><label>First Name <span>*</span></label><input name="first_name" required></div>
+                        <div class="tpo-form-field"><label>Middle Name</label><input name="middle_name"></div>
+                        <div class="tpo-form-field"><label>Last Name</label><input name="last_name"></div>
+                        <div class="tpo-form-field"><label>Date of Birth</label><input type="date" name="date_of_birth"></div>
+                        <div class="tpo-form-field"><label>Gender</label><select name="gender"><option value="">Select Gender</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+                        <div class="tpo-form-field"><label>Phone</label><input name="phone" type="tel" maxlength="20"></div>
+                        <div class="tpo-form-field"><label>Email <span>*</span></label><input name="email" type="email" required placeholder="student@poornima.org"></div>
+                        <div class="tpo-form-field"><label>City</label><input name="city"></div>
+                        <div class="tpo-form-field"><label>State</label><input name="state" value="Rajasthan"></div>
+                        <div class="tpo-form-field tpo-form-field-wide"><label>Address</label><textarea name="address" rows="2"></textarea></div>
+                    </div>
+                </div>
+
+                <div class="tpo-form-section">
+                    <div class="tpo-form-section-title">Academic Performance</div>
+                    <div class="tpo-form-grid">
+                        <div class="tpo-form-field"><label>10th Percentage</label><input type="number" name="tenth_percentage" min="0" max="100" step="0.01"></div>
+                        <div class="tpo-form-field"><label>12th Percentage</label><input type="number" name="twelfth_percentage" min="0" max="100" step="0.01"></div>
+                        <div class="tpo-form-field"><label>CGPA</label><input type="number" name="cgpa" min="0" max="10" step="0.01"></div>
+                        <div class="tpo-form-field"><label>Backlogs</label><input type="number" name="backlogs" min="0" step="1" value="0"></div>
+                    </div>
+                </div>
+
+                <div class="tpo-form-section">
+                    <div class="tpo-form-section-title">Login</div>
+                    <div class="tpo-form-grid">
+                        <div class="tpo-form-field tpo-form-field-wide">
+                            <label>Password <small>(leave blank to use Registration No.)</small></label>
+                            <input type="password" name="password" minlength="6" placeholder="Optional">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tpo-modal-actions">
+                    <button type="button" class="tpo-modal-secondary" id="cancelStudentModal">Cancel</button>
+                    <button type="submit" class="tpo-modal-primary" id="saveStudentBtn">Create Student</button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+</div>
+
+<style>
+.tpo-student-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:24px}.tpo-student-modal.open{display:flex}.tpo-student-modal-backdrop{position:absolute;inset:0;background:rgba(10,10,25,.68);backdrop-filter:blur(5px)}.tpo-student-modal-card{position:relative;width:min(980px,96vw);max-height:92vh;overflow:hidden;border:1px solid rgba(124,58,237,.22);border-radius:20px;background:var(--card-bg,#fff);box-shadow:0 30px 80px rgba(0,0,0,.28)}.tpo-student-modal-header{display:flex;justify-content:space-between;gap:20px;padding:24px 28px;border-bottom:1px solid rgba(120,120,140,.16)}.tpo-student-modal-header h2{margin:4px 0;font-size:24px}.tpo-student-modal-header p{margin:0;color:#7a7a88;font-size:13px}.tpo-modal-eyebrow{font-size:10px;font-weight:800;letter-spacing:.14em;color:#7c3aed}.tpo-modal-close{border:0;background:transparent;font-size:30px;line-height:1;cursor:pointer;color:#777}.tpo-student-modal-body{padding:24px 28px;overflow:auto;max-height:calc(92vh - 105px)}.tpo-form-section{margin-bottom:24px}.tpo-form-section-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;color:#7c3aed}.tpo-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.tpo-form-field{display:flex;flex-direction:column;gap:7px}.tpo-form-field-wide{grid-column:1/-1}.tpo-form-field label{font-size:12px;font-weight:700}.tpo-form-field label span{color:#dc2626}.tpo-form-field label small{font-weight:400;color:#888}.tpo-form-field input,.tpo-form-field select,.tpo-form-field textarea{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #ddd;border-radius:9px;background:transparent;font:inherit;font-size:13px;outline:none}.tpo-form-field input:focus,.tpo-form-field select:focus,.tpo-form-field textarea:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.10)}.tpo-form-field input[readonly]{background:rgba(120,120,140,.07)}.tpo-form-message{padding:11px 13px;border-radius:9px;margin-bottom:18px;font-size:13px}.tpo-form-message.error{background:#fff1f2;color:#be123c;border:1px solid #fecdd3}.tpo-form-message.success{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}.tpo-modal-actions{display:flex;justify-content:flex-end;gap:10px;padding-top:4px}.tpo-modal-secondary,.tpo-modal-primary{border:0;border-radius:9px;padding:11px 18px;font-weight:700;cursor:pointer}.tpo-modal-secondary{background:#eee;color:#333}.tpo-modal-primary{background:#7c3aed;color:#fff}.tpo-modal-primary:disabled{opacity:.6;cursor:not-allowed}@media(max-width:700px){.tpo-student-modal{padding:10px}.tpo-form-grid{grid-template-columns:1fr}.tpo-form-field-wide{grid-column:auto}.tpo-student-modal-header{padding:18px}.tpo-student-modal-body{padding:18px}}
+</style>
+
+<!-- =====================================================
+     TPO JS
+====================================================== -->
+
+<script src="{{ url_for('static',
+            filename='js/tpo/tpo-sidebar.js') }}">
+</script>
+
+<script src="{{ url_for('static',
+            filename='js/tpo/tpo-topbar.js') }}">
+</script>
+
+
+<!-- =====================================================
+     STUDENTS JS
+====================================================== -->
+
+<script src="{{ url_for('static',
+            filename='js/tpo/students.js') }}">
+</script>
+
+
+</body>
+
+</html>

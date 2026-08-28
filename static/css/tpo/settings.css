@@ -1,0 +1,999 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   TPO - SETTINGS
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.settings-content {
+
+    min-height: calc(100vh - 60px);
+
+    padding: 22px 24px 30px;
+
+    background: var(--page-bg);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.settings-page-header {
+
+    margin-bottom: 20px;
+}
+
+
+.settings-page-header h1 {
+
+    margin: 0;
+
+    color: var(--text-main);
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+
+.breadcrumb {
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 7px;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+}
+
+
+.breadcrumb strong {
+
+    color: var(--primary);
+
+    font-weight: 600;
+}
+
+
+.breadcrumb-arrow {
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN SETTINGS LAYOUT
+========================================================= */
+
+.settings-layout {
+
+    display: grid;
+
+    grid-template-columns: 190px minmax(0, 1fr);
+
+    gap: 15px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   SETTINGS NAV
+========================================================= */
+
+.settings-nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    padding: 7px;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(15, 23, 42, 0.025);
+}
+
+
+.settings-nav-item {
+
+    width: 100%;
+
+    min-height: 38px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 9px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-family: inherit;
+
+    font-size: 7.5px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        0.18s ease;
+}
+
+
+.settings-nav-item:hover {
+
+    background:
+        rgba(105, 55, 225, 0.05);
+
+    color: var(--primary);
+}
+
+
+.settings-nav-item.active {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(112, 71, 232, 0.12),
+            rgba(85, 41, 200, 0.07)
+        );
+
+    color: var(--primary);
+
+    font-weight: 700;
+}
+
+
+.settings-nav-icon {
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+}
+
+
+.settings-nav-item.active
+.settings-nav-icon {
+
+    background:
+        rgba(112, 71, 232, 0.10);
+}
+
+
+/* =========================================================
+   SETTINGS PANEL
+========================================================= */
+
+.settings-panel {
+
+    min-width: 0;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(15, 23, 42, 0.025);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.settings-section {
+
+    display: none;
+
+    padding: 18px;
+
+    box-sizing: border-box;
+}
+
+
+.settings-section.active {
+
+    display: block;
+
+    animation:
+        settingsSectionIn
+        0.18s
+        ease;
+}
+
+
+@keyframes settingsSectionIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(4px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.settings-section-header {
+
+    padding-bottom: 15px;
+
+    margin-bottom: 17px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.settings-section-header h2 {
+
+    margin: 0;
+
+    color: var(--text-main);
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+.settings-section-header p {
+
+    margin: 5px 0 0;
+
+    color: var(--text-muted);
+
+    font-size: 7px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-settings {
+
+    width: 100%;
+}
+
+
+.profile-avatar-area {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding-bottom: 17px;
+
+    margin-bottom: 17px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.profile-avatar {
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7047e8,
+            #5529c8
+        );
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 14px
+        rgba(91, 45, 204, 0.18);
+}
+
+
+.profile-avatar-area strong {
+
+    display: block;
+
+    color: var(--text-main);
+
+    font-size: 8.5px;
+
+    font-weight: 700;
+}
+
+
+.profile-avatar-area span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 6.8px;
+}
+
+
+.change-avatar-btn {
+
+    margin-top: 7px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--primary);
+
+    font-family: inherit;
+
+    font-size: 6.8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.change-avatar-btn:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.settings-form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+
+.settings-field {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.settings-field label {
+
+    color: var(--text-secondary);
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.settings-field input,
+.settings-field select {
+
+    width: 100%;
+
+    height: 35px;
+
+    padding: 0 10px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: var(--page-bg);
+
+    color: var(--text-main);
+
+    font-family: inherit;
+
+    font-size: 7.5px;
+
+    box-sizing: border-box;
+
+    transition:
+        0.18s ease;
+}
+
+
+.settings-field input::placeholder {
+
+    color: var(--text-muted);
+}
+
+
+.settings-field input:focus,
+.settings-field select:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(105, 55, 225, 0.07);
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.settings-actions {
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 7px;
+
+    margin-top: 17px;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid var(--border);
+}
+
+
+.settings-save-btn {
+
+    height: 35px;
+
+    padding: 0 14px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7047e8,
+            #5529c8
+        );
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 7.5px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px
+        rgba(91, 45, 204, 0.18);
+
+    transition:
+        0.18s ease;
+}
+
+
+.settings-save-btn:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(91, 45, 204, 0.25);
+}
+
+
+/* =========================================================
+   OPTION LIST
+========================================================= */
+
+.settings-option-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+
+.settings-option {
+
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 11px 13px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    box-sizing: border-box;
+}
+
+
+.settings-option:last-child {
+
+    border-bottom: none;
+}
+
+
+.settings-option > div {
+
+    min-width: 0;
+}
+
+
+.settings-option strong {
+
+    display: block;
+
+    color: var(--text-main);
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+.settings-option div span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 6.8px;
+
+    line-height: 1.4;
+}
+
+
+.settings-option select {
+
+    width: 135px;
+
+    height: 32px;
+
+    flex-shrink: 0;
+
+    padding: 0 8px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 6px;
+
+    outline: none;
+
+    background: var(--page-bg);
+
+    color: var(--text-main);
+
+    font-family: inherit;
+
+    font-size: 7px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.settings-switch {
+
+    position: relative;
+
+    width: 34px;
+    height: 19px;
+
+    flex-shrink: 0;
+
+    display: inline-block;
+}
+
+
+.settings-switch input {
+
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+}
+
+
+.settings-switch span {
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 20px;
+
+    background:
+        #cbd2dc;
+
+    cursor: pointer;
+
+    transition:
+        0.2s ease;
+}
+
+
+.settings-switch span::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 13px;
+    height: 13px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 1px 3px
+        rgba(15, 23, 42, 0.20);
+
+    transition:
+        0.2s ease;
+}
+
+
+.settings-switch input:checked + span {
+
+    background:
+        linear-gradient(
+            135deg,
+            #7047e8,
+            #5529c8
+        );
+}
+
+
+.settings-switch input:checked + span::before {
+
+    transform:
+        translateX(15px);
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.security-form {
+
+    max-width: 500px;
+}
+
+
+.security-form .settings-field {
+
+    margin-bottom: 13px;
+}
+
+
+.security-form .settings-actions {
+
+    justify-content: flex-start;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   SUCCESS STATE
+========================================================= */
+
+.settings-save-btn.saved {
+
+    background:
+        #16a96f;
+
+    box-shadow:
+        0 4px 12px
+        rgba(22, 169, 111, 0.18);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-theme .settings-content {
+
+    background: #081225;
+}
+
+
+body.dark-theme
+.settings-field input,
+body.dark-theme
+.settings-field select,
+body.dark-theme
+.settings-option select {
+
+    background: #0b172c;
+}
+
+
+body.dark-theme
+.settings-nav-item.active {
+
+    background:
+        rgba(112, 71, 232, 0.14);
+}
+
+
+/* =========================================================
+   RESPONSIVE — 900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .settings-layout {
+
+        grid-template-columns:
+            165px minmax(0, 1fr);
+    }
+
+
+    .settings-option {
+
+        gap: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .settings-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .settings-nav {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(5, minmax(0, 1fr));
+
+        gap: 3px;
+    }
+
+
+    .settings-nav-item {
+
+        min-height: 42px;
+
+        justify-content: center;
+
+        padding: 0 4px;
+
+        flex-direction: column;
+
+        gap: 2px;
+
+        text-align: center;
+    }
+
+
+    .settings-nav-icon {
+
+        width: 22px;
+        height: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .settings-content {
+
+        padding:
+            16px 12px 22px;
+    }
+
+
+    .settings-nav {
+
+        overflow-x: auto;
+
+        grid-template-columns:
+            repeat(5, minmax(82px, 1fr));
+    }
+
+
+    .settings-form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .profile-avatar-area {
+
+        align-items: flex-start;
+    }
+
+
+    .settings-option {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .settings-option select {
+
+        width: 100%;
+    }
+
+
+    .settings-option
+    .settings-switch {
+
+        align-self: flex-end;
+    }
+
+
+    .settings-actions {
+
+        justify-content: stretch;
+    }
+
+
+    .settings-save-btn {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .settings-page-header h1 {
+
+        font-size: 19px;
+    }
+
+
+    .settings-section {
+
+        padding: 14px;
+    }
+
+
+    .profile-avatar {
+
+        width: 48px;
+        height: 48px;
+    }
+
+}

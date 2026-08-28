@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="arpit@2467",
+    password="Tonu567890@",
     database="campus_placement_manager",
     port=3306
 )

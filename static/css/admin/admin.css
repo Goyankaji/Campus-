@@ -24,6 +24,7 @@
 
     --admin-info-soft:
         rgba(66, 165, 255, 0.12);
+
 }
 
 
@@ -42,8 +43,13 @@
             transparent 25%
         ),
         var(--admin-bg);
+
 }
 
+
+/* =========================================================
+   LIGHT THEME
+========================================================= */
 
 body.admin-light {
 
@@ -54,353 +60,6 @@ body.admin-light {
             transparent 25%
         ),
         var(--admin-bg);
-}
-
-
-/* =========================================================
-   COMMON STATUS
-========================================================= */
-
-.admin-status {
-
-    min-height: 25px;
-
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding:
-        0 9px;
-
-    border-radius: 999px;
-
-    font-size: 9px;
-
-    font-weight: 750;
-}
-
-
-.admin-status-success {
-
-    background:
-        var(--admin-success-soft);
-
-    color:
-        var(--admin-success);
-}
-
-
-.admin-status-warning {
-
-    background:
-        var(--admin-warning-soft);
-
-    color:
-        var(--admin-warning);
-}
-
-
-.admin-status-danger {
-
-    background:
-        var(--admin-danger-soft);
-
-    color:
-        var(--admin-danger);
-}
-
-
-.admin-status-info {
-
-    background:
-        var(--admin-info-soft);
-
-    color:
-        var(--admin-info);
-}
-
-
-/* =========================================================
-   COMMON SECTION TITLE
-========================================================= */
-
-.admin-section-heading {
-
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: space-between;
-
-    gap: 16px;
-
-    margin-bottom: 14px;
-}
-
-
-.admin-section-heading h2 {
-
-    margin: 0;
-
-    color: var(--admin-text);
-
-    font-size: 16px;
-
-    line-height: 1.2;
-}
-
-
-.admin-section-heading p {
-
-    margin:
-        5px 0 0;
-
-    color: var(--admin-muted);
-
-    font-size: 10px;
-}
-
-
-/* =========================================================
-   COMMON SELECT
-========================================================= */
-
-.admin-select {
-
-    min-height: 38px;
-
-    padding:
-        0 32px 0 11px;
-
-    border:
-        1px solid var(--admin-border);
-
-    border-radius: 9px;
-
-    background:
-        var(--admin-card-bg);
-
-    color:
-        var(--admin-text);
-
-    font-size: 10px;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   COMMON ICON BOX
-========================================================= */
-
-.admin-icon-box {
-
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 10px;
-
-    background:
-        var(--admin-purple-glow);
-
-    color:
-        var(--admin-primary-light);
-}
-
-
-.admin-icon-box svg {
-
-    width: 17px;
-    height: 17px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-}
-
-
-/* =========================================================
-   COMMON EMPTY STATE
-========================================================= */
-
-.admin-empty-state {
-
-    min-height: 220px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 30px;
-}
-
-
-.admin-empty-state-icon {
-
-    width: 50px;
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 12px;
-
-    border-radius: 14px;
-
-    background:
-        rgba(124, 58, 237, 0.10);
-
-    color:
-        var(--admin-primary-light);
-
-    font-size: 21px;
-}
-
-
-.admin-empty-state h3 {
-
-    margin:
-        0 0 5px;
-
-    color:
-        var(--admin-text);
-
-    font-size: 14px;
-}
-
-
-.admin-empty-state p {
-
-    max-width: 420px;
-
-    margin: 0;
-
-    color:
-        var(--admin-muted);
-
-    font-size: 10px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   PAGE LOADING
-========================================================= */
-
-.admin-loading {
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-
-.admin-loading::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    transform:
-        translateX(-100%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.045),
-            transparent
-        );
-
-    animation:
-        adminShimmer 1.3s infinite;
-}
-
-
-@keyframes adminShimmer {
-
-    100% {
-        transform:
-            translateX(100%);
-    }
-}
-
-
-/* =========================================================
-   FOCUS ACCESSIBILITY
-========================================================= */
-
-.admin-layout
-a:focus-visible,
-.admin-layout
-button:focus-visible,
-.admin-layout
-input:focus-visible,
-.admin-layout
-select:focus-visible {
-
-    outline:
-        2px solid
-        rgba(155, 108, 255, 0.85);
-
-    outline-offset:
-        2px;
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-@media print {
-
-    .admin-sidebar,
-    .admin-topbar {
-
-        display: none !important;
-    }
-
-
-    .admin-main {
-
-        margin-left: 0 !important;
-    }
-
-
-    .admin-content {
-
-        padding: 0 !important;
-    }
-}
-
-/* =========================================================
-   ADMIN LIGHT THEME SUPPORT
-   ========================================================= */
-
-body.admin-light {
 
     --admin-purple-glow:
         rgba(124, 58, 237, 0.10);
@@ -416,4 +75,1334 @@ body.admin-light {
 
     --admin-info-soft:
         rgba(66, 165, 255, 0.10);
+
+}
+
+
+/* =========================================================
+   COMMON STATUS
+========================================================= */
+
+.admin-status {
+
+    min-height:
+        25px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0 9px;
+
+    border-radius:
+        999px;
+
+    font-size:
+        9px;
+
+    font-weight:
+        750;
+
+}
+
+
+.admin-status-success {
+
+    background:
+        var(--admin-success-soft);
+
+    color:
+        var(--admin-success);
+
+}
+
+
+.admin-status-warning {
+
+    background:
+        var(--admin-warning-soft);
+
+    color:
+        var(--admin-warning);
+
+}
+
+
+.admin-status-danger {
+
+    background:
+        var(--admin-danger-soft);
+
+    color:
+        var(--admin-danger);
+
+}
+
+
+.admin-status-info {
+
+    background:
+        var(--admin-info-soft);
+
+    color:
+        var(--admin-info);
+
+}
+
+
+/* =========================================================
+   COMMON SECTION TITLE
+========================================================= */
+
+.admin-section-heading {
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        space-between;
+
+    gap:
+        16px;
+
+    margin-bottom:
+        14px;
+
+}
+
+
+.admin-section-heading h2 {
+
+    margin:
+        0;
+
+    color:
+        var(--admin-text);
+
+    font-size:
+        16px;
+
+    line-height:
+        1.2;
+
+}
+
+
+.admin-section-heading p {
+
+    margin:
+        5px 0 0;
+
+    color:
+        var(--admin-muted);
+
+    font-size:
+        10px;
+
+}
+
+
+/* =========================================================
+   COMMON SELECT
+========================================================= */
+
+.admin-select {
+
+    min-height:
+        38px;
+
+    padding:
+        0 32px 0 11px;
+
+    border:
+        1px solid var(--admin-border);
+
+    border-radius:
+        9px;
+
+    background:
+        var(--admin-card-bg);
+
+    color:
+        var(--admin-text);
+
+    font-size:
+        10px;
+
+    cursor:
+        pointer;
+
+}
+
+
+/* =========================================================
+   COMMON ICON BOX
+========================================================= */
+
+.admin-icon-box {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        10px;
+
+    background:
+        var(--admin-purple-glow);
+
+    color:
+        var(--admin-primary-light);
+
+}
+
+
+.admin-icon-box svg {
+
+    width:
+        17px;
+
+    height:
+        17px;
+
+    fill:
+        none;
+
+    stroke:
+        currentColor;
+
+    stroke-width:
+        1.7;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
+
+}
+
+
+/* =========================================================
+   COMMON EMPTY STATE
+========================================================= */
+
+.admin-empty-state {
+
+    min-height:
+        220px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    padding:
+        30px;
+
+}
+
+
+.admin-empty-state-icon {
+
+    width:
+        50px;
+
+    height:
+        50px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        12px;
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(124, 58, 237, 0.10);
+
+    color:
+        var(--admin-primary-light);
+
+    font-size:
+        21px;
+
+}
+
+
+.admin-empty-state h3 {
+
+    margin:
+        0 0 5px;
+
+    color:
+        var(--admin-text);
+
+    font-size:
+        14px;
+
+}
+
+
+.admin-empty-state p {
+
+    max-width:
+        420px;
+
+    margin:
+        0;
+
+    color:
+        var(--admin-muted);
+
+    font-size:
+        10px;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================================
+   PAGE LOADING
+========================================================= */
+
+.admin-loading {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+}
+
+
+.admin-loading::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    transform:
+        translateX(-100%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.045),
+            transparent
+        );
+
+    animation:
+        adminShimmer 1.3s infinite;
+
+}
+
+
+@keyframes adminShimmer {
+
+    100% {
+
+        transform:
+            translateX(100%);
+
+    }
+
+}
+
+
+/* =========================================================
+   ADMIN SIDEBAR
+   COMPACT CAMPUS THEME
+========================================================= */
+
+.admin-sidebar {
+
+    width: 170px;
+
+    background: #07142f;
+
+    color: #dbe4f5;
+
+    border-right:
+        1px solid rgba(255, 255, 255, 0.05);
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #7c3aed #07142f;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.admin-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+    background: #07142f;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+    background: #7c3aed;
+    border-radius: 999px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.admin-brand {
+    padding: 12px 12px 10px;
+}
+
+.admin-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.admin-brand-logo {
+    width: 31px;
+    height: 31px;
+
+    flex: 0 0 31px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 7px;
+    background: #ffffff;
+}
+
+.admin-brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.admin-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.admin-brand-text strong {
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    line-height: 1;
+    letter-spacing: 0.1px;
+}
+
+.admin-brand-text span {
+    color: #71809b;
+
+    font-size: 5px;
+    font-weight: 600;
+
+    line-height: 1;
+    letter-spacing: 0.55px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.admin-sidebar-nav {
+    padding: 2px 8px 12px;
+}
+
+
+/* =========================================================
+   NAV GROUP
+========================================================= */
+
+.admin-nav-group {
+    margin: 0 0 8px;
+}
+
+.admin-nav-group:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.admin-nav-section-title {
+
+    margin: 0 6px 3px;
+
+    color: #71809b;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 7px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    letter-spacing: 0.65px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   NAV LINK
+========================================================= */
+
+.admin-nav-link {
+
+    min-height: 24px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 0;
+
+    padding: 0 8px;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #aebbd0;
+
+    text-decoration: none;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 8.5px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    letter-spacing: 0;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.admin-nav-icon {
+
+    width: 12px;
+    height: 12px;
+
+    flex: 0 0 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8493ab;
+}
+
+.admin-nav-icon svg {
+
+    width: 10px;
+    height: 10px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.admin-nav-label {
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: inherit;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 8.5px;
+    font-weight: 500;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.admin-nav-link:hover {
+
+    background:
+        rgba(124, 58, 237, 0.12);
+
+    color: #ffffff;
+}
+
+.admin-nav-link:hover .admin-nav-icon {
+    color: #b89cff;
+}
+
+
+/* =========================================================
+   ACTIVE MENU
+========================================================= */
+
+.admin-nav-link.active {
+
+    background:
+        linear-gradient(
+            90deg,
+            #6d28d9,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 12px
+        rgba(124, 58, 237, 0.20);
+}
+
+.admin-nav-link.active .admin-nav-icon {
+    color: #ffffff;
+}
+
+.admin-nav-link.active .admin-nav-label {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.admin-nav-badge {
+
+    min-width: 15px;
+    height: 12px;
+
+    margin-left: auto;
+
+    padding: 0 4px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background:
+        rgba(124, 58, 237, 0.30);
+
+    color: #d8c7ff;
+
+    font-size: 5.5px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+.admin-nav-badge-danger {
+
+    background:
+        rgba(239, 71, 111, 0.20);
+
+    color: #ff9ab5;
+}
+
+.admin-nav-badge-warning {
+
+    background:
+        rgba(244, 183, 64, 0.20);
+
+    color: #ffd37a;
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+========================================================= */
+
+.admin-sidebar-footer {
+
+    padding: 7px 8px 8px;
+
+    margin-top: auto;
+}
+
+
+/* =========================================================
+   SYSTEM STATUS
+========================================================= */
+
+.admin-system-card {
+
+    padding: 8px;
+
+    margin-bottom: 6px;
+
+    border:
+        1px solid rgba(139, 92, 246, 0.20);
+
+    border-radius: 7px;
+
+    background:
+        rgba(124, 58, 237, 0.08);
+}
+
+.admin-system-card-top {
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: #aebbd0;
+
+    font-size: 6.5px;
+    font-weight: 600;
+}
+
+.admin-system-card-top strong {
+
+    margin-left: auto;
+
+    color: #31d99b;
+
+    font-size: 6px;
+    font-weight: 600;
+}
+
+.admin-system-dot {
+
+    width: 5px;
+    height: 5px;
+
+    flex: 0 0 5px;
+
+    border-radius: 50%;
+
+    background: #20d995;
+
+    box-shadow:
+        0 0 6px
+        rgba(32, 217, 149, 0.65);
+}
+
+.admin-system-card p {
+
+    margin: 4px 0 0;
+
+    color: #697995;
+
+    font-size: 5.5px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.admin-logout {
+
+    min-height: 27px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 7px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: #aebbd0;
+
+    text-decoration: none;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 8px;
+    font-weight: 500;
+}
+
+.admin-logout:hover {
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    color: #ffffff;
+}
+
+.admin-logout-icon {
+
+    font-size: 10px;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   LIGHT MODE
+   SIDEBAR STAYS DARK
+========================================================= */
+
+body.admin-light .admin-sidebar {
+
+    background: #07142f;
+
+    color: #dbe4f5;
+}
+
+body.admin-light .admin-nav-link {
+    color: #aebbd0;
+}
+
+body.admin-light .admin-nav-link:hover {
+    background:
+        rgba(124, 58, 237, 0.12);
+
+    color: #ffffff;
+}
+
+body.admin-light .admin-nav-link.active {
+
+    background:
+        linear-gradient(
+            90deg,
+            #6d28d9,
+            #7c3aed
+        );
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.admin-layout a:focus-visible,
+.admin-layout button:focus-visible,
+.admin-layout input:focus-visible,
+.admin-layout select:focus-visible {
+
+    outline:
+        2px solid
+        rgba(155, 108, 255, 0.85);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    .admin-sidebar,
+    .admin-topbar {
+        display: none !important;
+    }
+
+    .admin-main {
+        margin-left: 0 !important;
+    }
+
+    .admin-content {
+        padding: 0 !important;
+    }
+}
+
+
+/* =========================================================
+   FINAL FONT SMOOTHING
+========================================================= */
+
+.admin-sidebar,
+.admin-sidebar * {
+
+    -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
+}
+/* =========================================================
+   ADMIN SIDEBAR — LIGHT MODE VISIBILITY FIX
+========================================================= */
+
+body.admin-light .admin-sidebar {
+
+    background: #07142f !important;
+
+    color: #dbe4f5 !important;
+}
+
+
+/* ---------------------------------------------------------
+   BRAND VISIBILITY
+--------------------------------------------------------- */
+
+body.admin-light .admin-sidebar .admin-brand-text strong {
+
+    color: #ffffff !important;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif !important;
+
+    font-size: 12px !important;
+
+    font-weight: 800 !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+body.admin-light .admin-sidebar .admin-brand-text span {
+
+    color: #8b9ab3 !important;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif !important;
+
+    font-size: 5px !important;
+
+    font-weight: 600 !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+/* ---------------------------------------------------------
+   BRAND LINK
+--------------------------------------------------------- */
+
+body.admin-light .admin-sidebar .admin-brand-link {
+
+    color: #ffffff !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+/* ---------------------------------------------------------
+   SECTION TITLES
+--------------------------------------------------------- */
+
+body.admin-light .admin-sidebar .admin-nav-section-title {
+
+    color: #71809b !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+/* ---------------------------------------------------------
+   MENU TEXT
+--------------------------------------------------------- */
+
+body.admin-light .admin-sidebar .admin-nav-link {
+
+    color: #aebbd0 !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+body.admin-light .admin-sidebar .admin-nav-label {
+
+    color: inherit !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+/* ---------------------------------------------------------
+   ICONS
+--------------------------------------------------------- */
+
+body.admin-light .admin-sidebar .admin-nav-icon {
+
+    color: #8493ab !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+
+/* ---------------------------------------------------------
+   ACTIVE MENU
+--------------------------------------------------------- */
+
+body.admin-light .admin-sidebar .admin-nav-link.active {
+
+    background:
+        linear-gradient(
+            90deg,
+            #6d28d9,
+            #7c3aed
+        ) !important;
+
+    color: #ffffff !important;
+}
+
+
+body.admin-light .admin-sidebar .admin-nav-link.active .admin-nav-label {
+
+    color: #ffffff !important;
+}
+
+
+body.admin-light .admin-sidebar .admin-nav-link.active .admin-nav-icon {
+
+    color: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER
+--------------------------------------------------------- */
+
+body.admin-light .admin-sidebar .admin-system-card {
+
+    background:
+        rgba(124, 58, 237, 0.08) !important;
+
+    border-color:
+        rgba(139, 92, 246, 0.20) !important;
+}
+
+
+body.admin-light .admin-sidebar .admin-system-card-top {
+
+    color: #aebbd0 !important;
+}
+
+
+body.admin-light .admin-sidebar .admin-system-card p {
+
+    color: #697995 !important;
+}
+
+
+body.admin-light .admin-sidebar .admin-logout {
+
+    background:
+        rgba(255, 255, 255, 0.025) !important;
+
+    color: #aebbd0 !important;
+
+    border-color:
+        rgba(255, 255, 255, 0.08) !important;
+}
+/* =========================================================
+   ADMIN LAYOUT — SIDEBAR / CONTENT ALIGNMENT FIX
+========================================================= */
+
+:root {
+
+    --admin-sidebar-width: 170px;
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.admin-sidebar {
+
+    width:
+        var(--admin-sidebar-width) !important;
+
+    left:
+        0 !important;
+
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.admin-main {
+
+    margin-left:
+        var(--admin-sidebar-width) !important;
+
+    width:
+        calc(100% - var(--admin-sidebar-width)) !important;
+
+    box-sizing:
+        border-box !important;
+
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.admin-topbar {
+
+    left:
+        var(--admin-sidebar-width) !important;
+
+    right:
+        0 !important;
+
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+========================================================= */
+
+.admin-dashboard {
+
+    width:
+        100% !important;
+
+    max-width:
+        none !important;
+
+    margin:
+        0 !important;
+
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+========================================================= */
+
+.dashboard-header {
+
+    margin-bottom:
+        16px !important;
+
+}
+
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.dashboard-kpi-grid {
+
+    margin-bottom:
+        14px !important;
+
+}
+
+
+/* =========================================================
+   REMOVE OLD FUNNEL GRID GAP
+========================================================= */
+
+.dashboard-main-grid {
+
+    margin-top:
+        0 !important;
+
+}
+
+
+/* =========================================================
+   DASHBOARD SECONDARY ROW
+========================================================= */
+
+.dashboard-secondary-grid {
+
+    margin-top:
+        14px !important;
+
+}
+
+
+/* =========================================================
+   DASHBOARD BOTTOM ROW
+========================================================= */
+
+.dashboard-bottom-grid {
+
+    margin-top:
+        14px !important;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    :root {
+
+        --admin-sidebar-width:
+            0px;
+
+    }
+
+
+    .admin-main {
+
+        margin-left:
+            0 !important;
+
+        width:
+            100% !important;
+
+    }
+
+
+    .admin-topbar {
+
+        left:
+            0 !important;
+
+    }
+
 }

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | TPO</title>
+
+
+    <!-- FONT -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- COMMON CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- SETTINGS CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/settings.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- SIDEBAR -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- SETTINGS -->
+
+        <section class="settings-content">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="settings-page-header">
+
+                <div>
+
+                    <h1>
+                        Settings
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Settings
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SETTINGS LAYOUT -->
+
+            <div class="settings-layout">
+
+
+                <!-- =========================================
+                     SETTINGS NAVIGATION
+                ========================================== -->
+
+                <aside class="settings-nav">
+
+
+                    <button
+                        type="button"
+                        class="settings-nav-item active"
+                        data-section="profile"
+                    >
+
+                        <span class="settings-nav-icon">
+                            ♙
+                        </span>
+
+                        <span>
+                            Profile
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-nav-item"
+                        data-section="account"
+                    >
+
+                        <span class="settings-nav-icon">
+                            ◉
+                        </span>
+
+                        <span>
+                            Account
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-nav-item"
+                        data-section="notifications"
+                    >
+
+                        <span class="settings-nav-icon">
+                            ♢
+                        </span>
+
+                        <span>
+                            Notifications
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-nav-item"
+                        data-section="security"
+                    >
+
+                        <span class="settings-nav-icon">
+                            ◇
+                        </span>
+
+                        <span>
+                            Security
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-nav-item"
+                        data-section="appearance"
+                    >
+
+                        <span class="settings-nav-icon">
+                            ☾
+                        </span>
+
+                        <span>
+                            Appearance
+                        </span>
+
+                    </button>
+
+
+                </aside>
+
+
+
+                <!-- =========================================
+                     SETTINGS PANEL
+                ========================================== -->
+
+                <div class="settings-panel">
+
+
+                    <!-- =====================================
+                         PROFILE
+                    ====================================== -->
+
+                    <section
+                        class="settings-section active"
+                        data-section-content="profile"
+                    >
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Profile Information
+                                </h2>
+
+                                <p>
+                                    Manage your TPO profile information.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-settings">
+
+
+                            <div class="profile-avatar-area">
+
+                                <div class="profile-avatar">
+                                    TPO
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        TPO / Placement Cell
+                                    </strong>
+
+                                    <span>
+                                        Training & Placement Officer
+                                    </span>
+
+                                    <button
+                                        type="button"
+                                        class="change-avatar-btn"
+                                    >
+                                        Change Photo
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-form-grid">
+
+                                <div class="settings-field">
+
+                                    <label>
+                                        Full Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        value="Training & Placement Officer"
+                                    >
+
+                                </div>
+
+
+                                <div class="settings-field">
+
+                                    <label>
+                                        Email Address
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        value="tpo@campus.edu"
+                                    >
+
+                                </div>
+
+
+                                <div class="settings-field">
+
+                                    <label>
+                                        Phone Number
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        value="+91 98765 43210"
+                                    >
+
+                                </div>
+
+
+                                <div class="settings-field">
+
+                                    <label>
+                                        Designation
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        value="Training & Placement Officer"
+                                    >
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="settings-actions">
+
+                                <button
+                                    type="button"
+                                    class="settings-save-btn"
+                                >
+                                    Save Changes
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =====================================
+                         ACCOUNT
+                    ====================================== -->
+
+                    <section
+                        class="settings-section"
+                        data-section-content="account"
+                    >
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Account Settings
+                                </h2>
+
+                                <p>
+                                    Manage your account preferences.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-option-list">
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Academic Year
+                                    </strong>
+
+                                    <span>
+                                        Current academic year used across
+                                        the placement portal.
+                                    </span>
+
+                                </div>
+
+
+                                <select>
+
+                                    <option selected>
+                                        2026-27
+                                    </option>
+
+                                    <option>
+                                        2025-26
+                                    </option>
+
+                                    <option>
+                                        2024-25
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Default College
+                                    </strong>
+
+                                    <span>
+                                        College shown by default in TPO reports.
+                                    </span>
+
+                                </div>
+
+
+                                <select>
+
+                                    <option selected>
+                                        All Colleges
+                                    </option>
+
+                                    <option>
+                                        PCE
+                                    </option>
+
+                                    <option>
+                                        PIET
+                                    </option>
+
+                                    <option>
+                                        PU
+                                    </option>
+
+                                    <option>
+                                        JIET
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Session Timeout
+                                    </strong>
+
+                                    <span>
+                                        Automatically sign out after inactivity.
+                                    </span>
+
+                                </div>
+
+
+                                <select>
+
+                                    <option>
+                                        15 Minutes
+                                    </option>
+
+                                    <option selected>
+                                        30 Minutes
+                                    </option>
+
+                                    <option>
+                                        1 Hour
+                                    </option>
+
+                                    <option>
+                                        2 Hours
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =====================================
+                         NOTIFICATIONS
+                    ====================================== -->
+
+                    <section
+                        class="settings-section"
+                        data-section-content="notifications"
+                    >
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Notification Preferences
+                                </h2>
+
+                                <p>
+                                    Choose which notifications you want to receive.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-option-list">
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Placement Drive Alerts
+                                    </strong>
+
+                                    <span>
+                                        Receive alerts for new placement drives.
+                                    </span>
+
+                                </div>
+
+                                <label class="settings-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Interview Updates
+                                    </strong>
+
+                                    <span>
+                                        Receive updates about interview schedules.
+                                    </span>
+
+                                </div>
+
+                                <label class="settings-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Offer Notifications
+                                    </strong>
+
+                                    <span>
+                                        Receive notifications for placement offers.
+                                    </span>
+
+                                </div>
+
+                                <label class="settings-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        checked
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Report Notifications
+                                    </strong>
+
+                                    <span>
+                                        Receive alerts when reports are generated.
+                                    </span>
+
+                                </div>
+
+                                <label class="settings-switch">
+
+                                    <input
+                                        type="checkbox"
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =====================================
+                         SECURITY
+                    ====================================== -->
+
+                    <section
+                        class="settings-section"
+                        data-section-content="security"
+                    >
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Security
+                                </h2>
+
+                                <p>
+                                    Manage your password and account security.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="security-form">
+
+
+                            <div class="settings-field">
+
+                                <label>
+                                    Current Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    placeholder="Enter current password"
+                                >
+
+                            </div>
+
+
+                            <div class="settings-field">
+
+                                <label>
+                                    New Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    placeholder="Enter new password"
+                                >
+
+                            </div>
+
+
+                            <div class="settings-field">
+
+                                <label>
+                                    Confirm New Password
+                                </label>
+
+                                <input
+                                    type="password"
+                                    placeholder="Confirm new password"
+                                >
+
+                            </div>
+
+
+                            <div class="settings-actions">
+
+                                <button
+                                    type="button"
+                                    class="settings-save-btn"
+                                    id="changePasswordBtn"
+                                >
+                                    Update Password
+                                </button>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =====================================
+                         APPEARANCE
+                    ====================================== -->
+
+                    <section
+                        class="settings-section"
+                        data-section-content="appearance"
+                    >
+
+                        <div class="settings-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Appearance
+                                </h2>
+
+                                <p>
+                                    Customize how the TPO portal looks.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-option-list">
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Dark Mode
+                                    </strong>
+
+                                    <span>
+                                        Switch between light and dark appearance.
+                                    </span>
+
+                                </div>
+
+                                <label class="settings-switch">
+
+                                    <input
+                                        type="checkbox"
+                                        id="settingsDarkMode"
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="settings-option">
+
+                                <div>
+
+                                    <strong>
+                                        Compact Layout
+                                    </strong>
+
+                                    <span>
+                                        Reduce spacing across dashboard sections.
+                                    </span>
+
+                                </div>
+
+                                <label class="settings-switch">
+
+                                    <input
+                                        type="checkbox"
+                                    >
+
+                                    <span></span>
+
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- COMMON JS -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+<!-- SETTINGS JS -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/settings.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ student.first_name }}
+        {{ student.last_name or '' }}
+        | Student Profile
+    </title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-sidebar.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-topbar.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         STUDENT DETAIL CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/student-detail.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="student-detail-content">
+
+
+            <!-- =================================================
+                 BREADCRUMB
+            ================================================== -->
+
+            <div class="detail-breadcrumb">
+
+                <a href="{{ url_for('tpo_students') }}">
+                    Students
+                </a>
+
+                <span>
+                    ›
+                </span>
+
+                <strong>
+                    Student Profile
+                </strong>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROFILE HEADER
+            ================================================== -->
+
+            <section class="student-profile-header">
+
+
+                <div class="profile-main">
+
+
+                    <!-- AVATAR -->
+
+                    <div class="profile-avatar">
+
+                        {{
+                            (
+                                student.first_name[0]
+                                ~
+                                (
+                                    student.last_name[0]
+                                    if student.last_name
+                                    else ''
+                                )
+                            ) | upper
+                        }}
+
+                    </div>
+
+
+                    <!-- BASIC INFO -->
+
+                    <div class="profile-basic">
+
+                        <div class="profile-name-row">
+
+                            <h1>
+
+                                {{ student.first_name }}
+
+                                {% if student.middle_name %}
+                                    {{ student.middle_name }}
+                                {% endif %}
+
+                                {% if student.last_name %}
+                                    {{ student.last_name }}
+                                {% endif %}
+
+                            </h1>
+
+
+                            {% if placements %}
+
+                                {% set final_placement = namespace(found=false) %}
+
+                                {% for placement in placements %}
+
+                                    {% if placement.placement_status %}
+                                        {% if placement.placement_status|upper in [
+                                            'PLACED',
+                                            'SELECTED',
+                                            'JOINED'
+                                        ] %}
+                                            {% set final_placement.found = true %}
+                                        {% endif %}
+                                    {% endif %}
+
+                                {% endfor %}
+
+
+                                {% if final_placement.found %}
+
+                                    <span class="profile-status placed">
+                                        Placed
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="profile-status">
+                                        Active
+                                    </span>
+
+                                {% endif %}
+
+                            {% else %}
+
+                                <span class="profile-status">
+                                    Active
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <p>
+
+                            Registration No.
+
+                            <strong>
+                                {{ student.registration_no }}
+                            </strong>
+
+                        </p>
+
+
+                        <p>
+
+                            {% if student.course %}
+                                {{ student.course }}
+                            {% else %}
+                                -
+                            {% endif %}
+
+                            <span>•</span>
+
+                            {% if student.branch %}
+                                {{ student.branch }}
+                            {% else %}
+                                -
+                            {% endif %}
+
+                            <span>•</span>
+
+                            {% if student.section %}
+                                Section {{ student.section }}
+                            {% else %}
+                                Section -
+                            {% endif %}
+
+                        </p>
+
+
+                        <p>
+
+                            {{ student.campus_code or '-' }}
+
+                            <span>•</span>
+
+                            Batch
+                            {{ student.session_name or '-' }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="profile-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="backBtn"
+                    >
+                        ← Back
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="primary-btn"
+                        id="editStudentBtn"
+                    >
+                        ✎ Edit Student
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 CALCULATE PLACEMENT COUNTS
+            ================================================== -->
+
+            {% set application_count = placements|length %}
+
+            {% set interview_count = namespace(value=0) %}
+
+            {% set offer_count = namespace(value=0) %}
+
+            {% set selected_count = namespace(value=0) %}
+
+            {% set final_package = namespace(value=None) %}
+
+
+            {% for placement in placements %}
+
+                {% set stage = (placement.stage or '')|upper %}
+                {% set progress = (placement.progress_status or '')|upper %}
+                {% set application_status = (placement.application_status or '')|upper %}
+                {% set placement_status = (placement.placement_status or '')|upper %}
+
+
+                {% if 'INTERVIEW' in stage %}
+                    {% set interview_count.value =
+                        interview_count.value + 1 %}
+                {% endif %}
+
+
+                {% if
+                    'OFFER' in stage
+                    or 'OFFER' in progress
+                    or 'OFFER' in application_status
+                    or placement_status in ['SELECTED', 'OFFERED', 'PLACED', 'JOINED']
+                %}
+
+                    {% set offer_count.value =
+                        offer_count.value + 1 %}
+
+                {% endif %}
+
+
+                {% if
+                    placement_status in
+                    ['SELECTED', 'PLACED', 'JOINED']
+                %}
+
+                    {% set selected_count.value =
+                        selected_count.value + 1 %}
+
+                {% endif %}
+
+
+                {% if placement.placed_package is not none %}
+
+                    {% set final_package.value =
+                        placement.placed_package %}
+
+                {% elif placement.offer_package_lpa is not none %}
+
+                    {% set final_package.value =
+                        placement.offer_package_lpa %}
+
+                {% elif placement.package_lpa is not none %}
+
+                    {% set final_package.value =
+                        placement.package_lpa %}
+
+                {% endif %}
+
+            {% endfor %}
+
+
+
+            <!-- =================================================
+                 QUICK STATS
+            ================================================== -->
+
+            <section class="profile-stats">
+
+
+                <div class="profile-stat">
+
+                    <span>
+                        CGPA
+                    </span>
+
+                    <strong>
+
+                        {{ student.cgpa
+                           if student.cgpa is not none
+                           else '-' }}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <span>
+                        Eligibility
+                    </span>
+
+
+                    {% if
+                        student.cgpa is not none
+                        and
+                        student.backlogs is not none
+                        and
+                        student.backlogs <= 0
+                    %}
+
+                        <strong class="green-text">
+                            Eligible
+                        </strong>
+
+                    {% else %}
+
+                        <strong>
+                            Not Eligible
+                        </strong>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <span>
+                        Applications
+                    </span>
+
+                    <strong>
+                        {{ application_count }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <span>
+                        Interviews
+                    </span>
+
+                    <strong>
+                        {{ interview_count.value }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <span>
+                        Offers
+                    </span>
+
+                    <strong>
+                        {{ offer_count.value }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-stat">
+
+                    <span>
+                        Package
+                    </span>
+
+                    <strong>
+
+                        {% if final_package.value is not none %}
+
+                            ₹ {{ final_package.value }} LPA
+
+                        {% else %}
+
+                            -
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MAIN GRID
+            ================================================== -->
+
+            <div class="student-detail-grid">
+
+
+                <!-- =================================================
+                     LEFT COLUMN
+                ================================================== -->
+
+                <div class="detail-left-column">
+
+
+                    <!-- =================================================
+                         PERSONAL INFORMATION
+                    ================================================== -->
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Personal Information
+                                </h2>
+
+                                <span>
+                                    Basic student details
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-info-grid">
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Full Name
+                                </label>
+
+                                <strong>
+
+                                    {{ student.first_name }}
+
+                                    {% if student.middle_name %}
+                                        {{ student.middle_name }}
+                                    {% endif %}
+
+                                    {% if student.last_name %}
+                                        {{ student.last_name }}
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Gender
+                                </label>
+
+                                <strong>
+                                    {{ student.gender or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Registration No.
+                                </label>
+
+                                <strong>
+                                    {{ student.registration_no }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Enrollment No.
+                                </label>
+
+                                <strong>
+                                    {{ student.enrollment_no or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Date of Birth
+                                </label>
+
+                                <strong>
+                                    {{ student.date_of_birth or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    College
+                                </label>
+
+                                <strong>
+
+                                    {{ student.campus_name
+                                       or
+                                       student.campus_code
+                                       or
+                                       '-' }}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item full-width">
+
+                                <label>
+                                    Address
+                                </label>
+
+                                <strong>
+
+                                    {{ student.address or '-' }}
+
+                                    {% if student.city %}
+                                        , {{ student.city }}
+                                    {% endif %}
+
+                                    {% if student.state %}
+                                        , {{ student.state }}
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         ACADEMIC INFORMATION
+                    ================================================== -->
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Academic Information
+                                </h2>
+
+                                <span>
+                                    Academic performance
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-info-grid">
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Course
+                                </label>
+
+                                <strong>
+                                    {{ student.course or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Branch
+                                </label>
+
+                                <strong>
+                                    {{ student.branch or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Section
+                                </label>
+
+                                <strong>
+                                    {{ student.section or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Batch
+                                </label>
+
+                                <strong>
+                                    {{ student.session_name or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    10th Percentage
+                                </label>
+
+                                <strong>
+                                    {{ student.tenth_percentage or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    12th Percentage
+                                </label>
+
+                                <strong>
+                                    {{ student.twelfth_percentage or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    CGPA
+                                </label>
+
+                                <strong>
+                                    {{ student.cgpa or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Backlogs
+                                </label>
+
+                                <strong>
+                                    {{ student.backlogs or 0 }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Placement Eligibility
+                                </label>
+
+
+                                {% if
+                                    student.cgpa is not none
+                                    and
+                                    student.backlogs is not none
+                                    and
+                                    student.backlogs <= 0
+                                %}
+
+                                    <span class="status-badge eligible">
+                                        Eligible
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-badge not-eligible">
+                                        Not Eligible
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         CONTACT INFORMATION
+                    ================================================== -->
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Contact Information
+                                </h2>
+
+                                <span>
+                                    Student contact details
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-info-grid">
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Email
+                                </label>
+
+                                <strong>
+                                    {{ student.email or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    Mobile
+                                </label>
+
+                                <strong>
+                                    {{ student.phone or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    City
+                                </label>
+
+                                <strong>
+                                    {{ student.city or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <label>
+                                    State
+                                </label>
+
+                                <strong>
+                                    {{ student.state or '-' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-item full-width">
+
+                                <label>
+                                    LinkedIn
+                                </label>
+
+                                <strong>
+                                    -
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         INTERNSHIP INFORMATION
+                    ================================================== -->
+
+                    {% if student.internship_details %}
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Internship Information
+                                </h2>
+
+                                <span>
+                                    Student internship details
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-info-grid">
+
+                            <div class="info-item full-width">
+
+                                <label>
+                                    Details
+                                </label>
+
+                                <strong>
+                                    {{ student.internship_details }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    {% endif %}
+
+
+
+                    <!-- =================================================
+                         PLACEMENT INFORMATION
+                    ================================================== -->
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Placement Information
+                                </h2>
+
+                                <span>
+                                    Current placement status
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        {% set selected_placement = namespace(data=None) %}
+
+
+                        {% for placement in placements %}
+
+                            {% if
+                                placement.placement_status|upper
+                                in ['SELECTED', 'PLACED', 'JOINED']
+                            %}
+
+                                {% set selected_placement.data =
+                                    placement %}
+
+                            {% endif %}
+
+                        {% endfor %}
+
+
+                        {% if selected_placement.data %}
+
+                            <div class="placement-summary">
+
+
+                                <div class="placement-company">
+
+                                    <div class="company-mini-icon">
+
+                                        {{
+                                            (
+                                                selected_placement.data.company_name[0]
+                                                if selected_placement.data.company_name
+                                                else '?'
+                                            ) | upper
+                                        }}
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            Placed At
+                                        </span>
+
+                                        <strong>
+                                            {{ selected_placement.data.company_name }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Role
+                                    </span>
+
+                                    <strong>
+                                        {{ selected_placement.data.job_role or '-' }}
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Package
+                                    </span>
+
+                                    <strong>
+
+                                        {% if selected_placement.data.placed_package is not none %}
+
+                                            ₹ {{ selected_placement.data.placed_package }} LPA
+
+                                        {% elif selected_placement.data.offer_package_lpa is not none %}
+
+                                            ₹ {{ selected_placement.data.offer_package_lpa }} LPA
+
+                                        {% elif selected_placement.data.package_lpa is not none %}
+
+                                            ₹ {{ selected_placement.data.package_lpa }} LPA
+
+                                        {% else %}
+
+                                            -
+
+                                        {% endif %}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Status
+                                    </span>
+
+                                    <span class="status-badge placed">
+                                        {{ selected_placement.data.placement_status }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="placement-summary">
+
+                                <div>
+
+                                    <span>
+                                        Status
+                                    </span>
+
+                                    <strong>
+                                        Not Placed
+                                    </strong>
+
+                                </div>
+
+                                <div>
+
+                                    <span>
+                                        Applications
+                                    </span>
+
+                                    <strong>
+                                        {{ application_count }}
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
+                    </section>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     RIGHT COLUMN
+                ================================================== -->
+
+                <div class="detail-right-column">
+
+
+                    <!-- =================================================
+                         PLACEMENT TIMELINE
+                    ================================================== -->
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Placement Timeline
+                                </h2>
+
+                                <span>
+                                    Student placement journey
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline">
+
+
+                            {% if placements %}
+
+
+                                {% for placement in placements %}
+
+
+                                    <!-- APPLICATION -->
+
+                                    <div class="timeline-item completed">
+
+                                        <div class="timeline-dot">
+                                            ✓
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Application Submitted
+                                            </strong>
+
+                                            <span>
+
+                                                {{ placement.company_name or '-' }}
+
+                                                {% if placement.applied_at %}
+                                                    • {{ placement.applied_at }}
+                                                {% endif %}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- PROGRESS -->
+
+                                    {% if placement.stage %}
+
+                                    <div
+                                        class="timeline-item
+                                        {% if placement.progress_status %}
+                                            completed
+                                        {% endif %}"
+                                    >
+
+                                        <div class="timeline-dot">
+                                            ✓
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                {{ placement.stage }}
+                                            </strong>
+
+                                            <span>
+
+                                                {{ placement.company_name or '-' }}
+
+                                                {% if placement.scheduled_at %}
+                                                    • {{ placement.scheduled_at }}
+                                                {% endif %}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    {% endif %}
+
+
+                                    <!-- OFFER -->
+
+                                    {% if placement.offer_package_lpa is not none %}
+
+                                    <div class="timeline-item current">
+
+                                        <div class="timeline-dot">
+                                            ★
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Offer Received
+                                            </strong>
+
+                                            <span>
+
+                                                {{ placement.company_name or '-' }}
+
+                                                • ₹ {{ placement.offer_package_lpa }} LPA
+
+                                                {% if placement.joining_date %}
+                                                    • Joining {{ placement.joining_date }}
+                                                {% endif %}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    {% endif %}
+
+
+                                {% endfor %}
+
+
+                            {% else %}
+
+                                <div class="timeline-item">
+
+                                    <div class="timeline-dot">
+                                        -
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            No Placement Activity
+                                        </strong>
+
+                                        <span>
+                                            No applications found for this student.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            {% endif %}
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         APPLICATIONS
+                    ================================================== -->
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Recent Applications
+                                </h2>
+
+                                <span>
+                                    Latest placement activity
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="application-list">
+
+
+                            {% if placements %}
+
+
+                                {% for placement in placements %}
+
+
+                                <div class="application-item">
+
+
+                                    <div class="application-company-icon">
+
+                                        {{
+                                            (
+                                                placement.company_name[0]
+                                                if placement.company_name
+                                                else '?'
+                                            ) | upper
+                                        }}
+
+                                    </div>
+
+
+                                    <div class="application-info">
+
+                                        <strong>
+                                            {{ placement.company_name or '-' }}
+                                        </strong>
+
+                                        <span>
+                                            {{ placement.job_role or '-' }}
+                                        </span>
+
+                                    </div>
+
+
+                                    {% set app_status =
+                                        placement.placement_status
+                                        or
+                                        placement.progress_status
+                                        or
+                                        placement.application_status
+                                    %}
+
+
+                                    {% if app_status %}
+
+                                        {% set normalized_status =
+                                            app_status|upper %}
+
+
+                                        {% if normalized_status in [
+                                            'SELECTED',
+                                            'PLACED',
+                                            'JOINED'
+                                        ] %}
+
+                                            <span class="status-badge placed">
+                                                {{ app_status }}
+                                            </span>
+
+                                        {% elif 'INTERVIEW' in normalized_status %}
+
+                                            <span class="status-badge interview">
+                                                {{ app_status }}
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status-badge yet">
+                                                {{ app_status }}
+                                            </span>
+
+                                        {% endif %}
+
+                                    {% else %}
+
+                                        <span class="status-badge yet">
+                                            Applied
+                                        </span>
+
+                                    {% endif %}
+
+
+                                </div>
+
+
+                                {% endfor %}
+
+
+                            {% else %}
+
+                                <div class="application-item">
+
+                                    <div class="application-info">
+
+                                        <strong>
+                                            No applications
+                                        </strong>
+
+                                        <span>
+                                            No placement applications found.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            {% endif %}
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         DOCUMENTS
+                    ================================================== -->
+
+                    <section class="detail-card">
+
+                        <div class="detail-card-header">
+
+                            <div>
+
+                                <h2>
+                                    Student Documents
+                                </h2>
+
+                                <span>
+                                    Uploaded documents
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="document-list">
+
+
+                            {% if student.resume_file %}
+
+                            <div class="document-item">
+
+                                <span>
+                                    📄
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Resume
+                                    </strong>
+
+                                    <small>
+                                        Uploaded document
+                                    </small>
+
+                                </div>
+
+                                <a
+                                    href="{{ url_for(
+                                        'static',
+                                        filename=student.resume_file
+                                    ) }}"
+                                    target="_blank"
+                                >
+                                    View
+                                </a>
+
+                            </div>
+
+                            {% endif %}
+
+
+
+                            {% if student.certificate_files %}
+
+                            <div class="document-item">
+
+                                <span>
+                                    📄
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Certificates
+                                    </strong>
+
+                                    <small>
+                                        Uploaded certificates
+                                    </small>
+
+                                </div>
+
+                                <span>
+                                    Available
+                                </span>
+
+                            </div>
+
+                            {% endif %}
+
+
+
+                            {% if student.internship_files %}
+
+                            <div class="document-item">
+
+                                <span>
+                                    📄
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Internship Documents
+                                    </strong>
+
+                                    <small>
+                                        Uploaded internship files
+                                    </small>
+
+                                </div>
+
+                                <span>
+                                    Available
+                                </span>
+
+                            </div>
+
+                            {% endif %}
+
+
+
+                            {% if not student.resume_file
+                                  and not student.certificate_files
+                                  and not student.internship_files %}
+
+                            <div class="document-item">
+
+                                <span>
+                                    📄
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        No Documents
+                                    </strong>
+
+                                    <small>
+                                        No documents uploaded by this student.
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            {% endif %}
+
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-sidebar.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-topbar.js'
+    ) }}"
+></script>
+
+
+
+<!-- =====================================================
+     STUDENT DETAIL JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/student-detail.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

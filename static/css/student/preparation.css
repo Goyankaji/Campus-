@@ -2,8 +2,24 @@
    CAMPUS — STUDENT PREPARATION
 ========================================================= */
 
+
+/* =========================================================
+   PAGE
+========================================================= */
+
 .student-preparation-page {
-    padding: 24px 28px 40px;
+
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding:
+        0 28px
+        40px;
+
+    box-sizing: border-box;
 }
 
 
@@ -12,105 +28,59 @@
 ========================================================= */
 
 .student-preparation-header {
-    margin-bottom: 20px;
-}
-
-.student-preparation-header h1 {
-    margin: 0;
-
-    color: #172033;
-
-    font-size: 26px;
-    font-weight: 700;
-
-    letter-spacing: -0.4px;
-}
-
-.student-preparation-header p {
-    margin: 6px 0 0;
-
-    color: #697386;
-
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.student-preparation-stats {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 14px;
-
-    margin-bottom: 18px;
-}
-
-.student-preparation-stat {
-    min-height: 82px;
-
-    padding: 16px 18px;
-
-    box-sizing: border-box;
-
-    background: #ffffff;
-
-    border: 1px solid #e4e7ee;
-
-    border-radius: 10px;
-
-    box-shadow:
-        0 3px 12px rgba(28, 35, 52, .035);
-}
-
-.student-preparation-stat span {
-    display: block;
-
-    margin-bottom: 8px;
-
-    color: #7b8496;
-
-    font-size: 10px;
-}
-
-.student-preparation-stat strong {
-    color: #172033;
-
-    font-size: 22px;
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   TOOLBAR
-========================================================= */
-
-.student-preparation-toolbar {
-    min-height: 58px;
-
-    margin-bottom: 20px;
-
-    padding: 9px 10px;
 
     display: flex;
 
-    align-items: center;
+    align-items: flex-end;
+
     justify-content: space-between;
 
-    gap: 15px;
+    margin-bottom: 22px;
+}
 
-    box-sizing: border-box;
 
-    background: #ffffff;
+.student-preparation-eyebrow {
 
-    border: 1px solid #e1e5ed;
+    display: block;
 
-    border-radius: 10px;
+    margin-bottom: 6px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+
+.student-preparation-heading h1 {
+
+    margin: 0 0 6px;
+
+    color:
+        var(--student-text);
+
+    font-size: 24px;
+
+    line-height: 1.2;
+}
+
+
+.student-preparation-heading p {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 10px;
+
+    line-height: 1.6;
 }
 
 
@@ -119,217 +89,635 @@
 ========================================================= */
 
 .student-preparation-tabs {
+
     display: flex;
 
     align-items: center;
 
     gap: 7px;
+
+    margin-bottom: 20px;
+
+    padding: 5px;
+
+    width: fit-content;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 9px;
+
+    background:
+        var(--student-surface-soft);
 }
 
+
 .student-preparation-tab {
-    height: 36px;
 
-    padding: 0 15px;
+    display: flex;
 
-    border: 1px solid #e0e4ec;
+    align-items: center;
 
-    border-radius: 7px;
+    gap: 7px;
 
-    background: #ffffff;
+    min-height: 34px;
 
-    color: #667085;
+    padding:
+        0 13px;
 
-    font-family: inherit;
+    border: 0;
 
-    font-size: 10px;
-    font-weight: 600;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color:
+        var(--student-text-muted);
+
+    font: inherit;
+
+    font-size: 9px;
+
+    font-weight: 700;
 
     cursor: pointer;
 
     transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        box-shadow .2s ease;
+        background .18s ease,
+        color .18s ease,
+        box-shadow .18s ease;
 }
+
 
 .student-preparation-tab:hover {
-    color: #6938ef;
 
-    border-color: #cfc4ff;
+    color:
+        var(--student-text);
+
 }
 
-.student-preparation-tab.active {
-    background: #6938ef;
 
-    border-color: #6938ef;
+.student-preparation-tab.active {
+
+    background:
+        var(--student-primary);
 
     color: #ffffff;
 
     box-shadow:
-        0 5px 12px rgba(105, 56, 239, .20);
+        0 4px 12px
+        rgba(
+            124,
+            58,
+            237,
+            .20
+        );
 }
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+.student-preparation-tab-icon {
 
-.student-preparation-search {
-    width: 260px;
+    display: flex;
 
-    height: 36px;
+    align-items: center;
 
-    padding: 0 13px;
-
-    box-sizing: border-box;
-
-    border: 1px solid #dfe3eb;
-
-    border-radius: 7px;
-
-    outline: none;
-
-    background: #ffffff;
-
-    color: #172033;
-
-    font-family: inherit;
+    justify-content: center;
 
     font-size: 10px;
 }
 
-.student-preparation-search::placeholder {
-    color: #9ca5b4;
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.student-preparation-section {
+
+    display: none;
+
 }
 
-.student-preparation-search:focus {
-    border-color: #6938ef;
 
-    box-shadow:
-        0 0 0 3px rgba(105, 56, 239, .09);
+.student-preparation-section.active {
+
+    display: block;
+
+    animation:
+        preparationFade .22s ease;
+}
+
+
+@keyframes preparationFade {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(4px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
 }
 
 
 /* =========================================================
-   MATERIAL GRID
+   SECTION HEADER
 ========================================================= */
 
-.student-preparation-grid {
+.student-preparation-section-header {
+
+    margin-bottom: 14px;
+}
+
+
+.student-preparation-section-label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.student-preparation-section-header h2 {
+
+    margin: 0 0 4px;
+
+    color:
+        var(--student-text);
+
+    font-size: 16px;
+}
+
+
+.student-preparation-section-header p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CORE SUBJECT GRID
+========================================================= */
+
+.student-core-subject-grid {
+
     display: grid;
 
     grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
 
-    gap: 15px;
-
-    margin-bottom: 28px;
+    gap: 12px;
 }
 
 
 /* =========================================================
-   MATERIAL CARD
+   CORE SUBJECT CARD
 ========================================================= */
 
-.student-preparation-card {
-    min-height: 225px;
+.student-core-subject-card {
 
-    padding: 18px;
+    position: relative;
+
+    min-height: 190px;
 
     display: flex;
 
     flex-direction: column;
 
+    padding: 16px;
+
     box-sizing: border-box;
 
-    background: #ffffff;
+    border:
+        1px solid
+        var(--student-border);
 
-    border: 1px solid #e2e6ed;
+    border-radius: 12px;
 
-    border-radius: 11px;
+    background:
+        var(--student-surface);
 
     box-shadow:
-        0 4px 14px rgba(25, 32, 48, .035);
+        var(--student-shadow);
+
+    overflow: hidden;
 
     transition:
         transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
-.student-preparation-card:hover {
-    transform: translateY(-2px);
 
-    border-color: #d6cffb;
+.student-core-subject-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 2px;
+
+    background:
+        var(--student-primary);
+
+    opacity: .75;
+}
+
+
+.student-core-subject-card:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(
+            124,
+            58,
+            237,
+            .38
+        );
 
     box-shadow:
-        0 9px 24px rgba(25, 32, 48, .07);
+        0 10px 30px
+        rgba(
+            0,
+            0,
+            0,
+            .10
+        );
 }
 
 
 /* =========================================================
-   CARD TOP
+   SUBJECT ICON
 ========================================================= */
 
-.student-preparation-card-top {
+.student-core-subject-icon {
+
+    width: 38px;
+
+    height: 38px;
+
     display: flex;
 
     align-items: center;
-    justify-content: space-between;
 
-    margin-bottom: 16px;
+    justify-content: center;
+
+    margin-bottom: 11px;
+
+    border-radius: 9px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 14px;
 }
 
-.student-preparation-icon {
+
+.student-core-subject-content {
+
+    flex: 1;
+}
+
+
+.student-core-subject-tag {
+
+    display: inline-block;
+
+    margin-bottom: 5px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: .8px;
+}
+
+
+.student-core-subject-content h3 {
+
+    margin: 0 0 6px;
+
+    color:
+        var(--student-text);
+
+    font-size: 12px;
+
+    line-height: 1.35;
+}
+
+
+.student-core-subject-content p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   STUDY BUTTON
+========================================================= */
+
+.student-core-subject-btn {
+
+    align-self: flex-start;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 13px;
+
+    padding:
+        7px
+        10px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 6px;
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text-soft);
+
+    font: inherit;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        .18s ease;
+}
+
+
+.student-core-subject-btn:hover {
+
+    border-color:
+        var(--student-primary);
+
+    background:
+        var(--student-primary);
+
+    color: #ffffff;
+
+}
+
+
+/* =========================================================
+   PRACTICE HERO
+========================================================= */
+
+.student-practice-hero {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 13px;
+
+    padding: 17px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--student-surface),
+            var(--student-surface-soft)
+        );
+
+    box-shadow:
+        var(--student-shadow);
+}
+
+
+.student-practice-hero-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    flex:
+        0 0 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 18px;
+}
+
+
+.student-practice-hero-content {
+
+    min-width: 0;
+}
+
+
+.student-practice-hero-content h2 {
+
+    margin: 0 0 4px;
+
+    color:
+        var(--student-text);
+
+    font-size: 16px;
+}
+
+
+.student-practice-hero-content p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   MOODLE CARD
+========================================================= */
+
+.student-moodle-card {
+
+    overflow: hidden;
+
+    margin-bottom: 13px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 12px;
+
+    background:
+        var(--student-surface);
+
+    box-shadow:
+        var(--student-shadow);
+}
+
+
+.student-moodle-card-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 16px;
+
+    border-bottom:
+        1px solid
+        var(--student-border);
+}
+
+
+.student-moodle-icon {
+
     width: 40px;
+
     height: 40px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     border-radius: 9px;
 
-    background: #eee8ff;
+    background:
+        var(--student-primary-soft);
 
-    color: #6938ef;
+    color:
+        var(--student-primary);
 
-    font-size: 12px;
+    font-size: 15px;
+}
+
+
+.student-moodle-label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 6px;
+
     font-weight: 800;
-}
 
-.student-preparation-type {
-    padding: 5px 9px;
-
-    border-radius: 20px;
-
-    background: #f4f1ff;
-
-    color: #6938ef;
-
-    font-size: 8px;
-    font-weight: 700;
+    letter-spacing: .9px;
 }
 
 
-/* =========================================================
-   CARD CONTENT
-========================================================= */
+.student-moodle-card-top h3 {
 
-.student-preparation-card h3 {
-    margin: 0 0 8px;
-
-    color: #172033;
-
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.student-preparation-card p {
     margin: 0;
 
-    color: #7b8496;
+    color:
+        var(--student-text);
+
+    font-size: 14px;
+}
+
+
+.student-moodle-card-body {
+
+    padding:
+        14px
+        16px;
+}
+
+
+.student-moodle-card-body > p {
+
+    margin: 0 0 13px;
+
+    color:
+        var(--student-text-muted);
 
     font-size: 9px;
 
@@ -338,323 +726,305 @@
 
 
 /* =========================================================
-   META
+   MOODLE FEATURES
 ========================================================= */
 
-.student-preparation-meta {
-    display: flex;
+.student-moodle-features {
 
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
 
-    gap: 8px;
-
-    margin-top: auto;
-
-    padding-top: 16px;
-}
-
-.student-preparation-meta span {
-    color: #929aaa;
-
-    font-size: 8px;
-}
-
-
-/* =========================================================
-   BUTTON
-========================================================= */
-
-.student-preparation-btn {
-    width: 100%;
-
-    height: 32px;
-
-    margin-top: 12px;
-
-    border: 1px solid #d8cffc;
-
-    border-radius: 7px;
-
-    background: #ffffff;
-
-    color: #6035e8;
-
-    font-family: inherit;
-
-    font-size: 8px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-.student-preparation-btn:hover {
-    background: #6938ef;
-
-    border-color: #6938ef;
-
-    color: #ffffff;
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   PYQ SECTION
-========================================================= */
-
-.student-pyq-section {
-    padding: 19px;
-
-    background: #ffffff;
-
-    border: 1px solid #e2e6ed;
-
-    border-radius: 11px;
-
-    box-shadow:
-        0 4px 14px rgba(25, 32, 48, .035);
-}
-
-
-/* =========================================================
-   PYQ HEADER
-========================================================= */
-
-.student-pyq-header {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-bottom: 15px;
-}
-
-.student-pyq-header h2 {
-    margin: 0;
-
-    color: #172033;
-
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.student-pyq-header p {
-    margin: 5px 0 0;
-
-    color: #8992a3;
-
-    font-size: 9px;
-}
-
-.student-pyq-view-all {
-    border: none;
-
-    background: transparent;
-
-    color: #6938ef;
-
-    font-family: inherit;
-
-    font-size: 9px;
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   PYQ LIST
-========================================================= */
-
-.student-pyq-list {
-    display: flex;
-
-    flex-direction: column;
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
 
     gap: 8px;
 }
 
 
-/* =========================================================
-   PYQ ITEM
-========================================================= */
-
-.student-pyq-item {
-    min-height: 58px;
-
-    padding: 9px 11px;
+.student-moodle-feature {
 
     display: flex;
 
     align-items: center;
 
-    gap: 13px;
+    gap: 7px;
+
+    min-height: 35px;
+
+    padding:
+        7px
+        9px;
 
     box-sizing: border-box;
 
-    background: #fafbfc;
+    border:
+        1px solid
+        var(--student-border);
 
-    border: 1px solid #edf0f4;
+    border-radius: 7px;
 
-    border-radius: 8px;
+    background:
+        var(--student-surface-soft);
 
-    transition:
-        border-color .2s ease,
-        background .2s ease,
-        transform .2s ease;
+    color:
+        var(--student-text-soft);
+
+    font-size: 7px;
+
+    font-weight: 600;
 }
 
-.student-pyq-item:hover {
-    background: #ffffff;
 
-    border-color: #dcd5fb;
+.student-moodle-feature i {
 
-    transform: translateY(-1px);
+    color:
+        var(--student-success);
+
+    font-size: 9px;
 }
 
 
 /* =========================================================
-   COMPANY LOGO
+   MOODLE FOOTER
 ========================================================= */
 
-.student-pyq-company {
-    width: 38px;
-    height: 38px;
-
-    flex: 0 0 38px;
+.student-moodle-card-footer {
 
     display: flex;
 
     align-items: center;
-    justify-content: center;
 
-    border-radius: 8px;
+    justify-content: space-between;
 
-    background: #eee8ff;
+    gap: 10px;
 
-    color: #6938ef;
+    padding:
+        11px
+        16px;
 
-    font-size: 8px;
-    font-weight: 800;
+    border-top:
+        1px solid
+        var(--student-border);
+
+    background:
+        var(--student-surface-soft);
 }
 
 
-/* =========================================================
-   PYQ INFO
-========================================================= */
+.student-moodle-status {
 
-.student-pyq-info {
-    flex: 1;
+    display: flex;
 
-    min-width: 0;
-}
+    align-items: center;
 
-.student-pyq-info strong {
-    display: block;
+    gap: 6px;
 
-    color: #273044;
-
-    font-size: 10px;
-    font-weight: 700;
-}
-
-.student-pyq-info span {
-    display: block;
-
-    margin-top: 4px;
-
-    color: #929aaa;
-
-    font-size: 8px;
-}
-
-
-/* =========================================================
-   QUESTION COUNT
-========================================================= */
-
-.student-pyq-questions {
-    color: #8992a3;
+    color:
+        var(--student-text-muted);
 
     font-size: 8px;
 
-    white-space: nowrap;
+    font-weight: 600;
 }
 
 
-/* =========================================================
-   OPEN LINK
-========================================================= */
+.student-moodle-status-dot {
 
-.student-pyq-open {
-    min-width: 54px;
-    height: 29px;
+    width: 6px;
 
-    padding: 0 11px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        var(--student-success);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            25,
+            201,
+            139,
+            .10
+        );
+}
+
+
+.student-moodle-btn {
 
     display: inline-flex;
 
     align-items: center;
-    justify-content: center;
 
-    box-sizing: border-box;
+    gap: 7px;
 
-    border: 1px solid #d8cffc;
+    min-height: 34px;
 
-    border-radius: 6px;
+    padding:
+        0
+        13px;
 
-    background: #ffffff;
+    border: 0;
 
-    color: #6035e8;
+    border-radius: 7px;
 
-    text-decoration: none;
+    background:
+        var(--student-primary);
 
-    font-family: inherit;
+    color: #ffffff;
+
+    font: inherit;
 
     font-size: 8px;
+
     font-weight: 700;
 
     cursor: pointer;
 
+    box-shadow:
+        0 5px 15px
+        rgba(
+            124,
+            58,
+            237,
+            .18
+        );
+
     transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
+        transform .18s ease,
+        box-shadow .18s ease;
 }
 
-.student-pyq-open:hover {
-    background: #6938ef;
 
-    border-color: #6938ef;
+.student-moodle-btn:hover {
 
-    color: #ffffff;
+    transform:
+        translateY(-1px);
 
-    text-decoration: none;
-
-    transform: translateY(-1px);
+    box-shadow:
+        0 8px 20px
+        rgba(
+            124,
+            58,
+            237,
+            .25
+        );
 }
 
 
 /* =========================================================
-   PYQ CARD
+   MOODLE INFORMATION CARDS
 ========================================================= */
 
-.student-preparation-pyq {
-    border-color: #e0dafa;
+.student-moodle-info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 10px;
 }
 
-.student-preparation-pyq:hover {
-    border-color: #cfc4ff;
+
+.student-moodle-info-card {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding: 13px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 10px;
+
+    background:
+        var(--student-surface);
+
+    box-shadow:
+        var(--student-shadow);
+}
+
+
+.student-moodle-info-icon {
+
+    width: 30px;
+
+    height: 30px;
+
+    flex:
+        0 0 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 10px;
+}
+
+
+.student-moodle-info-card h4 {
+
+    margin:
+        0
+        0
+        4px;
+
+    color:
+        var(--student-text);
+
+    font-size: 9px;
+}
+
+
+.student-moodle-info-card p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
+
+body:not(.dark-mode)
+.student-core-subject-card:hover {
+
+    box-shadow:
+        0 10px 28px
+        rgba(
+            15,
+            23,
+            42,
+            .08
+        );
 }
 
 
@@ -662,85 +1032,201 @@
    DARK MODE
 ========================================================= */
 
-body.dark-mode .student-pyq-section {
-    background: var(--student-surface);
+body.dark-mode
+.student-core-subject-card:hover {
 
-    border-color: var(--student-border);
-}
-
-body.dark-mode .student-pyq-header h2 {
-    color: var(--student-text);
-}
-
-body.dark-mode .student-pyq-header p {
-    color: var(--student-text-muted);
-}
-
-body.dark-mode .student-pyq-item {
-    background: rgba(255, 255, 255, .035);
-
-    border-color: var(--student-border);
-}
-
-body.dark-mode .student-pyq-item:hover {
-    background: var(--student-surface);
-
-    border-color: #6556a8;
-}
-
-body.dark-mode .student-pyq-info strong {
-    color: var(--student-text);
-}
-
-body.dark-mode .student-pyq-info span,
-body.dark-mode .student-pyq-questions {
-    color: var(--student-text-muted);
-}
-
-body.dark-mode .student-pyq-open {
-    background: var(--student-surface);
-
-    border-color: var(--student-border);
-
-    color: var(--student-primary);
-}
-
-body.dark-mode .student-pyq-open:hover {
-    background: var(--student-primary);
-
-    border-color: var(--student-primary);
-
-    color: #ffffff;
+    box-shadow:
+        0 10px 30px
+        rgba(
+            0,
+            0,
+            0,
+            .28
+        );
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .student-core-subject-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+    }
+
+
+    .student-moodle-features {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
 ========================================================= */
 
 @media (max-width: 700px) {
 
-    .student-pyq-header {
+    .student-preparation-page {
+
+        padding:
+            0
+            16px
+            30px;
+
+    }
+
+
+    .student-preparation-header {
+
+        margin-bottom: 15px;
+
+    }
+
+
+    .student-preparation-heading h1 {
+
+        font-size: 21px;
+
+    }
+
+
+    .student-preparation-heading p {
+
+        font-size: 9px;
+
+    }
+
+
+    .student-preparation-tabs {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .student-preparation-tab {
+
+        flex: 1;
+
+        justify-content: center;
+
+        padding:
+            0
+            9px;
+
+    }
+
+
+    .student-core-subject-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .student-practice-hero {
+
+        align-items: flex-start;
+
+    }
+
+
+    .student-moodle-features {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .student-moodle-info-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .student-preparation-tabs {
+
+        gap: 4px;
+
+    }
+
+
+    .student-preparation-tab {
+
+        font-size: 8px;
+
+    }
+
+
+    .student-preparation-tab-icon {
+
+        display: none;
+
+    }
+
+
+    .student-practice-hero {
+
+        padding: 13px;
+
+    }
+
+
+    .student-practice-hero-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        flex-basis: 40px;
+
+        font-size: 14px;
+
+    }
+
+
+    .student-moodle-card-footer {
+
         align-items: flex-start;
 
         flex-direction: column;
+
     }
 
 
-    .student-pyq-item {
-        align-items: flex-start;
+    .student-moodle-btn {
 
-        flex-wrap: wrap;
-    }
+        width: 100%;
 
+        justify-content: center;
 
-    .student-pyq-questions {
-        margin-left: 51px;
-    }
-
-
-    .student-pyq-open {
-        margin-left: auto;
     }
 
 }

@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        NOC Request | Campus
+    </title>
+
+
+    <!-- =====================================================
+         STUDENT COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         NOC PAGE STYLE
+         No separate CSS file required
+    ====================================================== -->
+
+    <style>
+
+        /* =================================================
+           NOC PAGE
+        ================================================== */
+
+        .student-noc-page {
+            padding: 28px 30px 45px;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+
+        /* =================================================
+           HEADER
+        ================================================== */
+
+        .student-noc-header {
+            margin-bottom: 24px;
+        }
+
+        .student-noc-header h1 {
+            margin: 0 0 7px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .student-noc-header p {
+            margin: 0;
+            font-size: 12px;
+            opacity: .62;
+        }
+
+
+        /* =================================================
+           STATUS CARD
+        ================================================== */
+
+        .student-noc-status-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 20px 22px;
+
+            margin-bottom: 18px;
+
+            border: 1px solid rgba(124, 58, 237, .18);
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124, 58, 237, .10),
+                    rgba(124, 58, 237, .025)
+                );
+        }
+
+        .student-noc-status-card span,
+        .student-noc-card-header span {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #8b5cf6;
+
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: .13em;
+        }
+
+        .student-noc-status-card h2 {
+            margin: 0 0 5px;
+
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .student-noc-status-card p {
+            margin: 0;
+
+            font-size: 11px;
+
+            opacity: .58;
+        }
+
+        .student-noc-status-badge {
+            flex-shrink: 0;
+
+            padding: 7px 11px;
+
+            border-radius: 7px;
+
+            background: rgba(148, 163, 184, .10);
+
+            color: #94a3b8;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+
+        /* =================================================
+           CARD
+        ================================================== */
+
+        .student-noc-card {
+            margin-bottom: 18px;
+
+            padding: 22px;
+
+            border:
+                1px solid
+                rgba(120, 130, 160, .13);
+
+            border-radius: 14px;
+
+            background:
+                rgba(255, 255, 255, .025);
+
+            box-shadow:
+                0 8px 28px
+                rgba(0, 0, 0, .08);
+        }
+
+        .student-noc-card-header {
+            margin-bottom: 20px;
+
+            padding-bottom: 17px;
+
+            border-bottom:
+                1px solid
+                rgba(120, 130, 160, .10);
+        }
+
+        .student-noc-card-header h2 {
+            margin: 0 0 5px;
+
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .student-noc-card-header p {
+            margin: 0;
+
+            font-size: 11px;
+
+            opacity: .55;
+        }
+
+
+        /* =================================================
+           FORM GRID
+        ================================================== */
+
+        .student-noc-form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px 20px;
+        }
+
+        .student-noc-field {
+            min-width: 0;
+        }
+
+        .student-noc-field-full {
+            grid-column: 1 / -1;
+        }
+
+
+        /* =================================================
+           LABEL
+        ================================================== */
+
+        .student-noc-field label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            color: inherit;
+        }
+
+        .student-noc-field label span {
+            color: #a855f7;
+        }
+
+
+        /* =================================================
+           INPUT / SELECT / TEXTAREA
+        ================================================== */
+
+        .student-noc-field input[type="text"],
+        .student-noc-field input[type="file"],
+        .student-noc-field select,
+        .student-noc-field textarea {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            border:
+                1px solid
+                rgba(120, 130, 160, .18);
+
+            border-radius: 8px;
+
+            background:
+                rgba(255, 255, 255, .035);
+
+            color: inherit;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            transition:
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        /* TEXT INPUT */
+
+        .student-noc-field input[type="text"] {
+            height: 40px;
+
+            padding: 0 12px;
+        }
+
+
+        /* SELECT */
+
+        .student-noc-field select {
+            height: 40px;
+
+            padding: 0 12px;
+
+            cursor: pointer;
+        }
+
+        .student-noc-field select option {
+            background: #11182b;
+            color: #fff;
+        }
+
+
+        /* TEXTAREA */
+
+        .student-noc-field textarea {
+            min-height: 125px;
+
+            padding: 11px 12px;
+
+            resize: vertical;
+
+            line-height: 1.55;
+        }
+
+
+        /* FILE */
+
+        .student-noc-field input[type="file"] {
+            min-height: 40px;
+
+            padding: 9px 10px;
+
+            cursor: pointer;
+        }
+
+        .student-noc-field input[type="file"]::file-selector-button {
+            margin-right: 10px;
+
+            padding: 6px 9px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background: rgba(124, 58, 237, .12);
+
+            color: #a78bfa;
+
+            font-family: inherit;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        /* PLACEHOLDER */
+
+        .student-noc-field input::placeholder,
+        .student-noc-field textarea::placeholder {
+            color: inherit;
+
+            opacity: .35;
+        }
+
+
+        /* FOCUS */
+
+        .student-noc-field input:focus,
+        .student-noc-field select:focus,
+        .student-noc-field textarea:focus {
+
+            border-color:
+                rgba(124, 58, 237, .55);
+
+            background:
+                rgba(124, 58, 237, .035);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(124, 58, 237, .07);
+        }
+
+
+        /* HELP TEXT */
+
+        .student-noc-field small {
+            display: block;
+
+            margin-top: 6px;
+
+            font-size: 9px;
+
+            opacity: .43;
+        }
+
+
+        /* =================================================
+           DECLARATION
+        ================================================== */
+
+        .student-noc-declaration {
+
+            margin-top: 20px;
+
+            padding-top: 17px;
+
+            border-top:
+                1px solid
+                rgba(120, 130, 160, .10);
+        }
+
+        .student-noc-declaration label {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 9px;
+
+            cursor: pointer;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+            opacity: .72;
+        }
+
+        .student-noc-declaration input {
+            margin-top: 2px;
+
+            accent-color: #7c3aed;
+
+            cursor: pointer;
+        }
+
+
+        /* =================================================
+           ACTIONS
+        ================================================== */
+
+        .student-noc-actions {
+
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 9px;
+
+            margin-top: 20px;
+
+            padding-top: 17px;
+
+            border-top:
+                1px solid
+                rgba(120, 130, 160, .10);
+        }
+
+        .student-noc-clear-btn,
+        .student-noc-submit-btn {
+
+            height: 38px;
+
+            padding: 0 16px;
+
+            border-radius: 8px;
+
+            font-family: inherit;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .15s ease,
+                background .2s ease,
+                border-color .2s ease;
+        }
+
+        .student-noc-clear-btn {
+
+            border:
+                1px solid
+                rgba(120, 130, 160, .18);
+
+            background:
+                transparent;
+
+            color: inherit;
+        }
+
+        .student-noc-clear-btn:hover {
+            background:
+                rgba(255, 255, 255, .04);
+        }
+
+        .student-noc-submit-btn {
+
+            border:
+                1px solid
+                rgba(124, 58, 237, .55);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #6d28d9
+                );
+
+            color: #fff;
+
+            box-shadow:
+                0 7px 18px
+                rgba(124, 58, 237, .18);
+        }
+
+        .student-noc-submit-btn:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 24px
+                rgba(124, 58, 237, .25);
+        }
+
+        .student-noc-submit-btn:disabled {
+            opacity: .55;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =================================================
+           APPROVAL PROCESS
+        ================================================== */
+
+        .student-noc-process {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .student-noc-process-step {
+
+            min-height: 145px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                rgba(120, 130, 160, .12);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, .018);
+        }
+
+        .student-noc-process-number {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 31px;
+            height: 31px;
+
+            margin-bottom: 13px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(124, 58, 237, .12);
+
+            color:
+                #a78bfa;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .student-noc-process-step h3 {
+
+            margin: 0 0 7px;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .student-noc-process-step p {
+
+            margin: 0;
+
+            font-size: 10px;
+
+            line-height: 1.55;
+
+            opacity: .52;
+        }
+
+
+        /* =================================================
+           IMPORTANT NOTE
+        ================================================== */
+
+        .student-noc-note {
+
+            display: flex;
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding: 14px 16px;
+
+            border:
+                1px solid
+                rgba(245, 158, 11, .15);
+
+            border-radius: 10px;
+
+            background:
+                rgba(245, 158, 11, .045);
+        }
+
+        .student-noc-note strong {
+
+            flex-shrink: 0;
+
+            color: #fbbf24;
+
+            font-size: 10px;
+        }
+
+        .student-noc-note p {
+
+            margin: 0;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+            opacity: .58;
+        }
+
+
+        /* =================================================
+           ERROR STATE
+        ================================================== */
+
+        .noc-input-error {
+
+            border-color:
+                rgba(239, 68, 68, .65)
+                !important;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(239, 68, 68, .06)
+                !important;
+        }
+
+
+        /* =================================================
+           SUCCESS
+        ================================================== */
+
+        .student-noc-success {
+            width: 100%;
+
+            box-sizing: border-box;
+        }
+
+
+        /* =================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 950px) {
+
+            .student-noc-page {
+                padding: 22px 20px 35px;
+            }
+
+            .student-noc-process {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .student-noc-page {
+                padding: 18px 14px 30px;
+            }
+
+            .student-noc-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .student-noc-field-full {
+                grid-column: auto;
+            }
+
+            .student-noc-status-card {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .student-noc-process {
+                grid-template-columns: 1fr;
+            }
+
+            .student-noc-actions {
+                justify-content: stretch;
+            }
+
+            .student-noc-clear-btn,
+            .student-noc-submit-btn {
+                flex: 1;
+            }
+
+        }
+
+
+        /* =================================================
+           LIGHT MODE
+        ================================================== */
+
+        body.light-mode
+        .student-noc-card {
+
+            background:
+                rgba(255, 255, 255, .82);
+
+            border-color:
+                rgba(80, 90, 120, .12);
+        }
+
+        body.light-mode
+        .student-noc-field input[type="text"],
+        body.light-mode
+        .student-noc-field select,
+        body.light-mode
+        .student-noc-field textarea,
+        body.light-mode
+        .student-noc-field input[type="file"] {
+
+            background:
+                rgba(0, 0, 0, .018);
+
+            border-color:
+                rgba(80, 90, 120, .16);
+        }
+
+        body.light-mode
+        .student-noc-field select option {
+
+            background: #fff;
+
+            color: #1f2937;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <!-- =================================================
+             NOC CONTENT
+        ================================================== -->
+
+        <section class="student-noc-page">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="student-noc-header">
+
+                <h1>
+                    NOC Request
+                </h1>
+
+                <p>
+                    Submit and track your No Objection Certificate request.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATUS
+            ================================================== -->
+
+            <div class="student-noc-status-card">
+
+                <div>
+
+                    <span>
+                        CURRENT STATUS
+                    </span>
+
+                    <h2>
+                        No Active Request
+                    </h2>
+
+                    <p>
+                        You currently have no active NOC request.
+                        Submit a new request below.
+                    </p>
+
+                </div>
+
+
+                <div class="student-noc-status-badge">
+                    No Request
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FORM
+            ================================================== -->
+
+            <div class="student-noc-card">
+
+
+                <div class="student-noc-card-header">
+
+                    <span>
+                        NOC APPLICATION
+                    </span>
+
+                    <h2>
+                        Submit NOC Request
+                    </h2>
+
+                    <p>
+                        Enter the details required for your NOC request.
+                    </p>
+
+                </div>
+
+
+                <form
+                    id="studentNocForm"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+
+                    <div class="student-noc-form-grid">
+
+
+                        <!-- PURPOSE -->
+
+                        <div class="student-noc-field">
+
+                            <label for="nocPurpose">
+
+                                Purpose
+
+                                <span>*</span>
+
+                            </label>
+
+                            <select
+                                id="nocPurpose"
+                                name="purpose"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Purpose
+                                </option>
+
+                                <option value="off_campus">
+                                    Off Campus Opportunity
+                                </option>
+
+                                <option value="higher_studies">
+                                    Higher Studies
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- ORGANIZATION -->
+
+                        <div class="student-noc-field">
+
+                            <label for="nocOrganization">
+
+                                Organization / University
+
+                                <span>*</span>
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nocOrganization"
+                                name="organization"
+                                placeholder="Enter organization or university"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- POSITION -->
+
+                        <div class="student-noc-field">
+
+                            <label for="nocPosition">
+                                Position / Course
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nocPosition"
+                                name="position"
+                                placeholder="Enter position or course"
+                            >
+
+                        </div>
+
+
+                        <!-- DOCUMENT -->
+
+                        <div class="student-noc-field">
+
+                            <label for="nocDocument">
+                                Supporting Document
+                            </label>
+
+                            <input
+                                type="file"
+                                id="nocDocument"
+                                name="document"
+                                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                            >
+
+                            <small>
+                                PDF, JPG, PNG, DOC or DOCX — max 5 MB.
+                            </small>
+
+                        </div>
+
+
+                        <!-- REASON -->
+
+                        <div
+                            class="
+                                student-noc-field
+                                student-noc-field-full
+                            "
+                        >
+
+                            <label for="nocReason">
+
+                                Reason / Details
+
+                                <span>*</span>
+
+                            </label>
+
+                            <textarea
+                                id="nocReason"
+                                name="reason"
+                                rows="6"
+                                placeholder="Explain why you require the NOC..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- DECLARATION -->
+
+                    <div class="student-noc-declaration">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="nocDeclaration"
+                                required
+                            >
+
+                            <span>
+                                I confirm that the information provided
+                                above is correct and complete.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="student-noc-actions">
+
+                        <button
+                            type="reset"
+                            id="resetNocForm"
+                            class="student-noc-clear-btn"
+                        >
+                            Clear
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="submitNocRequest"
+                            class="student-noc-submit-btn"
+                        >
+                            Submit NOC Request
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPROVAL PROCESS
+            ================================================== -->
+
+            <div class="student-noc-card">
+
+
+                <div class="student-noc-card-header">
+
+                    <span>
+                        APPROVAL PROCESS
+                    </span>
+
+                    <h2>
+                        How Your NOC Is Processed
+                    </h2>
+
+                    <p>
+                        Both TPO and Authority approval are required.
+                    </p>
+
+                </div>
+
+
+                <div class="student-noc-process">
+
+
+                    <div class="student-noc-process-step">
+
+                        <div class="student-noc-process-number">
+                            01
+                        </div>
+
+                        <h3>
+                            Request Submitted
+                        </h3>
+
+                        <p>
+                            Your NOC request is sent to the TPO
+                            for review.
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-noc-process-step">
+
+                        <div class="student-noc-process-number">
+                            02
+                        </div>
+
+                        <h3>
+                            TPO Approval
+                        </h3>
+
+                        <p>
+                            TPO reviews your request and supporting
+                            documents.
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-noc-process-step">
+
+                        <div class="student-noc-process-number">
+                            03
+                        </div>
+
+                        <h3>
+                            Authority Approval
+                        </h3>
+
+                        <p>
+                            After TPO approval, the request goes
+                            to the Authority.
+                        </p>
+
+                    </div>
+
+
+                    <div class="student-noc-process-step">
+
+                        <div class="student-noc-process-number">
+                            04
+                        </div>
+
+                        <h3>
+                            NOC Approved
+                        </h3>
+
+                        <p>
+                            NOC becomes approved only after both
+                            approvals are completed.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 IMPORTANT
+            ================================================== -->
+
+            <div class="student-noc-note">
+
+                <strong>
+                    Important
+                </strong>
+
+                <p>
+                    Submitting a request does not mean your NOC has
+                    been approved. The request must be approved by
+                    both the TPO and the Authority.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}"
+></script>
+
+
+<!-- =====================================================
+     NOC JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/noc.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

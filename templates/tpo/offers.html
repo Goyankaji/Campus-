@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Offers & Joining | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         OFFERS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/offers.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="offers-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="offers-page-header">
+
+                <div>
+
+                    <h1>
+                        Offers & Joining
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Offers & Joining
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="offers-header-actions">
+
+                    <button
+                        type="button"
+                        class="add-offer-btn"
+                        id="addOfferBtn"
+                    >
+
+                        +
+                        Add Offer
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="offers-export-btn"
+                        id="exportOffers"
+                    >
+
+                        ↓
+                        Export
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="offer-stats">
+
+
+                <!-- TOTAL OFFERS -->
+
+                <div class="offer-stat-card">
+
+                    <div class="offer-stat-icon purple">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Offers
+                        </span>
+
+                        <strong>
+                            186
+                        </strong>
+
+                        <small>
+                            This academic year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACCEPTED -->
+
+                <div class="offer-stat-card">
+
+                    <div class="offer-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Accepted
+                        </span>
+
+                        <strong>
+                            142
+                        </strong>
+
+                        <small>
+                            Students accepted
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PENDING -->
+
+                <div class="offer-stat-card">
+
+                    <div class="offer-stat-icon orange">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong>
+                            29
+                        </strong>
+
+                        <small>
+                            Awaiting response
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REJECTED -->
+
+                <div class="offer-stat-card">
+
+                    <div class="offer-stat-icon red">
+                        ×
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Rejected
+                        </span>
+
+                        <strong>
+                            15
+                        </strong>
+
+                        <small>
+                            Offers declined
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AVERAGE PACKAGE -->
+
+                <div class="offer-stat-card">
+
+                    <div class="offer-stat-icon violet">
+                        ₹
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Average Package
+                        </span>
+
+                        <strong>
+                            ₹9.40 LPA
+                        </strong>
+
+                        <small>
+                            Across all offers
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="offers-table-card">
+
+
+                <!-- =================================================
+                     FILTER BAR
+                ================================================== -->
+
+                <div class="offers-filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="offers-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="offerSearch"
+                            placeholder="Search student or company..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- COMPANY -->
+
+                    <div class="offers-filter-control">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <select
+                            id="offerCompanyFilter"
+                        >
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            <option value="TCS">
+                                TCS
+                            </option>
+
+                            <option value="Infosys">
+                                Infosys
+                            </option>
+
+                            <option value="Amazon">
+                                Amazon
+                            </option>
+
+                            <option value="Capgemini">
+                                Capgemini
+                            </option>
+
+                            <option value="Deloitte">
+                                Deloitte
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="offers-filter-control">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select
+                            id="offerCollegeFilter"
+                        >
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- OFFER STATUS -->
+
+                    <div class="offers-filter-control">
+
+                        <label>
+                            Offer Status
+                        </label>
+
+                        <select
+                            id="offerStatusFilter"
+                        >
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="accepted">
+                                Accepted
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                            <option value="rejected">
+                                Rejected
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- JOINING STATUS -->
+
+                    <div class="offers-filter-control">
+
+                        <label>
+                            Joining
+                        </label>
+
+                        <select
+                            id="joiningStatusFilter"
+                        >
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="confirmed">
+                                Confirmed
+                            </option>
+
+                            <option value="upcoming">
+                                Upcoming
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- RESET -->
+
+                    <button
+                        type="button"
+                        class="offers-reset-btn"
+                        id="resetOfferFilters"
+                    >
+
+                        ↻
+                        Reset
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="offers-table-wrapper">
+
+                    <table
+                        class="offers-table"
+                        id="offersTable"
+                    >
+
+                        <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>STUDENT</th>
+
+                            <th>COLLEGE</th>
+
+                            <th>COMPANY</th>
+
+                            <th>JOB ROLE</th>
+
+                            <th>PACKAGE</th>
+
+                            <th>OFFER DATE</th>
+
+                            <th>JOINING DATE</th>
+
+                            <th>OFFER STATUS</th>
+
+                            <th>JOINING</th>
+
+                            <th>ACTIONS</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <!-- =================================================
+                             OFFER 01
+                        ================================================== -->
+
+                        <tr
+                            data-student="Aarav Sharma"
+                            data-company="TCS"
+                            data-college="PCE"
+                            data-offer-status="accepted"
+                            data-joining-status="confirmed"
+                        >
+
+                            <td>
+                                01
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-student-info">
+
+                                    <div class="offer-avatar purple">
+                                        AS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Aarav Sharma
+                                        </strong>
+
+                                        <span>
+                                            PCE202701
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="offer-company">
+                                    TCS
+                                </strong>
+
+                                <span class="offer-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td class="offer-package">
+                                ₹8.50 LPA
+                            </td>
+
+
+                            <td>
+                                24 Aug 2026
+                            </td>
+
+
+                            <td>
+                                15 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="offer-status accepted">
+                                    Accepted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status confirmed">
+                                    Confirmed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-actions">
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn view-offer-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn edit-offer-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn more-offer-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             OFFER 02
+                        ================================================== -->
+
+                        <tr
+                            data-student="Priya Mehta"
+                            data-company="Infosys"
+                            data-college="PIET"
+                            data-offer-status="accepted"
+                            data-joining-status="upcoming"
+                        >
+
+                            <td>
+                                02
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-student-info">
+
+                                    <div class="offer-avatar blue">
+                                        PM
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Priya Mehta
+                                        </strong>
+
+                                        <span>
+                                            PIET202734
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="offer-company">
+                                    Infosys
+                                </strong>
+
+                                <span class="offer-company-subtext">
+                                    Infosys Limited
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                System Engineer
+                            </td>
+
+
+                            <td class="offer-package">
+                                ₹7.20 LPA
+                            </td>
+
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+
+                            <td>
+                                20 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="offer-status accepted">
+                                    Accepted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status upcoming">
+                                    Upcoming
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-actions">
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn view-offer-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn edit-offer-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn more-offer-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             OFFER 03
+                        ================================================== -->
+
+                        <tr
+                            data-student="Rohan Verma"
+                            data-company="Amazon"
+                            data-college="PU"
+                            data-offer-status="pending"
+                            data-joining-status="pending"
+                        >
+
+                            <td>
+                                03
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-student-info">
+
+                                    <div class="offer-avatar orange">
+                                        RV
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Rohan Verma
+                                        </strong>
+
+                                        <span>
+                                            PU202715
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PU
+                            </td>
+
+
+                            <td>
+
+                                <strong class="offer-company">
+                                    Amazon
+                                </strong>
+
+                                <span class="offer-company-subtext">
+                                    Amazon Development Centre
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                SDE I
+                            </td>
+
+
+                            <td class="offer-package">
+                                ₹14.00 LPA
+                            </td>
+
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+
+                            <td>
+                                10 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="offer-status pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-actions">
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn view-offer-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn edit-offer-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn more-offer-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             OFFER 04
+                        ================================================== -->
+
+                        <tr
+                            data-student="Neha Gupta"
+                            data-company="Capgemini"
+                            data-college="JIET"
+                            data-offer-status="rejected"
+                            data-joining-status="pending"
+                        >
+
+                            <td>
+                                04
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-student-info">
+
+                                    <div class="offer-avatar green">
+                                        NG
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Neha Gupta
+                                        </strong>
+
+                                        <span>
+                                            JIET202756
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                JIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="offer-company">
+                                    Capgemini
+                                </strong>
+
+                                <span class="offer-company-subtext">
+                                    Capgemini Technology Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Analyst
+                            </td>
+
+
+                            <td class="offer-package">
+                                ₹9.10 LPA
+                            </td>
+
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+
+                            <td>
+                                12 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="offer-status rejected">
+                                    Rejected
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-actions">
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn view-offer-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn edit-offer-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn more-offer-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             OFFER 05
+                        ================================================== -->
+
+                        <tr
+                            data-student="Kunal Singh"
+                            data-company="Deloitte"
+                            data-college="PCE"
+                            data-offer-status="accepted"
+                            data-joining-status="upcoming"
+                        >
+
+                            <td>
+                                05
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-student-info">
+
+                                    <div class="offer-avatar dark">
+                                        KS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Kunal Singh
+                                        </strong>
+
+                                        <span>
+                                            PCE202768
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="offer-company">
+                                    Deloitte
+                                </strong>
+
+                                <span class="offer-company-subtext">
+                                    Deloitte Consulting
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Analyst
+                            </td>
+
+
+                            <td class="offer-package">
+                                ₹8.80 LPA
+                            </td>
+
+
+                            <td>
+                                21 Aug 2026
+                            </td>
+
+
+                            <td>
+                                18 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="offer-status accepted">
+                                    Accepted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status upcoming">
+                                    Upcoming
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-actions">
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn view-offer-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn edit-offer-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn more-offer-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             OFFER 06
+                        ================================================== -->
+
+                        <tr
+                            data-student="Ananya Joshi"
+                            data-company="TCS"
+                            data-college="PIET"
+                            data-offer-status="accepted"
+                            data-joining-status="confirmed"
+                        >
+
+                            <td>
+                                06
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-student-info">
+
+                                    <div class="offer-avatar violet">
+                                        AJ
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Ananya Joshi
+                                        </strong>
+
+                                        <span>
+                                            PIET202781
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="offer-company">
+                                    TCS
+                                </strong>
+
+                                <span class="offer-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td class="offer-package">
+                                ₹8.50 LPA
+                            </td>
+
+
+                            <td>
+                                20 Aug 2026
+                            </td>
+
+
+                            <td>
+                                15 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="offer-status accepted">
+                                    Accepted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status confirmed">
+                                    Confirmed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="offer-actions">
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn view-offer-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn edit-offer-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="offer-action-btn more-offer-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="offers-table-footer">
+
+                    <span id="offerCount">
+                        Showing 6 of 186 offers
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button type="button">
+                            2
+                        </button>
+
+                        <button type="button">
+                            3
+                        </button>
+
+                        <button type="button">
+                            4
+                        </button>
+
+                        <button type="button">
+                            5
+                        </button>
+
+                        <button type="button">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     OFFERS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/offers.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

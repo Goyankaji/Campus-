@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Reports | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         REPORTS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/reports.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             REPORT CONTENT
+        ================================================== -->
+
+        <section class="reports-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="reports-page-header">
+
+                <div>
+
+                    <h1>
+                        Placement Reports
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Reports
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reports-header-actions">
+
+                    <select
+                        id="reportYear"
+                        class="report-year-select"
+                    >
+
+                        <option value="2026-27">
+                            2026 - 27
+                        </option>
+
+                        <option value="2025-26">
+                            2025 - 26
+                        </option>
+
+                        <option value="2024-25">
+                            2024 - 25
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        class="report-export-btn"
+                        id="exportReport"
+                    >
+
+                        ↓
+                        Download Report
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 OVERVIEW CARDS
+            ================================================== -->
+
+            <div class="report-overview-grid">
+
+
+                <!-- TOTAL STUDENTS -->
+
+                <div class="report-card">
+
+                    <div class="report-card-top">
+
+                        <div class="report-icon purple">
+                            ♙
+                        </div>
+
+                        <span class="report-trend positive">
+                            ↑ 8.4%
+                        </span>
+
+                    </div>
+
+                    <span class="report-card-label">
+                        Total Students
+                    </span>
+
+                    <strong>
+                        1,248
+                    </strong>
+
+                    <small>
+                        Registered for placements
+                    </small>
+
+                </div>
+
+
+
+                <!-- PLACED -->
+
+                <div class="report-card">
+
+                    <div class="report-card-top">
+
+                        <div class="report-icon green">
+                            ★
+                        </div>
+
+                        <span class="report-trend positive">
+                            ↑ 12.6%
+                        </span>
+
+                    </div>
+
+                    <span class="report-card-label">
+                        Students Placed
+                    </span>
+
+                    <strong>
+                        142
+                    </strong>
+
+                    <small>
+                        Confirmed placements
+                    </small>
+
+                </div>
+
+
+
+                <!-- PLACEMENT RATE -->
+
+                <div class="report-card">
+
+                    <div class="report-card-top">
+
+                        <div class="report-icon blue">
+                            %
+                        </div>
+
+                        <span class="report-trend positive">
+                            ↑ 4.2%
+                        </span>
+
+                    </div>
+
+                    <span class="report-card-label">
+                        Placement Rate
+                    </span>
+
+                    <strong>
+                        78.4%
+                    </strong>
+
+                    <small>
+                        Eligible students placed
+                    </small>
+
+                </div>
+
+
+
+                <!-- AVERAGE PACKAGE -->
+
+                <div class="report-card">
+
+                    <div class="report-card-top">
+
+                        <div class="report-icon orange">
+                            ₹
+                        </div>
+
+                        <span class="report-trend positive">
+                            ↑ 9.8%
+                        </span>
+
+                    </div>
+
+                    <span class="report-card-label">
+                        Average Package
+                    </span>
+
+                    <strong>
+                        ₹9.40 LPA
+                    </strong>
+
+                    <small>
+                        Across placed students
+                    </small>
+
+                </div>
+
+
+
+                <!-- HIGHEST PACKAGE -->
+
+                <div class="report-card">
+
+                    <div class="report-card-top">
+
+                        <div class="report-icon violet">
+                            ↑
+                        </div>
+
+                        <span class="report-trend positive">
+                            New
+                        </span>
+
+                    </div>
+
+                    <span class="report-card-label">
+                        Highest Package
+                    </span>
+
+                    <strong>
+                        ₹24.00 LPA
+                    </strong>
+
+                    <small>
+                        Highest offer received
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANALYTICS GRID
+            ================================================== -->
+
+            <div class="reports-main-grid">
+
+
+                <!-- =================================================
+                     COLLEGE-WISE PLACEMENT
+                ================================================== -->
+
+                <div class="report-panel">
+
+                    <div class="report-panel-header">
+
+                        <div>
+
+                            <h2>
+                                College-wise Placement
+                            </h2>
+
+                            <span>
+                                Placement performance by college
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="college-report-list">
+
+
+                        <!-- PCE -->
+
+                        <div class="college-report-row">
+
+                            <div class="college-report-name">
+
+                                <div class="college-report-icon pce">
+                                    P
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        PCE
+                                    </strong>
+
+                                    <span>
+                                        48 placed
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="college-progress">
+
+                                <div class="progress-track">
+
+                                    <div
+                                        class="progress-fill pce-fill"
+                                        style="width: 86%;"
+                                    ></div>
+
+                                </div>
+
+                                <strong>
+                                    86%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PIET -->
+
+                        <div class="college-report-row">
+
+                            <div class="college-report-name">
+
+                                <div class="college-report-icon piet">
+                                    P
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        PIET
+                                    </strong>
+
+                                    <span>
+                                        39 placed
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="college-progress">
+
+                                <div class="progress-track">
+
+                                    <div
+                                        class="progress-fill piet-fill"
+                                        style="width: 79%;"
+                                    ></div>
+
+                                </div>
+
+                                <strong>
+                                    79%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PU -->
+
+                        <div class="college-report-row">
+
+                            <div class="college-report-name">
+
+                                <div class="college-report-icon pu">
+                                    P
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        PU
+                                    </strong>
+
+                                    <span>
+                                        31 placed
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="college-progress">
+
+                                <div class="progress-track">
+
+                                    <div
+                                        class="progress-fill pu-fill"
+                                        style="width: 72%;"
+                                    ></div>
+
+                                </div>
+
+                                <strong>
+                                    72%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- JIET -->
+
+                        <div class="college-report-row">
+
+                            <div class="college-report-name">
+
+                                <div class="college-report-icon jiet">
+                                    J
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        JIET
+                                    </strong>
+
+                                    <span>
+                                        24 placed
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="college-progress">
+
+                                <div class="progress-track">
+
+                                    <div
+                                        class="progress-fill jiet-fill"
+                                        style="width: 68%;"
+                                    ></div>
+
+                                </div>
+
+                                <strong>
+                                    68%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PACKAGE DISTRIBUTION
+                ================================================== -->
+
+                <div class="report-panel">
+
+                    <div class="report-panel-header">
+
+                        <div>
+
+                            <h2>
+                                Package Distribution
+                            </h2>
+
+                            <span>
+                                Placed students by package range
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="package-chart">
+
+
+                        <div class="package-row">
+
+                            <div class="package-label">
+
+                                <span>
+                                    Below ₹5 LPA
+                                </span>
+
+                                <strong>
+                                    18
+                                </strong>
+
+                            </div>
+
+                            <div class="package-track">
+
+                                <div
+                                    class="package-fill package-one"
+                                    style="width: 24%;"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="package-row">
+
+                            <div class="package-label">
+
+                                <span>
+                                    ₹5 - ₹8 LPA
+                                </span>
+
+                                <strong>
+                                    42
+                                </strong>
+
+                            </div>
+
+                            <div class="package-track">
+
+                                <div
+                                    class="package-fill package-two"
+                                    style="width: 48%;"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="package-row">
+
+                            <div class="package-label">
+
+                                <span>
+                                    ₹8 - ₹12 LPA
+                                </span>
+
+                                <strong>
+                                    51
+                                </strong>
+
+                            </div>
+
+                            <div class="package-track">
+
+                                <div
+                                    class="package-fill package-three"
+                                    style="width: 62%;"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="package-row">
+
+                            <div class="package-label">
+
+                                <span>
+                                    ₹12+ LPA
+                                </span>
+
+                                <strong>
+                                    31
+                                </strong>
+
+                            </div>
+
+                            <div class="package-track">
+
+                                <div
+                                    class="package-fill package-four"
+                                    style="width: 40%;"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 COMPANY REPORT
+            ================================================== -->
+
+            <div class="report-panel company-report-panel">
+
+                <div class="report-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Top Recruiting Companies
+                        </h2>
+
+                        <span>
+                            Companies with highest number of placements
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="company-report-table-wrapper">
+
+                    <table
+                        class="company-report-table"
+                        id="companyReportTable"
+                    >
+
+                        <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                COMPANY
+                            </th>
+
+                            <th>
+                                STUDENTS PLACED
+                            </th>
+
+                            <th>
+                                AVERAGE PACKAGE
+                            </th>
+
+                            <th>
+                                HIGHEST PACKAGE
+                            </th>
+
+                            <th>
+                                STATUS
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                01
+                            </td>
+
+                            <td>
+                                <strong>
+                                    TCS
+                                </strong>
+                            </td>
+
+                            <td>
+                                32
+                            </td>
+
+                            <td>
+                                ₹8.50 LPA
+                            </td>
+
+                            <td>
+                                ₹12.00 LPA
+                            </td>
+
+                            <td>
+                                <span class="company-status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                02
+                            </td>
+
+                            <td>
+                                <strong>
+                                    Infosys
+                                </strong>
+                            </td>
+
+                            <td>
+                                28
+                            </td>
+
+                            <td>
+                                ₹7.20 LPA
+                            </td>
+
+                            <td>
+                                ₹10.50 LPA
+                            </td>
+
+                            <td>
+                                <span class="company-status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                03
+                            </td>
+
+                            <td>
+                                <strong>
+                                    Capgemini
+                                </strong>
+                            </td>
+
+                            <td>
+                                21
+                            </td>
+
+                            <td>
+                                ₹9.10 LPA
+                            </td>
+
+                            <td>
+                                ₹13.00 LPA
+                            </td>
+
+                            <td>
+                                <span class="company-status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                04
+                            </td>
+
+                            <td>
+                                <strong>
+                                    Deloitte
+                                </strong>
+                            </td>
+
+                            <td>
+                                18
+                            </td>
+
+                            <td>
+                                ₹8.80 LPA
+                            </td>
+
+                            <td>
+                                ₹14.00 LPA
+                            </td>
+
+                            <td>
+                                <span class="company-status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                05
+                            </td>
+
+                            <td>
+                                <strong>
+                                    Amazon
+                                </strong>
+                            </td>
+
+                            <td>
+                                14
+                            </td>
+
+                            <td>
+                                ₹14.00 LPA
+                            </td>
+
+                            <td>
+                                ₹24.00 LPA
+                            </td>
+
+                            <td>
+                                <span class="company-status active">
+                                    Active
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DOWNLOAD REPORTS
+            ================================================== -->
+
+            <div class="report-panel download-report-panel">
+
+                <div class="report-panel-header">
+
+                    <div>
+
+                        <h2>
+                            Download Reports
+                        </h2>
+
+                        <span>
+                            Generate placement reports for official use
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="download-report-grid">
+
+
+                    <button
+                        type="button"
+                        class="download-report-card"
+                        data-report="placement-summary"
+                    >
+
+                        <span class="download-report-icon purple">
+                            ▥
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Placement Summary
+                            </strong>
+
+                            <small>
+                                Overall placement statistics
+                            </small>
+
+                        </div>
+
+                        <span class="download-arrow">
+                            ↓
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="download-report-card"
+                        data-report="college-wise"
+                    >
+
+                        <span class="download-report-icon blue">
+                            ▦
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                College-wise Report
+                            </strong>
+
+                            <small>
+                                Placement data by college
+                            </small>
+
+                        </div>
+
+                        <span class="download-arrow">
+                            ↓
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="download-report-card"
+                        data-report="company-wise"
+                    >
+
+                        <span class="download-report-icon green">
+                            ▣
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Company-wise Report
+                            </strong>
+
+                            <small>
+                                Recruiting company statistics
+                            </small>
+
+                        </div>
+
+                        <span class="download-arrow">
+                            ↓
+                        </span>
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="download-report-card"
+                        data-report="placed-students"
+                    >
+
+                        <span class="download-report-icon orange">
+                            ★
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Placed Students List
+                            </strong>
+
+                            <small>
+                                Complete placed student data
+                            </small>
+
+                        </div>
+
+                        <span class="download-arrow">
+                            ↓
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     REPORTS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/reports.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,644 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   TPO SIDEBAR
+========================================================= */
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+
+    width: 246px;
+    height: 100vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 18px 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #07132f 0%,
+            #08142f 55%,
+            #09152f 100%
+        );
+
+    color: #d8def0;
+
+    border-right: 1px solid rgba(255,255,255,0.04);
+
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(126, 72, 239, 0.65)
+        transparent;
+}
+
+
+/* =========================================================
+   SIDEBAR SCROLLBAR
+========================================================= */
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+
+    background:
+        linear-gradient(
+            180deg,
+            #6f3ee9,
+            #44219c
+        );
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.sidebar-logo {
+
+    min-height: 52px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 4px 8px 17px;
+}
+
+
+.sidebar-logo img {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,0.20);
+}
+
+
+.sidebar-logo h2 {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: 0.4px;
+}
+
+
+.sidebar-logo span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #929db7;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   TPO PROFILE CARD
+========================================================= */
+
+.tpo-profile {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 61px;
+
+    padding: 9px 9px;
+
+    margin: 4px 3px 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(103, 50, 190, 0.17),
+            rgba(62, 25, 107, 0.12)
+        );
+
+    border:
+        1px solid rgba(126, 72, 239, 0.25);
+
+    border-radius: 12px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+
+.tpo-avatar {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7047e8,
+            #4f29c9
+        );
+
+    color: #ffffff;
+
+    font-size: 17px;
+
+    box-shadow:
+        0 5px 15px rgba(95, 44, 222, 0.28);
+}
+
+
+.tpo-profile strong {
+
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+.tpo-profile span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #929db7;
+
+    font-size: 7px;
+
+    line-height: 1.2;
+}
+
+
+.tpo-profile small {
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 4px;
+
+    color: #8f9bb7;
+
+    font-size: 7px;
+}
+
+
+.tpo-profile small i {
+
+    width: 5px;
+    height: 5px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #18d58a;
+
+    box-shadow:
+        0 0 6px rgba(24,213,138,0.65);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.sidebar-nav {
+
+    flex: 1;
+
+    min-height: 0;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+========================================================= */
+
+.nav-section-title {
+
+    padding:
+        14px
+        10px
+        7px;
+
+    color: #77829e;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+
+    text-transform: uppercase;
+}
+
+
+.nav-section-title:first-child {
+    padding-top: 4px;
+}
+
+
+/* =========================================================
+   NAV ITEM
+========================================================= */
+
+.nav-item {
+
+    position: relative;
+
+    min-height: 38px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 2px 0;
+
+    padding: 0 11px;
+
+    border-radius: 9px;
+
+    color: #c3c9db;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.nav-item:hover {
+
+    color: #ffffff;
+
+    background:
+        rgba(119, 72, 224, 0.10);
+}
+
+
+.nav-item.active {
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(100, 48, 209, 0.30),
+            rgba(100, 48, 209, 0.12)
+        );
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(126, 72, 239, 0.08);
+}
+
+
+/* =========================================================
+   ACTIVE LEFT INDICATOR
+========================================================= */
+
+.nav-item.active::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 7px;
+    bottom: 7px;
+
+    width: 3px;
+
+    border-radius: 0 5px 5px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #9149ff,
+            #6b35e9
+        );
+
+    box-shadow:
+        0 0 10px rgba(122, 59, 239, 0.55);
+}
+
+
+/* =========================================================
+   NAV ICON
+========================================================= */
+
+.nav-icon {
+
+    width: 18px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #aeb7cf;
+
+    font-size: 13px;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.nav-item:hover .nav-icon,
+.nav-item.active .nav-icon {
+
+    color: #a96cff;
+}
+
+
+/* =========================================================
+   NAV BADGES
+========================================================= */
+
+.nav-badge {
+
+    min-width: 22px;
+    height: 18px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: auto;
+
+    padding: 0 6px;
+
+    border-radius: 20px;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+/* NEW */
+
+.new-badge {
+
+    min-width: 25px;
+
+    background:
+        rgba(111, 54, 225, 0.25);
+
+    color: #a76cff;
+
+    border:
+        1px solid rgba(131, 73, 245, 0.15);
+}
+
+
+/* NOTIFICATIONS */
+
+.notification-badge {
+
+    background:
+        rgba(206, 39, 63, 0.18);
+
+    color: #ff5c70;
+}
+
+
+/* ANNOUNCEMENTS */
+
+.announcement-badge {
+
+    background:
+        rgba(108, 48, 215, 0.20);
+
+    color: #a76cff;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-item {
+
+    margin-top: 7px;
+
+    color: #ef5261;
+}
+
+
+.logout-item .nav-icon {
+
+    color: #ef5261;
+}
+
+
+.logout-item:hover {
+
+    color: #ff6876;
+
+    background:
+        rgba(239, 82, 97, 0.07);
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+========================================================= */
+
+.theme-toggle {
+
+    width: calc(100% - 6px);
+
+    min-height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 10px 3px 1px;
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,0.025);
+
+    color: #bfc6d8;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+
+.theme-toggle:hover {
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border-color:
+        rgba(126,72,239,0.30);
+
+    color: #ffffff;
+}
+
+
+.theme-toggle span:first-child {
+
+    color: #aeb7cf;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT OFFSET
+========================================================= */
+
+.main-content {
+
+    margin-left: 246px;
+
+    min-height: 100vh;
+
+    width: calc(100% - 246px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+
+        width: 246px;
+
+        transform:
+            translateX(-100%);
+
+        transition:
+            transform 0.28s ease;
+
+        box-shadow:
+            12px 0 35px
+            rgba(0,0,0,0.28);
+    }
+
+
+    .sidebar.open {
+
+        transform:
+            translateX(0);
+    }
+
+
+    .main-content {
+
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .sidebar {
+
+        width: 235px;
+    }
+
+    .main-content {
+
+        width: 100%;
+    }
+
+}

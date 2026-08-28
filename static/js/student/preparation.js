@@ -2,365 +2,375 @@
    CAMPUS — STUDENT PREPARATION JS
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    const tabs = document.querySelectorAll(
-        ".student-preparation-tab"
-    );
-
-    const cards = document.querySelectorAll(
-        ".student-preparation-card"
-    );
-
-    const searchInput = document.querySelector(
-        ".student-preparation-search"
-    );
-
-    const pyqSection = document.querySelector(
-        ".student-pyq-section"
-    );
-
-    const pyqItems = document.querySelectorAll(
-        ".student-pyq-item"
-    );
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
 
-    let activeFilter = "all";
+        /* =====================================================
+           PREPARATION TABS
+        ===================================================== */
+
+        const tabs =
+            document.querySelectorAll(
+                ".student-preparation-tab"
+            );
 
 
-    /* =====================================================
-       FILTER MATERIAL + PYQ SECTION
-    ===================================================== */
-
-    function filterPreparation() {
-
-        const searchValue = searchInput
-            ? searchInput.value
-                .trim()
-                .toLowerCase()
-            : "";
+        const sections =
+            document.querySelectorAll(
+                ".student-preparation-section"
+            );
 
 
-        /* =================================================
-           MATERIAL CARDS
-        ================================================= */
+        function activatePreparationTab(
+            selectedTab
+        ) {
 
-        cards.forEach(function (card) {
-
-            const categories = (
-                card.dataset.category || ""
-            )
-            .toLowerCase()
-            .split(/\s+/);
-
-
-            const cardText =
-                card.textContent.toLowerCase();
-
-
-            const matchesSearch =
-                searchValue === "" ||
-                cardText.includes(searchValue);
-
-
-            const matchesFilter =
-                activeFilter === "all" ||
-                categories.includes(activeFilter);
-
-
-            if (
-                matchesSearch &&
-                matchesFilter
-            ) {
-
-                card.style.display = "";
-
-            } else {
-
-                card.style.display = "none";
-
+            if (!selectedTab) {
+                return;
             }
 
-        });
 
-
-        /* =================================================
-           PYQ SECTION
-        ================================================= */
-
-        if (pyqSection) {
-
-            /*
-             * PYQ section is visible on:
-             *
-             * All
-             * PYQs
-             */
-
-            if (
-                activeFilter === "all" ||
-                activeFilter === "pyq"
-            ) {
-
-                pyqSection.style.display = "";
-
-            } else {
-
-                pyqSection.style.display = "none";
-
-            }
-
-        }
-
-
-        /* =================================================
-           PYQ SEARCH
-        ================================================= */
-
-        if (pyqSection) {
-
-            pyqItems.forEach(function (item) {
-
-                const itemText =
-                    item.textContent.toLowerCase();
-
-
-                const matchesSearch =
-                    searchValue === "" ||
-                    itemText.includes(searchValue);
-
-
-                if (matchesSearch) {
-
-                    item.style.display = "";
-
-                } else {
-
-                    item.style.display = "none";
-
-                }
-
-            });
-
-        }
-
-    }
-
-
-    /* =====================================================
-       TAB CLICK
-    ===================================================== */
-
-    tabs.forEach(function (tab) {
-
-        tab.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-
-                /* Remove active */
-
-                tabs.forEach(function (item) {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                });
-
-
-                /* Add active */
-
-                tab.classList.add("active");
-
-
-                /* Get selected filter */
-
-                activeFilter = (
-                    tab.dataset.filter ||
-                    "all"
+            const target =
+                (
+                    selectedTab.getAttribute(
+                        "data-preparation-tab"
+                    ) || "core"
                 )
                 .trim()
                 .toLowerCase();
 
 
-                /* Apply */
+            /* ---------------------------------------------
+               UPDATE TABS
+            --------------------------------------------- */
 
-                filterPreparation();
+            tabs.forEach(
+                function (tab) {
 
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       SEARCH
-    ===================================================== */
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            function () {
-
-                filterPreparation();
-
-            }
-        );
-
-    }
+                    const tabTarget =
+                        (
+                            tab.getAttribute(
+                                "data-preparation-tab"
+                            ) || ""
+                        )
+                        .trim()
+                        .toLowerCase();
 
 
-    /* =====================================================
-       MATERIAL BUTTONS
-    ===================================================== */
-
-    const materialButtons =
-        document.querySelectorAll(
-            ".student-preparation-btn"
-        );
-
-
-    materialButtons.forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                const card =
-                    button.closest(
-                        ".student-preparation-card"
+                    tab.classList.toggle(
+                        "active",
+                        tabTarget === target
                     );
 
-
-                if (!card) {
-                    return;
                 }
+            );
 
 
-                const titleElement =
-                    card.querySelector("h3");
+            /* ---------------------------------------------
+               UPDATE SECTIONS
+            --------------------------------------------- */
+
+            sections.forEach(
+                function (section) {
+
+                    const sectionTarget =
+                        (
+                            section.getAttribute(
+                                "data-preparation-section"
+                            ) || ""
+                        )
+                        .trim()
+                        .toLowerCase();
 
 
-                const title =
-                    titleElement
-                        ? titleElement.textContent.trim()
-                        : "Preparation Material";
+                    section.classList.toggle(
+                        "active",
+                        sectionTarget === target
+                    );
+
+                }
+            );
 
 
-                /*
-                 * Temporary action.
-                 *
-                 * Actual material routes can be
-                 * connected later.
-                 */
+            /* ---------------------------------------------
+               REMEMBER ACTIVE TAB
+            --------------------------------------------- */
 
-                console.log(
-                    "Opening preparation material:",
-                    title
+            try {
+
+                localStorage.setItem(
+                    "campus-preparation-tab",
+                    target
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Unable to save preparation tab:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           TAB CLICK
+        ===================================================== */
+
+        tabs.forEach(
+            function (tab) {
+
+                tab.addEventListener(
+                    "click",
+                    function () {
+
+                        activatePreparationTab(
+                            tab
+                        );
+
+                    }
                 );
 
             }
         );
 
-    });
+
+        /* =====================================================
+           RESTORE LAST TAB
+        ===================================================== */
+
+        let savedTab = "core";
 
 
-    /* =====================================================
-       PYQ OPEN BUTTONS
-    ===================================================== */
+        try {
 
-    const pyqButtons =
-        document.querySelectorAll(
-            ".student-pyq-open"
-        );
+            const storedTab =
+                localStorage.getItem(
+                    "campus-preparation-tab"
+                );
 
 
-    pyqButtons.forEach(function (button) {
+            if (
+                storedTab === "core" ||
+                storedTab === "practice"
+            ) {
 
-        button.addEventListener(
-            "click",
-            function () {
+                savedTab =
+                    storedTab;
 
-                const item =
-                    button.closest(
-                        ".student-pyq-item"
-                    );
+            }
 
+        } catch (error) {
 
-                if (!item) {
-                    return;
-                }
+            console.warn(
+                "Unable to read preparation tab:",
+                error
+            );
 
-
-                const titleElement =
-                    item.querySelector(
-                        ".student-pyq-info strong"
-                    );
+        }
 
 
-                const title =
-                    titleElement
-                        ? titleElement.textContent.trim()
-                        : "PYQ";
+        const savedTabElement =
+            document.querySelector(
+                '.student-preparation-tab[data-preparation-tab="' +
+                savedTab +
+                '"]'
+            );
 
 
-                console.log(
-                    "Opening PYQ:",
-                    title
+        if (savedTabElement) {
+
+            activatePreparationTab(
+                savedTabElement
+            );
+
+        }
+
+
+        /* =====================================================
+           CORE SUBJECT BUTTONS
+        ===================================================== */
+
+        const subjectButtons =
+            document.querySelectorAll(
+                "[data-subject]"
+            );
+
+
+        subjectButtons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const subject =
+                            button.getAttribute(
+                                "data-subject"
+                            );
+
+
+                        if (!subject) {
+                            return;
+                        }
+
+
+                        /*
+                         * Core subject route will be connected
+                         * when subject-wise academic content
+                         * is added to the backend.
+                         */
+
+                        console.log(
+                            "Opening core subject:",
+                            subject
+                        );
+
+                    }
                 );
 
             }
         );
 
-    });
+
+        /* =====================================================
+           MOODLE BUTTON
+        ===================================================== */
+
+        const moodleButton =
+            document.querySelector(
+                "[data-moodle-open]"
+            );
 
 
-    /* =====================================================
-       VIEW ALL PYQ
-    ===================================================== */
+        if (moodleButton) {
 
-    const viewAllPYQ =
-        document.querySelector(
-            ".student-pyq-view-all"
-        );
+            moodleButton.addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * IMPORTANT:
+                     *
+                     * Do not put a fake Moodle URL here.
+                     * Actual Moodle URL/API configuration
+                     * will be connected after the Moodle
+                     * server details are available.
+                     */
 
 
-    if (viewAllPYQ) {
+                    const moodleUrl =
+                        moodleButton.getAttribute(
+                            "data-moodle-url"
+                        );
 
-        viewAllPYQ.addEventListener(
-            "click",
-            function () {
 
-                /*
-                 * Activate PYQ tab
-                 */
+                    if (
+                        moodleUrl &&
+                        moodleUrl.trim() !== ""
+                    ) {
 
-                const pyqTab =
-                    document.querySelector(
-                        '.student-preparation-tab[data-filter="pyq"]'
+                        window.open(
+                            moodleUrl,
+                            "_blank",
+                            "noopener,noreferrer"
+                        );
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Moodle is not configured yet.
+                     */
+
+                    alert(
+                        "Moodle practice is not configured yet. It will be connected here once the Moodle server is configured."
                     );
 
-
-                if (pyqTab) {
-
-                    pyqTab.click();
-
                 }
+            );
+
+        }
+
+
+        /* =====================================================
+           PREVENT DOUBLE CLICK
+        ===================================================== */
+
+        subjectButtons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            button.dataset.processing ===
+                            "true"
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        button.dataset.processing =
+                            "true";
+
+
+                        setTimeout(
+                            function () {
+
+                                button.dataset.processing =
+                                    "false";
+
+                            },
+                            500
+                        );
+
+                    }
+                );
 
             }
         );
 
+
+        /* =====================================================
+           KEYBOARD ACCESS
+        ===================================================== */
+
+        tabs.forEach(
+            function (tab) {
+
+                tab.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Enter" ||
+                            event.key === " "
+                        ) {
+
+                            event.preventDefault();
+
+                            activatePreparationTab(
+                                tab
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
     }
-
-
-    /* =====================================================
-       INITIAL STATE
-    ===================================================== */
-
-    filterPreparation();
-
-});
+);

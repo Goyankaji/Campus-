@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Announcements | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         ANNOUNCEMENTS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/announcements.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             ANNOUNCEMENTS CONTENT
+        ================================================== -->
+
+        <section class="announcements-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="announcements-page-header">
+
+                <div>
+
+                    <h1>
+                        Announcements
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Announcements
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="create-announcement-btn"
+                    id="createAnnouncementBtn"
+                >
+
+                    +
+                    Create Announcement
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="announcement-summary">
+
+
+                <div class="announcement-summary-card">
+
+                    <div class="announcement-summary-icon purple">
+                        ◇
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Announcements
+                        </span>
+
+                        <strong id="totalAnnouncements">
+                            8
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-summary-card">
+
+                    <div class="announcement-summary-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Published
+                        </span>
+
+                        <strong id="publishedAnnouncements">
+                            6
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-summary-card">
+
+                    <div class="announcement-summary-icon orange">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Drafts
+                        </span>
+
+                        <strong id="draftAnnouncements">
+                            2
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT PANEL
+            ================================================== -->
+
+            <div class="announcements-panel">
+
+
+                <!-- =================================================
+                     TOOLBAR
+                ================================================== -->
+
+                <div class="announcements-toolbar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="announcement-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="announcementSearch"
+                            placeholder="Search announcements..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- FILTER -->
+
+                    <div class="announcement-filters">
+
+                        <button
+                            type="button"
+                            class="announcement-filter-btn active"
+                            data-filter="all"
+                        >
+                            All
+                        </button>
+
+                        <button
+                            type="button"
+                            class="announcement-filter-btn"
+                            data-filter="published"
+                        >
+                            Published
+                        </button>
+
+                        <button
+                            type="button"
+                            class="announcement-filter-btn"
+                            data-filter="draft"
+                        >
+                            Drafts
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ANNOUNCEMENT LIST
+                ================================================== -->
+
+                <div
+                    class="announcement-list"
+                    id="announcementList"
+                >
+
+
+                    <!-- =================================================
+                         ANNOUNCEMENT 01
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="published"
+                        data-search="tcs placement drive registration students"
+                    >
+
+                        <div class="announcement-icon purple">
+                            ▣
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    TCS Placement Drive Registration Open
+                                </h3>
+
+                                <span class="announcement-status published">
+                                    Published
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                Registration for the upcoming TCS placement
+                                drive is now open for all eligible students.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Posted 15 minutes ago
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         ANNOUNCEMENT 02
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="published"
+                        data-search="placement preparation workshop aptitude"
+                    >
+
+                        <div class="announcement-icon blue">
+                            ◆
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    Placement Preparation Workshop
+                                </h3>
+
+                                <span class="announcement-status published">
+                                    Published
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                A placement preparation workshop covering
+                                aptitude and interview preparation will be
+                                conducted this week.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Posted Yesterday
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         ANNOUNCEMENT 03
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="published"
+                        data-search="infosys interview schedule shortlisted students"
+                    >
+
+                        <div class="announcement-icon green">
+                            ◷
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    Infosys Interview Schedule Released
+                                </h3>
+
+                                <span class="announcement-status published">
+                                    Published
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                The interview schedule for shortlisted
+                                candidates has been published.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Posted 2 days ago
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Shortlisted Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         ANNOUNCEMENT 04
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="published"
+                        data-search="resume building session students"
+                    >
+
+                        <div class="announcement-icon orange">
+                            ◆
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    Resume Building Session
+                                </h3>
+
+                                <span class="announcement-status published">
+                                    Published
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                Students are invited to attend the resume
+                                building session conducted by the placement cell.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Posted 3 days ago
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         ANNOUNCEMENT 05
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="published"
+                        data-search="amazon placement drive selected students"
+                    >
+
+                        <div class="announcement-icon violet">
+                            ★
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    Amazon Placement Drive Result
+                                </h3>
+
+                                <span class="announcement-status published">
+                                    Published
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                The final list of students selected through
+                                the Amazon placement drive has been published.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Posted 4 days ago
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         ANNOUNCEMENT 06
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="published"
+                        data-search="placement cell meeting tpo"
+                    >
+
+                        <div class="announcement-icon blue">
+                            ◇
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    Placement Cell Meeting
+                                </h3>
+
+                                <span class="announcement-status published">
+                                    Published
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                The next placement cell coordination meeting
+                                will be held with all concerned members.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Posted 5 days ago
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Placement Cell
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         DRAFT 01
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="draft"
+                        data-search="campus recruitment preparation mock interview"
+                    >
+
+                        <div class="announcement-icon orange">
+                            ◷
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    Mock Interview Preparation Session
+                                </h3>
+
+                                <span class="announcement-status draft">
+                                    Draft
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                Draft announcement for the upcoming mock
+                                interview preparation session.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Saved 2 days ago
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         DRAFT 02
+                    ================================================== -->
+
+                    <article
+                        class="announcement-item"
+                        data-status="draft"
+                        data-search="new company drive upcoming placement"
+                    >
+
+                        <div class="announcement-icon purple">
+                            ▣
+                        </div>
+
+
+                        <div class="announcement-info">
+
+                            <div class="announcement-title-row">
+
+                                <h3>
+                                    Upcoming Company Drive
+                                </h3>
+
+                                <span class="announcement-status draft">
+                                    Draft
+                                </span>
+
+                            </div>
+
+
+                            <p>
+                                Draft announcement regarding an upcoming
+                                company placement drive.
+                            </p>
+
+
+                            <div class="announcement-meta">
+
+                                <span>
+                                    Saved 3 days ago
+                                </span>
+
+                                <span>
+                                    •
+                                </span>
+
+                                <span>
+                                    Audience: Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="announcement-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-action edit-announcement-btn"
+                                title="Edit"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                type="button"
+                                class="announcement-action delete-announcement-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     EMPTY STATE
+                ================================================== -->
+
+                <div
+                    class="announcement-empty"
+                    id="announcementEmpty"
+                    style="display:none;"
+                >
+
+                    <div class="announcement-empty-icon">
+                        ◇
+                    </div>
+
+                    <strong>
+                        No announcements found
+                    </strong>
+
+                    <span>
+                        Try changing your search or filter.
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="announcements-footer">
+
+                    <span id="announcementCount">
+                        Showing 8 announcements
+                    </span>
+
+
+                    <div class="announcement-pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button type="button">
+                            2
+                        </button>
+
+                        <button type="button">
+                            3
+                        </button>
+
+                        <button type="button">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 CREATE / EDIT MODAL
+            ================================================== -->
+
+            <div
+                class="announcement-modal"
+                id="announcementModal"
+                aria-hidden="true"
+            >
+
+                <div
+                    class="announcement-modal-overlay"
+                    id="announcementModalOverlay"
+                ></div>
+
+
+                <div class="announcement-modal-box">
+
+
+                    <div class="announcement-modal-header">
+
+                        <div>
+
+                            <h2 id="announcementModalTitle">
+                                Create Announcement
+                            </h2>
+
+                            <span>
+                                Publish an update for your selected audience
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="announcement-modal-close"
+                            id="closeAnnouncementModal"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <form
+                        id="announcementForm"
+                        class="announcement-form"
+                    >
+
+
+                        <div class="announcement-form-group">
+
+                            <label for="announcementTitle">
+                                Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="announcementTitle"
+                                placeholder="Enter announcement title"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="announcement-form-row">
+
+                            <div class="announcement-form-group">
+
+                                <label for="announcementAudience">
+                                    Audience
+                                </label>
+
+                                <select
+                                    id="announcementAudience"
+                                    required
+                                >
+
+                                    <option value="Students">
+                                        Students
+                                    </option>
+
+                                    <option value="Shortlisted Students">
+                                        Shortlisted Students
+                                    </option>
+
+                                    <option value="Placement Cell">
+                                        Placement Cell
+                                    </option>
+
+                                    <option value="All">
+                                        All
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="announcement-form-group">
+
+                                <label for="announcementType">
+                                    Type
+                                </label>
+
+                                <select
+                                    id="announcementType"
+                                >
+
+                                    <option value="general">
+                                        General
+                                    </option>
+
+                                    <option value="drive">
+                                        Placement Drive
+                                    </option>
+
+                                    <option value="interview">
+                                        Interview
+                                    </option>
+
+                                    <option value="important">
+                                        Important
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="announcement-form-group">
+
+                            <label for="announcementMessage">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="announcementMessage"
+                                rows="5"
+                                placeholder="Write your announcement..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+
+                        <div class="announcement-form-actions">
+
+                            <button
+                                type="button"
+                                class="announcement-cancel-btn"
+                                id="cancelAnnouncement"
+                            >
+                                Cancel
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="announcement-draft-btn"
+                                id="saveAnnouncementDraft"
+                            >
+                                Save Draft
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="announcement-publish-btn"
+                            >
+                                Publish Announcement
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     ANNOUNCEMENTS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/announcements.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

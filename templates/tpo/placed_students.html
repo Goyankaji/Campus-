@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Placed Students | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         PLACED STUDENTS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/placed_students.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="placed-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="placed-page-header">
+
+                <div>
+
+                    <h1>
+                        Placed Students
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Placed Students
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="placed-header-actions">
+
+                    <button
+                        type="button"
+                        class="placed-export-btn"
+                        id="exportPlacedStudents"
+                    >
+
+                        ↓
+                        Export
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="placed-stats">
+
+
+                <!-- TOTAL PLACED -->
+
+                <div class="placed-stat-card">
+
+                    <div class="placed-stat-icon purple">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Placed
+                        </span>
+
+                        <strong>
+                            142
+                        </strong>
+
+                        <small>
+                            This academic year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PCE -->
+
+                <div class="placed-stat-card">
+
+                    <div class="placed-stat-icon blue">
+                        P
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PCE
+                        </span>
+
+                        <strong>
+                            48
+                        </strong>
+
+                        <small>
+                            Students placed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PIET -->
+
+                <div class="placed-stat-card">
+
+                    <div class="placed-stat-icon green">
+                        P
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PIET
+                        </span>
+
+                        <strong>
+                            39
+                        </strong>
+
+                        <small>
+                            Students placed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PU -->
+
+                <div class="placed-stat-card">
+
+                    <div class="placed-stat-icon orange">
+                        P
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PU
+                        </span>
+
+                        <strong>
+                            31
+                        </strong>
+
+                        <small>
+                            Students placed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- JIET -->
+
+                <div class="placed-stat-card">
+
+                    <div class="placed-stat-icon violet">
+                        J
+                    </div>
+
+                    <div>
+
+                        <span>
+                            JIET
+                        </span>
+
+                        <strong>
+                            24
+                        </strong>
+
+                        <small>
+                            Students placed
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="placed-table-card">
+
+
+                <!-- =================================================
+                     FILTER BAR
+                ================================================== -->
+
+                <div class="placed-filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="placed-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="placedSearch"
+                            placeholder="Search student or company..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- COMPANY -->
+
+                    <div class="placed-filter-control">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <select
+                            id="placedCompanyFilter"
+                        >
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            <option value="TCS">
+                                TCS
+                            </option>
+
+                            <option value="Infosys">
+                                Infosys
+                            </option>
+
+                            <option value="Amazon">
+                                Amazon
+                            </option>
+
+                            <option value="Capgemini">
+                                Capgemini
+                            </option>
+
+                            <option value="Deloitte">
+                                Deloitte
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="placed-filter-control">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select
+                            id="placedCollegeFilter"
+                        >
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- PACKAGE -->
+
+                    <div class="placed-filter-control">
+
+                        <label>
+                            Package
+                        </label>
+
+                        <select
+                            id="placedPackageFilter"
+                        >
+
+                            <option value="all">
+                                All Packages
+                            </option>
+
+                            <option value="0-5">
+                                Below ₹5 LPA
+                            </option>
+
+                            <option value="5-8">
+                                ₹5 - ₹8 LPA
+                            </option>
+
+                            <option value="8-12">
+                                ₹8 - ₹12 LPA
+                            </option>
+
+                            <option value="12+">
+                                ₹12+ LPA
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- JOINING -->
+
+                    <div class="placed-filter-control">
+
+                        <label>
+                            Joining
+                        </label>
+
+                        <select
+                            id="placedJoiningFilter"
+                        >
+
+                            <option value="all">
+                                All Joining
+                            </option>
+
+                            <option value="confirmed">
+                                Confirmed
+                            </option>
+
+                            <option value="upcoming">
+                                Upcoming
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- RESET -->
+
+                    <button
+                        type="button"
+                        class="placed-reset-btn"
+                        id="resetPlacedFilters"
+                    >
+
+                        ↻
+                        Reset
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="placed-table-wrapper">
+
+                    <table
+                        class="placed-table"
+                        id="placedStudentsTable"
+                    >
+
+                        <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>STUDENT</th>
+
+                            <th>COLLEGE</th>
+
+                            <th>COMPANY</th>
+
+                            <th>JOB ROLE</th>
+
+                            <th>PACKAGE</th>
+
+                            <th>OFFER DATE</th>
+
+                            <th>JOINING DATE</th>
+
+                            <th>JOINING STATUS</th>
+
+                            <th>ACTIONS</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <!-- =================================================
+                             STUDENT 01
+                        ================================================== -->
+
+                        <tr
+                            data-student="Aarav Sharma"
+                            data-company="TCS"
+                            data-college="PCE"
+                            data-package="8.50"
+                            data-joining="confirmed"
+                        >
+
+                            <td>
+                                01
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-student-info">
+
+                                    <div class="placed-avatar purple">
+                                        AS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Aarav Sharma
+                                        </strong>
+
+                                        <span>
+                                            PCE202701
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="placed-company">
+                                    TCS
+                                </strong>
+
+                                <span class="placed-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td class="placed-package">
+                                ₹8.50 LPA
+                            </td>
+
+
+                            <td>
+                                24 Aug 2026
+                            </td>
+
+
+                            <td>
+                                15 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status confirmed">
+                                    Confirmed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-actions">
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn view-placed-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn more-placed-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 02
+                        ================================================== -->
+
+                        <tr
+                            data-student="Priya Mehta"
+                            data-company="Infosys"
+                            data-college="PIET"
+                            data-package="7.20"
+                            data-joining="upcoming"
+                        >
+
+                            <td>
+                                02
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-student-info">
+
+                                    <div class="placed-avatar blue">
+                                        PM
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Priya Mehta
+                                        </strong>
+
+                                        <span>
+                                            PIET202734
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="placed-company">
+                                    Infosys
+                                </strong>
+
+                                <span class="placed-company-subtext">
+                                    Infosys Limited
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                System Engineer
+                            </td>
+
+
+                            <td class="placed-package">
+                                ₹7.20 LPA
+                            </td>
+
+
+                            <td>
+                                23 Aug 2026
+                            </td>
+
+
+                            <td>
+                                20 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status upcoming">
+                                    Upcoming
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-actions">
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn view-placed-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn more-placed-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 03
+                        ================================================== -->
+
+                        <tr
+                            data-student="Rohan Verma"
+                            data-company="Amazon"
+                            data-college="PU"
+                            data-package="14.00"
+                            data-joining="pending"
+                        >
+
+                            <td>
+                                03
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-student-info">
+
+                                    <div class="placed-avatar orange">
+                                        RV
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Rohan Verma
+                                        </strong>
+
+                                        <span>
+                                            PU202715
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PU
+                            </td>
+
+
+                            <td>
+
+                                <strong class="placed-company">
+                                    Amazon
+                                </strong>
+
+                                <span class="placed-company-subtext">
+                                    Amazon Development Centre
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                SDE I
+                            </td>
+
+
+                            <td class="placed-package">
+                                ₹14.00 LPA
+                            </td>
+
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+
+                            <td>
+                                10 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-actions">
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn view-placed-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn more-placed-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 04
+                        ================================================== -->
+
+                        <tr
+                            data-student="Neha Gupta"
+                            data-company="Capgemini"
+                            data-college="JIET"
+                            data-package="9.10"
+                            data-joining="confirmed"
+                        >
+
+                            <td>
+                                04
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-student-info">
+
+                                    <div class="placed-avatar green">
+                                        NG
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Neha Gupta
+                                        </strong>
+
+                                        <span>
+                                            JIET202756
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                JIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="placed-company">
+                                    Capgemini
+                                </strong>
+
+                                <span class="placed-company-subtext">
+                                    Capgemini Technology Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Analyst
+                            </td>
+
+
+                            <td class="placed-package">
+                                ₹9.10 LPA
+                            </td>
+
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+
+                            <td>
+                                12 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status confirmed">
+                                    Confirmed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-actions">
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn view-placed-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn more-placed-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 05
+                        ================================================== -->
+
+                        <tr
+                            data-student="Kunal Singh"
+                            data-company="Deloitte"
+                            data-college="PCE"
+                            data-package="8.80"
+                            data-joining="upcoming"
+                        >
+
+                            <td>
+                                05
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-student-info">
+
+                                    <div class="placed-avatar dark">
+                                        KS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Kunal Singh
+                                        </strong>
+
+                                        <span>
+                                            PCE202768
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="placed-company">
+                                    Deloitte
+                                </strong>
+
+                                <span class="placed-company-subtext">
+                                    Deloitte Consulting
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Analyst
+                            </td>
+
+
+                            <td class="placed-package">
+                                ₹8.80 LPA
+                            </td>
+
+
+                            <td>
+                                21 Aug 2026
+                            </td>
+
+
+                            <td>
+                                18 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status upcoming">
+                                    Upcoming
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-actions">
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn view-placed-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn more-placed-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 06
+                        ================================================== -->
+
+                        <tr
+                            data-student="Ananya Joshi"
+                            data-company="TCS"
+                            data-college="PIET"
+                            data-package="8.50"
+                            data-joining="confirmed"
+                        >
+
+                            <td>
+                                06
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-student-info">
+
+                                    <div class="placed-avatar violet">
+                                        AJ
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Ananya Joshi
+                                        </strong>
+
+                                        <span>
+                                            PIET202781
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="placed-company">
+                                    TCS
+                                </strong>
+
+                                <span class="placed-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td class="placed-package">
+                                ₹8.50 LPA
+                            </td>
+
+
+                            <td>
+                                20 Aug 2026
+                            </td>
+
+
+                            <td>
+                                15 Jul 2027
+                            </td>
+
+
+                            <td>
+
+                                <span class="joining-status confirmed">
+                                    Confirmed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="placed-actions">
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn view-placed-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="placed-action-btn more-placed-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="placed-table-footer">
+
+                    <span id="placedCount">
+                        Showing 6 of 142 placed students
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button type="button">
+                            2
+                        </button>
+
+                        <button type="button">
+                            3
+                        </button>
+
+                        <button type="button">
+                            4
+                        </button>
+
+                        <button type="button">
+                            5
+                        </button>
+
+                        <button type="button">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     PLACED STUDENTS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/placed_students.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

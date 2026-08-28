@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0a1124"
+    >
+
+    <title>
+        Community Moderation | Campus
+    </title>
+
+
+    <!-- ADMIN COMMON -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/admin.css'
+        ) }}"
+    >
+
+
+    <!-- PAGE CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/admin/community_moderation.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-shell">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'admin/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'admin/components/topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE
+        ================================================== -->
+
+        <section class="community-admin-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="community-admin-header">
+
+                <div>
+
+                    <span class="community-admin-eyebrow">
+                        STUDENT COMMUNITY
+                    </span>
+
+                    <h1>
+                        Community Moderation
+                    </h1>
+
+                    <p>
+                        Review student questions, discussions
+                        and shared information before publishing.
+                    </p>
+
+                </div>
+
+
+                <div class="moderation-header-status">
+
+                    <span>
+                        Pending Review
+                    </span>
+
+                    <strong>
+                        {{ stats.pending or 0 }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATS
+            ================================================== -->
+
+            <div class="moderation-stats">
+
+
+                <a
+                    href="{{ url_for(
+                        'admin_community',
+                        status='PENDING'
+                    ) }}"
+                    class="
+                        moderation-stat
+                        pending
+                        {% if active_status == 'PENDING' %}
+                            active
+                        {% endif %}
+                    "
+                >
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong>
+                        {{ stats.pending or 0 }}
+                    </strong>
+
+                    <small>
+                        Needs review
+                    </small>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for(
+                        'admin_community',
+                        status='APPROVED'
+                    ) }}"
+                    class="
+                        moderation-stat
+                        approved
+                        {% if active_status == 'APPROVED' %}
+                            active
+                        {% endif %}
+                    "
+                >
+
+                    <span>
+                        Approved
+                    </span>
+
+                    <strong>
+                        {{ stats.approved or 0 }}
+                    </strong>
+
+                    <small>
+                        Published posts
+                    </small>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for(
+                        'admin_community',
+                        status='REJECTED'
+                    ) }}"
+                    class="
+                        moderation-stat
+                        rejected
+                        {% if active_status == 'REJECTED' %}
+                            active
+                        {% endif %}
+                    "
+                >
+
+                    <span>
+                        Rejected
+                    </span>
+
+                    <strong>
+                        {{ stats.rejected or 0 }}
+                    </strong>
+
+                    <small>
+                        Not published
+                    </small>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for(
+                        'admin_community',
+                        status='ALL'
+                    ) }}"
+                    class="
+                        moderation-stat
+                        total
+                        {% if active_status == 'ALL' %}
+                            active
+                        {% endif %}
+                    "
+                >
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        {{ stats.total or 0 }}
+                    </strong>
+
+                    <small>
+                        All submissions
+                    </small>
+
+                </a>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 TOOLBAR
+            ================================================== -->
+
+            <div class="moderation-toolbar">
+
+
+                <div>
+
+                    <h2>
+                        {% if active_status == 'PENDING' %}
+                            Pending Posts
+                        {% elif active_status == 'APPROVED' %}
+                            Approved Posts
+                        {% elif active_status == 'REJECTED' %}
+                            Rejected Posts
+                        {% else %}
+                            All Posts
+                        {% endif %}
+                    </h2>
+
+                    <p>
+                        Review and manage student community content.
+                    </p>
+
+                </div>
+
+
+                <div class="moderation-filter-group">
+
+                    <span>
+                        Filter
+                    </span>
+
+
+                    <select
+                        id="moderationStatus"
+                        class="admin-select"
+                    >
+
+                        <option
+                            value="PENDING"
+                            {% if active_status == 'PENDING' %}
+                                selected
+                            {% endif %}
+                        >
+                            Pending
+                        </option>
+
+
+                        <option
+                            value="APPROVED"
+                            {% if active_status == 'APPROVED' %}
+                                selected
+                            {% endif %}
+                        >
+                            Approved
+                        </option>
+
+
+                        <option
+                            value="REJECTED"
+                            {% if active_status == 'REJECTED' %}
+                                selected
+                            {% endif %}
+                        >
+                            Rejected
+                        </option>
+
+
+                        <option
+                            value="ALL"
+                            {% if active_status == 'ALL' %}
+                                selected
+                            {% endif %}
+                        >
+                            All
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FLASH
+            ================================================== -->
+
+            {% with messages =
+                get_flashed_messages(
+                    with_categories=true
+                )
+            %}
+
+                {% if messages %}
+
+                    <div class="moderation-alerts">
+
+                        {% for category, message in messages %}
+
+                            <div
+                                class="
+                                    moderation-alert
+                                    {{ category }}
+                                "
+                            >
+
+                                {{ message }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- =================================================
+                 DATABASE ERROR
+            ================================================== -->
+
+            {% if db_error %}
+
+                <div class="moderation-alert error">
+
+                    Unable to load community posts.
+
+                    <span>
+                        {{ db_error }}
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 POSTS
+            ================================================== -->
+
+            <div class="moderation-post-list">
+
+
+                {% for post in posts %}
+
+
+                    <article
+                        class="moderation-post"
+                        data-post-id="{{ post.post_id }}"
+                    >
+
+
+                        <!-- =================================================
+                             POST HEADER
+                        ================================================== -->
+
+                        <div class="moderation-post-header">
+
+
+                            <div class="moderation-author">
+
+
+                                <div class="moderation-avatar">
+
+                                    {{ post.author_name[:1]|upper }}
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+
+                                        {{ post.author_name }}
+
+                                    </strong>
+
+
+                                    <span>
+
+                                        User ID:
+                                        {{ post.user_id }}
+
+                                    </span>
+
+
+                                    <small>
+
+                                        {{
+                                            post.created_at.strftime(
+                                                '%d %b %Y, %I:%M %p'
+                                            )
+                                            if post.created_at
+                                            else ''
+                                        }}
+
+                                    </small>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="moderation-post-labels">
+
+
+                                <span
+                                    class="
+                                        moderation-type
+                                        {{ post.post_type|lower }}
+                                    "
+                                >
+
+                                    {% if
+                                        post.post_type ==
+                                        'QUESTION'
+                                    %}
+
+                                        Question
+
+                                    {% elif
+                                        post.post_type ==
+                                        'DISCUSSION'
+                                    %}
+
+                                        Discussion
+
+                                    {% else %}
+
+                                        Information
+
+                                    {% endif %}
+
+                                </span>
+
+
+                                <span
+                                    class="
+                                        moderation-status
+                                        {{ post.status|lower }}
+                                    "
+                                >
+
+                                    {{ post.status|title }}
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             POST CONTENT
+                        ================================================== -->
+
+                        <div class="moderation-post-content">
+
+
+                            <h3>
+
+                                {{ post.title }}
+
+                            </h3>
+
+
+                            <p>
+
+                                {{ post.content }}
+
+                            </p>
+
+
+                            {% if post.tags %}
+
+                                <div class="moderation-tags">
+
+                                    {% for tag in
+                                        post.tags.split(',')
+                                    %}
+
+                                        {% if tag.strip() %}
+
+                                            <span>
+
+                                                #{{ tag.strip()
+                                                    .lstrip('#') }}
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </div>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             REJECTION REASON
+                        ================================================== -->
+
+                        {% if
+                            post.status == 'REJECTED'
+                            and
+                            post.rejection_reason
+                        %}
+
+                            <div class="moderation-rejection">
+
+                                <strong>
+                                    Rejection reason
+                                </strong>
+
+                                <p>
+                                    {{ post.rejection_reason }}
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- =================================================
+                             REVIEW INFO
+                        ================================================== -->
+
+                        {% if post.reviewed_at %}
+
+                            <div class="moderation-review-info">
+
+                                Reviewed:
+
+                                {{
+                                    post.reviewed_at.strftime(
+                                        '%d %b %Y, %I:%M %p'
+                                    )
+                                }}
+
+                                {% if post.reviewed_by %}
+
+                                    · By
+                                    {{ post.reviewed_by }}
+
+                                {% endif %}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- =================================================
+                             ACTIONS
+                        ================================================== -->
+
+                        {% if post.status == 'PENDING' %}
+
+
+                            <div class="moderation-actions">
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'admin_community_review',
+                                        post_id=post.post_id
+                                    ) }}"
+                                    class="approve-form"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="action"
+                                        value="APPROVE"
+                                    >
+
+
+                                    <button
+                                        type="submit"
+                                        class="moderation-approve-btn"
+                                        data-approve
+                                    >
+
+                                        ✓ Approve
+
+                                    </button>
+
+                                </form>
+
+
+                                <button
+                                    type="button"
+                                    class="moderation-reject-btn"
+                                    data-open-reject
+                                    data-post-id="{{ post.post_id }}"
+                                >
+
+                                    × Reject
+
+                                </button>
+
+
+                            </div>
+
+
+                        {% else %}
+
+
+                            <div class="moderation-final-state">
+
+                                {% if
+                                    post.status ==
+                                    'APPROVED'
+                                %}
+
+                                    ✓ This post is published.
+
+                                {% else %}
+
+                                    × This post is rejected.
+
+                                {% endif %}
+
+                            </div>
+
+
+                        {% endif %}
+
+
+                    </article>
+
+
+                {% else %}
+
+
+                    <!-- =================================================
+                         EMPTY
+                    ================================================== -->
+
+                    <div class="admin-card moderation-empty">
+
+                        <div class="moderation-empty-icon">
+                            ✦
+                        </div>
+
+
+                        <h3>
+                            No {{ active_status|lower }}
+                            posts found
+                        </h3>
+
+
+                        <p>
+                            There are no community posts in
+                            this moderation category right now.
+                        </p>
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     REJECT MODAL
+========================================================= -->
+
+<div
+    class="moderation-modal"
+    id="rejectModal"
+>
+
+
+    <div
+        class="moderation-modal-backdrop"
+        data-close-reject
+    ></div>
+
+
+    <div class="moderation-modal-card">
+
+
+        <div class="moderation-modal-header">
+
+
+            <div>
+
+                <span>
+                    MODERATION
+                </span>
+
+                <h2>
+                    Reject this post?
+                </h2>
+
+                <p>
+                    Provide a clear reason so the student
+                    understands what needs to be changed.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="moderation-modal-close"
+                data-close-reject
+            >
+                ×
+            </button>
+
+
+        </div>
+
+
+        <form
+            method="POST"
+            id="rejectForm"
+        >
+
+
+            <div class="moderation-modal-body">
+
+
+                <label>
+
+                    Rejection Reason
+
+                    <textarea
+                        name="rejection_reason"
+                        id="rejectionReason"
+                        rows="5"
+                        maxlength="1000"
+                        required
+                        placeholder="Explain why this post cannot be published..."
+                    ></textarea>
+
+                </label>
+
+
+            </div>
+
+
+            <div class="moderation-modal-footer">
+
+
+                <button
+                    type="button"
+                    class="admin-secondary-btn"
+                    data-close-reject
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="moderation-confirm-reject"
+                >
+
+                    Reject Post
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/admin/community_moderation.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

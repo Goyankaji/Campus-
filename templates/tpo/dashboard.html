@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
     <title>TPO Dashboard | Campus Placement Portal</title>
+
+
+    <!-- GOOGLE FONT -->
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -19,242 +23,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
 
+
+    <!-- TPO COMMON CSS -->
+
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/tpo.css') }}">
+          href="{{ url_for('static',
+          filename='css/tpo/tpo-common.css') }}">
+
+
+    <!-- TPO SIDEBAR CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/tpo/tpo-sidebar.css') }}">
+
+
+    <!-- TPO TOPBAR CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/tpo/tpo-topbar.css') }}">
+
 </head>
 
 
 <body>
 
+
 <div class="app-container">
 
 
     <!-- =====================================================
-         SIDEBAR
+         TPO SIDEBAR
     ====================================================== -->
 
-    <aside class="sidebar" id="sidebar">
-
-
-        <!-- LOGO -->
-
-        <div class="sidebar-logo">
-
-            <img src="{{ url_for('static',
-                    filename='images/college-logo.jpeg') }}"
-                 alt="College Logo">
-
-            <div>
-                <h2>CAMPUS</h2>
-                <span>PLACEMENT PORTAL</span>
-            </div>
-
-        </div>
-
-
-        <!-- TPO PROFILE -->
-
-        <div class="tpo-profile">
-
-            <div class="tpo-avatar">
-                👤
-            </div>
-
-            <div>
-                <strong>TPO / Placement Cell</strong>
-                <span>Training & Placement Officer</span>
-
-                <small>
-                    <i></i> Online
-                </small>
-            </div>
-
-        </div>
-
-
-        <!-- NAVIGATION -->
-
-        <nav class="sidebar-nav">
-
-
-            <div class="nav-section-title">
-                OVERVIEW
-            </div>
-
-
-            <a href="#"
-               class="nav-item active">
-
-                <span class="nav-icon">⌂</span>
-                <span>Dashboard</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">♙</span>
-                <span>Students</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">▦</span>
-                <span>Companies</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">▣</span>
-                <span>Placement Drives</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">▤</span>
-                <span>Applications</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">◆</span>
-                <span>Shortlisted Students</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">◷</span>
-                <span>Interviews</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">▣</span>
-                <span>Offers & Joining</span>
-
-            </a>
-
-
-            <div class="nav-section-title">
-                RESOURCES
-            </div>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">▤</span>
-                <span>PYQ</span>
-
-                <span class="nav-badge new-badge">
-                    NEW
-                </span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">▥</span>
-                <span>Preparation Materials</span>
-
-            </a>
-
-
-            <div class="nav-section-title">
-                PLACEMENT DATA
-            </div>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">♙</span>
-                <span>Placed Students</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">▥</span>
-                <span>Reports</span>
-
-            </a>
-
-
-            <div class="nav-section-title">
-                SYSTEM
-            </div>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">♢</span>
-                <span>Notifications</span>
-
-                <span class="nav-badge notification-badge">
-                    8
-                </span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">◈</span>
-                <span>Announcements</span>
-
-                <span class="nav-badge announcement-badge">
-                    3
-                </span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item">
-
-                <span class="nav-icon">⚙</span>
-                <span>Settings</span>
-
-            </a>
-
-
-            <a href="#"
-               class="nav-item logout-item">
-
-                <span class="nav-icon">⇥</span>
-                <span>Logout</span>
-
-            </a>
-
-
-        </nav>
-    </aside>
+    {% include 'tpo/components/tpo_sidebar.html' %}
 
 
 
@@ -265,98 +68,24 @@
     <main class="main-content">
 
 
-        <!-- TOP HEADER -->
+        <!-- =================================================
+             TPO TOPBAR
+        ================================================== -->
 
-        <header class="top-header">
-
-
-            <button class="menu-toggle"
-                    id="menuToggle">
-
-                ☰
-
-            </button>
-
-
-            <div class="search-box">
-
-                <span class="search-icon">
-                    ⌕
-                </span>
-
-                <input type="text"
-                       id="tpoSearch"
-                       placeholder="Search students, companies, drives...">
-
-                <span class="search-shortcut">
-                    Ctrl + K
-                </span>
-
-            </div>
-
-
-            <div class="header-right">
-
-
-                <button class="header-icon"
-                        id="topThemeToggle">
-
-                    ☼
-
-                </button>
-
-
-                <button class="header-icon notification-button">
-
-                    ♢
-
-                    <span class="notification-dot">
-                        8
-                    </span>
-
-                </button>
-
-
-                <div class="user-profile">
-
-                    <div class="user-avatar">
-                        T
-                    </div>
-
-                    <div class="user-info">
-
-                        <strong>
-                            TPO / Placement Cell
-                        </strong>
-
-                        <span>
-                            Training & Placement Officer
-                        </span>
-
-                    </div>
-
-                    <span class="profile-arrow">
-                        ⌄
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-        </header>
+        {% include 'tpo/components/tpo_topbar.html' %}
 
 
 
-        <!-- =====================================================
+        <!-- =================================================
              DASHBOARD CONTENT
-        ====================================================== -->
+        ================================================== -->
 
         <section class="dashboard-content">
 
 
-            <!-- WELCOME -->
+            <!-- =================================================
+                 WELCOME
+            ================================================== -->
 
             <div class="welcome-row">
 
@@ -375,7 +104,9 @@
 
                 <div class="academic-year">
 
-                    <span>Academic Year</span>
+                    <span>
+                        Academic Year
+                    </span>
 
                     <strong>
                         2026-27 ▾
@@ -402,7 +133,9 @@
 
                     <div>
 
-                        <span>Total Students</span>
+                        <span>
+                            Total Students
+                        </span>
 
                         <strong>
                             1,260
@@ -425,7 +158,9 @@
 
                     <div>
 
-                        <span>Eligible Students</span>
+                        <span>
+                            Eligible Students
+                        </span>
 
                         <strong>
                             1,045
@@ -448,7 +183,9 @@
 
                     <div>
 
-                        <span>Active Drives</span>
+                        <span>
+                            Active Drives
+                        </span>
 
                         <strong>
                             24
@@ -471,7 +208,9 @@
 
                     <div>
 
-                        <span>Total Applications</span>
+                        <span>
+                            Total Applications
+                        </span>
 
                         <strong>
                             2,348
@@ -494,7 +233,9 @@
 
                     <div>
 
-                        <span>Students Placed</span>
+                        <span>
+                            Students Placed
+                        </span>
 
                         <strong>
                             486
@@ -517,7 +258,9 @@
 
                     <div>
 
-                        <span>Placement %</span>
+                        <span>
+                            Placement %
+                        </span>
 
                         <strong>
                             38.57%
@@ -543,7 +286,7 @@
             <section class="top-grid">
 
 
-                <!-- UPCOMING DRIVES -->
+                <!-- UPCOMING / ACTIVE DRIVES -->
 
                 <div class="dashboard-card drives-card">
 
@@ -587,10 +330,13 @@
                                 <tr>
 
                                     <td>
+
                                         <strong class="company-name tcs">
                                             tcs
                                         </strong>
+
                                         TCS
+
                                     </td>
 
                                     <td>
@@ -610,9 +356,11 @@
                                     </td>
 
                                     <td>
+
                                         <span class="drive-status active">
                                             Active
                                         </span>
+
                                     </td>
 
                                 </tr>
@@ -621,10 +369,13 @@
                                 <tr>
 
                                     <td>
+
                                         <strong class="company-name infosys">
                                             Infosys
                                         </strong>
+
                                         Infosys
+
                                     </td>
 
                                     <td>
@@ -644,9 +395,11 @@
                                     </td>
 
                                     <td>
+
                                         <span class="drive-status active">
                                             Active
                                         </span>
+
                                     </td>
 
                                 </tr>
@@ -655,10 +408,13 @@
                                 <tr>
 
                                     <td>
+
                                         <strong class="company-name wipro">
                                             wipro
                                         </strong>
+
                                         Wipro
+
                                     </td>
 
                                     <td>
@@ -678,9 +434,11 @@
                                     </td>
 
                                     <td>
+
                                         <span class="drive-status active">
                                             Active
                                         </span>
+
                                     </td>
 
                                 </tr>
@@ -689,10 +447,13 @@
                                 <tr>
 
                                     <td>
+
                                         <strong class="company-name capgemini">
                                             ◆
                                         </strong>
+
                                         Capgemini
+
                                     </td>
 
                                     <td>
@@ -712,9 +473,11 @@
                                     </td>
 
                                     <td>
+
                                         <span class="drive-status upcoming">
                                             Upcoming
                                         </span>
+
                                     </td>
 
                                 </tr>
@@ -723,10 +486,13 @@
                                 <tr>
 
                                     <td>
+
                                         <strong class="company-name cognizant">
                                             ◇
                                         </strong>
+
                                         Cognizant
+
                                     </td>
 
                                     <td>
@@ -746,9 +512,11 @@
                                     </td>
 
                                     <td>
+
                                         <span class="drive-status upcoming">
                                             Upcoming
                                         </span>
+
                                     </td>
 
                                 </tr>
@@ -775,6 +543,7 @@
                         <h2>
                             Placement Overview
                         </h2>
+
 
                         <select class="year-select">
 
@@ -877,7 +646,6 @@
 
                         </div>
 
-
                     </div>
 
 
@@ -977,8 +745,6 @@
                         <div class="bar-chart">
 
 
-                            <!-- CSE -->
-
                             <div class="bar-group">
 
                                 <div class="bars">
@@ -1004,8 +770,6 @@
 
                             </div>
 
-
-                            <!-- IT -->
 
                             <div class="bar-group">
 
@@ -1033,8 +797,6 @@
                             </div>
 
 
-                            <!-- ECE -->
-
                             <div class="bar-group">
 
                                 <div class="bars">
@@ -1060,8 +822,6 @@
 
                             </div>
 
-
-                            <!-- EE -->
 
                             <div class="bar-group">
 
@@ -1089,8 +849,6 @@
                             </div>
 
 
-                            <!-- ME -->
-
                             <div class="bar-group">
 
                                 <div class="bars">
@@ -1116,8 +874,6 @@
 
                             </div>
 
-
-                            <!-- CIVIL -->
 
                             <div class="bar-group">
 
@@ -1145,8 +901,6 @@
                             </div>
 
 
-                            <!-- AI ML -->
-
                             <div class="bar-group">
 
                                 <div class="bars">
@@ -1173,8 +927,6 @@
                             </div>
 
 
-                            <!-- DS -->
-
                             <div class="bar-group">
 
                                 <div class="bars">
@@ -1200,8 +952,6 @@
 
                             </div>
 
-
-                            <!-- Others -->
 
                             <div class="bar-group">
 
@@ -1231,7 +981,6 @@
 
                         </div>
 
-
                     </div>
 
 
@@ -1240,10 +989,12 @@
                         <span>ⓘ</span>
 
                         <p>
+
                             CSE leads the highest placements.
                             Overall placement improved by
                             <strong>4.2%</strong>
                             compared to last year.
+
                         </p>
 
                     </div>
@@ -1276,9 +1027,17 @@
 
                         <div class="company-row header-row">
 
-                            <span>Company</span>
-                            <span>Placed</span>
-                            <span>Avg Package</span>
+                            <span>
+                                Company
+                            </span>
+
+                            <span>
+                                Placed
+                            </span>
+
+                            <span>
+                                Avg Package
+                            </span>
 
                         </div>
 
@@ -1286,10 +1045,13 @@
                         <div class="company-row">
 
                             <span>
+
                                 <b class="mini-logo tcs">
                                     tcs
                                 </b>
+
                                 TCS
+
                             </span>
 
                             <strong>
@@ -1306,10 +1068,13 @@
                         <div class="company-row">
 
                             <span>
+
                                 <b class="mini-logo infosys">
                                     Inf
                                 </b>
+
                                 Infosys
+
                             </span>
 
                             <strong>
@@ -1326,10 +1091,13 @@
                         <div class="company-row">
 
                             <span>
+
                                 <b class="mini-logo wipro">
                                     W
                                 </b>
+
                                 Wipro
+
                             </span>
 
                             <strong>
@@ -1346,10 +1114,13 @@
                         <div class="company-row">
 
                             <span>
+
                                 <b class="mini-logo capgemini">
                                     ◆
                                 </b>
+
                                 Capgemini
+
                             </span>
 
                             <strong>
@@ -1366,10 +1137,13 @@
                         <div class="company-row">
 
                             <span>
+
                                 <b class="mini-logo cognizant">
                                     ◇
                                 </b>
+
                                 Cognizant
+
                             </span>
 
                             <strong>
@@ -1464,7 +1238,6 @@
 
                     </div>
 
-
                 </div>
 
 
@@ -1479,8 +1252,19 @@
 </div>
 
 
+
+<!-- =====================================================
+     TPO JAVASCRIPT
+====================================================== -->
+
 <script src="{{ url_for('static',
-            filename='js/tpo.js') }}"></script>
+            filename='js/tpo/tpo-sidebar.js') }}">
+</script>
+
+<script src="{{ url_for('static',
+            filename='js/tpo/tpo-topbar.js') }}">
+</script>
+
 
 </body>
 

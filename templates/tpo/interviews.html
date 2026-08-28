@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interviews | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         INTERVIEWS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/interviews.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="interviews-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="interviews-page-header">
+
+                <div>
+
+                    <h1>
+                        Interviews
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Interviews
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="schedule-interview-btn"
+                    id="scheduleInterviewBtn"
+                >
+
+                    +
+                    Schedule Interview
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="interview-stats">
+
+
+                <!-- TOTAL -->
+
+                <div class="interview-stat-card">
+
+                    <div class="interview-stat-icon purple">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Interviews
+                        </span>
+
+                        <strong>
+                            248
+                        </strong>
+
+                        <small>
+                            This academic year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TODAY -->
+
+                <div class="interview-stat-card">
+
+                    <div class="interview-stat-icon blue">
+                        ●
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Today's Interviews
+                        </span>
+
+                        <strong>
+                            18
+                        </strong>
+
+                        <small>
+                            Scheduled today
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- UPCOMING -->
+
+                <div class="interview-stat-card">
+
+                    <div class="interview-stat-icon orange">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Upcoming
+                        </span>
+
+                        <strong>
+                            64
+                        </strong>
+
+                        <small>
+                            Next scheduled
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COMPLETED -->
+
+                <div class="interview-stat-card">
+
+                    <div class="interview-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Completed
+                        </span>
+
+                        <strong>
+                            156
+                        </strong>
+
+                        <small>
+                            Interviews completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PENDING -->
+
+                <div class="interview-stat-card">
+
+                    <div class="interview-stat-icon violet">
+                        !
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Result Pending
+                        </span>
+
+                        <strong>
+                            28
+                        </strong>
+
+                        <small>
+                            Awaiting result
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="interviews-table-card">
+
+
+                <!-- =================================================
+                     FILTER BAR
+                ================================================== -->
+
+                <div class="interview-filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="interview-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="interviewSearch"
+                            placeholder="Search student or company..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- DATE -->
+
+                    <div class="interview-filter-control">
+
+                        <label>
+                            Date
+                        </label>
+
+                        <select
+                            id="interviewDateFilter"
+                        >
+
+                            <option value="all">
+                                All Dates
+                            </option>
+
+                            <option value="today">
+                                Today
+                            </option>
+
+                            <option value="upcoming">
+                                Upcoming
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COMPANY -->
+
+                    <div class="interview-filter-control">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <select
+                            id="interviewCompanyFilter"
+                        >
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            <option value="TCS">
+                                TCS
+                            </option>
+
+                            <option value="Infosys">
+                                Infosys
+                            </option>
+
+                            <option value="Amazon">
+                                Amazon
+                            </option>
+
+                            <option value="Capgemini">
+                                Capgemini
+                            </option>
+
+                            <option value="Deloitte">
+                                Deloitte
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="interview-filter-control">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select
+                            id="interviewCollegeFilter"
+                        >
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- MODE -->
+
+                    <div class="interview-filter-control">
+
+                        <label>
+                            Mode
+                        </label>
+
+                        <select
+                            id="interviewModeFilter"
+                        >
+
+                            <option value="all">
+                                All Modes
+                            </option>
+
+                            <option value="Offline">
+                                Offline
+                            </option>
+
+                            <option value="Online">
+                                Online
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="interview-filter-control">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select
+                            id="interviewStatusFilter"
+                        >
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="scheduled">
+                                Scheduled
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                            <option value="pending">
+                                Result Pending
+                            </option>
+
+                            <option value="cancelled">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- RESET -->
+
+                    <button
+                        type="button"
+                        class="interview-reset-btn"
+                        id="resetInterviewFilters"
+                    >
+
+                        ↻
+                        Reset
+
+                    </button>
+
+
+
+                    <!-- EXPORT -->
+
+                    <button
+                        type="button"
+                        class="interview-export-btn"
+                        id="exportInterviews"
+                    >
+
+                        ↓
+                        Export
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="interviews-table-wrapper">
+
+                    <table
+                        class="interviews-table"
+                        id="interviewsTable"
+                    >
+
+                        <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>STUDENT</th>
+
+                            <th>COLLEGE</th>
+
+                            <th>COMPANY</th>
+
+                            <th>JOB ROLE</th>
+
+                            <th>DATE & TIME</th>
+
+                            <th>ROUND</th>
+
+                            <th>MODE</th>
+
+                            <th>INTERVIEWER</th>
+
+                            <th>STATUS</th>
+
+                            <th>ACTIONS</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <!-- =================================================
+                             INTERVIEW 01
+                        ================================================== -->
+
+                        <tr
+                            data-student="Aarav Sharma"
+                            data-company="TCS"
+                            data-college="PCE"
+                            data-date="today"
+                            data-mode="Offline"
+                            data-status="scheduled"
+                        >
+
+                            <td>
+                                01
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-student-info">
+
+                                    <div class="interview-avatar purple">
+                                        AS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Aarav Sharma
+                                        </strong>
+
+                                        <span>
+                                            PCE202701
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-company">
+                                    TCS
+                                </strong>
+
+                                <span class="interview-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-date">
+                                    24 Aug 2026
+                                </strong>
+
+                                <span>
+                                    10:00 AM
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Technical Round
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-mode offline">
+                                    Offline
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Rahul Mehta
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status scheduled">
+                                    Scheduled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-actions">
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn view-interview-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn edit-interview-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn more-interview-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             INTERVIEW 02
+                        ================================================== -->
+
+                        <tr
+                            data-student="Priya Mehta"
+                            data-company="Infosys"
+                            data-college="PIET"
+                            data-date="completed"
+                            data-mode="Online"
+                            data-status="completed"
+                        >
+
+                            <td>
+                                02
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-student-info">
+
+                                    <div class="interview-avatar blue">
+                                        PM
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Priya Mehta
+                                        </strong>
+
+                                        <span>
+                                            PIET202734
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-company">
+                                    Infosys
+                                </strong>
+
+                                <span class="interview-company-subtext">
+                                    Infosys Limited
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                System Engineer
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-date">
+                                    23 Aug 2026
+                                </strong>
+
+                                <span>
+                                    11:30 AM
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                HR Round
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-mode online">
+                                    Online
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Sneha Kapoor
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-actions">
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn view-interview-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn edit-interview-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn more-interview-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             INTERVIEW 03
+                        ================================================== -->
+
+                        <tr
+                            data-student="Rohan Verma"
+                            data-company="Amazon"
+                            data-college="PU"
+                            data-date="upcoming"
+                            data-mode="Online"
+                            data-status="pending"
+                        >
+
+                            <td>
+                                03
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-student-info">
+
+                                    <div class="interview-avatar orange">
+                                        RV
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Rohan Verma
+                                        </strong>
+
+                                        <span>
+                                            PU202715
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PU
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-company">
+                                    Amazon
+                                </strong>
+
+                                <span class="interview-company-subtext">
+                                    Amazon Development Centre
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                SDE I
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-date">
+                                    26 Aug 2026
+                                </strong>
+
+                                <span>
+                                    02:00 PM
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Technical Round
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-mode online">
+                                    Online
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Vikram Singh
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status pending">
+                                    Result Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-actions">
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn view-interview-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn edit-interview-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn more-interview-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             INTERVIEW 04
+                        ================================================== -->
+
+                        <tr
+                            data-student="Neha Gupta"
+                            data-company="Capgemini"
+                            data-college="JIET"
+                            data-date="completed"
+                            data-mode="Offline"
+                            data-status="completed"
+                        >
+
+                            <td>
+                                04
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-student-info">
+
+                                    <div class="interview-avatar green">
+                                        NG
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Neha Gupta
+                                        </strong>
+
+                                        <span>
+                                            JIET202756
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                JIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-company">
+                                    Capgemini
+                                </strong>
+
+                                <span class="interview-company-subtext">
+                                    Capgemini Technology Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Analyst
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-date">
+                                    22 Aug 2026
+                                </strong>
+
+                                <span>
+                                    03:30 PM
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Technical Round
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-mode offline">
+                                    Offline
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Amit Sharma
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-actions">
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn view-interview-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn edit-interview-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn more-interview-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             INTERVIEW 05
+                        ================================================== -->
+
+                        <tr
+                            data-student="Kunal Singh"
+                            data-company="Deloitte"
+                            data-college="PCE"
+                            data-date="upcoming"
+                            data-mode="Online"
+                            data-status="scheduled"
+                        >
+
+                            <td>
+                                05
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-student-info">
+
+                                    <div class="interview-avatar dark">
+                                        KS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Kunal Singh
+                                        </strong>
+
+                                        <span>
+                                            PCE202768
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-company">
+                                    Deloitte
+                                </strong>
+
+                                <span class="interview-company-subtext">
+                                    Deloitte Consulting
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Analyst
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-date">
+                                    27 Aug 2026
+                                </strong>
+
+                                <span>
+                                    12:00 PM
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                HR Round
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-mode online">
+                                    Online
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Pooja Malhotra
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status scheduled">
+                                    Scheduled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-actions">
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn view-interview-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn edit-interview-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn more-interview-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             INTERVIEW 06
+                        ================================================== -->
+
+                        <tr
+                            data-student="Ananya Joshi"
+                            data-company="TCS"
+                            data-college="PIET"
+                            data-date="upcoming"
+                            data-mode="Offline"
+                            data-status="cancelled"
+                        >
+
+                            <td>
+                                06
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-student-info">
+
+                                    <div class="interview-avatar violet">
+                                        AJ
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Ananya Joshi
+                                        </strong>
+
+                                        <span>
+                                            PIET202781
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-company">
+                                    TCS
+                                </strong>
+
+                                <span class="interview-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Managerial Round
+                            </td>
+
+
+                            <td>
+
+                                <strong class="interview-date">
+                                    28 Aug 2026
+                                </strong>
+
+                                <span>
+                                    10:30 AM
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Managerial Round
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-mode offline">
+                                    Offline
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Rahul Mehta
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status cancelled">
+                                    Cancelled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="interview-actions">
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn view-interview-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn edit-interview-btn"
+                                        title="Edit"
+                                    >
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="interview-action-btn more-interview-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="interviews-table-footer">
+
+                    <span id="interviewCount">
+                        Showing 6 of 248 interviews
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button type="button">
+                            2
+                        </button>
+
+                        <button type="button">
+                            3
+                        </button>
+
+                        <button type="button">
+                            4
+                        </button>
+
+                        <button type="button">
+                            5
+                        </button>
+
+                        <button type="button">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     INTERVIEWS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/interviews.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

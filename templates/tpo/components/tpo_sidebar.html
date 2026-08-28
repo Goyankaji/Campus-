@@ -1,0 +1,629 @@
+<!-- =========================================================
+     CAMPUS PLACEMENT PORTAL
+     TPO SIDEBAR
+========================================================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <!-- =====================================================
+         LOGO
+    ====================================================== -->
+
+    <div class="sidebar-logo">
+
+        <img
+            src="{{ url_for(
+                'static',
+                filename='images/college-logo.jpeg'
+            ) }}"
+            alt="College Logo"
+        >
+
+        <div>
+
+            <h2>
+                CAMPUS
+            </h2>
+
+            <span>
+                PLACEMENT PORTAL
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TPO PROFILE
+    ====================================================== -->
+
+    <div class="tpo-profile">
+
+        <div class="tpo-avatar">
+            ♟
+        </div>
+
+        <div>
+
+            <strong>
+                TPO / Placement Cell
+            </strong>
+
+            <span>
+                Training & Placement Officer
+            </span>
+
+            <small>
+                <i></i>
+                Online
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav class="sidebar-nav">
+
+
+        <!-- =================================================
+             OVERVIEW
+        ================================================== -->
+
+        <div class="nav-section-title">
+            OVERVIEW
+        </div>
+
+
+        <a
+            href="{{ url_for('tpo_dashboard') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_dashboard' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             PLACEMENT
+        ================================================== -->
+
+        <div class="nav-section-title">
+            PLACEMENT
+        </div>
+
+
+        <!-- Placement Overview -->
+
+        <a
+            href="{{ url_for('tpo_placement_overview') }}"
+            class="nav-item
+            {% if request.endpoint in [
+                'tpo_placement_overview',
+                'placement_overview'
+            ] %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◉
+            </span>
+
+            <span>
+                Placement Overview
+            </span>
+
+        </a>
+
+
+        <!-- Students -->
+
+        <a
+            href="{{ url_for('tpo_students') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_students' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ♙
+            </span>
+
+            <span>
+                Students
+            </span>
+
+        </a>
+
+
+        <!-- Companies -->
+
+        <a
+            href="{{ url_for('tpo_companies') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_companies' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▣
+            </span>
+
+            <span>
+                Companies
+            </span>
+
+        </a>
+
+
+        <!-- Placement Drives -->
+
+        <a
+            href="{{ url_for('tpo_placement_drives') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_placement_drives' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▤
+            </span>
+
+            <span>
+                Placement Drives
+            </span>
+
+        </a>
+
+
+        <!-- Applications -->
+
+        <a
+            href="{{ url_for('tpo_applications') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_applications' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▤
+            </span>
+
+            <span>
+                Applications
+            </span>
+
+        </a>
+
+
+        <!-- Shortlisted Students -->
+
+        <a
+            href="{{ url_for('tpo_shortlisted_students') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_shortlisted_students' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◇
+            </span>
+
+            <span>
+                Shortlisted Students
+            </span>
+
+        </a>
+
+
+        <!-- Interviews -->
+
+        <a
+            href="{{ url_for('tpo_interviews') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_interviews' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◷
+            </span>
+
+            <span>
+                Interviews
+            </span>
+
+        </a>
+
+
+        <!-- Offers & Joining -->
+
+        <a
+            href="{{ url_for('tpo_offers') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_offers' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ✓
+            </span>
+
+            <span>
+                Offers & Joining
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             SPECIAL PLACEMENT
+        ================================================== -->
+
+        <div class="nav-section-title">
+            SPECIAL PLACEMENT
+        </div>
+
+
+        <!-- Off Campus -->
+
+        <a
+            href="#"
+            class="nav-item
+            {% if request.endpoint == 'tpo_off_campus' %}
+                active
+            {% endif %}"
+            data-coming-soon="true"
+        >
+
+            <span class="nav-icon">
+                ↗
+            </span>
+
+            <span>
+                Off Campus
+            </span>
+
+            <span class="nav-badge new-badge">
+                NEW
+            </span>
+
+        </a>
+
+
+        <!-- Pre-Placed -->
+
+        <a
+            href="#"
+            class="nav-item
+            {% if request.endpoint == 'tpo_pre_placed' %}
+                active
+            {% endif %}"
+            data-coming-soon="true"
+        >
+
+            <span class="nav-icon">
+                ★
+            </span>
+
+            <span>
+                Pre-Placed
+            </span>
+
+            <span class="nav-badge new-badge">
+                NEW
+            </span>
+
+        </a>
+
+
+        <!-- =====================================================
+     NOC
+====================================================== -->
+
+<a
+    href="{{ url_for('tpo_noc') }}"
+    class="tpo-nav-link
+    {% if request.endpoint == 'tpo_noc' %}active{% endif %}"
+>
+
+    <span class="tpo-nav-icon noc-sidebar-icon">
+        ◇
+    </span>
+
+    <span class="tpo-nav-text">
+        NOC
+    </span>
+
+</a>
+
+
+        <!-- Startups -->
+
+        <a
+            href="#"
+            class="nav-item
+            {% if request.endpoint == 'tpo_startups' %}
+                active
+            {% endif %}"
+            data-coming-soon="true"
+        >
+
+            <span class="nav-icon">
+                ✦
+            </span>
+
+            <span>
+                Startups
+            </span>
+
+            <span class="nav-badge new-badge">
+                NEW
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             RESOURCES
+        ================================================== -->
+
+        <div class="nav-section-title">
+            RESOURCES
+        </div>
+
+
+        <!-- Preparation Materials -->
+
+        <a
+            href="{{ url_for('tpo_preparation') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_preparation' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◆
+            </span>
+
+            <span>
+                Preparation Materials
+            </span>
+
+            <span class="nav-badge new-badge">
+                NEW
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             PLACEMENT DATA
+        ================================================== -->
+
+        <div class="nav-section-title">
+            PLACEMENT DATA
+        </div>
+
+
+        <!-- Placed Students -->
+
+        <a
+            href="{{ url_for('tpo_placed_students') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_placed_students' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ★
+            </span>
+
+            <span>
+                Placed Students
+            </span>
+
+        </a>
+
+
+        <!-- Reports -->
+
+        <a
+            href="{{ url_for('tpo_reports') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_reports' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▥
+            </span>
+
+            <span>
+                Reports
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             SYSTEM
+        ================================================== -->
+
+        <div class="nav-section-title">
+            SYSTEM
+        </div>
+
+
+        <!-- Notifications -->
+
+        <a
+            href="{{ url_for('tpo_notifications') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_notifications' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ♢
+            </span>
+
+            <span>
+                Notifications
+            </span>
+
+            <span class="nav-badge notification-badge">
+                8
+            </span>
+
+        </a>
+
+
+        <!-- Announcements -->
+
+        <a
+            href="{{ url_for('tpo_announcements') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_announcements' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ◇
+            </span>
+
+            <span>
+                Announcements
+            </span>
+
+            <span class="nav-badge announcement-badge">
+                3
+            </span>
+
+        </a>
+
+
+        <!-- Settings -->
+
+        <a
+            href="{{ url_for('tpo_settings') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_settings' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ⚙
+            </span>
+
+            <span>
+                Settings
+            </span>
+
+        </a>
+
+
+        <!-- Logout -->
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="nav-item logout-item"
+        >
+
+            <span class="nav-icon">
+                →|
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             THEME TOGGLE
+        ================================================== -->
+
+        <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+        >
+
+            <span id="themeIcon">
+                ☾
+            </span>
+
+            <span id="themeText">
+                Dark Mode
+            </span>
+
+        </button>
+
+
+    </nav>
+<style>
+
+    .tpo-nav-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tpo-nav-icon {
+        width: 18px;
+        min-width: 18px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 11px;
+        line-height: 1;
+    }
+
+    .tpo-nav-text {
+        display: inline-flex;
+        align-items: center;
+
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    .noc-sidebar-icon {
+        font-size: 12px;
+    }
+
+</style>
+</aside>

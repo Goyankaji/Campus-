@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tutor Dashboard | Campus Placement Portal</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/mentor.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/hod.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="hod-sidebar" id="hodSidebar">
+
+        <!-- LOGO -->
+        <div class="hod-logo">
+            <img
+                src="{{ url_for('static', filename='images/college-logo.JPEG') }}"
+                alt="College Logo">
+
+            <div>
+                <h2>TUTOR PORTAL</h2>
+                <span>DEPARTMENT DASHBOARD</span>
+            </div>
+        </div>
+
+        <!-- TUTOR PROFILE -->
+        <!-- <div class="hod-profile">
+            <div class="hod-avatar">T</div>
+            <div>
+                <strong>Tutor</strong>
+                <span>TUTOR • CSE Department</span>
+            </div>
+        </div> -->
+
+        <!-- NAVIGATION -->
+        <nav class="hod-navigation">
+
+            <div class="nav-title">OVERVIEW</div>
+
+            <a href="#dashboard" class="hod-nav active"
+               onclick="openSection('dashboard', this); return false;">
+                <span class="nav-symbol">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <div class="nav-title">MAIN</div>
+
+            <!-- <a href="#profile" class="hod-nav"
+               onclick="openSection('profile', this); return false;">
+                <span class="nav-symbol">♙</span>
+                <span>My Profile</span>
+            </a> -->
+
+            <a href="#students" class="hod-nav"
+               onclick="openSection('students', this); return false;">
+                <span class="nav-symbol">♙</span>
+                <span>Students</span>
+            </a>
+
+            <a href="#attendance" class="hod-nav"
+               onclick="openSection('attendance', this); return false;">
+                <span class="nav-symbol">◉</span>
+                <span>Attendance</span>
+            </a>
+
+            <a href="#academics" class="hod-nav"
+               onclick="openSection('academics', this); return false;">
+                <span class="nav-symbol">▤</span>
+                <span>Academics</span>
+            </a>
+
+            <div class="nav-title">PLACEMENT</div>
+
+            <a href="#drives" class="hod-nav"
+               onclick="openSection('drives', this); return false;">
+                <span class="nav-symbol">▣</span>
+                <span>Placement Drives</span>
+            </a>
+
+            <a href="#applications" class="hod-nav"
+               onclick="openSection('applications', this); return false;">
+                <span class="nav-symbol">▤</span>
+                <span>Student Applications</span>
+            </a>
+
+            <a href="#interviews" class="hod-nav"
+               onclick="openSection('interviews', this); return false;">
+                <span class="nav-symbol">◷</span>
+                <span>Interviews</span>
+            </a>
+
+            <a href="#placement-status" class="hod-nav"
+               onclick="openSection('placement-status', this); return false;">
+                <span class="nav-symbol">✓</span>
+                <span>Placement Status</span>
+            </a>
+
+            <div class="nav-title">SYSTEM</div>
+
+            <a href="#announcements" class="hod-nav"
+               onclick="openSection('announcements', this); return false;">
+                <span class="nav-symbol">◈</span>
+                <span>Announcements</span>
+            </a>
+
+            <a href="#notifications" class="hod-nav"
+               onclick="openSection('notifications', this); return false;">
+                <span class="nav-symbol">♢</span>
+                <span>Notifications</span>
+                <span class="badge red">5</span>
+            </a>
+
+            <a href="#complaints" class="hod-nav"
+               onclick="openSection('complaints', this); return false;">
+                <span class="nav-symbol">◌</span>
+                <span>Complaints / Feedback</span>
+            </a>
+
+            <a href="#settings" class="hod-nav"
+               onclick="openSection('settings', this); return false;">
+                <span class="nav-symbol">⚙</span>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <!-- LOGOUT -->
+        <a href="{{ url_for('index') }}" class="hod-logout">
+            <span>⇥</span>
+            <span>Logout</span>
+        </a>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-area">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <!-- SEARCH -->
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search students, drives, applications...">
+
+                <span class="search-shortcut">
+                    Ctrl + K
+                </span>
+
+            </div>
+
+
+            <!-- TOP RIGHT -->
+            <div class="topbar-right">
+
+                <!-- THEME -->
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    onclick="toggleDarkMode()"
+                    title="Toggle theme">
+
+                    <span id="themeIcon">
+                        ☾
+                    </span>
+
+                </button>
+
+
+                <!-- NOTIFICATIONS -->
+                <button
+                    class="top-icon notification-button"
+                    title="Notifications">
+
+                    ♧
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <!-- TUTOR PROFILE -->
+                <div class="profile"
+                     onclick="openSection('profile')"
+                     role="button"
+                     tabindex="0"
+                     title="Open My Profile">
+
+                    <div class="profile-avatar">
+                        T
+                    </div>
+
+                    <div class="profile-details">
+
+                        <strong>
+                            Tutor
+                        </strong>
+
+                        <span>
+                            CSE Department
+                        </span>
+
+                    </div>
+
+                    <span class="profile-arrow">
+                        ▾
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section id="dashboard"
+                 class="page-section active-section">
+
+
+            <!-- WELCOME -->
+            <div class="welcome-section">
+
+                <div>
+
+                    <h1>
+                        Welcome back, Tutor! 👋
+                    </h1>
+
+                    <p>
+                        Here's your students' academic and placement overview.
+                    </p>
+
+                </div>
+
+
+                <div class="academic-session">
+
+                    <span>
+                        Academic Session
+                    </span>
+
+                    <strong>
+                        2025-26
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="stats-grid">
+
+
+                <!-- Assigned -->
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        🎓
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Assigned Students
+                        </span>
+
+                        <h2>
+                            60
+                        </h2>
+
+                        <small>
+                            Your assigned students
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Eligible -->
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Eligible Students
+                        </span>
+
+                        <h2>
+                            48
+                        </h2>
+
+                        <small class="positive">
+                            80% of assigned students
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Applications -->
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ⌁
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Applications
+                        </span>
+
+                        <h2>
+                            35
+                        </h2>
+
+                        <small>
+                            Active applications
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Placed -->
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        ★
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Students Placed
+                        </span>
+
+                        <h2>
+                            24
+                        </h2>
+
+                        <small class="positive">
+                            40% placement rate
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Pending -->
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        !
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            Pending Actions
+                        </span>
+
+                        <h2>
+                            08
+                        </h2>
+
+                        <small>
+                            Need your attention
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FIRST ROW
+            ================================================== -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- STUDENT PLACEMENT OVERVIEW -->
+                <div class="panel overview-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Student Placement Overview
+                            </h2>
+
+                            <p>
+                                Placement status of your assigned students
+                            </p>
+
+                        </div>
+
+
+                        <select
+                            id="overviewYear"
+                            onchange="changeOverviewYear()">
+
+                            <option value="2025-26">
+                                2025-26
+                            </option>
+
+                            <option value="2024-25">
+                                2024-25
+                            </option>
+
+                            <option value="2023-24">
+                                2023-24
+                            </option>
+
+                            <option value="2022-23">
+                                2022-23
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="overview-chart">
+
+                        <canvas id="overviewChart"></canvas>
+
+                    </div>
+
+
+                    <div class="overview-message">
+
+                        <span class="message-icon">
+                            ✦
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Keep supporting your students!
+                            </strong>
+
+                            <p>
+                                Help students complete their pending placement activities.
+                            </p>
+
+                        </div>
+
+                        <span class="rocket">
+                            🎓
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- UPCOMING DRIVES -->
+                <div class="panel drives-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Upcoming Placement Drives
+                            </h2>
+
+                            <p>
+                                Drives relevant to your students
+                            </p>
+
+                        </div>
+
+                        <button class="view-all-btn"
+                                onclick="openSection('drives')">
+
+                            View All
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="drive-list">
+
+
+                        <!-- TCS -->
+                        <div class="drive-item">
+
+                            <div class="company-logo tcs">
+                                tcs
+                            </div>
+
+                            <div class="drive-info">
+
+                                <strong>
+                                    TCS
+                                </strong>
+
+                                <span>
+                                    Software Engineer
+                                </span>
+
+                                <div class="tags">
+
+                                    <span>
+                                        CSE
+                                    </span>
+
+                                    <span>
+                                        On Campus
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="drive-date">
+
+                                <small>
+                                    Apply by
+                                </small>
+
+                                <strong>
+                                    25 Aug
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- INFOSYS -->
+                        <div class="drive-item">
+
+                            <div class="company-logo infosys">
+                                I
+                            </div>
+
+                            <div class="drive-info">
+
+                                <strong>
+                                    Infosys
+                                </strong>
+
+                                <span>
+                                    System Engineer
+                                </span>
+
+                                <div class="tags">
+
+                                    <span>
+                                        CSE
+                                    </span>
+
+                                    <span>
+                                        IT
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="drive-date">
+
+                                <small>
+                                    Apply by
+                                </small>
+
+                                <strong>
+                                    30 Aug
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- WIPRO -->
+                        <div class="drive-item">
+
+                            <div class="company-logo wipro">
+                                W
+                            </div>
+
+                            <div class="drive-info">
+
+                                <strong>
+                                    Wipro
+                                </strong>
+
+                                <span>
+                                    Project Engineer
+                                </span>
+
+                                <div class="tags">
+
+                                    <span>
+                                        CSE
+                                    </span>
+
+                                    <span>
+                                        On Campus
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="drive-date">
+
+                                <small>
+                                    Apply by
+                                </small>
+
+                                <strong>
+                                    02 Sep
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 YEAR WISE GRAPH
+            ================================================== -->
+
+            <div class="panel year-chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Year-wise Placement Performance
+                        </h2>
+
+                        <p>
+                            Students placed from your assigned group
+                        </p>
+
+                    </div>
+
+
+                    <span class="chart-info">
+                        2022-23 to 2025-26
+                    </span>
+
+                </div>
+
+
+                <div class="year-chart">
+
+                    <canvas id="yearWiseChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STUDENTS + NOTIFICATIONS
+            ================================================== -->
+
+            <div class="bottom-grid">
+
+
+                <!-- MY STUDENTS -->
+                <div class="panel students-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                My Students
+                            </h2>
+
+                            <p>
+                                Latest student placement status
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="view-all-btn"
+                            onclick="openSection('students')">
+
+                            View All
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                            <tr>
+
+                                <th>
+                                    STUDENT
+                                </th>
+
+                                <th>
+                                    ROLL NO.
+                                </th>
+
+                                <th>
+                                    DEPARTMENT
+                                </th>
+
+                                <th>
+                                    STATUS
+                                </th>
+
+                            </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Rahul Sharma
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    23CS001
+                                </td>
+
+                                <td>
+                                    CSE
+                                </td>
+
+                                <td>
+                                    <span class="status placed">
+                                        Placed
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Priya Verma
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    23CS002
+                                </td>
+
+                                <td>
+                                    CSE
+                                </td>
+
+                                <td>
+                                    <span class="status interview">
+                                        Interview
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Aman Gupta
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    23IT014
+                                </td>
+
+                                <td>
+                                    IT
+                                </td>
+
+                                <td>
+                                    <span class="status applied">
+                                        Applied
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        Neha Singh
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    23CS018
+                                </td>
+
+                                <td>
+                                    CSE
+                                </td>
+
+                                <td>
+                                    <span class="status pending">
+                                        Not Applied
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PENDING ACTIONS -->
+                <div class="panel pending-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Pending Actions
+                            </h2>
+
+                            <p>
+                                Tasks requiring your attention
+                            </p>
+
+                        </div>
+
+                        <span class="pending-count">
+                            08
+                        </span>
+
+                    </div>
+
+
+                    <div class="pending-list">
+
+
+                        <div class="pending-item">
+
+                            <div class="pending-icon red">
+                                !
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Student verification
+                                </strong>
+
+                                <small>
+                                    3 students pending
+                                </small>
+
+                            </div>
+
+                            <button>
+                                View
+                            </button>
+
+                        </div>
+
+
+                        <div class="pending-item">
+
+                            <div class="pending-icon orange">
+                                ◷
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Interview updates
+                                </strong>
+
+                                <small>
+                                    2 updates pending
+                                </small>
+
+                            </div>
+
+                            <button>
+                                View
+                            </button>
+
+                        </div>
+
+
+                        <div class="pending-item">
+
+                            <div class="pending-icon purple">
+                                ▣
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Academic verification
+                                </strong>
+
+                                <small>
+                                    3 students pending
+                                </small>
+
+                            </div>
+
+                            <button>
+                                View
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LATEST NOTIFICATIONS
+            ================================================== -->
+
+            <div class="panel notifications-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Latest Notifications
+                        </h2>
+
+                        <p>
+                            Recent placement updates
+                        </p>
+
+                    </div>
+
+                    <button class="view-all-btn">
+                        View All
+                    </button>
+
+                </div>
+
+
+                <div class="notification-list">
+
+
+                    <div class="notification-item">
+
+                        <div class="notification-icon orange">
+                            ▣
+                        </div>
+
+                        <div class="notification-content">
+
+                            <strong>
+                                TCS Technical Interview
+                            </strong>
+
+                            <p>
+                                Technical interviews are scheduled for eligible students.
+                            </p>
+
+                            <small>
+                                10 min ago
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="notification-item">
+
+                        <div class="notification-icon blue">
+                            ◉
+                        </div>
+
+                        <div class="notification-content">
+
+                            <strong>
+                                New Placement Drive
+                            </strong>
+
+                            <p>
+                                Infosys drive has been published.
+                            </p>
+
+                            <small>
+                                Yesterday
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="notification-item">
+
+                        <div class="notification-icon purple">
+                            🎓
+                        </div>
+
+                        <div class="notification-content">
+
+                            <strong>
+                                Student Reminder
+                            </strong>
+
+                            <p>
+                                Students have been reminded to update their profiles.
+                            </p>
+
+                            <small>
+                                2 days ago
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             OTHER MODULES
+        ================================================== -->
+
+        <section id="profile"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>My Profile</h1>
+
+                <p>View and update your tutor profile.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">♙</div>
+
+                    <h2>Tutor Profile</h2>
+
+                    <p>Your profile information will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="students"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>My Students</h1>
+
+                <p>View and monitor all students assigned to you.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">🎓</div>
+
+                    <h2>Student Management</h2>
+
+                    <p>Student records will be connected with the database.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="attendance"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Attendance</h1>
+
+                <p>Monitor attendance of your assigned students.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">✓</div>
+
+                    <h2>Attendance Management</h2>
+
+                    <p>Attendance module will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="academics"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Academics</h1>
+
+                <p>Monitor academic performance of students.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">▣</div>
+
+                    <h2>Academic Performance</h2>
+
+                    <p>Academic data will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="drives"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Placement Drives</h1>
+
+                <p>View placement drives relevant to your students.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">◉</div>
+
+                    <h2>Placement Drives</h2>
+
+                    <p>Placement drive information will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="applications"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Student Applications</h1>
+
+                <p>Monitor student applications.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">⌁</div>
+
+                    <h2>Applications</h2>
+
+                    <p>Student application records will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="interviews"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Interviews</h1>
+
+                <p>Monitor upcoming and completed interviews.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">◷</div>
+
+                    <h2>Interview Management</h2>
+
+                    <p>Interview information will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="placement-status"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Placement Status</h1>
+
+                <p>Track placement status of your assigned students.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">✓</div>
+
+                    <h2>Placement Status</h2>
+
+                    <p>Placement status records will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="materials"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Preparation Materials</h1>
+
+                <p>Share and manage preparation resources.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">▤</div>
+
+                    <h2>Preparation Materials</h2>
+
+                    <p>Learning resources will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="pyq"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Previous Year Questions</h1>
+
+                <p>Manage previous year question papers.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">▥</div>
+
+                    <h2>PYQ</h2>
+
+                    <p>Previous year papers will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="announcements"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Announcements</h1>
+
+                <p>View placement announcements.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">◈</div>
+
+                    <h2>Announcements</h2>
+
+                    <p>Announcements will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="notifications"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Notifications</h1>
+
+                <p>View all notifications.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">♧</div>
+
+                    <h2>Notifications</h2>
+
+                    <p>Your notifications will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="complaints"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Complaints / Feedback</h1>
+
+                <p>Manage student complaints and feedback.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">◌</div>
+
+                    <h2>Complaints & Feedback</h2>
+
+                    <p>Complaints will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section id="settings"
+                 class="page-section">
+
+            <div class="inner-page">
+
+                <h1>Settings</h1>
+
+                <p>Manage your account settings.</p>
+
+                <div class="empty-module">
+
+                    <div class="module-icon">⚙</div>
+
+                    <h2>Settings</h2>
+
+                    <p>Settings will appear here.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='js/tutor.js') }}"></script>
+
+</body>
+
+</html>

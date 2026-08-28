@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Overview | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         PLACEMENT OVERVIEW CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/placement_overview.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="placement-overview-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="placement-overview-header">
+
+                <div>
+
+                    <h1>
+                        Placement Overview
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Placement Overview
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="overview-header-actions">
+
+                    <select
+                        id="overviewYear"
+                        class="overview-year-select"
+                    >
+
+                        <option selected>
+                            2026-27
+                        </option>
+
+                        <option>
+                            2025-26
+                        </option>
+
+                        <option>
+                            2024-25
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="overviewCollege"
+                        class="overview-college-select"
+                    >
+
+                        <option selected>
+                            All Colleges
+                        </option>
+
+                        <option>
+                            PCE
+                        </option>
+
+                        <option>
+                            PIET
+                        </option>
+
+                        <option>
+                            PU
+                        </option>
+
+                        <option>
+                            JIET
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 KPI CARDS
+            ================================================== -->
+
+            <div class="placement-kpi-grid">
+
+
+                <!-- TOTAL STUDENTS -->
+
+                <div class="placement-kpi-card">
+
+                    <div class="placement-kpi-top">
+
+                        <div class="placement-kpi-icon purple">
+                            ♙
+                        </div>
+
+                        <span class="kpi-growth positive">
+                            +8.4%
+                        </span>
+
+                    </div>
+
+                    <span class="placement-kpi-label">
+                        Total Students
+                    </span>
+
+                    <strong class="placement-kpi-value">
+                        {{ total_students|default(0) }}
+                    </strong>
+
+                    <span class="placement-kpi-note">
+                        Registered for placement
+                    </span>
+
+                </div>
+
+
+
+                <!-- PLACED STUDENTS -->
+
+                <div class="placement-kpi-card">
+
+                    <div class="placement-kpi-top">
+
+                        <div class="placement-kpi-icon green">
+                            ★
+                        </div>
+
+                        <span class="kpi-growth positive">
+                            +12.6%
+                        </span>
+
+                    </div>
+
+                    <span class="placement-kpi-label">
+                        Students Placed
+                    </span>
+
+                    <strong class="placement-kpi-value">
+                        {{ placed_students|default(0) }}
+                    </strong>
+
+                    <span class="placement-kpi-note">
+                        Successfully placed
+                    </span>
+
+                </div>
+
+
+
+                <!-- PLACEMENT RATE -->
+
+                <div class="placement-kpi-card">
+
+                    <div class="placement-kpi-top">
+
+                        <div class="placement-kpi-icon blue">
+                            %
+                        </div>
+
+                        <span class="kpi-growth positive">
+                            +4.8%
+                        </span>
+
+                    </div>
+
+                    <span class="placement-kpi-label">
+                        Placement Rate
+                    </span>
+
+                    <strong class="placement-kpi-value">
+                        {{ placement_rate|default(0) }}%
+                    </strong>
+
+                    <span class="placement-kpi-note">
+                        Overall placement rate
+                    </span>
+
+                </div>
+
+
+
+                <!-- COMPANIES -->
+
+                <div class="placement-kpi-card">
+
+                    <div class="placement-kpi-top">
+
+                        <div class="placement-kpi-icon orange">
+                            ▣
+                        </div>
+
+                        <span class="kpi-growth positive">
+                            +6
+                        </span>
+
+                    </div>
+
+                    <span class="placement-kpi-label">
+                        Recruiting Companies
+                    </span>
+
+                    <strong class="placement-kpi-value">
+                        {{ recruiting_companies|default(0) }}
+                    </strong>
+
+                    <span class="placement-kpi-note">
+                        Companies participated
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PACKAGE CARDS
+            ================================================== -->
+
+            <div class="package-summary-grid">
+
+
+                <div class="package-summary-card">
+
+                    <div class="package-card-icon purple">
+                        ₹
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Average Package
+                        </span>
+
+                        <strong>
+                            ₹{{ '%.2f'|format(average_package|default(0)|float) }} LPA
+                        </strong>
+
+                        <small>
+                            +11.2% from last year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="package-summary-card">
+
+                    <div class="package-card-icon green">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Highest Package
+                        </span>
+
+                        <strong>
+                            ₹{{ '%.2f'|format(highest_package|default(0)|float) }} LPA
+                        </strong>
+
+                        <small>
+                            Highest offer this year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="package-summary-card">
+
+                    <div class="package-card-icon blue">
+                        ◉
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Median Package
+                        </span>
+
+                        <strong>
+                            ₹{{ '%.2f'|format(median_package|default(0)|float) }} LPA
+                        </strong>
+
+                        <small>
+                            Placement median
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANALYTICS GRID
+            ================================================== -->
+
+            <div class="overview-analytics-grid">
+
+
+                <!-- =================================================
+                     PLACEMENT TREND
+                ================================================== -->
+
+                <div class="overview-card placement-trend-card">
+
+                    <div class="overview-card-header">
+
+                        <div>
+
+                            <h2>
+                                Placement Trend
+                            </h2>
+
+                            <p>
+                                Students placed across recent academic years
+                            </p>
+
+                        </div>
+
+                        <span class="overview-card-badge">
+                            5 Years
+                        </span>
+
+                    </div>
+
+
+                    <div class="placement-chart">
+
+                        <div class="chart-y-axis">
+
+                            <span>
+                                180
+                            </span>
+
+                            <span>
+                                135
+                            </span>
+
+                            <span>
+                                90
+                            </span>
+
+                            <span>
+                                45
+                            </span>
+
+                            <span>
+                                0
+                            </span>
+
+                        </div>
+
+
+                        <div class="chart-area">
+
+                            <div class="chart-grid-lines">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+
+                            <div class="chart-bars">
+
+                                <div class="chart-column">
+
+                                    <div
+                                        class="chart-bar"
+                                        style="height:42%;"
+                                        title="2022-23: 76 students"
+                                    ></div>
+
+                                    <span>
+                                        2022-23
+                                    </span>
+
+                                </div>
+
+
+                                <div class="chart-column">
+
+                                    <div
+                                        class="chart-bar"
+                                        style="height:54%;"
+                                        title="2023-24: 98 students"
+                                    ></div>
+
+                                    <span>
+                                        2023-24
+                                    </span>
+
+                                </div>
+
+
+                                <div class="chart-column">
+
+                                    <div
+                                        class="chart-bar"
+                                        style="height:67%;"
+                                        title="2024-25: 121 students"
+                                    ></div>
+
+                                    <span>
+                                        2024-25
+                                    </span>
+
+                                </div>
+
+
+                                <div class="chart-column">
+
+                                    <div
+                                        class="chart-bar"
+                                        style="height:76%;"
+                                        title="2025-26: 137 students"
+                                    ></div>
+
+                                    <span>
+                                        2025-26
+                                    </span>
+
+                                </div>
+
+
+                                <div class="chart-column current">
+
+                                    <div
+                                        class="chart-bar"
+                                        style="height:82%;"
+                                        title="2026-27: 142 students"
+                                    ></div>
+
+                                    <span>
+                                        2026-27
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PLACEMENT STATUS
+                ================================================== -->
+
+                <div class="overview-card placement-status-card">
+
+                    <div class="overview-card-header">
+
+                        <div>
+
+                            <h2>
+                                Placement Status
+                            </h2>
+
+                            <p>
+                                Current student placement distribution
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="placement-status-content">
+
+
+                        <div class="status-donut">
+
+                            <div class="status-donut-inner">
+
+                                <strong>
+                                    {{ total_students|default(0) }}
+                                </strong>
+
+                                <span>
+                                    Students
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-legend">
+
+                            <div class="legend-item">
+
+                                <span class="legend-dot placed"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Placed
+                                    </strong>
+
+                                    <span>
+                                        {{ placed_students|default(0) }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <span class="legend-dot eligible"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Eligible
+                                    </strong>
+
+                                    <span>
+                                        {{ eligible_students|default(0) }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <span class="legend-dot registered"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Registered
+                                    </strong>
+
+                                    <span>
+                                        {{ eligible_students|default(0) }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <span class="legend-dot pending"></span>
+
+                                <div>
+
+                                    <strong>
+                                        Pending
+                                    </strong>
+
+                                    <span>
+                                        0
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 COLLEGE-WISE PLACEMENT
+            ================================================== -->
+
+            <div class="overview-card college-placement-card">
+
+                <div class="overview-card-header">
+
+                    <div>
+
+                        <h2>
+                            College-wise Placement
+                        </h2>
+
+                        <p>
+                            Placement performance for
+                            {{ campus.campus_name if campus else 'current campus' }}
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="view-report-btn"
+                    >
+                        View Report →
+                    </button>
+
+                </div>
+
+
+                <div class="college-table-wrapper">
+
+                    <table class="college-placement-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    College
+                                </th>
+
+                                <th>
+                                    Total Students
+                                </th>
+
+                                <th>
+                                    Eligible
+                                </th>
+
+                                <th>
+                                    Placed
+                                </th>
+
+                                <th>
+                                    Placement Rate
+                                </th>
+
+                                <th>
+                                    Avg. Package
+                                </th>
+
+                                <th>
+                                    Highest Package
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% if college_rows %}
+
+                                {% for row in college_rows %}
+
+                                    <tr>
+
+                                        <td>
+                                            <strong>
+                                                {{ row.campus_code or row.campus_name }}
+                                            </strong>
+                                        </td>
+
+                                        <td>
+                                            {{ row.total_students|default(0) }}
+                                        </td>
+
+                                        <td>
+                                            {{ row.eligible_students|default(0) }}
+                                        </td>
+
+                                        <td>
+                                            {{ row.placed_students|default(0) }}
+                                        </td>
+
+                                        <td>
+
+                                            <div class="rate-cell">
+
+                                                <span>
+                                                    {{ row.placement_rate|default(0) }}%
+                                                </span>
+
+                                                <div class="rate-bar">
+                                                    <i
+                                                        style="width:{{ row.placement_rate|default(0) }}%;"
+                                                    ></i>
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            —
+                                        </td>
+
+                                        <td>
+                                            —
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+
+                            {% else %}
+
+                                <tr>
+
+                                    <td
+                                        colspan="7"
+                                        style="text-align:center;"
+                                    >
+                                        No placement data available.
+                                    </td>
+
+                                </tr>
+
+                            {% endif %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 COMPANY + ACTIVITY
+            ================================================== -->
+
+            <div class="overview-bottom-grid">
+
+
+                <!-- TOP RECRUITERS -->
+
+                <div class="overview-card">
+
+                    <div class="overview-card-header">
+
+                        <div>
+
+                            <h2>
+                                Top Recruiting Companies
+                            </h2>
+
+                            <p>
+                                Companies with highest selections
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="recruiter-list">
+
+                        {% if top_recruiters %}
+
+                            {% for recruiter in top_recruiters %}
+
+                                <div class="recruiter-row">
+
+                                    <span class="recruiter-rank">
+                                        {{ '%02d'|format(loop.index) }}
+                                    </span>
+
+                                    <div class="recruiter-logo">
+                                        {{ (recruiter.company_name or 'C')[:1]|upper }}
+                                    </div>
+
+                                    <div class="recruiter-info">
+
+                                        <strong>
+                                            {{ recruiter.company_name }}
+                                        </strong>
+
+                                        <span>
+                                            {{ recruiter.selected_students|default(0) }}
+                                            students selected
+                                        </span>
+
+                                    </div>
+
+                                    <strong class="recruiter-package">
+                                        {% if recruiter.package_lpa is not none %}
+                                            ₹{{ '%.2f'|format(recruiter.package_lpa|float) }} LPA
+                                        {% else %}
+                                            —
+                                        {% endif %}
+                                    </strong>
+
+                                </div>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <div class="recruiter-row">
+                                <div class="recruiter-info">
+                                    <strong>No recruiters yet</strong>
+                                    <span>No placement selections recorded.</span>
+                                </div>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- RECENT ACTIVITY -->
+
+                <div class="overview-card">
+
+                    <div class="overview-card-header">
+
+                        <div>
+
+                            <h2>
+                                Recent Placement Activity
+                            </h2>
+
+                            <p>
+                                Latest placement updates
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="placement-activity-list">
+
+
+                        <div class="placement-activity-item">
+
+                            <span class="activity-icon green">
+                                ★
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    6 students placed at TCS
+                                </strong>
+
+                                <span>
+                                    15 minutes ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="placement-activity-item">
+
+                            <span class="activity-icon blue">
+                                ◷
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Infosys interviews scheduled
+                                </strong>
+
+                                <span>
+                                    1 hour ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="placement-activity-item">
+
+                            <span class="activity-icon purple">
+                                ▣
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    New Amazon drive opened
+                                </strong>
+
+                                <span>
+                                    2 hours ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="placement-activity-item">
+
+                            <span class="activity-icon orange">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    4 offers confirmed
+                                </strong>
+
+                                <span>
+                                    Yesterday
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="placement-activity-item">
+
+                            <span class="activity-icon violet">
+                                ◇
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Placement report generated
+                                </strong>
+
+                                <span>
+                                    2 days ago
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+<!-- =====================================================
+     PLACEMENT OVERVIEW JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/placement_overview.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2349 @@
+/* =========================================================
+   ADMIN COMMON CSS
+   Shared by all Admin pages
+   ========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+:root {
+    --admin-sidebar-width: 260px;
+    --admin-topbar-height: 82px;
+
+    --admin-bg: #071126;
+    --admin-sidebar: #071126;
+    --admin-card: #111d36;
+
+    --admin-border: #253653;
+
+    --admin-text: #f5f7ff;
+    --admin-muted: #8fa2c4;
+
+    --admin-primary: #6d35ed;
+    --admin-primary-light: #8b5cf6;
+
+    --admin-success: #18b875;
+    --admin-danger: #ef476f;
+}
+
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
+body.light-theme {
+    --admin-bg: #f5f7fb;
+    --admin-sidebar: #071126;
+    --admin-card: #ffffff;
+
+    --admin-border: #dce3ef;
+
+    --admin-text: #101a33;
+    --admin-muted: #66758f;
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--admin-bg);
+    color: var(--admin-text);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   ADMIN LAYOUT
+   ========================================================= */
+
+.admin-layout {
+    width: 100%;
+    min-height: 100vh;
+
+    background: var(--admin-bg);
+}
+
+
+/* =========================================================
+   ADMIN SIDEBAR
+========================================================= */
+
+.admin-sidebar {
+    width: 225px;
+    min-width: 225px;
+    height: 100vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 14px 10px;
+    box-sizing: border-box;
+
+    background: #071126;
+    border-right: 1px solid #1c2b47;
+
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.admin-sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0 6px;
+    margin-bottom: 28px;
+}
+
+.admin-sidebar-logo img {
+    width: 42px;
+    height: 42px;
+
+    object-fit: contain;
+    border-radius: 9px;
+}
+
+.admin-sidebar-logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.admin-sidebar-logo-text strong {
+    color: #f8fafc;
+    font-size: 17px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.admin-sidebar-logo-text span {
+    color: #94a3b8;
+    font-size: 8px;
+    line-height: 1;
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.admin-sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 0;
+}
+
+.admin-sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.admin-sidebar-nav::-webkit-scrollbar-thumb {
+    background: #263858;
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.admin-nav-section {
+    margin: 0 8px 10px;
+
+    color: #7f8da8;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   NAV ITEM
+========================================================= */
+
+.admin-sidebar-nav a {
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 3px 0;
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 8px;
+
+    color: #e2e8f0;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.admin-sidebar-nav a:hover {
+    background: rgba(124, 58, 237, 0.12);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   NAV ICON
+========================================================= */
+
+.admin-sidebar-nav a .nav-icon {
+    width: 15px;
+    min-width: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #dbe4f0;
+
+    font-size: 13px;
+}
+
+.admin-sidebar-nav a:hover .nav-icon {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ACTIVE ITEM
+========================================================= */
+
+.admin-sidebar-nav a.active {
+    background: linear-gradient(
+        90deg,
+        #6d28d9,
+        #7c3aed
+    );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 7px 18px rgba(124, 58, 237, 0.25);
+}
+
+.admin-sidebar-nav a.active .nav-icon {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.admin-sidebar-nav .nav-badge {
+    min-width: 20px;
+    height: 20px;
+
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 5px;
+
+    box-sizing: border-box;
+
+    border-radius: 50%;
+
+    background: #7c3aed;
+    color: #ffffff;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.admin-sidebar-nav .nav-badge.notification {
+    background: #f43f5e;
+}
+
+
+/* =========================================================
+   PROGRESS CARD
+========================================================= */
+
+.admin-progress-card {
+    margin: 14px 8px 12px;
+    padding: 14px 11px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #742ff0,
+        #6d28d9
+    );
+
+    color: #ffffff;
+
+    box-sizing: border-box;
+}
+
+.admin-progress-card h4 {
+    margin: 0 0 10px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.admin-progress-card p {
+    margin: 0 0 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #ffffff;
+
+    font-size: 8px;
+}
+
+.admin-progress-bar {
+    width: 100%;
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.admin-progress-bar span {
+    display: block;
+
+    width: 80%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.admin-sidebar-logout {
+    margin: 8px 8px 0;
+}
+
+.admin-sidebar-logout a {
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    border: 1px solid #263858;
+    border-radius: 9px;
+
+    color: #e2e8f0;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    background: transparent;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.admin-sidebar-logout a:hover {
+    background: rgba(124, 58, 237, 0.10);
+    border-color: #7c3aed;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN CONTENT OFFSET
+========================================================= */
+
+.admin-main {
+    margin-left: 225px;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .admin-sidebar {
+        width: 210px;
+        min-width: 210px;
+    }
+
+    .admin-main {
+        margin-left: 210px;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .admin-sidebar {
+        width: 190px;
+        min-width: 190px;
+    }
+
+    .admin-main {
+        margin-left: 190px;
+    }
+
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.admin-main {
+    width: calc(100% - var(--admin-sidebar-width));
+
+    margin-left: var(--admin-sidebar-width);
+
+    min-height: 100vh;
+
+    padding-top: var(--admin-topbar-height);
+    padding-left: 18px;
+    padding-right: 18px;
+
+    background: var(--admin-bg);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.admin-topbar {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    left: var(--admin-sidebar-width);
+
+    height: var(--admin-topbar-height);
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 0 28px;
+
+    background: var(--admin-bg);
+
+    border-bottom: 1px solid var(--admin-border);
+
+    z-index: 900;
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.admin-menu-btn {
+    display: none;
+
+    width: 42px;
+    height: 42px;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 10px;
+
+    background: var(--admin-card);
+
+    color: var(--admin-text);
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.admin-search {
+    width: 560px;
+    max-width: 560px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    margin: 0;
+    padding: 0 13px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 10px;
+
+    background: var(--admin-card);
+
+    color: var(--admin-text);
+}
+
+
+/* Search icon */
+
+.admin-search > span {
+    width: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    margin-right: 9px;
+
+    color: var(--admin-muted);
+
+    font-size: 15px;
+}
+
+
+/* Search input */
+
+.admin-search input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    flex: 1 1 auto;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--admin-text);
+
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.admin-search input::placeholder {
+    color: var(--admin-muted);
+}
+
+
+/* Ctrl + K */
+
+.admin-search kbd {
+    flex-shrink: 0;
+
+    margin-left: 10px;
+    padding: 4px 7px;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: var(--admin-muted);
+
+    font-family: inherit;
+    font-size: 10px;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TOPBAR RIGHT
+   ========================================================= */
+
+.admin-topbar-right {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TOPBAR BUTTONS
+   ========================================================= */
+
+.admin-topbar-btn,
+.admin-theme-toggle {
+    position: relative;
+
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 11px;
+
+    background: var(--admin-card);
+
+    color: var(--admin-text);
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+.admin-topbar-btn:hover,
+.admin-theme-toggle:hover {
+    border-color: var(--admin-primary);
+
+    color: var(--admin-primary-light);
+}
+
+
+/* =========================================================
+   NOTIFICATION BADGE
+   ========================================================= */
+
+.notification-btn span {
+    position: absolute;
+
+    top: -6px;
+    right: -5px;
+
+    min-width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 5px;
+
+    border-radius: 20px;
+
+    background: var(--admin-danger);
+
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ADMIN PROFILE
+   ========================================================= */
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding-left: 4px;
+
+    cursor: pointer;
+}
+
+.admin-profile-avatar {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--admin-primary);
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.admin-profile-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.admin-profile-info strong {
+    color: var(--admin-text);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-profile-info small {
+    color: var(--admin-muted);
+
+    font-size: 9px;
+}
+
+.admin-profile-arrow {
+    margin-left: 4px;
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.dashboard-card {
+    background: var(--admin-card);
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 12px;
+}
+
+
+/* =========================================================
+   COMMON BUTTON
+   ========================================================= */
+
+.primary-btn {
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: var(--admin-primary);
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+.primary-btn:hover {
+    background: var(--admin-primary-light);
+}
+
+
+/* =========================================================
+   COMMON FORM ELEMENTS
+   ========================================================= */
+
+.admin-layout input,
+.admin-layout select,
+.admin-layout button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   DASHBOARD SPACING
+   ========================================================= */
+
+.dashboard-page,
+.admin-dashboard,
+.dashboard-content {
+    padding-top: 20px;
+
+    box-sizing: border-box;
+}
+
+.dashboard-page h1,
+.admin-dashboard h1,
+.dashboard-content h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.dashboard-page > p,
+.admin-dashboard > p,
+.dashboard-content > p {
+    margin-top: 0;
+}
+
+.dashboard-stats,
+.dashboard-stats-grid,
+.stats-grid {
+    margin-top: 18px;
+}
+
+.dashboard-main-grid {
+    margin-top: 18px;
+}
+
+.year-performance-card {
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   USER MANAGEMENT PAGE
+   ========================================================= */
+
+.user-management-page,
+.admin-user-management-page {
+    padding-left: 28px;
+    padding-right: 28px;
+
+    box-sizing: border-box;
+}
+
+.user-management-page .page-header,
+.admin-user-management-page .page-header {
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.admin-sidebar::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: #33415f;
+
+    border-radius: 10px;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+    background: #475777;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .admin-search {
+        width: 520px;
+        max-width: 520px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1000px
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    :root {
+        --admin-sidebar-width: 230px;
+    }
+
+    .admin-search {
+        width: 460px;
+        max-width: 460px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 800px
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    :root {
+        --admin-sidebar-width: 0px;
+    }
+
+    .admin-sidebar {
+        width: 260px;
+
+        transform: translateX(-100%);
+
+        transition: transform 0.25s ease;
+    }
+
+    .admin-sidebar.open {
+        transform: translateX(0);
+    }
+
+    .admin-main {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .admin-topbar {
+        left: 0;
+
+        padding: 0 16px;
+    }
+
+    .admin-menu-btn {
+        display: flex;
+    }
+
+    .admin-search {
+        flex: 1;
+
+        width: auto;
+        max-width: none;
+    }
+
+    .admin-profile-info,
+    .admin-profile-arrow {
+        display: none;
+    }
+
+    .user-management-page,
+    .admin-user-management-page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .dashboard-page,
+    .admin-dashboard,
+    .dashboard-content {
+        padding-top: 16px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 600px
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .admin-topbar {
+        gap: 10px;
+    }
+
+    .admin-search {
+        height: 44px;
+
+        padding: 0 10px;
+    }
+
+    .admin-search kbd {
+        display: none;
+    }
+
+    .admin-search input {
+        font-size: 12px;
+    }
+
+    .admin-topbar-btn,
+    .admin-theme-toggle {
+        width: 42px;
+        height: 42px;
+    }
+
+    .admin-profile-avatar {
+        width: 42px;
+        height: 42px;
+    }
+}
+/* =========================================================
+   ADMIN TOPBAR → PAGE SPACING
+   ========================================================= */
+
+.admin-main {
+    padding-top: calc(var(--admin-topbar-height) + 24px);
+}
+
+
+/* =========================================================
+   USER MANAGEMENT PAGE SPACING
+   ========================================================= */
+
+.user-management-page,
+.admin-user-management-page {
+    padding-top: 8px;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+
+/* Page heading */
+.user-management-page .page-header,
+.admin-user-management-page .page-header {
+    margin-top: 0;
+    margin-bottom: 22px;
+}
+
+
+/* If page does not use page-header */
+.user-management-page > h1,
+.admin-user-management-page > h1 {
+    margin-top: 0;
+}
+
+
+/* Add User button area */
+.user-management-page .page-actions,
+.admin-user-management-page .page-actions {
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   USER MANAGEMENT STATS
+   ========================================================= */
+
+.user-management-page .stats-grid,
+.admin-user-management-page .stats-grid {
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   ALL USERS CARD
+   ========================================================= */
+
+.user-management-page .users-card,
+.admin-user-management-page .users-card {
+    margin-top: 24px;
+}
+/* =========================================================
+   ADMIN COMMON LAYOUT
+   Sidebar + Topbar + Page Content
+   ========================================================= */
+
+:root {
+    --admin-sidebar-width: 225px;
+    --admin-topbar-height: 74px;
+    --admin-page-gap: 28px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: var(--admin-sidebar-width);
+    height: 100vh;
+
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.admin-topbar {
+    position: fixed;
+    top: 0;
+    left: var(--admin-sidebar-width);
+    right: 0;
+
+    height: var(--admin-topbar-height);
+
+    z-index: 900;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.admin-main {
+    margin-left: var(--admin-sidebar-width);
+
+    padding-top: var(--admin-topbar-height);
+
+    min-height: 100vh;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   EVERY ADMIN PAGE
+   ========================================================= */
+
+.admin-page {
+    width: 100%;
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    padding: var(--admin-page-gap);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.admin-page-header {
+    margin-bottom: 24px;
+}
+
+.admin-page-header h1 {
+    margin: 0 0 6px;
+}
+
+.admin-page-header p {
+    margin: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    :root {
+        --admin-sidebar-width: 210px;
+    }
+
+    .admin-page {
+        padding: 24px;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .admin-topbar {
+        left: 0;
+    }
+
+    .admin-main {
+        margin-left: 0;
+    }
+
+    .admin-page {
+        padding: 20px;
+    }
+}
+/* =========================================================
+   ADMIN SIDEBAR - SECTION HEADINGS
+   ========================================================= */
+
+/* Section heading text */
+.sidebar .nav-section-title,
+.admin-sidebar .nav-section-title,
+.admin-sidebar .section-title,
+.sidebar-section-title,
+.nav-section-title {
+    display: block !important;
+
+    margin: 22px 0 8px 18px !important;
+    padding: 0 !important;
+
+    color: #7f8ba5 !important;
+
+    font-size: 9px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.2 !important;
+
+    letter-spacing: 1.2px !important;
+
+    text-transform: uppercase !important;
+}
+
+
+/* First heading */
+.sidebar .nav-section-title:first-child,
+.admin-sidebar .nav-section-title:first-child,
+.sidebar-section-title:first-child {
+    margin-top: 0 !important;
+}
+
+
+/* Sidebar links */
+.sidebar nav a,
+.admin-sidebar nav a {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+
+/* Keep headings separated from links */
+.sidebar .nav-section,
+.admin-sidebar .nav-section {
+    margin-bottom: 0 !important;
+}
+/* =========================================================
+   ADMIN SIDEBAR NAVIGATION
+   Same visual structure as Student Sidebar
+========================================================= */
+
+.admin-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.admin-nav-heading {
+
+    margin: 18px 0 8px 12px;
+
+    padding: 0;
+
+    color: #7f8ba5;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+/* First section heading */
+
+.admin-nav-heading:first-child {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   NAVIGATION LINKS
+========================================================= */
+
+.admin-nav-link {
+
+    height: 38px;
+
+    margin: 2px 0;
+
+    padding: 0 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border-radius: 8px;
+
+    color: #e2e8f0;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* =========================================================
+   NAVIGATION ICON
+========================================================= */
+
+.admin-nav-icon {
+
+    width: 16px;
+
+    min-width: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #dbe4f0;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.admin-nav-link:hover {
+
+    background: rgba(124, 58, 237, 0.10);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.admin-nav-link.active {
+
+    background: linear-gradient(
+        90deg,
+        #6d28d9,
+        #7c3aed
+    );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 8px 18px rgba(124, 58, 237, 0.22);
+}
+
+
+.admin-nav-link.active .admin-nav-icon {
+
+    color: #ffffff;
+}
+/* =========================================================
+   ADMIN SIDEBAR FOOTER
+   ========================================================= */
+
+.admin-sidebar-bottom {
+    margin-top: auto;
+
+    padding: 16px 18px 18px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PROGRESS CARD
+   ========================================================= */
+
+.admin-progress-card {
+
+    width: 100%;
+
+    padding: 16px 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #6d28d9,
+        #7c3aed
+    );
+
+    color: #ffffff;
+}
+
+
+/* Title */
+
+.admin-progress-title {
+
+    margin: 0 0 12px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+}
+
+
+/* Progress information */
+
+.admin-progress-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 9px;
+
+    font-weight: 500;
+}
+
+
+.admin-progress-row strong {
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* Progress track */
+
+.admin-progress-track {
+
+    width: 100%;
+
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.25);
+}
+
+
+/* Progress */
+
+.admin-progress-fill {
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.admin-logout {
+
+    width: 100%;
+
+    height: 44px;
+
+    margin-top: 12px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid #263554;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #e2e8f0;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.admin-logout:hover {
+
+    background: rgba(124, 58, 237, 0.08);
+
+    border-color: #7c3aed;
+
+    color: #ffffff;
+}
+
+
+.admin-logout span:first-child {
+
+    font-size: 13px;
+
+    line-height: 1;
+}
+/* =========================================================
+   ADMIN TOPBAR
+   Matched with Student Common Topbar
+========================================================= */
+
+:root {
+    --admin-topbar-height: 72px;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.admin-topbar {
+    position: fixed;
+
+    top: 0;
+    left: var(--admin-sidebar-width);
+    right: 0;
+
+    width: auto;
+    height: var(--admin-topbar-height);
+
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: var(--admin-card);
+
+    border-bottom: 1px solid var(--admin-border);
+
+    box-sizing: border-box;
+
+    z-index: 900;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.admin-search {
+    width: min(440px, 45%);
+    max-width: 440px;
+
+    height: 39px;
+
+    margin: 0;
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    flex-shrink: 0;
+
+    background: var(--admin-card);
+
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+
+    box-sizing: border-box;
+}
+
+
+/* Search icon */
+
+.admin-search-icon {
+    width: auto !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 !important;
+
+    color: var(--admin-muted) !important;
+
+    font-size: 16px !important;
+
+    line-height: 1;
+}
+
+
+/* Search input */
+
+.admin-search input {
+
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    flex: 1;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--admin-text);
+
+    font-family: inherit;
+
+    font-size: 12px;
+}
+
+.admin-search input::placeholder {
+    color: var(--admin-muted);
+}
+
+
+/* Ctrl + K */
+
+.admin-search-shortcut {
+
+    flex-shrink: 0;
+
+    padding: 4px 7px;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 5px;
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.admin-topbar-right {
+
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+========================================================= */
+
+.theme-toggle,
+.admin-theme-toggle {
+
+    width: 35px;
+    height: 35px;
+
+    padding: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 8px;
+
+    background: var(--admin-card);
+
+    color: var(--admin-muted);
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    line-height: 1;
+
+    box-sizing: border-box;
+}
+
+
+.theme-toggle:hover,
+.admin-theme-toggle:hover {
+
+    background: rgba(109, 53, 237, 0.08);
+
+    color: var(--admin-primary-light);
+
+    border-color: var(--admin-primary);
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.admin-notification-wrapper {
+    position: relative;
+}
+
+
+.admin-notification-btn {
+
+    width: 35px;
+    height: 35px;
+
+    padding: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 8px;
+
+    background: var(--admin-card);
+
+    color: var(--admin-muted);
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    line-height: 1;
+
+    box-sizing: border-box;
+}
+
+
+.admin-notification-btn:hover {
+
+    background: rgba(109, 53, 237, 0.08);
+
+    color: var(--admin-primary-light);
+
+    border-color: var(--admin-primary);
+}
+
+
+/* Notification dot */
+
+.admin-notification-dot {
+
+    width: 6px;
+    height: 6px;
+
+    position: absolute;
+
+    top: 6px;
+    right: 6px;
+
+    border-radius: 50%;
+
+    background: var(--admin-danger);
+
+    border: 2px solid var(--admin-card);
+
+    box-sizing: content-box;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.admin-profile-wrapper {
+    position: relative;
+}
+
+
+.admin-profile-button {
+
+    min-height: 42px;
+
+    padding: 4px 8px 4px 4px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--admin-text);
+
+    cursor: pointer;
+}
+
+
+.admin-profile-button:hover {
+
+    background: rgba(109, 53, 237, 0.08);
+}
+
+
+/* Avatar */
+
+.admin-profile-avatar {
+
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eee5ff;
+
+    color: var(--admin-primary);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* Profile details */
+
+.admin-profile-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 3px;
+}
+
+
+.admin-profile-details strong {
+
+    color: var(--admin-text);
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.admin-profile-details span {
+
+    color: var(--admin-muted);
+
+    font-size: 8px;
+}
+
+
+/* Arrow */
+
+.admin-profile-arrow {
+
+    color: var(--admin-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   DROPDOWNS
+========================================================= */
+
+.admin-profile-wrapper .profile-dropdown,
+.admin-notification-wrapper .notification-dropdown {
+
+    z-index: 9999;
+}
+
+
+/* =========================================================
+   ADMIN MAIN TOPBAR OFFSET
+========================================================= */
+
+.admin-main {
+
+    padding-top: var(--admin-topbar-height) !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .admin-topbar {
+
+        left: 0;
+
+        padding: 0 16px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin-search {
+
+        width: 150px;
+        max-width: 150px;
+
+    }
+
+    .admin-search-shortcut {
+
+        display: none;
+
+    }
+
+    .admin-topbar {
+
+        gap: 10px;
+
+    }
+
+}
+/* =========================================================
+   ADMIN TOPBAR DROPDOWNS
+========================================================= */
+
+.notification-dropdown,
+.profile-dropdown {
+
+    position: absolute;
+
+    display: none;
+
+    min-width: 280px;
+
+    padding: 8px;
+
+    background: var(--admin-card);
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 14px 35px rgba(0, 0, 0, 0.35);
+
+    z-index: 9999;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NOTIFICATION DROPDOWN
+========================================================= */
+
+.admin-notification-wrapper .notification-dropdown {
+
+    top: calc(100% + 10px);
+
+    right: 0;
+
+    width: 320px;
+}
+
+
+/* Header */
+
+.notification-dropdown-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 10px 10px 12px;
+
+    border-bottom: 1px solid var(--admin-border);
+}
+
+
+.notification-dropdown-header strong {
+
+    color: var(--admin-text);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.notification-dropdown-header span {
+
+    color: var(--admin-primary-light);
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+/* Notification item */
+
+.notification-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 11px 10px;
+
+    border-radius: 7px;
+
+    color: var(--admin-text) !important;
+
+    text-decoration: none !important;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.15s ease;
+}
+
+
+.notification-item:hover {
+
+    background: rgba(124, 58, 237, 0.10);
+
+    color: var(--admin-text) !important;
+}
+
+
+/* Notification icon */
+
+.notification-item-icon {
+
+    width: 28px;
+    height: 28px;
+
+    flex: 0 0 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: rgba(124, 58, 237, 0.14);
+
+    color: var(--admin-primary-light);
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* Notification content */
+
+.notification-item div {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.notification-item strong {
+
+    color: var(--admin-text);
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+.notification-item small {
+
+    color: var(--admin-muted);
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+
+/* View all */
+
+.notification-view-all {
+
+    display: block;
+
+    margin-top: 4px;
+
+    padding: 10px;
+
+    border-top: 1px solid var(--admin-border);
+
+    color: var(--admin-primary-light) !important;
+
+    text-decoration: none !important;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.notification-view-all:hover {
+
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
+.admin-profile-wrapper .profile-dropdown {
+
+    top: calc(100% + 8px);
+
+    right: 0;
+
+    width: 170px;
+
+    min-width: 170px;
+}
+
+
+/* Profile links */
+
+.profile-dropdown a {
+
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 36px;
+
+    padding: 0 11px;
+
+    border-radius: 7px;
+
+    color: var(--admin-text) !important;
+
+    background: transparent;
+
+    text-decoration: none !important;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    box-sizing: border-box;
+}
+
+
+.profile-dropdown a:hover {
+
+    background: rgba(124, 58, 237, 0.10);
+
+    color: var(--admin-primary-light) !important;
+}
+
+
+/* Logout button */
+
+.profile-dropdown button {
+
+    width: 100%;
+
+    min-height: 36px;
+
+    padding: 0 11px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: var(--admin-text);
+
+    text-align: left;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+
+.profile-dropdown button:hover {
+
+    background: rgba(239, 71, 111, 0.10);
+
+    color: var(--admin-danger);
+}
+
+
+/* =========================================================
+   DROPDOWN OPEN STATE
+========================================================= */
+
+.notification-dropdown.show,
+.profile-dropdown.show {
+
+    display: block;
+}

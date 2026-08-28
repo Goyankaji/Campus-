@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Preparation Materials | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         PREPARATION CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/preparation.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE
+        ================================================== -->
+
+        <section class="preparation-content">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="preparation-page-header">
+
+                <div>
+
+                    <h1>
+                        Preparation Materials
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Preparation Materials
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="add-material-btn"
+                    id="addMaterialBtn"
+                >
+
+                    +
+                    Add Material
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="preparation-summary">
+
+
+                <div class="preparation-summary-card">
+
+                    <div class="preparation-summary-icon purple">
+                        ◆
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Materials
+                        </span>
+
+                        <strong id="totalMaterials">
+                            24
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preparation-summary-card">
+
+                    <div class="preparation-summary-icon blue">
+                        ◫
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Categories
+                        </span>
+
+                        <strong>
+                            6
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preparation-summary-card">
+
+                    <div class="preparation-summary-icon green">
+                        ↓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Downloads
+                        </span>
+
+                        <strong>
+                            486
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preparation-summary-card">
+
+                    <div class="preparation-summary-icon orange">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PYQs
+                        </span>
+
+                        <strong>
+                            7
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CATEGORIES
+            ================================================== -->
+
+            <div class="preparation-categories">
+
+
+                <button
+                    type="button"
+                    class="material-category active"
+                    data-category="all"
+                >
+
+                    <span class="category-icon">
+                        ▦
+                    </span>
+
+                    <span>
+                        All Materials
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="material-category"
+                    data-category="aptitude"
+                >
+
+                    <span class="category-icon">
+                        %
+                    </span>
+
+                    <span>
+                        Aptitude
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="material-category"
+                    data-category="coding"
+                >
+
+                    <span class="category-icon">
+                        &lt;/&gt;
+                    </span>
+
+                    <span>
+                        Coding
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="material-category"
+                    data-category="interview"
+                >
+
+                    <span class="category-icon">
+                        ◇
+                    </span>
+
+                    <span>
+                        Interview
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="material-category"
+                    data-category="resume"
+                >
+
+                    <span class="category-icon">
+                        ▤
+                    </span>
+
+                    <span>
+                        Resume
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="material-category"
+                    data-category="gd"
+                >
+
+                    <span class="category-icon">
+                        ◉
+                    </span>
+
+                    <span>
+                        Group Discussion
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="material-category"
+                    data-category="pyq"
+                >
+
+                    <span class="category-icon">
+                        ★
+                    </span>
+
+                    <span>
+                        PYQs
+                    </span>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MATERIAL PANEL
+            ================================================== -->
+
+            <div class="preparation-panel">
+
+
+                <!-- TOOLBAR -->
+
+                <div class="preparation-toolbar">
+
+
+                    <div class="material-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="materialSearch"
+                            placeholder="Search preparation materials..."
+                        >
+
+                    </div>
+
+
+                    <div class="material-toolbar-right">
+
+                        <select
+                            id="materialTypeFilter"
+                            class="material-type-filter"
+                        >
+
+                            <option value="all">
+                                All Types
+                            </option>
+
+                            <option value="pdf">
+                                PDF
+                            </option>
+
+                            <option value="video">
+                                Video
+                            </option>
+
+                            <option value="link">
+                                Link
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            id="materialCollegeFilter"
+                            class="material-college-filter"
+                        >
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MATERIAL GRID
+                ================================================== -->
+
+                <div
+                    class="material-grid"
+                    id="materialGrid"
+                >
+
+
+                    <!-- MATERIAL 01 -->
+
+                    <article
+                        class="material-card"
+                        data-category="aptitude"
+                        data-type="pdf"
+                        data-college="all"
+                        data-search="quantitative aptitude practice questions placement"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon pdf">
+                                PDF
+                            </div>
+
+                            <span class="material-category-tag">
+                                Aptitude
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Quantitative Aptitude Practice Set
+                        </h3>
+
+
+                        <p>
+                            Important aptitude questions for placement
+                            preparation and company assessments.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                PDF
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                2.4 MB
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                124 downloads
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 2 days ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MATERIAL 02 -->
+
+                    <article
+                        class="material-card"
+                        data-category="coding"
+                        data-type="pdf"
+                        data-college="all"
+                        data-search="coding dsa programming interview questions"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon pdf">
+                                PDF
+                            </div>
+
+                            <span class="material-category-tag">
+                                Coding
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            DSA & Coding Interview Questions
+                        </h3>
+
+
+                        <p>
+                            Frequently asked data structures and algorithms
+                            questions for technical interviews.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                PDF
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                4.1 MB
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                98 downloads
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 4 days ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MATERIAL 03 -->
+
+                    <article
+                        class="material-card"
+                        data-category="interview"
+                        data-type="video"
+                        data-college="all"
+                        data-search="technical interview preparation mock interview"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon video">
+                                ▶
+                            </div>
+
+                            <span class="material-category-tag">
+                                Interview
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Technical Interview Preparation
+                        </h3>
+
+
+                        <p>
+                            Video session covering common technical interview
+                            questions and preparation strategies.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                Video
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                42 min
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                76 views
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 1 week ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                Watch
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MATERIAL 04 -->
+
+                    <article
+                        class="material-card"
+                        data-category="resume"
+                        data-type="pdf"
+                        data-college="all"
+                        data-search="resume cv resume building placement"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon pdf">
+                                PDF
+                            </div>
+
+                            <span class="material-category-tag">
+                                Resume
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Resume Building Guide
+                        </h3>
+
+
+                        <p>
+                            Complete guide to creating an effective placement
+                            resume with examples and tips.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                PDF
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                1.8 MB
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                87 downloads
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 1 week ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MATERIAL 05 -->
+
+                    <article
+                        class="material-card"
+                        data-category="gd"
+                        data-type="video"
+                        data-college="all"
+                        data-search="group discussion gd communication skills"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon video">
+                                ▶
+                            </div>
+
+                            <span class="material-category-tag">
+                                Group Discussion
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Group Discussion Preparation
+                        </h3>
+
+
+                        <p>
+                            Learn GD strategies, communication techniques and
+                            commonly discussed topics.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                Video
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                31 min
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                61 views
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 10 days ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                Watch
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================================
+                         PYQ 01
+                    ================================================== -->
+
+                    <article
+                        class="material-card pyq-card"
+                        data-category="pyq"
+                        data-type="pdf"
+                        data-college="all"
+                        data-search="tcs previous year questions pyq aptitude"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon pyq">
+                                PYQ
+                            </div>
+
+                            <span class="material-category-tag pyq">
+                                PYQs
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            TCS Previous Year Questions
+                        </h3>
+
+
+                        <p>
+                            Previous year TCS placement questions including
+                            aptitude and assessment patterns.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                PDF
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                3.2 MB
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                140 downloads
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 2 weeks ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- PYQ 02 -->
+
+                    <article
+                        class="material-card pyq-card"
+                        data-category="pyq"
+                        data-type="pdf"
+                        data-college="all"
+                        data-search="infosys previous year questions pyq"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon pyq">
+                                PYQ
+                            </div>
+
+                            <span class="material-category-tag pyq">
+                                PYQs
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Infosys Previous Year Questions
+                        </h3>
+
+
+                        <p>
+                            Previous year Infosys aptitude and logical reasoning
+                            questions for placement preparation.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                PDF
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                2.7 MB
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                91 downloads
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 3 weeks ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- PYQ 03 -->
+
+                    <article
+                        class="material-card pyq-card"
+                        data-category="pyq"
+                        data-type="pdf"
+                        data-college="all"
+                        data-search="campus previous year placement questions"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon pyq">
+                                PYQ
+                            </div>
+
+                            <span class="material-category-tag pyq">
+                                PYQs
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Campus Placement PYQ Collection
+                        </h3>
+
+
+                        <p>
+                            Collection of previous year placement questions
+                            from different recruiting companies.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                PDF
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                5.6 MB
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                131 downloads
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 1 month ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                View
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MATERIAL 09 -->
+
+                    <article
+                        class="material-card"
+                        data-category="aptitude"
+                        data-type="link"
+                        data-college="all"
+                        data-search="logical reasoning online practice placement"
+                    >
+
+                        <div class="material-card-top">
+
+                            <div class="material-file-icon link">
+                                ↗
+                            </div>
+
+                            <span class="material-category-tag">
+                                Aptitude
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Logical Reasoning Practice
+                        </h3>
+
+
+                        <p>
+                            Online practice resources for logical reasoning
+                            and placement assessments.
+                        </p>
+
+
+                        <div class="material-meta">
+
+                            <span>
+                                Link
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                Online
+                            </span>
+
+                            <span>
+                                •
+                            </span>
+
+                            <span>
+                                54 visits
+                            </span>
+
+                        </div>
+
+
+                        <div class="material-card-footer">
+
+                            <span>
+                                Added 1 month ago
+                            </span>
+
+                            <button
+                                type="button"
+                                class="material-view-btn"
+                            >
+                                Open
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     EMPTY STATE
+                ================================================== -->
+
+                <div
+                    class="materials-empty"
+                    id="materialsEmpty"
+                    style="display:none;"
+                >
+
+                    <div class="materials-empty-icon">
+                        ◆
+                    </div>
+
+                    <strong>
+                        No materials found
+                    </strong>
+
+                    <span>
+                        Try changing your category, filter or search.
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="materials-footer">
+
+                    <span id="materialsCount">
+                        Showing 9 materials
+                    </span>
+
+
+                    <div class="materials-pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button type="button">
+                            2
+                        </button>
+
+                        <button type="button">
+                            3
+                        </button>
+
+                        <button type="button">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ADD MATERIAL MODAL
+            ================================================== -->
+
+            <div
+                class="material-modal"
+                id="materialModal"
+                aria-hidden="true"
+            >
+
+                <div
+                    class="material-modal-overlay"
+                    id="materialModalOverlay"
+                ></div>
+
+
+                <div class="material-modal-box">
+
+
+                    <div class="material-modal-header">
+
+                        <div>
+
+                            <h2>
+                                Add Preparation Material
+                            </h2>
+
+                            <span>
+                                Add a resource for student placement preparation.
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="material-modal-close"
+                            id="closeMaterialModal"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                    <form
+                        id="materialForm"
+                        class="material-form"
+                    >
+
+
+                        <div class="material-form-group">
+
+                            <label for="materialTitle">
+                                Material Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="materialTitle"
+                                placeholder="Enter material title"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="material-form-row">
+
+
+                            <div class="material-form-group">
+
+                                <label for="materialCategory">
+                                    Category
+                                </label>
+
+                                <select
+                                    id="materialCategory"
+                                    required
+                                >
+
+                                    <option value="aptitude">
+                                        Aptitude
+                                    </option>
+
+                                    <option value="coding">
+                                        Coding
+                                    </option>
+
+                                    <option value="interview">
+                                        Interview
+                                    </option>
+
+                                    <option value="resume">
+                                        Resume
+                                    </option>
+
+                                    <option value="gd">
+                                        Group Discussion
+                                    </option>
+
+                                    <option value="pyq">
+                                        PYQs
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="material-form-group">
+
+                                <label for="materialType">
+                                    Material Type
+                                </label>
+
+                                <select
+                                    id="materialType"
+                                    required
+                                >
+
+                                    <option value="pdf">
+                                        PDF
+                                    </option>
+
+                                    <option value="video">
+                                        Video
+                                    </option>
+
+                                    <option value="link">
+                                        Link
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="material-form-group">
+
+                            <label for="materialDescription">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="materialDescription"
+                                rows="4"
+                                placeholder="Write a short description..."
+                            ></textarea>
+
+                        </div>
+
+
+
+                        <div class="material-form-group">
+
+                            <label for="materialCollege">
+                                College
+                            </label>
+
+                            <select
+                                id="materialCollege"
+                            >
+
+                                <option value="all">
+                                    All Colleges
+                                </option>
+
+                                <option value="PCE">
+                                    PCE
+                                </option>
+
+                                <option value="PIET">
+                                    PIET
+                                </option>
+
+                                <option value="PU">
+                                    PU
+                                </option>
+
+                                <option value="JIET">
+                                    JIET
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="material-form-group">
+
+                            <label for="materialFile">
+                                Resource
+                            </label>
+
+                            <input
+                                type="file"
+                                id="materialFile"
+                            >
+
+                            <small>
+                                Upload PDF or select a resource file.
+                            </small>
+
+                        </div>
+
+
+
+                        <div class="material-form-actions">
+
+                            <button
+                                type="button"
+                                class="material-cancel-btn"
+                                id="cancelMaterial"
+                            >
+                                Cancel
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="material-add-btn"
+                            >
+                                Add Material
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+<!-- =====================================================
+     PREPARATION JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/preparation.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

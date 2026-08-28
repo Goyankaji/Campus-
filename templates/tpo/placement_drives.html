@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Placement Drives | TPO
+    </title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         PLACEMENT DRIVES CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/placement-drives.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="drives-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="drives-page-header">
+
+
+                <div>
+
+                    <h1>
+                        Placement Drives
+                    </h1>
+
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Placement Drives
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CREATE DRIVE -->
+
+                <button
+                    type="button"
+                    class="create-drive-btn"
+                    id="createDriveBtn"
+                >
+
+                    <span>
+                        +
+                    </span>
+
+                    Create Drive
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="drive-stats">
+
+
+                <!-- TOTAL -->
+
+                <div class="drive-stat-card">
+
+                    <div class="drive-stat-icon purple">
+                        ◫
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Drives
+                        </span>
+
+                        <strong>
+                            24
+                        </strong>
+
+                        <small>
+                            This academic year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- UPCOMING -->
+
+                <div class="drive-stat-card">
+
+                    <div class="drive-stat-icon blue">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Upcoming
+                        </span>
+
+                        <strong>
+                            6
+                        </strong>
+
+                        <small>
+                            Scheduled drives
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ONGOING -->
+
+                <div class="drive-stat-card">
+
+                    <div class="drive-stat-icon orange">
+                        ●
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Ongoing
+                        </span>
+
+                        <strong>
+                            4
+                        </strong>
+
+                        <small>
+                            Currently active
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COMPLETED -->
+
+                <div class="drive-stat-card">
+
+                    <div class="drive-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Completed
+                        </span>
+
+                        <strong>
+                            14
+                        </strong>
+
+                        <small>
+                            Successfully completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STUDENTS HIRED -->
+
+                <div class="drive-stat-card">
+
+                    <div class="drive-stat-icon violet">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Students Hired
+                        </span>
+
+                        <strong>
+                            156
+                        </strong>
+
+                        <small>
+                            Total selections
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="drives-table-card">
+
+
+                <!-- =================================================
+                     FILTER BAR
+                ================================================== -->
+
+                <div class="drive-filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="drive-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="driveSearch"
+                            placeholder="Search company or role..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="drive-filter-control">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select id="driveStatusFilter">
+
+                            <option value="all">
+                                All
+                            </option>
+
+                            <option value="upcoming">
+                                Upcoming
+                            </option>
+
+                            <option value="ongoing">
+                                Ongoing
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                            <option value="cancelled">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COMPANY -->
+
+                    <div class="drive-filter-control">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <select id="driveCompanyFilter">
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            <option value="TCS">
+                                TCS
+                            </option>
+
+                            <option value="Infosys">
+                                Infosys
+                            </option>
+
+                            <option value="Amazon">
+                                Amazon
+                            </option>
+
+                            <option value="Capgemini">
+                                Capgemini
+                            </option>
+
+                            <option value="Deloitte">
+                                Deloitte
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="drive-filter-control">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select id="driveCollegeFilter">
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- DRIVE TYPE -->
+
+                    <div class="drive-filter-control">
+
+                        <label>
+                            Drive Type
+                        </label>
+
+                        <select id="driveTypeFilter">
+
+                            <option value="all">
+                                All Types
+                            </option>
+
+                            <option value="On Campus">
+                                On Campus
+                            </option>
+
+                            <option value="Pool Drive">
+                                Pool Drive
+                            </option>
+
+                            <option value="Virtual">
+                                Virtual
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- RESET -->
+
+                    <button
+                        type="button"
+                        class="drive-filter-btn"
+                        id="resetDriveFilters"
+                    >
+
+                        ↻
+                        Reset
+
+                    </button>
+
+
+
+                    <!-- EXPORT -->
+
+                    <button
+                        type="button"
+                        class="drive-export-btn"
+                        id="exportDrives"
+                    >
+
+                        ↓
+                        Export
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="drives-table-wrapper">
+
+
+                    <table
+                        class="drives-table"
+                        id="drivesTable"
+                    >
+
+
+                        <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                COMPANY
+                            </th>
+
+                            <th>
+                                JOB ROLE
+                            </th>
+
+                            <th>
+                                DRIVE DATE
+                            </th>
+
+                            <th>
+                                REG. DEADLINE
+                            </th>
+
+                            <th>
+                                COLLEGES
+                            </th>
+
+                            <th>
+                                ELIGIBILITY
+                            </th>
+
+                            <th>
+                                PACKAGE
+                            </th>
+
+                            <th>
+                                APPLICANTS
+                            </th>
+
+                            <th>
+                                SELECTED
+                            </th>
+
+                            <th>
+                                STATUS
+                            </th>
+
+                            <th>
+                                ACTIONS
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+                        <!-- =================================================
+                             TCS
+                        ================================================== -->
+
+                        <tr
+                            data-company="TCS"
+                            data-role="Software Engineer"
+                            data-status="ongoing"
+                            data-college="PCE,PIET,PU,JIET"
+                            data-type="On Campus"
+                        >
+
+                            <td>
+                                01
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-company-info">
+
+                                    <div class="drive-company-logo purple-logo">
+                                        T
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            TCS
+                                        </strong>
+
+                                        <span>
+                                            Tata Consultancy Services
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="role-name">
+                                    Software Engineer
+                                </strong>
+
+                                <span class="drive-type">
+                                    On Campus
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    28 Aug 2026
+                                </strong>
+
+                                <span class="date-day">
+                                    Friday
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                25 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-college-tags">
+
+                                    <span>PCE</span>
+                                    <span>PIET</span>
+                                    <span>PU</span>
+                                    <span>JIET</span>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="eligibility-text">
+                                    CGPA ≥ 7.0
+                                </span>
+
+                                <small>
+                                    No active backlogs
+                                </small>
+
+                            </td>
+
+
+                            <td class="drive-package">
+                                ₹ 8.50 LPA
+                            </td>
+
+
+                            <td>
+                                186
+                            </td>
+
+
+                            <td class="selected-count">
+                                32
+                            </td>
+
+
+                            <td>
+
+                                <span class="drive-status ongoing">
+                                    Ongoing
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-actions">
+
+                                    <button
+                                        class="drive-action-btn view-drive-btn"
+                                        title="View Drive"
+                                        type="button"
+                                    >
+                                        ◉
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn edit-drive-btn"
+                                        title="Edit Drive"
+                                        type="button"
+                                    >
+                                        ✎
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn more-drive-btn"
+                                        title="More"
+                                        type="button"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             INFOSYS
+                        ================================================== -->
+
+                        <tr
+                            data-company="Infosys"
+                            data-role="System Engineer"
+                            data-status="upcoming"
+                            data-college="PCE,PIET,PU"
+                            data-type="On Campus"
+                        >
+
+                            <td>
+                                02
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-company-info">
+
+                                    <div class="drive-company-logo blue-logo">
+                                        I
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Infosys
+                                        </strong>
+
+                                        <span>
+                                            Infosys Limited
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="role-name">
+                                    System Engineer
+                                </strong>
+
+                                <span class="drive-type">
+                                    On Campus
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    02 Sep 2026
+                                </strong>
+
+                                <span class="date-day">
+                                    Wednesday
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                30 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-college-tags">
+
+                                    <span>PCE</span>
+                                    <span>PIET</span>
+                                    <span>PU</span>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="eligibility-text">
+                                    CGPA ≥ 6.5
+                                </span>
+
+                                <small>
+                                    Max 1 active backlog
+                                </small>
+
+                            </td>
+
+
+                            <td class="drive-package">
+                                ₹ 7.20 LPA
+                            </td>
+
+
+                            <td>
+                                142
+                            </td>
+
+
+                            <td class="selected-count">
+                                -
+                            </td>
+
+
+                            <td>
+
+                                <span class="drive-status upcoming">
+                                    Upcoming
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-actions">
+
+                                    <button
+                                        class="drive-action-btn view-drive-btn"
+                                        title="View Drive"
+                                        type="button"
+                                    >
+                                        ◉
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn edit-drive-btn"
+                                        title="Edit Drive"
+                                        type="button"
+                                    >
+                                        ✎
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn more-drive-btn"
+                                        title="More"
+                                        type="button"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             AMAZON
+                        ================================================== -->
+
+                        <tr
+                            data-company="Amazon"
+                            data-role="SDE I"
+                            data-status="upcoming"
+                            data-college="PCE,PIET"
+                            data-type="Pool Drive"
+                        >
+
+                            <td>
+                                03
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-company-info">
+
+                                    <div class="drive-company-logo orange-logo">
+                                        A
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Amazon
+                                        </strong>
+
+                                        <span>
+                                            Amazon Development Centre
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="role-name">
+                                    SDE I
+                                </strong>
+
+                                <span class="drive-type">
+                                    Pool Drive
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    10 Sep 2026
+                                </strong>
+
+                                <span class="date-day">
+                                    Thursday
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                06 Sep 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-college-tags">
+
+                                    <span>PCE</span>
+                                    <span>PIET</span>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="eligibility-text">
+                                    CGPA ≥ 7.5
+                                </span>
+
+                                <small>
+                                    CSE / IT only
+                                </small>
+
+                            </td>
+
+
+                            <td class="drive-package">
+                                ₹ 14.00 LPA
+                            </td>
+
+
+                            <td>
+                                96
+                            </td>
+
+
+                            <td class="selected-count">
+                                -
+                            </td>
+
+
+                            <td>
+
+                                <span class="drive-status upcoming">
+                                    Upcoming
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-actions">
+
+                                    <button
+                                        class="drive-action-btn view-drive-btn"
+                                        title="View Drive"
+                                        type="button"
+                                    >
+                                        ◉
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn edit-drive-btn"
+                                        title="Edit Drive"
+                                        type="button"
+                                    >
+                                        ✎
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn more-drive-btn"
+                                        title="More"
+                                        type="button"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             CAPGEMINI
+                        ================================================== -->
+
+                        <tr
+                            data-company="Capgemini"
+                            data-role="Software Analyst"
+                            data-status="completed"
+                            data-college="PU,JIET"
+                            data-type="On Campus"
+                        >
+
+                            <td>
+                                04
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-company-info">
+
+                                    <div class="drive-company-logo green-logo">
+                                        C
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Capgemini
+                                        </strong>
+
+                                        <span>
+                                            Capgemini Technology Services
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="role-name">
+                                    Software Analyst
+                                </strong>
+
+                                <span class="drive-type">
+                                    On Campus
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    18 Aug 2026
+                                </strong>
+
+                                <span class="date-day">
+                                    Tuesday
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                15 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-college-tags">
+
+                                    <span>PU</span>
+                                    <span>JIET</span>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="eligibility-text">
+                                    CGPA ≥ 6.5
+                                </span>
+
+                                <small>
+                                    All branches
+                                </small>
+
+                            </td>
+
+
+                            <td class="drive-package">
+                                ₹ 9.10 LPA
+                            </td>
+
+
+                            <td>
+                                128
+                            </td>
+
+
+                            <td class="selected-count">
+                                21
+                            </td>
+
+
+                            <td>
+
+                                <span class="drive-status completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-actions">
+
+                                    <button
+                                        class="drive-action-btn view-drive-btn"
+                                        title="View Drive"
+                                        type="button"
+                                    >
+                                        ◉
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn edit-drive-btn"
+                                        title="Edit Drive"
+                                        type="button"
+                                    >
+                                        ✎
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn more-drive-btn"
+                                        title="More"
+                                        type="button"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             DELOITTE
+                        ================================================== -->
+
+                        <tr
+                            data-company="Deloitte"
+                            data-role="Analyst"
+                            data-status="completed"
+                            data-college="PCE,PU"
+                            data-type="Virtual"
+                        >
+
+                            <td>
+                                05
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-company-info">
+
+                                    <div class="drive-company-logo dark-logo">
+                                        D
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Deloitte
+                                        </strong>
+
+                                        <span>
+                                            Deloitte Consulting
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="role-name">
+                                    Analyst
+                                </strong>
+
+                                <span class="drive-type">
+                                    Virtual
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    12 Aug 2026
+                                </strong>
+
+                                <span class="date-day">
+                                    Wednesday
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                08 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-college-tags">
+
+                                    <span>PCE</span>
+                                    <span>PU</span>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="eligibility-text">
+                                    CGPA ≥ 7.0
+                                </span>
+
+                                <small>
+                                    CSE / ECE / IT
+                                </small>
+
+                            </td>
+
+
+                            <td class="drive-package">
+                                ₹ 8.80 LPA
+                            </td>
+
+
+                            <td>
+                                105
+                            </td>
+
+
+                            <td class="selected-count">
+                                18
+                            </td>
+
+
+                            <td>
+
+                                <span class="drive-status completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-actions">
+
+                                    <button
+                                        class="drive-action-btn view-drive-btn"
+                                        title="View Drive"
+                                        type="button"
+                                    >
+                                        ◉
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn edit-drive-btn"
+                                        title="Edit Drive"
+                                        type="button"
+                                    >
+                                        ✎
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn more-drive-btn"
+                                        title="More"
+                                        type="button"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             WIPRO
+                        ================================================== -->
+
+                        <tr
+                            data-company="Wipro"
+                            data-role="Project Engineer"
+                            data-status="cancelled"
+                            data-college="PIET,JIET"
+                            data-type="On Campus"
+                        >
+
+                            <td>
+                                06
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-company-info">
+
+                                    <div class="drive-company-logo blue-logo">
+                                        W
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Wipro
+                                        </strong>
+
+                                        <span>
+                                            Wipro Limited
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong class="role-name">
+                                    Project Engineer
+                                </strong>
+
+                                <span class="drive-type">
+                                    On Campus
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    05 Sep 2026
+                                </strong>
+
+                                <span class="date-day">
+                                    Saturday
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                01 Sep 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-college-tags">
+
+                                    <span>PIET</span>
+                                    <span>JIET</span>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="eligibility-text">
+                                    CGPA ≥ 6.0
+                                </span>
+
+                                <small>
+                                    All branches
+                                </small>
+
+                            </td>
+
+
+                            <td class="drive-package">
+                                ₹ 6.50 LPA
+                            </td>
+
+
+                            <td>
+                                0
+                            </td>
+
+
+                            <td class="selected-count">
+                                -
+                            </td>
+
+
+                            <td>
+
+                                <span class="drive-status cancelled">
+                                    Cancelled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="drive-actions">
+
+                                    <button
+                                        class="drive-action-btn view-drive-btn"
+                                        title="View Drive"
+                                        type="button"
+                                    >
+                                        ◉
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn edit-drive-btn"
+                                        title="Edit Drive"
+                                        type="button"
+                                    >
+                                        ✎
+                                    </button>
+
+
+                                    <button
+                                        class="drive-action-btn more-drive-btn"
+                                        title="More"
+                                        type="button"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="drives-table-footer">
+
+                    <span id="driveCount">
+                        Showing 6 of 24 drives
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+
+                        <button
+                            type="button"
+                        >
+                            2
+                        </button>
+
+
+                        <button
+                            type="button"
+                        >
+                            3
+                        </button>
+
+
+                        <button
+                            type="button"
+                        >
+                            4
+                        </button>
+
+
+                        <button
+                            type="button"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     PLACEMENT DRIVES JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/placement-drives.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

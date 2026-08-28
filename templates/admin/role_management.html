@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Role Management | Campus Placement Portal</title>
+
+
+    <!-- =====================================================
+         COMMON ADMIN CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin.css') }}"
+    >
+
+
+    <!-- =====================================================
+         ROLE MANAGEMENT CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin/role_management.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    {% include 'admin/components/sidebar.html' %}
+
+
+
+    <!-- =====================================================
+         ADMIN MAIN AREA
+         ===================================================== -->
+
+    <div class="admin-main">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        {% include 'admin/components/topbar.html' %}
+
+
+
+        <!-- =================================================
+             ROLE MANAGEMENT PAGE
+             ================================================= -->
+
+        <main class="admin-page role-management-page">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+                 ================================================= -->
+
+            <div class="role-page-header">
+
+                <div>
+
+                    <span class="role-eyebrow">
+                        ACCESS CONTROL
+                    </span>
+
+                    <h1>
+                        Role Management
+                    </h1>
+
+                    <p>
+                        Define what each role can view, create,
+                        edit, delete and manage.
+                    </p>
+
+                </div>
+
+
+                <div class="role-total-card">
+
+                    <div class="role-total-icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            6
+                        </strong>
+
+                        <span>
+                            Total Roles
+                        </span>
+
+                        <small>
+                            Configured in system
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MAIN ROLE LAYOUT
+                 ================================================= -->
+
+            <div class="role-management-layout">
+
+
+                <!-- =================================================
+                     LEFT ROLE LIST
+                     ================================================= -->
+
+                <section class="roles-list-card">
+
+
+                    <!-- ROLE LIST HEADER -->
+
+                    <div class="roles-list-header">
+
+                        <div>
+
+                            <h2>
+                                System Roles
+                            </h2>
+
+                            <p>
+                                6 roles configured
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="role-add-btn"
+                            id="addRoleBtn">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ROLE LIST -->
+
+                    <div class="roles-list">
+
+
+                        <!-- ADMIN -->
+
+                        <button
+                            type="button"
+                            class="role-list-item active"
+                            data-role="admin">
+
+                            <span class="role-avatar role-admin">
+                                A
+                            </span>
+
+                            <span class="role-list-info">
+
+                                <strong>
+                                    Admin
+                                </strong>
+
+                                <small>
+                                    System Administrator
+                                </small>
+
+                            </span>
+
+                            <span class="role-arrow">
+                                ›
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- STUDENT -->
+
+                        <button
+                            type="button"
+                            class="role-list-item"
+                            data-role="student">
+
+                            <span class="role-avatar role-student">
+                                S
+                            </span>
+
+                            <span class="role-list-info">
+
+                                <strong>
+                                    Student
+                                </strong>
+
+                                <small>
+                                    Student User
+                                </small>
+
+                            </span>
+
+                            <span class="role-arrow">
+                                ›
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- MENTOR -->
+
+                        <button
+                            type="button"
+                            class="role-list-item"
+                            data-role="mentor">
+
+                            <span class="role-avatar role-mentor">
+                                M
+                            </span>
+
+                            <span class="role-list-info">
+
+                                <strong>
+                                    Mentor
+                                </strong>
+
+                                <small>
+                                    Student Mentor
+                                </small>
+
+                            </span>
+
+                            <span class="role-arrow">
+                                ›
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- HOD -->
+
+                        <button
+                            type="button"
+                            class="role-list-item"
+                            data-role="hod">
+
+                            <span class="role-avatar role-hod">
+                                H
+                            </span>
+
+                            <span class="role-list-info">
+
+                                <strong>
+                                    HOD
+                                </strong>
+
+                                <small>
+                                    Head of Department
+                                </small>
+
+                            </span>
+
+                            <span class="role-arrow">
+                                ›
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- TPO -->
+
+                        <button
+                            type="button"
+                            class="role-list-item"
+                            data-role="tpo">
+
+                            <span class="role-avatar role-tpo">
+                                T
+                            </span>
+
+                            <span class="role-list-info">
+
+                                <strong>
+                                    TPO
+                                </strong>
+
+                                <small>
+                                    Placement Officer
+                                </small>
+
+                            </span>
+
+                            <span class="role-arrow">
+                                ›
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- HIGHER AUTHORITY -->
+
+                        <button
+                            type="button"
+                            class="role-list-item"
+                            data-role="authority">
+
+                            <span class="role-avatar role-authority">
+                                H
+                            </span>
+
+                            <span class="role-list-info">
+
+                                <strong>
+                                    Higher Authority
+                                </strong>
+
+                                <small>
+                                    Higher Authority
+                                </small>
+
+                            </span>
+
+                            <span class="role-arrow">
+                                ›
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- INFO BOX -->
+
+                    <div class="role-info-box">
+
+                        <span>
+                            ⓘ
+                        </span>
+
+                        <p>
+                            Changes to roles will affect all users
+                            assigned to that role.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     RIGHT ROLE DETAILS
+                     ================================================= -->
+
+                <section class="role-details-card">
+
+
+                    <!-- ROLE HEADER -->
+
+                    <div class="role-details-header">
+
+                        <div class="selected-role">
+
+                            <div class="selected-role-icon">
+                                A
+                            </div>
+
+                            <div>
+
+                                <div class="selected-role-title">
+
+                                    <h2 id="selectedRoleName">
+                                        Admin
+                                    </h2>
+
+                                    <span class="role-active-badge">
+                                        ACTIVE
+                                    </span>
+
+                                </div>
+
+                                <p id="selectedRoleDescription">
+                                    System Administrator
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="role-meta">
+
+                            <p>
+                                Role ID:
+
+                                <strong id="roleId">
+                                    1
+                                </strong>
+
+                                <button
+                                    type="button"
+                                    class="copy-role-btn">
+
+                                    ⧉
+
+                                </button>
+
+                            </p>
+
+                            <p>
+                                Created: 21 Aug 2026
+                            </p>
+
+                            <p>
+                                Updated: 21 Aug 2026
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         TABS
+                         ================================================= -->
+
+                    <div class="role-tabs">
+
+                        <button
+                            type="button"
+                            class="role-tab active"
+                            data-tab="permissions">
+
+                            Permissions
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="role-tab"
+                            data-tab="details">
+
+                            Role Details
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         PERMISSIONS TAB
+                         ================================================= -->
+
+                    <div
+                        class="role-tab-content active"
+                        id="permissionsTab">
+
+
+                        <!-- GLOBAL PERMISSIONS -->
+
+                        <div class="permission-section">
+
+                            <div class="permission-section-header">
+
+                                <h3>
+                                    Global Permissions
+                                </h3>
+
+                                <p>
+                                    Basic actions this role can perform
+                                    across the portal.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="global-permissions-grid">
+
+
+                                <!-- VIEW -->
+
+                                <div class="permission-card">
+
+                                    <div class="permission-icon purple">
+                                        ◉
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            View
+                                        </strong>
+
+                                        <span>
+                                            Can view portal data
+                                        </span>
+
+                                    </div>
+
+                                    <label class="permission-toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked>
+
+                                        <span></span>
+
+                                    </label>
+
+                                </div>
+
+
+
+                                <!-- CREATE -->
+
+                                <div class="permission-card">
+
+                                    <div class="permission-icon blue">
+                                        +
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Create
+                                        </strong>
+
+                                        <span>
+                                            Can create new records
+                                        </span>
+
+                                    </div>
+
+                                    <label class="permission-toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked>
+
+                                        <span></span>
+
+                                    </label>
+
+                                </div>
+
+
+
+                                <!-- EDIT -->
+
+                                <div class="permission-card">
+
+                                    <div class="permission-icon green">
+                                        ✎
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Edit
+                                        </strong>
+
+                                        <span>
+                                            Can modify records
+                                        </span>
+
+                                    </div>
+
+                                    <label class="permission-toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked>
+
+                                        <span></span>
+
+                                    </label>
+
+                                </div>
+
+
+
+                                <!-- DELETE -->
+
+                                <div class="permission-card">
+
+                                    <div class="permission-icon red">
+                                        ♜
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Delete
+                                        </strong>
+
+                                        <span>
+                                            Can remove records
+                                        </span>
+
+                                    </div>
+
+                                    <label class="permission-toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked>
+
+                                        <span></span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- =================================================
+                             MODULE MANAGEMENT
+                             ================================================= -->
+
+                        <div class="permission-section">
+
+                            <div class="permission-section-header">
+
+                                <h3>
+                                    Module Management
+                                </h3>
+
+                                <p>
+                                    Control which modules this role can manage.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="module-permissions-grid">
+
+
+                                {% set modules = [
+
+                                    ('Users', 'Manage user accounts', '♟'),
+
+                                    ('Students', 'Manage student records', '♟'),
+
+                                    ('Faculty', 'Manage faculty records', '◆'),
+
+                                    ('Companies', 'Manage companies', '▣'),
+
+                                    ('Placement Drives', 'Manage placement drives', '▣'),
+
+                                    ('Applications', 'Manage applications', '▤'),
+
+                                    ('Placements', 'Manage placements', '▣'),
+
+                                    ('Resources', 'Manage resources', '▰'),
+
+                                    ('Announcements', 'Manage announcements', '⚑'),
+
+                                    ('Reports', 'View system reports', '▥'),
+
+                                    ('Feedback', 'Manage feedback', '▣')
+
+                                ] %}
+
+
+
+                                {% for module in modules %}
+
+                                <div class="module-card">
+
+                                    <div class="module-icon">
+                                        {{ module[2] }}
+                                    </div>
+
+                                    <div class="module-info">
+
+                                        <strong>
+                                            {{ module[0] }}
+                                        </strong>
+
+                                        <span>
+                                            {{ module[1] }}
+                                        </span>
+
+                                    </div>
+
+                                    <label class="permission-toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked>
+
+                                        <span></span>
+
+                                    </label>
+
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         ROLE DETAILS TAB
+                         ================================================= -->
+
+                    <div
+                        class="role-tab-content"
+                        id="detailsTab">
+
+                        <div class="role-details-placeholder">
+
+                            <h3>
+                                Role Details
+                            </h3>
+
+                            <p>
+                                Role information and configuration details
+                                will appear here.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         FOOTER
+                         ================================================= -->
+
+                    <div class="role-details-footer">
+
+                        <button
+                            type="button"
+                            class="reset-role-btn"
+                            id="resetRoleBtn">
+
+                            ↻ &nbsp; Reset Changes
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="save-role-btn"
+                            id="saveRoleBtn">
+
+                            ▣ &nbsp; Save Changes
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         COMMON ADMIN JS
+         ===================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/admin.js') }}">
+    </script>
+
+
+    <!-- =====================================================
+         ROLE MANAGEMENT JS
+         ===================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/admin/role_management.js') }}">
+    </script>
+
+
+</body>
+
+</html>

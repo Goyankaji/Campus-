@@ -1,705 +1,526 @@
-{% extends "authority/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}NOC Management | Authority{% endblock %}
+<head>
 
-{% block content %}
+    <meta charset="UTF-8">
 
-<link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/authority/noc.css') }}"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<div class="noc-page">
+    <title>
+        NOC Requests | Authority
+    </title>
 
-    <!-- HEADER -->
 
-    <div class="noc-header">
+    <!-- =====================================================
+         AUTHORITY COMMON CSS
+    ====================================================== -->
 
-        <div>
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/authority/common.css'
+        ) }}"
+    >
 
-            <div class="page-eyebrow">
-                SPECIAL INITIATIVES
+</head>
+
+
+<body>
+
+
+<div class="authority-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'authority/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="authority-main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'authority/components/topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE
+        ================================================== -->
+
+        <section class="authority-noc-page">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="authority-noc-header">
+
+                <div>
+
+                    <span>
+                        APPROVAL MANAGEMENT
+                    </span>
+
+                    <h1>
+                        NOC Requests
+                    </h1>
+
+                    <p>
+                        Review and approve student No Objection Certificate requests.
+                    </p>
+
+                </div>
+
             </div>
 
-            <h1>
-                NOC Management
-            </h1>
 
-            <p>
-                Manage and review student No Objection Certificate applications.
-            </p>
+            <!-- =================================================
+                 STATUS INFORMATION
+            ================================================== -->
 
-        </div>
+            <div class="authority-noc-info">
 
+                <div>
 
-        <div class="header-actions">
+                    <strong>
+                        Two-Level Approval
+                    </strong>
 
-            <select
-                id="academicYear"
-                class="noc-select"
-            >
-                <option value="2026-27">
-                    2026 - 27
-                </option>
+                    <p>
+                        Every NOC request requires approval from both
+                        TPO and Authority before it becomes final.
+                    </p>
 
-                <option value="2025-26">
-                    2025 - 26
-                </option>
+                </div>
 
-                <option value="2024-25">
-                    2024 - 25
-                </option>
-            </select>
+            </div>
 
 
-            <select
-                id="nocStatus"
-                class="noc-select"
-            >
-                <option value="all">
-                    All Status
-                </option>
+            <!-- =================================================
+                 STATS
+            ================================================== -->
 
-                <option value="pending">
-                    Pending
-                </option>
+            <div class="authority-noc-stats">
 
-                <option value="approved">
-                    Approved
-                </option>
 
-                <option value="rejected">
-                    Rejected
-                </option>
-            </select>
+                <div class="authority-noc-stat">
+
+                    <span>
+                        TOTAL REQUESTS
+                    </span>
+
+                    <strong id="authorityTotalNoc">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="authority-noc-stat">
+
+                    <span>
+                        WAITING FOR AUTHORITY
+                    </span>
+
+                    <strong id="authorityPendingNoc">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="authority-noc-stat">
+
+                    <span>
+                        AUTHORITY APPROVED
+                    </span>
+
+                    <strong id="authorityApprovedNoc">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="authority-noc-stat">
+
+                    <span>
+                        REJECTED
+                    </span>
+
+                    <strong id="authorityRejectedNoc">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 FILTERS
+            ================================================== -->
+
+            <div class="authority-noc-filters">
+
+
+                <div class="authority-noc-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="authorityNocSearch"
+                        placeholder="Search student, registration or organization..."
+                    >
+
+                </div>
+
+
+                <select
+                    id="authorityNocFilter"
+                >
+
+                    <option value="all">
+                        All Requests
+                    </option>
+
+                    <option value="pending">
+                        Authority Pending
+                    </option>
+
+                    <option value="approved">
+                        Authority Approved
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    id="authorityNocReset"
+                >
+                    Reset
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
+
+            <div class="authority-noc-card">
+
+
+                <div class="authority-noc-card-header">
+
+                    <div>
+
+                        <span>
+                            NOC REQUEST QUEUE
+                        </span>
+
+                        <h2>
+                            Student Requests
+                        </h2>
+
+                    </div>
+
+
+                    <div class="authority-noc-legend">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span>
+                            Authority
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="authority-noc-table-wrapper">
+
+                    <table
+                        class="authority-noc-table"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    STUDENT
+                                </th>
+
+                                <th>
+                                    REG. NO.
+                                </th>
+
+                                <th>
+                                    PURPOSE
+                                </th>
+
+                                <th>
+                                    ORGANIZATION
+                                </th>
+
+                                <th>
+                                    REQUEST DATE
+                                </th>
+
+                                <th>
+                                    TPO STATUS
+                                </th>
+
+                                <th>
+                                    AUTHORITY STATUS
+                                </th>
+
+                                <th>
+                                    FINAL STATUS
+                                </th>
+
+                                <th>
+                                    ACTION
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="authorityNocTableBody"
+                        >
+
+                            <!-- JS DATA -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="authority-noc-footer">
+
+                    <span id="authorityNocCount">
+                        Showing 0 requests
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     DETAILS MODAL
+====================================================== -->
+
+<div
+    id="authorityNocDetailsModal"
+    class="authority-noc-modal"
+    style="display:none;"
+>
+
+
+    <div class="authority-noc-modal-overlay"></div>
+
+
+    <div class="authority-noc-modal-card">
+
+
+        <div class="authority-noc-modal-header">
+
+            <div>
+
+                <span>
+                    NOC REQUEST
+                </span>
+
+                <h2>
+                    Request Details
+                </h2>
+
+            </div>
 
 
             <button
                 type="button"
-                id="exportNocReport"
-                class="export-btn"
+                id="closeAuthorityNocDetails"
             >
-                ↓ Export Report
+                ×
             </button>
 
         </div>
 
-    </div>
 
-
-    <!-- SCOPE -->
-
-    <div class="scope-card">
-
-        <div class="scope-icon">
-            ◉
+        <div
+            id="authorityNocDetailsBody"
+            class="authority-noc-details-body"
+        >
         </div>
 
 
-        <div class="scope-info">
+        <div class="authority-noc-modal-footer">
 
-            <span>
-                AUTHORITY DATA SCOPE
-            </span>
-
-            <strong>
-                College Authority
-            </strong>
-
-            <small>
-                NOC applications are restricted to your assigned college.
-            </small>
+            <button
+                type="button"
+                id="closeAuthorityNocDetailsBottom"
+            >
+                Close
+            </button>
 
         </div>
 
-
-        <div class="scope-code">
-            ● {{ session.get("college_code", "PCE") }}
-        </div>
-
-    </div>
-
-
-    <!-- SUMMARY -->
-
-    <div class="summary-grid">
-
-        <div class="summary-card">
-
-            <div class="summary-icon purple">
-                ▦
-            </div>
-
-            <div>
-
-                <span>
-                    Total Applications
-                </span>
-
-                <strong>
-                    186
-                </strong>
-
-                <small>
-                    NOC applications received
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-icon orange">
-                ◷
-            </div>
-
-            <div>
-
-                <span>
-                    Pending
-                </span>
-
-                <strong>
-                    24
-                </strong>
-
-                <small>
-                    Awaiting authority action
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-icon green">
-                ✓
-            </div>
-
-            <div>
-
-                <span>
-                    Approved
-                </span>
-
-                <strong>
-                    148
-                </strong>
-
-                <small>
-                    NOCs approved
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-icon red">
-                ×
-            </div>
-
-            <div>
-
-                <span>
-                    Rejected
-                </span>
-
-                <strong>
-                    14
-                </strong>
-
-                <small>
-                    Applications rejected
-                </small>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- APPLICATIONS -->
-
-    <section class="report-card noc-applications-card">
-
-        <div class="card-header">
-
-            <div>
-
-                <h2>
-                    NOC Applications
-                </h2>
-
-                <p>
-                    Review student applications and their current NOC status.
-                </p>
-
-            </div>
-
-
-            <div class="search-box">
-
-                <span>
-                    ⌕
-                </span>
-
-                <input
-                    type="text"
-                    id="nocSearch"
-                    placeholder="Search student or company..."
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="table-wrapper">
-
-            <table class="noc-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            STUDENT
-                        </th>
-
-                        <th>
-                            BRANCH
-                        </th>
-
-                        <th>
-                            ROLL NO.
-                        </th>
-
-                        <th>
-                            COMPANY
-                        </th>
-
-                        <th>
-                            TYPE
-                        </th>
-
-                        <th>
-                            APPLIED ON
-                        </th>
-
-                        <th>
-                            STATUS
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="nocTableBody">
-
-
-                    <tr
-                        data-status="pending"
-                        data-search="rahul sharma tcs"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Rahul Sharma
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE001
-                        </td>
-
-                        <td>
-                            TCS
-                        </td>
-
-                        <td>
-
-                            <span class="type-badge campus">
-                                On Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            20 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="approved"
-                        data-search="priya meena infosys"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Priya Meena
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            IT
-                        </td>
-
-                        <td>
-                            21PIT014
-                        </td>
-
-                        <td>
-                            Infosys
-                        </td>
-
-                        <td>
-
-                            <span class="type-badge campus">
-                                On Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            18 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge approved">
-                                Approved
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="pending"
-                        data-search="aman kumar wipro"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Aman Kumar
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            ECE
-                        </td>
-
-                        <td>
-                            21PEC027
-                        </td>
-
-                        <td>
-                            Wipro
-                        </td>
-
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            21 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="approved"
-                        data-search="neha joshi accenture"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Neha Joshi
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE042
-                        </td>
-
-                        <td>
-                            Accenture
-                        </td>
-
-                        <td>
-
-                            <span class="type-badge campus">
-                                On Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            16 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge approved">
-                                Approved
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="rejected"
-                        data-search="mohit singh capgemini"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Mohit Singh
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            ME
-                        </td>
-
-                        <td>
-                            21PME018
-                        </td>
-
-                        <td>
-                            Capgemini
-                        </td>
-
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            14 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge rejected">
-                                Rejected
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="pending"
-                        data-search="ankit gupta deloitte"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Ankit Gupta
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            EE
-                        </td>
-
-                        <td>
-                            21PEE031
-                        </td>
-
-                        <td>
-                            Deloitte
-                        </td>
-
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            22 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="approved"
-                        data-search="simran kaur amazon"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Simran Kaur
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE067
-                        </td>
-
-                        <td>
-                            Amazon
-                        </td>
-
-                        <td>
-
-                            <span class="type-badge offcampus">
-                                Off Campus
-                            </span>
-
-                        </td>
-
-                        <td>
-                            11 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge approved">
-                                Approved
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <div class="reports-footer">
-
-        <span>
-            Report generated for
-            <strong id="footerYear">
-                2026-27
-            </strong>
-        </span>
-
-        <span>
-            Campus Placement Portal
-        </span>
 
     </div>
 
 </div>
 
 
+<!-- =====================================================
+     REJECTION MODAL
+====================================================== -->
+
+<div
+    id="authorityNocRejectModal"
+    class="authority-noc-modal"
+    style="display:none;"
+>
+
+
+    <div class="authority-noc-modal-overlay"></div>
+
+
+    <div class="authority-noc-modal-card">
+
+
+        <div class="authority-noc-modal-header">
+
+            <div>
+
+                <span>
+                    AUTHORITY ACTION
+                </span>
+
+                <h2>
+                    Reject NOC Request
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeAuthorityNocReject"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="authority-noc-reject-body">
+
+            <label for="authorityNocRejectReason">
+                Rejection Reason
+            </label>
+
+
+            <textarea
+                id="authorityNocRejectReason"
+                rows="5"
+                placeholder="Enter reason for rejecting this NOC request..."
+            ></textarea>
+
+
+            <small>
+                This reason will be visible to the student and TPO.
+            </small>
+
+        </div>
+
+
+        <div class="authority-noc-modal-footer">
+
+
+            <button
+                type="button"
+                id="cancelAuthorityNocReject"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmAuthorityNocReject"
+            >
+                Reject NOC
+            </button>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     AUTHORITY NOC JS
+====================================================== -->
+
 <script
-    src="{{ url_for('static', filename='js/authority/noc.js') }}"
+    src="{{ url_for(
+        'static',
+        filename='js/authority/noc.js'
+    ) }}"
 ></script>
 
-{% endblock %}
+
+</body>
+
+</html>

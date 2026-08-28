@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Companies | TPO
+    </title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         COMPANIES CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/companies.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="companies-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="companies-page-header">
+
+                <div>
+
+                    <h1>
+                        Companies
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Companies
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="company-header-actions">
+
+    <!-- ADD COMPANY -->
+
+    <button
+        type="button"
+        class="add-company-btn"
+        id="addCompanyBtn"
+    >
+
+        <span>
+            +
+        </span>
+
+        Add Company
+
+    </button>
+
+
+    <!-- IMPORT EXCEL -->
+
+    <button
+        type="button"
+        class="import-excel-btn"
+        id="importCompanyExcelBtn"
+    >
+
+        <span>
+            ↑
+        </span>
+
+        Import Excel
+
+    </button>
+
+
+    <!-- HIDDEN FILE INPUT -->
+
+    <input
+        type="file"
+        id="companyExcelInput"
+        accept=".xlsx,.xls,.csv"
+        hidden
+    >
+
+</div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ERROR
+            ================================================== -->
+
+            {% if db_error %}
+
+                <div
+                    class="company-db-error"
+                    style="
+                        padding:12px 15px;
+                        margin-bottom:18px;
+                        border-radius:8px;
+                        background:#3a1720;
+                        color:#ffb4c0;
+                        font-size:12px;
+                    "
+                >
+                    {{ db_error }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <section class="company-stats">
+
+
+                <!-- TOTAL COMPANIES -->
+
+                <div class="company-stat-card">
+
+                    <div class="company-stat-icon purple">
+                        ◈
+                    </div>
+
+                    <div class="company-stat-content">
+
+                        <span>
+                            Total Companies
+                        </span>
+
+                        <strong id="totalCompanies">
+                            {{ total_companies|default(0) }}
+                        </strong>
+
+                        <small>
+                            Registered for this campus
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIVE COMPANIES -->
+
+                <div class="company-stat-card">
+
+                    <div class="company-stat-icon blue">
+                        ✓
+                    </div>
+
+                    <div class="company-stat-content">
+
+                        <span>
+                            Active Companies
+                        </span>
+
+                        <strong id="activeCompanies">
+                            {{ active_companies|default(0) }}
+                        </strong>
+
+                        <small>
+                            Currently active
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DRIVES -->
+
+                <div class="company-stat-card">
+
+                    <div class="company-stat-icon green">
+                        💼
+                    </div>
+
+                    <div class="company-stat-content">
+
+                        <span>
+                            Placement Drives
+                        </span>
+
+                        <strong id="placementDrives">
+                            {{ placement_drives|default(0) }}
+                        </strong>
+
+                        <small>
+                            Conducted for this campus
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OFFERS -->
+
+                <div class="company-stat-card">
+
+                    <div class="company-stat-icon orange">
+                        ★
+                    </div>
+
+                    <div class="company-stat-content">
+
+                        <span>
+                            Offers Generated
+                        </span>
+
+                        <strong id="offersGenerated">
+                            {{ offers_generated|default(0) }}
+                        </strong>
+
+                        <small>
+                            Placement offers
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="companies-table-card">
+
+
+                <!-- =================================================
+                     FILTER BAR
+                ================================================== -->
+
+                <div class="company-filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="company-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="companySearch"
+                            placeholder="Search company..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- INDUSTRY -->
+
+                    <div class="filter-control">
+
+                        <label>
+                            Industry
+                        </label>
+
+                        <select
+                            id="industryFilter"
+                        >
+
+                            <option value="all">
+                                All Industries
+                            </option>
+
+                            {% for item in industries %}
+
+                                <option
+                                    value="{{ item.industry }}"
+                                >
+                                    {{ item.industry }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="filter-control">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select
+                            id="statusFilter"
+                        >
+
+                            <option value="all">
+                                All Statuses
+                            </option>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="inactive">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="filter-control">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select
+                            id="collegeFilter"
+                        >
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- RESET -->
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        id="resetFilters"
+                    >
+
+                        ↻
+                        Reset
+
+                    </button>
+
+
+                    <!-- EXPORT -->
+
+                    <button
+                        type="button"
+                        class="export-btn"
+                        id="exportCompanies"
+                    >
+
+                        ↓
+                        Export
+
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="companies-table-wrapper">
+
+                    <table
+                        class="companies-table"
+                        id="companiesTable"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    COMPANY
+                                </th>
+
+                                <th>
+                                    INDUSTRY
+                                </th>
+
+                                <th>
+                                    LOCATION
+                                </th>
+
+                                <th>
+                                    COLLEGE
+                                </th>
+
+                                <th>
+                                    DRIVES
+                                </th>
+
+                                <th>
+                                    SELECTED
+                                </th>
+
+                                <th>
+                                    PACKAGE
+                                </th>
+
+                                <th>
+                                    STATUS
+                                </th>
+
+                                <th>
+                                    ACTION
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="companyTableBody">
+
+
+                            {% if companies %}
+
+
+                                {% for company in companies %}
+
+                                    <tr
+                                        class="company-row"
+
+                                        data-company="{{ company.company_name|default('')|lower }}"
+
+                                        data-industry="{{ company.industry|default('')|lower }}"
+
+                                        data-college="{{ company.colleges|default('')|lower }}"
+
+                                        data-status="{{ company.status|default('')|lower }}"
+
+                                        data-company-id="{{ company.company_id }}"
+                                    >
+
+
+                                        <!-- COMPANY -->
+
+                                        <td>
+
+                                            <div
+                                                class="company-info"
+                                            >
+
+                                                <div
+                                                    class="company-logo"
+                                                >
+                                                    {{ company.company_name[:1]|upper if company.company_name else 'C' }}
+                                                </div>
+
+                                                <div>
+
+                                                    <strong>
+                                                        {{ company.company_name }}
+                                                    </strong>
+
+                                                    <span>
+                                                        {{ company.company_code|default('—') }}
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <!-- INDUSTRY -->
+
+                                        <td>
+
+                                            {{ company.industry|default('—') }}
+
+                                        </td>
+
+
+                                        <!-- LOCATION -->
+
+                                        <td>
+
+                                            {{ company.location|default('—') }}
+
+                                        </td>
+
+
+                                        <!-- COLLEGE -->
+
+                                        <td>
+
+                                            <span class="campus-badge yes">
+
+                                                {{ company.colleges|default('—') }}
+
+                                            </span>
+
+                                        </td>
+
+
+                                        <!-- DRIVES -->
+
+                                        <td>
+
+                                            {{ company.drives|default(0) }}
+
+                                        </td>
+
+
+                                        <!-- SELECTED -->
+
+                                        <td>
+
+                                            {{ company.students_selected|default(0) }}
+
+                                        </td>
+
+
+                                        <!-- PACKAGE -->
+
+                                        <td>
+
+                                            {% if company.package_lpa %}
+
+                                                ₹{{ '%.2f'|format(company.package_lpa|float) }}
+                                                LPA
+
+                                            {% else %}
+
+                                                —
+
+                                            {% endif %}
+
+                                        </td>
+
+
+                                        <!-- STATUS -->
+
+                                        <td>
+
+                                            {% if company.status|upper == 'ACTIVE' %}
+
+                                                <span class="company-status active">
+                                                    Active
+                                                </span>
+
+                                            {% else %}
+
+                                                <span class="company-status inactive">
+                                                    Inactive
+                                                </span>
+
+                                            {% endif %}
+
+                                        </td>
+
+
+                                        <!-- ACTION -->
+
+                                        <td>
+
+                                            <div
+                                                class="company-actions"
+                                            >
+
+                                                <button
+                                                    type="button"
+                                                    class="company-action-btn view-company-btn"
+                                                    data-company-id="{{ company.company_id }}"
+                                                    title="View Company"
+                                                >
+                                                    View
+                                                </button>
+
+
+                                                <button
+                                                    type="button"
+                                                    class="company-action-btn toggle-company-btn"
+                                                    data-company-id="{{ company.company_id }}"
+                                                    title="Toggle Status"
+                                                >
+                                                    ⋮
+                                                </button>
+
+                                            </div>
+
+                                        </td>
+
+
+                                    </tr>
+
+                                {% endfor %}
+
+
+                            {% else %}
+
+
+                                <tr>
+
+                                    <td
+                                        colspan="9"
+                                        style="
+                                            text-align:center;
+                                            padding:35px;
+                                        "
+                                    >
+
+                                        <strong>
+                                            No companies found
+                                        </strong>
+
+                                        <br>
+
+                                        <span
+                                            style="
+                                                display:block;
+                                                margin-top:6px;
+                                                opacity:.65;
+                                            "
+                                        >
+                                            Companies connected with this campus
+                                            will appear here.
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                            {% endif %}
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="companies-table-footer">
+
+                    <span id="companyCount">
+
+                        Showing
+                        {{ companies|length }}
+                        companies
+
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            class="pagination-btn disabled"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="pagination-btn active"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            type="button"
+                            class="pagination-btn disabled"
+                            disabled
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     ADD COMPANY MODAL
+====================================================== -->
+
+<div
+    id="companyModal"
+    class="company-modal"
+    style="display:none;"
+>
+
+    <div class="company-modal-overlay"></div>
+
+
+    <div
+        class="company-modal-card"
+        role="dialog"
+        aria-modal="true"
+    >
+
+        <div class="company-modal-header">
+
+            <div>
+
+                <span>
+                    COMPANY MANAGEMENT
+                </span>
+
+                <h2>
+                    Add Company
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeCompanyModal"
+                class="company-modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="addCompanyForm"
+        >
+
+            <div class="company-form-grid">
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Company Code *
+                    </label>
+
+                    <input
+                        type="text"
+                        name="company_code"
+                        required
+                        placeholder="e.g. TCS"
+                    >
+
+                </div>
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Company Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        name="company_name"
+                        required
+                        placeholder="Company name"
+                    >
+
+                </div>
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Industry
+                    </label>
+
+                    <input
+                        type="text"
+                        name="industry"
+                        placeholder="IT Services"
+                    >
+
+                </div>
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="Jaipur"
+                    >
+
+                </div>
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Website
+                    </label>
+
+                    <input
+                        type="text"
+                        name="website"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Contact Person
+                    </label>
+
+                    <input
+                        type="text"
+                        name="contact_person"
+                        placeholder="Contact person"
+                    >
+
+                </div>
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Contact Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="contact_email"
+                        placeholder="hr@company.com"
+                    >
+
+                </div>
+
+
+                <div class="company-form-group">
+
+                    <label>
+                        Contact Phone
+                    </label>
+
+                    <input
+                        type="text"
+                        name="contact_phone"
+                        placeholder="Phone number"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                id="companyFormMessage"
+                style="
+                    display:none;
+                    margin-top:12px;
+                    font-size:12px;
+                "
+            ></div>
+
+
+            <div class="company-modal-footer">
+
+                <button
+                    type="button"
+                    id="cancelCompanyBtn"
+                    class="filter-btn"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="add-company-btn"
+                >
+                    Add Company
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+<!-- =====================================================
+     COMPANIES JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/companies.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b1224"
+    >
+
+    <title>
+        Discussion | Campus Placement Portal
+    </title>
+
+
+    <!-- =====================================================
+         STUDENT COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         BLOG CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/blog.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <!-- =================================================
+             BLOG DETAIL
+        ================================================== -->
+
+        <div class="community-detail-page">
+
+
+            <!-- =================================================
+                 BACK TO BLOG
+            ================================================== -->
+
+            <a
+                href="{{ url_for('student_blog') }}"
+                class="community-back"
+            >
+                ← Back to Community
+            </a>
+
+
+            <!-- =================================================
+                 MAIN POST
+            ================================================== -->
+
+            <article class="community-detail-card">
+
+
+                <!-- =================================================
+                     AUTHOR HEADER
+                ================================================== -->
+
+                <div class="community-post-top">
+
+
+                    <!-- AVATAR -->
+
+                    <div class="community-avatar">
+
+                        {{ post.author_name[:1]|upper }}
+
+                    </div>
+
+
+                    <!-- AUTHOR -->
+
+                    <div class="community-author">
+
+                        <strong>
+
+                            {{ post.author_name }}
+
+                        </strong>
+
+
+                        <span>
+
+                            {{
+                                post.created_at.strftime(
+                                    '%d %b %Y, %I:%M %p'
+                                )
+                                if post.created_at
+                                else ''
+                            }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         POST TYPE
+                    ================================================== -->
+
+                    <span
+                        class="
+                            community-type
+                            {{ post.post_type|lower }}
+                        "
+                    >
+
+                        {% if post.post_type == 'QUESTION' %}
+
+                            Question
+
+                        {% elif post.post_type == 'DISCUSSION' %}
+
+                            Discussion
+
+                        {% else %}
+
+                            Information
+
+                        {% endif %}
+
+                    </span>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     TITLE
+                ================================================== -->
+
+                <h1>
+
+                    {{ post.title }}
+
+                </h1>
+
+
+                <!-- =================================================
+                     CONTENT
+                ================================================== -->
+
+                <div class="community-detail-content">
+
+                    {{ post.content|e
+                        |replace('\n', '<br>')
+                        |safe
+                    }}
+
+                </div>
+
+
+                <!-- =================================================
+                     TAGS
+                ================================================== -->
+
+                {% if post.tags %}
+
+                    <div class="community-tags">
+
+
+                        {% for tag in post.tags.split(',') %}
+
+
+                            {% if tag.strip() %}
+
+                                <span>
+
+                                    #{{ tag.strip()
+                                        .lstrip('#') }}
+
+                                </span>
+
+                            {% endif %}
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     BOTTOM META / ACTION BAR
+                ================================================== -->
+
+                <div class="community-detail-meta">
+
+
+                    <!-- =================================================
+                         OWNER ACTIONS — BOTTOM LEFT
+                    ================================================== -->
+
+                    {% if
+                        post.user_id|string ==
+                        session.get('user_id')|string
+                    %}
+
+                        <div class="community-owner-actions">
+
+
+                            <!-- EDIT -->
+
+                            <button
+                                type="button"
+                                class="community-edit-btn"
+                                data-open-edit
+                            >
+
+                                ✎ Edit
+
+                            </button>
+
+
+                            <!-- DELETE -->
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'student_blog_delete',
+                                    post_id=post.post_id
+                                ) }}"
+                                class="community-delete-form"
+                                data-delete-post
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="community-delete-btn"
+                                >
+
+                                    🗑 Delete
+
+                                </button>
+
+                            </form>
+
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- =================================================
+                         LIKE
+                    ================================================== -->
+
+                    <button
+                        type="button"
+                        class="community-like-btn"
+                        data-like-post="{{ post.post_id }}"
+                    >
+
+                        ♥
+
+
+                        <span
+                            data-like-count="{{ post.post_id }}"
+                        >
+
+                            {{ post.like_count }}
+
+                        </span>
+
+
+                        Likes
+
+                    </button>
+
+
+                    <!-- =================================================
+                         ANSWERS
+                    ================================================== -->
+
+                    <span>
+
+                        💬
+
+                        {{ comments|length }}
+
+                        Answers
+
+                    </span>
+
+
+                    <!-- =================================================
+                         STATUS
+                    ================================================== -->
+
+                    {% if
+                        post.user_id|string ==
+                        session.get('user_id')|string
+                        and
+                        post.status != 'APPROVED'
+                    %}
+
+                        <span
+                            class="
+                                community-review-status
+                                {{ post.status|lower }}
+                            "
+                        >
+
+                            {{ post.status|title }}
+
+
+                            {% if post.rejection_reason %}
+
+                                ·
+
+                                {{ post.rejection_reason }}
+
+                            {% endif %}
+
+                        </span>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </article>
+
+
+            <!-- =================================================
+                 ANSWERS / COMMENTS
+            ================================================== -->
+
+            {% if post.status == 'APPROVED' %}
+
+
+                <section class="community-comments">
+
+
+                    <!-- =================================================
+                         SECTION HEADER
+                    ================================================== -->
+
+                    <div class="community-section-heading">
+
+
+                        <span>
+                            COMMUNITY
+                        </span>
+
+
+                        <h2>
+                            Answers & Replies
+                        </h2>
+
+
+                    </div>
+
+
+                    <!-- =================================================
+                         COMMENTS
+                    ================================================== -->
+
+                    {% for comment in comments %}
+
+
+                        <div class="community-comment">
+
+
+                            <!-- COMMENT AVATAR -->
+
+                            <div class="community-avatar small">
+
+                                {{ comment.author_name[:1]|upper }}
+
+                            </div>
+
+
+                            <!-- COMMENT BODY -->
+
+                            <div>
+
+
+                                <div class="community-comment-head">
+
+
+                                    <strong>
+
+                                        {{ comment.author_name }}
+
+                                    </strong>
+
+
+                                    <span>
+
+                                        {{
+                                            comment.created_at.strftime(
+                                                '%d %b %Y, %I:%M %p'
+                                            )
+                                            if comment.created_at
+                                            else ''
+                                        }}
+
+                                    </span>
+
+
+                                </div>
+
+
+                                <p>
+
+                                    {{ comment.content }}
+
+                                </p>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    {% else %}
+
+
+                        <!-- NO COMMENTS -->
+
+                        <div class="community-no-comments">
+
+                            No answers yet.
+
+                            Be the first student to
+                            help with this question.
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                    <!-- =================================================
+                         REPLY FORM
+                    ================================================== -->
+
+                    <form
+                        method="POST"
+                        action="{{ url_for(
+                            'student_blog_comment',
+                            post_id=post.post_id
+                        ) }}"
+                        class="community-reply-form"
+                    >
+
+
+                        <textarea
+                            name="content"
+                            rows="5"
+                            maxlength="3000"
+                            required
+                            placeholder="Write a helpful answer..."
+                        ></textarea>
+
+
+                        <button
+                            type="submit"
+                            class="community-primary-btn"
+                        >
+
+                            Post Answer
+
+                        </button>
+
+
+                    </form>
+
+
+                </section>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     EDIT POST MODAL
+========================================================= -->
+
+{% if
+    post.user_id|string ==
+    session.get('user_id')|string
+%}
+
+
+<div
+    class="community-modal"
+    data-edit-modal
+>
+
+
+    <!-- BACKDROP -->
+
+    <div
+        class="community-modal-backdrop"
+        data-close-edit
+    ></div>
+
+
+    <!-- MODAL CARD -->
+
+    <div class="community-modal-card">
+
+
+        <!-- =================================================
+             MODAL HEADER
+        ================================================== -->
+
+        <div class="community-modal-header">
+
+
+            <div>
+
+                <span>
+                    EDIT POST
+                </span>
+
+
+                <h2>
+                    Update your post
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                data-close-edit
+                aria-label="Close edit window"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+        <!-- =================================================
+             EDIT FORM
+        ================================================== -->
+
+        <form
+            method="POST"
+            action="{{ url_for(
+                'student_blog_edit',
+                post_id=post.post_id
+            ) }}"
+            class="community-form"
+            data-edit-form
+        >
+
+
+            <!-- POST TYPE -->
+
+            <label>
+
+                Post Type
+
+
+                <select
+                    name="post_type"
+                    required
+                >
+
+
+                    <option
+                        value="QUESTION"
+                        {% if
+                            post.post_type ==
+                            'QUESTION'
+                        %}
+                            selected
+                        {% endif %}
+                    >
+
+                        Question
+
+                    </option>
+
+
+                    <option
+                        value="DISCUSSION"
+                        {% if
+                            post.post_type ==
+                            'DISCUSSION'
+                        %}
+                            selected
+                        {% endif %}
+                    >
+
+                        Discussion
+
+                    </option>
+
+
+                    <option
+                        value="INFORMATION"
+                        {% if
+                            post.post_type ==
+                            'INFORMATION'
+                        %}
+                            selected
+                        {% endif %}
+                    >
+
+                        Information / Share
+
+                    </option>
+
+
+                </select>
+
+            </label>
+
+
+            <!-- TITLE -->
+
+            <label>
+
+                Title
+
+
+                <input
+                    type="text"
+                    name="title"
+                    maxlength="220"
+                    required
+                    value="{{ post.title }}"
+                >
+
+            </label>
+
+
+            <!-- MESSAGE -->
+
+            <label>
+
+                Your Message
+
+
+                <textarea
+                    name="content"
+                    rows="7"
+                    maxlength="5000"
+                    required
+                >{{ post.content }}</textarea>
+
+            </label>
+
+
+            <!-- TAGS -->
+
+            <label>
+
+                Tags
+
+
+                <small>
+                    Separate tags with commas
+                </small>
+
+
+                <input
+                    type="text"
+                    name="tags"
+                    maxlength="500"
+                    value="{{ post.tags or '' }}"
+                >
+
+            </label>
+
+
+            <!-- =================================================
+                 ADMIN REVIEW NOTICE
+            ================================================== -->
+
+            <div class="community-form-note">
+
+                Saving changes will send this post back to
+
+                <strong>
+                    Pending
+                </strong>
+
+                status for Admin review.
+
+            </div>
+
+
+            <!-- =================================================
+                 FORM ACTIONS
+            ================================================== -->
+
+            <div class="community-form-actions">
+
+
+                <button
+                    type="button"
+                    class="community-secondary-btn"
+                    data-close-edit
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="community-primary-btn"
+                >
+
+                    Save Changes
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+{% endif %}
+
+
+<!-- =========================================================
+     STUDENT COMMON JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}"
+></script>
+
+
+<!-- =========================================================
+     BLOG DETAIL JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/blog_detail.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

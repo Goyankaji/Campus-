@@ -1,0 +1,350 @@
+<!-- =========================================================
+     CAMPUS PLACEMENT PORTAL
+     TPO TOPBAR
+========================================================= -->
+
+<header class="top-header">
+
+
+    <!-- =====================================================
+         MOBILE MENU
+    ====================================================== -->
+
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open menu"
+    >
+        ☰
+    </button>
+
+
+
+   <!-- =====================================================
+     GLOBAL SEARCH
+====================================================== -->
+
+<div
+    class="search-wrapper"
+    id="searchWrapper"
+>
+
+
+    <div class="search-box">
+
+        <span class="search-icon">
+            ⌕
+        </span>
+
+        <input
+            type="text"
+            id="tpoSearch"
+            placeholder="Search students, companies, drives..."
+            autocomplete="off"
+            aria-label="Global search"
+        >
+
+        <span
+            class="search-shortcut"
+            id="searchShortcut"
+        >
+            Ctrl + K
+        </span>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SEARCH RESULTS
+    ================================================== -->
+
+    <div
+        class="search-results"
+        id="searchResults"
+    >
+
+        <div
+            class="search-results-header"
+            id="searchResultsHeader"
+        >
+            Quick Navigation
+        </div>
+
+
+        <div
+            class="search-results-list"
+            id="searchResultsList"
+        ></div>
+
+
+        <div
+            class="search-no-results"
+            id="searchNoResults"
+        >
+
+            <span>
+                ⌕
+            </span>
+
+            <strong>
+                No results found
+            </strong>
+
+            <small>
+                Try another search term
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    <!-- =====================================================
+         HEADER RIGHT
+    ====================================================== -->
+
+    <div class="header-right">
+
+
+        <!-- =================================================
+             THEME TOGGLE
+        ================================================== -->
+
+        <button
+            class="header-icon"
+            id="topThemeToggle"
+            type="button"
+            title="Toggle theme"
+            aria-label="Toggle theme"
+        >
+            ☼
+        </button>
+
+
+
+        <!-- =================================================
+             NOTIFICATIONS
+        ================================================== -->
+
+        <a
+            href="{{ url_for('tpo_notifications') }}"
+            class="header-icon notification-button"
+            title="Notifications"
+            aria-label="Notifications"
+        >
+
+            ♢
+
+            <span class="notification-dot">
+                8
+            </span>
+
+        </a>
+
+
+
+        <!-- =================================================
+             TPO PROFILE WRAPPER
+        ================================================== -->
+
+        <div
+            class="user-profile-wrapper"
+            id="userProfileWrapper"
+        >
+
+
+            <!-- =================================================
+                 PROFILE BUTTON
+            ================================================== -->
+
+            <button
+                class="user-profile"
+                id="userProfileButton"
+                type="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+            >
+
+                <div class="user-avatar">
+                    T
+                </div>
+
+
+                <div class="user-info">
+
+                    <strong>
+                        TPO / Placement Cell
+                    </strong>
+
+                    <span>
+                        Training & Placement Officer
+                    </span>
+
+                </div>
+
+
+                <span
+                    class="profile-arrow"
+                    id="profileArrow"
+                >
+                    ▾
+                </span>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 PROFILE DROPDOWN
+            ================================================== -->
+
+            <div
+                class="profile-dropdown"
+                id="profileDropdown"
+                aria-hidden="true"
+            >
+
+
+                <!-- =================================================
+                     PROFILE HEADER
+                ================================================== -->
+
+                <div class="profile-dropdown-header">
+
+                    <div class="profile-dropdown-avatar">
+                        T
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            TPO / Placement Cell
+                        </strong>
+
+                        <span>
+                            Training & Placement Officer
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     DIVIDER
+                ================================================== -->
+
+                <div class="profile-dropdown-divider"></div>
+
+
+
+                <!-- =================================================
+                     PROFILE & ACCOUNT
+                ================================================== -->
+
+                <a
+                    href="{{ url_for('tpo_settings') }}"
+                    class="profile-dropdown-item"
+                >
+
+                    <span class="dropdown-item-icon">
+                        ◉
+                    </span>
+
+                    <span>
+                        Profile & Account
+                    </span>
+
+                </a>
+
+
+
+                <!-- =================================================
+                     SETTINGS
+                ================================================== -->
+
+                <a
+                    href="{{ url_for('tpo_settings') }}"
+                    class="profile-dropdown-item"
+                >
+
+                    <span class="dropdown-item-icon">
+                        ⚙
+                    </span>
+
+                    <span>
+                        Settings
+                    </span>
+
+                </a>
+
+
+
+                <!-- =================================================
+                     NOTIFICATIONS
+                ================================================== -->
+
+                <a
+                    href="{{ url_for('tpo_notifications') }}"
+                    class="profile-dropdown-item"
+                >
+
+                    <span class="dropdown-item-icon">
+                        ♢
+                    </span>
+
+                    <span>
+                        Notifications
+                    </span>
+
+                    <span class="dropdown-count">
+                        8
+                    </span>
+
+                </a>
+
+
+
+                <!-- =================================================
+                     DIVIDER
+                ================================================== -->
+
+                <div class="profile-dropdown-divider"></div>
+
+
+
+                <!-- =================================================
+                     LOGOUT
+                ================================================== -->
+
+                <a
+                    href="{{ url_for('logout') }}"
+                    class="profile-dropdown-item logout"
+                >
+
+                    <span class="dropdown-item-icon">
+                        →|
+                    </span>
+
+                    <span>
+                        Logout
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</header>

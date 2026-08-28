@@ -1,0 +1,2221 @@
+/* =========================================================
+   CAMPUS — STUDENT COMMUNITY / BLOG
+   Student Community / Blog Page
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.community-page,
+.community-detail-page {
+
+    width: 100%;
+    max-width: 1240px;
+
+    margin: 0 auto;
+
+    padding:
+        30px
+        32px
+        50px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.community-header {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 22px;
+}
+
+
+.community-eyebrow,
+.community-section-heading span {
+
+    color:
+        var(--student-primary);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    text-transform: uppercase;
+}
+
+
+.community-header h1 {
+
+    margin:
+        7px
+        0
+        6px;
+
+    color:
+        var(--student-text);
+
+    font-size: 29px;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+}
+
+
+.community-header p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.community-primary-btn,
+.community-secondary-btn {
+
+    min-height: 40px;
+
+    padding:
+        0
+        16px;
+
+    border-radius: 8px;
+
+    font: inherit;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease,
+        border-color .18s ease;
+}
+
+
+.community-primary-btn {
+
+    border: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7138ef,
+            #6938ef
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 7px 18px
+        rgba(
+            105,
+            56,
+            239,
+            .20
+        );
+}
+
+
+.community-primary-btn:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 10px 24px
+        rgba(
+            105,
+            56,
+            239,
+            .28
+        );
+}
+
+
+.community-primary-btn:active {
+
+    transform:
+        translateY(0);
+}
+
+
+.community-secondary-btn {
+
+    border:
+        1px solid
+        var(--student-border);
+
+    background:
+        var(--student-surface);
+
+    color:
+        var(--student-text);
+}
+
+
+.community-secondary-btn:hover {
+
+    border-color:
+        var(--student-primary);
+
+    color:
+        var(--student-primary);
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.community-toolbar {
+
+    width: 100%;
+
+    min-height: 60px;
+
+    padding: 10px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-sizing: border-box;
+
+    background:
+        var(--student-surface);
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 10px;
+
+    box-shadow:
+        var(--student-shadow);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.community-search {
+
+    flex: 1;
+
+    min-width: 220px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        0
+        12px;
+
+    box-sizing: border-box;
+
+    background:
+        var(--student-surface-soft);
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 8px;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.community-search:focus-within {
+
+    border-color:
+        var(--student-primary);
+
+    box-shadow:
+        0 0 0 3px
+        var(--student-primary-soft);
+}
+
+
+.community-search span {
+
+    flex:
+        0 0 auto;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 15px;
+}
+
+
+.community-search input {
+
+    width: 100%;
+
+    min-width: 0;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color:
+        var(--student-text);
+
+    font: inherit;
+
+    font-size: 11px;
+}
+
+
+.community-search input::placeholder {
+
+    color:
+        var(--student-text-muted);
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.community-filters {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+}
+
+
+.community-filters a {
+
+    padding:
+        9px
+        12px;
+
+    border-radius: 7px;
+
+    color:
+        var(--student-text-soft);
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    transition:
+        background .18s ease,
+        color .18s ease;
+}
+
+
+.community-filters a:hover,
+.community-filters a.active {
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.community-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        275px;
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+.community-feed {
+
+    min-width: 0;
+}
+
+
+.community-side {
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   COMMON CARDS
+========================================================= */
+
+.community-post,
+.community-info-card,
+.community-empty,
+.community-detail-card,
+.community-comments {
+
+    background:
+        var(--student-surface);
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 11px;
+
+    box-shadow:
+        var(--student-shadow);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   POST CARD
+========================================================= */
+
+.community-post {
+
+    padding: 17px;
+
+    margin-bottom: 12px;
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.community-post:hover {
+
+    transform:
+        translateY(-1px);
+
+    border-color:
+        rgba(
+            113,
+            56,
+            239,
+            .28
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            15,
+            23,
+            42,
+            .08
+        );
+}
+
+
+/* =========================================================
+   AUTHOR
+========================================================= */
+
+.community-post-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.community-avatar {
+
+    width: 37px;
+
+    height: 37px;
+
+    flex:
+        0 0 37px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7138ef,
+            #5222c8
+        );
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    user-select: none;
+}
+
+
+.community-avatar.small {
+
+    width: 31px;
+
+    height: 31px;
+
+    flex-basis: 31px;
+
+    font-size: 11px;
+}
+
+
+.community-author {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.community-author strong {
+
+    color:
+        var(--student-text);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.community-author span {
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   POST TYPE
+========================================================= */
+
+.community-type {
+
+    margin-left: auto;
+
+    padding:
+        5px
+        8px;
+
+    border-radius: 20px;
+
+    white-space: nowrap;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: .4px;
+}
+
+
+.community-type.question {
+
+    background:
+        rgba(
+            105,
+            56,
+            239,
+            .11
+        );
+
+    color:
+        var(--student-primary);
+}
+
+
+.community-type.discussion {
+
+    background:
+        rgba(
+            34,
+            201,
+            130,
+            .11
+        );
+
+    color:
+        var(--student-success);
+}
+
+
+.community-type.information {
+
+    background:
+        rgba(
+            245,
+            165,
+            36,
+            .12
+        );
+
+    color:
+        var(--student-warning);
+}
+
+
+/* =========================================================
+   POST LINK
+========================================================= */
+
+.community-post-link {
+
+    display: block;
+
+    color: inherit;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   POST CONTENT
+========================================================= */
+
+.community-post h2 {
+
+    margin:
+        14px
+        0
+        6px;
+
+    color:
+        var(--student-text);
+
+    font-size: 15px;
+
+    line-height: 1.4;
+
+    font-weight: 800;
+}
+
+
+.community-post p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.community-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 12px;
+}
+
+
+.community-tags span {
+
+    padding:
+        5px
+        7px;
+
+    border-radius: 5px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   POST FOOTER
+========================================================= */
+
+.community-post-footer {
+
+    margin-top: 15px;
+
+    padding-top: 11px;
+
+    border-top:
+        1px solid
+        var(--student-border);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+.community-post-footer a {
+
+    margin-left: auto;
+
+    color:
+        var(--student-primary);
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.community-post-footer a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   LIKE
+========================================================= */
+
+.community-like-btn {
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+        var(--student-text-muted);
+
+    cursor: pointer;
+
+    font: inherit;
+
+    font-size: 8px;
+
+    transition:
+        color .18s ease,
+        transform .18s ease;
+}
+
+
+.community-like-btn:hover {
+
+    color:
+        var(--student-primary);
+
+}
+
+
+.community-like-btn:active {
+
+    transform:
+        scale(.94);
+}
+
+
+.community-like-btn.liked {
+
+    color:
+        var(--student-danger);
+}
+
+
+/* =========================================================
+   REVIEW STATUS
+========================================================= */
+
+.community-review-status {
+
+    margin-top: 11px;
+
+    padding:
+        7px
+        9px;
+
+    border-radius: 6px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+}
+
+
+.community-review-status.pending {
+
+    background:
+        rgba(
+            245,
+            165,
+            36,
+            .11
+        );
+
+    color:
+        var(--student-warning);
+}
+
+
+.community-review-status.rejected {
+
+    background:
+        rgba(
+            242,
+            85,
+            120,
+            .11
+        );
+
+    color:
+        var(--student-danger);
+}
+
+
+.community-review-status.approved {
+
+    background:
+        rgba(
+            34,
+            201,
+            130,
+            .11
+        );
+
+    color:
+        var(--student-success);
+}
+
+
+/* =========================================================
+   SIDE INFORMATION CARDS
+========================================================= */
+
+.community-info-card {
+
+    padding: 17px;
+
+    margin-bottom: 12px;
+}
+
+
+.community-info-card:last-child {
+
+    margin-bottom: 0;
+}
+
+
+.community-info-icon {
+
+    width: 31px;
+
+    height: 31px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.community-info-card h3 {
+
+    margin:
+        12px
+        0
+        10px;
+
+    color:
+        var(--student-text);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.community-info-card ul {
+
+    margin: 0;
+
+    padding-left: 16px;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 9px;
+
+    line-height: 1.8;
+}
+
+
+.community-info-card li {
+
+    margin-bottom: 2px;
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.community-step {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin-top: 13px;
+}
+
+
+.community-step > span {
+
+    min-width: 18px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.community-step strong,
+.community-step small {
+
+    display: block;
+}
+
+
+.community-step strong {
+
+    color:
+        var(--student-text);
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+
+.community-step small {
+
+    margin-top: 3px;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.community-empty {
+
+    padding:
+        55px
+        25px;
+
+    text-align: center;
+}
+
+
+.community-empty-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 20px;
+}
+
+
+.community-empty h2 {
+
+    margin:
+        14px
+        0
+        6px;
+
+    color:
+        var(--student-text);
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+.community-empty p {
+
+    margin:
+        0
+        auto
+        18px;
+
+    max-width: 400px;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FLASH / ALERTS
+========================================================= */
+
+.community-alerts {
+
+    margin-bottom: 12px;
+}
+
+
+.community-alert {
+
+    padding:
+        10px
+        12px;
+
+    margin-bottom: 7px;
+
+    border-radius: 7px;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+.community-alert:last-child {
+
+    margin-bottom: 0;
+}
+
+
+.community-alert.success {
+
+    background:
+        rgba(
+            34,
+            201,
+            130,
+            .10
+        );
+
+    color:
+        var(--student-success);
+}
+
+
+.community-alert.error {
+
+    background:
+        rgba(
+            242,
+            85,
+            120,
+            .10
+        );
+
+    color:
+        var(--student-danger);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.community-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    z-index: 5000;
+}
+
+
+.community-modal.open {
+
+    display: flex;
+}
+
+
+.community-modal-backdrop {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(
+            2,
+            6,
+            23,
+            .68
+        );
+
+    backdrop-filter:
+        blur(4px);
+}
+
+
+.community-modal-card {
+
+    width:
+        min(
+            620px,
+            100%
+        );
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    position: relative;
+
+    z-index: 1;
+
+    background:
+        var(--student-surface);
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(
+            0,
+            0,
+            0,
+            .28
+        );
+
+    animation:
+        communityModalIn
+        .18s
+        ease;
+}
+
+
+@keyframes communityModalIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.community-modal-header {
+
+    padding:
+        17px
+        18px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom:
+        1px solid
+        var(--student-border);
+}
+
+
+.community-modal-header span {
+
+    color:
+        var(--student-primary);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+.community-modal-header h2 {
+
+    margin:
+        5px
+        0
+        0;
+
+    color:
+        var(--student-text);
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+.community-modal-header button {
+
+    width: 28px;
+
+    height: 28px;
+
+    flex:
+        0 0 28px;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text-soft);
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    transition:
+        background .18s ease,
+        color .18s ease;
+}
+
+
+.community-modal-header button:hover {
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.community-form {
+
+    padding: 18px;
+}
+
+
+.community-form label {
+
+    display: block;
+
+    margin-bottom: 14px;
+
+    color:
+        var(--student-text);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.community-form label small {
+
+    margin-left: 5px;
+
+    color:
+        var(--student-text-muted);
+
+    font-weight: 400;
+}
+
+
+.community-form input,
+.community-form textarea,
+.community-form select,
+.community-reply-form textarea {
+
+    width: 100%;
+
+    margin-top: 7px;
+
+    padding:
+        10px
+        11px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 7px;
+
+    outline: 0;
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text);
+
+    font: inherit;
+
+    font-size: 10px;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.community-form input::placeholder,
+.community-form textarea::placeholder,
+.community-reply-form textarea::placeholder {
+
+    color:
+        var(--student-text-muted);
+}
+
+
+.community-form textarea,
+.community-reply-form textarea {
+
+    resize: vertical;
+
+    min-height: 100px;
+
+    line-height: 1.6;
+}
+
+
+.community-form select {
+
+    cursor: pointer;
+}
+
+
+.community-form input:focus,
+.community-form textarea:focus,
+.community-form select:focus,
+.community-reply-form textarea:focus {
+
+    border-color:
+        var(--student-primary);
+
+    box-shadow:
+        0 0 0 3px
+        var(--student-primary-soft);
+}
+
+
+.community-form-note {
+
+    padding: 10px;
+
+    margin-bottom: 14px;
+
+    border-radius: 7px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 8px;
+
+    line-height: 1.6;
+}
+
+
+.community-form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding-top: 3px;
+}
+
+
+/* =========================================================
+   DETAIL PAGE
+========================================================= */
+
+.community-back {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-bottom: 14px;
+
+    color:
+        var(--student-primary);
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.community-back:hover {
+
+    text-decoration: underline;
+}
+
+
+.community-detail-card {
+
+    padding: 22px;
+}
+
+
+.community-detail-card h1 {
+
+    margin:
+        20px
+        0
+        14px;
+
+    color:
+        var(--student-text);
+
+    font-size: 24px;
+
+    line-height: 1.35;
+
+    font-weight: 800;
+}
+
+
+.community-detail-content {
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+.community-detail-meta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    align-items: center;
+
+    margin-top: 18px;
+
+    padding-top: 13px;
+
+    border-top:
+        1px solid
+        var(--student-border);
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+.community-comments {
+
+    margin-top: 15px;
+
+    padding: 20px;
+}
+
+
+.community-section-heading h2 {
+
+    margin:
+        5px
+        0
+        0;
+
+    color:
+        var(--student-text);
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+.community-comment {
+
+    display: flex;
+
+    gap: 10px;
+
+    padding:
+        15px
+        0;
+
+    border-bottom:
+        1px solid
+        var(--student-border);
+}
+
+
+.community-comment:last-of-type {
+
+    border-bottom: 0;
+}
+
+
+.community-comment-head {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+
+.community-comment-head strong {
+
+    color:
+        var(--student-text);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.community-comment-head span {
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+.community-comment p {
+
+    margin:
+        6px
+        0
+        0;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 9px;
+
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+.community-no-comments {
+
+    padding:
+        22px
+        0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 9px;
+}
+
+
+.community-reply-form {
+
+    margin-top: 17px;
+}
+
+
+.community-reply-form button {
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   DARK MODE SUPPORT
+========================================================= */
+
+body.dark-mode .community-post:hover {
+
+    box-shadow:
+        0 12px 32px
+        rgba(
+            0,
+            0,
+            0,
+            .24
+        );
+}
+
+
+body.dark-mode .community-modal-backdrop {
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .76
+        );
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .community-page,
+    .community-detail-page {
+
+        padding:
+            26px
+            24px
+            45px;
+
+    }
+
+    .community-layout {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            240px;
+
+        gap: 15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET / SMALL SCREEN
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .community-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .community-side {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+        gap: 12px;
+
+    }
+
+    .community-info-card {
+
+        margin-bottom: 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .community-page,
+    .community-detail-page {
+
+        padding:
+            20px
+            15px
+            35px;
+
+    }
+
+    .community-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+    .community-header h1 {
+
+        font-size: 24px;
+
+    }
+
+    .community-header p {
+
+        font-size: 10px;
+
+    }
+
+    .community-header .community-primary-btn {
+
+        width: 100%;
+
+    }
+
+    .community-toolbar {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+    .community-search {
+
+        min-width: 0;
+
+        width: 100%;
+
+    }
+
+    .community-filters {
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        padding-bottom: 2px;
+
+    }
+
+    .community-filters a {
+
+        flex-shrink: 0;
+
+    }
+
+    .community-side {
+
+        display: block;
+
+    }
+
+    .community-info-card {
+
+        margin-bottom: 12px;
+
+    }
+
+    .community-post {
+
+        padding: 14px;
+
+    }
+
+    .community-post h2 {
+
+        font-size: 14px;
+
+    }
+
+    .community-detail-card {
+
+        padding: 17px;
+
+    }
+
+    .community-detail-card h1 {
+
+        font-size: 20px;
+
+    }
+
+    .community-comments {
+
+        padding: 16px;
+
+    }
+
+    .community-form-actions {
+
+        flex-direction: column-reverse;
+
+    }
+
+    .community-form-actions button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .community-page,
+    .community-detail-page {
+
+        padding:
+            16px
+            12px
+            30px;
+
+    }
+
+    .community-header h1 {
+
+        font-size: 21px;
+
+    }
+
+    .community-post-top {
+
+        align-items: flex-start;
+
+    }
+
+    .community-type {
+
+        font-size: 6px;
+
+        padding:
+            4px
+            6px;
+
+    }
+
+    .community-post-footer {
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+
+    }
+
+    .community-post-footer a {
+
+        margin-left: 0;
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.community-primary-btn:focus-visible,
+.community-secondary-btn:focus-visible,
+.community-like-btn:focus-visible,
+.community-filters a:focus-visible,
+.community-back:focus-visible,
+.community-modal-header button:focus-visible {
+
+    outline:
+        2px solid
+        var(--student-primary);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .community-post,
+    .community-primary-btn,
+    .community-like-btn,
+    .community-modal-card {
+
+        transition: none;
+
+        animation: none;
+
+    }
+
+}
+/* =========================================================
+   OWNER ACTIONS — BOTTOM LEFT
+========================================================= */
+
+.community-owner-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-left: 0;
+
+    order: -1;
+}
+
+
+.community-edit-btn,
+.community-delete-btn {
+
+    min-height: 27px;
+
+    padding:
+        0 10px;
+
+    border-radius: 6px;
+
+    font: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        .18s ease;
+}
+
+
+.community-edit-btn {
+
+    border:
+        1px solid
+        var(--student-border);
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text-soft);
+}
+
+
+.community-edit-btn:hover {
+
+    border-color:
+        var(--student-primary);
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+}
+
+
+.community-delete-form {
+
+    margin: 0;
+
+    padding: 0;
+}
+
+
+.community-delete-btn {
+
+    border:
+        1px solid
+        rgba(
+            242,
+            85,
+            120,
+            .20
+        );
+
+    background:
+        rgba(
+            242,
+            85,
+            120,
+            .07
+        );
+
+    color:
+        var(--student-danger);
+}
+
+
+.community-delete-btn:hover {
+
+    border-color:
+        var(--student-danger);
+
+    background:
+        rgba(
+            242,
+            85,
+            120,
+            .13
+        );
+}
+
+/* =========================================================
+   EDIT MODAL
+========================================================= */
+
+[data-edit-modal] {
+
+    display: none;
+
+}
+
+
+[data-edit-modal].open {
+
+    display: flex;
+
+}
+
+
+/* =========================================================
+   MOBILE OWNER ACTIONS
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .community-owner-actions {
+
+        width: 100%;
+
+        margin-left: 0;
+
+        margin-top: 5px;
+
+    }
+
+
+    .community-edit-btn,
+    .community-delete-btn {
+
+        flex: 1;
+
+    }
+
+}

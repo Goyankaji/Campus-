@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics | Campus Placement Portal</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin/analytics.css') }}">
+
+</head>
+
+
+<body>
+
+    <div class="admin-layout">
+
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        {% include "admin/components/sidebar.html" %}
+
+
+        <!-- =====================================================
+             MAIN AREA
+        ====================================================== -->
+
+        <div class="admin-main">
+
+
+            <!-- TOPBAR -->
+
+            {% include "admin/components/topbar.html" %}
+
+
+
+            <!-- =================================================
+                 PAGE CONTENT
+            ================================================== -->
+
+            <main class="analytics-page">
+
+
+                <!-- PAGE HEADER -->
+
+                <div class="analytics-page-header">
+
+                    <div>
+
+                        <span class="analytics-eyebrow">
+                            ANALYTICS
+                        </span>
+
+                        <h1>
+                            Placement Analytics
+                        </h1>
+
+                        <p>
+                            Track placement performance and recruitment insights.
+                        </p>
+
+                    </div>
+
+
+                    <div class="analytics-header-actions">
+
+                        <select
+                            id="academicYear"
+                            class="analytics-year-select">
+
+                            <option>
+                                Academic Year 2025-26
+                            </option>
+
+                            <option>
+                                Academic Year 2026-27
+                            </option>
+
+                            <option>
+                                Academic Year 2024-25
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            type="button"
+                            id="downloadReport"
+                            class="download-report-btn">
+
+                            <span>↓</span>
+
+                            Download Report
+
+                            <span class="download-arrow">
+                                ▾
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     KPI CARDS
+                ================================================== -->
+
+                <section class="analytics-kpi-grid">
+
+
+                    <!-- TOTAL STUDENTS -->
+
+                    <div class="analytics-kpi-card">
+
+                        <div class="analytics-kpi-icon purple">
+                            ♧
+                        </div>
+
+                        <div class="analytics-kpi-content">
+
+                            <span>
+                                Total Students
+                            </span>
+
+                            <strong>
+                                1,240
+                            </strong>
+
+                            <small class="positive">
+                                +12.4% vs last year
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STUDENTS PLACED -->
+
+                    <div class="analytics-kpi-card">
+
+                        <div class="analytics-kpi-icon green">
+                            ✓
+                        </div>
+
+                        <div class="analytics-kpi-content">
+
+                            <span>
+                                Students Placed
+                            </span>
+
+                            <strong>
+                                865
+                            </strong>
+
+                            <small class="positive">
+                                +8.2% vs last year
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PLACEMENT RATE -->
+
+                    <div class="analytics-kpi-card">
+
+                        <div class="analytics-kpi-icon blue">
+                            %
+                        </div>
+
+                        <div class="analytics-kpi-content">
+
+                            <span>
+                                Placement Rate
+                            </span>
+
+                            <strong>
+                                69.7%
+                            </strong>
+
+                            <small class="positive">
+                                +4.6% vs last year
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- AVERAGE PACKAGE -->
+
+                    <div class="analytics-kpi-card">
+
+                        <div class="analytics-kpi-icon orange">
+                            ₹
+                        </div>
+
+                        <div class="analytics-kpi-content">
+
+                            <span>
+                                Average Package
+                            </span>
+
+                            <strong>
+                                8.4 LPA
+                            </strong>
+
+                            <small class="positive">
+                                +7.1% vs last year
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- =================================================
+                     CHART ROW
+                ================================================== -->
+
+                <section class="analytics-chart-grid">
+
+
+                    <!-- PLACEMENT TREND -->
+
+                    <div class="analytics-panel trend-panel">
+
+                        <div class="analytics-panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Placement Trend
+                                </h2>
+
+                                <p>
+                                    Monthly placement rate (%)
+                                </p>
+
+                            </div>
+
+
+                            <select class="panel-select">
+
+                                <option>
+                                    This Year
+                                </option>
+
+                                <option>
+                                    Last Year
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="trend-chart">
+
+                            <div class="trend-y-axis">
+
+                                <span>100%</span>
+                                <span>80%</span>
+                                <span>60%</span>
+                                <span>40%</span>
+                                <span>20%</span>
+                                <span>0%</span>
+
+                            </div>
+
+
+                            <div class="trend-chart-area">
+
+                                <div class="trend-grid-lines">
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                </div>
+
+
+                                <svg
+                                    class="trend-svg"
+                                    viewBox="0 0 700 260"
+                                    preserveAspectRatio="none">
+
+                                    <defs>
+
+                                        <linearGradient
+                                            id="trendFill"
+                                            x1="0"
+                                            y1="0"
+                                            x2="0"
+                                            y2="1">
+
+                                            <stop
+                                                offset="0%"
+                                                stop-opacity=".30" />
+
+                                            <stop
+                                                offset="100%"
+                                                stop-opacity="0" />
+
+                                        </linearGradient>
+
+                                    </defs>
+
+
+                                    <path
+                                        class="trend-area"
+                                        d="M20 175
+                                           C110 160 145 145 245 125
+                                           C330 108 380 92 470 72
+                                           C545 55 600 50 680 68
+                                           L680 250
+                                           L20 250 Z" />
+
+
+                                    <path
+                                        class="trend-line"
+                                        d="M20 175
+                                           C110 160 145 145 245 125
+                                           C330 108 380 92 470 72
+                                           C545 55 600 50 680 68" />
+
+
+                                    <circle
+                                        cx="20"
+                                        cy="175"
+                                        r="5" />
+
+                                    <circle
+                                        cx="150"
+                                        cy="150"
+                                        r="5" />
+
+                                    <circle
+                                        cx="280"
+                                        cy="120"
+                                        r="5" />
+
+                                    <circle
+                                        cx="410"
+                                        cy="85"
+                                        r="5" />
+
+                                    <circle
+                                        cx="545"
+                                        cy="55"
+                                        r="5" />
+
+                                    <circle
+                                        cx="680"
+                                        cy="68"
+                                        r="5" />
+
+                                </svg>
+
+
+                                <div class="trend-values">
+
+                                    <span style="left: 2%;">
+                                        45%
+                                    </span>
+
+                                    <span style="left: 20%;">
+                                        52%
+                                    </span>
+
+                                    <span style="left: 38%;">
+                                        60%
+                                    </span>
+
+                                    <span style="left: 57%;">
+                                        68%
+                                    </span>
+
+                                    <span style="left: 76%;">
+                                        72%
+                                    </span>
+
+                                    <span style="left: 95%;">
+                                        69%
+                                    </span>
+
+                                </div>
+
+
+                                <div class="trend-months">
+
+                                    <span>Jan</span>
+                                    <span>Feb</span>
+                                    <span>Mar</span>
+                                    <span>Apr</span>
+                                    <span>May</span>
+                                    <span>Jun</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PLACEMENT BY BRANCH -->
+
+                    <div class="analytics-panel branch-panel">
+
+                        <div class="analytics-panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Placement by Branch
+                                </h2>
+
+                                <p>
+                                    Placement rate by branch (%)
+                                </p>
+
+                            </div>
+
+
+                            <select class="panel-select">
+
+                                <option>
+                                    All Branches
+                                </option>
+
+                                <option>
+                                    CSE
+                                </option>
+
+                                <option>
+                                    IT
+                                </option>
+
+                                <option>
+                                    ECE
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="branch-list">
+
+
+                            <div class="branch-row">
+
+                                <span class="branch-name">
+                                    CSE
+                                </span>
+
+                                <div class="branch-track">
+
+                                    <div
+                                        class="branch-fill"
+                                        style="width:78%;">
+                                    </div>
+
+                                </div>
+
+                                <strong>
+                                    78%
+                                </strong>
+
+                            </div>
+
+
+                            <div class="branch-row">
+
+                                <span class="branch-name">
+                                    IT
+                                </span>
+
+                                <div class="branch-track">
+
+                                    <div
+                                        class="branch-fill"
+                                        style="width:72%;">
+                                    </div>
+
+                                </div>
+
+                                <strong>
+                                    72%
+                                </strong>
+
+                            </div>
+
+
+                            <div class="branch-row">
+
+                                <span class="branch-name">
+                                    ECE
+                                </span>
+
+                                <div class="branch-track">
+
+                                    <div
+                                        class="branch-fill"
+                                        style="width:64%;">
+                                    </div>
+
+                                </div>
+
+                                <strong>
+                                    64%
+                                </strong>
+
+                            </div>
+
+
+                            <div class="branch-row">
+
+                                <span class="branch-name">
+                                    ME
+                                </span>
+
+                                <div class="branch-track">
+
+                                    <div
+                                        class="branch-fill"
+                                        style="width:58%;">
+                                    </div>
+
+                                </div>
+
+                                <strong>
+                                    58%
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- =================================================
+                     SECOND ROW
+                ================================================== -->
+
+                <section class="analytics-three-grid">
+
+
+                    <!-- TOP COMPANIES -->
+
+                    <div class="analytics-panel companies-panel">
+
+                        <div class="analytics-panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Top Recruiting Companies
+                                </h2>
+
+                                <p>
+                                    By number of placements
+                                </p>
+
+                            </div>
+
+                            <select class="panel-select">
+
+                                <option>
+                                    This Year
+                                </option>
+
+                                <option>
+                                    Last Year
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="company-ranking">
+
+
+                            <div class="company-rank-row">
+
+                                <div class="company-logo">
+                                    TCS
+                                </div>
+
+                                <strong>
+                                    TCS
+                                </strong>
+
+                                <span>
+                                    128 placements
+                                </span>
+
+                            </div>
+
+
+                            <div class="company-rank-row">
+
+                                <div class="company-logo">
+                                    INF
+                                </div>
+
+                                <strong>
+                                    Infosys
+                                </strong>
+
+                                <span>
+                                    96 placements
+                                </span>
+
+                            </div>
+
+
+                            <div class="company-rank-row">
+
+                                <div class="company-logo accent">
+                                    &gt;
+                                </div>
+
+                                <strong>
+                                    Accenture
+                                </strong>
+
+                                <span>
+                                    82 placements
+                                </span>
+
+                            </div>
+
+
+                            <div class="company-rank-row">
+
+                                <div class="company-logo">
+                                    D
+                                </div>
+
+                                <strong>
+                                    Deloitte
+                                </strong>
+
+                                <span>
+                                    64 placements
+                                </span>
+
+                            </div>
+
+
+                            <div class="company-rank-row">
+
+                                <div class="company-logo">
+                                    W
+                                </div>
+
+                                <strong>
+                                    Wipro
+                                </strong>
+
+                                <span>
+                                    52 placements
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PACKAGE STATISTICS -->
+
+                    <div class="analytics-panel package-panel">
+
+                        <div class="analytics-panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Package Statistics
+                                </h2>
+
+                                <p>
+                                    Overview of package distribution
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="package-grid">
+
+
+                            <div class="package-stat purple-border">
+
+                                <span>
+                                    Highest Package
+                                </span>
+
+                                <strong>
+                                    24 LPA
+                                </strong>
+
+                                <small>
+                                    +9.3% vs last year
+                                </small>
+
+                            </div>
+
+
+                            <div class="package-stat green-border">
+
+                                <span>
+                                    Average Package
+                                </span>
+
+                                <strong>
+                                    8.4 LPA
+                                </strong>
+
+                                <small>
+                                    +7.1% vs last year
+                                </small>
+
+                            </div>
+
+
+                            <div class="package-stat orange-border">
+
+                                <span>
+                                    Median Package
+                                </span>
+
+                                <strong>
+                                    7.2 LPA
+                                </strong>
+
+                                <small>
+                                    +6.5% vs last year
+                                </small>
+
+                            </div>
+
+
+                            <div class="package-stat blue-border">
+
+                                <span>
+                                    Lowest Package
+                                </span>
+
+                                <strong>
+                                    3.6 LPA
+                                </strong>
+
+                                <small>
+                                    +5.2% vs last year
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PLACEMENT STATUS -->
+
+                    <div class="analytics-panel status-panel">
+
+                        <div class="analytics-panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Placement Status
+                                </h2>
+
+                                <p>
+                                    Overall placement status
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-content">
+
+
+                            <div class="donut-chart">
+
+                                <div class="donut-inner">
+
+                                    <strong>
+                                        1,240
+                                    </strong>
+
+                                    <span>
+                                        Total Students
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="status-legend">
+
+
+                                <div>
+
+                                    <span class="legend-dot green"></span>
+
+                                    <span>
+                                        Placed (865)
+                                    </span>
+
+                                    <strong>
+                                        69.7%
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span class="legend-dot blue"></span>
+
+                                    <span>
+                                        In Process (210)
+                                    </span>
+
+                                    <strong>
+                                        16.9%
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span class="legend-dot purple"></span>
+
+                                    <span>
+                                        Not Placed (165)
+                                    </span>
+
+                                    <strong>
+                                        13.3%
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- =================================================
+                     RECRUITMENT SUMMARY
+                ================================================== -->
+
+                <section class="analytics-panel recruitment-panel">
+
+                    <div class="analytics-panel-header">
+
+                        <div>
+
+                            <h2>
+                                Recruitment Summary
+                            </h2>
+
+                            <p>
+                                Company-wise placement summary
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="analytics-table-wrapper">
+
+                        <table class="analytics-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        COMPANY
+                                    </th>
+
+                                    <th>
+                                        STUDENTS PLACED
+                                    </th>
+
+                                    <th>
+                                        ELIGIBLE STUDENTS
+                                    </th>
+
+                                    <th>
+                                        PLACEMENT RATE
+                                    </th>
+
+                                    <th>
+                                        AVERAGE PACKAGE
+                                    </th>
+
+                                    <th>
+                                        HIGHEST PACKAGE
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                    <th>
+                                        ACTIONS
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+                                        <strong>TCS</strong>
+                                    </td>
+
+                                    <td>128</td>
+                                    <td>150</td>
+                                    <td>85.33%</td>
+                                    <td>8.2 LPA</td>
+                                    <td>14 LPA</td>
+
+                                    <td>
+                                        <span class="status-active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-action">
+                                            ⋮
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Infosys</strong>
+                                    </td>
+
+                                    <td>96</td>
+                                    <td>130</td>
+                                    <td>73.85%</td>
+                                    <td>7.1 LPA</td>
+                                    <td>12 LPA</td>
+
+                                    <td>
+                                        <span class="status-active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-action">
+                                            ⋮
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Accenture</strong>
+                                    </td>
+
+                                    <td>82</td>
+                                    <td>110</td>
+                                    <td>74.55%</td>
+                                    <td>9.4 LPA</td>
+                                    <td>18 LPA</td>
+
+                                    <td>
+                                        <span class="status-active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-action">
+                                            ⋮
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Deloitte</strong>
+                                    </td>
+
+                                    <td>64</td>
+                                    <td>90</td>
+                                    <td>71.11%</td>
+                                    <td>6.8 LPA</td>
+                                    <td>11 LPA</td>
+
+                                    <td>
+                                        <span class="status-active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-action">
+                                            ⋮
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Wipro</strong>
+                                    </td>
+
+                                    <td>52</td>
+                                    <td>80</td>
+                                    <td>65.00%</td>
+                                    <td>6.2 LPA</td>
+                                    <td>10 LPA</td>
+
+                                    <td>
+                                        <span class="status-active">
+                                            Active
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <button class="table-action">
+                                            ⋮
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <script
+        src="{{ url_for('static', filename='js/admin.js') }}">
+    </script>
+
+    <script
+        src="{{ url_for('static', filename='js/admin/analytics.js') }}">
+    </script>
+
+</body>
+
+</html>

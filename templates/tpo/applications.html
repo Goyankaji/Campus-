@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Applications | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         APPLICATIONS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/applications.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="applications-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="applications-page-header">
+
+                <div>
+
+                    <h1>
+                        Applications
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Applications
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="export-applications-btn"
+                    id="exportApplications"
+                >
+
+                    ↓
+                    Export
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="application-stats">
+
+
+                <div class="application-stat-card">
+
+                    <div class="application-stat-icon purple">
+                        ◉
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Applications
+                        </span>
+
+                        <strong>
+                            1,248
+                        </strong>
+
+                        <small>
+                            This academic year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="application-stat-card">
+
+                    <div class="application-stat-icon blue">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Under Review
+                        </span>
+
+                        <strong>
+                            284
+                        </strong>
+
+                        <small>
+                            Awaiting action
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="application-stat-card">
+
+                    <div class="application-stat-icon orange">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Shortlisted
+                        </span>
+
+                        <strong>
+                            392
+                        </strong>
+
+                        <small>
+                            Students shortlisted
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="application-stat-card">
+
+                    <div class="application-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Selected
+                        </span>
+
+                        <strong>
+                            156
+                        </strong>
+
+                        <small>
+                            Successful applications
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="application-stat-card">
+
+                    <div class="application-stat-icon red">
+                        ×
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Rejected
+                        </span>
+
+                        <strong>
+                            416
+                        </strong>
+
+                        <small>
+                            Not selected
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="applications-table-card">
+
+
+                <!-- =================================================
+                     FILTER BAR
+                ================================================== -->
+
+                <div class="application-filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="application-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="applicationSearch"
+                            placeholder="Search student or company..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div class="application-filter-control">
+
+                        <label>
+                            Application Status
+                        </label>
+
+                        <select
+                            id="applicationStatusFilter"
+                        >
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="applied">
+                                Applied
+                            </option>
+
+                            <option value="under review">
+                                Under Review
+                            </option>
+
+                            <option value="shortlisted">
+                                Shortlisted
+                            </option>
+
+                            <option value="selected">
+                                Selected
+                            </option>
+
+                            <option value="rejected">
+                                Rejected
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COMPANY -->
+
+                    <div class="application-filter-control">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <select
+                            id="applicationCompanyFilter"
+                        >
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            <option value="TCS">
+                                TCS
+                            </option>
+
+                            <option value="Infosys">
+                                Infosys
+                            </option>
+
+                            <option value="Amazon">
+                                Amazon
+                            </option>
+
+                            <option value="Capgemini">
+                                Capgemini
+                            </option>
+
+                            <option value="Deloitte">
+                                Deloitte
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="application-filter-control">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select
+                            id="applicationCollegeFilter"
+                        >
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- RESET -->
+
+                    <button
+                        type="button"
+                        class="application-reset-btn"
+                        id="resetApplicationFilters"
+                    >
+
+                        ↻
+                        Reset
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="applications-table-wrapper">
+
+                    <table
+                        class="applications-table"
+                        id="applicationsTable"
+                    >
+
+                        <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>STUDENT</th>
+
+                            <th>COLLEGE</th>
+
+                            <th>COMPANY</th>
+
+                            <th>JOB ROLE</th>
+
+                            <th>APPLIED DATE</th>
+
+                            <th>PACKAGE</th>
+
+                            <th>INTERVIEW</th>
+
+                            <th>APPLICATION STATUS</th>
+
+                            <th>ACTIONS</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <!-- =================================================
+                             APPLICATION 01
+                        ================================================== -->
+
+                        <tr
+                            data-student="Aarav Sharma"
+                            data-company="TCS"
+                            data-college="PCE"
+                            data-status="shortlisted"
+                        >
+
+                            <td>
+                                01
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-student-info">
+
+                                    <div class="student-avatar purple">
+                                        AS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Aarav Sharma
+                                        </strong>
+
+                                        <span>
+                                            PCE202701
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="application-company">
+                                    TCS
+                                </strong>
+
+                                <span class="company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+
+                            <td class="application-package">
+                                ₹ 8.50 LPA
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status scheduled">
+                                    Scheduled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="application-status shortlisted">
+                                    Shortlisted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-actions">
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn view-application-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn more-application-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             APPLICATION 02
+                        ================================================== -->
+
+                        <tr
+                            data-student="Priya Mehta"
+                            data-company="Infosys"
+                            data-college="PIET"
+                            data-status="selected"
+                        >
+
+                            <td>
+                                02
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-student-info">
+
+                                    <div class="student-avatar blue">
+                                        PM
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Priya Mehta
+                                        </strong>
+
+                                        <span>
+                                            PIET202734
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="application-company">
+                                    Infosys
+                                </strong>
+
+                                <span class="company-subtext">
+                                    Infosys Limited
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                System Engineer
+                            </td>
+
+
+                            <td>
+                                20 Aug 2026
+                            </td>
+
+
+                            <td class="application-package">
+                                ₹ 7.20 LPA
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="application-status selected">
+                                    Selected
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-actions">
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn view-application-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn more-application-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             APPLICATION 03
+                        ================================================== -->
+
+                        <tr
+                            data-student="Rohan Verma"
+                            data-company="Amazon"
+                            data-college="PU"
+                            data-status="under review"
+                        >
+
+                            <td>
+                                03
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-student-info">
+
+                                    <div class="student-avatar orange">
+                                        RV
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Rohan Verma
+                                        </strong>
+
+                                        <span>
+                                            PU202715
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PU
+                            </td>
+
+
+                            <td>
+
+                                <strong class="application-company">
+                                    Amazon
+                                </strong>
+
+                                <span class="company-subtext">
+                                    Amazon Development Centre
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                SDE I
+                            </td>
+
+
+                            <td>
+                                19 Aug 2026
+                            </td>
+
+
+                            <td class="application-package">
+                                ₹ 14.00 LPA
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="application-status review">
+                                    Under Review
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-actions">
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn view-application-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn more-application-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             APPLICATION 04
+                        ================================================== -->
+
+                        <tr
+                            data-student="Neha Gupta"
+                            data-company="Capgemini"
+                            data-college="JIET"
+                            data-status="rejected"
+                        >
+
+                            <td>
+                                04
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-student-info">
+
+                                    <div class="student-avatar green">
+                                        NG
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Neha Gupta
+                                        </strong>
+
+                                        <span>
+                                            JIET202756
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                JIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="application-company">
+                                    Capgemini
+                                </strong>
+
+                                <span class="company-subtext">
+                                    Capgemini Technology Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Analyst
+                            </td>
+
+
+                            <td>
+                                17 Aug 2026
+                            </td>
+
+
+                            <td class="application-package">
+                                ₹ 9.10 LPA
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="application-status rejected">
+                                    Rejected
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-actions">
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn view-application-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn more-application-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             APPLICATION 05
+                        ================================================== -->
+
+                        <tr
+                            data-student="Kunal Singh"
+                            data-company="Deloitte"
+                            data-college="PCE"
+                            data-status="applied"
+                        >
+
+                            <td>
+                                05
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-student-info">
+
+                                    <div class="student-avatar dark">
+                                        KS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Kunal Singh
+                                        </strong>
+
+                                        <span>
+                                            PCE202768
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="application-company">
+                                    Deloitte
+                                </strong>
+
+                                <span class="company-subtext">
+                                    Deloitte Consulting
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Analyst
+                            </td>
+
+
+                            <td>
+                                16 Aug 2026
+                            </td>
+
+
+                            <td class="application-package">
+                                ₹ 8.80 LPA
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="application-status applied">
+                                    Applied
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-actions">
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn view-application-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn more-application-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             APPLICATION 06
+                        ================================================== -->
+
+                        <tr
+                            data-student="Ananya Joshi"
+                            data-company="TCS"
+                            data-college="PIET"
+                            data-status="shortlisted"
+                        >
+
+                            <td>
+                                06
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-student-info">
+
+                                    <div class="student-avatar violet">
+                                        AJ
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Ananya Joshi
+                                        </strong>
+
+                                        <span>
+                                            PIET202781
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="application-company">
+                                    TCS
+                                </strong>
+
+                                <span class="company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td>
+                                15 Aug 2026
+                            </td>
+
+
+                            <td class="application-package">
+                                ₹ 8.50 LPA
+                            </td>
+
+
+                            <td>
+
+                                <span class="interview-status scheduled">
+                                    Scheduled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="application-status shortlisted">
+                                    Shortlisted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="application-actions">
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn view-application-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="application-action-btn more-application-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="applications-table-footer">
+
+                    <span id="applicationCount">
+                        Showing 6 of 1,248 applications
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            2
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            3
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            4
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            5
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     APPLICATIONS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/applications.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

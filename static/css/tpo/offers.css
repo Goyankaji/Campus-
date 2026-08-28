@@ -1,0 +1,1361 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   TPO - OFFERS & JOINING
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.offers-content {
+
+    min-height: calc(100vh - 60px);
+
+    padding: 22px 24px 30px;
+
+    background: var(--page-bg);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.offers-page-header {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.offers-page-header h1 {
+
+    margin: 0;
+
+    color: var(--text-main);
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+
+.breadcrumb {
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 7px;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+}
+
+
+.breadcrumb strong {
+
+    color: var(--primary);
+
+    font-weight: 600;
+}
+
+
+.breadcrumb-arrow {
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
+
+.offers-header-actions {
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.add-offer-btn,
+.offers-export-btn {
+
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0 13px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.add-offer-btn {
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7047e8,
+            #5529c8
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 15px
+        rgba(91, 45, 204, 0.20);
+}
+
+
+.add-offer-btn:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 18px
+        rgba(91, 45, 204, 0.28);
+}
+
+
+.offers-export-btn {
+
+    border:
+        1px solid var(--border);
+
+    background: var(--card-bg);
+
+    color: var(--text-secondary);
+}
+
+
+.offers-export-btn:hover {
+
+    border-color: var(--primary);
+
+    background:
+        rgba(105, 55, 225, 0.04);
+
+    color: var(--primary);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.offer-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+
+.offer-stat-card {
+
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 2px 7px
+        rgba(15, 23, 42, 0.025);
+}
+
+
+.offer-stat-icon {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+.offer-stat-icon.purple {
+
+    background:
+        rgba(112, 71, 232, 0.11);
+
+    color: #7047e8;
+}
+
+
+.offer-stat-icon.green {
+
+    background:
+        rgba(22, 180, 112, 0.10);
+
+    color: #16a96f;
+}
+
+
+.offer-stat-icon.orange {
+
+    background:
+        rgba(242, 143, 39, 0.11);
+
+    color: #ed8a24;
+}
+
+
+.offer-stat-icon.red {
+
+    background:
+        rgba(232, 75, 97, 0.10);
+
+    color: #e44c60;
+}
+
+
+.offer-stat-icon.violet {
+
+    background:
+        rgba(133, 82, 224, 0.10);
+
+    color: #8552e0;
+}
+
+
+.offer-stat-card span {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    font-size: 7.5px;
+
+    font-weight: 500;
+}
+
+
+.offer-stat-card strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-main);
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.offer-stat-card small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #18a870;
+
+    font-size: 6.5px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.offers-table-card {
+
+    width: 100%;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(15, 23, 42, 0.025);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.offers-filter-bar {
+
+    min-height: 67px;
+
+    display: flex;
+    align-items: flex-end;
+
+    gap: 8px;
+
+    padding: 13px 14px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    box-sizing: border-box;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+}
+
+
+.offers-filter-bar::-webkit-scrollbar {
+
+    height: 5px;
+}
+
+
+.offers-filter-bar::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(105, 55, 225, 0.35);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.offers-search {
+
+    width: 205px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 0 10px;
+
+    background: var(--page-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 7px;
+
+    box-sizing: border-box;
+
+    transition: 0.2s ease;
+}
+
+
+.offers-search:focus-within {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(105, 55, 225, 0.07);
+}
+
+
+.offers-search > span {
+
+    color: var(--text-muted);
+
+    font-size: 15px;
+}
+
+
+.offers-search input {
+
+    width: 100%;
+    min-width: 0;
+
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: var(--text-main);
+
+    font-family: inherit;
+
+    font-size: 8px;
+}
+
+
+.offers-search input::placeholder {
+
+    color: var(--text-muted);
+}
+
+
+/* =========================================================
+   FILTER CONTROL
+========================================================= */
+
+.offers-filter-control {
+
+    width: 112px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.offers-filter-control label {
+
+    padding-left: 1px;
+
+    color: var(--text-secondary);
+
+    font-size: 7px;
+
+    font-weight: 600;
+}
+
+
+.offers-filter-control select {
+
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 7px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: var(--page-bg);
+
+    color: var(--text-main);
+
+    font-family: inherit;
+
+    font-size: 7.5px;
+
+    cursor: pointer;
+}
+
+
+.offers-filter-control select:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(105, 55, 225, 0.07);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+.offers-reset-btn {
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 0 10px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 7px;
+
+    background: var(--page-bg);
+
+    color: var(--text-secondary);
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.offers-reset-btn:hover {
+
+    border-color: var(--primary);
+
+    background:
+        rgba(105, 55, 225, 0.04);
+
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.offers-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: thin;
+}
+
+
+.offers-table-wrapper::-webkit-scrollbar {
+
+    height: 7px;
+}
+
+
+.offers-table-wrapper::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+
+.offers-table-wrapper::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(105, 55, 225, 0.50);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.offers-table {
+
+    width: 100%;
+
+    min-width: 1480px;
+
+    border-collapse: collapse;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.offers-table thead {
+
+    background:
+        rgba(105, 55, 225, 0.025);
+}
+
+
+.offers-table th {
+
+    height: 43px;
+
+    padding: 0 10px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    color: var(--text-secondary);
+
+    font-size: 6.8px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    white-space: nowrap;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.offers-table tbody tr {
+
+    transition:
+        background 0.18s ease;
+}
+
+
+.offers-table tbody tr:hover {
+
+    background:
+        rgba(105, 55, 225, 0.025);
+}
+
+
+.offers-table td {
+
+    min-height: 65px;
+
+    padding: 9px 10px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    color: var(--text-secondary);
+
+    font-size: 7.4px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    vertical-align: middle;
+}
+
+
+.offers-table tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+.offers-table th:nth-child(1),
+.offers-table td:nth-child(1) {
+
+    width: 34px;
+
+    color: var(--text-muted);
+
+    text-align: center;
+}
+
+
+.offers-table th:nth-child(2) {
+
+    min-width: 190px;
+}
+
+
+.offers-table th:nth-child(3) {
+
+    min-width: 70px;
+}
+
+
+.offers-table th:nth-child(4) {
+
+    min-width: 155px;
+}
+
+
+.offers-table th:nth-child(5) {
+
+    min-width: 145px;
+}
+
+
+.offers-table th:nth-child(6) {
+
+    min-width: 95px;
+}
+
+
+.offers-table th:nth-child(7) {
+
+    min-width: 105px;
+}
+
+
+.offers-table th:nth-child(8) {
+
+    min-width: 110px;
+}
+
+
+.offers-table th:nth-child(9) {
+
+    min-width: 105px;
+}
+
+
+.offers-table th:nth-child(10) {
+
+    min-width: 95px;
+}
+
+
+.offers-table th:nth-child(11) {
+
+    width: 105px;
+}
+
+
+/* =========================================================
+   STUDENT
+========================================================= */
+
+.offer-student-info {
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 175px;
+}
+
+
+.offer-avatar {
+
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 7px;
+
+    font-weight: 800;
+}
+
+
+.offer-avatar.purple {
+
+    background:
+        rgba(112, 71, 232, 0.11);
+
+    color: #7047e8;
+}
+
+
+.offer-avatar.blue {
+
+    background:
+        rgba(52, 120, 246, 0.10);
+
+    color: #3478f6;
+}
+
+
+.offer-avatar.orange {
+
+    background:
+        rgba(242, 143, 39, 0.11);
+
+    color: #e98922;
+}
+
+
+.offer-avatar.green {
+
+    background:
+        rgba(22, 180, 112, 0.10);
+
+    color: #16a96f;
+}
+
+
+.offer-avatar.dark {
+
+    background:
+        rgba(71, 85, 105, 0.10);
+
+    color: #475569;
+}
+
+
+.offer-avatar.violet {
+
+    background:
+        rgba(133, 82, 224, 0.10);
+
+    color: #8552e0;
+}
+
+
+.offer-student-info strong {
+
+    display: block;
+
+    color: var(--text-main);
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+.offer-student-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 6.2px;
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.offer-company {
+
+    display: block;
+
+    color: var(--text-main);
+
+    font-size: 7.8px;
+
+    font-weight: 700;
+}
+
+
+.offer-company-subtext {
+
+    display: block;
+
+    max-width: 140px;
+
+    margin-top: 3px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    color: var(--text-muted);
+
+    font-size: 6px;
+}
+
+
+/* =========================================================
+   PACKAGE
+========================================================= */
+
+.offer-package {
+
+    color: var(--primary) !important;
+
+    font-size: 7.8px !important;
+
+    font-weight: 800 !important;
+}
+
+
+/* =========================================================
+   OFFER STATUS
+========================================================= */
+
+.offer-status,
+.joining-status {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 21px;
+
+    padding: 0 7px;
+
+    border-radius: 5px;
+
+    font-size: 6.2px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.offer-status.accepted {
+
+    background:
+        rgba(21, 171, 113, 0.10);
+
+    color: #129d69;
+}
+
+
+.offer-status.pending {
+
+    background:
+        rgba(242, 143, 39, 0.11);
+
+    color: #df821d;
+}
+
+
+.offer-status.rejected {
+
+    background:
+        rgba(232, 75, 97, 0.10);
+
+    color: #e44c60;
+}
+
+
+/* =========================================================
+   JOINING STATUS
+========================================================= */
+
+.joining-status.confirmed {
+
+    background:
+        rgba(21, 171, 113, 0.10);
+
+    color: #129d69;
+}
+
+
+.joining-status.upcoming {
+
+    background:
+        rgba(52, 120, 246, 0.10);
+
+    color: #3478f6;
+}
+
+
+.joining-status.pending {
+
+    background:
+        rgba(242, 143, 39, 0.11);
+
+    color: #df821d;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.offer-actions {
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+.offer-action-btn {
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 6px;
+
+    background: var(--page-bg);
+
+    color: var(--text-secondary);
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+
+.offer-action-btn:hover {
+
+    border-color: var(--primary);
+
+    background:
+        rgba(105, 55, 225, 0.06);
+
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.offers-table-footer {
+
+    min-height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 0 14px;
+
+    border-top:
+        1px solid var(--border);
+
+    box-sizing: border-box;
+}
+
+
+.offers-table-footer > span {
+
+    color: var(--text-secondary);
+
+    font-size: 7px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.pagination {
+
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+.pagination button {
+
+    min-width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 6px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 5px;
+
+    background: var(--card-bg);
+
+    color: var(--text-secondary);
+
+    font-family: inherit;
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+
+.pagination button:hover:not(:disabled) {
+
+    border-color: var(--primary);
+
+    color: var(--primary);
+
+    background:
+        rgba(105, 55, 225, 0.04);
+}
+
+
+.pagination button.active {
+
+    border-color: var(--primary);
+
+    background:
+        linear-gradient(
+            135deg,
+            #7047e8,
+            #5529c8
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 3px 8px
+        rgba(91, 45, 204, 0.18);
+}
+
+
+.pagination button:disabled {
+
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-theme .offers-content {
+
+    background: #081225;
+}
+
+
+body.dark-theme .offers-table thead {
+
+    background:
+        rgba(255, 255, 255, 0.018);
+}
+
+
+body.dark-theme .offers-table tbody tr:hover {
+
+    background:
+        rgba(112, 71, 232, 0.045);
+}
+
+
+body.dark-theme .offers-search,
+body.dark-theme .offers-filter-control select,
+body.dark-theme .offers-reset-btn,
+body.dark-theme .offer-action-btn {
+
+    background: #0b172c;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .offers-content {
+
+        padding:
+            19px 18px 25px;
+    }
+
+
+    .offer-stats {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 800px
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .offer-stats {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .offers-header-actions {
+
+        flex-wrap: wrap;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .offers-content {
+
+        padding:
+            16px 12px 22px;
+    }
+
+
+    .offers-page-header {
+
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .offers-header-actions {
+
+        width: fit-content;
+    }
+
+
+    .offer-stats {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .offers-table-footer {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding:
+            12px 14px;
+    }
+
+
+    .pagination {
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        padding-bottom: 2px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .offers-page-header h1 {
+
+        font-size: 19px;
+    }
+
+
+    .offer-stat-card {
+
+        min-height: 76px;
+    }
+
+
+    .offer-stat-card strong {
+
+        font-size: 15px;
+    }
+
+
+    .offers-table {
+
+        min-width: 1480px;
+    }
+
+}

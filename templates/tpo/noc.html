@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        NOC Requests | TPO
+    </title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-sidebar.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-topbar.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         NOC CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/noc.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             NOC CONTENT
+        ================================================== -->
+
+        <section class="noc-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="noc-page-header">
+
+                <div>
+
+                    <div class="noc-eyebrow">
+                        TPO APPROVAL
+                    </div>
+
+                    <h1>
+                        NOC Requests
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span>
+                            ›
+                        </span>
+
+                        <strong>
+                            NOC
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPROVAL INFORMATION
+            ================================================== -->
+
+          <div class="noc-approval-banner">
+
+    <div class="noc-approval-icon">
+        ✓
+    </div>
+
+    <div class="noc-approval-content">
+
+        <div class="noc-approval-title">
+            Two-Level Approval Required
+        </div>
+
+        <div class="noc-approval-description">
+            Every NOC request is visible to both TPO and Authority.
+            Final approval requires approval from both sides.
+        </div>
+
+    </div>
+
+    <div class="noc-approval-status">
+
+        <span></span>
+
+        TPO + Authority
+
+    </div>
+
+</div>
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <section class="noc-stats">
+
+
+                <div class="noc-stat-card">
+
+                    <div class="noc-stat-icon purple">
+                        ◈
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Requests
+                        </span>
+
+                        <strong id="totalNoc">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="noc-stat-card">
+
+                    <div class="noc-stat-icon orange">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Pending TPO
+                        </span>
+
+                        <strong id="pendingNoc">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="noc-stat-card">
+
+                    <div class="noc-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            TPO Approved
+                        </span>
+
+                        <strong id="approvedNoc">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="noc-stat-card">
+
+                    <div class="noc-stat-icon red">
+                        ×
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Rejected
+                        </span>
+
+                        <strong id="rejectedNoc">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 FILTERS
+            ================================================== -->
+
+            <div class="noc-filter-card">
+
+
+                <!-- SEARCH -->
+
+                <div class="noc-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="nocSearch"
+                        placeholder="Search student, registration or company..."
+                    >
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <select
+                    id="nocStatusFilter"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="pending">
+                        Pending TPO
+                    </option>
+
+                    <option value="approved">
+                        TPO Approved
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <!-- PURPOSE -->
+
+                <select
+                    id="nocTypeFilter"
+                >
+
+                    <option value="all">
+                        All Purposes
+                    </option>
+
+                    <option value="off_campus">
+                        Off Campus
+                    </option>
+
+                    <option value="higher_studies">
+                        Higher Studies
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <!-- RESET -->
+
+                <button
+                    type="button"
+                    id="resetNocFilters"
+                    class="noc-reset-btn"
+                >
+
+                    ↻
+                    Reset
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
+
+            <div class="noc-table-card">
+
+
+                <!-- TABLE HEADER -->
+
+                <div class="noc-table-header">
+
+                    <div>
+
+                        <span>
+                            REQUEST QUEUE
+                        </span>
+
+                        <h2>
+                            Student NOC Requests
+                        </h2>
+
+                    </div>
+
+
+                    <div class="noc-approval-note">
+
+                        <span class="approval-dot"></span>
+
+                        TPO + Authority approval
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="noc-table-wrapper">
+
+                    <table
+                        class="noc-table"
+                        id="nocTable"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    STUDENT
+                                </th>
+
+                                <th>
+                                    REGISTRATION
+                                </th>
+
+                                <th>
+                                    PURPOSE
+                                </th>
+
+                                <th>
+                                    ORGANIZATION
+                                </th>
+
+                                <th>
+                                    REQUEST DATE
+                                </th>
+
+                                <th>
+                                    TPO STATUS
+                                </th>
+
+                                <th>
+                                    AUTHORITY STATUS
+                                </th>
+
+                                <th>
+                                    FINAL STATUS
+                                </th>
+
+                                <th>
+                                    ACTION
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="nocTableBody">
+
+
+                            <!-- =================================================
+                                 EMPTY STATE
+                            ================================================== -->
+
+                            <tr
+                                class="noc-empty-row"
+                                id="nocEmptyRow"
+                            >
+
+                                <td colspan="9">
+
+                                    <div class="noc-empty-state">
+
+                                        <div class="noc-empty-icon">
+                                            ◈
+                                        </div>
+
+                                        <strong>
+                                            No NOC requests yet
+                                        </strong>
+
+                                        <span>
+                                            Student submitted NOC requests
+                                            will appear here.
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- =================================================
+                     TABLE FOOTER
+                ================================================== -->
+
+                <div class="noc-table-footer">
+
+                    <span id="nocCount">
+                        Showing 0 requests
+                    </span>
+
+
+                    <div class="noc-pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     NOC DETAILS MODAL
+====================================================== -->
+
+<div
+    id="nocDetailsModal"
+    class="noc-modal"
+    style="display:none;"
+>
+
+    <div class="noc-modal-overlay"></div>
+
+
+    <div class="noc-modal-card">
+
+
+        <!-- HEADER -->
+
+        <div class="noc-modal-header">
+
+            <div>
+
+                <span>
+                    NOC REQUEST
+                </span>
+
+                <h2>
+                    Request Details
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeNocDetails"
+                class="noc-modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- DETAILS -->
+
+        <div
+            id="nocDetailsBody"
+            class="noc-details-body"
+        >
+
+            <!-- JS WILL FILL DETAILS -->
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="noc-modal-footer">
+
+            <button
+                type="button"
+                id="closeNocDetailsBottom"
+                class="noc-secondary-btn"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     REJECTION MODAL
+====================================================== -->
+
+<div
+    id="nocRejectModal"
+    class="noc-modal"
+    style="display:none;"
+>
+
+    <div class="noc-modal-overlay"></div>
+
+
+    <div class="noc-modal-card noc-reject-card">
+
+
+        <!-- HEADER -->
+
+        <div class="noc-modal-header">
+
+            <div>
+
+                <span>
+                    TPO ACTION
+                </span>
+
+                <h2>
+                    Reject NOC Request
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeNocReject"
+                class="noc-modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- REJECTION FORM -->
+
+        <div class="noc-reject-body">
+
+            <label for="nocRejectReason">
+                Rejection Reason
+            </label>
+
+
+            <textarea
+                id="nocRejectReason"
+                rows="5"
+                placeholder="Enter the reason for rejecting this NOC request..."
+            ></textarea>
+
+
+            <small>
+                This reason will be visible to the student and Authority.
+            </small>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="noc-modal-footer">
+
+
+            <button
+                type="button"
+                id="cancelNocReject"
+                class="noc-secondary-btn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmNocReject"
+                class="noc-danger-btn"
+            >
+                Reject NOC
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NOC JAVASCRIPT
+====================================================== -->
+
+<!-- =====================================================
+     COMMON TPO JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-sidebar.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-topbar.js'
+    ) }}"
+></script>
+
+
+<!-- =====================================================
+     NOC JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/noc.js'
+    ) }}"
+></script>
+
+</body>
+
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         NOTIFICATIONS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/notifications.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="notifications-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="notifications-page-header">
+
+                <div>
+
+                    <h1>
+                        Notifications
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Notifications
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notifications-header-actions">
+
+                    <button
+                        type="button"
+                        class="mark-all-btn"
+                        id="markAllRead"
+                    >
+                        ✓
+                        Mark all as read
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NOTIFICATION SUMMARY
+            ================================================== -->
+
+            <div class="notification-summary">
+
+
+                <div class="notification-summary-card">
+
+                    <div class="notification-summary-icon purple">
+                        ♢
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Notifications
+                        </span>
+
+                        <strong id="totalNotifications">
+                            8
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-summary-card">
+
+                    <div class="notification-summary-icon orange">
+                        !
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Unread
+                        </span>
+
+                        <strong id="unreadNotifications">
+                            5
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notification-summary-card">
+
+                    <div class="notification-summary-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Read
+                        </span>
+
+                        <strong id="readNotifications">
+                            3
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NOTIFICATION PANEL
+            ================================================== -->
+
+            <div class="notifications-panel">
+
+
+                <!-- =================================================
+                     TOOLBAR
+                ================================================== -->
+
+                <div class="notifications-toolbar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="notification-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="notificationSearch"
+                            placeholder="Search notifications..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- FILTER -->
+
+                    <div class="notification-filter">
+
+                        <button
+                            type="button"
+                            class="notification-filter-btn active"
+                            data-filter="all"
+                        >
+                            All
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-filter-btn"
+                            data-filter="unread"
+                        >
+                            Unread
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notification-filter-btn"
+                            data-filter="read"
+                        >
+                            Read
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     NOTIFICATION LIST
+                ================================================== -->
+
+                <div
+                    class="notification-list"
+                    id="notificationList"
+                >
+
+
+                    <!-- =================================================
+                         NOTIFICATION 01
+                    ================================================== -->
+
+                    <div
+                        class="notification-item unread"
+                        data-status="unread"
+                        data-type="drive"
+                        data-search="tcs placement drive registration opened"
+                    >
+
+                        <div class="notification-type-icon purple">
+                            ▣
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    TCS Placement Drive Registration Opened
+                                </strong>
+
+                                <span class="notification-dot"></span>
+
+                            </div>
+
+                            <p>
+                                Registration for the upcoming TCS placement drive
+                                is now open for eligible students.
+                            </p>
+
+                            <span class="notification-time">
+                                15 minutes ago
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-read-btn"
+                                title="Mark as read"
+                            >
+                                ✓
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTIFICATION 02
+                    ================================================== -->
+
+                    <div
+                        class="notification-item unread"
+                        data-status="unread"
+                        data-type="interview"
+                        data-search="interview schedule infosys students"
+                    >
+
+                        <div class="notification-type-icon blue">
+                            ◷
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    Interview Schedule Updated
+                                </strong>
+
+                                <span class="notification-dot"></span>
+
+                            </div>
+
+                            <p>
+                                Infosys interview schedule has been updated.
+                                Students can now view their assigned slots.
+                            </p>
+
+                            <span class="notification-time">
+                                1 hour ago
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-read-btn"
+                                title="Mark as read"
+                            >
+                                ✓
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTIFICATION 03
+                    ================================================== -->
+
+                    <div
+                        class="notification-item unread"
+                        data-status="unread"
+                        data-type="offer"
+                        data-search="offer received amazon rohan verma"
+                    >
+
+                        <div class="notification-type-icon green">
+                            ★
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    New Placement Offer Received
+                                </strong>
+
+                                <span class="notification-dot"></span>
+
+                            </div>
+
+                            <p>
+                                Rohan Verma has received a placement offer
+                                from Amazon with a package of ₹14.00 LPA.
+                            </p>
+
+                            <span class="notification-time">
+                                2 hours ago
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-read-btn"
+                                title="Mark as read"
+                            >
+                                ✓
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTIFICATION 04
+                    ================================================== -->
+
+                    <div
+                        class="notification-item unread"
+                        data-status="unread"
+                        data-type="application"
+                        data-search="applications pending review"
+                    >
+
+                        <div class="notification-type-icon orange">
+                            !
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    Applications Pending Review
+                                </strong>
+
+                                <span class="notification-dot"></span>
+
+                            </div>
+
+                            <p>
+                                18 student applications are currently waiting
+                                for TPO review.
+                            </p>
+
+                            <span class="notification-time">
+                                3 hours ago
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-read-btn"
+                                title="Mark as read"
+                            >
+                                ✓
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTIFICATION 05
+                    ================================================== -->
+
+                    <div
+                        class="notification-item unread"
+                        data-status="unread"
+                        data-type="announcement"
+                        data-search="placement cell announcement meeting"
+                    >
+
+                        <div class="notification-type-icon violet">
+                            ◇
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    New Placement Cell Announcement
+                                </strong>
+
+                                <span class="notification-dot"></span>
+
+                            </div>
+
+                            <p>
+                                A new announcement has been published for
+                                students regarding placement preparation.
+                            </p>
+
+                            <span class="notification-time">
+                                Yesterday
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-read-btn"
+                                title="Mark as read"
+                            >
+                                ✓
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTIFICATION 06 - READ
+                    ================================================== -->
+
+                    <div
+                        class="notification-item"
+                        data-status="read"
+                        data-type="drive"
+                        data-search="capgemini placement drive completed"
+                    >
+
+                        <div class="notification-type-icon blue">
+                            ▣
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    Capgemini Placement Drive Completed
+                                </strong>
+
+                            </div>
+
+                            <p>
+                                The Capgemini placement drive has been completed
+                                successfully with 21 students selected.
+                            </p>
+
+                            <span class="notification-time">
+                                2 days ago
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-unread-btn"
+                                title="Mark as unread"
+                            >
+                                ↺
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTIFICATION 07 - READ
+                    ================================================== -->
+
+                    <div
+                        class="notification-item"
+                        data-status="read"
+                        data-type="joining"
+                        data-search="joining date updated tcs"
+                    >
+
+                        <div class="notification-type-icon green">
+                            ✓
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    Joining Date Updated
+                                </strong>
+
+                            </div>
+
+                            <p>
+                                TCS joining date for selected students has been
+                                updated to 15 July 2027.
+                            </p>
+
+                            <span class="notification-time">
+                                3 days ago
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-unread-btn"
+                                title="Mark as unread"
+                            >
+                                ↺
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         NOTIFICATION 08 - READ
+                    ================================================== -->
+
+                    <div
+                        class="notification-item"
+                        data-status="read"
+                        data-type="report"
+                        data-search="monthly placement report generated"
+                    >
+
+                        <div class="notification-type-icon purple">
+                            ▥
+                        </div>
+
+
+                        <div class="notification-body">
+
+                            <div class="notification-title-row">
+
+                                <strong>
+                                    Monthly Placement Report Generated
+                                </strong>
+
+                            </div>
+
+                            <p>
+                                The latest monthly placement report is ready
+                                for review and download.
+                            </p>
+
+                            <span class="notification-time">
+                                4 days ago
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action mark-unread-btn"
+                                title="Mark as unread"
+                            >
+                                ↺
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action delete-notification-btn"
+                                title="Delete"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     EMPTY STATE
+                ================================================== -->
+
+                <div
+                    class="notification-empty"
+                    id="notificationEmpty"
+                    style="display: none;"
+                >
+
+                    <div class="notification-empty-icon">
+                        ✓
+                    </div>
+
+                    <strong>
+                        No notifications found
+                    </strong>
+
+                    <span>
+                        Try changing your search or filter.
+                    </span>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="notifications-footer">
+
+                    <span id="notificationCount">
+                        Showing 8 notifications
+                    </span>
+
+
+                    <div class="notification-pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button type="button">
+                            2
+                        </button>
+
+                        <button type="button">
+                            3
+                        </button>
+
+                        <button type="button">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     NOTIFICATIONS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/notifications.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

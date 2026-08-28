@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Shortlisted Students | TPO</title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-common.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-sidebar.css'
+          ) }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/tpo-topbar.css'
+          ) }}">
+
+
+    <!-- =====================================================
+         SHORTLISTED STUDENTS CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='css/tpo/shortlisted-students.css'
+          ) }}">
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="shortlisted-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="shortlisted-page-header">
+
+                <div>
+
+                    <h1>
+                        Shortlisted Students
+                    </h1>
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span class="breadcrumb-arrow">
+                            ›
+                        </span>
+
+                        <strong>
+                            Shortlisted Students
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXPORT -->
+
+                <button
+                    type="button"
+                    class="export-shortlisted-btn"
+                    id="exportShortlisted"
+                >
+
+                    ↓
+                    Export
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="shortlisted-stats">
+
+
+                <!-- TOTAL -->
+
+                <div class="shortlisted-stat-card">
+
+                    <div class="shortlisted-stat-icon purple">
+                        ★
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Shortlisted
+                        </span>
+
+                        <strong>
+                            392
+                        </strong>
+
+                        <small>
+                            This academic year
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INTERVIEW -->
+
+                <div class="shortlisted-stat-card">
+
+                    <div class="shortlisted-stat-icon blue">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Interviews
+                        </span>
+
+                        <strong>
+                            248
+                        </strong>
+
+                        <small>
+                            Scheduled / completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SELECTED -->
+
+                <div class="shortlisted-stat-card">
+
+                    <div class="shortlisted-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Selected
+                        </span>
+
+                        <strong>
+                            156
+                        </strong>
+
+                        <small>
+                            Final selections
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PENDING -->
+
+                <div class="shortlisted-stat-card">
+
+                    <div class="shortlisted-stat-icon orange">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong>
+                            144
+                        </strong>
+
+                        <small>
+                            Awaiting interview
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PACKAGE -->
+
+                <div class="shortlisted-stat-card">
+
+                    <div class="shortlisted-stat-icon violet">
+                        ₹
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Avg Package
+                        </span>
+
+                        <strong>
+                            ₹9.20 LPA
+                        </strong>
+
+                        <small>
+                            Of shortlisted offers
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="shortlisted-table-card">
+
+
+                <!-- =================================================
+                     FILTER BAR
+                ================================================== -->
+
+                <div class="shortlisted-filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="shortlisted-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="shortlistedSearch"
+                            placeholder="Search student or company..."
+                        >
+
+                    </div>
+
+
+
+                    <!-- COMPANY -->
+
+                    <div class="shortlisted-filter-control">
+
+                        <label>
+                            Company
+                        </label>
+
+                        <select
+                            id="shortlistedCompanyFilter"
+                        >
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            <option value="TCS">
+                                TCS
+                            </option>
+
+                            <option value="Infosys">
+                                Infosys
+                            </option>
+
+                            <option value="Amazon">
+                                Amazon
+                            </option>
+
+                            <option value="Capgemini">
+                                Capgemini
+                            </option>
+
+                            <option value="Deloitte">
+                                Deloitte
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- COLLEGE -->
+
+                    <div class="shortlisted-filter-control">
+
+                        <label>
+                            College
+                        </label>
+
+                        <select
+                            id="shortlistedCollegeFilter"
+                        >
+
+                            <option value="all">
+                                All Colleges
+                            </option>
+
+                            <option value="PCE">
+                                PCE
+                            </option>
+
+                            <option value="PIET">
+                                PIET
+                            </option>
+
+                            <option value="PU">
+                                PU
+                            </option>
+
+                            <option value="JIET">
+                                JIET
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- INTERVIEW STATUS -->
+
+                    <div class="shortlisted-filter-control">
+
+                        <label>
+                            Interview
+                        </label>
+
+                        <select
+                            id="shortlistedInterviewFilter"
+                        >
+
+                            <option value="all">
+                                All
+                            </option>
+
+                            <option value="scheduled">
+                                Scheduled
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- SELECTION STATUS -->
+
+                    <div class="shortlisted-filter-control">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select
+                            id="shortlistedStatusFilter"
+                        >
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="shortlisted">
+                                Shortlisted
+                            </option>
+
+                            <option value="selected">
+                                Selected
+                            </option>
+
+                            <option value="rejected">
+                                Rejected
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- RESET -->
+
+                    <button
+                        type="button"
+                        class="shortlisted-reset-btn"
+                        id="resetShortlistedFilters"
+                    >
+
+                        ↻
+                        Reset
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+
+                <div class="shortlisted-table-wrapper">
+
+                    <table
+                        class="shortlisted-table"
+                        id="shortlistedTable"
+                    >
+
+                        <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>STUDENT</th>
+
+                            <th>COLLEGE</th>
+
+                            <th>COMPANY</th>
+
+                            <th>JOB ROLE</th>
+
+                            <th>PACKAGE</th>
+
+                            <th>APPLIED DATE</th>
+
+                            <th>INTERVIEW</th>
+
+                            <th>STATUS</th>
+
+                            <th>ACTIONS</th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        <!-- =================================================
+                             STUDENT 01
+                        ================================================== -->
+
+                        <tr
+                            data-student="Aarav Sharma"
+                            data-company="TCS"
+                            data-college="PCE"
+                            data-interview="scheduled"
+                            data-status="shortlisted"
+                        >
+
+                            <td>
+                                01
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-student-info">
+
+                                    <div class="shortlisted-avatar purple">
+                                        AS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Aarav Sharma
+                                        </strong>
+
+                                        <span>
+                                            PCE202701
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="shortlisted-company">
+                                    TCS
+                                </strong>
+
+                                <span class="shortlisted-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td class="shortlisted-package">
+                                ₹8.50 LPA
+                            </td>
+
+
+                            <td>
+                                22 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-interview scheduled">
+                                    Scheduled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-status shortlisted">
+                                    Shortlisted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-actions">
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn view-shortlisted-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn more-shortlisted-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 02
+                        ================================================== -->
+
+                        <tr
+                            data-student="Priya Mehta"
+                            data-company="Infosys"
+                            data-college="PIET"
+                            data-interview="completed"
+                            data-status="selected"
+                        >
+
+                            <td>
+                                02
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-student-info">
+
+                                    <div class="shortlisted-avatar blue">
+                                        PM
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Priya Mehta
+                                        </strong>
+
+                                        <span>
+                                            PIET202734
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="shortlisted-company">
+                                    Infosys
+                                </strong>
+
+                                <span class="shortlisted-company-subtext">
+                                    Infosys Limited
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                System Engineer
+                            </td>
+
+
+                            <td class="shortlisted-package">
+                                ₹7.20 LPA
+                            </td>
+
+
+                            <td>
+                                20 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-interview completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-status selected">
+                                    Selected
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-actions">
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn view-shortlisted-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn more-shortlisted-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 03
+                        ================================================== -->
+
+                        <tr
+                            data-student="Rohan Verma"
+                            data-company="Amazon"
+                            data-college="PU"
+                            data-interview="pending"
+                            data-status="shortlisted"
+                        >
+
+                            <td>
+                                03
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-student-info">
+
+                                    <div class="shortlisted-avatar orange">
+                                        RV
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Rohan Verma
+                                        </strong>
+
+                                        <span>
+                                            PU202715
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PU
+                            </td>
+
+
+                            <td>
+
+                                <strong class="shortlisted-company">
+                                    Amazon
+                                </strong>
+
+                                <span class="shortlisted-company-subtext">
+                                    Amazon Development Centre
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                SDE I
+                            </td>
+
+
+                            <td class="shortlisted-package">
+                                ₹14.00 LPA
+                            </td>
+
+
+                            <td>
+                                19 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-interview pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-status shortlisted">
+                                    Shortlisted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-actions">
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn view-shortlisted-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn more-shortlisted-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 04
+                        ================================================== -->
+
+                        <tr
+                            data-student="Neha Gupta"
+                            data-company="Capgemini"
+                            data-college="JIET"
+                            data-interview="completed"
+                            data-status="rejected"
+                        >
+
+                            <td>
+                                04
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-student-info">
+
+                                    <div class="shortlisted-avatar green">
+                                        NG
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Neha Gupta
+                                        </strong>
+
+                                        <span>
+                                            JIET202756
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                JIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="shortlisted-company">
+                                    Capgemini
+                                </strong>
+
+                                <span class="shortlisted-company-subtext">
+                                    Capgemini Technology Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Analyst
+                            </td>
+
+
+                            <td class="shortlisted-package">
+                                ₹9.10 LPA
+                            </td>
+
+
+                            <td>
+                                17 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-interview completed">
+                                    Completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-status rejected">
+                                    Rejected
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-actions">
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn view-shortlisted-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn more-shortlisted-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 05
+                        ================================================== -->
+
+                        <tr
+                            data-student="Kunal Singh"
+                            data-company="Deloitte"
+                            data-college="PCE"
+                            data-interview="pending"
+                            data-status="shortlisted"
+                        >
+
+                            <td>
+                                05
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-student-info">
+
+                                    <div class="shortlisted-avatar dark">
+                                        KS
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Kunal Singh
+                                        </strong>
+
+                                        <span>
+                                            PCE202768
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PCE
+                            </td>
+
+
+                            <td>
+
+                                <strong class="shortlisted-company">
+                                    Deloitte
+                                </strong>
+
+                                <span class="shortlisted-company-subtext">
+                                    Deloitte Consulting
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Analyst
+                            </td>
+
+
+                            <td class="shortlisted-package">
+                                ₹8.80 LPA
+                            </td>
+
+
+                            <td>
+                                16 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-interview pending">
+                                    Pending
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-status shortlisted">
+                                    Shortlisted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-actions">
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn view-shortlisted-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn more-shortlisted-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- =================================================
+                             STUDENT 06
+                        ================================================== -->
+
+                        <tr
+                            data-student="Ananya Joshi"
+                            data-company="TCS"
+                            data-college="PIET"
+                            data-interview="scheduled"
+                            data-status="shortlisted"
+                        >
+
+                            <td>
+                                06
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-student-info">
+
+                                    <div class="shortlisted-avatar violet">
+                                        AJ
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Ananya Joshi
+                                        </strong>
+
+                                        <span>
+                                            PIET202781
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                PIET
+                            </td>
+
+
+                            <td>
+
+                                <strong class="shortlisted-company">
+                                    TCS
+                                </strong>
+
+                                <span class="shortlisted-company-subtext">
+                                    Tata Consultancy Services
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Software Engineer
+                            </td>
+
+
+                            <td class="shortlisted-package">
+                                ₹8.50 LPA
+                            </td>
+
+
+                            <td>
+                                15 Aug 2026
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-interview scheduled">
+                                    Scheduled
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="shortlisted-status shortlisted">
+                                    Shortlisted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="shortlisted-actions">
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn view-shortlisted-btn"
+                                        title="View"
+                                    >
+                                        ◉
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="shortlisted-action-btn more-shortlisted-btn"
+                                        title="More"
+                                    >
+                                        ⋮
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="shortlisted-table-footer">
+
+                    <span id="shortlistedCount">
+                        Showing 6 of 392 shortlisted students
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            2
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            3
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            4
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            5
+                        </button>
+
+                        <button
+                            type="button"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMMON JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-sidebar.js'
+          ) }}">
+</script>
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/tpo-topbar.js'
+          ) }}">
+</script>
+
+
+
+<!-- =====================================================
+     SHORTLISTED STUDENTS JS
+====================================================== -->
+
+<script src="{{ url_for(
+            'static',
+            filename='js/tpo/shortlisted-students.js'
+          ) }}">
+</script>
+
+
+</body>
+
+</html>

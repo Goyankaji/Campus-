@@ -1,0 +1,1611 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   TPO - PLACEMENT OVERVIEW
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.placement-overview-content {
+
+    min-height: calc(100vh - 60px);
+
+    padding: 22px 24px 30px;
+
+    background: var(--page-bg);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.placement-overview-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 19px;
+}
+
+
+.placement-overview-header h1 {
+
+    margin: 0;
+
+    color: var(--text-main);
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+
+.breadcrumb {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 7px;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+}
+
+
+.breadcrumb strong {
+
+    color: var(--primary);
+
+    font-weight: 600;
+}
+
+
+.breadcrumb-arrow {
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   HEADER FILTERS
+========================================================= */
+
+.overview-header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.overview-year-select,
+.overview-college-select {
+
+    height: 34px;
+
+    padding: 0 9px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: var(--card-bg);
+
+    color: var(--text-secondary);
+
+    font-family: inherit;
+
+    font-size: 7.5px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+
+.overview-year-select {
+
+    width: 105px;
+}
+
+
+.overview-college-select {
+
+    width: 125px;
+}
+
+
+.overview-year-select:focus,
+.overview-college-select:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(105, 55, 225, 0.07);
+}
+
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.placement-kpi-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 11px;
+
+    margin-bottom: 11px;
+}
+
+
+.placement-kpi-card {
+
+    min-height: 126px;
+
+    padding: 13px;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 2px 8px
+        rgba(15, 23, 42, 0.025);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+.placement-kpi-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 17px
+        rgba(15, 23, 42, 0.06);
+}
+
+
+.placement-kpi-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.placement-kpi-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.placement-kpi-icon.purple {
+
+    background:
+        rgba(112, 71, 232, 0.11);
+
+    color: #7047e8;
+}
+
+
+.placement-kpi-icon.green {
+
+    background:
+        rgba(22, 180, 112, 0.10);
+
+    color: #16a96f;
+}
+
+
+.placement-kpi-icon.blue {
+
+    background:
+        rgba(52, 120, 246, 0.10);
+
+    color: #3478f6;
+}
+
+
+.placement-kpi-icon.orange {
+
+    background:
+        rgba(242, 143, 39, 0.11);
+
+    color: #ed8a24;
+}
+
+
+.kpi-growth {
+
+    padding: 4px 6px;
+
+    border-radius: 5px;
+
+    font-size: 6px;
+
+    font-weight: 700;
+}
+
+
+.kpi-growth.positive {
+
+    background:
+        rgba(22, 180, 112, 0.09);
+
+    color: #129d69;
+}
+
+
+.placement-kpi-label {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    font-size: 7px;
+
+    font-weight: 600;
+}
+
+
+.placement-kpi-value {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-main);
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+.placement-kpi-note {
+
+    display: block;
+
+    margin-top: 6px;
+
+    color: var(--text-muted);
+
+    font-size: 6px;
+}
+
+
+/* =========================================================
+   PACKAGE SUMMARY
+========================================================= */
+
+.package-summary-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 11px;
+
+    margin-bottom: 12px;
+}
+
+
+.package-summary-card {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 11px 13px;
+
+    background: var(--card-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 9px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 2px 7px
+        rgba(15, 23, 42, 0.025);
+}
+
+
+.package-card-icon {
+
+    width: 35px;
+
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.package-card-icon.purple {
+
+    background:
+        rgba(112, 71, 232, 0.11);
+
+    color: #7047e8;
+}
+
+
+.package-card-icon.green {
+
+    background:
+        rgba(22, 180, 112, 0.10);
+
+    color: #16a96f;
+}
+
+
+.package-card-icon.blue {
+
+    background:
+        rgba(52, 120, 246, 0.10);
+
+    color: #3478f6;
+}
+
+
+.package-summary-card span {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    font-size: 7px;
+
+    font-weight: 600;
+}
+
+
+.package-summary-card strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-main);
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.package-summary-card small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 5.8px;
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+========================================================= */
+
+.overview-analytics-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.55fr)
+        minmax(270px, 0.9fr);
+
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   COMMON CARD
+========================================================= */
+
+.overview-card {
+
+    background: var(--card-bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px
+        rgba(15, 23, 42, 0.025);
+
+    overflow: hidden;
+}
+
+
+.overview-card-header {
+
+    min-height: 59px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 11px 13px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    box-sizing: border-box;
+}
+
+
+.overview-card-header h2 {
+
+    margin: 0;
+
+    color: var(--text-main);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.overview-card-header p {
+
+    margin: 4px 0 0;
+
+    color: var(--text-muted);
+
+    font-size: 6.2px;
+}
+
+
+.overview-card-badge {
+
+    padding: 5px 7px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(112, 71, 232, 0.08);
+
+    color: var(--primary);
+
+    font-size: 5.8px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PLACEMENT TREND CHART
+========================================================= */
+
+.placement-trend-card {
+
+    min-width: 0;
+}
+
+
+.placement-chart {
+
+    height: 220px;
+
+    display: flex;
+
+    padding: 14px 14px 12px;
+
+    box-sizing: border-box;
+}
+
+
+.chart-y-axis {
+
+    width: 27px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding:
+        1px 5px 24px 0;
+
+    box-sizing: border-box;
+
+    color: var(--text-muted);
+
+    font-size: 5.5px;
+
+    text-align: right;
+}
+
+
+.chart-area {
+
+    position: relative;
+
+    flex: 1;
+
+    min-width: 0;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.chart-grid-lines {
+
+    position: absolute;
+
+    inset: 0 0 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+
+.chart-grid-lines span {
+
+    width: 100%;
+
+    border-top:
+        1px dashed
+        rgba(148, 163, 184, 0.20);
+}
+
+
+.chart-bars {
+
+    position: absolute;
+
+    inset: 0 4px 0;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-around;
+
+    gap: 14px;
+}
+
+
+.chart-column {
+
+    height: 100%;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 25px;
+}
+
+
+.chart-bar {
+
+    width: min(36px, 55%);
+
+    min-height: 12px;
+
+    border-radius:
+        5px 5px 0 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8c68ef,
+            #6540d4
+        );
+
+    box-shadow:
+        0 4px 10px
+        rgba(105, 55, 225, 0.12);
+
+    transition:
+        height 0.5s ease;
+}
+
+
+.chart-column.current
+.chart-bar {
+
+    background:
+        linear-gradient(
+            180deg,
+            #16b477,
+            #10915f
+        );
+
+    box-shadow:
+        0 4px 10px
+        rgba(22, 180, 112, 0.13);
+}
+
+
+.chart-column > span {
+
+    min-height: 12px;
+
+    color: var(--text-muted);
+
+    font-size: 5px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PLACEMENT STATUS
+========================================================= */
+
+.placement-status-content {
+
+    min-height: 220px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 24px;
+
+    padding: 15px;
+}
+
+
+.status-donut {
+
+    width: 138px;
+
+    height: 138px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #16a96f 0 11.4%,
+            #7047e8 11.4% 42%,
+            #3478f6 42% 84.4%,
+            #e6a044 84.4% 100%
+        );
+
+    box-shadow:
+        0 6px 18px
+        rgba(15, 23, 42, 0.07);
+}
+
+
+.status-donut::before {
+
+    content: "";
+
+    position: absolute;
+}
+
+
+.status-donut-inner {
+
+    width: 94px;
+
+    height: 94px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    border-radius: 50%;
+
+    background: var(--card-bg);
+
+}
+
+
+.status-donut-inner strong {
+
+    color: var(--text-main);
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+.status-donut-inner span {
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 6px;
+}
+
+
+.status-legend {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.legend-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.legend-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+.legend-dot.placed {
+    background: #16a96f;
+}
+
+
+.legend-dot.eligible {
+    background: #7047e8;
+}
+
+
+.legend-dot.registered {
+    background: #3478f6;
+}
+
+
+.legend-dot.pending {
+    background: #e6a044;
+}
+
+
+.legend-item strong {
+
+    display: block;
+
+    color: var(--text-main);
+
+    font-size: 6.7px;
+
+    font-weight: 700;
+}
+
+
+.legend-item div span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 5.8px;
+}
+
+
+/* =========================================================
+   COLLEGE PLACEMENT
+========================================================= */
+
+.college-placement-card {
+
+    margin-bottom: 12px;
+}
+
+
+.view-report-btn {
+
+    height: 28px;
+
+    padding: 0 9px;
+
+    border:
+        1px solid rgba(105, 55, 225, 0.20);
+
+    border-radius: 6px;
+
+    background:
+        rgba(105, 55, 225, 0.05);
+
+    color: var(--primary);
+
+    font-family: inherit;
+
+    font-size: 6.5px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+
+.view-report-btn:hover {
+
+    background:
+        rgba(105, 55, 225, 0.10);
+}
+
+
+.college-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.college-placement-table {
+
+    width: 100%;
+
+    min-width: 760px;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+}
+
+
+.college-placement-table th {
+
+    height: 38px;
+
+    padding: 0 12px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    background:
+        rgba(105, 55, 225, 0.025);
+
+    color: var(--text-muted);
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+
+.college-placement-table td {
+
+    height: 51px;
+
+    padding: 0 12px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    color: var(--text-secondary);
+
+    font-size: 6.5px;
+
+    white-space: nowrap;
+}
+
+
+.college-placement-table tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+.college-placement-table tbody tr:hover {
+
+    background:
+        rgba(105, 55, 225, 0.025);
+}
+
+
+.college-placement-table td strong {
+
+    color: var(--text-main);
+
+    font-size: 7px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RATE
+========================================================= */
+
+.rate-cell {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    min-width: 80px;
+}
+
+
+.rate-cell > span {
+
+    width: 23px;
+
+    color: var(--text-secondary);
+
+    font-size: 6px;
+
+    font-weight: 700;
+}
+
+
+.rate-bar {
+
+    width: 43px;
+
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        var(--page-bg);
+}
+
+
+.rate-bar i {
+
+    display: block;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7047e8,
+            #8d6df0
+        );
+}
+
+
+/* =========================================================
+   BOTTOM GRID
+========================================================= */
+
+.overview-bottom-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   RECRUITERS
+========================================================= */
+
+.recruiter-list {
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.recruiter-row {
+
+    min-height: 57px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 13px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    box-sizing: border-box;
+}
+
+
+.recruiter-row:last-child {
+
+    border-bottom: none;
+}
+
+
+.recruiter-rank {
+
+    width: 18px;
+
+    color: var(--text-muted);
+
+    font-size: 5.5px;
+
+    font-weight: 700;
+}
+
+
+.recruiter-logo {
+
+    width: 31px;
+
+    height: 31px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    background:
+        rgba(112, 71, 232, 0.09);
+
+    color: var(--primary);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.recruiter-info {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.recruiter-info strong {
+
+    display: block;
+
+    color: var(--text-main);
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.recruiter-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 5.8px;
+}
+
+
+.recruiter-package {
+
+    color: var(--text-main);
+
+    font-size: 6.5px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY
+========================================================= */
+
+.placement-activity-list {
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.placement-activity-item {
+
+    min-height: 57px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 8px 13px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    box-sizing: border-box;
+}
+
+
+.placement-activity-item:last-child {
+
+    border-bottom: none;
+}
+
+
+.activity-icon {
+
+    width: 30px;
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.activity-icon.green {
+
+    background:
+        rgba(22, 180, 112, 0.10);
+
+    color: #16a96f;
+}
+
+
+.activity-icon.blue {
+
+    background:
+        rgba(52, 120, 246, 0.10);
+
+    color: #3478f6;
+}
+
+
+.activity-icon.purple {
+
+    background:
+        rgba(112, 71, 232, 0.10);
+
+    color: #7047e8;
+}
+
+
+.activity-icon.orange {
+
+    background:
+        rgba(242, 143, 39, 0.11);
+
+    color: #ed8a24;
+}
+
+
+.activity-icon.violet {
+
+    background:
+        rgba(133, 82, 224, 0.10);
+
+    color: #8552e0;
+}
+
+
+.placement-activity-item div {
+
+    min-width: 0;
+}
+
+
+.placement-activity-item strong {
+
+    display: block;
+
+    overflow: hidden;
+
+    color: var(--text-main);
+
+    font-size: 6.7px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+
+.placement-activity-item div span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 5.8px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-theme
+.placement-overview-content {
+
+    background: #081225;
+}
+
+
+body.dark-theme
+.overview-year-select,
+body.dark-theme
+.overview-college-select {
+
+    background: #0b172c;
+}
+
+
+body.dark-theme
+.college-placement-table th {
+
+    background:
+        rgba(112, 71, 232, 0.045);
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .placement-kpi-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .overview-analytics-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 850px
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .overview-bottom-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .package-summary-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .placement-overview-header {
+
+        flex-direction: column;
+    }
+
+
+    .overview-header-actions {
+
+        width: 100%;
+    }
+
+
+    .overview-year-select,
+    .overview-college-select {
+
+        flex: 1;
+
+        width: auto;
+    }
+
+
+    .package-summary-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .placement-status-content {
+
+        flex-direction: column;
+
+        gap: 18px;
+
+        padding: 20px;
+    }
+
+
+    .status-legend {
+
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .placement-overview-content {
+
+        padding:
+            16px 12px 22px;
+    }
+
+
+    .placement-kpi-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .overview-header-actions {
+
+        flex-direction: column;
+    }
+
+
+    .overview-year-select,
+    .overview-college-select {
+
+        width: 100%;
+    }
+
+
+    .placement-chart {
+
+        height: 190px;
+
+        padding:
+            12px 8px 10px;
+    }
+
+
+    .chart-bars {
+
+        gap: 5px;
+    }
+
+
+    .chart-bar {
+
+        width: 22px;
+    }
+
+
+    .chart-column > span {
+
+        font-size: 4px;
+    }
+
+
+    .status-donut {
+
+        width: 120px;
+
+        height: 120px;
+    }
+
+
+    .status-donut-inner {
+
+        width: 82px;
+
+        height: 82px;
+    }
+
+
+    .status-legend {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .overview-card-header {
+
+        align-items: flex-start;
+    }
+
+
+    .view-report-btn {
+
+        flex-shrink: 0;
+    }
+
+
+    .recruiter-row {
+
+        padding:
+            8px 11px;
+    }
+
+
+    .recruiter-package {
+
+        display: none;
+    }
+
+}
