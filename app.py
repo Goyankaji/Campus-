@@ -33,7 +33,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="Tonu567890@",
+        password="*****",
         database="campus_placement_manager",
         port=3306
     )
@@ -5985,7 +5985,7 @@ def tpo_placement_overview():
             user = cursor.fetchone()
             if user:
                 campus_id = user["campus_id"]
-                session.get("user_id"),
+                session["campus_id"] = campus_id,
         if not campus_id:
             return render_template(
                 "tpo/placement_overview.html",
