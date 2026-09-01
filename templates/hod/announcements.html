@@ -1,0 +1,594 @@
+{% extends "hod/base.html" %}
+
+
+{% block title %}
+    Announcements | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/hod/announcements.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section
+    class="hod-announcements-page"
+    id="hodAnnouncementsPage"
+>
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="announcements-page-header">
+
+        <div class="announcements-header-left">
+
+
+            <!-- BREADCRUMB -->
+
+            <div class="announcements-breadcrumb">
+
+                <span>
+                    Dashboard
+                </span>
+
+                <b>
+                    ›
+                </b>
+
+                <strong>
+                    Announcements
+                </strong>
+
+            </div>
+
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Announcements
+            </h1>
+
+            <p>
+                Stay updated with important placement,
+                academic and department announcements.
+            </p>
+
+
+        </div>
+
+
+
+        <!-- DEPARTMENT -->
+
+        <div class="announcements-department-pill">
+
+            <span class="department-pill-dot"></span>
+
+            <span>
+                Information Technology
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN PANEL
+    ====================================================== -->
+
+    <section class="announcements-panel">
+
+
+        <!-- =================================================
+             PANEL HEADER
+        ================================================== -->
+
+        <div class="announcements-panel-header">
+
+
+            <div class="announcements-panel-heading">
+
+                <div class="announcements-panel-icon">
+                    ◈
+                </div>
+
+
+                <div>
+
+                    <span class="panel-eyebrow">
+                        DEPARTMENT UPDATES
+                    </span>
+
+                    <h2>
+                        Latest Announcements
+                    </h2>
+
+                    <p>
+                        Important updates shared with
+                        Information Technology students.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="mark-all-btn"
+                id="markAllReadBtn"
+            >
+
+                ✓ Mark all as read
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="announcements-toolbar">
+
+
+            <!-- SEARCH -->
+
+            <div class="announcement-search">
+
+                <span class="announcement-search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="announcementSearch"
+                    placeholder="Search announcements..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- CATEGORY -->
+
+            <select
+                id="announcementCategory"
+                class="announcement-select"
+            >
+
+                <option value="all">
+                    All Announcements
+                </option>
+
+                <option value="placement">
+                    Placement
+                </option>
+
+                <option value="academic">
+                    Academic
+                </option>
+
+                <option value="general">
+                    General
+                </option>
+
+            </select>
+
+
+
+            <!-- STATUS -->
+
+            <select
+                id="announcementStatus"
+                class="announcement-select"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="unread">
+                    Unread
+                </option>
+
+                <option value="read">
+                    Read
+                </option>
+
+            </select>
+
+
+
+            <!-- CLEAR -->
+
+            <button
+                type="button"
+                class="clear-announcement-btn"
+                id="clearAnnouncementFilters"
+            >
+
+                Clear
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             RESULT INFO
+        ================================================== -->
+
+        <div class="announcement-result-bar">
+
+            <div>
+
+                <strong id="announcementResultCount">
+                    4
+                </strong>
+
+                <span>
+                    announcements
+                </span>
+
+            </div>
+
+
+            <span class="announcement-scope">
+                Information Technology Department
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ANNOUNCEMENT LIST
+        ================================================== -->
+
+        <div
+            class="announcement-list"
+            id="announcementList"
+        >
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT 01
+            ================================================== -->
+
+            <article
+                class="announcement-item unread"
+                data-id="announcement-001"
+                data-category="placement"
+                data-status="unread"
+            >
+
+                <div class="announcement-type-icon placement">
+                    ✓
+                </div>
+
+
+                <div class="announcement-main">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Student shortlisted for placement
+                        </h3>
+
+                        <span class="unread-indicator"></span>
+
+                    </div>
+
+
+                    <p class="announcement-description">
+                        Rishi Sharma has been shortlisted
+                        for the TCS campus placement drive.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category">
+                            Placement
+                        </span>
+
+                        <span class="meta-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Today, 10:15 AM
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="announcement-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT 02
+            ================================================== -->
+
+            <article
+                class="announcement-item unread"
+                data-id="announcement-002"
+                data-category="placement"
+                data-status="unread"
+            >
+
+                <div class="announcement-type-icon placement">
+                    ◆
+                </div>
+
+
+                <div class="announcement-main">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            New placement application received
+                        </h3>
+
+                        <span class="unread-indicator"></span>
+
+                    </div>
+
+
+                    <p class="announcement-description">
+                        A new placement application has been
+                        submitted by an Information Technology student.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category">
+                            Placement
+                        </span>
+
+                        <span class="meta-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Today, 09:42 AM
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="announcement-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT 03
+            ================================================== -->
+
+            <article
+                class="announcement-item unread"
+                data-id="announcement-003"
+                data-category="placement"
+                data-status="unread"
+            >
+
+                <div class="announcement-type-icon interview">
+                    ◷
+                </div>
+
+
+                <div class="announcement-main">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Interview stage updated
+                        </h3>
+
+                        <span class="unread-indicator"></span>
+
+                    </div>
+
+
+                    <p class="announcement-description">
+                        Arsf Danish has moved to the interview
+                        stage for an active placement opportunity.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category">
+                            Placement
+                        </span>
+
+                        <span class="meta-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Today, 08:55 AM
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="announcement-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENT 04
+            ================================================== -->
+
+            <article
+                class="announcement-item"
+                data-id="announcement-004"
+                data-category="academic"
+                data-status="read"
+            >
+
+                <div class="announcement-type-icon academic">
+                    ▣
+                </div>
+
+
+                <div class="announcement-main">
+
+                    <div class="announcement-title-row">
+
+                        <h3>
+                            Academic session update
+                        </h3>
+
+                    </div>
+
+
+                    <p class="announcement-description">
+                        Important academic information for
+                        the current 2026–27 session is now available.
+                    </p>
+
+
+                    <div class="announcement-meta">
+
+                        <span class="announcement-category">
+                            Academic
+                        </span>
+
+                        <span class="meta-separator">
+                            •
+                        </span>
+
+                        <span>
+                            Yesterday
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="announcement-action read-action"
+                    data-action="read"
+                >
+                    Read
+
+                </button>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="announcement-empty"
+                id="announcementEmpty"
+                hidden
+            >
+
+                <div class="announcement-empty-icon">
+                    ◈
+                </div>
+
+                <h3>
+                    No announcements found
+                </h3>
+
+                <p>
+                    No announcements match the selected
+                    search or filter.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</section>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/hod/announcements.js'
+    ) }}"
+></script>
+
+{% endblock %}

@@ -1,0 +1,1045 @@
+{% extends "hod/base.html" %}
+
+{% block title %}
+    Feedback | HOD Portal
+{% endblock %}
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/hod/feedback.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section
+    class="hod-feedback-page"
+    id="hodFeedbackPage"
+>
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="feedback-page-header">
+
+        <div class="feedback-header-left">
+
+            <div class="feedback-breadcrumb">
+
+                <span>Dashboard</span>
+
+                <b>›</b>
+
+                <strong>Feedback</strong>
+
+            </div>
+
+
+            <h1>
+                Feedback
+            </h1>
+
+            <p>
+                Review feedback submitted by students and
+                department users.
+            </p>
+
+        </div>
+
+
+        <div class="feedback-department-pill">
+
+            <span></span>
+
+            Information Technology
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="feedback-summary-grid">
+
+
+        <article class="feedback-summary-card">
+
+            <div class="feedback-summary-icon purple">
+                ◈
+            </div>
+
+            <div>
+
+                <span>
+                    Total Feedback
+                </span>
+
+                <strong id="totalFeedback">
+                    6
+                </strong>
+
+                <small>
+                    Department responses
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="feedback-summary-card">
+
+            <div class="feedback-summary-icon red">
+                !
+            </div>
+
+            <div>
+
+                <span>
+                    New
+                </span>
+
+                <strong id="newFeedback">
+                    2
+                </strong>
+
+                <small>
+                    Needs attention
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="feedback-summary-card">
+
+            <div class="feedback-summary-icon blue">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    Under Review
+                </span>
+
+                <strong id="reviewFeedback">
+                    2
+                </strong>
+
+                <small>
+                    Currently reviewing
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="feedback-summary-card">
+
+            <div class="feedback-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Resolved
+                </span>
+
+                <strong id="resolvedFeedback">
+                    2
+                </strong>
+
+                <small>
+                    Successfully handled
+                </small>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FEEDBACK DIRECTORY
+    ====================================================== -->
+
+    <section class="feedback-panel">
+
+
+        <!-- PANEL HEADER -->
+
+        <div class="feedback-panel-header">
+
+            <div class="feedback-panel-heading">
+
+                <div class="feedback-panel-icon">
+                    ◈
+                </div>
+
+                <div>
+
+                    <span>
+                        FEEDBACK CENTER
+                    </span>
+
+                    <h2>
+                        Feedback Directory
+                    </h2>
+
+                    <p>
+                        Review comments and suggestions
+                        received from department users.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="feedback-record-count">
+
+                <strong id="feedbackResultCount">
+                    6
+                </strong>
+
+                Records
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="feedback-toolbar">
+
+
+            <div class="feedback-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="feedbackSearch"
+                    placeholder="Search user or feedback..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select
+                id="feedbackStatus"
+                class="feedback-select"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="new">
+                    New
+                </option>
+
+                <option value="review">
+                    Under Review
+                </option>
+
+                <option value="resolved">
+                    Resolved
+                </option>
+
+            </select>
+
+
+            <select
+                id="feedbackSource"
+                class="feedback-select"
+            >
+
+                <option value="all">
+                    All Sources
+                </option>
+
+                <option value="student">
+                    Student
+                </option>
+
+                <option value="tpo">
+                    TPO
+                </option>
+
+                <option value="faculty">
+                    Faculty
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                id="clearFeedbackFilters"
+                class="feedback-clear-btn"
+            >
+                Clear
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FEEDBACK TABLE
+        ================================================== -->
+
+        <div class="feedback-table-wrap">
+
+            <table class="feedback-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>USER</th>
+
+                        <th>FEEDBACK</th>
+
+                        <th>SOURCE</th>
+
+                        <th>SUBMITTED ON</th>
+
+                        <th>STATUS</th>
+
+                        <th>ACTION</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="feedbackTableBody">
+
+
+                    <!-- =================================================
+                         ROW 01
+                    ================================================== -->
+
+                    <tr
+                        class="feedback-row"
+                        data-id="feedback-001"
+                        data-status="new"
+                        data-source="student"
+                    >
+
+                        <td>
+                            01
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-user">
+
+                                <div class="feedback-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rahul Sharma
+                                    </strong>
+
+                                    <small>
+                                        rishi.sharma@poornima.org
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-message">
+                                Placement drive information was
+                                very useful.
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="source-badge student">
+                                Student
+                            </span>
+                        </td>
+
+
+                        <td>
+                            31 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="feedback-status new">
+                                New
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="feedback-view-btn"
+                                data-feedback="feedback-001"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 02
+                    ================================================== -->
+
+                    <tr
+                        class="feedback-row"
+                        data-id="feedback-002"
+                        data-status="review"
+                        data-source="student"
+                    >
+
+                        <td>
+                            02
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-user">
+
+                                <div class="feedback-avatar">
+                                    PV
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Priya Verma
+                                    </strong>
+
+                                    <small>
+                                        priya.verma@poornima.org
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-message">
+                                Please add more technical
+                                preparation material.
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="source-badge student">
+                                Student
+                            </span>
+                        </td>
+
+
+                        <td>
+                            30 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="feedback-status review">
+                                Under Review
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="feedback-view-btn"
+                                data-feedback="feedback-002"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 03
+                    ================================================== -->
+
+                    <tr
+                        class="feedback-row"
+                        data-id="feedback-003"
+                        data-status="resolved"
+                        data-source="tpo"
+                    >
+
+                        <td>
+                            03
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-user">
+
+                                <div class="feedback-avatar">
+                                    AK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Ankit Kumar
+                                    </strong>
+
+                                    <small>
+                                        ankit.kumar@poornima.org
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-message">
+                                Company management workflow
+                                is easy to use.
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="source-badge tpo">
+                                TPO
+                            </span>
+                        </td>
+
+
+                        <td>
+                            29 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="feedback-status resolved">
+                                Resolved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="feedback-view-btn"
+                                data-feedback="feedback-003"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 04
+                    ================================================== -->
+
+                    <tr
+                        class="feedback-row"
+                        data-id="feedback-004"
+                        data-status="new"
+                        data-source="faculty"
+                    >
+
+                        <td>
+                            04
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-user">
+
+                                <div class="feedback-avatar">
+                                    SM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Sandeep Meena
+                                    </strong>
+
+                                    <small>
+                                        sandeep.meena@poornima.org
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-message">
+                                More company-specific preparation
+                                sessions would be helpful.
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="source-badge faculty">
+                                Faculty
+                            </span>
+                        </td>
+
+
+                        <td>
+                            28 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="feedback-status new">
+                                New
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="feedback-view-btn"
+                                data-feedback="feedback-004"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 05
+                    ================================================== -->
+
+                    <tr
+                        class="feedback-row"
+                        data-id="feedback-005"
+                        data-status="review"
+                        data-source="student"
+                    >
+
+                        <td>
+                            05
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-user">
+
+                                <div class="feedback-avatar">
+                                    NM
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Neha Mehta
+                                    </strong>
+
+                                    <small>
+                                        neha.mehta@poornima.org
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-message">
+                                Interview schedule updates should
+                                be visible earlier.
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="source-badge student">
+                                Student
+                            </span>
+                        </td>
+
+
+                        <td>
+                            27 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="feedback-status review">
+                                Under Review
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="feedback-view-btn"
+                                data-feedback="feedback-005"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 06
+                    ================================================== -->
+
+                    <tr
+                        class="feedback-row"
+                        data-id="feedback-006"
+                        data-status="resolved"
+                        data-source="student"
+                    >
+
+                        <td>
+                            06
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-user">
+
+                                <div class="feedback-avatar">
+                                    VK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Vikram Kumar
+                                    </strong>
+
+                                    <small>
+                                        vikram.kumar@poornima.org
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="feedback-message">
+                                Placement portal is simple and
+                                easy to understand.
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="source-badge student">
+                                Student
+                            </span>
+                        </td>
+
+
+                        <td>
+                            26 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="feedback-status resolved">
+                                Resolved
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="feedback-view-btn"
+                                data-feedback="feedback-006"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+            <!-- EMPTY -->
+
+            <div
+                id="feedbackEmpty"
+                class="feedback-empty"
+                hidden
+            >
+
+                <div>
+                    ◈
+                </div>
+
+                <h3>
+                    No feedback found
+                </h3>
+
+                <p>
+                    No feedback matches the selected
+                    search or filters.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         VIEW MODAL
+    ====================================================== -->
+
+    <div
+        class="feedback-modal-backdrop"
+        id="feedbackModal"
+        hidden
+    >
+
+        <div
+            class="feedback-modal"
+            role="dialog"
+            aria-modal="true"
+        >
+
+            <div class="feedback-modal-header">
+
+                <div>
+
+                    <span>
+                        FEEDBACK DETAILS
+                    </span>
+
+                    <h2 id="modalFeedbackTitle">
+                        Feedback
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="closeFeedbackModal"
+                    class="feedback-modal-close"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="feedback-modal-body">
+
+                <div class="modal-user">
+
+                    <div
+                        class="feedback-avatar"
+                        id="modalAvatar"
+                    >
+                        RS
+                    </div>
+
+                    <div>
+
+                        <strong id="modalUser">
+                            Rahul Sharma
+                        </strong>
+
+                        <small id="modalSource">
+                            Student
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-message">
+
+                    <span>
+                        Feedback
+                    </span>
+
+                    <p id="modalMessage">
+                        Placement drive information was
+                        very useful.
+                    </p>
+
+                </div>
+
+
+                <div class="modal-date">
+
+                    <span>
+                        Submitted
+                    </span>
+
+                    <strong id="modalDate">
+                        31 Aug 2026
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="feedback-modal-footer">
+
+                <button
+                    type="button"
+                    id="closeFeedbackModalBottom"
+                    class="feedback-modal-secondary"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/hod/feedback.js'
+    ) }}"
+></script>
+
+{% endblock %}

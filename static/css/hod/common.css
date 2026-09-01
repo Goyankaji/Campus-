@@ -1,0 +1,1495 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   HOD COMMON DESIGN SYSTEM
+========================================================= */
+
+
+/* =========================================================
+   DESIGN TOKENS
+========================================================= */
+
+:root {
+
+    --hod-primary: #6338e8;
+    --hod-primary-dark: #4c25c7;
+    --hod-primary-light: #7b52f2;
+
+    --hod-sidebar: #07122f;
+    --hod-sidebar-deep: #050d25;
+
+    --hod-sidebar-text: #dce3f6;
+    --hod-sidebar-muted: #8290ad;
+
+    --hod-page: #f6f8fc;
+    --hod-card: #ffffff;
+
+    --hod-text: #101a38;
+    --hod-secondary: #68738e;
+    --hod-muted: #939cb0;
+
+    --hod-border: #e5e9f1;
+
+    --hod-blue: #287bea;
+    --hod-green: #1ab56d;
+    --hod-purple: #7047e8;
+    --hod-orange: #f59a23;
+    --hod-red: #ed5368;
+    --hod-teal: #23b8c5;
+
+    --hod-radius: 14px;
+
+    --hod-shadow:
+        0 7px 25px rgba(16, 24, 40, 0.055);
+
+    --hod-transition:
+        0.25s ease;
+
+    --hod-sidebar-width: 240px;
+    --hod-topbar-height: 72px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--hod-page);
+
+    color: var(--hod-text);
+
+    transition:
+        background var(--hod-transition),
+        color var(--hod-transition);
+}
+
+
+button,
+input,
+select,
+textarea {
+
+    font-family: inherit;
+}
+
+
+button {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+}
+
+
+a {
+
+    color: inherit;
+
+    text-decoration: none;
+}
+
+
+img {
+
+    max-width: 100%;
+
+    display: block;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.hod-app {
+
+    min-height: 100vh;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.hod-sidebar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: var(--hod-sidebar-width);
+
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 18px 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--hod-sidebar) 0%,
+            var(--hod-sidebar-deep) 100%
+        );
+
+    color: var(--hod-sidebar-text);
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    z-index: 1000;
+
+    border-right:
+        1px solid rgba(255,255,255,0.035);
+
+    transition:
+        transform var(--hod-transition);
+}
+
+
+.hod-sidebar::-webkit-scrollbar {
+
+    width: 4px;
+}
+
+
+.hod-sidebar::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+
+.hod-sidebar::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(255,255,255,0.14);
+
+    border-radius: 20px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.hod-sidebar-brand {
+
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        2px
+        6px
+        20px;
+}
+
+
+.hod-brand-logo {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,0.18);
+}
+
+
+.hod-brand-logo img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.hod-brand-text {
+
+    min-width: 0;
+}
+
+
+.hod-brand-text h2 {
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    line-height: 1.1;
+}
+
+
+.hod-brand-text span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #aeb9d3;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.55px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.hod-sidebar-navigation {
+
+    flex: 1;
+
+    min-height: 0;
+}
+
+
+.hod-nav-section-title {
+
+    padding:
+        14px
+        9px
+        6px;
+
+    color:
+        var(--hod-sidebar-muted);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+
+.hod-nav {
+
+    min-height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        8px
+        10px;
+
+    margin:
+        2px 0;
+
+    border-radius: 8px;
+
+    color:
+        var(--hod-sidebar-text);
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    transition:
+        background var(--hod-transition),
+        color var(--hod-transition),
+        transform var(--hod-transition);
+}
+
+
+.hod-nav:hover {
+
+    background:
+        rgba(255,255,255,0.065);
+
+    color: #ffffff;
+
+    transform: translateX(1px);
+}
+
+
+.hod-nav.active {
+
+    background:
+        linear-gradient(
+            90deg,
+            #5b32e8,
+            #7448ef
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 7px 20px rgba(91,50,232,0.28);
+}
+
+
+.hod-nav-icon {
+
+    width: 18px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+.hod-nav-label {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.hod-nav-badge {
+
+    min-width: 18px;
+
+    margin-left: auto;
+
+    padding:
+        3px
+        5px;
+
+    border-radius: 20px;
+
+    color: #ffffff;
+
+    text-align: center;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.hod-nav-badge.red {
+
+    background:
+        var(--hod-red);
+}
+
+
+.hod-nav-badge.purple {
+
+    background:
+        var(--hod-purple);
+}
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+========================================================= */
+
+.hod-sidebar-footer {
+
+    margin-top: 8px;
+
+    padding-top: 8px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.08);
+}
+
+
+.hod-logout {
+
+    min-height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        8px
+        10px;
+
+    border-radius: 8px;
+
+    color: #ef6378;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    transition:
+        background var(--hod-transition),
+        color var(--hod-transition);
+}
+
+
+.hod-logout:hover {
+
+    background:
+        rgba(237,83,104,0.09);
+
+    color: #ff788b;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.hod-main {
+
+    min-height: 100vh;
+
+    margin-left:
+        var(--hod-sidebar-width);
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.hod-topbar {
+
+    min-height:
+        var(--hod-topbar-height);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+        12px
+        26px;
+
+    background:
+        var(--hod-card);
+
+    border-bottom:
+        1px solid var(--hod-border);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 500;
+
+    transition:
+        background var(--hod-transition),
+        border-color var(--hod-transition);
+}
+
+
+.hod-topbar-left {
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.hod-topbar-intro {
+
+    min-width: 0;
+}
+
+
+.hod-topbar-intro h1 {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+.hod-topbar-intro p {
+
+    margin-top: 4px;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.hod-mobile-menu {
+
+    display: none;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 8px;
+
+    color:
+        var(--hod-text);
+
+    font-size: 19px;
+}
+
+
+.hod-mobile-menu:hover {
+
+    background:
+        var(--hod-page);
+}
+
+
+/* =========================================================
+   TOPBAR RIGHT
+========================================================= */
+
+.hod-topbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.hod-global-search {
+
+    width: 290px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        0
+        10px;
+
+    background:
+        var(--hod-page);
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius: 9px;
+
+    transition:
+        border-color var(--hod-transition),
+        box-shadow var(--hod-transition);
+}
+
+
+.hod-global-search:focus-within {
+
+    border-color:
+        rgba(99,56,232,0.55);
+
+    box-shadow:
+        0 0 0 3px rgba(99,56,232,0.08);
+}
+
+
+.hod-search-icon {
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 17px;
+}
+
+
+.hod-global-search input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color:
+        var(--hod-text);
+
+    font-size: 9px;
+}
+
+
+.hod-global-search input::placeholder {
+
+    color:
+        var(--hod-muted);
+}
+
+
+.hod-search-shortcut {
+
+    padding:
+        4px
+        6px;
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius: 5px;
+
+    color:
+        var(--hod-muted);
+
+    font-size: 7px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TOPBAR ACTIONS
+========================================================= */
+
+.hod-topbar-action {
+
+    width: 34px;
+    height: 34px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 17px;
+
+    transition:
+        background var(--hod-transition),
+        color var(--hod-transition);
+}
+
+
+.hod-topbar-action:hover {
+
+    background:
+        var(--hod-page);
+
+    color:
+        var(--hod-text);
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.hod-notification-count {
+
+    position: absolute;
+
+    top: -1px;
+    right: -1px;
+
+    width: 14px;
+    height: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--hod-red);
+
+    color:
+        #ffffff;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TOPBAR USER
+========================================================= */
+
+.hod-topbar-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        4px
+        6px;
+
+    border-radius: 10px;
+}
+
+
+.hod-topbar-avatar {
+
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #f0ebff;
+
+    color:
+        var(--hod-primary);
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.hod-topbar-user-info {
+
+    min-width: 0;
+}
+
+
+.hod-topbar-user-info strong {
+
+    display: block;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.hod-topbar-user-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 7px;
+}
+
+
+.hod-user-arrow {
+
+    color:
+        var(--hod-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PAGE CONTENT
+========================================================= */
+
+.hod-page-content {
+
+    width: 100%;
+
+    min-height:
+        calc(100vh - var(--hod-topbar-height));
+
+    padding:
+        22px 26px;
+}
+
+
+/* =========================================================
+   COMMON CARD
+========================================================= */
+
+.hod-card {
+
+    background:
+        var(--hod-card);
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius:
+        var(--hod-radius);
+
+    box-shadow:
+        var(--hod-shadow);
+
+    overflow: hidden;
+
+    transition:
+        background var(--hod-transition),
+        border-color var(--hod-transition),
+        box-shadow var(--hod-transition);
+}
+
+
+/* =========================================================
+   COMMON BUTTON
+========================================================= */
+
+.hod-btn {
+
+    min-height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    padding:
+        7px
+        12px;
+
+    border-radius: 8px;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    transition:
+        transform var(--hod-transition),
+        background var(--hod-transition);
+}
+
+
+.hod-btn:hover {
+
+    transform: translateY(-1px);
+}
+
+
+.hod-btn-primary {
+
+    background:
+        var(--hod-primary);
+
+    color:
+        #ffffff;
+}
+
+
+.hod-btn-primary:hover {
+
+    background:
+        var(--hod-primary-dark);
+}
+
+
+.hod-btn-secondary {
+
+    background:
+        var(--hod-page);
+
+    border:
+        1px solid var(--hod-border);
+
+    color:
+        var(--hod-primary);
+}
+
+
+/* =========================================================
+   COMMON FORM
+========================================================= */
+
+.hod-input,
+.hod-select {
+
+    width: 100%;
+
+    min-height: 36px;
+
+    padding:
+        8px
+        10px;
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background:
+        var(--hod-card);
+
+    color:
+        var(--hod-text);
+
+    font-size: 9px;
+
+    transition:
+        border-color var(--hod-transition),
+        box-shadow var(--hod-transition);
+}
+
+
+.hod-input:focus,
+.hod-select:focus {
+
+    border-color:
+        rgba(99,56,232,0.55);
+
+    box-shadow:
+        0 0 0 3px rgba(99,56,232,0.08);
+}
+
+
+/* =========================================================
+   COMMON BADGE
+========================================================= */
+
+.hod-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        4px
+        8px;
+
+    border-radius: 20px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.hod-badge-success {
+
+    color:
+        #109b5a;
+
+    background:
+        #e3f8ec;
+}
+
+
+.hod-badge-info {
+
+    color:
+        var(--hod-blue);
+
+    background:
+        #e7f1ff;
+}
+
+
+.hod-badge-warning {
+
+    color:
+        #c87808;
+
+    background:
+        #fff0dc;
+}
+
+
+.hod-badge-danger {
+
+    color:
+        var(--hod-red);
+
+    background:
+        #ffe8ed;
+}
+
+
+/* =========================================================
+   COMMON TABLE
+========================================================= */
+
+.hod-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.hod-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+.hod-table th {
+
+    padding:
+        10px
+        12px;
+
+    background:
+        var(--hod-page);
+
+    color:
+        var(--hod-secondary);
+
+    text-align: left;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.hod-table td {
+
+    padding:
+        11px
+        12px;
+
+    border-top:
+        1px solid var(--hod-border);
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+
+    white-space: nowrap;
+}
+
+
+.hod-table td strong {
+
+    color:
+        var(--hod-text);
+}
+
+
+/* =========================================================
+   SIDEBAR OVERLAY
+========================================================= */
+
+.hod-sidebar-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(3,8,23,0.52);
+
+    backdrop-filter:
+        blur(2px);
+
+    z-index: 900;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode {
+
+    --hod-page: #091123;
+
+    --hod-card: #111b30;
+
+    --hod-text: #f3f6ff;
+
+    --hod-secondary: #9aa7c2;
+
+    --hod-muted: #6e7b98;
+
+    --hod-border: #202d47;
+
+    --hod-shadow:
+        0 8px 28px rgba(0,0,0,0.26);
+}
+
+
+body.dark-mode .hod-sidebar {
+
+    background:
+        linear-gradient(
+            180deg,
+            #050b1b 0%,
+            #040918 100%
+        );
+}
+
+
+body.dark-mode .hod-topbar-avatar {
+
+    background:
+        #211b46;
+
+    color:
+        #ad9aff;
+}
+
+
+body.dark-mode .hod-global-search {
+
+    background:
+        #0c1528;
+}
+
+
+body.dark-mode .hod-search-shortcut {
+
+    background:
+        #111b30;
+}
+
+
+body.dark-mode .hod-topbar-action:hover {
+
+    background:
+        #0c1528;
+}
+
+
+body.dark-mode .hod-badge-success {
+
+    background:
+        #123629;
+}
+
+
+body.dark-mode .hod-badge-info {
+
+    background:
+        #142c4c;
+}
+
+
+body.dark-mode .hod-badge-warning {
+
+    background:
+        #3a2b17;
+}
+
+
+body.dark-mode .hod-badge-danger {
+
+    background:
+        #3a2029;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1200
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    :root {
+
+        --hod-sidebar-width: 225px;
+
+    }
+
+    .hod-global-search {
+
+        width: 240px;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1000
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .hod-topbar {
+
+        padding:
+            12px 18px;
+
+    }
+
+    .hod-page-content {
+
+        padding:
+            18px;
+
+    }
+
+    .hod-global-search {
+
+        width: 210px;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 850
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .hod-sidebar {
+
+        transform:
+            translateX(-100%);
+
+        box-shadow:
+            10px 0 35px rgba(0,0,0,0.25);
+    }
+
+
+    .hod-sidebar.open {
+
+        transform:
+            translateX(0);
+    }
+
+
+    .hod-sidebar-overlay.active {
+
+        display: block;
+    }
+
+
+    .hod-main {
+
+        margin-left: 0;
+    }
+
+
+    .hod-mobile-menu {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+    }
+
+
+    .hod-topbar {
+
+        gap: 10px;
+    }
+
+
+    .hod-global-search {
+
+        display: none;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 600
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .hod-topbar {
+
+        min-height: 64px;
+
+        padding:
+            10px 12px;
+    }
+
+
+    .hod-page-content {
+
+        padding:
+            14px 12px;
+    }
+
+
+    .hod-topbar-intro h1 {
+
+        font-size: 13px;
+    }
+
+
+    .hod-topbar-intro p {
+
+        display: none;
+    }
+
+
+    .hod-topbar-right {
+
+        gap: 4px;
+    }
+
+
+    .hod-topbar-user-info,
+    .hod-user-arrow {
+
+        display: none;
+    }
+
+
+    .hod-topbar-avatar {
+
+        width: 34px;
+        height: 34px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 420
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .hod-topbar-action {
+
+        width: 31px;
+        height: 31px;
+    }
+
+
+    .hod-topbar-avatar {
+
+        width: 32px;
+        height: 32px;
+    }
+
+}

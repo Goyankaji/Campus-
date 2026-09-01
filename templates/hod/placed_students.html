@@ -1,0 +1,848 @@
+{% extends "hod/base.html" %}
+
+{% block title %}
+Placed Students | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/hod/placed_students.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hod-placed-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="placed-page-header">
+
+        <div>
+
+            <div class="placed-breadcrumb">
+                <span>Dashboard</span>
+                <b>›</b>
+                <strong>Placed Students</strong>
+            </div>
+
+            <h1>
+                Placed Students
+            </h1>
+
+            <p>
+                Successfully placed students from the
+                Information Technology department.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <div class="placed-summary-grid">
+
+
+        <div class="placed-summary-card">
+
+            <div class="summary-icon purple">
+                ✓
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Total Placed
+                </span>
+
+                <strong>
+                    82
+                </strong>
+
+                <small>
+                    Students placed
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="placed-summary-card">
+
+            <div class="summary-icon green">
+                ₹
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Average Package
+                </span>
+
+                <strong>
+                    ₹6.80 LPA
+                </strong>
+
+                <small>
+                    Average offered package
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="placed-summary-card">
+
+            <div class="summary-icon blue">
+                ↗
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Highest Package
+                </span>
+
+                <strong>
+                    ₹12.50 LPA
+                </strong>
+
+                <small>
+                    Highest package received
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="placed-summary-card">
+
+            <div class="summary-icon orange">
+                ◷
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Joined
+                </span>
+
+                <strong>
+                    5
+                </strong>
+
+                <small>
+                    Students joined
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         DIRECTORY
+    ====================================================== -->
+
+    <section class="placed-directory-card">
+
+
+        <!-- DIRECTORY HEADER -->
+
+        <div class="directory-header">
+
+            <div class="directory-heading">
+
+                <div class="directory-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h2>
+                        Placed Student Directory
+                    </h2>
+
+                    <p>
+                        Placement records for Information Technology
+                        students.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="record-count">
+
+                <strong id="placedRecordCount">
+                    4
+                </strong>
+
+                <span>
+                    Records
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="placed-filter-bar">
+
+
+            <div class="placed-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="placedSearch"
+                    placeholder="Search student, registration no. or company..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select
+                id="companyFilter"
+                class="placed-filter"
+            >
+
+                <option value="all">
+                    All Companies
+                </option>
+
+                <option value="tcs">
+                    TCS
+                </option>
+
+                <option value="infosys">
+                    Infosys
+                </option>
+
+                <option value="wipro">
+                    Wipro
+                </option>
+
+                <option value="accenture">
+                    Accenture
+                </option>
+
+            </select>
+
+
+            <select
+                id="joiningFilter"
+                class="placed-filter"
+            >
+
+                <option value="all">
+                    All Joining Status
+                </option>
+
+                <option value="joined">
+                    Joined
+                </option>
+
+                <option value="pending">
+                    Joining Pending
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                class="clear-filter-btn"
+                id="clearPlacedFilters"
+            >
+                Clear
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="placed-table-container">
+
+            <table class="placed-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th class="col-number">
+                            #
+                        </th>
+
+                        <th>
+                            STUDENT
+                        </th>
+
+                        <th>
+                            REGISTRATION NO.
+                        </th>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            JOB ROLE
+                        </th>
+
+                        <th>
+                            PACKAGE
+                        </th>
+
+                        <th>
+                            OFFER DATE
+                        </th>
+
+                        <th>
+                            JOINING DATE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="placedStudentsTable">
+
+
+                    <!-- =================================================
+                         STUDENT 01
+                    ================================================== -->
+
+                    <tr
+                        class="placed-student-row"
+                        data-company="tcs"
+                        data-status="joined"
+                    >
+
+                        <td class="serial">
+                            01
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div class="student-info">
+
+                                    <strong>
+                                        Rishi Sharma
+                                    </strong>
+
+                                    <span>
+                                        rishi.sharma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24101
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    TCS
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="package">
+                                ₹6.20 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            28 Aug 2026
+                        </td>
+
+
+                        <td>
+                            15 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge joined">
+                                Joined
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-btn"
+                                data-student="Rishi Sharma"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 02
+                    ================================================== -->
+
+                    <tr
+                        class="placed-student-row"
+                        data-company="infosys"
+                        data-status="pending"
+                    >
+
+                        <td class="serial">
+                            02
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    AD
+                                </div>
+
+                                <div class="student-info">
+
+                                    <strong>
+                                        Arsf Danish
+                                    </strong>
+
+                                    <span>
+                                        arsf.danish@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24102
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Infosys
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            System Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="package">
+                                ₹6.50 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            29 Aug 2026
+                        </td>
+
+
+                        <td>
+                            20 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge pending">
+                                Joining Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-btn"
+                                data-student="Arsf Danish"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 03
+                    ================================================== -->
+
+                    <tr
+                        class="placed-student-row"
+                        data-company="wipro"
+                        data-status="joined"
+                    >
+
+                        <td class="serial">
+                            03
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RK
+                                </div>
+
+                                <div class="student-info">
+
+                                    <strong>
+                                        Ritik Kumar
+                                    </strong>
+
+                                    <span>
+                                        ritik.kumar@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24103
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Wipro
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Project Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="package">
+                                ₹5.80 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            30 Aug 2026
+                        </td>
+
+
+                        <td>
+                            25 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge joined">
+                                Joined
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-btn"
+                                data-student="Ritik Kumar"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 04
+                    ================================================== -->
+
+                    <tr
+                        class="placed-student-row"
+                        data-company="accenture"
+                        data-status="pending"
+                    >
+
+                        <td class="serial">
+                            04
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    LJ
+                                </div>
+
+                                <div class="student-info">
+
+                                    <strong>
+                                        Lakshay Jaipur
+                                    </strong>
+
+                                    <span>
+                                        lakshay.jaipoo@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24104
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Accenture
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Associate Software Engineer
+                        </td>
+
+
+                        <td>
+                            <strong class="package">
+                                ₹7.10 LPA
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            31 Aug 2026
+                        </td>
+
+
+                        <td>
+                            —
+                        </td>
+
+
+                        <td>
+
+                            <span class="status-badge pending">
+                                Joining Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-btn"
+                                data-student="Lakshay Jaipur"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <div
+            class="placed-empty-state"
+            id="placedEmptyState"
+            hidden
+        >
+
+            <div class="empty-icon">
+                ✓
+            </div>
+
+            <h3>
+                No Placed Students Found
+            </h3>
+
+            <p>
+                No students match the selected filters.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+</section>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/hod/placed_students.js'
+    ) }}"
+></script>
+
+{% endblock %}

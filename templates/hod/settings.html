@@ -1,0 +1,766 @@
+{% extends "hod/base.html" %}
+
+{% block title %}
+    Settings | HOD Portal
+{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/hod/settings.css') }}"
+>
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hod-settings-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="settings-page-header">
+
+        <div>
+
+            <div class="settings-breadcrumb">
+                <span>Dashboard</span>
+                <b>›</b>
+                <strong>Settings</strong>
+            </div>
+
+            <h1>Settings</h1>
+
+            <p>
+                Manage your HOD account, notifications and portal preferences.
+            </p>
+
+        </div>
+
+
+        <div class="settings-department-pill">
+            <span></span>
+            Information Technology
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SETTINGS LAYOUT
+    ====================================================== -->
+
+    <div class="settings-layout">
+
+
+        <!-- =================================================
+             SETTINGS NAVIGATION
+        ================================================== -->
+
+        <aside class="settings-sidebar">
+
+            <button
+                type="button"
+                class="settings-nav active"
+                data-section="general"
+            >
+                <span>⚙</span>
+
+                <div>
+                    <strong>General</strong>
+                    <small>Portal preferences</small>
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="settings-nav"
+                data-section="notifications"
+            >
+                <span>♢</span>
+
+                <div>
+                    <strong>Notifications</strong>
+                    <small>Alert preferences</small>
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="settings-nav"
+                data-section="security"
+            >
+                <span>◈</span>
+
+                <div>
+                    <strong>Security</strong>
+                    <small>Password & access</small>
+                </div>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="settings-nav"
+                data-section="account"
+            >
+                <span>◉</span>
+
+                <div>
+                    <strong>Account</strong>
+                    <small>Profile information</small>
+                </div>
+
+            </button>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             SETTINGS CONTENT
+        ================================================== -->
+
+        <main class="settings-content">
+
+
+            <!-- =================================================
+                 GENERAL
+            ================================================== -->
+
+            <section
+                class="settings-section active"
+                id="settings-general"
+            >
+
+                <div class="settings-section-header">
+
+                    <div>
+
+                        <span class="settings-eyebrow">
+                            GENERAL
+                        </span>
+
+                        <h2>
+                            General Preferences
+                        </h2>
+
+                        <p>
+                            Configure how the HOD portal behaves for you.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Academic Session
+                            </strong>
+
+                            <small>
+                                Current session used throughout the portal.
+                            </small>
+
+                        </div>
+
+                        <select
+                            class="settings-select"
+                            id="academicSession"
+                        >
+                            <option value="2026-27">
+                                2026-27
+                            </option>
+
+                            <option value="2025-26">
+                                2025-26
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Department
+                            </strong>
+
+                            <small>
+                                Department assigned to your HOD account.
+                            </small>
+
+                        </div>
+
+                        <div class="settings-static-value">
+                            Information Technology
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                College
+                            </strong>
+
+                            <small>
+                                Institution associated with your account.
+                            </small>
+
+                        </div>
+
+                        <div class="settings-static-value">
+                            Poornima College of Engineering
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Compact Table View
+                            </strong>
+
+                            <small>
+                                Reduce row height in department tables.
+                            </small>
+
+                        </div>
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                id="compactTables"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-actions">
+
+                    <button
+                        type="button"
+                        class="settings-primary"
+                        data-save="general"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NOTIFICATIONS
+            ================================================== -->
+
+            <section
+                class="settings-section"
+                id="settings-notifications"
+            >
+
+                <div class="settings-section-header">
+
+                    <div>
+
+                        <span class="settings-eyebrow">
+                            NOTIFICATIONS
+                        </span>
+
+                        <h2>
+                            Notification Preferences
+                        </h2>
+
+                        <p>
+                            Choose which department activities require your attention.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Placement Applications
+                            </strong>
+
+                            <small>
+                                Notify when students submit placement applications.
+                            </small>
+
+                        </div>
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                id="notifyApplications"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Shortlisting Updates
+                            </strong>
+
+                            <small>
+                                Receive updates when students move to the next stage.
+                            </small>
+
+                        </div>
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                id="notifyShortlisting"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Offer & Joining Updates
+                            </strong>
+
+                            <small>
+                                Notify about offers, joining and placement changes.
+                            </small>
+
+                        </div>
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                id="notifyOffers"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Announcements
+                            </strong>
+
+                            <small>
+                                Receive important department announcements.
+                            </small>
+
+                        </div>
+
+                        <label class="settings-switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                id="notifyAnnouncements"
+                            >
+
+                            <span></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-actions">
+
+                    <button
+                        type="button"
+                        class="settings-primary"
+                        data-save="notifications"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SECURITY
+            ================================================== -->
+
+            <section
+                class="settings-section"
+                id="settings-security"
+            >
+
+                <div class="settings-section-header">
+
+                    <div>
+
+                        <span class="settings-eyebrow">
+                            SECURITY
+                        </span>
+
+                        <h2>
+                            Security Settings
+                        </h2>
+
+                        <p>
+                            Manage your password and account security.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+
+                    <div class="settings-form-grid">
+
+                        <div class="settings-field">
+
+                            <label>
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                                placeholder="Enter current password"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-field">
+
+                            <label>
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                placeholder="Enter new password"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-field">
+
+                            <label>
+                                Confirm New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm new password"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="password-note">
+
+                        <span>!</span>
+
+                        <p>
+                            Use at least 8 characters with a combination
+                            of letters, numbers and symbols.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-actions">
+
+                    <button
+                        type="button"
+                        class="settings-primary"
+                        id="updatePassword"
+                    >
+                        Update Password
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ACCOUNT
+            ================================================== -->
+
+            <section
+                class="settings-section"
+                id="settings-account"
+            >
+
+                <div class="settings-section-header">
+
+                    <div>
+
+                        <span class="settings-eyebrow">
+                            ACCOUNT
+                        </span>
+
+                        <h2>
+                            Account Information
+                        </h2>
+
+                        <p>
+                            Information associated with your HOD account.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-profile-card">
+
+                    <div class="settings-profile-avatar">
+                        R
+                    </div>
+
+                    <div class="settings-profile-info">
+
+                        <strong>
+                            Dr. Rahul Sharma
+                        </strong>
+
+                        <span>
+                            HOD · Information Technology
+                        </span>
+
+                        <small>
+                            rahul.sharma@poornima.org
+                        </small>
+
+                    </div>
+
+                    <span class="account-status">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Role
+                            </strong>
+
+                            <small>
+                                Your current portal role.
+                            </small>
+
+                        </div>
+
+                        <div class="settings-static-value">
+                            HOD
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Access Scope
+                            </strong>
+
+                            <small>
+                                Data visible to this account.
+                            </small>
+
+                        </div>
+
+                        <div class="settings-static-value purple-text">
+                            Department Only
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-divider"></div>
+
+
+                    <div class="settings-row">
+
+                        <div class="settings-row-info">
+
+                            <strong>
+                                Account Status
+                            </strong>
+
+                            <small>
+                                Current account availability.
+                            </small>
+
+                        </div>
+
+                        <span class="active-badge">
+                            Active
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-danger-card">
+
+                    <div>
+
+                        <strong>
+                            Sign out of this account
+                        </strong>
+
+                        <small>
+                            End your current HOD portal session.
+                        </small>
+
+                    </div>
+
+                    <a
+                        href="{{ url_for('logout') }}"
+                        class="logout-button"
+                    >
+                        Logout
+                    </a>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         SAVE TOAST
+    ====================================================== -->
+
+    <div
+        class="settings-toast"
+        id="settingsToast"
+    >
+        Settings saved successfully.
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/hod/settings.js') }}"
+></script>
+
+{% endblock %}

@@ -1,0 +1,731 @@
+{% extends "hod/base.html" %}
+
+{% block title %}
+Applications | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/hod/applications.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="hod-applications-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="applications-header">
+
+        <div class="applications-header-left">
+
+            <div class="applications-breadcrumb">
+
+                <span>Dashboard</span>
+
+                <b>›</b>
+
+                <strong>
+                    Applications
+                </strong>
+
+            </div>
+
+
+            <div class="applications-title-row">
+
+                <div>
+
+                    <h1>
+                        Applications
+                    </h1>
+
+                    <p>
+                        Monitor placement applications from
+                        your department.
+                    </p>
+
+                </div>
+
+
+                <div class="department-pill">
+
+                    <span class="department-dot"></span>
+
+                    <span>
+                        {{ department_name }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         APPLICATION SUMMARY
+    ====================================================== -->
+
+    <div class="application-summary">
+
+
+        <!-- TOTAL -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon purple">
+                ▤
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Total Applications
+                </span>
+
+                <strong>
+                    {{ total_applications }}
+                </strong>
+
+                <small>
+                    From your department
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- APPLIED -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon blue">
+                ◉
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Applied
+                </span>
+
+                <strong>
+                    {{ applied_count }}
+                </strong>
+
+                <small>
+                    Submitted applications
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SHORTLISTED -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon green">
+                ✓
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Shortlisted
+                </span>
+
+                <strong>
+                    {{ shortlisted_count }}
+                </strong>
+
+                <small>
+                    Moved to next stage
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REJECTED -->
+
+        <div class="summary-card">
+
+            <div class="summary-icon red">
+                ×
+            </div>
+
+            <div class="summary-content">
+
+                <span>
+                    Rejected
+                </span>
+
+                <strong>
+                    {{ rejected_count }}
+                </strong>
+
+                <small>
+                    Applications rejected
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         APPLICATION WORKSPACE
+    ====================================================== -->
+
+    <div class="applications-workspace">
+
+
+        <!-- =================================================
+             WORKSPACE HEADER
+        ================================================== -->
+
+        <div class="workspace-header">
+
+            <div class="workspace-title">
+
+                <div class="workspace-title-icon">
+                    ▤
+                </div>
+
+                <div>
+
+                    <h2>
+                        Application Directory
+                    </h2>
+
+                    <span>
+                        {{ department_name }} department applications
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="workspace-count">
+
+                <strong
+                    id="visibleApplicationCount"
+                >
+                    {{ total_applications }}
+                </strong>
+
+                <span>
+                    Applications
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER TOOLBAR
+        ================================================== -->
+
+        <div class="application-toolbar">
+
+
+            <!-- SEARCH -->
+
+            <div class="application-search">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="applicationSearch"
+                    placeholder="Search student, registration no. or company..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <div class="filter-box">
+
+                <select
+                    id="applicationStatusFilter"
+                    aria-label="Filter by application status"
+                >
+
+                    <option value="">
+                        All Status
+                    </option>
+
+                    <option value="APPLIED">
+                        Applied
+                    </option>
+
+                    <option value="SHORTLISTED">
+                        Shortlisted
+                    </option>
+
+                    <option value="REJECTED">
+                        Rejected
+                    </option>
+
+                    <option value="WITHDRAWN">
+                        Withdrawn
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- STAGE -->
+
+            <div class="filter-box">
+
+                <select
+                    id="applicationStageFilter"
+                    aria-label="Filter by placement stage"
+                >
+
+                    <option value="">
+                        All Stages
+                    </option>
+
+                    <option value="SHORTLISTED">
+                        Shortlisted
+                    </option>
+
+                    <option value="INTERVIEW">
+                        Interview
+                    </option>
+
+                    <option value="SELECTED">
+                        Selected
+                    </option>
+
+                    <option value="OFFER">
+                        Offer
+                    </option>
+
+                    <option value="JOINING">
+                        Joining
+                    </option>
+
+                    <option value="PLACED">
+                        Placed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- CLEAR -->
+
+            <button
+                type="button"
+                class="clear-filters-btn"
+                id="clearApplicationFilters"
+            >
+
+                Clear
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="applications-table-container">
+
+            <table
+                class="applications-table"
+                id="applicationsTable"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th class="col-number">
+                            #
+                        </th>
+
+                        <th>
+                            STUDENT
+                        </th>
+
+                        <th>
+                            REGISTRATION NO.
+                        </th>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            JOB ROLE
+                        </th>
+
+                        <th>
+                            APPLIED ON
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            STAGE
+                        </th>
+
+                        <th class="col-action">
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="applicationsTableBody"
+                >
+
+
+                    {% for application in applications %}
+
+
+                    <tr
+                        class="application-row"
+                        data-status="{{ application.application_status or '' }}"
+                        data-stage="{{ application.current_stage or '' }}"
+                        data-search="{{ application.student_name or '' }} {{ application.registration_no or '' }} {{ application.company_name or '' }} {{ application.job_role or '' }}"
+                    >
+
+
+                        <!-- NUMBER -->
+
+                        <td class="application-number">
+
+                            {{ "%02d"|format(loop.index) }}
+
+                        </td>
+
+
+
+                        <!-- STUDENT -->
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+
+                                    {{ application.student_initials }}
+
+                                </div>
+
+
+                                <div class="student-info">
+
+                                    <strong>
+                                        {{ application.student_name }}
+                                    </strong>
+
+                                    <span>
+                                        {{ application.student_email or "Email not available" }}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+
+                        <!-- REGISTRATION -->
+
+                        <td>
+
+                            <span class="registration-number">
+
+                                {{ application.registration_no or "—" }}
+
+                            </span>
+
+                        </td>
+
+
+
+                        <!-- COMPANY -->
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    {{ application.company_name }}
+                                </strong>
+
+                                {% if application.drive_name %}
+
+                                <span>
+                                    {{ application.drive_name }}
+                                </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </td>
+
+
+
+                        <!-- ROLE -->
+
+                        <td>
+
+                            <span class="job-role">
+
+                                {{ application.job_role }}
+
+                            </span>
+
+                        </td>
+
+
+
+                        <!-- DATE -->
+
+                        <td>
+
+                            <span class="application-date">
+
+                                {% if application.applied_at %}
+
+                                    {{ application.applied_at.strftime("%d %b %Y") }}
+
+                                {% else %}
+
+                                    —
+
+                                {% endif %}
+
+                            </span>
+
+                        </td>
+
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% set status =
+                                application.application_status|upper
+                            %}
+
+                            <span
+                                class="
+                                    application-status
+                                    status-{{ status|lower }}
+                                "
+                            >
+
+                                {{ status|replace("_", " ")|title }}
+
+                            </span>
+
+                        </td>
+
+
+
+                        <!-- STAGE -->
+
+                        <td>
+
+                            {% if application.current_stage %}
+
+                                {% set stage =
+                                    application.current_stage|upper
+                                %}
+
+                                <span
+                                    class="
+                                        application-stage
+                                        stage-{{ stage|lower }}
+                                    "
+                                >
+
+                                    {{ stage|replace("_", " ")|title }}
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="stage-empty">
+                                    Not started
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+
+                        <!-- ACTION -->
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="application-view-btn"
+                                data-application-id="{{ application.application_id }}"
+                            >
+
+                                View
+
+                            </button>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% else %}
+
+
+                    <tr class="database-empty-row">
+
+                        <td colspan="9">
+
+                            <div class="empty-state">
+
+                                <div class="empty-state-icon">
+                                    ▤
+                                </div>
+
+                                <h3>
+                                    No Applications Yet
+                                </h3>
+
+                                <p>
+                                    There are currently no placement
+                                    applications from students in
+                                    {{ department_name }}.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 FILTER EMPTY
+            ================================================== -->
+
+            <div
+                class="filter-empty-state"
+                id="filteredEmpty"
+                hidden
+            >
+
+                <div class="filter-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No Matching Applications
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+                <button
+                    type="button"
+                    id="emptyClearFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/hod/applications.js'
+    ) }}"
+></script>
+
+{% endblock %}

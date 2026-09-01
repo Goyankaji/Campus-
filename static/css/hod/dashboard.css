@@ -1,0 +1,1467 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   HOD DASHBOARD
+========================================================= */
+
+
+/* =========================================================
+   DASHBOARD WRAPPER
+========================================================= */
+
+.hod-dashboard {
+    width: 100%;
+}
+
+
+/* =========================================================
+   DEPARTMENT LABEL
+========================================================= */
+
+.hod-department-label {
+
+    width: fit-content;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-left: auto;
+    margin-bottom: 14px;
+
+    padding: 8px 13px;
+
+    background: #f1edff;
+
+    border: 1px solid #e6ddff;
+
+    border-radius: 8px;
+
+    font-size: 8px;
+}
+
+.hod-department-label span {
+    color: var(--hod-secondary);
+}
+
+.hod-department-label strong {
+    color: var(--hod-primary);
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.hod-kpi-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   KPI CARD
+========================================================= */
+
+.hod-kpi-card {
+
+    min-height: 100px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 14px;
+
+    background: var(--hod-card);
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius:
+        var(--hod-radius);
+
+    box-shadow:
+        var(--hod-shadow);
+
+    transition:
+        transform var(--hod-transition),
+        box-shadow var(--hod-transition);
+}
+
+.hod-kpi-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(16,24,40,0.08);
+}
+
+
+/* =========================================================
+   KPI ICON
+========================================================= */
+
+.hod-kpi-icon {
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+.hod-kpi-icon.purple {
+    color: var(--hod-purple);
+    background: #eee9ff;
+}
+
+.hod-kpi-icon.green {
+    color: var(--hod-green);
+    background: #e3f8ed;
+}
+
+.hod-kpi-icon.blue {
+    color: var(--hod-blue);
+    background: #e7f1ff;
+}
+
+.hod-kpi-icon.orange {
+    color: var(--hod-orange);
+    background: #fff0dc;
+}
+
+.hod-kpi-icon.teal {
+    color: var(--hod-teal);
+    background: #e3f8fa;
+}
+
+
+/* =========================================================
+   KPI CONTENT
+========================================================= */
+
+.hod-kpi-content {
+
+    min-width: 0;
+}
+
+.hod-kpi-content span {
+
+    display: block;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.hod-kpi-content strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color:
+        var(--hod-text);
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    white-space: nowrap;
+}
+
+.hod-kpi-content small {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color:
+        var(--hod-muted);
+
+    font-size: 7px;
+
+    white-space: nowrap;
+}
+
+.hod-kpi-content small.positive {
+
+    color:
+        var(--hod-green);
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+========================================================= */
+
+.hod-analytics-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.08fr
+        1.08fr
+        .92fr;
+
+    gap: 14px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   DASHBOARD CARD
+========================================================= */
+
+.hod-dashboard-card {
+
+    min-width: 0;
+
+    background:
+        var(--hod-card);
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius:
+        var(--hod-radius);
+
+    box-shadow:
+        var(--hod-shadow);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.hod-card-header {
+
+    min-height: 59px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding:
+        10px 16px;
+
+    border-bottom:
+        1px solid var(--hod-border);
+}
+
+.hod-card-header h2 {
+
+    color:
+        var(--hod-text);
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.hod-card-header p {
+
+    margin-top: 3px;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   CARD SELECT
+========================================================= */
+
+.hod-card-select {
+
+    height: 29px;
+
+    padding:
+        0 8px;
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background:
+        var(--hod-card);
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   PLACEMENT OVERVIEW
+========================================================= */
+
+.placement-overview-body {
+
+    min-height: 260px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    padding: 20px;
+}
+
+
+/* =========================================================
+   DONUT
+========================================================= */
+
+.hod-donut {
+
+    width: 170px;
+    height: 170px;
+
+    flex-shrink: 0;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            var(--hod-blue) 0 45.56%,
+            var(--hod-purple) 45.56% 58.89%,
+            var(--hod-green) 58.89% 100%
+        );
+}
+
+.hod-donut::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 32px;
+
+    border-radius: 50%;
+
+    background:
+        var(--hod-card);
+}
+
+.hod-donut-hole {
+
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+}
+
+.hod-donut-hole strong {
+
+    display: block;
+
+    color:
+        var(--hod-text);
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+.hod-donut-hole span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   DONUT LEGEND
+========================================================= */
+
+.hod-donut-legend {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.legend-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 8px;
+}
+
+.legend-dot {
+
+    width: 9px;
+    height: 9px;
+
+    flex-shrink: 0;
+
+    margin-top: 2px;
+
+    border-radius: 50%;
+}
+
+.legend-dot.blue {
+    background: var(--hod-blue);
+}
+
+.legend-dot.purple {
+    background: var(--hod-purple);
+}
+
+.legend-dot.green {
+    background: var(--hod-green);
+}
+
+.legend-item strong {
+
+    display: block;
+
+    color:
+        var(--hod-text);
+
+    font-size: 8px;
+}
+
+.legend-item span:not(.legend-dot) {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   BAR CHART
+========================================================= */
+
+.hod-bar-chart {
+
+    height: 245px;
+
+    display: flex;
+
+    padding:
+        17px 20px 5px;
+}
+
+
+/* Y AXIS */
+
+.hod-chart-y-axis {
+
+    width: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding-bottom: 25px;
+
+    color:
+        var(--hod-muted);
+
+    font-size: 7px;
+}
+
+
+/* BARS AREA */
+
+.hod-bars-area {
+
+    flex: 1;
+
+    min-width: 0;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-around;
+
+    gap: 15px;
+
+    border-bottom:
+        1px solid var(--hod-border);
+}
+
+
+/* GRID */
+
+.hod-grid-lines {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to top,
+            transparent 0,
+            transparent 48px,
+            var(--hod-border) 49px
+        );
+
+    opacity: .8;
+}
+
+
+/* BAR GROUP */
+
+.hod-bar-group {
+
+    height: 100%;
+
+    min-width: 45px;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* BAR */
+
+.hod-bar {
+
+    width: 45px;
+
+    min-height: 10px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    padding-top: 5px;
+
+    border-radius:
+        7px 7px 0 0;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    transition:
+        height .4s ease;
+}
+
+.hod-bar.previous {
+
+    background:
+        #dcd2fa;
+
+    color:
+        var(--hod-text);
+}
+
+.hod-bar.current {
+
+    background:
+        linear-gradient(
+            180deg,
+            #7147e9,
+            #5a31d6
+        );
+
+    color:
+        #ffffff;
+}
+
+.hod-bar-group small {
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 7px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PERFORMANCE NOTE
+========================================================= */
+
+.hod-performance-note {
+
+    margin:
+        0 15px 14px;
+
+    padding:
+        10px;
+
+    border-radius: 8px;
+
+    background:
+        #f4f0ff;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+}
+
+.hod-performance-note strong {
+
+    color:
+        var(--hod-primary);
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.hod-status-list {
+
+    padding:
+        15px;
+}
+
+.hod-status-row {
+
+    margin-bottom:
+        15px;
+}
+
+.hod-status-row:last-child {
+
+    margin-bottom: 0;
+}
+
+.status-info {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+}
+
+.status-info span {
+
+    color:
+        var(--hod-text);
+
+    font-size: 8px;
+}
+
+.status-info strong {
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.hod-progress {
+
+    height: 6px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        #edf0f5;
+}
+
+.hod-progress div {
+
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+.hod-progress .blue {
+    background: var(--hod-blue);
+}
+
+.hod-progress .purple {
+    background: var(--hod-purple);
+}
+
+.hod-progress .orange {
+    background: var(--hod-orange);
+}
+
+.hod-progress .teal {
+    background: var(--hod-teal);
+}
+
+.hod-progress .red {
+    background: var(--hod-red);
+}
+
+
+/* =========================================================
+   STATUS TOTAL
+========================================================= */
+
+.hod-status-total {
+
+    margin:
+        0 15px 15px;
+
+    padding:
+        10px;
+
+    border-radius: 8px;
+
+    background:
+        var(--hod-page);
+
+    font-size: 8px;
+}
+
+.hod-status-total span {
+
+    color:
+        var(--hod-secondary);
+}
+
+.hod-status-total strong {
+
+    color:
+        var(--hod-text);
+
+    margin-left: 3px;
+}
+
+
+/* =========================================================
+   LOWER GRID
+========================================================= */
+
+.hod-lower-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.25fr
+        .95fr
+        .72fr;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
+
+.hod-view-button {
+
+    padding:
+        6px 10px;
+
+    border:
+        1px solid var(--hod-border);
+
+    border-radius: 7px;
+
+    color:
+        var(--hod-primary);
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    transition:
+        background var(--hod-transition),
+        border-color var(--hod-transition);
+}
+
+.hod-view-button:hover {
+
+    background:
+        #f4f0ff;
+
+    border-color:
+        #dcd1ff;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.hod-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.hod-dashboard-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.hod-dashboard-table th {
+
+    padding:
+        10px 12px;
+
+    background:
+        var(--hod-page);
+
+    color:
+        var(--hod-secondary);
+
+    text-align: left;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.hod-dashboard-table td {
+
+    padding:
+        11px 12px;
+
+    border-top:
+        1px solid var(--hod-border);
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+
+    white-space: nowrap;
+}
+
+.hod-dashboard-table td strong {
+
+    color:
+        var(--hod-text);
+}
+
+.hod-dashboard-table td .company {
+
+    color:
+        var(--hod-primary);
+}
+
+
+/* =========================================================
+   DEADLINE
+========================================================= */
+
+.hod-dashboard-table .deadline {
+
+    color:
+        var(--hod-red);
+}
+
+
+/* =========================================================
+   DRIVE BADGES
+========================================================= */
+
+.drive-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+.drive-badge.active {
+
+    color:
+        #109b5a;
+
+    background:
+        #e3f8ec;
+}
+
+.drive-badge.upcoming {
+
+    color:
+        var(--hod-blue);
+
+    background:
+        #e7f1ff;
+}
+
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+.hod-activity-list {
+
+    padding:
+        6px 15px;
+}
+
+.hod-activity-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding:
+        11px 0;
+
+    border-bottom:
+        1px solid var(--hod-border);
+}
+
+.hod-activity-item:last-child {
+
+    border-bottom: none;
+}
+
+
+.activity-icon {
+
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.activity-icon.purple {
+
+    color: var(--hod-purple);
+
+    background: #eee9ff;
+}
+
+.activity-icon.blue {
+
+    color: var(--hod-blue);
+
+    background: #e7f1ff;
+}
+
+.activity-icon.green {
+
+    color: var(--hod-green);
+
+    background: #e3f8ed;
+}
+
+.activity-icon.orange {
+
+    color: var(--hod-orange);
+
+    background: #fff0dc;
+}
+
+
+.activity-content {
+
+    min-width: 0;
+}
+
+.activity-content strong {
+
+    display: block;
+
+    color:
+        var(--hod-text);
+
+    font-size: 8px;
+}
+
+.activity-content span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 7px;
+
+    line-height: 1.35;
+}
+
+.activity-content small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        var(--hod-muted);
+
+    font-size: 6px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.hod-dashboard-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 14px;
+
+    padding:
+        10px 14px;
+
+    border-radius: 8px;
+
+    background:
+        #f2efff;
+
+    color:
+        var(--hod-secondary);
+
+    font-size: 8px;
+}
+
+.hod-dashboard-footer strong {
+
+    color:
+        var(--hod-primary);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .hod-department-label {
+
+    background:
+        #211b46;
+
+    border-color:
+        #30275b;
+}
+
+body.dark-mode .hod-department-label strong {
+
+    color:
+        #ad9aff;
+}
+
+
+body.dark-mode .hod-bar.previous {
+
+    background:
+        #39315f;
+
+    color:
+        #ddd5ff;
+}
+
+
+body.dark-mode .hod-performance-note {
+
+    background:
+        #1c1938;
+}
+
+
+body.dark-mode .hod-progress {
+
+    background:
+        #222d43;
+}
+
+
+body.dark-mode .hod-view-button:hover {
+
+    background:
+        #211b46;
+
+    border-color:
+        #30275b;
+}
+
+
+body.dark-mode .drive-badge.active {
+
+    background:
+        #123629;
+}
+
+
+body.dark-mode .drive-badge.upcoming {
+
+    background:
+        #142c4c;
+}
+
+
+body.dark-mode .activity-icon.purple {
+
+    background:
+        #211b46;
+}
+
+
+body.dark-mode .activity-icon.blue {
+
+    background:
+        #152d4c;
+}
+
+
+body.dark-mode .activity-icon.green {
+
+    background:
+        #123529;
+}
+
+
+body.dark-mode .activity-icon.orange {
+
+    background:
+        #3a2b17;
+}
+
+
+body.dark-mode .hod-dashboard-footer {
+
+    background:
+        #1c1938;
+}
+
+
+/* =========================================================
+   RESPONSIVE — 1250
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .hod-kpi-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+
+    .hod-analytics-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .status-card {
+
+        grid-column:
+            span 2;
+    }
+
+
+    .hod-lower-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .activity-card {
+
+        grid-column:
+            span 2;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 900
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .hod-analytics-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .status-card {
+
+        grid-column:
+            span 1;
+    }
+
+
+    .hod-lower-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .activity-card {
+
+        grid-column:
+            span 1;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 650
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .hod-department-label {
+
+        margin-left: 0;
+
+        width: 100%;
+
+        justify-content: space-between;
+
+        flex-wrap: wrap;
+    }
+
+
+    .hod-kpi-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .placement-overview-body {
+
+        flex-direction: column;
+
+        gap: 22px;
+    }
+
+
+    .hod-donut-legend {
+
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 10px;
+    }
+
+
+    .hod-card-header {
+
+        padding:
+            10px 12px;
+    }
+
+
+    .hod-dashboard-table th,
+    .hod-dashboard-table td {
+
+        padding:
+            10px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — 480
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .hod-kpi-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .hod-kpi-card {
+
+        min-height: 82px;
+    }
+
+
+    .hod-donut {
+
+        width: 150px;
+        height: 150px;
+    }
+
+
+    .hod-donut::before {
+
+        inset: 28px;
+    }
+
+
+    .hod-donut-legend {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .hod-bar-chart {
+
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .hod-bar {
+
+        width: 32px;
+    }
+
+
+    .hod-bar-group {
+
+        min-width: 32px;
+    }
+
+
+    .hod-bar-group small {
+
+        font-size: 6px;
+    }
+
+
+    .hod-dashboard-footer {
+
+        flex-wrap: wrap;
+    }
+
+}

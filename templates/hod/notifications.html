@@ -1,0 +1,509 @@
+{% extends "hod/base.html" %}
+
+{% block title %}
+    Notifications | HOD Portal
+{% endblock %}
+
+{% block page_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/hod/notifications.css') }}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="notifications-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="notifications-header">
+
+        <div>
+            <div class="notifications-breadcrumb">
+                <span>Dashboard</span>
+                <span class="breadcrumb-arrow">›</span>
+                <strong>Notifications</strong>
+            </div>
+
+            <h1>Notifications</h1>
+
+            <p>
+                Stay updated with important activities from your department.
+            </p>
+        </div>
+
+        <div class="notifications-department">
+            <span class="department-dot"></span>
+            Information Technology
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <div class="notification-summary">
+
+        <div class="summary-card">
+            <div class="summary-icon purple">
+                <span>◆</span>
+            </div>
+
+            <div>
+                <span class="summary-label">Total Notifications</span>
+                <strong id="totalNotifications">6</strong>
+                <small>Department updates</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon red">
+                <span>!</span>
+            </div>
+
+            <div>
+                <span class="summary-label">Unread</span>
+                <strong id="unreadNotifications">6</strong>
+                <small>Need your attention</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon blue">
+                <span>✓</span>
+            </div>
+
+            <div>
+                <span class="summary-label">Placement Updates</span>
+                <strong>4</strong>
+                <small>Recent placement activity</small>
+            </div>
+        </div>
+
+
+        <div class="summary-card">
+            <div class="summary-icon green">
+                <span>●</span>
+            </div>
+
+            <div>
+                <span class="summary-label">System Updates</span>
+                <strong>2</strong>
+                <small>Portal notifications</small>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NOTIFICATION PANEL
+    ====================================================== -->
+
+    <section class="notification-panel">
+
+        <div class="notification-panel-header">
+
+            <div>
+                <span class="panel-kicker">ACTIVITY CENTER</span>
+
+                <h2>Recent Notifications</h2>
+
+                <p>
+                    Important updates and activities related to your department.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="mark-all-btn"
+                id="markAllRead"
+            >
+                ✓ Mark all as read
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="notification-toolbar">
+
+            <div class="notification-search">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="text"
+                    id="notificationSearch"
+                    placeholder="Search notifications..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <select
+                id="notificationFilter"
+                class="notification-filter"
+            >
+                <option value="all">All Notifications</option>
+                <option value="unread">Unread</option>
+                <option value="placement">Placement</option>
+                <option value="system">System</option>
+            </select>
+
+
+            <button
+                type="button"
+                class="clear-filter-btn"
+                id="clearNotificationFilter"
+            >
+                Clear
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             NOTIFICATION LIST
+        ================================================== -->
+
+        <div
+            class="notification-list"
+            id="notificationList"
+        >
+
+            <!-- Notification 1 -->
+
+            <article
+                class="notification-item unread"
+                data-type="placement"
+                data-read="false"
+            >
+
+                <div class="notification-type-icon placement">
+                    ✓
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Student shortlisted for placement
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+                    <p>
+                        Rishi Sharma has been shortlisted for the TCS campus
+                        placement drive.
+                    </p>
+
+                    <div class="notification-meta">
+                        <span>Placement</span>
+                        <span>•</span>
+                        <span>Today, 10:15 AM</span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="notification-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+            </article>
+
+
+            <!-- Notification 2 -->
+
+            <article
+                class="notification-item unread"
+                data-type="placement"
+                data-read="false"
+            >
+
+                <div class="notification-type-icon placement">
+                    ◆
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            New placement application received
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+                    <p>
+                        A new placement application has been submitted by a
+                        student from Information Technology.
+                    </p>
+
+                    <div class="notification-meta">
+                        <span>Placement</span>
+                        <span>•</span>
+                        <span>Today, 09:42 AM</span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="notification-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+            </article>
+
+
+            <!-- Notification 3 -->
+
+            <article
+                class="notification-item unread"
+                data-type="placement"
+                data-read="false"
+            >
+
+                <div class="notification-type-icon interview">
+                    ◷
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Interview stage updated
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+                    <p>
+                        Arsf Danish has moved to the interview stage for an
+                        active placement opportunity.
+                    </p>
+
+                    <div class="notification-meta">
+                        <span>Placement</span>
+                        <span>•</span>
+                        <span>Yesterday, 04:30 PM</span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="notification-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+            </article>
+
+
+            <!-- Notification 4 -->
+
+            <article
+                class="notification-item unread"
+                data-type="placement"
+                data-read="false"
+            >
+
+                <div class="notification-type-icon offer">
+                    ₹
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            New offer received
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+                    <p>
+                        A placement offer has been recorded for a student
+                        from your department.
+                    </p>
+
+                    <div class="notification-meta">
+                        <span>Placement</span>
+                        <span>•</span>
+                        <span>Yesterday, 02:18 PM</span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="notification-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+            </article>
+
+
+            <!-- Notification 5 -->
+
+            <article
+                class="notification-item unread"
+                data-type="system"
+                data-read="false"
+            >
+
+                <div class="notification-type-icon system">
+                    ⚙
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Student data updated
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+                    <p>
+                        Student records for the Information Technology
+                        department were updated successfully.
+                    </p>
+
+                    <div class="notification-meta">
+                        <span>System</span>
+                        <span>•</span>
+                        <span>Yesterday, 11:20 AM</span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="notification-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+            </article>
+
+
+            <!-- Notification 6 -->
+
+            <article
+                class="notification-item unread"
+                data-type="system"
+                data-read="false"
+            >
+
+                <div class="notification-type-icon system">
+                    ✓
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-title-row">
+
+                        <h3>
+                            Department data sync completed
+                        </h3>
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+                    <p>
+                        Latest department placement information has been
+                        synchronized with the portal.
+                    </p>
+
+                    <div class="notification-meta">
+                        <span>System</span>
+                        <span>•</span>
+                        <span>30 Aug 2026, 06:10 PM</span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="notification-action"
+                    data-action="read"
+                >
+                    Mark read
+                </button>
+
+            </article>
+
+
+            <!-- Empty State -->
+
+            <div
+                class="notification-empty"
+                id="notificationEmpty"
+                hidden
+            >
+
+                <div class="empty-icon">
+                    ✓
+                </div>
+
+                <h3>No notifications found</h3>
+
+                <p>
+                    No notifications match your current search or filter.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/hod/notifications.js') }}"
+></script>
+
+{% endblock %}

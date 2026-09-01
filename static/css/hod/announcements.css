@@ -1,0 +1,1201 @@
+/* =========================================================
+   CAMPUS HOD PORTAL
+   ANNOUNCEMENTS PAGE
+   FINAL VERSION
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.hod-announcements-page {
+
+    width: 100%;
+
+    max-width: none;
+
+    margin: 0;
+
+    /*
+       IMPORTANT:
+       base.html / .hod-page-content already controls
+       horizontal page spacing.
+
+       DO NOT add left/right padding here.
+    */
+
+    padding:
+        28px
+        0
+        48px
+        0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.announcements-page-header {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin: 0 0 24px;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+.announcements-header-left {
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.announcements-breadcrumb {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin:
+        0
+        0
+        7px;
+
+    color: #7190bd;
+
+    font-size: 11px;
+
+    line-height: 1.3;
+}
+
+
+.announcements-breadcrumb b {
+
+    color: #4f6690;
+
+    font-weight: 600;
+}
+
+
+.announcements-breadcrumb strong {
+
+    color: #9271ef;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.announcements-page-header h1 {
+
+    margin: 0;
+
+    color: #f5f7ff;
+
+    font-size: 30px;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+}
+
+
+.announcements-page-header p {
+
+    margin:
+        6px
+        0
+        0;
+
+    color: #7893bd;
+
+    font-size: 11px;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   DEPARTMENT PILL
+========================================================= */
+
+.announcements-department-pill {
+
+    height: 38px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex: 0 0 auto;
+
+    padding:
+        0
+        15px;
+
+    margin-top: 2px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        rgba(124, 58, 237, 0.52);
+
+    border-radius: 12px;
+
+    background:
+        rgba(75, 42, 145, 0.18);
+
+    color: #ad8df8;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.department-pill-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    flex: 0 0 8px;
+
+    border-radius: 50%;
+
+    background: #8b5cf6;
+
+    box-shadow:
+        0 0 8px
+        rgba(139, 92, 246, 0.65);
+}
+
+
+/* =========================================================
+   MAIN PANEL
+========================================================= */
+
+.announcements-panel {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        #273b5d;
+
+    border-radius: 15px;
+
+    background: #101c32;
+}
+
+
+/* =========================================================
+   PANEL HEADER
+========================================================= */
+
+.announcements-panel-header {
+
+    min-height: 88px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+        17px
+        20px;
+
+    box-sizing: border-box;
+
+    border-bottom:
+        1px solid
+        #263a5d;
+}
+
+
+.announcements-panel-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   PANEL ICON
+========================================================= */
+
+.announcements-panel-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        rgba(124, 58, 237, 0.18);
+
+    color: #a78bfa;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   PANEL TEXT
+========================================================= */
+
+.panel-eyebrow {
+
+    display: block;
+
+    margin: 0 0 4px;
+
+    color: #8b5cf6;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.announcements-panel-header h2 {
+
+    margin: 0;
+
+    color: #edf2ff;
+
+    font-size: 18px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.announcements-panel-header p {
+
+    margin:
+        4px
+        0
+        0;
+
+    color: #6783ad;
+
+    font-size: 9px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   MARK ALL
+========================================================= */
+
+.mark-all-btn {
+
+    height: 36px;
+
+    flex: 0 0 auto;
+
+    padding:
+        0
+        13px;
+
+    border:
+        1px solid
+        #354a70;
+
+    border-radius: 9px;
+
+    background: #0d192d;
+
+    color: #a98bfa;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.mark-all-btn:hover {
+
+    border-color:
+        rgba(124, 58, 237, 0.7);
+
+    background:
+        rgba(124, 58, 237, 0.10);
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.announcements-toolbar {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        190px
+        165px
+        82px;
+
+    gap: 10px;
+
+    padding:
+        14px
+        20px;
+
+    box-sizing: border-box;
+
+    background: #0d192d;
+
+    border-bottom:
+        1px solid
+        #263a5d;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.announcement-search {
+
+    position: relative;
+
+    min-width: 0;
+}
+
+
+.announcement-search-icon {
+
+    position: absolute;
+
+    left: 13px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color: #7290ba;
+
+    font-size: 15px;
+
+    pointer-events: none;
+}
+
+
+.announcement-search input {
+
+    width: 100%;
+
+    height: 40px;
+
+    padding:
+        0
+        13px
+        0
+        36px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        #293f63;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #101d34;
+
+    color: #dce6f8;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.announcement-search input::placeholder {
+
+    color: #5e78a1;
+}
+
+
+.announcement-search input:focus {
+
+    border-color: #7651dc;
+
+    box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(124, 58, 237, 0.08);
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.announcement-select {
+
+    width: 100%;
+
+    height: 40px;
+
+    padding:
+        0
+        11px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        #293f63;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #101d34;
+
+    color: #dbe6f8;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+.announcement-select:focus {
+
+    border-color: #7651dc;
+}
+
+
+.announcement-select option {
+
+    background: #101d34;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+.clear-announcement-btn {
+
+    height: 40px;
+
+    border:
+        1px solid
+        #4b3890;
+
+    border-radius: 9px;
+
+    background: #2b1d61;
+
+    color: #b69aff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.clear-announcement-btn:hover {
+
+    background: #382577;
+
+    border-color: #7651dc;
+}
+
+
+/* =========================================================
+   RESULT BAR
+========================================================= */
+
+.announcement-result-bar {
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        0
+        20px;
+
+    box-sizing: border-box;
+
+    border-bottom:
+        1px solid
+        #223653;
+
+    background: #101c32;
+}
+
+
+.announcement-result-bar > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.announcement-result-bar strong {
+
+    color: #a98bfa;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+.announcement-result-bar span {
+
+    color: #617da8;
+
+    font-size: 9px;
+}
+
+
+.announcement-scope {
+
+    color: #506b95 !important;
+
+    font-size: 9px !important;
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.announcement-list {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.announcement-item {
+
+    width: 100%;
+
+    min-height: 84px;
+
+    display: grid;
+
+    grid-template-columns:
+        44px
+        minmax(0, 1fr)
+        80px;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        14px
+        20px;
+
+    box-sizing: border-box;
+
+    border-bottom:
+        1px solid
+        #213653;
+
+    background: #101c32;
+
+    transition:
+        background 0.18s ease;
+}
+
+
+.announcement-item:last-of-type {
+
+    border-bottom: 0;
+}
+
+
+.announcement-item:hover {
+
+    background: #12203a;
+}
+
+
+/* =========================================================
+   TYPE ICON
+========================================================= */
+
+.announcement-type-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+
+.announcement-type-icon.placement {
+
+    color: #a78bfa;
+
+    background:
+        rgba(124, 58, 237, 0.18);
+}
+
+
+.announcement-type-icon.interview {
+
+    color: #60a5fa;
+
+    background:
+        rgba(59, 130, 246, 0.15);
+}
+
+
+.announcement-type-icon.academic {
+
+    color: #4ade80;
+
+    background:
+        rgba(34, 197, 94, 0.13);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.announcement-main {
+
+    min-width: 0;
+}
+
+
+.announcement-title-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    min-width: 0;
+}
+
+
+.announcement-title-row h3 {
+
+    min-width: 0;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    color: #eaf0ff;
+
+    font-size: 12px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.announcement-description {
+
+    margin:
+        4px
+        0
+        0;
+
+    color: #718db8;
+
+    font-size: 10px;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.announcement-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin:
+        5px
+        0
+        0;
+
+    color: #536f99;
+
+    font-size: 8px;
+
+    line-height: 1.2;
+}
+
+
+.announcement-category {
+
+    color: #9572ee;
+}
+
+
+.meta-separator {
+
+    color: #3f5679;
+}
+
+
+/* =========================================================
+   UNREAD
+========================================================= */
+
+.unread-indicator {
+
+    width: 6px;
+
+    height: 6px;
+
+    flex: 0 0 6px;
+
+    border-radius: 50%;
+
+    background: #f05270;
+
+    box-shadow:
+        0
+        0
+        7px
+        rgba(240, 82, 112, 0.55);
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.announcement-action {
+
+    width: 80px;
+
+    height: 32px;
+
+    justify-self: end;
+
+    border:
+        1px solid
+        #344a70;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #a98bfa;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.announcement-action:hover {
+
+    border-color: #7651dc;
+
+    background:
+        rgba(124, 58, 237, 0.10);
+}
+
+
+.announcement-action.read-action {
+
+    color: #617ba2;
+
+    border-color: #293d5e;
+
+    cursor: default;
+}
+
+
+/* =========================================================
+   READ ITEM
+========================================================= */
+
+.announcement-item:not(.unread) {
+
+    background: #101c32;
+}
+
+
+.announcement-item:not(.unread)
+.unread-indicator {
+
+    display: none;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.announcement-empty {
+
+    min-height: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+
+.announcement-empty-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 10px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(124, 58, 237, 0.14);
+
+    color: #9b78f5;
+
+    font-size: 18px;
+}
+
+
+.announcement-empty h3 {
+
+    margin: 0;
+
+    color: #e8efff;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.announcement-empty p {
+
+    margin:
+        5px
+        0
+        0;
+
+    color: #5d78a1;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+[hidden] {
+
+    display: none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    .announcements-toolbar {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            170px
+            150px
+            80px;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .announcements-page-header {
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+
+    .announcements-department-pill {
+
+        margin-top: 0;
+    }
+
+
+    .announcements-toolbar {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            170px
+            80px;
+    }
+
+
+    .announcement-search {
+
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .hod-announcements-page {
+
+        padding:
+            20px
+            0
+            32px;
+    }
+
+
+    .announcements-page-header h1 {
+
+        font-size: 28px;
+    }
+
+
+    .announcements-panel-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .mark-all-btn {
+
+        width: 100%;
+    }
+
+
+    .announcements-toolbar {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .announcement-search {
+
+        grid-column: auto;
+    }
+
+
+    .announcement-item {
+
+        grid-template-columns:
+            40px
+            minmax(0, 1fr);
+
+        gap: 10px;
+
+        padding:
+            13px
+            14px;
+    }
+
+
+    .announcement-type-icon {
+
+        width: 40px;
+
+        height: 40px;
+    }
+
+
+    .announcement-action {
+
+        grid-column: 2;
+
+        justify-self: start;
+
+        margin-top: 2px;
+    }
+
+
+    .announcement-result-bar {
+
+        padding:
+            0
+            14px;
+    }
+
+}

@@ -1,0 +1,940 @@
+{% extends "hod/base.html" %}
+
+
+{% block title %}
+    Offers & Joining | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/hod/offers_joining.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="hod-offers-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="offers-header">
+
+        <div class="offers-breadcrumb">
+
+            <span>
+                Dashboard
+            </span>
+
+            <b>›</b>
+
+            <strong>
+                Offers & Joining
+            </strong>
+
+        </div>
+
+
+        <div class="offers-title-row">
+
+            <div>
+
+                <h1>
+                    Offers & Joining
+                </h1>
+
+                <p>
+                    Track placement offers and joining progress
+                    of IT department students.
+                </p>
+
+            </div>
+
+
+            <div class="department-pill">
+
+                <span class="department-dot"></span>
+
+                Information Technology
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <div class="offers-summary">
+
+
+        <!-- TOTAL OFFERS -->
+
+        <div class="offer-stat">
+
+            <div class="stat-icon purple">
+                ₹
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Offers
+                </span>
+
+                <strong>
+                    24
+                </strong>
+
+                <small>
+                    Offers received
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACCEPTED -->
+
+        <div class="offer-stat">
+
+            <div class="stat-icon blue">
+                ✓
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Accepted
+                </span>
+
+                <strong>
+                    20
+                </strong>
+
+                <small>
+                    Offers accepted
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- JOINING PENDING -->
+
+        <div class="offer-stat">
+
+            <div class="stat-icon orange">
+                ◷
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Joining Pending
+                </span>
+
+                <strong>
+                    15
+                </strong>
+
+                <small>
+                    Awaiting joining
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- JOINED -->
+
+        <div class="offer-stat">
+
+            <div class="stat-icon green">
+                ★
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Joined
+                </span>
+
+                <strong>
+                    5
+                </strong>
+
+                <small>
+                    Successfully joined
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         OFFER WORKSPACE
+    ====================================================== -->
+
+    <div class="offers-workspace">
+
+
+        <!-- =================================================
+             WORKSPACE HEADER
+        ================================================== -->
+
+        <div class="workspace-header">
+
+            <div class="workspace-title">
+
+                <div class="workspace-icon">
+                    ₹
+                </div>
+
+                <div>
+
+                    <h2>
+                        Offer & Joining Directory
+                    </h2>
+
+                    <span>
+                        Placement offers issued to
+                        department students
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="workspace-count">
+
+                <strong id="visibleOfferCount">
+                    24
+                </strong>
+
+                <span>
+                    Records
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="offers-toolbar">
+
+
+            <!-- SEARCH -->
+
+            <div class="offers-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="offerSearch"
+                    placeholder="Search student, registration no. or company..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- COMPANY -->
+
+            <div class="filter-box">
+
+                <select
+                    id="offerCompanyFilter"
+                    aria-label="Filter by company"
+                >
+
+                    <option value="">
+                        All Companies
+                    </option>
+
+                    <option value="TCS">
+                        TCS
+                    </option>
+
+                    <option value="Infosys">
+                        Infosys
+                    </option>
+
+                    <option value="Wipro">
+                        Wipro
+                    </option>
+
+                    <option value="Accenture">
+                        Accenture
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- JOINING -->
+
+            <div class="filter-box">
+
+                <select
+                    id="joiningStatusFilter"
+                    aria-label="Filter by joining status"
+                >
+
+                    <option value="">
+                        All Joining Status
+                    </option>
+
+                    <option value="offer">
+                        Offer Received
+                    </option>
+
+                    <option value="accepted">
+                        Accepted
+                    </option>
+
+                    <option value="pending">
+                        Joining Pending
+                    </option>
+
+                    <option value="joined">
+                        Joined
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- CLEAR -->
+
+            <button
+                type="button"
+                class="clear-offer-filters"
+                id="clearOfferFilters"
+            >
+                Clear
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="offers-table-wrap">
+
+            <table
+                class="offers-table"
+                id="offersTable"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th class="number-column">
+                            #
+                        </th>
+
+                        <th>
+                            STUDENT
+                        </th>
+
+                        <th>
+                            REGISTRATION NO.
+                        </th>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            JOB ROLE
+                        </th>
+
+                        <th>
+                            PACKAGE
+                        </th>
+
+                        <th>
+                            OFFER DATE
+                        </th>
+
+                        <th>
+                            JOINING DATE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="offersTableBody">
+
+
+                    <!-- =================================================
+                         ROW 1
+                    ================================================== -->
+
+                    <tr
+                        class="offer-row"
+                        data-company="tcs"
+                        data-status="joined"
+                        data-search="Rishi Sharma PCEA24101 TCS Software Engineer"
+                    >
+
+                        <td>
+                            01
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Rishi Sharma
+                                    </strong>
+
+                                    <span>
+                                        rishi.sharma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24101
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    TCS
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+
+                        <td>
+
+                            <strong class="package">
+                                ₹6.20 LPA
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            28 Aug 2026
+                        </td>
+
+
+                        <td>
+                            15 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="joining-status joined">
+                                Joined
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-offer-btn"
+                                data-student="PCEA24101"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 2
+                    ================================================== -->
+
+                    <tr
+                        class="offer-row"
+                        data-company="infosys"
+                        data-status="pending"
+                        data-search="Arsf Danish PCEA24102 Infosys System Engineer"
+                    >
+
+                        <td>
+                            02
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    AD
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Arsf Danish
+                                    </strong>
+
+                                    <span>
+                                        arsf.danish@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24102
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Infosys
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            System Engineer
+                        </td>
+
+
+                        <td>
+
+                            <strong class="package">
+                                ₹6.50 LPA
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            29 Aug 2026
+                        </td>
+
+
+                        <td>
+                            20 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="joining-status pending">
+                                Joining Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-offer-btn"
+                                data-student="PCEA24102"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 3
+                    ================================================== -->
+
+                    <tr
+                        class="offer-row"
+                        data-company="wipro"
+                        data-status="accepted"
+                        data-search="Ritik Kumar PCEA24103 Wipro Project Engineer"
+                    >
+
+                        <td>
+                            03
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RK
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Ritik Kumar
+                                    </strong>
+
+                                    <span>
+                                        ritik.kumar@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24103
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Wipro
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Project Engineer
+                        </td>
+
+
+                        <td>
+
+                            <strong class="package">
+                                ₹5.80 LPA
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            30 Aug 2026
+                        </td>
+
+
+                        <td>
+                            25 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="joining-status accepted">
+                                Accepted
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-offer-btn"
+                                data-student="PCEA24103"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         ROW 4
+                    ================================================== -->
+
+                    <tr
+                        class="offer-row"
+                        data-company="accenture"
+                        data-status="offer"
+                        data-search="Lakshay Jaipoo PCEA24104 Accenture Associate Software Engineer"
+                    >
+
+                        <td>
+                            04
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    LJ
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Lakshay Jaipoo
+                                    </strong>
+
+                                    <span>
+                                        lakshay.jaipoo@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24104
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Accenture
+                                </strong>
+
+                                <span>
+                                    Campus Placement
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Associate Software Engineer
+                        </td>
+
+
+                        <td>
+
+                            <strong class="package">
+                                ₹7.10 LPA
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+                            31 Aug 2026
+                        </td>
+
+
+                        <td>
+                            —
+                        </td>
+
+
+                        <td>
+
+                            <span class="joining-status offer">
+                                Offer Received
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-offer-btn"
+                                data-student="PCEA24104"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 FILTER EMPTY
+            ================================================== -->
+
+            <div
+                class="offers-empty"
+                id="offersEmpty"
+                hidden
+            >
+
+                <div class="empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No Matching Records
+                </h3>
+
+                <p>
+                    No offer or joining record matches
+                    your current filters.
+                </p>
+
+                <button
+                    type="button"
+                    id="emptyClearOfferFilters"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/hod/offers_joining.js'
+    ) }}"
+></script>
+
+{% endblock %}

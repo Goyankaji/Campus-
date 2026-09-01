@@ -1,0 +1,995 @@
+{% extends "hod/base.html" %}
+
+{% block title %}
+    Placement Statistics | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/hod/placement_statistics.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hod-placement-statistics-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="ps-page-header">
+
+        <div>
+
+            <div class="ps-breadcrumb">
+
+                <span>Dashboard</span>
+
+                <b>›</b>
+
+                <strong>
+                    Placement Statistics
+                </strong>
+
+            </div>
+
+
+            <h1>
+                Placement Statistics
+            </h1>
+
+
+            <p>
+                Placement performance and recruitment insights
+                for the Information Technology department.
+            </p>
+
+        </div>
+
+
+        <div class="ps-session-badge">
+
+            <span class="ps-badge-dot"></span>
+
+            2026–27 Session
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         KPI CARDS
+    ====================================================== -->
+
+    <div class="ps-kpi-grid">
+
+
+        <!-- TOTAL STUDENTS -->
+
+        <article class="ps-kpi-card">
+
+            <div class="ps-kpi-icon purple">
+                ♙
+            </div>
+
+            <div class="ps-kpi-content">
+
+                <span>
+                    Total Students
+                </span>
+
+                <strong>
+                    180
+                </strong>
+
+                <small>
+                    Information Technology
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ELIGIBLE -->
+
+        <article class="ps-kpi-card">
+
+            <div class="ps-kpi-icon green">
+                ✓
+            </div>
+
+            <div class="ps-kpi-content">
+
+                <span>
+                    Placement Eligible
+                </span>
+
+                <strong>
+                    145
+                </strong>
+
+                <small>
+                    80.56% of students
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- PLACED -->
+
+        <article class="ps-kpi-card">
+
+            <div class="ps-kpi-icon blue">
+                ★
+            </div>
+
+            <div class="ps-kpi-content">
+
+                <span>
+                    Students Placed
+                </span>
+
+                <strong>
+                    82
+                </strong>
+
+                <small class="positive">
+                    45.56% placement rate
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- AVERAGE PACKAGE -->
+
+        <article class="ps-kpi-card">
+
+            <div class="ps-kpi-icon orange">
+                ₹
+            </div>
+
+            <div class="ps-kpi-content">
+
+                <span>
+                    Average Package
+                </span>
+
+                <strong>
+                    ₹6.80 LPA
+                </strong>
+
+                <small>
+                    Average offered package
+                </small>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN ANALYTICS GRID
+    ====================================================== -->
+
+    <div class="ps-analytics-grid">
+
+
+        <!-- =================================================
+             PLACEMENT OVERVIEW
+        ================================================== -->
+
+        <section class="ps-card placement-overview-card">
+
+
+            <div class="ps-card-header">
+
+                <div>
+
+                    <h2>
+                        Placement Overview
+                    </h2>
+
+                    <p>
+                        Department placement performance
+                    </p>
+
+                </div>
+
+
+                <span class="ps-card-tag">
+                    IT Department
+                </span>
+
+            </div>
+
+
+            <!-- DONUT -->
+
+            <div class="ps-placement-overview">
+
+
+                <div class="ps-donut-wrapper">
+
+                    <div class="ps-donut">
+
+                        <div class="ps-donut-center">
+
+                            <strong>
+                                45.56%
+                            </strong>
+
+                            <span>
+                                Placement
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ps-overview-legend">
+
+
+                    <div class="ps-legend-item">
+
+                        <span class="legend-dot total"></span>
+
+                        <div>
+
+                            <strong>
+                                180
+                            </strong>
+
+                            <span>
+                                Total Students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ps-legend-item">
+
+                        <span class="legend-dot eligible"></span>
+
+                        <div>
+
+                            <strong>
+                                145
+                            </strong>
+
+                            <span>
+                                Eligible Students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ps-legend-item">
+
+                        <span class="legend-dot placed"></span>
+
+                        <div>
+
+                            <strong>
+                                82
+                            </strong>
+
+                            <span>
+                                Students Placed
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ps-legend-item">
+
+                        <span class="legend-dot remaining"></span>
+
+                        <div>
+
+                            <strong>
+                                98
+                            </strong>
+
+                            <span>
+                                Not Yet Placed
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PACKAGE INSIGHTS
+        ================================================== -->
+
+        <section class="ps-card package-card">
+
+
+            <div class="ps-card-header">
+
+                <div>
+
+                    <h2>
+                        Package Insights
+                    </h2>
+
+                    <p>
+                        Salary distribution of placed students
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="package-highlight">
+
+                <div>
+
+                    <span>
+                        Highest Package
+                    </span>
+
+                    <strong>
+                        ₹12.50 LPA
+                    </strong>
+
+                </div>
+
+
+                <div class="package-highlight-icon">
+                    ↑
+                </div>
+
+            </div>
+
+
+            <div class="package-stat-list">
+
+
+                <div class="package-stat">
+
+                    <span>
+                        Average Package
+                    </span>
+
+                    <strong>
+                        ₹6.80 LPA
+                    </strong>
+
+                </div>
+
+
+                <div class="package-stat">
+
+                    <span>
+                        Lowest Package
+                    </span>
+
+                    <strong>
+                        ₹3.20 LPA
+                    </strong>
+
+                </div>
+
+
+                <div class="package-stat">
+
+                    <span>
+                        Students with Offers
+                    </span>
+
+                    <strong>
+                        82
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         COMPANY PERFORMANCE
+    ====================================================== -->
+
+    <section class="ps-card company-performance-card">
+
+
+        <div class="ps-card-header">
+
+            <div>
+
+                <h2>
+                    Company-wise Placement Performance
+                </h2>
+
+                <p>
+                    Students placed across recruiting companies
+                </p>
+
+            </div>
+
+
+            <span class="ps-record-count">
+                6 Companies
+            </span>
+
+        </div>
+
+
+        <div class="ps-company-list">
+
+
+            <!-- TCS -->
+
+            <div class="ps-company-row">
+
+                <div class="ps-company-info">
+
+                    <div class="ps-company-logo">
+                        T
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            TCS
+                        </strong>
+
+                        <span>
+                            Tata Consultancy Services
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ps-company-progress">
+
+                    <div class="ps-progress-top">
+
+                        <span>
+                            18 Students
+                        </span>
+
+                        <strong>
+                            22%
+                        </strong>
+
+                    </div>
+
+                    <div class="ps-progress-track">
+
+                        <div
+                            class="ps-progress-fill"
+                            style="width:22%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- INFOSYS -->
+
+            <div class="ps-company-row">
+
+                <div class="ps-company-info">
+
+                    <div class="ps-company-logo">
+                        I
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Infosys
+                        </strong>
+
+                        <span>
+                            Infosys Limited
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ps-company-progress">
+
+                    <div class="ps-progress-top">
+
+                        <span>
+                            15 Students
+                        </span>
+
+                        <strong>
+                            18%
+                        </strong>
+
+                    </div>
+
+                    <div class="ps-progress-track">
+
+                        <div
+                            class="ps-progress-fill"
+                            style="width:18%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WIPRO -->
+
+            <div class="ps-company-row">
+
+                <div class="ps-company-info">
+
+                    <div class="ps-company-logo">
+                        W
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Wipro
+                        </strong>
+
+                        <span>
+                            Wipro Limited
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ps-company-progress">
+
+                    <div class="ps-progress-top">
+
+                        <span>
+                            13 Students
+                        </span>
+
+                        <strong>
+                            16%
+                        </strong>
+
+                    </div>
+
+                    <div class="ps-progress-track">
+
+                        <div
+                            class="ps-progress-fill"
+                            style="width:16%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACCENTURE -->
+
+            <div class="ps-company-row">
+
+                <div class="ps-company-info">
+
+                    <div class="ps-company-logo">
+                        A
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Accenture
+                        </strong>
+
+                        <span>
+                            Accenture Campus Hiring
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ps-company-progress">
+
+                    <div class="ps-progress-top">
+
+                        <span>
+                            11 Students
+                        </span>
+
+                        <strong>
+                            13%
+                        </strong>
+
+                    </div>
+
+                    <div class="ps-progress-track">
+
+                        <div
+                            class="ps-progress-fill"
+                            style="width:13%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TECH MAHINDRA -->
+
+            <div class="ps-company-row">
+
+                <div class="ps-company-info">
+
+                    <div class="ps-company-logo">
+                        TM
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Tech Mahindra
+                        </strong>
+
+                        <span>
+                            Campus Recruitment
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ps-company-progress">
+
+                    <div class="ps-progress-top">
+
+                        <span>
+                            9 Students
+                        </span>
+
+                        <strong>
+                            11%
+                        </strong>
+
+                    </div>
+
+                    <div class="ps-progress-track">
+
+                        <div
+                            class="ps-progress-fill"
+                            style="width:11%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OTHERS -->
+
+            <div class="ps-company-row">
+
+                <div class="ps-company-info">
+
+                    <div class="ps-company-logo">
+                        +
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Other Recruiters
+                        </strong>
+
+                        <span>
+                            Other placement partners
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ps-company-progress">
+
+                    <div class="ps-progress-top">
+
+                        <span>
+                            16 Students
+                        </span>
+
+                        <strong>
+                            20%
+                        </strong>
+
+                    </div>
+
+                    <div class="ps-progress-track">
+
+                        <div
+                            class="ps-progress-fill"
+                            style="width:20%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PLACEMENT STATUS
+    ====================================================== -->
+
+    <section class="ps-card status-card">
+
+
+        <div class="ps-card-header">
+
+            <div>
+
+                <h2>
+                    Placement Status
+                </h2>
+
+                <p>
+                    Current student placement pipeline
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="ps-status-grid">
+
+
+            <div class="ps-status-item">
+
+                <div class="ps-status-icon applied">
+                    ●
+                </div>
+
+                <div>
+
+                    <span>
+                        Applications
+                    </span>
+
+                    <strong>
+                        126
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="ps-status-item">
+
+                <div class="ps-status-icon shortlisted">
+                    ◆
+                </div>
+
+                <div>
+
+                    <span>
+                        Shortlisted
+                    </span>
+
+                    <strong>
+                        31
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="ps-status-item">
+
+                <div class="ps-status-icon interview">
+                    ◷
+                </div>
+
+                <div>
+
+                    <span>
+                        In Interview
+                    </span>
+
+                    <strong>
+                        12
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="ps-status-item">
+
+                <div class="ps-status-icon selected">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Selected
+                    </span>
+
+                    <strong>
+                        10
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="ps-status-item">
+
+                <div class="ps-status-icon offers">
+                    ₹
+                </div>
+
+                <div>
+
+                    <span>
+                        Offers
+                    </span>
+
+                    <strong>
+                        24
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="ps-status-item">
+
+                <div class="ps-status-icon joined">
+                    ★
+                </div>
+
+                <div>
+
+                    <span>
+                        Joined
+                    </span>
+
+                    <strong>
+                        5
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER NOTE
+    ====================================================== -->
+
+    <div class="ps-footer-note">
+
+        <span>ⓘ</span>
+
+        All statistics shown are for the
+        <strong>Information Technology</strong>
+        department only.
+
+    </div>
+
+
+</section>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/hod/placement_statistics.js'
+    ) }}">
+</script>
+
+{% endblock %}

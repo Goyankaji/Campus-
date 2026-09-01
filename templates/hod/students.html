@@ -1,0 +1,1783 @@
+{% extends "hod/base.html" %}
+
+
+{% block title %}
+    Students | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/hod/students.css') }}"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="hod-students-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="students-page-header">
+
+        <div class="students-page-heading">
+
+            <div class="students-breadcrumb">
+
+                <span>Dashboard</span>
+
+                <span>›</span>
+
+                <strong>Students</strong>
+
+            </div>
+
+
+            <h1>
+                Students
+            </h1>
+
+
+            <p>
+                Students registered under Information Technology
+            </p>
+
+        </div>
+
+
+        <div class="students-page-actions">
+
+            <button
+                type="button"
+                class="students-btn students-btn-import"
+                id="importExcelBtn"
+            >
+
+                <span class="students-btn-icon">
+                    ↑
+                </span>
+
+                Import Excel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="students-btn students-btn-primary"
+                id="addStudentBtn"
+            >
+
+                <span class="students-btn-icon">
+                    +
+                </span>
+
+                Add New Student
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DEPARTMENT CONTEXT
+    ====================================================== -->
+
+    <section class="students-context-card">
+
+
+        <div class="context-main">
+
+            <div class="context-icon">
+                IT
+            </div>
+
+
+            <div class="context-details">
+
+                <span>
+                    Department
+                </span>
+
+                <strong>
+                    Information Technology
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="context-divider"></div>
+
+
+        <div class="context-item">
+
+            <span>
+                College
+            </span>
+
+            <strong>
+                Poornima College of Engineering
+            </strong>
+
+        </div>
+
+
+        <div class="context-divider"></div>
+
+
+        <div class="context-item">
+
+            <span>
+                Academic Year
+            </span>
+
+            <strong>
+                2026–27
+            </strong>
+
+        </div>
+
+
+        <div class="context-fixed">
+
+            IT Department Only
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         KPI CARDS
+    ====================================================== -->
+
+    <section class="students-kpi-grid">
+
+
+        <article class="students-kpi-card">
+
+            <div class="kpi-icon purple">
+                ♙
+            </div>
+
+            <div class="kpi-content">
+
+                <span>
+                    Total Students
+                </span>
+
+                <strong>
+                    180
+                </strong>
+
+                <small>
+                    IT Department
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="students-kpi-card">
+
+            <div class="kpi-icon green">
+                ✓
+            </div>
+
+            <div class="kpi-content">
+
+                <span>
+                    Placement Eligible
+                </span>
+
+                <strong>
+                    145
+                </strong>
+
+                <small>
+                    80.56% of students
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="students-kpi-card">
+
+            <div class="kpi-icon blue">
+                ★
+            </div>
+
+            <div class="kpi-content">
+
+                <span>
+                    Students Placed
+                </span>
+
+                <strong>
+                    82
+                </strong>
+
+                <small>
+                    45.56% placement
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="students-kpi-card">
+
+            <div class="kpi-icon orange">
+                ↗
+            </div>
+
+            <div class="kpi-content">
+
+                <span>
+                    Placement Percentage
+                </span>
+
+                <strong>
+                    45.56%
+                </strong>
+
+                <small class="positive">
+                    Current session
+                </small>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STUDENT DIRECTORY
+    ====================================================== -->
+
+    <section class="students-directory-card">
+
+
+        <!-- DIRECTORY HEADER -->
+
+        <div class="directory-header">
+
+            <div>
+
+                <h2>
+                    Student Directory
+                </h2>
+
+                <p>
+                    Students registered under Information Technology
+                </p>
+
+            </div>
+
+
+            <div class="directory-count">
+
+                <strong>
+                    180
+                </strong>
+
+                <span>
+                    Records
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="students-filter-bar">
+
+
+            <!-- SEARCH -->
+
+            <div class="student-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="studentSearch"
+                    placeholder="Search name, registration no. or email..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- BATCH -->
+
+            <select
+                class="student-filter"
+                id="batchFilter"
+            >
+
+                <option value="">
+                    All Batches
+                </option>
+
+                <option value="2026-27">
+                    2026–27
+                </option>
+
+                <option value="2025-26">
+                    2025–26
+                </option>
+
+                <option value="2024-25">
+                    2024–25
+                </option>
+
+            </select>
+
+
+
+            <!-- PLACEMENT -->
+
+            <select
+                class="student-filter"
+                id="placementFilter"
+            >
+
+                <option value="">
+                    Placement Status
+                </option>
+
+                <option value="Placed">
+                    Placed
+                </option>
+
+                <option value="Interview">
+                    In Interview
+                </option>
+
+                <option value="Shortlisted">
+                    Shortlisted
+                </option>
+
+                <option value="Applied">
+                    Applied
+                </option>
+
+                <option value="Not Placed">
+                    Not Placed
+                </option>
+
+            </select>
+
+
+
+            <!-- CLEAR -->
+
+            <button
+                type="button"
+                class="clear-filter-btn"
+                id="clearFiltersBtn"
+            >
+
+                Clear
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="students-table-wrapper">
+
+
+            <table
+                class="students-table"
+                id="studentsTable"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            #
+                        </th>
+
+                        <th>
+                            STUDENT DETAILS
+                        </th>
+
+                        <th>
+                            REGISTRATION NO.
+                        </th>
+
+                        <th>
+                            GENDER
+                        </th>
+
+                        <th>
+                            COURSE
+                        </th>
+
+                        <th>
+                            BRANCH
+                        </th>
+
+                        <th>
+                            SECTION
+                        </th>
+
+                        <th>
+                            BATCH
+                        </th>
+
+                        <th>
+                            CGPA
+                        </th>
+
+                        <th>
+                            PLACEMENT
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <!-- =================================================
+                         STUDENT 1
+                    ================================================== -->
+
+                    <tr
+                        data-batch="2026-27"
+                        data-placement="Placed"
+                    >
+
+                        <td>
+                            01
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-details">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Rishi Sharma
+                                    </strong>
+
+                                    <span>
+                                        rishi.sharma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24101
+                        </td>
+
+
+                        <td>
+                            Male
+                        </td>
+
+
+                        <td>
+                            B.Tech
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            A
+                        </td>
+
+
+                        <td>
+                            2026–27
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                8.50
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <span class="placement-badge placed">
+                                Placed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 2
+                    ================================================== -->
+
+                    <tr
+                        data-batch="2026-27"
+                        data-placement="Interview"
+                    >
+
+                        <td>
+                            02
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-details">
+
+                                <div class="student-avatar">
+                                    AD
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Arsf Danish
+                                    </strong>
+
+                                    <span>
+                                        arsf.danish@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24102
+                        </td>
+
+
+                        <td>
+                            Male
+                        </td>
+
+
+                        <td>
+                            B.Tech
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            A
+                        </td>
+
+
+                        <td>
+                            2026–27
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                8.12
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <span class="placement-badge interview">
+                                Interview
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 3
+                    ================================================== -->
+
+                    <tr
+                        data-batch="2026-27"
+                        data-placement="Shortlisted"
+                    >
+
+                        <td>
+                            03
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-details">
+
+                                <div class="student-avatar">
+                                    RK
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Ritik Kumar
+                                    </strong>
+
+                                    <span>
+                                        ritik.kumar@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24103
+                        </td>
+
+
+                        <td>
+                            Male
+                        </td>
+
+
+                        <td>
+                            B.Tech
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            B
+                        </td>
+
+
+                        <td>
+                            2026–27
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                9.50
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <span class="placement-badge shortlisted">
+                                Shortlisted
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 4
+                    ================================================== -->
+
+                    <tr
+                        data-batch="2026-27"
+                        data-placement="Applied"
+                    >
+
+                        <td>
+                            04
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-details">
+
+                                <div class="student-avatar">
+                                    LJ
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Lakshay Jajoo
+                                    </strong>
+
+                                    <span>
+                                        lakshay.jajoo@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24104
+                        </td>
+
+
+                        <td>
+                            Male
+                        </td>
+
+
+                        <td>
+                            B.Tech
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            B
+                        </td>
+
+
+                        <td>
+                            2026–27
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                9.00
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <span class="placement-badge applied">
+                                Applied
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 5
+                    ================================================== -->
+
+                    <tr
+                        data-batch="2026-27"
+                        data-placement="Not Placed"
+                    >
+
+                        <td>
+                            05
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-details">
+
+                                <div class="student-avatar">
+                                    AS
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Aman Singh
+                                    </strong>
+
+                                    <span>
+                                        aman.singh@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA24105
+                        </td>
+
+
+                        <td>
+                            Male
+                        </td>
+
+
+                        <td>
+                            B.Tech
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            C
+                        </td>
+
+
+                        <td>
+                            2026–27
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                6.20
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <span class="placement-badge not-placed">
+                                Not Placed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 6
+                    ================================================== -->
+
+                    <tr
+                        data-batch="2025-26"
+                        data-placement="Placed"
+                    >
+
+                        <td>
+                            06
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-details">
+
+                                <div class="student-avatar">
+                                    PG
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Priya Gupta
+                                    </strong>
+
+                                    <span>
+                                        priya.gupta@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            PCEA23106
+                        </td>
+
+
+                        <td>
+                            Female
+                        </td>
+
+
+                        <td>
+                            B.Tech
+                        </td>
+
+
+                        <td>
+                            IT
+                        </td>
+
+
+                        <td>
+                            C
+                        </td>
+
+
+                        <td>
+                            2025–26
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                9.02
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <span class="placement-badge placed">
+                                Placed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="students-empty-state"
+                id="studentsEmptyState"
+            >
+
+                <div class="empty-state-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No students found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE FOOTER
+        ================================================== -->
+
+        <div class="students-table-footer">
+
+            <span id="studentsShowingText">
+                Showing 1–6 of 180 students
+            </span>
+
+
+            <div class="students-pagination">
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                    disabled
+                >
+                    ‹
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pagination-btn active"
+                >
+                    1
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    2
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    3
+                </button>
+
+
+                <span>
+                    ...
+                </span>
+
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    30
+                </button>
+
+
+                <button
+                    type="button"
+                    class="pagination-btn"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ADD STUDENT MODAL
+         NOTE:
+         FORM DESIGN WILL BE REDESIGNED LATER
+    ====================================================== -->
+
+    <div
+        class="students-modal"
+        id="addStudentModal"
+        aria-hidden="true"
+    >
+
+        <div class="students-modal-overlay"></div>
+
+
+        <div class="students-modal-box">
+
+
+            <div class="students-modal-header">
+
+                <div>
+
+                    <h2>
+                        Add New Student
+                    </h2>
+
+                    <p>
+                        Add a student to the Information Technology department.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="students-modal-close"
+                    data-close-modal="addStudentModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <form
+                id="addStudentForm"
+                class="student-form"
+            >
+
+                <div class="student-form-grid">
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="student_name"
+                            placeholder="Enter full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Registration Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="registration_no"
+                            placeholder="e.g. PCEA24107"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="student@poornima.org"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Gender
+                        </label>
+
+                        <select
+                            name="gender"
+                            required
+                        >
+
+                            <option value="">
+                                Select Gender
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            College
+                        </label>
+
+                        <input
+                            type="text"
+                            name="college"
+                            value="Poornima College of Engineering"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Course
+                        </label>
+
+                        <select
+                            name="course"
+                            required
+                        >
+
+                            <option value="">
+                                Select Course
+                            </option>
+
+                            <option value="B.Tech">
+                                B.Tech
+                            </option>
+
+                            <option value="M.Tech">
+                                M.Tech
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Branch
+                        </label>
+
+                        <input
+                            type="text"
+                            name="branch"
+                            value="Information Technology"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Section
+                        </label>
+
+                        <select
+                            name="section"
+                            required
+                        >
+
+                            <option value="">
+                                Select Section
+                            </option>
+
+                            <option value="A">
+                                A
+                            </option>
+
+                            <option value="B">
+                                B
+                            </option>
+
+                            <option value="C">
+                                C
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            Batch
+                        </label>
+
+                        <select
+                            name="batch"
+                            required
+                        >
+
+                            <option value="">
+                                Select Batch
+                            </option>
+
+                            <option value="2026-27">
+                                2026–27
+                            </option>
+
+                            <option value="2025-26">
+                                2025–26
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="student-form-field">
+
+                        <label>
+                            CGPA
+                        </label>
+
+                        <input
+                            type="number"
+                            name="cgpa"
+                            min="0"
+                            max="10"
+                            step="0.01"
+                            placeholder="e.g. 8.50"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="student-duplicate-note">
+
+                    <span>
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Duplicate protection
+                        </strong>
+
+                        <p>
+                            Existing student records will be checked
+                            before adding a new student.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="students-modal-footer">
+
+                    <button
+                        type="button"
+                        class="modal-cancel-btn"
+                        data-close-modal="addStudentModal"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="modal-submit-btn"
+                    >
+                        Add Student
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         IMPORT EXCEL MODAL
+    ====================================================== -->
+
+    <div
+        class="students-modal"
+        id="importExcelModal"
+        aria-hidden="true"
+    >
+
+        <div class="students-modal-overlay"></div>
+
+
+        <div class="students-modal-box import-modal-box">
+
+
+            <div class="students-modal-header">
+
+                <div>
+
+                    <h2>
+                        Import Students from Excel
+                    </h2>
+
+                    <p>
+                        Import students for Information Technology.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="students-modal-close"
+                    data-close-modal="importExcelModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="excel-import-content">
+
+
+                <div class="excel-steps">
+
+                    <div class="excel-step active">
+
+                        <span>
+                            1
+                        </span>
+
+                        <strong>
+                            Upload
+                        </strong>
+
+                    </div>
+
+
+                    <div class="excel-step-line"></div>
+
+
+                    <div class="excel-step">
+
+                        <span>
+                            2
+                        </span>
+
+                        <strong>
+                            Preview
+                        </strong>
+
+                    </div>
+
+
+                    <div class="excel-step-line"></div>
+
+
+                    <div class="excel-step">
+
+                        <span>
+                            3
+                        </span>
+
+                        <strong>
+                            Validate
+                        </strong>
+
+                    </div>
+
+
+                    <div class="excel-step-line"></div>
+
+
+                    <div class="excel-step">
+
+                        <span>
+                            4
+                        </span>
+
+                        <strong>
+                            Import
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="excel-upload-area"
+                    id="excelUploadArea"
+                >
+
+                    <div class="excel-upload-icon">
+                        ↑
+                    </div>
+
+
+                    <h3>
+                        Upload Student Excel File
+                    </h3>
+
+
+                    <p>
+                        Upload the Excel file containing IT department students.
+                    </p>
+
+
+                    <span>
+                        Supported formats: .xlsx, .xls
+                    </span>
+
+
+                    <input
+                        type="file"
+                        id="studentExcelFile"
+                        accept=".xlsx,.xls"
+                        hidden
+                    >
+
+
+                    <button
+                        type="button"
+                        class="browse-excel-btn"
+                        id="browseExcelBtn"
+                    >
+                        Browse File
+                    </button>
+
+                </div>
+
+
+
+                <div class="excel-import-info">
+
+                    <div class="info-icon">
+                        !
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            IT department records only
+                        </strong>
+
+                        <p>
+                            PCE and Information Technology are fixed
+                            for this HOD portal. Duplicate student records
+                            will not be imported.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="selected-excel-file"
+                    id="selectedExcelFile"
+                >
+
+                    <span class="file-icon">
+                        XLS
+                    </span>
+
+
+                    <div>
+
+                        <strong id="selectedFileName">
+                            No file selected
+                        </strong>
+
+                        <small id="selectedFileSize">
+                            —
+                        </small>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="removeExcelFile"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="students-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-cancel-btn"
+                    data-close-modal="importExcelModal"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="button"
+                    class="modal-submit-btn"
+                    id="continueExcelBtn"
+                    disabled
+                >
+                    Continue
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/hod/students.js') }}"
+></script>
+
+{% endblock %}

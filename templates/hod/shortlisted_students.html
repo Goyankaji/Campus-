@@ -1,0 +1,922 @@
+{% extends "hod/base.html" %}
+
+
+{% block title %}
+    Shortlisted Students | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for(
+        'static',
+        filename='css/hod/shortlisted_students.css'
+    ) }}"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="hod-shortlisted-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="shortlisted-header">
+
+        <div>
+
+            <div class="shortlisted-breadcrumb">
+
+                <span>Dashboard</span>
+
+                <b>›</b>
+
+                <strong>
+                    Shortlisted Students
+                </strong>
+
+            </div>
+
+
+            <div class="shortlisted-title-row">
+
+                <div>
+
+                    <h1>
+                        Shortlisted Students
+                    </h1>
+
+                    <p>
+                        Track students shortlisted for
+                        placement opportunities.
+                    </p>
+
+                </div>
+
+
+                <div class="department-pill">
+
+                    <span class="department-dot"></span>
+
+                    Information Technology
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <div class="shortlisted-summary">
+
+
+        <!-- TOTAL -->
+
+        <div class="shortlisted-stat">
+
+            <div class="stat-icon purple">
+                ◆
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Shortlisted
+                </span>
+
+                <strong>
+                    31
+                </strong>
+
+                <small>
+                    IT department
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- INTERVIEW -->
+
+        <div class="shortlisted-stat">
+
+            <div class="stat-icon orange">
+                ◷
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    In Interview
+                </span>
+
+                <strong>
+                    12
+                </strong>
+
+                <small>
+                    Interview process
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SELECTED -->
+
+        <div class="shortlisted-stat">
+
+            <div class="stat-icon green">
+                ✓
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Selected
+                </span>
+
+                <strong>
+                    10
+                </strong>
+
+                <small>
+                    Successfully selected
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- OFFER -->
+
+        <div class="shortlisted-stat">
+
+            <div class="stat-icon blue">
+                ₹
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Offer / Joining
+                </span>
+
+                <strong>
+                    9
+                </strong>
+
+                <small>
+                    Offer or joining stage
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN DIRECTORY
+    ====================================================== -->
+
+    <div class="shortlisted-workspace">
+
+
+        <!-- =================================================
+             DIRECTORY HEADER
+        ================================================== -->
+
+        <div class="workspace-header">
+
+            <div class="workspace-title">
+
+                <div class="workspace-icon">
+                    ◆
+                </div>
+
+                <div>
+
+                    <h2>
+                        Shortlisted Directory
+                    </h2>
+
+                    <span>
+                        Students currently shortlisted
+                        for placement
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="workspace-count">
+
+                <strong id="visibleShortlistedCount">
+                    31
+                </strong>
+
+                <span>
+                    Students
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER TOOLBAR
+        ================================================== -->
+
+        <div class="shortlisted-toolbar">
+
+
+            <!-- SEARCH -->
+
+            <div class="shortlisted-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="shortlistedSearch"
+                    placeholder="Search student, registration no. or company..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- COMPANY -->
+
+            <div class="filter-box">
+
+                <select
+                    id="companyFilter"
+                    aria-label="Filter by company"
+                >
+
+                    <option value="">
+                        All Companies
+                    </option>
+
+                    <option value="TCS">
+                        TCS
+                    </option>
+
+                    <option value="Infosys">
+                        Infosys
+                    </option>
+
+                    <option value="Wipro">
+                        Wipro
+                    </option>
+
+                    <option value="Accenture">
+                        Accenture
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- STAGE -->
+
+            <div class="filter-box">
+
+                <select
+                    id="stageFilter"
+                    aria-label="Filter by stage"
+                >
+
+                    <option value="">
+                        All Stages
+                    </option>
+
+                    <option value="Shortlisted">
+                        Shortlisted
+                    </option>
+
+                    <option value="Interview">
+                        Interview
+                    </option>
+
+                    <option value="Selected">
+                        Selected
+                    </option>
+
+                    <option value="Offer">
+                        Offer
+                    </option>
+
+                    <option value="Joining">
+                        Joining
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- CLEAR -->
+
+            <button
+                type="button"
+                class="clear-filter-btn"
+                id="clearShortlistedFilters"
+            >
+                Clear
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="shortlisted-table-wrap">
+
+            <table
+                class="shortlisted-table"
+                id="shortlistedTable"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th class="number-column">
+                            #
+                        </th>
+
+                        <th>
+                            STUDENT
+                        </th>
+
+                        <th>
+                            REGISTRATION NO.
+                        </th>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            JOB ROLE
+                        </th>
+
+                        <th>
+                            SHORTLISTED ON
+                        </th>
+
+                        <th>
+                            STAGE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="shortlistedTableBody">
+
+
+                    <!-- =================================================
+                         STUDENT 1
+                    ================================================== -->
+
+                    <tr
+                        class="shortlisted-row"
+                        data-company="tcs"
+                        data-stage="interview"
+                        data-search="Rishi Sharma PCEA24101 TCS Software Engineer"
+                    >
+
+                        <td>
+                            01
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RS
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Rishi Sharma
+                                    </strong>
+
+                                    <span>
+                                        rishi.sharma@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24101
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    TCS
+                                </strong>
+
+                                <span>
+                                    Campus Drive
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+
+                        <td>
+                            24 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="stage interview">
+                                Interview
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                                data-student="PCEA24101"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 2
+                    ================================================== -->
+
+                    <tr
+                        class="shortlisted-row"
+                        data-company="infosys"
+                        data-stage="selected"
+                        data-search="Arsf Danish PCEA24102 Infosys System Engineer"
+                    >
+
+                        <td>
+                            02
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    AD
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Arsf Danish
+                                    </strong>
+
+                                    <span>
+                                        arsf.danish@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24102
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Infosys
+                                </strong>
+
+                                <span>
+                                    Campus Drive
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            System Engineer
+                        </td>
+
+
+                        <td>
+                            25 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="stage selected">
+                                Selected
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status selected-status">
+                                Selected
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                                data-student="PCEA24102"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 3
+                    ================================================== -->
+
+                    <tr
+                        class="shortlisted-row"
+                        data-company="wipro"
+                        data-stage="shortlisted"
+                        data-search="Ritik Kumar PCEA24103 Wipro Project Engineer"
+                    >
+
+                        <td>
+                            03
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RK
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Ritik Kumar
+                                    </strong>
+
+                                    <span>
+                                        ritik.kumar@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24103
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Wipro
+                                </strong>
+
+                                <span>
+                                    Campus Drive
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Project Engineer
+                        </td>
+
+
+                        <td>
+                            26 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="stage shortlisted">
+                                Shortlisted
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                                data-student="PCEA24103"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- =================================================
+                         STUDENT 4
+                    ================================================== -->
+
+                    <tr
+                        class="shortlisted-row"
+                        data-company="accenture"
+                        data-stage="offer"
+                        data-search="Lakshay Jaipoo PCEA24104 Accenture Associate Software Engineer"
+                    >
+
+                        <td>
+                            04
+                        </td>
+
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    LJ
+                                </div>
+
+                                <div class="student-details">
+
+                                    <strong>
+                                        Lakshay Jaipoo
+                                    </strong>
+
+                                    <span>
+                                        lakshay.jaipoo@poornima.org
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            <span class="registration">
+                                PCEA24104
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <div class="company-cell">
+
+                                <strong>
+                                    Accenture
+                                </strong>
+
+                                <span>
+                                    Campus Drive
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Associate Software Engineer
+                        </td>
+
+
+                        <td>
+                            27 Aug 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="stage offer">
+                                Offer
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status offer-status">
+                                Offer Received
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-student-btn"
+                                data-student="PCEA24104"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+            <!-- =================================================
+                 FILTER EMPTY
+            ================================================== -->
+
+            <div
+                class="shortlisted-empty"
+                id="shortlistedEmpty"
+                hidden
+            >
+
+                <div class="empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No Students Found
+                </h3>
+
+                <p>
+                    No shortlisted students match
+                    your current filters.
+                </p>
+
+                <button
+                    type="button"
+                    id="emptyClearButton"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/hod/shortlisted_students.js'
+    ) }}"
+></script>
+
+{% endblock %}

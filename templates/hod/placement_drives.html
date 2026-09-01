@@ -1,0 +1,732 @@
+{% extends "hod/base.html" %}
+
+{% block title %}
+    Placement Drives | HOD Portal
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/hod/placement_drives.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="hod-drives-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <section class="drives-page-header">
+
+        <div class="drives-heading">
+
+            <div class="drives-breadcrumb">
+
+                <span>Placement</span>
+
+                <span class="breadcrumb-arrow">
+                    ›
+                </span>
+
+                <strong>
+                    Placement Drives
+                </strong>
+
+            </div>
+
+
+            <h1>
+                Placement Drives
+            </h1>
+
+
+            <p>
+                View placement drives available for
+                Information Technology students.
+            </p>
+
+        </div>
+
+
+        <div class="drives-header-actions">
+
+            <button
+                type="button"
+                class="drive-outline-btn"
+                id="refreshDrivesBtn"
+            >
+
+                <span>
+                    ↻
+                </span>
+
+                Refresh
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DEPARTMENT CONTEXT
+    ====================================================== -->
+
+    <section class="drive-context-card">
+
+
+        <div class="drive-context-icon">
+            IT
+        </div>
+
+
+        <div class="drive-context-item">
+
+            <span>
+                Department
+            </span>
+
+            <strong>
+                Information Technology
+            </strong>
+
+        </div>
+
+
+        <div class="drive-context-divider"></div>
+
+
+        <div class="drive-context-item">
+
+            <span>
+                College
+            </span>
+
+            <strong>
+                Poornima College of Engineering
+            </strong>
+
+        </div>
+
+
+        <div class="drive-context-divider"></div>
+
+
+        <div class="drive-context-item">
+
+            <span>
+                Academic Year
+            </span>
+
+            <strong>
+                2026–27
+            </strong>
+
+        </div>
+
+
+        <div class="drive-context-badge">
+            IT Department Only
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="drive-summary-grid">
+
+
+        <!-- TOTAL -->
+
+        <article class="drive-summary-card">
+
+            <div class="drive-summary-icon purple">
+                ▣
+            </div>
+
+            <div>
+
+                <span>
+                    Total Drives
+                </span>
+
+                <strong id="totalDrives">
+                    12
+                </strong>
+
+                <small>
+                    Available for department
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- UPCOMING -->
+
+        <article class="drive-summary-card">
+
+            <div class="drive-summary-icon blue">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    Upcoming Drives
+                </span>
+
+                <strong id="upcomingDrives">
+                    5
+                </strong>
+
+                <small>
+                    Scheduled recruitment
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ACTIVE -->
+
+        <article class="drive-summary-card">
+
+            <div class="drive-summary-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Active Drives
+                </span>
+
+                <strong id="activeDrives">
+                    4
+                </strong>
+
+                <small>
+                    Applications open
+                </small>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- COMPLETED -->
+
+        <article class="drive-summary-card">
+
+            <div class="drive-summary-icon orange">
+                ◉
+            </div>
+
+            <div>
+
+                <span>
+                    Completed
+                </span>
+
+                <strong id="completedDrives">
+                    3
+                </strong>
+
+                <small>
+                    Recruitment completed
+                </small>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN DIRECTORY
+    ====================================================== -->
+
+    <section class="drives-directory-card">
+
+
+        <!-- =================================================
+             CARD HEADER
+        ================================================== -->
+
+        <div class="drives-directory-header">
+
+            <div>
+
+                <h2>
+                    Placement Drive Directory
+                </h2>
+
+                <p>
+                    Placement opportunities shared by
+                    TPO / Administration.
+                </p>
+
+            </div>
+
+
+            <div class="drive-record-count">
+
+                <strong id="visibleDriveCount">
+                    12
+                </strong>
+
+                <span>
+                    Records
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="drive-filter-bar">
+
+
+            <!-- SEARCH -->
+
+            <div class="drive-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="driveSearch"
+                    placeholder="Search company or job role..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <select
+                id="driveStatusFilter"
+                class="drive-filter"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="active">
+                    Active
+                </option>
+
+                <option value="upcoming">
+                    Upcoming
+                </option>
+
+                <option value="completed">
+                    Completed
+                </option>
+
+                <option value="closed">
+                    Closed
+                </option>
+
+            </select>
+
+
+
+            <!-- MODE -->
+
+            <select
+                id="driveModeFilter"
+                class="drive-filter"
+            >
+
+                <option value="all">
+                    All Modes
+                </option>
+
+                <option value="on-campus">
+                    On Campus
+                </option>
+
+                <option value="online">
+                    Online
+                </option>
+
+                <option value="hybrid">
+                    Hybrid
+                </option>
+
+            </select>
+
+
+
+            <!-- CLEAR -->
+
+            <button
+                type="button"
+                id="clearDriveFilters"
+                class="drive-clear-btn"
+            >
+                Clear
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="drives-table-wrapper">
+
+
+            <table class="drives-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            #
+                        </th>
+
+                        <th>
+                            COMPANY
+                        </th>
+
+                        <th>
+                            ROLE
+                        </th>
+
+                        <th>
+                            DRIVE DATE
+                        </th>
+
+                        <th>
+                            APPLY BY
+                        </th>
+
+                        <th>
+                            MODE
+                        </th>
+
+                        <th>
+                            ELIGIBLE
+                        </th>
+
+                        <th>
+                            APPLICANTS
+                        </th>
+
+                        <th>
+                            PACKAGE
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="drivesTableBody">
+                </tbody>
+
+
+            </table>
+
+
+
+            <!-- EMPTY -->
+
+            <div
+                class="drives-empty-state"
+                id="drivesEmptyState"
+            >
+
+                <div class="drives-empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    No placement drives found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="drives-table-footer">
+
+            <span id="driveFooterText">
+                Showing 12 placement drives
+            </span>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DRIVE DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="drive-modal"
+        id="driveModal"
+    >
+
+        <div
+            class="drive-modal-overlay"
+            id="driveModalOverlay"
+        ></div>
+
+
+        <div class="drive-modal-box">
+
+
+            <!-- HEADER -->
+
+            <div class="drive-modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        PLACEMENT DRIVE
+                    </span>
+
+                    <h2 id="modalCompany">
+                        Tata Consultancy Services
+                    </h2>
+
+                    <p id="modalRole">
+                        Software Engineer
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="drive-modal-close"
+                    id="closeDriveModal"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- BODY -->
+
+            <div class="drive-modal-body">
+
+
+                <div class="modal-status-row">
+
+                    <span>
+                        Drive Status
+                    </span>
+
+                    <strong id="modalStatus">
+                        Active
+                    </strong>
+
+                </div>
+
+
+                <div class="modal-details-grid">
+
+
+                    <div class="modal-detail">
+
+                        <span>
+                            Drive Date
+                        </span>
+
+                        <strong id="modalDriveDate">
+                            25 Aug 2026
+                        </strong>
+
+                    </div>
+
+
+                    <div class="modal-detail">
+
+                        <span>
+                            Application Deadline
+                        </span>
+
+                        <strong id="modalDeadline">
+                            22 Aug 2026
+                        </strong>
+
+                    </div>
+
+
+                    <div class="modal-detail">
+
+                        <span>
+                            Mode
+                        </span>
+
+                        <strong id="modalMode">
+                            On Campus
+                        </strong>
+
+                    </div>
+
+
+                    <div class="modal-detail">
+
+                        <span>
+                            Work Location
+                        </span>
+
+                        <strong id="modalLocation">
+                            Jaipur
+                        </strong>
+
+                    </div>
+
+
+                    <div class="modal-detail">
+
+                        <span>
+                            Eligible Students
+                        </span>
+
+                        <strong id="modalEligible">
+                            120
+                        </strong>
+
+                    </div>
+
+
+                    <div class="modal-detail">
+
+                        <span>
+                            Applicants
+                        </span>
+
+                        <strong id="modalApplicants">
+                            82
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- PACKAGE -->
+
+                <div class="modal-package">
+
+                    <span>
+                        Expected Package
+                    </span>
+
+                    <strong id="modalPackage">
+                        ₹ 6.20 LPA
+                    </strong>
+
+                </div>
+
+
+
+                <!-- NOTE -->
+
+                <div class="drive-info-note">
+
+                    <span>
+                        i
+                    </span>
+
+                    <p>
+                        Drive information is shared by
+                        the TPO / Administration.
+                        HOD can monitor the drive and
+                        department participation.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/hod/placement_drives.js') }}"
+></script>
+
+{% endblock %}

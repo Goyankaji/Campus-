@@ -1,0 +1,157 @@
+<!-- =========================================================
+     CAMPUS HOD PORTAL
+     COMMON TOPBAR
+========================================================= -->
+
+
+<header class="hod-topbar">
+
+
+    <!-- =====================================================
+         LEFT
+    ====================================================== -->
+
+    <div class="hod-topbar-left">
+
+
+        <!-- MOBILE MENU -->
+
+        <button
+            type="button"
+            class="hod-mobile-menu"
+            id="hodMobileMenu"
+            aria-label="Open navigation"
+        >
+            ☰
+        </button>
+
+
+        <!-- PAGE INTRO -->
+
+        <div class="hod-topbar-intro">
+
+            <h1>
+                {% block topbar_title %}
+                    Good Morning, HOD! 👋
+                {% endblock %}
+            </h1>
+
+            <p>
+                {% block topbar_subtitle %}
+                    Here's the placement overview of your department for 2026-27.
+                {% endblock %}
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RIGHT
+    ====================================================== -->
+
+    <div class="hod-topbar-right">
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <div class="hod-global-search">
+
+            <span class="hod-search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="search"
+                id="hodGlobalSearch"
+                placeholder="Search students..."
+                autocomplete="off"
+            >
+
+            <span class="hod-search-shortcut">
+                Ctrl + K
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             THEME
+        ================================================== -->
+
+        <button
+            type="button"
+            class="hod-topbar-action"
+            id="hodThemeToggle"
+            aria-label="Toggle theme"
+            title="Toggle theme"
+        >
+            ☼
+        </button>
+
+
+
+        <!-- =================================================
+             NOTIFICATIONS
+        ================================================== -->
+
+        <button
+            type="button"
+            class="hod-topbar-action hod-notification-button"
+            id="hodNotificationButton"
+            aria-label="Notifications"
+            title="Notifications"
+        >
+
+            ♢
+
+            <span class="hod-notification-count">
+                6
+            </span>
+
+        </button>
+
+
+
+        <!-- =================================================
+             HOD INFO
+        ================================================== -->
+
+        <div class="hod-topbar-user">
+
+
+            <div class="hod-topbar-avatar">
+                R
+            </div>
+
+
+            <div class="hod-topbar-user-info">
+
+                <strong>
+                    Dr. Rahul Sharma
+                </strong>
+
+                <span>
+                    HOD • CSE Department
+                </span>
+
+            </div>
+
+
+            <span class="hod-user-arrow">
+                ⌄
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+
+</header>

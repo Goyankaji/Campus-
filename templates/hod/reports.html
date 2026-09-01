@@ -1,0 +1,675 @@
+{% extends "hod/base.html" %}
+
+{% block title %}Reports | HOD Portal{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/hod/reports.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="reports-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="reports-header">
+
+        <div>
+            <div class="reports-breadcrumb">
+                <span>Dashboard</span>
+                <b>›</b>
+                <strong>Reports</strong>
+            </div>
+
+            <h1>Department Reports</h1>
+
+            <p>
+                Placement reports and performance summaries for
+                the Information Technology department.
+            </p>
+        </div>
+
+        <div class="department-pill">
+            <span></span>
+            Information Technology
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <div class="reports-summary">
+
+        <div class="summary-card">
+
+            <div class="summary-icon purple">
+                ▣
+            </div>
+
+            <div>
+                <label>Total Students</label>
+                <strong>180</strong>
+                <small>Information Technology</small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon green">
+                ✓
+            </div>
+
+            <div>
+                <label>Placement Eligible</label>
+                <strong>145</strong>
+                <small>80.56% of department</small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon blue">
+                ★
+            </div>
+
+            <div>
+                <label>Students Placed</label>
+                <strong>82</strong>
+                <small>45.56% placement rate</small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon orange">
+                ₹
+            </div>
+
+            <div>
+                <label>Average Package</label>
+                <strong>₹6.80 LPA</strong>
+                <small>Average offered package</small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         REPORT CONTROLS
+    ====================================================== -->
+
+    <section class="report-controls">
+
+        <div class="controls-top">
+
+            <div>
+
+                <span class="section-label">
+                    REPORT CENTER
+                </span>
+
+                <h2>
+                    Generate Department Report
+                </h2>
+
+                <p>
+                    Select the required report and apply filters.
+                </p>
+
+            </div>
+
+
+            <div class="controls-actions">
+
+                <button
+                    type="button"
+                    id="resetReportBtn"
+                    class="btn btn-secondary"
+                >
+                    Reset
+                </button>
+
+                <button
+                    type="button"
+                    id="generateReportBtn"
+                    class="btn btn-primary"
+                >
+                    Generate Report
+                </button>
+
+                <button
+                    type="button"
+                    id="exportReportBtn"
+                    class="btn btn-export"
+                >
+                    ↓ Export Report
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="filters-row">
+
+            <div class="filter-field">
+
+                <label for="reportType">
+                    Report Type
+                </label>
+
+                <select id="reportType">
+
+                    <option value="placement">
+                        Placement Summary
+                    </option>
+
+                    <option value="student">
+                        Student Placement Report
+                    </option>
+
+                    <option value="company">
+                        Company-wise Placement Report
+                    </option>
+
+                    <option value="package">
+                        Package Report
+                    </option>
+
+                    <option value="drive">
+                        Placement Drive Report
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="reportSession">
+                    Academic Session
+                </label>
+
+                <select id="reportSession">
+
+                    <option value="2026-27">
+                        2026-27
+                    </option>
+
+                    <option value="2025-26">
+                        2025-26
+                    </option>
+
+                    <option value="2024-25">
+                        2024-25
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="reportStatus">
+                    Placement Status
+                </label>
+
+                <select id="reportStatus">
+
+                    <option value="all">
+                        All Students
+                    </option>
+
+                    <option value="joined">
+                        Joined
+                    </option>
+
+                    <option value="placed">
+                        Placed
+                    </option>
+
+                    <option value="not-placed">
+                        Not Placed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-field search-field">
+
+                <label for="reportSearch">
+                    Search
+                </label>
+
+                <div class="search-input">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="reportSearch"
+                        placeholder="Search student or company..."
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REPORT TABLE
+    ====================================================== -->
+
+    <section class="report-card">
+
+        <div class="report-card-header">
+
+            <div class="report-title-wrap">
+
+                <div class="report-icon">
+                    ▤
+                </div>
+
+                <div>
+
+                    <span>
+                        INFORMATION TECHNOLOGY
+                    </span>
+
+                    <h2 id="reportTitle">
+                        Placement Summary
+                    </h2>
+
+                    <p id="reportSubtitle">
+                        Department placement performance for
+                        academic session 2026-27.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="session-box">
+
+                <small>Session</small>
+
+                <strong id="headerSession">
+                    2026-27
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table class="report-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>STUDENT</th>
+
+                        <th>REGISTRATION NO.</th>
+
+                        <th>COMPANY</th>
+
+                        <th>JOB ROLE</th>
+
+                        <th>PACKAGE</th>
+
+                        <th>OFFER DATE</th>
+
+                        <th>STATUS</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="reportTableBody">
+
+                    <tr data-status="joined">
+
+                        <td>01</td>
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="avatar">
+                                    RS
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Rishi Sharma
+                                    </strong>
+
+                                    <small>
+                                        rishi.sharma@poornima.org
+                                    </small>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            PCEA24101
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                TCS
+                            </strong>
+
+                            <small>
+                                Campus Placement
+                            </small>
+
+                        </td>
+
+                        <td>
+                            Software Engineer
+                        </td>
+
+                        <td class="package">
+                            ₹6.20 LPA
+                        </td>
+
+                        <td>
+                            28 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="status joined">
+                                Joined
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-status="placed">
+
+                        <td>02</td>
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="avatar">
+                                    AD
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Arsf Danish
+                                    </strong>
+
+                                    <small>
+                                        arsf.danish@poornima.org
+                                    </small>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            PCEA24102
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                Infosys
+                            </strong>
+
+                            <small>
+                                Campus Placement
+                            </small>
+
+                        </td>
+
+                        <td>
+                            System Engineer
+                        </td>
+
+                        <td class="package">
+                            ₹6.50 LPA
+                        </td>
+
+                        <td>
+                            29 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="status pending">
+                                Joining Pending
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-status="joined">
+
+                        <td>03</td>
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="avatar">
+                                    RK
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Ritik Kumar
+                                    </strong>
+
+                                    <small>
+                                        ritik.kumar@poornima.org
+                                    </small>
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            PCEA24103
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                Wipro
+                            </strong>
+
+                            <small>
+                                Campus Placement
+                            </small>
+
+                        </td>
+
+                        <td>
+                            Project Engineer
+                        </td>
+
+                        <td class="package">
+                            ₹5.80 LPA
+                        </td>
+
+                        <td>
+                            30 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="status joined">
+                                Joined
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr data-status="placed">
+
+                        <td>04</td>
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="avatar">
+                                    LJ
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Lakshay Jaipur
+                                    </strong>
+
+                                    <small>
+                                        lakshay.jaipoo@poornima.org
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            PCEA24104
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                Accenture
+                            </strong>
+
+                            <small>
+                                Campus Placement
+                            </small>
+
+                        </td>
+
+                        <td>
+                            Associate Software Engineer
+                        </td>
+
+                        <td class="package">
+                            ₹7.10 LPA
+                        </td>
+
+                        <td>
+                            31 Aug 2026
+                        </td>
+
+                        <td>
+                            <span class="status offer">
+                                Offer Received
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- EMPTY -->
+
+        <div
+            class="empty-state"
+            id="reportsEmpty"
+        >
+
+            <div class="empty-icon">
+                ▤
+            </div>
+
+            <h3>
+                No Report Records Found
+            </h3>
+
+            <p>
+                Try changing the selected filters.
+            </p>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="report-footer">
+
+            <span>
+                Department:
+                <strong>Information Technology</strong>
+            </span>
+
+            <span>
+                Session:
+                <strong id="footerSession">2026-27</strong>
+            </span>
+
+            <span>
+                Records:
+                <strong id="recordCount">4</strong>
+            </span>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+
+{% block page_js %}
+
+<script
+    src="{{ url_for('static', filename='js/hod/reports.js') }}"
+></script>
+
+{% endblock %}

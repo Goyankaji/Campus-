@@ -1,0 +1,341 @@
+<!-- =========================================================
+     CAMPUS HOD PORTAL
+     COMMON SIDEBAR
+========================================================= -->
+
+<aside
+    class="hod-sidebar"
+    id="hodSidebar"
+>
+
+    <!-- =====================================================
+         LOGO
+    ====================================================== -->
+
+    <div class="hod-sidebar-brand">
+
+        <div class="hod-brand-logo">
+
+            <img
+                src="{{ url_for('static', filename='images/college-logo.jpeg') }}"
+                alt="College Logo"
+            >
+
+        </div>
+
+        <div class="hod-brand-text">
+
+            <h2>
+                HOD PORTAL
+            </h2>
+
+            <span>
+                DEPARTMENT DASHBOARD
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav class="hod-sidebar-navigation">
+
+
+        <!-- =================================================
+             OVERVIEW
+        ================================================== -->
+
+        <div class="hod-nav-section-title">
+            OVERVIEW
+        </div>
+
+
+        <a
+            href="{{ url_for('hod_dashboard') }}"
+            class="hod-nav {% if request.endpoint == 'hod_dashboard' %}active{% endif %}"
+            data-page="dashboard"
+        >
+
+            <span class="hod-nav-icon">
+                ⌂
+            </span>
+
+            <span class="hod-nav-label">
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             STUDENT MANAGEMENT
+        ================================================== -->
+
+        <div class="hod-nav-section-title">
+            STUDENT MANAGEMENT
+        </div>
+
+
+        <a
+            href="{{ url_for('hod_students') }}"
+            class="hod-nav {% if request.endpoint in ['hod_students', 'hod_student_detail'] %}active{% endif %}"
+            data-page="students"
+        >
+
+            <span class="hod-nav-icon">
+                ♙
+            </span>
+
+            <span class="hod-nav-label">
+                Students
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             PLACEMENT
+        ================================================== -->
+
+        <div class="hod-nav-section-title">
+            PLACEMENT
+        </div>
+
+
+        <a
+            href="{{ url_for('hod_placement_drives') }}"
+            class="hod-nav {% if request.endpoint == 'hod_placement_drives' %}active{% endif %}"
+            data-page="placement-drives"
+        >
+
+            <span class="hod-nav-icon">
+                ▣
+            </span>
+
+            <span class="hod-nav-label">
+                Placement Drives
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_applications') }}"
+            class="hod-nav {% if request.endpoint == 'hod_applications' %}active{% endif %}"
+            data-page="applications"
+        >
+
+            <span class="hod-nav-icon">
+                ▤
+            </span>
+
+            <span class="hod-nav-label">
+                Applications
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_shortlisted_students') }}"
+            class="hod-nav {% if request.endpoint == 'hod_shortlisted_students' %}active{% endif %}"
+            data-page="shortlisted-students"
+        >
+
+            <span class="hod-nav-icon">
+                ◆
+            </span>
+
+            <span class="hod-nav-label">
+                Shortlisted Students
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_offers_joining') }}"
+            class="hod-nav {% if request.endpoint == 'hod_offers_joining' %}active{% endif %}"
+            data-page="offers-joining"
+        >
+
+            <span class="hod-nav-icon">
+                ◈
+            </span>
+
+            <span class="hod-nav-label">
+                Offers & Joining
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_placed_students') }}"
+            class="hod-nav {% if request.endpoint == 'hod_placed_students' %}active{% endif %}"
+            data-page="placed-students"
+        >
+
+            <span class="hod-nav-icon">
+                ✓
+            </span>
+
+            <span class="hod-nav-label">
+                Placed Students
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_placement_statistics') }}"
+            class="hod-nav {% if request.endpoint == 'hod_placement_statistics' %}active{% endif %}"
+            data-page="placement-statistics"
+        >
+
+            <span class="hod-nav-icon">
+                ▥
+            </span>
+
+            <span class="hod-nav-label">
+                Placement Statistics
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_reports') }}"
+            class="hod-nav {% if request.endpoint == 'hod_reports' %}active{% endif %}"
+            data-page="reports"
+        >
+
+            <span class="hod-nav-icon">
+                ▧
+            </span>
+
+            <span class="hod-nav-label">
+                Reports
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             SYSTEM
+        ================================================== -->
+
+        <div class="hod-nav-section-title">
+            SYSTEM
+        </div>
+
+
+        <a
+            href="{{ url_for('hod_notifications') }}"
+            class="hod-nav {% if request.endpoint == 'hod_notifications' %}active{% endif %}"
+            data-page="notifications"
+        >
+
+            <span class="hod-nav-icon">
+                ♢
+            </span>
+
+            <span class="hod-nav-label">
+                Notifications
+            </span>
+
+            <span class="hod-nav-badge red">
+                6
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_announcements') }}"
+            class="hod-nav {% if request.endpoint == 'hod_announcements' %}active{% endif %}"
+            data-page="announcements"
+        >
+
+            <span class="hod-nav-icon">
+                ◈
+            </span>
+
+            <span class="hod-nav-label">
+                Announcements
+            </span>
+
+            <span class="hod-nav-badge purple">
+                3
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_feedback') }}"
+            class="hod-nav {% if request.endpoint == 'hod_feedback' %}active{% endif %}"
+            data-page="feedback"
+        >
+
+            <span class="hod-nav-icon">
+                ▣
+            </span>
+
+            <span class="hod-nav-label">
+                Feedback
+            </span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('hod_settings') }}"
+            class="hod-nav {% if request.endpoint == 'hod_settings' %}active{% endif %}"
+            data-page="settings"
+        >
+
+            <span class="hod-nav-icon">
+                ⚙
+            </span>
+
+            <span class="hod-nav-label">
+                Settings
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- =====================================================
+         LOGOUT
+    ====================================================== -->
+
+    <div class="hod-sidebar-footer">
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="hod-logout"
+            id="hodLogout"
+        >
+
+            <span class="hod-nav-icon">
+                ⇥
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </div>
+
+
+</aside>

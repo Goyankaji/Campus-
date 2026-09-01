@@ -1,0 +1,1176 @@
+/* =========================================================
+   CAMPUS HOD PORTAL
+   OFFERS & JOINING
+   FINAL CARD / TABLE DESIGN
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.hod-offers-page {
+    width: 100%;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.offers-header {
+    margin-bottom: 22px;
+}
+
+.offers-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 7px;
+
+    font-size: 8px;
+    color: var(--secondary);
+}
+
+.offers-breadcrumb b {
+    color: var(--muted);
+}
+
+.offers-breadcrumb strong {
+    color: var(--primary);
+}
+
+.offers-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.offers-title-row h1 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 27px;
+    line-height: 1.15;
+    font-weight: 800;
+
+    letter-spacing: -.6px;
+}
+
+.offers-title-row p {
+    margin-top: 6px;
+
+    color: var(--secondary);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   DEPARTMENT PILL
+========================================================= */
+
+.department-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    padding: 9px 14px;
+
+    background: #f3efff;
+
+    border: 1px solid #ded6ff;
+
+    border-radius: 20px;
+
+    color: #6338e8;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.department-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #6338e8;
+
+    box-shadow:
+        0 0 0 3px rgba(99,56,232,.12);
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.offers-summary {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+.offer-stat {
+    min-height: 94px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 16px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 7px 24px rgba(16,24,40,.055);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.offer-stat:hover {
+    transform: translateY(-2px);
+
+    border-color: #cfc5f8;
+}
+
+
+/* =========================================================
+   SUMMARY ICON
+========================================================= */
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.stat-icon.purple {
+    color: #7047e8;
+    background: #eee9ff;
+}
+
+.stat-icon.blue {
+    color: #287bea;
+    background: #e7f1ff;
+}
+
+.stat-icon.orange {
+    color: #f59a23;
+    background: #fff0dc;
+}
+
+.stat-icon.green {
+    color: #1ab56d;
+    background: #e3f8ed;
+}
+
+
+/* =========================================================
+   STAT TEXT
+========================================================= */
+
+.stat-content {
+    min-width: 0;
+}
+
+.stat-content span {
+    display: block;
+
+    color: var(--secondary);
+
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.stat-content strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text);
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.stat-content small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   MAIN DIRECTORY CARD
+========================================================= */
+
+.offers-workspace {
+
+    position: relative;
+
+    width: 100%;
+
+    background: var(--card) !important;
+
+    border: 1px solid var(--border) !important;
+
+    border-radius: 16px !important;
+
+    box-shadow:
+        0 8px 28px rgba(16,24,40,.065) !important;
+
+    overflow: hidden;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   DIRECTORY HEADER
+========================================================= */
+
+.workspace-header {
+
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 0 18px;
+
+    background: var(--card);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.workspace-title {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+.workspace-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eee9ff;
+
+    color: #6338e8;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.workspace-title h2 {
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.workspace-title span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--secondary);
+
+    font-size: 7px;
+}
+
+.workspace-count {
+    display: flex;
+    align-items: baseline;
+
+    gap: 5px;
+
+    padding: 7px 10px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: var(--page);
+
+    color: var(--secondary);
+
+    font-size: 7px;
+}
+
+.workspace-count strong {
+    color: #6338e8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.offers-toolbar {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 1fr)
+        180px
+        180px
+        90px;
+
+    gap: 10px;
+
+    padding: 14px 16px;
+
+    background: var(--page);
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.offers-search {
+
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 11px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+}
+
+.offers-search:focus-within {
+
+    border-color: #6338e8;
+
+    box-shadow:
+        0 0 0 3px rgba(99,56,232,.08);
+}
+
+.offers-search > span {
+
+    color: var(--secondary);
+
+    font-size: 16px;
+}
+
+.offers-search input {
+
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: var(--text);
+
+    font-size: 8px;
+}
+
+.offers-search input::placeholder {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.filter-box {
+    min-width: 0;
+}
+
+.filter-box select {
+
+    width: 100%;
+    height: 40px;
+
+    padding: 0 11px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: var(--card);
+
+    color: var(--secondary);
+
+    font-size: 8px;
+
+    cursor: pointer;
+}
+
+.filter-box select:focus {
+    border-color: #6338e8;
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+.clear-offer-filters {
+
+    height: 40px;
+
+    border-radius: 8px;
+
+    background: #2b1c63;
+
+    color: white;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    transition: .2s ease;
+}
+
+.clear-offer-filters:hover {
+    background: #6338e8;
+}
+
+
+/* =========================================================
+   TABLE AREA
+========================================================= */
+
+.offers-table-wrap {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: var(--card);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.offers-table {
+
+    width: 100%;
+
+    min-width: 1250px;
+
+    border-collapse: collapse;
+
+    background: var(--card);
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.offers-table thead {
+
+    background: var(--page);
+}
+
+.offers-table th {
+
+    height: 43px;
+
+    padding: 0 12px;
+
+    background: var(--page);
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--secondary);
+
+    text-align: left;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.offers-table td {
+
+    height: 61px;
+
+    padding: 10px 12px;
+
+    background: var(--card);
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--secondary);
+
+    font-size: 8px;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+}
+
+.offers-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.offers-table tbody tr:hover td {
+
+    background:
+        rgba(99,56,232,.025);
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.number-column {
+    width: 45px;
+}
+
+.offers-table td:first-child {
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   STUDENT
+========================================================= */
+
+.student-cell {
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 185px;
+}
+
+.student-avatar {
+
+    width: 35px;
+    height: 35px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eee9ff;
+
+    color: #6338e8;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.student-details strong {
+
+    display: block;
+
+    color: var(--text);
+
+    font-size: 8px;
+}
+
+.student-details span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+
+/* =========================================================
+   REGISTRATION
+========================================================= */
+
+.registration {
+
+    color: var(--text);
+
+    font-size: 8px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.company-cell strong {
+
+    display: block;
+
+    color: var(--text);
+
+    font-size: 8px;
+}
+
+.company-cell span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+
+/* =========================================================
+   PACKAGE
+========================================================= */
+
+.package {
+
+    color: var(--text);
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.joining-status {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 76px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 6px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.joining-status.offer {
+
+    background: #eee9ff;
+
+    color: #6338e8;
+}
+
+.joining-status.accepted {
+
+    background: #e7f1ff;
+
+    color: #287bea;
+}
+
+.joining-status.pending {
+
+    background: #fff0dc;
+
+    color: #c87908;
+}
+
+.joining-status.joined {
+
+    background: #e3f8ed;
+
+    color: #11965b;
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+========================================================= */
+
+.view-offer-btn {
+
+    min-width: 48px;
+    height: 29px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d8cffb;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #6338e8;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    transition: .2s ease;
+}
+
+.view-offer-btn:hover {
+
+    background: #f1edff;
+
+    border-color: #6338e8;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.offers-empty {
+
+    min-height: 240px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: var(--card);
+}
+
+.offers-empty[hidden] {
+    display: none;
+}
+
+.empty-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 10px;
+
+    border-radius: 50%;
+
+    background: #eee9ff;
+
+    color: #6338e8;
+
+    font-size: 18px;
+}
+
+.offers-empty h3 {
+
+    color: var(--text);
+
+    font-size: 13px;
+}
+
+.offers-empty p {
+
+    margin-top: 5px;
+
+    color: var(--secondary);
+
+    font-size: 8px;
+}
+
+.offers-empty button {
+
+    margin-top: 12px;
+
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    background: #2b1c63;
+
+    color: white;
+
+    font-size: 7px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode {
+
+    --page: #080f21;
+    --card: #0d172b;
+
+    --text: #f4f6ff;
+    --secondary: #91a0bd;
+    --muted: #64728e;
+
+    --border: #263452;
+}
+
+
+/* =========================================================
+   DARK — MAIN CARD
+========================================================= */
+
+body.dark-mode .offers-workspace {
+
+    background: #0d172b !important;
+
+    border-color: #2b3a5a !important;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.24) !important;
+}
+
+
+/* =========================================================
+   DARK — HEADER
+========================================================= */
+
+body.dark-mode .workspace-header {
+
+    background: #0d172b;
+
+    border-color: #263452;
+}
+
+body.dark-mode .workspace-icon {
+
+    background: #211b46;
+
+    color: #a997ff;
+}
+
+body.dark-mode .workspace-count {
+
+    background: #111d34;
+
+    border-color: #2b3a5a;
+}
+
+
+/* =========================================================
+   DARK — TOOLBAR
+========================================================= */
+
+body.dark-mode .offers-toolbar {
+
+    background: #091226;
+
+    border-color: #263452;
+}
+
+body.dark-mode .offers-search,
+body.dark-mode .filter-box select {
+
+    background: #0d172b;
+
+    border-color: #2b3a5a;
+
+    color: #dce4f5;
+}
+
+
+/* =========================================================
+   DARK — TABLE
+========================================================= */
+
+body.dark-mode .offers-table,
+body.dark-mode .offers-table td {
+
+    background: #0d172b;
+}
+
+body.dark-mode .offers-table th {
+
+    background: #101c32;
+
+    border-color: #263452;
+}
+
+body.dark-mode .offers-table td {
+
+    border-color: #263452;
+}
+
+body.dark-mode
+.offers-table tbody tr:hover td {
+
+    background:
+        rgba(124,92,230,.055);
+}
+
+
+/* =========================================================
+   DARK — STUDENT
+========================================================= */
+
+body.dark-mode .student-avatar {
+
+    background: #211b46;
+
+    color: #b7a9ff;
+}
+
+
+/* =========================================================
+   DARK — STATUS
+========================================================= */
+
+body.dark-mode .joining-status.offer {
+
+    background: #211b46;
+
+    color: #b7a9ff;
+}
+
+body.dark-mode .joining-status.accepted {
+
+    background: #152d4c;
+
+    color: #73aaff;
+}
+
+body.dark-mode .joining-status.pending {
+
+    background: #44321b;
+
+    color: #ffbd5c;
+}
+
+body.dark-mode .joining-status.joined {
+
+    background: #123529;
+
+    color: #55d99a;
+}
+
+
+/* =========================================================
+   DARK — VIEW
+========================================================= */
+
+body.dark-mode .view-offer-btn {
+
+    border-color: #51458a;
+
+    color: #b7a9ff;
+}
+
+body.dark-mode .view-offer-btn:hover {
+
+    background: #211b46;
+
+    border-color: #8069ed;
+}
+
+
+/* =========================================================
+   DARK — EMPTY
+========================================================= */
+
+body.dark-mode .offers-empty {
+
+    background: #0d172b;
+}
+
+body.dark-mode .empty-icon {
+
+    background: #211b46;
+
+    color: #b7a9ff;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .offers-summary {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+    .offers-toolbar {
+
+        grid-template-columns:
+            minmax(250px, 1fr)
+            160px
+            160px
+            85px;
+
+    }
+
+}
+
+
+@media (max-width: 950px) {
+
+    .offers-title-row {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+    .department-pill {
+
+        align-self: flex-start;
+
+    }
+
+    .offers-toolbar {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+    .offers-search {
+
+        grid-column: span 2;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .offers-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .offers-toolbar {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .offers-search {
+
+        grid-column: span 1;
+
+    }
+
+    .workspace-header {
+
+        min-height: 65px;
+
+        padding: 12px 14px;
+
+    }
+
+    .offers-title-row h1 {
+
+        font-size: 22px;
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .workspace-title span {
+
+        display: none;
+
+    }
+
+    .workspace-count {
+
+        padding: 6px 8px;
+
+    }
+
+}

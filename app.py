@@ -5,23 +5,66 @@ from flask import (
     redirect,
     url_for,
     session,
-    flash
+    flash,
+    jsonify
 )
 
-from werkzeug.security import check_password_hash
+from werkzeug.security import (
+    check_password_hash,
+    generate_password_hash
+)
 
 import mysql.connector
-
 from functools import wraps
+import os
 
 
 # =========================================================
-# APP
+# CAMPUS PLACEMENT PORTAL — FINAL COMBINED APP
 # =========================================================
+#
+# Role IDs:
+# 1 = ADMIN
+# 2 = STUDENT
+# 3 = MENTOR / TUTOR
+# 4 = HOD
+# 5 = TPO
+# 6 = AUTHORITY
+#
+# This file combines:
+# - Main Student / Admin / TPO / Authority application
+# - HOD scoped application
+# - Student community/blog moderation
+#
+# =========================================================
+
 
 app = Flask(__name__)
 
-app.secret_key = "campus-placement-secret-key"
+app.secret_key = os.getenv(
+    "CAMPUS_SECRET_KEY",
+    "campus-placement-secret-key"
+)
+
+
+# =========================================================
+# DATABASE CONFIGURATION
+# =========================================================
+#
+# Set CAMPUS_DB_PASSWORD in your environment.
+#
+# Windows CMD example:
+#   set CAMPUS_DB_PASSWORD=YOUR_MYSQL_PASSWORD
+#
+# =========================================================
+
+DB_CONFIG = {
+    "host": "localhost",
+    "user": "root",
+    "password": "arpit@2467",
+    "database": "campus_placement_manager",
+    "port": 3306
+}
 
 
 # =========================================================
@@ -31,16 +74,16 @@ app.secret_key = "campus-placement-secret-key"
 def get_db_connection():
 
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="*****",
-        database="campus_placement_manager",
-        port=3306
+        host=DB_CONFIG["host"],
+        user=DB_CONFIG["user"],
+        password=DB_CONFIG["password"],
+        database=DB_CONFIG["database"],
+        port=DB_CONFIG["port"]
     )
 
 
 # =========================================================
-# LOGIN REQUIRED
+# AUTH HELPERS
 # =========================================================
 
 def login_required(f):
@@ -64,10 +107,6 @@ def login_required(f):
     return decorated_function
 
 
-# =========================================================
-# ROLE REQUIRED
-# =========================================================
-
 def role_required(required_role):
 
     def decorator(f):
@@ -86,7 +125,9 @@ def role_required(required_role):
                     url_for("index")
                 )
 
-            if str(session.get("role_id")) != str(required_role):
+            if str(
+                session.get("role_id")
+            ) != str(required_role):
 
                 flash(
                     "You are not authorized to access this page.",
@@ -104,28 +145,54 @@ def role_required(required_role):
     return decorator
 
 
-# =========================================================
-# ADMIN LOGIN REQUIRED
-# =========================================================
-# Used for Admin UI test-login mode.
-#
-# Later, when normal DB login is being used, Admin pages
-# can use @login_required + @role_required("1").
-# =========================================================
+def hod_required(f):
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+
+        if "user_id" not in session:
+
+            flash(
+                "Please login first.",
+                "error"
+            )
+
+            return redirect(
+                url_for("index")
+            )
+
+        if str(
+            session.get("role_id")
+        ) != "4":
+
+            flash(
+                "You are not authorized to access the HOD portal.",
+                "error"
+            )
+
+            return redirect(
+                url_for("index")
+            )
+
+        return f(*args, **kwargs)
+
+    return decorated_function
+
 
 def admin_required(f):
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
 
-        # Allow Admin test session
-        if session.get("admin_logged_in") is True:
+        if (
+            session.get("admin_logged_in") is True
+        ):
             return f(*args, **kwargs)
 
-        # Also allow real DB Admin session
         if (
             "user_id" in session
-            and str(session.get("role_id")) == "1"
+            and
+            str(session.get("role_id")) == "1"
         ):
             return f(*args, **kwargs)
 
@@ -142,26 +209,7 @@ def admin_required(f):
 
 
 # =========================================================
-# AUTHORITY COLLEGE SCOPE
-# =========================================================
-
-def get_authority_college():
-
-    return {
-        "code": session.get(
-            "college_code",
-            "PCE"
-        ),
-
-        "name": session.get(
-            "college_name",
-            "Poornima College of Engineering"
-        )
-    }
-
-
-# =========================================================
-# COMMON STUDENT DATA
+# COMMON DATA
 # =========================================================
 
 def get_student_data():
@@ -190,8 +238,7 @@ def get_student_data():
         "about": (
             "Passionate Computer Science student with strong "
             "problem-solving skills and interest in full-stack "
-            "development. Always eager to learn new technologies "
-            "and build innovative solutions that make a difference."
+            "development."
         ),
 
         "about_updated_at": "18 Aug 2026",
@@ -233,13 +280,278 @@ def get_student_data():
     }
 
 
-# =========================================================
-# PROFILE COMPLETION
-# =========================================================
-
 def get_profile_completion():
 
     return 80
+
+
+def get_authority_college():
+
+    campus_id = session.get(
+        "campus_id"
+    )
+
+    if not campus_id:
+
+        return {
+            "code": session.get(
+                "college_code",
+                "PCE"
+            ),
+            "name": session.get(
+                "college_name",
+                "Poornima College of Engineering"
+            )
+        }
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+        cursor.execute(
+            """
+            SELECT
+                campus_code,
+                campus_name
+            FROM campuses
+            WHERE campus_id = %s
+            LIMIT 1
+            """,
+            (campus_id,)
+        )
+
+        campus = cursor.fetchone()
+
+        if campus:
+
+            return {
+                "code": campus["campus_code"],
+                "name": campus["campus_name"]
+            }
+
+    except Exception as error:
+
+        print(
+            "AUTHORITY CAMPUS ERROR:",
+            error
+        )
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
+
+    return {
+        "code": session.get(
+            "college_code",
+            "PCE"
+        ),
+        "name": session.get(
+            "college_name",
+            "Poornima College of Engineering"
+        )
+    }
+
+
+# =========================================================
+# HOD CONTEXT
+# =========================================================
+
+def get_hod_context():
+
+    context = {
+
+        "department_id": None,
+
+        "department_name":
+            "Information Technology",
+
+        "department_code":
+            "IT",
+
+        "campus_id":
+            session.get("campus_id"),
+
+        "campus_name":
+            "Poornima College of Engineering",
+
+        "academic_year":
+            "2026-27",
+
+        "hod_name":
+            session.get(
+                "username",
+                "HOD"
+            )
+
+    }
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+        # -------------------------------------------------
+        # FIRST: FACULTY RECORD
+        # -------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT
+
+                f.faculty_id,
+                f.department_id,
+                f.campus_id,
+                f.faculty_type,
+                f.designation,
+
+                d.department_name,
+                d.department_code,
+
+                c.campus_name
+
+            FROM faculty f
+
+            LEFT JOIN departments d
+                ON d.department_id =
+                   f.department_id
+
+            LEFT JOIN campuses c
+                ON c.campus_id =
+                   f.campus_id
+
+            WHERE f.user_id = %s
+
+            LIMIT 1
+            """,
+            (
+                session.get("user_id"),
+            )
+        )
+
+        faculty = cursor.fetchone()
+
+        if faculty:
+
+            context["department_id"] = \
+                faculty["department_id"]
+
+            context["campus_id"] = \
+                faculty["campus_id"]
+
+            if faculty.get(
+                "department_name"
+            ):
+                context["department_name"] = \
+                    faculty["department_name"]
+
+            if faculty.get(
+                "department_code"
+            ):
+                context["department_code"] = \
+                    faculty["department_code"]
+
+            if faculty.get(
+                "campus_name"
+            ):
+                context["campus_name"] = \
+                    faculty["campus_name"]
+
+            if faculty.get(
+                "designation"
+            ):
+                context["hod_name"] = \
+                    session.get(
+                        "username",
+                        faculty["designation"]
+                    )
+
+            return context
+
+        # -------------------------------------------------
+        # FALLBACK: departments.hod_user_id
+        # -------------------------------------------------
+
+        cursor.execute(
+            """
+            SELECT
+
+                d.department_id,
+                d.department_name,
+                d.department_code,
+                d.campus_id,
+
+                c.campus_name
+
+            FROM departments d
+
+            LEFT JOIN campuses c
+                ON c.campus_id =
+                   d.campus_id
+
+            WHERE d.hod_user_id = %s
+
+            LIMIT 1
+            """,
+            (
+                session.get("user_id"),
+            )
+        )
+
+        department = cursor.fetchone()
+
+        if department:
+
+            context["department_id"] = \
+                department["department_id"]
+
+            context["campus_id"] = \
+                department["campus_id"]
+
+            context["department_name"] = \
+                department["department_name"]
+
+            context["department_code"] = \
+                department["department_code"]
+
+            if department.get(
+                "campus_name"
+            ):
+                context["campus_name"] = \
+                    department["campus_name"]
+
+    except Exception as error:
+
+        print(
+            "HOD CONTEXT ERROR:",
+            error
+        )
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
+
+    return context
 
 
 # =========================================================
@@ -255,7 +567,7 @@ def index():
 
 
 # =========================================================
-# LOGIN PROCESSING
+# LOGIN
 # =========================================================
 
 @app.route(
@@ -353,7 +665,9 @@ def login():
                 url_for("index")
             )
 
-        if user["account_status"] != "ACTIVE":
+        if str(
+            user["account_status"]
+        ).upper() != "ACTIVE":
 
             flash(
                 "Your account is not active yet.",
@@ -366,53 +680,75 @@ def login():
 
         session.clear()
 
-        session["user_id"] = user["user_id"]
-        session["username"] = user["username"]
-        session["email"] = user["email"]
-        session["role_id"] = user["role_id"]
-        session["campus_id"] = user["campus_id"]
+        session["user_id"] = \
+            user["user_id"]
+
+        session["username"] = \
+            user["username"]
+
+        session["email"] = \
+            user["email"]
+
+        session["role_id"] = \
+            user["role_id"]
+
+        session["campus_id"] = \
+            user["campus_id"]
 
         role_id = str(
             user["role_id"]
         )
 
-        if role_id == "1":
+        role_names = {
+            "1": "ADMIN",
+            "2": "STUDENT",
+            "3": "MENTOR",
+            "4": "HOD",
+            "5": "TPO",
+            "6": "AUTHORITY"
+        }
 
+        session["role_name"] = \
+            role_names.get(
+                role_id,
+                ""
+            )
+
+        if role_id == "1":
             return redirect(
                 url_for("admin_dashboard")
             )
 
-        elif role_id == "2":
-
+        if role_id == "2":
             return redirect(
                 url_for("student_dashboard")
             )
 
-        elif role_id == "3":
-
+        if role_id == "3":
             return redirect(
                 url_for("tutor_dashboard")
             )
 
-        elif role_id == "4":
-
+        if role_id == "4":
             return redirect(
                 url_for("hod_dashboard")
             )
 
-        elif role_id == "5":
-
+        if role_id == "5":
             return redirect(
                 url_for("tpo_dashboard")
             )
 
-        elif role_id == "6":
+        if role_id == "6":
 
-            session["role_name"] = "AUTHORITY"
-            session["college_code"] = "PCE"
-            session["college_name"] = (
-                "Poornima College of Engineering"
-            )
+            college = \
+                get_authority_college()
+
+            session["college_code"] = \
+                college["code"]
+
+            session["college_name"] = \
+                college["name"]
 
             return redirect(
                 url_for("authority_dashboard")
@@ -432,20 +768,28 @@ def login():
     except mysql.connector.Error as error:
 
         print(
-            "===================================="
-        )
-
-        print(
             "DATABASE ERROR:",
             error
         )
 
+        flash(
+            "Unable to connect to the database.",
+            "error"
+        )
+
+        return redirect(
+            url_for("index")
+        )
+
+    except Exception as error:
+
         print(
-            "===================================="
+            "LOGIN ERROR:",
+            error
         )
 
         flash(
-            "Unable to connect to the database.",
+            "Something went wrong while logging in.",
             "error"
         )
 
@@ -458,13 +802,30 @@ def login():
         if cursor:
             cursor.close()
 
-        if connection and connection.is_connected():
+        if connection:
             connection.close()
 
 
 # =========================================================
-# AUTHORITY TEST LOGIN
+# TEST LOGINS
 # =========================================================
+
+@app.route("/admin/test-login")
+def admin_test_login():
+
+    session.clear()
+
+    session["admin_logged_in"] = True
+    session["user_id"] = "ADMIN-TEST-001"
+    session["username"] = "Admin"
+    session["email"] = "admin@poornima.org"
+    session["role_id"] = 1
+    session["role_name"] = "ADMIN"
+
+    return redirect(
+        url_for("admin_dashboard")
+    )
+
 
 @app.route("/authority/test-login")
 def authority_test_login():
@@ -474,42 +835,14 @@ def authority_test_login():
     session["user_id"] = "AUTHORITY-TEST"
     session["username"] = "College Authority"
     session["email"] = "authority@poornima.org"
-
     session["role_id"] = 6
     session["role_name"] = "AUTHORITY"
-
     session["college_code"] = "PCE"
-    session["college_name"] = (
+    session["college_name"] = \
         "Poornima College of Engineering"
-    )
 
     return redirect(
         url_for("authority_dashboard")
-    )
-
-
-# =========================================================
-# ADMIN TEST LOGIN
-# =========================================================
-# Keeps Admin UI test mode available without DB.
-# =========================================================
-
-@app.route("/admin/test-login")
-def admin_test_login():
-
-    session.clear()
-
-    session["admin_logged_in"] = True
-
-    session["user_id"] = "ADMIN-TEST-001"
-    session["username"] = "Admin"
-    session["email"] = "admin@poornima.org"
-
-    session["role_id"] = 1
-    session["role_name"] = "ADMIN"
-
-    return redirect(
-        url_for("admin_dashboard")
     )
 
 
@@ -533,13 +866,6 @@ def logout():
     )
 
 
-# =========================================================
-# ADMIN LOGOUT
-# =========================================================
-# Kept separately because the Admin UI currently uses
-# /admin/logout.
-# =========================================================
-
 @app.route("/admin/logout")
 def admin_logout():
 
@@ -556,312 +882,140 @@ def admin_logout():
 
 
 # =========================================================
-# =========================================================
-# STUDENT
-# =========================================================
+# STUDENT ROUTES
 # =========================================================
 
+def render_student_page(template):
 
-# =========================================================
-# STUDENT DASHBOARD
-# =========================================================
+    student = get_student_data()
+
+    return render_template(
+        template,
+        student=student,
+        profile_completion=
+            get_profile_completion()
+    )
+
 
 @app.route("/student/dashboard")
 @login_required
 @role_required("2")
 def student_dashboard():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/dashboard.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/dashboard.html"
     )
 
-
-# =========================================================
-# STUDENT PROFILE
-# =========================================================
 
 @app.route("/student/profile")
 @login_required
 @role_required("2")
 def student_profile():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/profile.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/profile.html"
     )
 
-
-# =========================================================
-# STUDENT ACADEMICS
-# =========================================================
 
 @app.route("/student/academics")
 @login_required
 @role_required("2")
 def student_academics():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/academics.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/academics.html"
     )
 
-
-# =========================================================
-# STUDENT PLACEMENT DRIVES
-# =========================================================
 
 @app.route("/student/placement-drives")
 @login_required
 @role_required("2")
 def placement_drives():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/placement_drives.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/placement_drives.html"
     )
 
-
-# =========================================================
-# STUDENT APPLICATIONS
-# =========================================================
 
 @app.route("/student/applications")
 @login_required
 @role_required("2")
 def student_applications():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/applications.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/applications.html"
     )
 
-
-# =========================================================
-# STUDENT INTERVIEWS
-# =========================================================
 
 @app.route("/student/interviews")
 @login_required
 @role_required("2")
 def student_interviews():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/interviews.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/interviews.html"
     )
 
-
-# =========================================================
-# STUDENT PREPARATION
-# =========================================================
 
 @app.route("/student/preparation")
 @login_required
 @role_required("2")
 def student_preparation():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/preparation.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/preparation.html"
     )
+
 
 @app.route("/student/noc")
-def student_noc():
-    return render_template(
-        "students/noc.html",
-        profile_completion=80
-    )
-
-# =========================================================
-# STUDENT PYQ
-# =========================================================
-
-@app.route(
-    "/student/preparation/pyq/<company>"
-)
 @login_required
 @role_required("2")
-def student_pyq(company):
+def student_noc():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    pyq_data = {
-
-        "tcs": {
-
-            "company": "TCS",
-            "title": "TCS Placement Paper 2025",
-            "type": "Aptitude · Technical · Coding",
-            "questions": 40,
-            "year": "2025",
-            "difficulty": "Moderate"
-
-        },
-
-        "infosys": {
-
-            "company": "Infosys",
-            "title": "Infosys Placement Paper 2025",
-            "type": "Aptitude · Logical Reasoning",
-            "questions": 35,
-            "year": "2025",
-            "difficulty": "Moderate"
-
-        },
-
-        "amazon": {
-
-            "company": "Amazon",
-            "title": "Amazon SDE Assessment",
-            "type": "DSA · Coding · Problem Solving",
-            "questions": 30,
-            "year": "2025",
-            "difficulty": "Advanced"
-
-        }
-
-    }
-
-    pyq = pyq_data.get(
-        company.lower()
+    return render_student_page(
+        "students/noc.html"
     )
 
-    if not pyq:
-
-        return (
-            "PYQ not found",
-            404
-        )
-
-    return render_template(
-        "students/pyq_detail.html",
-        student=student,
-        profile_completion=profile_completion,
-        pyq=pyq
-    )
-
-
-# =========================================================
-# STUDENT MY UPLOADS
-# =========================================================
 
 @app.route("/student/my-uploads")
 @login_required
 @role_required("2")
 def student_my_uploads():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/my_uploads.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/my_uploads.html"
     )
 
-
-# =========================================================
-# STUDENT ANNOUNCEMENTS
-# =========================================================
 
 @app.route("/student/announcements")
 @login_required
 @role_required("2")
 def student_announcements():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/announcements.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/announcements.html"
     )
 
-
-# =========================================================
-# STUDENT SETTINGS
-# =========================================================
 
 @app.route("/student/settings")
 @login_required
 @role_required("2")
 def student_settings():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/settings.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/settings.html"
     )
 
-
-# =========================================================
-# STUDENT OFFERS & JOINING
-# =========================================================
 
 @app.route("/student/offers-joining")
 @login_required
 @role_required("2")
 def student_offers_joining():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/offers_joining.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/offers_joining.html"
     )
 
-
-# =========================================================
-# STUDENT HELP
-# =========================================================
 
 @app.route(
     "/student/help",
@@ -870,10 +1024,6 @@ def student_offers_joining():
 @login_required
 @role_required("2")
 def student_help():
-
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
 
     if request.method == "POST":
 
@@ -899,10 +1049,8 @@ def student_help():
                 "error"
             )
 
-            return render_template(
-                "students/help.html",
-                student=student,
-                profile_completion=profile_completion
+            return render_student_page(
+                "students/help.html"
             )
 
         if not subject:
@@ -912,10 +1060,8 @@ def student_help():
                 "error"
             )
 
-            return render_template(
-                "students/help.html",
-                student=student,
-                profile_completion=profile_completion
+            return render_student_page(
+                "students/help.html"
             )
 
         if not description:
@@ -925,10 +1071,8 @@ def student_help():
                 "error"
             )
 
-            return render_template(
-                "students/help.html",
-                student=student,
-                profile_completion=profile_completion
+            return render_student_page(
+                "students/help.html"
             )
 
         print(
@@ -936,8 +1080,7 @@ def student_help():
             {
                 "category": category,
                 "subject": subject,
-                "description": description,
-                "status": "Submitted"
+                "description": description
             }
         )
 
@@ -950,625 +1093,81 @@ def student_help():
             url_for("student_help")
         )
 
-    return render_template(
-        "students/help.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/help.html"
     )
 
-
-# =========================================================
-# STUDENT DISCUSSION
-# =========================================================
 
 @app.route("/student/discussion")
 @login_required
 @role_required("2")
 def student_discussion():
 
-    student = get_student_data()
-
-    profile_completion = get_profile_completion()
-
-    return render_template(
-        "students/discussion.html",
-        student=student,
-        profile_completion=profile_completion
+    return render_student_page(
+        "students/discussion.html"
     )
 
-
-# =========================================================
-# =========================================================
-# AUTHORITY
-# =========================================================
-# =========================================================
-
-
-# =========================================================
-# AUTHORITY DASHBOARD
-# =========================================================
-
-@app.route("/authority/dashboard")
-@login_required
-@role_required("6")
-def authority_dashboard():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/dashboard.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY PLACEMENT OVERVIEW
-# =========================================================
-
-@app.route("/authority/placement-overview")
-@login_required
-@role_required("6")
-def authority_placement_overview():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/placement_overview.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY COMPANIES
-# =========================================================
-
-@app.route("/authority/companies")
-@login_required
-@role_required("6")
-def authority_companies():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/companies.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY PLACEMENT DRIVES
-# =========================================================
-
-@app.route("/authority/placement-drives")
-@login_required
-@role_required("6")
-def authority_placement_drives():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/placement_drives.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY PLACEMENT PIPELINE
-# =========================================================
-
-@app.route("/authority/placement-pipeline")
-@login_required
-@role_required("6")
-def authority_placement_pipeline():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/placement_pipeline.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY BRANCH-WISE REPORTS
-# =========================================================
-
-@app.route("/authority/analytics/branch-reports")
-@login_required
-@role_required("6")
-def authority_branch_reports():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/analytics/branch_reports.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY OFF-CAMPUS PLACEMENTS
-# =========================================================
-
-@app.route("/authority/off-campus")
-@login_required
-@role_required("6")
-def authority_off_campus():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/off_campus.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY PRE-PLACED STUDENTS
-# =========================================================
-
-@app.route("/authority/pre-placed")
-@login_required
-@role_required("6")
-def authority_pre_placed():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/pre_placed.html",
-        college=college
-    )
-
-
-
-# =========================================================
-# AUTHORITY ANALYTICS — PLACEMENT REPORTS
-# =========================================================
 
 @app.route(
-    "/authority/analytics/placement-reports"
+    "/student/preparation/pyq/<company>"
 )
 @login_required
-@role_required("6")
-def authority_placement_reports():
+@role_required("2")
+def student_pyq(company):
 
-    college = get_authority_college()
+    pyq_data = {
+
+        "tcs": {
+            "company": "TCS",
+            "title": "TCS Placement Paper 2025",
+            "type": "Aptitude · Technical · Coding",
+            "questions": 40,
+            "year": "2025",
+            "difficulty": "Moderate"
+        },
+
+        "infosys": {
+            "company": "Infosys",
+            "title": "Infosys Placement Paper 2025",
+            "type": "Aptitude · Logical Reasoning",
+            "questions": 35,
+            "year": "2025",
+            "difficulty": "Moderate"
+        },
+
+        "amazon": {
+            "company": "Amazon",
+            "title": "Amazon SDE Assessment",
+            "type": "DSA · Coding · Problem Solving",
+            "questions": 30,
+            "year": "2025",
+            "difficulty": "Advanced"
+        }
+
+    }
+
+    pyq = pyq_data.get(
+        company.lower()
+    )
+
+    if not pyq:
+
+        return (
+            "PYQ not found",
+            404
+        )
 
     return render_template(
-        "authority/analytics/placement_reports.html",
-        college=college
+        "students/pyq_detail.html",
+        student=get_student_data(),
+        profile_completion=
+            get_profile_completion(),
+        pyq=pyq
     )
 
 
 # =========================================================
-# AUTHORITY ANALYTICS — DRIVE REPORTS
-# =========================================================
-
-@app.route(
-    "/authority/analytics/drive-reports"
-)
-@login_required
-@role_required("6")
-def authority_drive_reports():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/analytics/drive_reports.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY ANALYTICS — COMPANY REPORTS
-# =========================================================
-
-@app.route(
-    "/authority/analytics/company-reports"
-)
-@login_required
-@role_required("6")
-def authority_company_reports():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/analytics/company_reports.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY NOC
-# =========================================================
-
-@app.route("/authority/noc")
-@login_required
-@role_required("6")
-def authority_noc():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/noc.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY STARTUP IDEAS
-# =========================================================
-
-@app.route("/authority/startup-ideas")
-@login_required
-@role_required("6")
-def authority_startup_ideas():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/startup_ideas.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY NOTIFICATIONS
-# =========================================================
-
-@app.route("/authority/notifications")
-@login_required
-@role_required("6")
-def authority_notifications():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/notifications.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY ANNOUNCEMENTS
-# =========================================================
-
-@app.route("/authority/announcements")
-@login_required
-@role_required("6")
-def authority_announcements():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/announcements.html",
-        college=college
-    )
-
-
-# =========================================================
-# AUTHORITY SETTINGS
-# =========================================================
-
-@app.route("/authority/settings")
-@login_required
-@role_required("6")
-def authority_settings():
-
-    college = get_authority_college()
-
-    return render_template(
-        "authority/settings.html",
-        college=college
-    )
-
-
-# =========================================================
-# =========================================================
-# ADMIN
-# =========================================================
-# =========================================================
-
-
-# =========================================================
-# ADMIN DASHBOARD
-# =========================================================
-
-@app.route("/admin/dashboard")
-@admin_required
-def admin_dashboard():
-
-    return render_template(
-        "admin/dashboard.html"
-    )
-
-
-# =========================================================
-# PLACEMENT MANAGEMENT
-# =========================================================
-
-
-# =========================================================
-# PLACEMENT OVERVIEW
-# =========================================================
-
-@app.route("/admin/placement-overview")
-@admin_required
-def placement_overview():
-
-    return render_template(
-        "admin/placement_overview.html"
-    )
-
-
-# =========================================================
-# COMPANIES
-# =========================================================
-
-@app.route("/admin/companies")
-@admin_required
-def admin_companies():
-
-    return render_template(
-        "admin/companies.html"
-    )
-
-
-# =========================================================
-# PLACEMENT DRIVES
-# =========================================================
-
-@app.route("/admin/placement-drives")
-@admin_required
-def admin_drives():
-
-    return render_template(
-        "admin/placement_drives.html"
-    )
-
-
-# =========================================================
-# PLACEMENTS
-# =========================================================
-
-@app.route("/admin/placements")
-@admin_required
-def admin_placements():
-
-    return render_template(
-        "admin/placements.html"
-    )
-
-
-# =========================================================
-# ANALYTICS
-# =========================================================
-
-
-# =========================================================
-# ANALYTICS MAIN
-# =========================================================
-
-@app.route("/admin/analytics")
-@admin_required
-def admin_analytics():
-
-    return render_template(
-        "admin/analytics/placement_analytics.html"
-    )
-
-
-# =========================================================
-# PLACEMENT ANALYTICS
-# =========================================================
-
-@app.route("/admin/analytics/placement")
-@admin_required
-def admin_placement_analytics():
-
-    return render_template(
-        "admin/analytics/placement_analytics.html"
-    )
-
-
-# =========================================================
-# COMPANY ANALYTICS
-# =========================================================
-
-@app.route("/admin/analytics/company")
-@admin_required
-def admin_company_analytics():
-
-    return render_template(
-        "admin/analytics/company_analytics.html"
-    )
-
-
-# =========================================================
-# COLLEGE ANALYTICS
-# =========================================================
-
-@app.route("/admin/analytics/college")
-@admin_required
-def admin_college_analytics():
-
-    return render_template(
-        "admin/analytics/college_analytics.html"
-    )
-
-
-# =========================================================
-# STUDENT MANAGEMENT
-# =========================================================
-
-
-# =========================================================
-# STUDENTS
-# =========================================================
-
-@app.route("/admin/students")
-@admin_required
-def admin_students():
-
-    return render_template(
-        "admin/students.html"
-    )
-
-
-# =========================================================
-# OFF-CAMPUS
-# =========================================================
-
-@app.route("/admin/off-campus")
-@admin_required
-def admin_off_campus():
-
-    return render_template(
-        "admin/off_campus.html"
-    )
-
-
-# =========================================================
-# NOC
-# =========================================================
-
-@app.route("/admin/noc")
-@admin_required
-def admin_noc():
-
-    return render_template(
-        "admin/noc.html"
-    )
-
-
-# =========================================================
-# PRE-PLACED
-# =========================================================
-
-@app.route("/admin/pre-placed")
-@admin_required
-def admin_pre_placed():
-
-    return render_template(
-        "admin/pre_placed.html"
-    )
-
-
-# =========================================================
-# STARTUP STUDENTS
-# =========================================================
-
-@app.route("/admin/startup-students")
-@admin_required
-def admin_startup_students():
-
-    return render_template(
-        "admin/startup_students.html"
-    )
-
-
-# =========================================================
-# ADMINISTRATION
-# =========================================================
-
-
-# =========================================================
-# USERS
-# =========================================================
-
-@app.route("/admin/users")
-@admin_required
-def admin_users():
-
-    return render_template(
-        "admin/users.html"
-    )
-
-
-# =========================================================
-# ROLES
-# =========================================================
-
-@app.route("/admin/roles")
-@admin_required
-def admin_roles():
-
-    return render_template(
-        "admin/roles.html"
-    )
-
-
-# =========================================================
-# VERIFICATION
-# =========================================================
-
-@app.route("/admin/verification")
-@admin_required
-def admin_verification():
-
-    return render_template(
-        "admin/verification.html"
-    )
-
-
-# =========================================================
-# SYSTEM
-# =========================================================
-
-
-# =========================================================
-# NOTIFICATIONS
-# =========================================================
-
-@app.route("/admin/notifications")
-@admin_required
-def admin_notifications():
-
-    return render_template(
-        "admin/notifications.html"
-    )
-
-
-# =========================================================
-# FEEDBACK
-# =========================================================
-
-@app.route("/admin/feedback")
-@admin_required
-def admin_feedback():
-
-    return render_template(
-        "admin/feedback.html"
-    )
-
-
-# =========================================================
-# ANNOUNCEMENTS
-# =========================================================
-
-@app.route("/admin/announcements")
-@admin_required
-def admin_announcements():
-
-    return render_template(
-        "admin/announcements.html"
-    )
-
-
-# =========================================================
-# SETTINGS
-# =========================================================
-
-@app.route("/admin/settings")
-@admin_required
-def admin_settings():
-
-    return render_template(
-        "admin/settings.html"
-    )
-
-# =========================================================
-# STUDENT COMMUNITY / BLOG
+# STUDENT COMMUNITY TABLES
 # =========================================================
 
 def ensure_community_tables():
@@ -1579,9 +1178,11 @@ def ensure_community_tables():
     try:
 
         connection = get_db_connection()
+
         cursor = connection.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS student_posts (
 
                 post_id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -1626,9 +1227,11 @@ def ensure_community_tables():
             )
             ENGINE=InnoDB
             DEFAULT CHARSET=utf8mb4
-        """)
+            """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS student_post_comments (
 
                 comment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -1660,9 +1263,11 @@ def ensure_community_tables():
             )
             ENGINE=InnoDB
             DEFAULT CHARSET=utf8mb4
-        """)
+            """
+        )
 
-        cursor.execute("""
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS student_post_likes (
 
                 like_id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -1689,7 +1294,8 @@ def ensure_community_tables():
             )
             ENGINE=InnoDB
             DEFAULT CHARSET=utf8mb4
-        """)
+            """
+        )
 
         connection.commit()
 
@@ -1716,10 +1322,6 @@ def ensure_community_tables():
             connection.close()
 
 
-# =========================================================
-# GET COMMUNITY POSTS
-# =========================================================
-
 def get_community_posts(
     user_id=None,
     category="ALL",
@@ -1740,19 +1342,13 @@ def get_community_posts(
         conditions = []
         params = []
 
-        # Student can see approved posts
-        # and his/her own pending/rejected posts.
-
         if user_id:
 
             conditions.append(
                 """
                 (
                     p.status = 'APPROVED'
-
-                    OR
-
-                    p.user_id = %s
+                    OR p.user_id = %s
                 )
                 """
             )
@@ -1766,10 +1362,6 @@ def get_community_posts(
             conditions.append(
                 "p.status = 'APPROVED'"
             )
-
-        # -------------------------------------------------
-        # CATEGORY
-        # -------------------------------------------------
 
         if category in (
             "QUESTION",
@@ -1785,24 +1377,14 @@ def get_community_posts(
                 category
             )
 
-        # -------------------------------------------------
-        # SEARCH
-        # -------------------------------------------------
-
         if search:
 
             conditions.append(
                 """
                 (
                     p.title LIKE %s
-
                     OR p.content LIKE %s
-
-                    OR COALESCE(
-                        p.tags,
-                        ''
-                    ) LIKE %s
-
+                    OR COALESCE(p.tags, '') LIKE %s
                     OR p.author_name LIKE %s
                 )
                 """
@@ -1832,25 +1414,15 @@ def get_community_posts(
             SELECT
 
                 p.post_id,
-
                 p.user_id,
-
                 p.author_name,
-
                 p.post_type,
-
                 p.title,
-
                 p.content,
-
                 p.tags,
-
                 p.status,
-
                 p.rejection_reason,
-
                 p.created_at,
-
                 p.reviewed_at,
 
                 COALESCE(
@@ -1864,69 +1436,43 @@ def get_community_posts(
                 ) AS comment_count,
 
                 CASE
-
                     WHEN ul.like_id IS NULL
                     THEN 0
-
                     ELSE 1
-
                 END AS liked_by_me
 
             FROM student_posts p
 
             LEFT JOIN (
-
                 SELECT
-
                     post_id,
-
                     COUNT(*) AS like_count
-
                 FROM student_post_likes
-
                 GROUP BY post_id
-
             ) l
-
-                ON l.post_id =
-                   p.post_id
+                ON l.post_id = p.post_id
 
             LEFT JOIN (
-
                 SELECT
-
                     post_id,
-
                     COUNT(*) AS comment_count
-
                 FROM student_post_comments
-
-                WHERE status =
-                    'APPROVED'
-
+                WHERE status = 'APPROVED'
                 GROUP BY post_id
-
             ) c
-
-                ON c.post_id =
-                   p.post_id
+                ON c.post_id = p.post_id
 
             LEFT JOIN student_post_likes ul
-
-                ON ul.post_id =
-                   p.post_id
-
-                AND ul.user_id =
-                    %s
+                ON ul.post_id = p.post_id
+                AND ul.user_id = %s
 
             WHERE {where_sql}
 
-            ORDER BY
-                p.created_at DESC
+            ORDER BY p.created_at DESC
             """,
             tuple(
-                [current_user_id]
-                + params
+                [current_user_id] +
+                params
             )
         )
 
@@ -1949,10 +1495,6 @@ def get_community_posts(
         if connection:
             connection.close()
 
-
-# =========================================================
-# STUDENT BLOG
-# =========================================================
 
 @app.route("/student/blog")
 @login_required
@@ -1980,45 +1522,20 @@ def student_blog():
 
         category = "ALL"
 
-    student = get_student_data()
-
-    profile_completion = (
-        get_profile_completion()
-    )
-
-    posts = get_community_posts(
-
-        user_id=session.get(
-            "user_id"
-        ),
-
-        category=category,
-
-        search=search
-    )
-
     return render_template(
-
         "students/blog.html",
-
-        student=student,
-
+        student=get_student_data(),
         profile_completion=
-            profile_completion,
-
-        posts=posts,
-
-        active_category=
-            category,
-
+            get_profile_completion(),
+        posts=get_community_posts(
+            user_id=session.get("user_id"),
+            category=category,
+            search=search
+        ),
+        active_category=category,
         search=search
-
     )
 
-
-# =========================================================
-# CREATE BLOG POST
-# =========================================================
 
 @app.route(
     "/student/blog/create",
@@ -2050,13 +1567,11 @@ def student_blog_create():
         ""
     ).strip()
 
-    allowed_types = {
+    if post_type not in (
         "QUESTION",
         "DISCUSSION",
         "INFORMATION"
-    }
-
-    if post_type not in allowed_types:
+    ):
 
         flash(
             "Invalid post type.",
@@ -2121,7 +1636,6 @@ def student_blog_create():
                 tags,
                 status
             )
-
             VALUES
             (
                 %s,
@@ -2133,27 +1647,18 @@ def student_blog_create():
                 'PENDING'
             )
             """,
-
             (
                 str(
-                    session.get(
-                        "user_id"
-                    )
+                    session.get("user_id")
                 ),
-
                 session.get(
                     "username",
                     "Student"
                 ),
-
                 post_type,
-
                 title,
-
                 content,
-
                 tags or None
-
             )
         )
 
@@ -2192,18 +1697,12 @@ def student_blog_create():
     )
 
 
-# =========================================================
-# BLOG DETAIL
-# =========================================================
-
 @app.route(
     "/student/blog/<int:post_id>"
 )
 @login_required
 @role_required("2")
-def student_blog_detail(
-    post_id
-):
+def student_blog_detail(post_id):
 
     ensure_community_tables()
 
@@ -2222,36 +1721,13 @@ def student_blog_detail(
             """
             SELECT
 
-                p.post_id,
-
-                p.user_id,
-
-                p.author_name,
-
-                p.post_type,
-
-                p.title,
-
-                p.content,
-
-                p.tags,
-
-                p.status,
-
-                p.rejection_reason,
-
-                p.created_at,
+                p.*,
 
                 COALESCE(
                     (
                         SELECT COUNT(*)
-
                         FROM student_post_likes l
-
-                        WHERE
-                            l.post_id =
-                            p.post_id
-
+                        WHERE l.post_id = p.post_id
                     ),
                     0
                 ) AS like_count
@@ -2265,26 +1741,17 @@ def student_blog_detail(
                 AND
 
                 (
-                    p.status =
-                        'APPROVED'
-
-                    OR
-
-                    p.user_id = %s
+                    p.status = 'APPROVED'
+                    OR p.user_id = %s
                 )
 
             LIMIT 1
             """,
-
             (
                 post_id,
-
                 str(
-                    session.get(
-                        "user_id"
-                    )
+                    session.get("user_id")
                 )
-
             )
         )
 
@@ -2300,55 +1767,28 @@ def student_blog_detail(
         cursor.execute(
             """
             SELECT
-
                 comment_id,
-
                 author_name,
-
                 content,
-
                 created_at
-
             FROM student_post_comments
-
             WHERE
-
                 post_id = %s
-
-                AND
-
-                status = 'APPROVED'
-
-            ORDER BY
-                created_at ASC
+                AND status = 'APPROVED'
+            ORDER BY created_at ASC
             """,
-
-            (
-                post_id,
-            )
+            (post_id,)
         )
 
         comments = cursor.fetchall()
 
-        student = get_student_data()
-
-        profile_completion = (
-            get_profile_completion()
-        )
-
         return render_template(
-
             "students/blog_detail.html",
-
-            student=student,
-
+            student=get_student_data(),
             profile_completion=
-                profile_completion,
-
+                get_profile_completion(),
             post=post,
-
             comments=comments
-
         )
 
     except Exception as error:
@@ -2372,19 +1812,13 @@ def student_blog_detail(
             connection.close()
 
 
-# =========================================================
-# BLOG COMMENT
-# =========================================================
-
 @app.route(
     "/student/blog/<int:post_id>/comment",
     methods=["POST"]
 )
 @login_required
 @role_required("2")
-def student_blog_comment(
-    post_id
-):
+def student_blog_comment(post_id):
 
     ensure_community_tables()
 
@@ -2421,23 +1855,13 @@ def student_blog_comment(
         cursor.execute(
             """
             SELECT post_id
-
             FROM student_posts
-
             WHERE
-
                 post_id = %s
-
-                AND
-
-                status = 'APPROVED'
-
+                AND status = 'APPROVED'
             LIMIT 1
             """,
-
-            (
-                post_id,
-            )
+            (post_id,)
         )
 
         if not cursor.fetchone():
@@ -2448,15 +1872,12 @@ def student_blog_comment(
             )
 
             return redirect(
-                url_for(
-                    "student_blog"
-                )
+                url_for("student_blog")
             )
 
         cursor.execute(
             """
-            INSERT INTO
-                student_post_comments
+            INSERT INTO student_post_comments
             (
                 post_id,
                 user_id,
@@ -2464,7 +1885,6 @@ def student_blog_comment(
                 content,
                 status
             )
-
             VALUES
             (
                 %s,
@@ -2474,23 +1894,16 @@ def student_blog_comment(
                 'APPROVED'
             )
             """,
-
             (
                 post_id,
-
                 str(
-                    session.get(
-                        "user_id"
-                    )
+                    session.get("user_id")
                 ),
-
                 session.get(
                     "username",
                     "Student"
                 ),
-
                 content
-
             )
         )
 
@@ -2532,19 +1945,13 @@ def student_blog_comment(
     )
 
 
-# =========================================================
-# BLOG LIKE
-# =========================================================
-
 @app.route(
     "/student/blog/<int:post_id>/like",
     methods=["POST"]
 )
 @login_required
 @role_required("2")
-def student_blog_like(
-    post_id
-):
+def student_blog_like(post_id):
 
     ensure_community_tables()
 
@@ -2560,28 +1967,18 @@ def student_blog_like(
         )
 
         user_id = str(
-            session.get(
-                "user_id"
-            )
+            session.get("user_id")
         )
 
         cursor.execute(
             """
             SELECT like_id
-
             FROM student_post_likes
-
             WHERE
-
                 post_id = %s
-
-                AND
-
-                user_id = %s
-
+                AND user_id = %s
             LIMIT 1
             """,
-
             (
                 post_id,
                 user_id
@@ -2595,15 +1992,10 @@ def student_blog_like(
             cursor.execute(
                 """
                 DELETE FROM student_post_likes
-
-                WHERE
-                    like_id = %s
+                WHERE like_id = %s
                 """,
-
                 (
-                    existing[
-                        "like_id"
-                    ],
+                    existing["like_id"],
                 )
             )
 
@@ -2614,49 +2006,35 @@ def student_blog_like(
             cursor.execute(
                 """
                 SELECT post_id
-
                 FROM student_posts
-
                 WHERE
-
                     post_id = %s
-
-                    AND
-
-                    status = 'APPROVED'
-
+                    AND status = 'APPROVED'
                 LIMIT 1
                 """,
-
-                (
-                    post_id,
-                )
+                (post_id,)
             )
 
             if not cursor.fetchone():
 
                 return {
                     "success": False,
-                    "message":
-                        "Post unavailable."
+                    "message": "Post unavailable."
                 }, 404
 
             cursor.execute(
                 """
-                INSERT INTO
-                    student_post_likes
+                INSERT INTO student_post_likes
                 (
                     post_id,
                     user_id
                 )
-
                 VALUES
                 (
                     %s,
                     %s
                 )
                 """,
-
                 (
                     post_id,
                     user_id
@@ -2670,31 +2048,21 @@ def student_blog_like(
         cursor.execute(
             """
             SELECT COUNT(*) AS total
-
             FROM student_post_likes
-
-            WHERE
-                post_id = %s
+            WHERE post_id = %s
             """,
-
-            (
-                post_id,
-            )
+            (post_id,)
         )
 
         result = cursor.fetchone()
 
         return {
-
             "success": True,
-
             "liked": liked,
-
             "count":
                 result["total"]
                 if result
                 else 0
-
         }
 
     except Exception as error:
@@ -2708,12 +2076,8 @@ def student_blog_like(
         )
 
         return {
-
             "success": False,
-
-            "message":
-                "Unable to update like."
-
+            "message": "Unable to update like."
         }, 500
 
     finally:
@@ -2724,9 +2088,6 @@ def student_blog_like(
         if connection:
             connection.close()
 
-# =========================================================
-# EDIT BLOG POST
-# =========================================================
 
 @app.route(
     "/student/blog/<int:post_id>/edit",
@@ -2758,17 +2119,11 @@ def student_blog_edit(post_id):
         ""
     ).strip()
 
-    allowed_types = {
+    if post_type not in (
         "QUESTION",
         "DISCUSSION",
         "INFORMATION"
-    }
-
-    # -----------------------------------------------------
-    # VALIDATION
-    # -----------------------------------------------------
-
-    if post_type not in allowed_types:
+    ):
 
         flash(
             "Invalid post type.",
@@ -2782,10 +2137,10 @@ def student_blog_edit(post_id):
             )
         )
 
-    if not title:
+    if not title or not content:
 
         flash(
-            "Please enter a title.",
+            "Title and content are required.",
             "error"
         )
 
@@ -2795,35 +2150,6 @@ def student_blog_edit(post_id):
                 post_id=post_id
             )
         )
-
-    if len(title) > 220:
-
-        flash(
-            "Title is too long.",
-            "error"
-        )
-
-        return redirect(
-            url_for(
-                "student_blog_detail",
-                post_id=post_id
-            )
-        )
-
-    if not content:
-
-        flash(
-            "Please enter your question or message.",
-            "error"
-        )
-
-        return redirect(
-            url_for(
-                "student_blog_detail",
-                post_id=post_id
-            )
-        )
-
 
     connection = None
     cursor = None
@@ -2837,84 +2163,24 @@ def student_blog_edit(post_id):
         )
 
         current_user_id = str(
-            session.get(
-                "user_id"
-            )
+            session.get("user_id")
         )
-
-
-        # -------------------------------------------------
-        # VERIFY OWNERSHIP
-        # -------------------------------------------------
-
-        cursor.execute(
-            """
-            SELECT
-                post_id,
-                user_id,
-                status
-            FROM student_posts
-            WHERE
-                post_id = %s
-                AND user_id = %s
-            LIMIT 1
-            """,
-            (
-                post_id,
-                current_user_id
-            )
-        )
-
-        post = cursor.fetchone()
-
-
-        if not post:
-
-            flash(
-                "You are not allowed to edit this post.",
-                "error"
-            )
-
-            return redirect(
-                url_for(
-                    "student_blog"
-                )
-            )
-
-
-        # -------------------------------------------------
-        # UPDATE
-        # -------------------------------------------------
 
         cursor.execute(
             """
             UPDATE student_posts
-
             SET
-
                 post_type = %s,
-
                 title = %s,
-
                 content = %s,
-
                 tags = %s,
-
                 status = 'PENDING',
-
                 rejection_reason = NULL,
-
                 reviewed_at = NULL,
-
                 reviewed_by = NULL
-
             WHERE
-
                 post_id = %s
-
-                AND
-
-                user_id = %s
+                AND user_id = %s
             """,
             (
                 post_type,
@@ -2926,32 +2192,25 @@ def student_blog_edit(post_id):
             )
         )
 
-
         if cursor.rowcount != 1:
 
             connection.rollback()
 
             flash(
-                "Post could not be updated.",
+                "You are not allowed to edit this post.",
                 "error"
             )
 
             return redirect(
-                url_for(
-                    "student_blog_detail",
-                    post_id=post_id
-                )
+                url_for("student_blog")
             )
 
-
         connection.commit()
-
 
         flash(
             "Post updated and sent for admin review.",
             "success"
         )
-
 
     except Exception as error:
 
@@ -2968,7 +2227,6 @@ def student_blog_edit(post_id):
             "error"
         )
 
-
     finally:
 
         if cursor:
@@ -2977,7 +2235,6 @@ def student_blog_edit(post_id):
         if connection:
             connection.close()
 
-
     return redirect(
         url_for(
             "student_blog_detail",
@@ -2985,10 +2242,6 @@ def student_blog_edit(post_id):
         )
     )
 
-
-# =========================================================
-# DELETE BLOG POST
-# =========================================================
 
 @app.route(
     "/student/blog/<int:post_id>/delete",
@@ -3007,42 +2260,26 @@ def student_blog_delete(post_id):
 
         connection = get_db_connection()
 
-        cursor = connection.cursor(
-            dictionary=True
-        )
-
-        current_user_id = str(
-            session.get(
-                "user_id"
-            )
-        )
-
-
-        # -------------------------------------------------
-        # VERIFY OWNERSHIP
-        # -------------------------------------------------
+        cursor = connection.cursor()
 
         cursor.execute(
             """
-            SELECT
-                post_id,
-                user_id
-            FROM student_posts
+            DELETE FROM student_posts
             WHERE
                 post_id = %s
                 AND user_id = %s
-            LIMIT 1
             """,
             (
                 post_id,
-                current_user_id
+                str(
+                    session.get("user_id")
+                )
             )
         )
 
-        post = cursor.fetchone()
+        if cursor.rowcount != 1:
 
-
-        if not post:
+            connection.rollback()
 
             flash(
                 "You are not allowed to delete this post.",
@@ -3050,60 +2287,15 @@ def student_blog_delete(post_id):
             )
 
             return redirect(
-                url_for(
-                    "student_blog"
-                )
+                url_for("student_blog")
             )
-
-
-        # -------------------------------------------------
-        # DELETE
-        # -------------------------------------------------
-
-        cursor.execute(
-            """
-            DELETE FROM student_posts
-
-            WHERE
-
-                post_id = %s
-
-                AND
-
-                user_id = %s
-            """,
-            (
-                post_id,
-                current_user_id
-            )
-        )
-
-
-        if cursor.rowcount != 1:
-
-            connection.rollback()
-
-            flash(
-                "Post could not be deleted.",
-                "error"
-            )
-
-            return redirect(
-                url_for(
-                    "student_blog_detail",
-                    post_id=post_id
-                )
-            )
-
 
         connection.commit()
-
 
         flash(
             "Your post has been deleted.",
             "success"
         )
-
 
     except Exception as error:
 
@@ -3120,7 +2312,6 @@ def student_blog_delete(post_id):
             "error"
         )
 
-
     finally:
 
         if cursor:
@@ -3129,19 +2320,16 @@ def student_blog_delete(post_id):
         if connection:
             connection.close()
 
-
     return redirect(
-        url_for(
-            "student_blog"
-        )
+        url_for("student_blog")
     )
+
+
 # =========================================================
 # ADMIN COMMUNITY MODERATION
 # =========================================================
 
-@app.route(
-    "/admin/community"
-)
+@app.route("/admin/community")
 @admin_required
 def admin_community():
 
@@ -3176,48 +2364,14 @@ def admin_community():
 
             cursor.execute(
                 """
-                SELECT
-
-                    post_id,
-
-                    user_id,
-
-                    author_name,
-
-                    post_type,
-
-                    title,
-
-                    content,
-
-                    tags,
-
-                    status,
-
-                    rejection_reason,
-
-                    created_at,
-
-                    reviewed_at,
-
-                    reviewed_by
-
+                SELECT *
                 FROM student_posts
-
                 ORDER BY
-
                     CASE status
-
-                        WHEN 'PENDING'
-                        THEN 1
-
-                        WHEN 'APPROVED'
-                        THEN 2
-
+                        WHEN 'PENDING' THEN 1
+                        WHEN 'APPROVED' THEN 2
                         ELSE 3
-
                     END,
-
                     created_at DESC
                 """
             )
@@ -3226,44 +2380,12 @@ def admin_community():
 
             cursor.execute(
                 """
-                SELECT
-
-                    post_id,
-
-                    user_id,
-
-                    author_name,
-
-                    post_type,
-
-                    title,
-
-                    content,
-
-                    tags,
-
-                    status,
-
-                    rejection_reason,
-
-                    created_at,
-
-                    reviewed_at,
-
-                    reviewed_by
-
+                SELECT *
                 FROM student_posts
-
-                WHERE
-                    status = %s
-
-                ORDER BY
-                    created_at DESC
+                WHERE status = %s
+                ORDER BY created_at DESC
                 """,
-
-                (
-                    status,
-                )
+                (status,)
             )
 
         posts = cursor.fetchall()
@@ -3290,21 +2412,13 @@ def admin_community():
             """
         )
 
-        stats = (
-            cursor.fetchone()
-            or {}
-        )
+        stats = cursor.fetchone() or {}
 
         return render_template(
-
             "admin/community_moderation.html",
-
             posts=posts,
-
             active_status=status,
-
             stats=stats
-
         )
 
     except Exception as error:
@@ -3315,17 +2429,11 @@ def admin_community():
         )
 
         return render_template(
-
             "admin/community_moderation.html",
-
             posts=[],
-
             active_status=status,
-
             stats={},
-
             db_error=str(error)
-
         ), 500
 
     finally:
@@ -3337,18 +2445,12 @@ def admin_community():
             connection.close()
 
 
-# =========================================================
-# ADMIN REVIEW POST
-# =========================================================
-
 @app.route(
     "/admin/community/<int:post_id>/review",
     methods=["POST"]
 )
 @admin_required
-def admin_community_review(
-    post_id
-):
+def admin_community_review(post_id):
 
     ensure_community_tables()
 
@@ -3373,9 +2475,7 @@ def admin_community_review(
         )
 
         return redirect(
-            url_for(
-                "admin_community"
-            )
+            url_for("admin_community")
         )
 
     if (
@@ -3390,9 +2490,7 @@ def admin_community_review(
         )
 
         return redirect(
-            url_for(
-                "admin_community"
-            )
+            url_for("admin_community")
         )
 
     connection = None
@@ -3416,71 +2514,42 @@ def admin_community_review(
             cursor.execute(
                 """
                 UPDATE student_posts
-
                 SET
-
-                    status =
-                        'APPROVED',
-
-                    rejection_reason =
-                        NULL,
-
-                    reviewed_at =
-                        CURRENT_TIMESTAMP,
-
-                    reviewed_by =
-                        %s
-
-                WHERE
-                    post_id = %s
+                    status = 'APPROVED',
+                    rejection_reason = NULL,
+                    reviewed_at = CURRENT_TIMESTAMP,
+                    reviewed_by = %s
+                WHERE post_id = %s
                 """,
-
                 (
                     reviewer,
                     post_id
                 )
             )
 
-            message = (
+            message = \
                 "Post approved successfully."
-            )
 
         else:
 
             cursor.execute(
                 """
                 UPDATE student_posts
-
                 SET
-
-                    status =
-                        'REJECTED',
-
-                    rejection_reason =
-                        %s,
-
-                    reviewed_at =
-                        CURRENT_TIMESTAMP,
-
-                    reviewed_by =
-                        %s
-
-                WHERE
-                    post_id = %s
+                    status = 'REJECTED',
+                    rejection_reason = %s,
+                    reviewed_at = CURRENT_TIMESTAMP,
+                    reviewed_by = %s
+                WHERE post_id = %s
                 """,
-
                 (
                     rejection_reason,
-
                     reviewer,
-
                     post_id
                 )
             )
 
-            message = (
-                "Post rejected."
-            )
+            message = "Post rejected."
 
         connection.commit()
 
@@ -3513,19 +2582,377 @@ def admin_community_review(
             connection.close()
 
     return redirect(
-        url_for(
-            "admin_community"
-        )
+        url_for("admin_community")
     )
-# =========================================================
-# =========================================================
-# OTHER DASHBOARDS
-# =========================================================
-# =========================================================
 
 
 # =========================================================
-# TPO
+# AUTHORITY ROUTES
+# =========================================================
+
+def render_authority_page(template):
+
+    return render_template(
+        template,
+        college=get_authority_college()
+    )
+
+
+@app.route("/authority/dashboard")
+@login_required
+@role_required("6")
+def authority_dashboard():
+
+    return render_authority_page(
+        "authority/dashboard.html"
+    )
+
+
+@app.route("/authority/placement-overview")
+@login_required
+@role_required("6")
+def authority_placement_overview():
+
+    return render_authority_page(
+        "authority/placement_overview.html"
+    )
+
+
+@app.route("/authority/companies")
+@login_required
+@role_required("6")
+def authority_companies():
+
+    return render_authority_page(
+        "authority/companies.html"
+    )
+
+
+@app.route("/authority/placement-drives")
+@login_required
+@role_required("6")
+def authority_placement_drives():
+
+    return render_authority_page(
+        "authority/placement_drives.html"
+    )
+
+
+@app.route("/authority/placement-pipeline")
+@login_required
+@role_required("6")
+def authority_placement_pipeline():
+
+    return render_authority_page(
+        "authority/placement_pipeline.html"
+    )
+
+
+@app.route("/authority/analytics/branch-reports")
+@login_required
+@role_required("6")
+def authority_branch_reports():
+
+    return render_authority_page(
+        "authority/analytics/branch_reports.html"
+    )
+
+
+@app.route("/authority/analytics/placement-reports")
+@login_required
+@role_required("6")
+def authority_placement_reports():
+
+    return render_authority_page(
+        "authority/analytics/placement_reports.html"
+    )
+
+
+@app.route("/authority/analytics/drive-reports")
+@login_required
+@role_required("6")
+def authority_drive_reports():
+
+    return render_authority_page(
+        "authority/analytics/drive_reports.html"
+    )
+
+
+@app.route("/authority/analytics/company-reports")
+@login_required
+@role_required("6")
+def authority_company_reports():
+
+    return render_authority_page(
+        "authority/analytics/company_reports.html"
+    )
+
+
+@app.route("/authority/off-campus")
+@login_required
+@role_required("6")
+def authority_off_campus():
+
+    return render_authority_page(
+        "authority/off_campus.html"
+    )
+
+
+@app.route("/authority/pre-placed")
+@login_required
+@role_required("6")
+def authority_pre_placed():
+
+    return render_authority_page(
+        "authority/pre_placed.html"
+    )
+
+
+@app.route("/authority/noc")
+@login_required
+@role_required("6")
+def authority_noc():
+
+    return render_authority_page(
+        "authority/noc.html"
+    )
+
+
+@app.route("/authority/startup-ideas")
+@login_required
+@role_required("6")
+def authority_startup_ideas():
+
+    return render_authority_page(
+        "authority/startup_ideas.html"
+    )
+
+
+@app.route("/authority/notifications")
+@login_required
+@role_required("6")
+def authority_notifications():
+
+    return render_authority_page(
+        "authority/notifications.html"
+    )
+
+
+@app.route("/authority/announcements")
+@login_required
+@role_required("6")
+def authority_announcements():
+
+    return render_authority_page(
+        "authority/announcements.html"
+    )
+
+
+@app.route("/authority/settings")
+@login_required
+@role_required("6")
+def authority_settings():
+
+    return render_authority_page(
+        "authority/settings.html"
+    )
+
+
+# =========================================================
+# ADMIN ROUTES
+# =========================================================
+
+@app.route("/admin/dashboard")
+@admin_required
+def admin_dashboard():
+
+    return render_template(
+        "admin/dashboard.html"
+    )
+
+
+@app.route("/admin/placement-overview")
+@admin_required
+def placement_overview():
+
+    return render_template(
+        "admin/placement_overview.html"
+    )
+
+
+@app.route("/admin/companies")
+@admin_required
+def admin_companies():
+
+    return render_template(
+        "admin/companies.html"
+    )
+
+
+@app.route("/admin/placement-drives")
+@admin_required
+def admin_drives():
+
+    return render_template(
+        "admin/placement_drives.html"
+    )
+
+
+@app.route("/admin/placements")
+@admin_required
+def admin_placements():
+
+    return render_template(
+        "admin/placements.html"
+    )
+
+
+@app.route("/admin/analytics")
+@admin_required
+def admin_analytics():
+
+    return render_template(
+        "admin/analytics/placement_analytics.html"
+    )
+
+
+@app.route("/admin/analytics/placement")
+@admin_required
+def admin_placement_analytics():
+
+    return render_template(
+        "admin/analytics/placement_analytics.html"
+    )
+
+
+@app.route("/admin/analytics/company")
+@admin_required
+def admin_company_analytics():
+
+    return render_template(
+        "admin/analytics/company_analytics.html"
+    )
+
+
+@app.route("/admin/analytics/college")
+@admin_required
+def admin_college_analytics():
+
+    return render_template(
+        "admin/analytics/college_analytics.html"
+    )
+
+
+@app.route("/admin/students")
+@admin_required
+def admin_students():
+
+    return render_template(
+        "admin/students.html"
+    )
+
+
+@app.route("/admin/off-campus")
+@admin_required
+def admin_off_campus():
+
+    return render_template(
+        "admin/off_campus.html"
+    )
+
+
+@app.route("/admin/noc")
+@admin_required
+def admin_noc():
+
+    return render_template(
+        "admin/noc.html"
+    )
+
+
+@app.route("/admin/pre-placed")
+@admin_required
+def admin_pre_placed():
+
+    return render_template(
+        "admin/pre_placed.html"
+    )
+
+
+@app.route("/admin/startup-students")
+@admin_required
+def admin_startup_students():
+
+    return render_template(
+        "admin/startup_students.html"
+    )
+
+
+@app.route("/admin/users")
+@admin_required
+def admin_users():
+
+    return render_template(
+        "admin/users.html"
+    )
+
+
+@app.route("/admin/roles")
+@admin_required
+def admin_roles():
+
+    return render_template(
+        "admin/roles.html"
+    )
+
+
+@app.route("/admin/verification")
+@admin_required
+def admin_verification():
+
+    return render_template(
+        "admin/verification.html"
+    )
+
+
+@app.route("/admin/notifications")
+@admin_required
+def admin_notifications():
+
+    return render_template(
+        "admin/notifications.html"
+    )
+
+
+@app.route("/admin/feedback")
+@admin_required
+def admin_feedback():
+
+    return render_template(
+        "admin/feedback.html"
+    )
+
+
+@app.route("/admin/announcements")
+@admin_required
+def admin_announcements():
+
+    return render_template(
+        "admin/announcements.html"
+    )
+
+
+@app.route("/admin/settings")
+@admin_required
+def admin_settings():
+
+    return render_template(
+        "admin/settings.html"
+    )
+
+
+# =========================================================
+# TPO — COMMON ROUTES
 # =========================================================
 
 @app.route("/tpo/dashboard")
@@ -3537,8 +2964,129 @@ def tpo_dashboard():
         "tpo/dashboard.html"
     )
 
+
+@app.route("/tpo/placement-drives")
+@login_required
+@role_required("5")
+def tpo_placement_drives():
+
+    return render_template(
+        "tpo/placement_drives.html"
+    )
+
+
+@app.route("/tpo/applications")
+@login_required
+@role_required("5")
+def tpo_applications():
+
+    return render_template(
+        "tpo/applications.html"
+    )
+
+
+@app.route("/tpo/shortlisted-students")
+@login_required
+@role_required("5")
+def tpo_shortlisted_students():
+
+    return render_template(
+        "tpo/shortlisted_students.html"
+    )
+
+
+@app.route("/tpo/interviews")
+@login_required
+@role_required("5")
+def tpo_interviews():
+
+    return render_template(
+        "tpo/interviews.html"
+    )
+
+
+@app.route("/tpo/offers")
+@login_required
+@role_required("5")
+def tpo_offers():
+
+    return render_template(
+        "tpo/offers.html"
+    )
+
+
+@app.route("/tpo/placed-students")
+@login_required
+@role_required("5")
+def tpo_placed_students():
+
+    return render_template(
+        "tpo/placed_students.html"
+    )
+
+
+@app.route("/tpo/preparation")
+@login_required
+@role_required("5")
+def tpo_preparation():
+
+    return render_template(
+        "tpo/preparation.html"
+    )
+
+
+@app.route("/tpo/reports")
+@login_required
+@role_required("5")
+def tpo_reports():
+
+    return render_template(
+        "tpo/reports.html"
+    )
+
+
+@app.route("/tpo/notifications")
+@login_required
+@role_required("5")
+def tpo_notifications():
+
+    return render_template(
+        "tpo/notifications.html"
+    )
+
+
+@app.route("/tpo/announcements")
+@login_required
+@role_required("5")
+def tpo_announcements():
+
+    return render_template(
+        "tpo/announcements.html"
+    )
+
+
+@app.route("/tpo/settings")
+@login_required
+@role_required("5")
+def tpo_settings():
+
+    return render_template(
+        "tpo/settings.html"
+    )
+
+
+@app.route("/tpo/noc")
+@login_required
+@role_required("5")
+def tpo_noc():
+
+    return render_template(
+        "tpo/noc.html"
+    )
+
+
 # =========================================================
-# TPO STUDENTS — DATABASE + SEARCH + FILTERS
+# TPO STUDENTS — DATABASE CONNECTED
 # =========================================================
 
 @app.route("/tpo/students")
@@ -3551,43 +3099,25 @@ def tpo_students():
 
     try:
 
-        # =================================================
-        # DATABASE CONNECTION
-        # =================================================
-
         connection = get_db_connection()
 
         cursor = connection.cursor(
             dictionary=True
         )
 
+        user_id = session.get(
+            "user_id"
+        )
 
-        # =================================================
-        # CURRENT TPO
-        # =================================================
-
-        user_id = session.get("user_id")
-        campus_id = session.get("campus_id")
-
-
-        print("TPO USER ID:", user_id)
-        print("TPO SESSION CAMPUS:", campus_id)
-
-
-        # =================================================
-        # FALLBACK CAMPUS FROM USERS TABLE
-        # =================================================
+        campus_id = session.get(
+            "campus_id"
+        )
 
         if not campus_id and user_id:
 
             cursor.execute(
                 """
-                SELECT
-                    user_id,
-                    campus_id,
-                    role_id,
-                    username,
-                    email
+                SELECT campus_id
                 FROM users
                 WHERE user_id = %s
                 LIMIT 1
@@ -3595,88 +3125,18 @@ def tpo_students():
                 (user_id,)
             )
 
-            current_user = cursor.fetchone()
+            user = cursor.fetchone()
 
+            if user:
 
-            if current_user:
+                campus_id = \
+                    user["campus_id"]
 
-                campus_id = current_user["campus_id"]
-
-                session["campus_id"] = campus_id
-                session["role_id"] = current_user["role_id"]
-                session["username"] = current_user["username"]
-                session["email"] = current_user["email"]
-
-
-        print(
-            "TPO FINAL CAMPUS ID:",
-            campus_id
-        )
-
-
-        # =================================================
-        # NO CAMPUS
-        # =================================================
-
-        if not campus_id:
-
-            return render_template(
-                "tpo/students.html",
-
-                students=[],
-
-                total_students=0,
-                eligible_students=0,
-                placed_students=0,
-                placement_percentage=0,
-
-                colleges=[],
-                courses=[],
-                branches=[],
-                sections=[],
-                batches=[],
-
-                search="",
-                selected_college="",
-                selected_course="",
-                selected_branch="",
-                selected_section="",
-                selected_batch="",
-                selected_eligibility="",
-                selected_placement=""
-            )
-
-
-        # =================================================
-        # FILTER VALUES
-        # =================================================
+                session["campus_id"] = \
+                    campus_id
 
         search = request.args.get(
             "search",
-            ""
-        ).strip()
-
-
-        selected_college = request.args.get(
-            "college",
-            ""
-        ).strip()
-
-
-        selected_batch = request.args.get(
-            "batch",
-            ""
-        ).strip()
-
-
-        selected_eligibility = request.args.get(
-            "eligibility",
-            ""
-        ).strip()
-
-
-        selected_placement = request.args.get(
-            "placement",
             ""
         ).strip()
 
@@ -3695,97 +3155,57 @@ def tpo_students():
             ""
         ).strip()
 
+        selected_batch = request.args.get(
+            "batch",
+            ""
+        ).strip()
 
-        # =================================================
-        # NORMALIZE ALL VALUES
-        # =================================================
+        selected_eligibility = request.args.get(
+            "eligibility",
+            ""
+        ).strip()
 
-        if search.lower() == "all":
+        selected_placement = request.args.get(
+            "placement",
+            ""
+        ).strip()
 
-            search = ""
+        if not campus_id:
 
+            return render_template(
+                "tpo/students.html",
+                students=[],
+                total_students=0,
+                eligible_students=0,
+                placed_students=0,
+                placement_percentage=0,
+                colleges=[],
+                courses=[],
+                branches=[],
+                sections=[],
+                batches=[],
+                search=search,
+                selected_college="",
+                selected_course=selected_course,
+                selected_branch=selected_branch,
+                selected_section=selected_section,
+                selected_batch=selected_batch,
+                selected_eligibility=selected_eligibility,
+                selected_placement=selected_placement
+            )
 
-        if selected_college.lower() in (
-            "all",
-            "all_colleges",
-            "all-colleges"
-        ):
-
-            selected_college = ""
-
-
-        if selected_batch.lower() in (
-            "all",
-            "all_batches",
-            "all-batches"
-        ):
-
-            selected_batch = ""
-
-
-        if selected_eligibility.lower() in (
-            "all",
-            "all_eligibility",
-            "all-eligibility"
-        ):
-
-            selected_eligibility = ""
-
-
-        if selected_placement.lower() in (
-            "all",
-            "all_status",
-            "all-status"
-        ):
-
-            selected_placement = ""
-
-        if selected_course.lower() in (
-            "all",
-            "all_courses",
-            "all-courses"
-        ):
-            selected_course = ""
-
-        if selected_branch.lower() in (
-            "all",
-            "all_branches",
-            "all-branches"
-        ):
-            selected_branch = ""
-
-        if selected_section.lower() in (
-            "all",
-            "all_sections",
-            "all-sections"
-        ):
-            selected_section = ""
-
-
-        print("SEARCH:", search)
-        print("COLLEGE:", selected_college)
-        print("BATCH:", selected_batch)
-        print("ELIGIBILITY:", selected_eligibility)
-        print("PLACEMENT:", selected_placement)
-
-
-        # =================================================
-        # COLLEGE OPTIONS
-        # =================================================
+        # -------------------------------------------------
+        # FILTER OPTIONS
+        # -------------------------------------------------
 
         cursor.execute(
             """
             SELECT
-
-                c.campus_id,
-                c.campus_code,
-                c.campus_name
-
-            FROM campuses c
-
-            WHERE
-                c.campus_id = %s
-
+                campus_id,
+                campus_code,
+                campus_name
+            FROM campuses
+            WHERE campus_id = %s
             LIMIT 1
             """,
             (campus_id,)
@@ -3793,30 +3213,20 @@ def tpo_students():
 
         colleges = cursor.fetchall()
 
-
-        # =================================================
-        # COURSE OPTIONS
-        # =================================================
-
         cursor.execute(
             """
             SELECT
-                co.course_id,
-                co.course_code,
-                co.course_name
-            FROM courses co
-            WHERE co.campus_id = %s
-            ORDER BY co.course_name
+                course_id,
+                course_code,
+                course_name
+            FROM courses
+            WHERE campus_id = %s
+            ORDER BY course_name
             """,
             (campus_id,)
         )
 
         courses = cursor.fetchall()
-
-
-        # =================================================
-        # BRANCH OPTIONS
-        # =================================================
 
         cursor.execute(
             """
@@ -3835,11 +3245,6 @@ def tpo_students():
         )
 
         branches = cursor.fetchall()
-
-
-        # =================================================
-        # SECTION OPTIONS
-        # =================================================
 
         cursor.execute(
             """
@@ -3861,39 +3266,26 @@ def tpo_students():
 
         sections = cursor.fetchall()
 
-
-        # =================================================
-        # BATCH OPTIONS
-        # =================================================
-
         cursor.execute(
             """
             SELECT DISTINCT
-
                 a.session_id,
                 a.session_name,
                 a.start_date
-
             FROM students s
-
             INNER JOIN academic_sessions a
                 ON s.session_id = a.session_id
-
-            WHERE
-                s.campus_id = %s
-
-            ORDER BY
-                a.start_date DESC
+            WHERE s.campus_id = %s
+            ORDER BY a.start_date DESC
             """,
             (campus_id,)
         )
 
         batches = cursor.fetchall()
 
-
-        # =================================================
-        # BUILD STUDENT CONDITIONS
-        # =================================================
+        # -------------------------------------------------
+        # STUDENT CONDITIONS
+        # -------------------------------------------------
 
         conditions = [
             "s.campus_id = %s"
@@ -3902,11 +3294,6 @@ def tpo_students():
         params = [
             campus_id
         ]
-
-
-        # =================================================
-        # SEARCH
-        # =================================================
 
         if search:
 
@@ -3922,112 +3309,74 @@ def tpo_students():
                     ) LIKE %s
 
                     OR s.registration_no LIKE %s
-
                     OR s.enrollment_no LIKE %s
-
                     OR s.email LIKE %s
-
                     OR s.phone LIKE %s
                 )
                 """
             )
 
-
-            search_value = f"%{search}%"
-
+            value = f"%{search}%"
 
             params.extend(
                 [
-                    search_value,
-                    search_value,
-                    search_value,
-                    search_value,
-                    search_value
+                    value,
+                    value,
+                    value,
+                    value,
+                    value
                 ]
             )
 
-
-        # =================================================
-        # COLLEGE FILTER
-        # =================================================
-
-        if selected_college:
+        if selected_course:
 
             conditions.append(
-                """
-                s.campus_id = %s
-                """
+                "s.course_id = %s"
             )
 
             params.append(
-                selected_college
+                selected_course
             )
 
-
-        # =================================================
-        # COURSE FILTER
-        # =================================================
-
-        if selected_course:
-            conditions.append("s.course_id = %s")
-            params.append(selected_course)
-
-
-        # =================================================
-        # BRANCH FILTER
-        # =================================================
-
         if selected_branch:
-            conditions.append("s.branch_id = %s")
-            params.append(selected_branch)
 
+            conditions.append(
+                "s.branch_id = %s"
+            )
 
-        # =================================================
-        # SECTION FILTER
-        # =================================================
+            params.append(
+                selected_branch
+            )
 
         if selected_section:
-            conditions.append("s.section_id = %s")
-            params.append(selected_section)
 
+            conditions.append(
+                "s.section_id = %s"
+            )
 
-        # =================================================
-        # BATCH FILTER
-        # =================================================
+            params.append(
+                selected_section
+            )
 
         if selected_batch:
 
             conditions.append(
-                """
-                s.session_id = %s
-                """
+                "s.session_id = %s"
             )
 
             params.append(
                 selected_batch
             )
 
-
-        # =================================================
-        # ELIGIBILITY FILTER
-        # =================================================
-
         if selected_eligibility == "eligible":
 
             conditions.append(
                 """
                 s.cgpa IS NOT NULL
-
-                AND
-
-                s.backlogs IS NOT NULL
-
-                AND
-
-                s.backlogs <= 0
+                AND s.backlogs IS NOT NULL
+                AND s.backlogs <= 0
                 """
             )
-
 
         elif selected_eligibility in (
             "not_eligible",
@@ -4038,109 +3387,76 @@ def tpo_students():
                 """
                 (
                     s.cgpa IS NULL
-
-                    OR
-
-                    s.backlogs IS NULL
-
-                    OR
-
-                    s.backlogs > 0
+                    OR s.backlogs IS NULL
+                    OR s.backlogs > 0
                 )
                 """
             )
-
-
-        # =================================================
-        # PLACEMENT FILTER
-        # =================================================
 
         if selected_placement == "placed":
 
             conditions.append(
                 """
                 EXISTS (
-
                     SELECT 1
-
                     FROM placement_applications pa_filter
-
                     INNER JOIN placements pl_filter
                         ON pa_filter.application_id =
                            pl_filter.application_id
-
                     WHERE
-
                         pa_filter.student_id =
                         s.student_id
-
-                        AND
-
-                        UPPER(
-                            COALESCE(
-                                pl_filter.placement_status,
-                                ''
-                            )
-                        ) IN (
-                            'SELECTED',
-                            'PLACED',
-                            'JOINED'
+                    AND UPPER(
+                        COALESCE(
+                            pl_filter.placement_status,
+                            ''
                         )
+                    ) IN (
+                        'SELECTED',
+                        'PLACED',
+                        'JOINED'
+                    )
                 )
                 """
             )
-
 
         elif selected_placement == "not_placed":
 
             conditions.append(
                 """
                 NOT EXISTS (
-
                     SELECT 1
-
                     FROM placement_applications pa_filter
-
                     INNER JOIN placements pl_filter
                         ON pa_filter.application_id =
                            pl_filter.application_id
-
                     WHERE
-
                         pa_filter.student_id =
                         s.student_id
-
-                        AND
-
-                        UPPER(
-                            COALESCE(
-                                pl_filter.placement_status,
-                                ''
-                            )
-                        ) IN (
-                            'SELECTED',
-                            'PLACED',
-                            'JOINED'
+                    AND UPPER(
+                        COALESCE(
+                            pl_filter.placement_status,
+                            ''
                         )
+                    ) IN (
+                        'SELECTED',
+                        'PLACED',
+                        'JOINED'
+                    )
                 )
                 """
             )
-
-
-        # =================================================
-        # FINAL WHERE CLAUSE
-        # =================================================
 
         where_clause = " AND ".join(
             conditions
         )
 
+        # -------------------------------------------------
+        # STUDENTS
+        # -------------------------------------------------
 
-        # =================================================
-        # STUDENTS QUERY
-        # =================================================
-
-        student_query = f"""
+        cursor.execute(
+            f"""
             SELECT
 
                 s.student_id,
@@ -4187,61 +3503,32 @@ def tpo_students():
             FROM students s
 
             LEFT JOIN campuses c
-                ON s.campus_id =
-                   c.campus_id
+                ON s.campus_id = c.campus_id
 
             LEFT JOIN courses co
-                ON s.course_id =
-                   co.course_id
+                ON s.course_id = co.course_id
 
             LEFT JOIN branches b
-                ON s.branch_id =
-                   b.branch_id
+                ON s.branch_id = b.branch_id
 
             LEFT JOIN sections sec
-                ON s.section_id =
-                   sec.section_id
+                ON s.section_id = sec.section_id
 
             LEFT JOIN academic_sessions a
-                ON s.session_id =
-                   a.session_id
+                ON s.session_id = a.session_id
 
-            WHERE
-                {where_clause}
+            WHERE {where_clause}
 
-            ORDER BY
-                s.created_at DESC
-        """
-
-
-        print(
-            "TPO STUDENTS QUERY:",
-            student_query
-        )
-
-
-        # =================================================
-        # EXECUTE STUDENTS QUERY
-        # =================================================
-
-        cursor.execute(
-            student_query,
+            ORDER BY s.created_at DESC
+            """,
             tuple(params)
         )
 
-
         students = cursor.fetchall()
 
-
-        print(
-            "TPO STUDENTS FOUND:",
-            len(students)
-        )
-
-
-        # =================================================
-        # CAMPUS STATISTICS
-        # =================================================
+        # -------------------------------------------------
+        # STATS
+        # -------------------------------------------------
 
         cursor.execute(
             """
@@ -4252,22 +3539,12 @@ def tpo_students():
                 COALESCE(
                     SUM(
                         CASE
-
                             WHEN
                                 cgpa IS NOT NULL
-
-                                AND
-
-                                backlogs IS NOT NULL
-
-                                AND
-
-                                backlogs <= 0
-
+                                AND backlogs IS NOT NULL
+                                AND backlogs <= 0
                             THEN 1
-
                             ELSE 0
-
                         END
                     ),
                     0
@@ -4275,263 +3552,163 @@ def tpo_students():
 
             FROM students
 
-            WHERE
-                campus_id = %s
+            WHERE campus_id = %s
             """,
             (campus_id,)
         )
 
+        stats = cursor.fetchone() or {}
 
-        stats = cursor.fetchone()
+        total_students = \
+            stats.get(
+                "total_students",
+                0
+            )
 
-
-        total_students = (
-            stats["total_students"]
-            if stats
-            else 0
-        )
-
-
-        eligible_students = (
-            stats["eligible_students"]
-            if stats
-            else 0
-        )
-
-
-        # =================================================
-        # PLACED STUDENTS
-        # =================================================
+        eligible_students = \
+            stats.get(
+                "eligible_students",
+                0
+            )
 
         cursor.execute(
             """
             SELECT
-
                 COUNT(
                     DISTINCT pa.student_id
                 ) AS placed_students
-
             FROM placement_applications pa
-
             INNER JOIN placements pl
-
                 ON pa.application_id =
                    pl.application_id
-
             INNER JOIN students s
-
                 ON pa.student_id =
                    s.student_id
-
             WHERE
-
                 s.campus_id = %s
-
-                AND
-
-                UPPER(
-                    COALESCE(
-                        pl.placement_status,
-                        ''
-                    )
-                ) IN (
-                    'SELECTED',
-                    'PLACED',
-                    'JOINED'
+            AND UPPER(
+                COALESCE(
+                    pl.placement_status,
+                    ''
                 )
+            ) IN (
+                'SELECTED',
+                'PLACED',
+                'JOINED'
+            )
             """,
             (campus_id,)
         )
 
+        placed_result = \
+            cursor.fetchone() or {}
 
-        placed_result = cursor.fetchone()
+        placed_students = \
+            placed_result.get(
+                "placed_students",
+                0
+            )
 
+        placement_percentage = (
 
-        placed_students = (
-            placed_result["placed_students"]
-            if placed_result
-            else 0
-        )
-
-
-        # =================================================
-        # PLACEMENT PERCENTAGE
-        # =================================================
-
-        if total_students > 0:
-
-            placement_percentage = round(
+            round(
                 (
-                    placed_students
-                    / total_students
+                    placed_students /
+                    total_students
                 ) * 100,
                 2
             )
 
-        else:
-
-            placement_percentage = 0
-
-
-        # =================================================
-        # FINAL DEBUG
-        # =================================================
-
-        print(
-            "===================================="
+            if total_students
+            else 0
         )
-
-        print(
-            "TPO STUDENTS FOUND:",
-            len(students)
-        )
-
-        print(
-            "TOTAL STUDENTS:",
-            total_students
-        )
-
-        print(
-            "ELIGIBLE STUDENTS:",
-            eligible_students
-        )
-
-        print(
-            "PLACED STUDENTS:",
-            placed_students
-        )
-
-        print(
-            "PLACEMENT PERCENTAGE:",
-            placement_percentage
-        )
-
-        print(
-            "===================================="
-        )
-
-
-        # =================================================
-        # RENDER PAGE
-        # =================================================
 
         return render_template(
-
             "tpo/students.html",
 
             students=students,
 
-            total_students=total_students,
+            total_students=
+                total_students,
 
-            eligible_students=eligible_students,
+            eligible_students=
+                eligible_students,
 
-            placed_students=placed_students,
+            placed_students=
+                placed_students,
 
-            placement_percentage=placement_percentage,
+            placement_percentage=
+                placement_percentage,
 
             colleges=colleges,
-
             courses=courses,
             branches=branches,
             sections=sections,
-
             batches=batches,
 
             search=search,
 
-            selected_college=selected_college,
-            selected_course=selected_course,
-            selected_branch=selected_branch,
-            selected_section=selected_section,
+            selected_college="",
+            selected_course=
+                selected_course,
 
-            selected_batch=selected_batch,
+            selected_branch=
+                selected_branch,
 
-            selected_eligibility=selected_eligibility,
+            selected_section=
+                selected_section,
 
-            selected_placement=selected_placement
+            selected_batch=
+                selected_batch,
 
+            selected_eligibility=
+                selected_eligibility,
+
+            selected_placement=
+                selected_placement
         )
-
-
-    # =====================================================
-    # ERROR HANDLING
-    # =====================================================
 
     except Exception as error:
 
         print(
-            "===================================="
-        )
-
-        print(
-            "TPO STUDENTS FILTER ERROR:"
-        )
-
-        print(
+            "TPO STUDENTS ERROR:",
             error
         )
 
-        print(
-            "===================================="
-        )
-
-
         return render_template(
-
             "tpo/students.html",
-
             students=[],
-
             total_students=0,
-
             eligible_students=0,
-
             placed_students=0,
-
             placement_percentage=0,
-
             colleges=[],
-
             courses=[],
             branches=[],
             sections=[],
-
             batches=[],
-
             search="",
-
             selected_college="",
             selected_course="",
             selected_branch="",
             selected_section="",
-
             selected_batch="",
-
             selected_eligibility="",
-
             selected_placement="",
-
             db_error=str(error)
-
-        )
-
-
-    # =====================================================
-    # CLOSE DATABASE
-    # =====================================================
+        ), 500
 
     finally:
 
         if cursor:
-
             cursor.close()
 
-
         if connection:
-
             connection.close()
+
+
 # =========================================================
-# TPO STUDENT OPTIONS — DATABASE CONNECTED
+# TPO STUDENT OPTIONS
 # =========================================================
 
 @app.route("/tpo/student/options")
@@ -4543,12 +3720,19 @@ def tpo_student_options():
     cursor = None
 
     try:
-        connection = get_db_connection()
-        cursor = connection.cursor(dictionary=True)
 
-        campus_id = session.get("campus_id")
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+        campus_id = session.get(
+            "campus_id"
+        )
 
         if not campus_id:
+
             cursor.execute(
                 """
                 SELECT campus_id
@@ -4556,40 +3740,57 @@ def tpo_student_options():
                 WHERE user_id = %s
                 LIMIT 1
                 """,
-                (session.get("user_id"),)
+                (
+                    session.get("user_id"),
+                )
             )
+
             user = cursor.fetchone()
 
             if user:
-                campus_id = user["campus_id"]
-                session["campus_id"] = campus_id
+
+                campus_id = \
+                    user["campus_id"]
+
+                session["campus_id"] = \
+                    campus_id
 
         if not campus_id:
+
             return {
                 "success": False,
-                "message": "TPO campus is not configured."
+                "message":
+                    "TPO campus is not configured."
             }, 400
 
         cursor.execute(
             """
-            SELECT campus_id, campus_code, campus_name
+            SELECT
+                campus_id,
+                campus_code,
+                campus_name
             FROM campuses
             WHERE campus_id = %s
             LIMIT 1
             """,
             (campus_id,)
         )
+
         campus = cursor.fetchone()
 
         cursor.execute(
             """
-            SELECT course_id, course_code, course_name
+            SELECT
+                course_id,
+                course_code,
+                course_name
             FROM courses
             WHERE campus_id = %s
             ORDER BY course_name
             """,
             (campus_id,)
         )
+
         courses = cursor.fetchall()
 
         cursor.execute(
@@ -4607,6 +3808,7 @@ def tpo_student_options():
             """,
             (campus_id,)
         )
+
         branches = cursor.fetchall()
 
         cursor.execute(
@@ -4626,6 +3828,7 @@ def tpo_student_options():
             """,
             (campus_id,)
         )
+
         sections = cursor.fetchall()
 
         cursor.execute(
@@ -4641,6 +3844,7 @@ def tpo_student_options():
             """,
             (campus_id,)
         )
+
         batches = cursor.fetchall()
 
         return {
@@ -4653,7 +3857,11 @@ def tpo_student_options():
         }
 
     except Exception as error:
-        print("TPO STUDENT OPTIONS ERROR:", error)
+
+        print(
+            "TPO STUDENT OPTIONS ERROR:",
+            error
+        )
 
         return {
             "success": False,
@@ -4661,6 +3869,7 @@ def tpo_student_options():
         }, 500
 
     finally:
+
         if cursor:
             cursor.close()
 
@@ -4669,7 +3878,7 @@ def tpo_student_options():
 
 
 # =========================================================
-# TPO ADD STUDENT — DATABASE CONNECTED
+# TPO ADD STUDENT
 # =========================================================
 
 @app.route(
@@ -4684,14 +3893,23 @@ def tpo_add_student():
     cursor = None
 
     try:
+
         connection = get_db_connection()
-        cursor = connection.cursor(dictionary=True)
 
-        tpo_user_id = session.get("user_id")
-        campus_id = session.get("campus_id")
+        cursor = connection.cursor(
+            dictionary=True
+        )
 
-        # Never trust campus_id from the browser.
+        tpo_user_id = session.get(
+            "user_id"
+        )
+
+        campus_id = session.get(
+            "campus_id"
+        )
+
         if not campus_id:
+
             cursor.execute(
                 """
                 SELECT campus_id
@@ -4701,16 +3919,24 @@ def tpo_add_student():
                 """,
                 (tpo_user_id,)
             )
-            tpo_user = cursor.fetchone()
+
+            tpo_user = \
+                cursor.fetchone()
 
             if tpo_user:
-                campus_id = tpo_user["campus_id"]
-                session["campus_id"] = campus_id
+
+                campus_id = \
+                    tpo_user["campus_id"]
+
+                session["campus_id"] = \
+                    campus_id
 
         if not campus_id:
+
             return {
                 "success": False,
-                "message": "TPO campus is not configured."
+                "message":
+                    "TPO campus is not configured."
             }, 400
 
         # -------------------------------------------------
@@ -4718,148 +3944,188 @@ def tpo_add_student():
         # -------------------------------------------------
 
         registration_no = request.form.get(
-            "registration_no", ""
+            "registration_no",
+            ""
         ).strip()
 
         enrollment_no = request.form.get(
-            "enrollment_no", ""
+            "enrollment_no",
+            ""
         ).strip()
 
         first_name = request.form.get(
-            "first_name", ""
+            "first_name",
+            ""
         ).strip()
 
         middle_name = request.form.get(
-            "middle_name", ""
+            "middle_name",
+            ""
         ).strip()
 
         last_name = request.form.get(
-            "last_name", ""
+            "last_name",
+            ""
         ).strip()
 
         email = request.form.get(
-            "email", ""
+            "email",
+            ""
         ).strip().lower()
 
         phone = request.form.get(
-            "phone", ""
+            "phone",
+            ""
         ).strip()
 
         date_of_birth = request.form.get(
-            "date_of_birth", ""
+            "date_of_birth",
+            ""
         ).strip() or None
 
         gender = request.form.get(
-            "gender", ""
+            "gender",
+            ""
         ).strip() or None
 
         address = request.form.get(
-            "address", ""
+            "address",
+            ""
         ).strip()
 
         city = request.form.get(
-            "city", ""
+            "city",
+            ""
         ).strip()
 
         state = request.form.get(
-            "state", ""
+            "state",
+            ""
         ).strip()
 
         course_id = request.form.get(
-            "course_id", ""
+            "course_id",
+            ""
         ).strip()
 
         branch_id = request.form.get(
-            "branch_id", ""
+            "branch_id",
+            ""
         ).strip()
 
         section_id = request.form.get(
-            "section_id", ""
+            "section_id",
+            ""
         ).strip()
 
         session_id = request.form.get(
-            "session_id", ""
+            "session_id",
+            ""
         ).strip()
 
         tenth_percentage = request.form.get(
-            "tenth_percentage", ""
+            "tenth_percentage",
+            ""
         ).strip() or None
 
         twelfth_percentage = request.form.get(
-            "twelfth_percentage", ""
+            "twelfth_percentage",
+            ""
         ).strip() or None
 
         cgpa = request.form.get(
-            "cgpa", ""
+            "cgpa",
+            ""
         ).strip() or None
 
         backlogs = request.form.get(
-            "backlogs", "0"
+            "backlogs",
+            "0"
         ).strip() or "0"
 
         password = request.form.get(
-            "password", ""
+            "password",
+            ""
         ).strip()
 
-        # -------------------------------------------------
-        # REQUIRED FIELDS
-        # -------------------------------------------------
+        if not password:
+
+            password = registration_no
 
         required = {
-            "registration_no": registration_no,
-            "enrollment_no": enrollment_no,
-            "first_name": first_name,
-            "email": email,
-            "course_id": course_id,
-            "branch_id": branch_id,
-            "section_id": section_id,
-            "session_id": session_id
+
+            "registration_no":
+                registration_no,
+
+            "enrollment_no":
+                enrollment_no,
+
+            "first_name":
+                first_name,
+
+            "email":
+                email,
+
+            "course_id":
+                course_id,
+
+            "branch_id":
+                branch_id,
+
+            "section_id":
+                section_id,
+
+            "session_id":
+                session_id
+
         }
 
         missing = [
+
             field
-            for field, value in required.items()
+
+            for field, value
+            in required.items()
+
             if not value
+
         ]
 
         if missing:
+
             return {
                 "success": False,
-                "message": (
+                "message":
                     "Please fill required fields: "
                     + ", ".join(missing)
-                )
             }, 400
 
-        if not password:
-            password = registration_no
-
         # -------------------------------------------------
-        # VERIFY COURSE BELONGS TO TPO CAMPUS
+        # RELATION VALIDATION
         # -------------------------------------------------
 
         cursor.execute(
             """
             SELECT course_id
             FROM courses
-            WHERE course_id = %s
-              AND campus_id = %s
+            WHERE
+                course_id = %s
+                AND campus_id = %s
             LIMIT 1
             """,
-            (course_id, campus_id)
+            (
+                course_id,
+                campus_id
+            )
         )
 
-        course = cursor.fetchone()
+        if not cursor.fetchone():
 
-        if not course:
             return {
                 "success": False,
-                "message": "Invalid course for this campus."
+                "message":
+                    "Invalid course for this campus."
             }, 400
-
-        # -------------------------------------------------
-        # VERIFY BRANCH BELONGS TO COURSE
-        # -------------------------------------------------
 
         cursor.execute(
             """
@@ -4867,25 +4133,26 @@ def tpo_add_student():
             FROM branches b
             INNER JOIN courses co
                 ON b.course_id = co.course_id
-            WHERE b.branch_id = %s
-              AND b.course_id = %s
-              AND co.campus_id = %s
+            WHERE
+                b.branch_id = %s
+                AND b.course_id = %s
+                AND co.campus_id = %s
             LIMIT 1
             """,
-            (branch_id, course_id, campus_id)
+            (
+                branch_id,
+                course_id,
+                campus_id
+            )
         )
 
-        branch = cursor.fetchone()
+        if not cursor.fetchone():
 
-        if not branch:
             return {
                 "success": False,
-                "message": "Invalid branch for selected course."
+                "message":
+                    "Invalid branch for selected course."
             }, 400
-
-        # -------------------------------------------------
-        # VERIFY SECTION BELONGS TO BRANCH + SESSION
-        # -------------------------------------------------
 
         cursor.execute(
             """
@@ -4895,10 +4162,11 @@ def tpo_add_student():
                 ON sec.branch_id = b.branch_id
             INNER JOIN courses co
                 ON b.course_id = co.course_id
-            WHERE sec.section_id = %s
-              AND sec.branch_id = %s
-              AND sec.session_id = %s
-              AND co.campus_id = %s
+            WHERE
+                sec.section_id = %s
+                AND sec.branch_id = %s
+                AND sec.session_id = %s
+                AND co.campus_id = %s
             LIMIT 1
             """,
             (
@@ -4909,47 +4177,44 @@ def tpo_add_student():
             )
         )
 
-        section = cursor.fetchone()
+        if not cursor.fetchone():
 
-        if not section:
             return {
                 "success": False,
-                "message": (
-                    "Invalid section for selected "
-                    "branch and batch."
-                )
+                "message":
+                    "Invalid section for selected branch and batch."
             }, 400
-
-        # -------------------------------------------------
-        # VERIFY SESSION BELONGS TO CAMPUS
-        # -------------------------------------------------
 
         cursor.execute(
             """
             SELECT session_id
             FROM academic_sessions
-            WHERE session_id = %s
-              AND campus_id = %s
+            WHERE
+                session_id = %s
+                AND campus_id = %s
             LIMIT 1
             """,
-            (session_id, campus_id)
+            (
+                session_id,
+                campus_id
+            )
         )
 
-        academic_session = cursor.fetchone()
+        if not cursor.fetchone():
 
-        if not academic_session:
             return {
                 "success": False,
-                "message": "Invalid batch/session for this campus."
+                "message":
+                    "Invalid batch/session for this campus."
             }, 400
 
         # -------------------------------------------------
-        # DUPLICATE CHECK
+        # DUPLICATES
         # -------------------------------------------------
 
         cursor.execute(
             """
-            SELECT user_id, email
+            SELECT user_id
             FROM users
             WHERE email = %s
             LIMIT 1
@@ -4957,38 +4222,39 @@ def tpo_add_student():
             (email,)
         )
 
-        existing_user = cursor.fetchone()
+        if cursor.fetchone():
 
-        if existing_user:
             return {
                 "success": False,
-                "message": "Email is already registered."
+                "message":
+                    "Email is already registered."
             }, 409
 
         cursor.execute(
             """
             SELECT student_id
             FROM students
-            WHERE registration_no = %s
-               OR enrollment_no = %s
+            WHERE
+                registration_no = %s
+                OR enrollment_no = %s
             LIMIT 1
             """,
-            (registration_no, enrollment_no)
+            (
+                registration_no,
+                enrollment_no
+            )
         )
 
-        existing_student = cursor.fetchone()
+        if cursor.fetchone():
 
-        if existing_student:
             return {
                 "success": False,
-                "message": (
-                    "Registration number or enrollment "
-                    "number already exists."
-                )
+                "message":
+                    "Registration number or enrollment number already exists."
             }, 409
 
         # -------------------------------------------------
-        # GENERATE IDS
+        # STUDENT ID
         # -------------------------------------------------
 
         cursor.execute(
@@ -4999,8 +4265,10 @@ def tpo_add_student():
                     COALESCE(
                         MAX(
                             CAST(
-                                SUBSTRING(student_id, 4)
-                                AS UNSIGNED
+                                SUBSTRING(
+                                    student_id,
+                                    4
+                                ) AS UNSIGNED
                             )
                         ),
                         0
@@ -5014,25 +4282,22 @@ def tpo_add_student():
             """
         )
 
-        student_id = cursor.fetchone()["next_id"]
+        student_id = \
+            cursor.fetchone()["next_id"]
 
         user_id = student_id
 
-        # -------------------------------------------------
-        # PASSWORD HASH
-        # -------------------------------------------------
+        password_hash = \
+            generate_password_hash(
+                password,
+                method="scrypt"
+            )
 
-        from werkzeug.security import generate_password_hash
-
-        password_hash = generate_password_hash(
-            password,
-            method="scrypt"
-        )
-
-        username = registration_no.lower()
+        username = \
+            registration_no.lower()
 
         # -------------------------------------------------
-        # CREATE USER
+        # USER
         # -------------------------------------------------
 
         cursor.execute(
@@ -5068,7 +4333,7 @@ def tpo_add_student():
         )
 
         # -------------------------------------------------
-        # CREATE STUDENT
+        # STUDENT
         # -------------------------------------------------
 
         cursor.execute(
@@ -5192,30 +4457,45 @@ def tpo_add_student():
 
         return {
             "success": True,
-            "message": "Student added successfully.",
-            "student_id": student_id,
-            "user_id": user_id,
-            "registration_no": registration_no,
-            "default_password": password
+            "message":
+                "Student added successfully.",
+            "student_id":
+                student_id,
+            "user_id":
+                user_id,
+            "registration_no":
+                registration_no,
+            "default_password":
+                password
         }, 201
 
     except mysql.connector.IntegrityError as error:
+
         if connection:
             connection.rollback()
 
-        print("TPO ADD STUDENT INTEGRITY ERROR:", error)
+        print(
+            "TPO ADD STUDENT INTEGRITY ERROR:",
+            error
+        )
 
         return {
             "success": False,
-            "message": "Duplicate or invalid student data.",
-            "error": str(error)
+            "message":
+                "Duplicate or invalid student data.",
+            "error":
+                str(error)
         }, 409
 
     except Exception as error:
+
         if connection:
             connection.rollback()
 
-        print("TPO ADD STUDENT ERROR:", error)
+        print(
+            "TPO ADD STUDENT ERROR:",
+            error
+        )
 
         return {
             "success": False,
@@ -5223,6 +4503,7 @@ def tpo_add_student():
         }, 500
 
     finally:
+
         if cursor:
             cursor.close()
 
@@ -5231,7 +4512,7 @@ def tpo_add_student():
 
 
 # =========================================================
-# TPO STUDENT DETAIL — DATABASE CONNECTED
+# TPO STUDENT DETAIL
 # =========================================================
 
 @app.route(
@@ -5254,59 +4535,15 @@ def tpo_student_detail(
             dictionary=True
         )
 
-
         campus_id = session.get(
             "campus_id"
         )
-
-
-        # =================================================
-        # STUDENT BASIC DETAILS
-        # =================================================
 
         cursor.execute(
             """
             SELECT
 
-                s.student_id,
-                s.user_id,
-                s.campus_id,
-
-                s.registration_no,
-                s.enrollment_no,
-
-                s.first_name,
-                s.middle_name,
-                s.last_name,
-
-                s.date_of_birth,
-                s.gender,
-
-                s.phone,
-                s.email,
-
-                s.address,
-                s.city,
-                s.state,
-
-                s.session_id,
-                s.course_id,
-                s.branch_id,
-                s.section_id,
-
-                s.tenth_percentage,
-                s.twelfth_percentage,
-
-                s.cgpa,
-                s.backlogs,
-
-                s.resume_file,
-                s.certificate_files,
-
-                s.internship_details,
-                s.internship_files,
-
-                s.status,
+                s.*,
 
                 c.campus_code,
                 c.campus_name,
@@ -5341,23 +4578,17 @@ def tpo_student_detail(
             WHERE
 
                 s.registration_no = %s
-
-                AND
-
-                s.campus_id = %s
+                AND s.campus_id = %s
 
             LIMIT 1
             """,
-
             (
                 registration_no,
                 campus_id
             )
         )
 
-
         student = cursor.fetchone()
-
 
         if not student:
 
@@ -5366,13 +4597,7 @@ def tpo_student_detail(
                 404
             )
 
-
-        # =================================================
-        # PLACEMENT DETAILS
-        # =================================================
-
         placements = []
-
 
         try:
 
@@ -5427,62 +4652,40 @@ def tpo_student_detail(
                 ORDER BY
                     pa.applied_at DESC
                 """,
-
                 (
                     student["student_id"],
                 )
             )
 
+            placements = \
+                cursor.fetchall()
 
-            placements = cursor.fetchall()
-
-
-        except Exception as placement_error:
+        except Exception as error:
 
             print(
                 "PLACEMENT DETAILS ERROR:",
-                placement_error
+                error
             )
 
-
         return render_template(
-
             "tpo/student_detail.html",
-
             student=student,
-
             placements=placements,
-
             registration_no=registration_no
-
         )
-
 
     except Exception as error:
 
         print(
-            "===================================="
-        )
-
-        print(
-            "TPO STUDENT DETAIL ERROR:"
-        )
-
-        print(
+            "TPO STUDENT DETAIL ERROR:",
             error
         )
-
-        print(
-            "===================================="
-        )
-
 
         return (
             "Database error: " +
             str(error),
             500
         )
-
 
     finally:
 
@@ -5491,6 +4694,8 @@ def tpo_student_detail(
 
         if connection:
             connection.close()
+
+
 # =========================================================
 # TPO COMPANIES
 # =========================================================
@@ -5515,10 +4720,6 @@ def tpo_companies():
             "campus_id"
         )
 
-        # -------------------------------------------------
-        # FALLBACK CAMPUS
-        # -------------------------------------------------
-
         if not campus_id:
 
             cursor.execute(
@@ -5537,32 +4738,25 @@ def tpo_companies():
 
             if user:
 
-                campus_id = user["campus_id"]
+                campus_id = \
+                    user["campus_id"]
 
-                session["campus_id"] = campus_id
-
+                session["campus_id"] = \
+                    campus_id
 
         if not campus_id:
 
             return render_template(
                 "tpo/companies.html",
-
                 companies=[],
-
                 total_companies=0,
                 active_companies=0,
                 placement_drives=0,
                 offers_generated=0,
-
                 industries=[],
-
-                db_error="TPO campus is not configured."
+                db_error=
+                    "TPO campus is not configured."
             )
-
-
-        # -------------------------------------------------
-        # COMPANIES
-        # -------------------------------------------------
 
         cursor.execute(
             """
@@ -5587,32 +4781,17 @@ def tpo_companies():
                 ) AS drives,
 
                 COALESCE(
-                    MAX(
-                        pd.package_lpa
-                    ),
+                    MAX(pd.package_lpa),
                     0
-                ) AS package_lpa,
-
-                GROUP_CONCAT(
-                    DISTINCT c.campus_code
-                    ORDER BY c.campus_code
-                    SEPARATOR ', '
-                ) AS colleges
+                ) AS package_lpa
 
             FROM companies co
 
             INNER JOIN placement_drives pd
-
                 ON pd.company_id =
                    co.company_id
-
                 AND pd.campus_id =
                     %s
-
-            LEFT JOIN campuses c
-
-                ON c.campus_id =
-                   pd.campus_id
 
             GROUP BY
 
@@ -5631,30 +4810,16 @@ def tpo_companies():
                 co.status
 
             ORDER BY
-                co.company_name ASC
+                co.company_name
             """,
-
-            (
-                campus_id,
-            )
+            (campus_id,)
         )
 
-
         companies = cursor.fetchall()
-
-
-        # -------------------------------------------------
-        # TOTAL COMPANIES
-        # -------------------------------------------------
 
         total_companies = len(
             companies
         )
-
-
-        # -------------------------------------------------
-        # ACTIVE COMPANIES
-        # -------------------------------------------------
 
         active_companies = sum(
 
@@ -5671,185 +4836,111 @@ def tpo_companies():
 
         )
 
-
-        # -------------------------------------------------
-        # PLACEMENT DRIVES
-        # -------------------------------------------------
-
         cursor.execute(
             """
-            SELECT
-                COUNT(*) AS total
+            SELECT COUNT(*) AS total
             FROM placement_drives
             WHERE campus_id = %s
             """,
-
-            (
-                campus_id,
-            )
+            (campus_id,)
         )
-
-
-        result = cursor.fetchone()
-
 
         placement_drives = (
-
-            result["total"]
-
-            if result
-
-            else 0
-
+            cursor.fetchone() or {}
+        ).get(
+            "total",
+            0
         )
-
-
-        # -------------------------------------------------
-        # OFFERS GENERATED
-        # -------------------------------------------------
 
         cursor.execute(
             """
-            SELECT
-                COUNT(
-                    DISTINCT pl.placement_id
-                ) AS total
+            SELECT COUNT(
+                DISTINCT pl.placement_id
+            ) AS total
 
             FROM placements pl
 
             INNER JOIN placement_drives pd
-
                 ON pd.drive_id =
                    pl.drive_id
 
             WHERE
-
                 pd.campus_id = %s
-
-                AND
-
-                UPPER(
-                    COALESCE(
-                        pl.placement_status,
-                        ''
-                    )
-                ) IN (
-                    'SELECTED',
-                    'PLACED',
-                    'JOINED',
-                    'CONFIRMED'
+            AND UPPER(
+                COALESCE(
+                    pl.placement_status,
+                    ''
                 )
-            """,
-
-            (
-                campus_id,
+            ) IN (
+                'SELECTED',
+                'PLACED',
+                'JOINED',
+                'CONFIRMED'
             )
+            """,
+            (campus_id,)
         )
-
-
-        result = cursor.fetchone()
-
 
         offers_generated = (
-
-            result["total"]
-
-            if result
-
-            else 0
-
+            cursor.fetchone() or {}
+        ).get(
+            "total",
+            0
         )
-
-
-        # -------------------------------------------------
-        # INDUSTRIES
-        # -------------------------------------------------
 
         cursor.execute(
             """
             SELECT DISTINCT
                 industry
-
             FROM companies
-
             WHERE
-
                 industry IS NOT NULL
-
-                AND
-
-                TRIM(industry) <> ''
-
-            ORDER BY
-                industry
+                AND TRIM(industry) <> ''
+            ORDER BY industry
             """
         )
 
-
         industries = cursor.fetchall()
 
-
-        # -------------------------------------------------
-        # RENDER
-        # -------------------------------------------------
-
         return render_template(
-
             "tpo/companies.html",
 
             companies=companies,
 
-            total_companies=total_companies,
+            total_companies=
+                total_companies,
 
-            active_companies=active_companies,
+            active_companies=
+                active_companies,
 
-            placement_drives=placement_drives,
+            placement_drives=
+                placement_drives,
 
-            offers_generated=offers_generated,
+            offers_generated=
+                offers_generated,
 
             industries=industries,
 
             campus_id=campus_id
-
         )
-
 
     except Exception as error:
-
-        print(
-            "===================================="
-        )
 
         print(
             "TPO COMPANIES ERROR:",
             error
         )
 
-        print(
-            "===================================="
-        )
-
-
         return render_template(
-
             "tpo/companies.html",
-
             companies=[],
-
             total_companies=0,
-
             active_companies=0,
-
             placement_drives=0,
-
             offers_generated=0,
-
             industries=[],
-
             db_error=str(error)
-
-        )
-
+        ), 500
 
     finally:
 
@@ -5861,116 +4952,31 @@ def tpo_companies():
 
 
 # =========================================================
-# TPO PLACEMENT DRIVES
+# TPO PLACEMENT OVERVIEW
 # =========================================================
-
-@app.route("/tpo/placement-drives")
-@login_required
-@role_required("5")
-def tpo_placement_drives():
-
-    return render_template(
-        "tpo/placement_drives.html"
-    )
-
-# =========================================================
-# TPO NOC
-# =========================================================
-
-@app.route("/tpo/noc")
-def tpo_noc():
-
-    return render_template(
-        "tpo/noc.html"
-    )
-
-# =========================================================
-# TPO APPLICATIONS
-# =========================================================
-
-@app.route("/tpo/applications")
-@login_required
-@role_required("5")
-def tpo_applications():
-
-    return render_template(
-        "tpo/applications.html"
-    )
-
-
-# =========================================================
-# TPO SHORTLISTED STUDENTS
-# =========================================================
-
-@app.route("/tpo/shortlisted-students")
-@login_required
-@role_required("5")
-def tpo_shortlisted_students():
-
-    return render_template(
-        "tpo/shortlisted_students.html"
-    )
-
-
-# =========================================================
-# TPO INTERVIEWS
-# =========================================================
-
-@app.route("/tpo/interviews")
-@login_required
-@role_required("5")
-def tpo_interviews():
-
-    return render_template(
-        "tpo/interviews.html"
-    )
-
-
-# =========================================================
-# TPO OFFERS
-# =========================================================
-
-@app.route("/tpo/offers")
-@login_required
-@role_required("5")
-def tpo_offers():
-
-    return render_template(
-        "tpo/offers.html"
-    )
-
-
-# =========================================================
-# TPO PLACED STUDENTS
-# =========================================================
-
-@app.route("/tpo/placed-students")
-@login_required
-@role_required("5")
-def tpo_placed_students():
-
-    return render_template(
-        "tpo/placed_students.html"
-    )
 
 @app.route("/tpo/placement-overview")
 @login_required
 @role_required("5")
 def tpo_placement_overview():
+
     connection = None
     cursor = None
+
     try:
+
         connection = get_db_connection()
-        cursor =  connection.cursor(
+
+        cursor = connection.cursor(
             dictionary=True
         )
+
         campus_id = session.get(
             "campus_id"
         )
-        #=========================
-        #FALLBACK CAMPUS
-        #=========================
+
         if not campus_id:
+
             cursor.execute(
                 """
                 SELECT campus_id
@@ -5982,25 +4988,30 @@ def tpo_placement_overview():
                     session.get("user_id"),
                 )
             )
+
             user = cursor.fetchone()
+
             if user:
-                campus_id = user["campus_id"]
-                session["campus_id"] = campus_id,
+
+                campus_id = \
+                    user["campus_id"]
+
+                session["campus_id"] = \
+                    campus_id
+
         if not campus_id:
+
             return render_template(
                 "tpo/placement_overview.html",
+                campus=None,
                 total_students=0,
                 eligible_students=0,
                 placed_students=0,
                 placement_rate=0,
                 recruiting_companies=0,
                 average_package=0,
-                highest_package=0,
-                campus=None
+                highest_package=0
             )
-        # -------------------------------------------------
-        # CAMPUS
-        # -------------------------------------------------
 
         cursor.execute(
             """
@@ -6012,15 +5023,10 @@ def tpo_placement_overview():
             WHERE campus_id = %s
             LIMIT 1
             """,
-            (
-                campus_id,
-            )
+            (campus_id,)
         )
 
         campus = cursor.fetchone()
-        # -------------------------------------------------
-        # TOTAL STUDENTS
-        # -------------------------------------------------
 
         cursor.execute(
             """
@@ -6028,49 +5034,35 @@ def tpo_placement_overview():
             FROM students
             WHERE campus_id = %s
             """,
-            (
-                campus_id,
-            )
+            (campus_id,)
         )
-
-        result = cursor.fetchone()
 
         total_students = (
-            result["total_students"]
-            if result
-            else 0
+            cursor.fetchone() or {}
+        ).get(
+            "total_students",
+            0
         )
-         # -------------------------------------------------
-        # ELIGIBLE STUDENTS
-        # -------------------------------------------------
 
         cursor.execute(
             """
             SELECT COUNT(*) AS eligible_students
             FROM students
-            WHERE campus_id = %s
-
-              AND cgpa IS NOT NULL
-
-              AND backlogs IS NOT NULL
-
-              AND backlogs <= 0
+            WHERE
+                campus_id = %s
+                AND cgpa IS NOT NULL
+                AND backlogs IS NOT NULL
+                AND backlogs <= 0
             """,
-            (
-                campus_id,
-            )
+            (campus_id,)
         )
-
-        result = cursor.fetchone()
 
         eligible_students = (
-            result["eligible_students"]
-            if result
-            else 0
+            cursor.fetchone() or {}
+        ).get(
+            "eligible_students",
+            0
         )
-        # -------------------------------------------------
-        # PLACED STUDENTS
-        # -------------------------------------------------
 
         cursor.execute(
             """
@@ -6092,215 +5084,112 @@ def tpo_placement_overview():
             WHERE
                 s.campus_id = %s
 
-                AND
-
-                UPPER(
-                    COALESCE(
-                        pl.placement_status,
-                        ''
-                    )
-                ) IN (
-                    'SELECTED',
-                    'PLACED',
-                    'JOINED'
+            AND UPPER(
+                COALESCE(
+                    pl.placement_status,
+                    ''
                 )
-            """,
-            (
-                campus_id,
+            ) IN (
+                'SELECTED',
+                'PLACED',
+                'JOINED'
             )
+            """,
+            (campus_id,)
         )
-
-        result = cursor.fetchone()
 
         placed_students = (
-            result["placed_students"]
-            if result
-            else 0
+            cursor.fetchone() or {}
+        ).get(
+            "placed_students",
+            0
         )
 
+        placement_rate = (
 
-        # -------------------------------------------------
-        # PLACEMENT RATE
-        # -------------------------------------------------
-
-        if total_students > 0:
-
-            placement_rate = round(
+            round(
                 (
-                    placed_students
-                    / total_students
+                    placed_students /
+                    total_students
                 ) * 100,
                 2
             )
 
-        else:
-
-            placement_rate = 0
-
-
-        # -------------------------------------------------
-        # RECRUITING COMPANIES
-        # -------------------------------------------------
-
-        recruiting_companies = 0
-
-        try:
-
-            cursor.execute(
-                """
-                SELECT
-                    COUNT(
-                        DISTINCT pd.company_id
-                    ) AS company_count
-
-                FROM placement_drives pd
-
-                INNER JOIN placement_applications pa
-                    ON pd.drive_id =
-                       pa.drive_id
-
-                INNER JOIN students s
-                    ON pa.student_id =
-                       s.student_id
-
-                WHERE
-                    s.campus_id = %s
-                """,
-                (
-                    campus_id,
-                )
-            )
-
-            result = cursor.fetchone()
-
-            recruiting_companies = (
-                result["company_count"]
-                if result
-                else 0
-            )
-
-        except Exception as error:
-
-            print(
-                "RECRUITING COMPANY ERROR:",
-                error
-            )
-
-
-        # -------------------------------------------------
-        # DEBUG
-        # -------------------------------------------------
-
-        print(
-            "===================================="
+            if total_students
+            else 0
         )
 
-        print(
-            "TPO PLACEMENT OVERVIEW"
+        cursor.execute(
+            """
+            SELECT COUNT(
+                DISTINCT pd.company_id
+            ) AS company_count
+
+            FROM placement_drives pd
+
+            INNER JOIN placement_applications pa
+                ON pd.drive_id =
+                   pa.drive_id
+
+            INNER JOIN students s
+                ON pa.student_id =
+                   s.student_id
+
+            WHERE s.campus_id = %s
+            """,
+            (campus_id,)
         )
 
-        print(
-            "CAMPUS:",
-            campus_id
+        recruiting_companies = (
+            cursor.fetchone() or {}
+        ).get(
+            "company_count",
+            0
         )
-
-        print(
-            "TOTAL STUDENTS:",
-            total_students
-        )
-
-        print(
-            "ELIGIBLE:",
-            eligible_students
-        )
-
-        print(
-            "PLACED:",
-            placed_students
-        )
-
-        print(
-            "PLACEMENT RATE:",
-            placement_rate
-        )
-
-        print(
-            "COMPANIES:",
-            recruiting_companies
-        )
-
-        print(
-            "===================================="
-        )
-
-
-        # -------------------------------------------------
-        # RENDER
-        # -------------------------------------------------
 
         return render_template(
-
             "tpo/placement_overview.html",
 
             campus=campus,
 
-            total_students=total_students,
+            total_students=
+                total_students,
 
-            eligible_students=eligible_students,
+            eligible_students=
+                eligible_students,
 
-            placed_students=placed_students,
+            placed_students=
+                placed_students,
 
-            placement_rate=placement_rate,
+            placement_rate=
+                placement_rate,
 
-            recruiting_companies=recruiting_companies,
+            recruiting_companies=
+                recruiting_companies,
 
             average_package=0,
-
             highest_package=0
-
         )
-
 
     except Exception as error:
-
-        print(
-            "===================================="
-        )
 
         print(
             "TPO PLACEMENT OVERVIEW ERROR:",
             error
         )
 
-        print(
-            "===================================="
-        )
-
-
         return render_template(
-
             "tpo/placement_overview.html",
-
             campus=None,
-
             total_students=0,
-
             eligible_students=0,
-
             placed_students=0,
-
             placement_rate=0,
-
             recruiting_companies=0,
-
             average_package=0,
-
             highest_package=0,
-
             overview_error=str(error)
-
-        )
-
+        ), 500
 
     finally:
 
@@ -6310,86 +5199,303 @@ def tpo_placement_overview():
         if connection:
             connection.close()
 
-@app.route("/tpo/preparation")
-@login_required
-@role_required("5")
-def tpo_preparation():
-    return render_template(
-        "tpo/preparation.html"
-    )
-# =========================================================
-# TPO REPORTS
-# =========================================================
-
-@app.route("/tpo/reports")
-@login_required
-@role_required("5")
-def tpo_reports():
-
-    return render_template(
-        "tpo/reports.html"
-    )
-
 
 # =========================================================
-# TPO NOTIFICATIONS
-# =========================================================
-
-@app.route("/tpo/notifications")
-@login_required
-@role_required("5")
-def tpo_notifications():
-
-    return render_template(
-        "tpo/notifications.html"
-    )
-
-
-# =========================================================
-# TPO ANNOUNCEMENTS
-# =========================================================
-
-@app.route("/tpo/announcements")
-@login_required
-@role_required("5")
-def tpo_announcements():
-
-    return render_template(
-        "tpo/announcements.html"
-    )
-
-
-# =========================================================
-# TPO SETTINGS
-# =========================================================
-
-@app.route("/tpo/settings")
-@login_required
-@role_required("5")
-def tpo_settings():
-
-    return render_template(
-        "tpo/settings.html"
-    )
-
-
-
-# =========================================================
-# HOD
+# HOD ROUTES
 # =========================================================
 
 @app.route("/hod/dashboard")
 @login_required
-@role_required("4")
+@hod_required
 def hod_dashboard():
 
+    context = get_hod_context()
+
     return render_template(
-        "hod/dashboard.html"
+        "hod/dashboard.html",
+        **context
+    )
+
+
+@app.route("/hod/students")
+@login_required
+@hod_required
+def hod_students():
+
+    context = get_hod_context()
+
+    return render_template(
+        "hod/students.html",
+        **context
+    )
+
+
+@app.route(
+    "/hod/students/<student_id>"
+)
+@login_required
+@hod_required
+def hod_student_detail(student_id):
+
+    context = get_hod_context()
+
+    connection = None
+    cursor = None
+    student = None
+
+    try:
+
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+        # HOD can only open students
+        # belonging to the HOD department.
+
+        cursor.execute(
+            """
+            SELECT
+
+                s.*,
+
+                c.course_name,
+                b.branch_name,
+                sec.section_name,
+                a.session_name
+
+            FROM students s
+
+            LEFT JOIN courses c
+                ON c.course_id =
+                   s.course_id
+
+            LEFT JOIN branches b
+                ON b.branch_id =
+                   s.branch_id
+
+            LEFT JOIN sections sec
+                ON sec.section_id =
+                   s.section_id
+
+            LEFT JOIN academic_sessions a
+                ON a.session_id =
+                   s.session_id
+
+            WHERE
+
+                s.student_id = %s
+
+                AND
+
+                s.department_id = %s
+
+            LIMIT 1
+            """,
+            (
+                student_id,
+                context["department_id"]
+            )
+        )
+
+        student = cursor.fetchone()
+
+    except Exception as error:
+
+        print(
+            "HOD STUDENT DETAIL ERROR:",
+            error
+        )
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection:
+            connection.close()
+
+    if not student:
+
+        flash(
+            "Student not found in your department.",
+            "error"
+        )
+
+        return redirect(
+            url_for("hod_students")
+        )
+
+    return render_template(
+        "hod/student_detail.html",
+        student=student,
+        **context
+    )
+
+
+@app.route("/hod/placement-drives")
+@login_required
+@hod_required
+def hod_placement_drives():
+
+    return render_template(
+        "hod/placement_drives.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/applications")
+@login_required
+@hod_required
+def hod_applications():
+
+    return render_template(
+        "hod/applications.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/shortlisted-students")
+@login_required
+@hod_required
+def hod_shortlisted_students():
+
+    return render_template(
+        "hod/shortlisted_students.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/offers-joining")
+@login_required
+@hod_required
+def hod_offers_joining():
+
+    return render_template(
+        "hod/offers_joining.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/placed-students")
+@login_required
+@hod_required
+def hod_placed_students():
+
+    return render_template(
+        "hod/placed_students.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/placement-statistics")
+@login_required
+@hod_required
+def hod_placement_statistics():
+
+    return render_template(
+        "hod/placement_statistics.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/reports")
+@login_required
+@hod_required
+def hod_reports():
+
+    return render_template(
+        "hod/reports.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/notifications")
+@login_required
+@hod_required
+def hod_notifications():
+
+    return render_template(
+        "hod/notifications.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/announcements")
+@login_required
+@hod_required
+def hod_announcements():
+
+    return render_template(
+        "hod/announcements.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/feedback")
+@login_required
+@hod_required
+def hod_feedback():
+
+    return render_template(
+        "hod/feedback.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/settings")
+@login_required
+@hod_required
+def hod_settings():
+
+    return render_template(
+        "hod/settings.html",
+        **get_hod_context()
+    )
+
+
+@app.route("/hod/api/context")
+@login_required
+@hod_required
+def hod_context_api():
+
+    context = get_hod_context()
+
+    return jsonify(
+        {
+            "success": True,
+
+            "department": {
+                "id":
+                    context["department_id"],
+
+                "code":
+                    context["department_code"],
+
+                "name":
+                    context["department_name"]
+            },
+
+            "campus": {
+                "id":
+                    context["campus_id"],
+
+                "name":
+                    context["campus_name"]
+            },
+
+            "academic_year":
+                context["academic_year"],
+
+            "hod_name":
+                context["hod_name"]
+        }
     )
 
 
 # =========================================================
-# MENTOR
+# MENTOR / TUTOR
 # =========================================================
 
 @app.route("/mentor/dashboard")
@@ -6402,10 +5508,6 @@ def mentor_dashboard():
     )
 
 
-# =========================================================
-# OLD TUTOR URL
-# =========================================================
-
 @app.route("/tutor/dashboard")
 @login_required
 @role_required("3")
@@ -6413,6 +5515,35 @@ def tutor_dashboard():
 
     return render_template(
         "tutor/dashboard.html"
+    )
+
+
+# =========================================================
+# ERROR HANDLERS
+# =========================================================
+
+@app.errorhandler(404)
+def page_not_found(error):
+
+    return (
+        render_template(
+            "login/login.html"
+        ),
+        404
+    )
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+
+    print(
+        "INTERNAL SERVER ERROR:",
+        error
+    )
+
+    return (
+        "Internal server error.",
+        500
     )
 
 

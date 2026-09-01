@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07122f"
+    >
+
+    <title>
+        {% block title %}
+            HOD Portal | Campus Placement Portal
+        {% endblock %}
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         HOD COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/hod/common.css') }}"
+    >
+
+
+    {% block page_css %}
+    {% endblock %}
+
+
+    <!-- =====================================================
+         SIDEBAR LAYOUT SAFETY
+         Prevents zoom / scaling overlap
+    ====================================================== -->
+
+    <style>
+
+        /* =================================================
+           HOD SIDEBAR LAYOUT
+        ================================================== */
+
+        .hod-sidebar {
+
+            display: flex !important;
+
+            flex-direction: column !important;
+
+            height: 100vh !important;
+
+            min-height: 100vh !important;
+
+            overflow: hidden !important;
+
+        }
+
+
+        /* =================================================
+           NAVIGATION SCROLL AREA
+        ================================================== */
+
+        .hod-sidebar-navigation {
+
+            flex: 1 1 auto !important;
+
+            min-height: 0 !important;
+
+            overflow-y: auto !important;
+
+            overflow-x: hidden !important;
+
+            padding-bottom: 8px;
+
+        }
+
+
+        /* =================================================
+           NAVIGATION SCROLLBAR
+        ================================================== */
+
+        .hod-sidebar-navigation::-webkit-scrollbar {
+
+            width: 4px;
+
+        }
+
+
+        .hod-sidebar-navigation::-webkit-scrollbar-track {
+
+            background: transparent;
+
+        }
+
+
+        .hod-sidebar-navigation::-webkit-scrollbar-thumb {
+
+            background:
+                rgba(255,255,255,0.14);
+
+            border-radius: 10px;
+
+        }
+
+
+        .hod-sidebar-navigation::-webkit-scrollbar-thumb:hover {
+
+            background:
+                rgba(255,255,255,0.24);
+
+        }
+
+
+        /* =================================================
+           SIDEBAR FOOTER
+        ================================================== */
+
+        .hod-sidebar-footer {
+
+            flex: 0 0 auto !important;
+
+            width: 100%;
+
+            margin-top: auto !important;
+
+            padding-top: 8px;
+
+            background:
+                #07122f;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            position: relative;
+
+            z-index: 5;
+
+        }
+
+
+        /* =================================================
+           LOGOUT
+        ================================================== */
+
+        .hod-sidebar-footer .hod-logout {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            min-height: 38px;
+
+            padding:
+                9px 10px;
+
+            margin: 0;
+
+            border-radius: 8px;
+
+            color: #ef6378;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            transition:
+                background .25s ease,
+                color .25s ease;
+
+        }
+
+
+        .hod-sidebar-footer .hod-logout:hover {
+
+            background:
+                rgba(239,99,120,0.09);
+
+            color:
+                #ff7185;
+
+        }
+
+
+        .hod-sidebar-footer .hod-logout .hod-nav-icon {
+
+            flex: 0 0 18px;
+
+            width: 18px;
+
+            text-align: center;
+
+        }
+
+
+        /* =================================================
+           DARK MODE FOOTER
+        ================================================== */
+
+        body.dark-mode
+        .hod-sidebar-footer {
+
+            background:
+                #050b1b;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+        }
+
+
+        /* =================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 900px) {
+
+            .hod-sidebar {
+
+                height: 100vh !important;
+
+                min-height: 100vh !important;
+
+            }
+
+        }
+
+
+        /* =================================================
+           VERY SMALL HEIGHT SCREENS
+           Navigation scrolls, footer stays visible
+        ================================================== */
+
+        @media (max-height: 650px) {
+
+            .hod-sidebar-navigation {
+
+                overflow-y: auto !important;
+
+            }
+
+            .hod-sidebar-footer {
+
+                padding-top: 6px;
+
+            }
+
+            .hod-sidebar-footer .hod-logout {
+
+                min-height: 34px;
+
+                padding-top: 7px;
+
+                padding-bottom: 7px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HOD APP
+    ====================================================== -->
+
+    <div class="hod-app">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        {% include 'hod/components/sidebar.html' %}
+
+
+        <!-- =================================================
+             MAIN AREA
+        ================================================== -->
+
+        <main class="hod-main">
+
+
+            <!-- =============================================
+                 TOPBAR
+            ============================================== -->
+
+            {% include 'hod/components/topbar.html' %}
+
+
+            <!-- =============================================
+                 PAGE CONTENT
+            ============================================== -->
+
+            <div class="hod-page-content">
+
+                {% block content %}
+                {% endblock %}
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE SIDEBAR OVERLAY
+    ====================================================== -->
+
+    <div
+        class="hod-sidebar-overlay"
+        id="hodSidebarOverlay"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- =====================================================
+         COMMON JS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/hod/common.js') }}"
+    ></script>
+
+
+    {% block page_js %}
+    {% endblock %}
+
+
+</body>
+
+</html>

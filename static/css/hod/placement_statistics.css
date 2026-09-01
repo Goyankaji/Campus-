@@ -1,0 +1,1233 @@
+/* =========================================================
+   CAMPUS HOD PORTAL
+   PLACEMENT STATISTICS
+   FINAL CLEAN VERSION
+========================================================= */
+
+
+/* =========================================================
+   PAGE WRAPPER
+========================================================= */
+
+.hod-placement-statistics-page {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+
+    padding: 28px 30px 45px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   REMOVE EXTRA COMMON PAGE SPACING ONLY FOR
+   PLACEMENT STATISTICS
+========================================================= */
+
+.hod-page-content:has(.hod-placement-statistics-page) {
+    width: 100% !important;
+
+    max-width: none !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN HOD AREA
+========================================================= */
+
+.hod-main {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ps-page-header {
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin: 0 0 24px;
+}
+
+
+.ps-breadcrumb {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    color: #7182a5;
+}
+
+
+.ps-breadcrumb b {
+    color: #536381;
+}
+
+
+.ps-breadcrumb strong {
+    color: #8d72ff;
+}
+
+
+.ps-page-header h1 {
+    margin: 0;
+
+    color: #f4f7ff;
+
+    font-size: 32px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+}
+
+
+.ps-page-header p {
+    margin: 7px 0 0;
+
+    color: #8090b2;
+
+    font-size: 10px;
+}
+
+
+.ps-session-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    background: #17133a;
+
+    border: 1px solid #40317d;
+
+    border-radius: 20px;
+
+    color: #a68cff;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.ps-badge-dot {
+    width: 7px;
+
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #825cf0;
+
+    box-shadow:
+        0 0 0 4px rgba(130, 92, 240, 0.13);
+}
+
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.ps-kpi-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+.ps-kpi-card {
+    min-width: 0;
+
+    min-height: 108px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 17px;
+
+    background: #111b30;
+
+    border: 1px solid #273754;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease;
+}
+
+
+.ps-kpi-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #493a85;
+}
+
+
+.ps-kpi-icon {
+    width: 46px;
+
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.ps-kpi-icon.purple {
+    background: #292052;
+
+    color: #9a83ff;
+}
+
+
+.ps-kpi-icon.green {
+    background: #14392d;
+
+    color: #4bd79b;
+}
+
+
+.ps-kpi-icon.blue {
+    background: #172f50;
+
+    color: #63a4ff;
+}
+
+
+.ps-kpi-icon.orange {
+    background: #45351b;
+
+    color: #ffb653;
+}
+
+
+.ps-kpi-content {
+    min-width: 0;
+}
+
+
+.ps-kpi-content span {
+    display: block;
+
+    color: #7e8faf;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.ps-kpi-content strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #f2f5ff;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+
+.ps-kpi-content small {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #68799b;
+
+    font-size: 7px;
+}
+
+
+.ps-kpi-content small.positive {
+    color: #45cf93;
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+========================================================= */
+
+.ps-analytics-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(330px, 0.65fr);
+
+    gap: 14px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   COMMON CARD
+========================================================= */
+
+.ps-card {
+    width: 100%;
+
+    min-width: 0;
+
+    background: #111b30;
+
+    border: 1px solid #273754;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.18);
+
+    box-sizing: border-box;
+}
+
+
+.ps-card-header {
+    min-height: 68px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 14px 17px;
+
+    border-bottom: 1px solid #263653;
+}
+
+
+.ps-card-header h2 {
+    margin: 0;
+
+    color: #edf2ff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.ps-card-header p {
+    margin: 4px 0 0;
+
+    color: #6f80a2;
+
+    font-size: 8px;
+}
+
+
+.ps-card-tag,
+.ps-record-count {
+    padding: 7px 10px;
+
+    border-radius: 8px;
+
+    background: #19163a;
+
+    border: 1px solid #382d70;
+
+    color: #957dff;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PLACEMENT OVERVIEW
+========================================================= */
+
+.ps-placement-overview {
+    min-height: 245px;
+
+    display: grid;
+
+    grid-template-columns:
+        240px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 22px;
+
+    box-sizing: border-box;
+}
+
+
+.ps-donut-wrapper {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.ps-donut {
+    width: 170px;
+
+    height: 170px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #7752ed 0deg 164deg,
+            #42c98e 164deg 290deg,
+            #263651 290deg 360deg
+        );
+}
+
+
+.ps-donut::after {
+    content: "";
+
+    position: absolute;
+
+    width: 116px;
+
+    height: 116px;
+
+    border-radius: 50%;
+
+    background: #111b30;
+}
+
+
+.ps-donut-center {
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+}
+
+
+.ps-donut-center strong {
+    display: block;
+
+    color: #f2f5ff;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+.ps-donut-center span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #7384a6;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   OVERVIEW LEGEND
+========================================================= */
+
+.ps-overview-legend {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    min-width: 0;
+}
+
+
+.ps-legend-item {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 11px;
+
+    background: #0d172a;
+
+    border: 1px solid #243451;
+
+    border-radius: 9px;
+
+    box-sizing: border-box;
+}
+
+
+.legend-dot {
+    width: 8px;
+
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+.legend-dot.total {
+    background: #7752ed;
+}
+
+
+.legend-dot.eligible {
+    background: #42c98e;
+}
+
+
+.legend-dot.placed {
+    background: #5e9bff;
+}
+
+
+.legend-dot.remaining {
+    background: #52617d;
+}
+
+
+.ps-legend-item strong {
+    display: block;
+
+    color: #edf2ff;
+
+    font-size: 12px;
+}
+
+
+.ps-legend-item span:last-child {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #6d7e9f;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   PACKAGE CARD
+========================================================= */
+
+.package-highlight {
+    margin: 18px;
+
+    padding: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: #17133a;
+
+    border: 1px solid #382d70;
+
+    border-radius: 11px;
+
+    box-sizing: border-box;
+}
+
+
+.package-highlight span {
+    display: block;
+
+    color: #7c8dad;
+
+    font-size: 8px;
+}
+
+
+.package-highlight strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #f0f3ff;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+
+.package-highlight-icon {
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #282052;
+
+    color: #9c85ff;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.package-stat-list {
+    padding: 0 18px 18px;
+}
+
+
+.package-stat {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #25334e;
+}
+
+
+.package-stat:last-child {
+    border-bottom: none;
+}
+
+
+.package-stat span {
+    color: #7c8dad;
+
+    font-size: 8px;
+}
+
+
+.package-stat strong {
+    color: #eaf0ff;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   COMPANY PERFORMANCE
+========================================================= */
+
+.company-performance-card {
+    width: 100%;
+
+    margin-bottom: 14px;
+}
+
+
+.ps-company-list {
+    padding: 3px 17px;
+}
+
+
+.ps-company-row {
+    min-height: 68px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 0.8fr)
+        minmax(300px, 1fr);
+
+    align-items: center;
+
+    gap: 25px;
+
+    border-bottom: 1px solid #263653;
+}
+
+
+.ps-company-row:last-child {
+    border-bottom: none;
+}
+
+
+.ps-company-info {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.ps-company-logo {
+    width: 36px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #27204f;
+
+    color: #9a83ff;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+.ps-company-info strong {
+    display: block;
+
+    color: #eaf0ff;
+
+    font-size: 9px;
+}
+
+
+.ps-company-info span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #697a9c;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.ps-progress-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 6px;
+}
+
+
+.ps-progress-top span {
+    color: #7182a4;
+
+    font-size: 7px;
+}
+
+
+.ps-progress-top strong {
+    color: #9b87ff;
+
+    font-size: 7px;
+}
+
+
+.ps-progress-track {
+    width: 100%;
+
+    height: 6px;
+
+    overflow: hidden;
+
+    background: #202d47;
+
+    border-radius: 20px;
+}
+
+
+.ps-progress-fill {
+    height: 100%;
+
+    background: #7653e9;
+
+    border-radius: inherit;
+}
+
+
+/* =========================================================
+   STATUS CARD
+========================================================= */
+
+.status-card {
+    width: 100%;
+
+    margin-bottom: 14px;
+}
+
+
+.ps-status-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+    gap: 0;
+}
+
+
+.ps-status-item {
+    min-width: 0;
+
+    min-height: 100px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 15px;
+
+    border-right: 1px solid #263653;
+
+    box-sizing: border-box;
+}
+
+
+.ps-status-item:last-child {
+    border-right: none;
+}
+
+
+.ps-status-icon {
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.ps-status-icon.applied {
+    background: #202e48;
+
+    color: #6c9cff;
+}
+
+
+.ps-status-icon.shortlisted {
+    background: #2b2053;
+
+    color: #9a82ff;
+}
+
+
+.ps-status-icon.interview {
+    background: #44331a;
+
+    color: #f3ad4d;
+}
+
+
+.ps-status-icon.selected {
+    background: #153a2d;
+
+    color: #4bd59b;
+}
+
+
+.ps-status-icon.offers {
+    background: #202d50;
+
+    color: #72a4ff;
+}
+
+
+.ps-status-icon.joined {
+    background: #153b2d;
+
+    color: #51d79e;
+}
+
+
+.ps-status-item span {
+    display: block;
+
+    color: #7081a3;
+
+    font-size: 7px;
+}
+
+
+.ps-status-item strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #edf2ff;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FOOTER NOTE
+========================================================= */
+
+.ps-footer-note {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 10px;
+
+    color: #68799b;
+
+    font-size: 8px;
+}
+
+
+.ps-footer-note span {
+    color: #8770ef;
+}
+
+
+.ps-footer-note strong {
+    color: #9a85ff;
+}
+
+
+/* =========================================================
+   TABLE / CHART SAFETY
+========================================================= */
+
+.hod-placement-statistics-page * {
+    box-sizing: border-box;
+}
+
+
+.hod-placement-statistics-page img,
+.hod-placement-statistics-page svg,
+.hod-placement-statistics-page canvas {
+    max-width: 100%;
+}
+
+
+.hod-placement-statistics-page table {
+    width: 100%;
+}
+
+
+/* =========================================================
+   LARGE SCREEN
+========================================================= */
+
+@media (min-width: 1500px) {
+
+    .hod-placement-statistics-page {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+}
+
+
+/* =========================================================
+   1250px
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .ps-kpi-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .ps-analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .ps-status-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+
+    .ps-status-item {
+        border-bottom: 1px solid #263653;
+    }
+
+
+    .ps-status-item:nth-child(3) {
+        border-right: none;
+    }
+
+}
+
+
+/* =========================================================
+   1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .ps-placement-overview {
+        grid-template-columns: 1fr;
+    }
+
+
+    .ps-company-row {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        padding: 14px 0;
+    }
+
+}
+
+
+/* =========================================================
+   900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .hod-placement-statistics-page {
+        padding: 22px 20px 35px;
+    }
+
+
+    .ps-page-header {
+        flex-direction: column;
+    }
+
+
+    .ps-session-badge {
+        align-self: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .hod-placement-statistics-page {
+        padding: 18px 16px 30px;
+    }
+
+
+    .ps-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .ps-overview-legend {
+        grid-template-columns: 1fr;
+    }
+
+
+    .ps-status-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .ps-status-item {
+        border-right: 1px solid #263653;
+    }
+
+
+    .ps-status-item:nth-child(even) {
+        border-right: none;
+    }
+
+
+    .ps-page-header h1 {
+        font-size: 27px;
+    }
+
+
+    .ps-placement-overview {
+        padding: 17px;
+    }
+
+
+    .ps-company-list {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   500px
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .hod-placement-statistics-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+    .ps-status-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .ps-status-item {
+        border-right: none !important;
+
+        border-bottom: 1px solid #263653;
+    }
+
+
+    .ps-status-item:last-child {
+        border-bottom: none;
+    }
+
+
+    .ps-kpi-card {
+        padding: 14px;
+    }
+
+
+    .ps-kpi-content strong {
+        font-size: 19px;
+    }
+
+}
