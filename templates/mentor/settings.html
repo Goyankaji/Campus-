@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Settings | Mentor Portal
+    </title>
+
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/settings.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <main class="main-area">
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="settings-page">
+
+            <div class="settings-container">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="settings-header">
+
+                    <div>
+
+                        <span class="settings-eyebrow">
+                            SYSTEM
+                        </span>
+
+                        <h1>
+                            Settings
+                        </h1>
+
+                        <p>
+                            Manage your mentor portal
+                            preferences and account information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="settings-scope">
+
+                        <span>
+                            MENTOR PORTAL
+                        </span>
+
+                        <strong>
+                            Account Settings
+                        </strong>
+
+                        <small>
+                            Mentor Access
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCOUNT
+                ================================================== -->
+
+                <div class="settings-section">
+
+                    <div class="settings-section-heading">
+
+                        <div class="settings-section-icon">
+                            ♙
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Account Information
+                            </h2>
+
+                            <p>
+                                Your registered mentor account details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-grid">
+
+
+                        <div class="settings-field">
+
+                            <label>
+                                Employee ID
+                            </label>
+
+                            <div class="settings-value">
+                                {{ mentor.employee_id|default('—') }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-field">
+
+                            <label>
+                                Faculty Type
+                            </label>
+
+                            <div class="settings-value">
+                                {{ mentor.faculty_type|default('MENTOR') }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-field">
+
+                            <label>
+                                Designation
+                            </label>
+
+                            <div class="settings-value">
+                                {{ mentor.designation|default('Mentor') }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-field">
+
+                            <label>
+                                Status
+                            </label>
+
+                            <div class="settings-value">
+
+                                <span class="settings-status">
+                                    {{ mentor.status|default('ACTIVE') }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PREFERENCES
+                ================================================== -->
+
+                <div class="settings-section">
+
+                    <div class="settings-section-heading">
+
+                        <div class="settings-section-icon">
+                            ⚙
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Portal Preferences
+                            </h2>
+
+                            <p>
+                                Configure how the mentor portal
+                                behaves on your device.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-preferences">
+
+
+                        <div class="settings-preference-row">
+
+                            <div>
+
+                                <strong>
+                                    Compact Sidebar
+                                </strong>
+
+                                <span>
+                                    Use a smaller navigation sidebar
+                                    when working with limited screen space.
+                                </span>
+
+                            </div>
+
+
+                            <label class="settings-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="compactSidebarToggle"
+                                >
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="settings-preference-row">
+
+                            <div>
+
+                                <strong>
+                                    Remember Last Page
+                                </strong>
+
+                                <span>
+                                    Return to your last visited
+                                    mentor section when possible.
+                                </span>
+
+                            </div>
+
+
+                            <label class="settings-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="rememberPageToggle"
+                                    checked
+                                >
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="settings-preference-row">
+
+                            <div>
+
+                                <strong>
+                                    Notification Badge
+                                </strong>
+
+                                <span>
+                                    Show unread notification count
+                                    in the navigation.
+                                </span>
+
+                            </div>
+
+
+                            <label class="settings-toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="notificationBadgeToggle"
+                                    checked
+                                >
+
+                                <span></span>
+
+                            </label>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SECURITY
+                ================================================== -->
+
+                <div class="settings-section">
+
+                    <div class="settings-section-heading">
+
+                        <div class="settings-section-icon">
+                            🔒
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Security
+                            </h2>
+
+                            <p>
+                                Security-related account actions.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-security">
+
+
+                        <div class="settings-security-row">
+
+                            <div>
+
+                                <strong>
+                                    Password
+                                </strong>
+
+                                <span>
+                                    Change your account password
+                                    through the secure account system.
+                                </span>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                id="changePasswordButton"
+                                class="settings-action"
+                            >
+                                Change Password
+                            </button>
+
+                        </div>
+
+
+                        <div class="settings-security-row">
+
+                            <div>
+
+                                <strong>
+                                    Active Session
+                                </strong>
+
+                                <span>
+                                    Your current mentor portal session
+                                    is active.
+                                </span>
+
+                            </div>
+
+
+                            <span class="session-active">
+                                ● Active
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="settings-access-notice">
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mentor permissions
+                        </strong>
+
+                        <span>
+                            Mentor accounts have restricted access.
+                            Student, placement and system records
+                            remain view-only unless an authorized
+                            administrator grants additional permissions.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/settings.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!-- =========================================================
+     CAMPUS — MENTOR TOPBAR
+     Reusable component for all Mentor pages
+========================================================= -->
+
+<header class="mentor-topbar">
+
+
+    <!-- =====================================================
+         MOBILE MENU
+    ====================================================== -->
+
+    <button
+        type="button"
+        class="mobile-sidebar-toggle"
+        id="mobileSidebarToggle"
+        aria-label="Open navigation"
+    >
+        ☰
+    </button>
+
+
+    <!-- =====================================================
+         PAGE / PORTAL TITLE
+    ====================================================== -->
+
+    <div class="mentor-topbar-title">
+
+        <div class="topbar-title-icon">
+            M
+        </div>
+
+        <div>
+
+            <span class="topbar-eyebrow">
+                CAMPUS PLACEMENT
+            </span>
+
+            <h1>
+                Mentor Portal
+            </h1>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT SIDE
+    ====================================================== -->
+
+    <div class="mentor-topbar-actions">
+
+
+        <!-- =================================================
+             GLOBAL SEARCH
+        ================================================== -->
+
+        <div class="mentor-global-search">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="search"
+                id="globalSearch"
+                placeholder="Search..."
+                autocomplete="off"
+                aria-label="Search"
+            >
+
+            <span class="search-shortcut">
+                Ctrl K
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             THEME TOGGLE
+        ================================================== -->
+
+        <button
+            type="button"
+            class="topbar-icon-button"
+            id="themeToggle"
+            onclick="toggleDarkMode()"
+            aria-label="Switch to dark mode"
+        >
+
+            <span id="themeIcon">
+                ☾
+            </span>
+
+        </button>
+
+
+        <!-- =================================================
+             NOTIFICATIONS
+        ================================================== -->
+
+        <a
+            href="{{ url_for('mentor_notifications') }}"
+            class="topbar-icon-button notification-button"
+            aria-label="Notifications"
+        >
+
+            <span>
+                ♢
+            </span>
+
+            <span class="notification-dot">
+                5
+            </span>
+
+        </a>
+
+
+        <!-- =================================================
+             MENTOR PROFILE
+        ================================================== -->
+
+        <div
+            class="mentor-profile"
+            tabindex="0"
+            role="button"
+            aria-label="Mentor profile"
+        >
+
+            <div class="mentor-profile-avatar">
+
+                {% if mentor and mentor.employee_id %}
+
+                    {{ mentor.employee_id[:2]|upper }}
+
+                {% else %}
+
+                    M
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="mentor-profile-info">
+
+                <strong>
+
+                    {% if mentor and mentor.employee_id %}
+
+                        {{ mentor.employee_id }}
+
+                    {% else %}
+
+                        Mentor
+
+                    {% endif %}
+
+                </strong>
+
+                <span>
+                    Mentor
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>

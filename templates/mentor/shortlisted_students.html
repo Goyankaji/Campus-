@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Shortlisted Students | Mentor Portal
+    </title>
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/shortlisted_students.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-area">
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="shortlisted-page">
+
+
+            <div class="shortlisted-container">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="shortlisted-header">
+
+                    <div>
+
+                        <span class="shortlisted-eyebrow">
+                            PLACEMENT MANAGEMENT
+                        </span>
+
+                        <h1>
+                            Shortlisted Students
+                        </h1>
+
+                        <p>
+                            View students from your branch
+                            who have been shortlisted.
+                        </p>
+
+                    </div>
+
+
+                    <div class="shortlisted-scope">
+
+                        <span>
+                            YOUR BRANCH
+                        </span>
+
+                        <strong>
+                            {{ mentor.branch_code }}
+                        </strong>
+
+                        <small>
+                            {{ mentor.branch_name }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STATS
+                ================================================== -->
+
+                <div class="shortlisted-stats">
+
+
+                    <div class="shortlisted-stat">
+
+                        <div class="shortlisted-stat-icon blue">
+                            ♙
+                        </div>
+
+                        <div>
+
+                            <span>
+                                SHORTLISTED
+                            </span>
+
+                            <strong>
+                                {{ total_shortlisted|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="shortlisted-stat">
+
+                        <div class="shortlisted-stat-icon purple">
+                            ◉
+                        </div>
+
+                        <div>
+
+                            <span>
+                                COMPANIES
+                            </span>
+
+                            <strong>
+                                {{ shortlisted_companies|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="shortlisted-stat">
+
+                        <div class="shortlisted-stat-icon green">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                INTERVIEW READY
+                            </span>
+
+                            <strong>
+                                {{ interview_ready|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="shortlisted-stat">
+
+                        <div class="shortlisted-stat-icon orange">
+                            ◷
+                        </div>
+
+                        <div>
+
+                            <span>
+                                UPCOMING
+                            </span>
+
+                            <strong>
+                                {{ upcoming_interviews|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PANEL
+                ================================================== -->
+
+                <div class="shortlisted-panel">
+
+
+                    <!-- TOOLBAR -->
+
+                    <div class="shortlisted-toolbar">
+
+
+                        <div class="shortlisted-search">
+
+                            <span>
+                                ⌕
+                            </span>
+
+                            <input
+                                type="search"
+                                id="shortlistedSearch"
+                                placeholder="Search student or company..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <select
+                            id="shortlistedCompanyFilter"
+                        >
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            {% for company in companies|default([]) %}
+
+                                <option
+                                    value="{{ company|lower }}"
+                                >
+                                    {{ company }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+
+                        <button
+                            type="button"
+                            id="resetShortlistedFilters"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- PANEL HEADER -->
+
+                    <div class="shortlisted-panel-header">
+
+                        <div>
+
+                            <strong>
+                                Shortlisted Students
+                            </strong>
+
+                            <span>
+                                Showing
+                                <b id="visibleShortlistedCount">
+                                    {{ shortlisted_students|default([])|length }}
+                                </b>
+                            </span>
+
+                        </div>
+
+
+                        <div class="shortlisted-view-only">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            View Only
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         TABLE
+                    ================================================== -->
+
+                    {% if shortlisted_students %}
+
+
+                    <div class="shortlisted-table-wrapper">
+
+                        <table class="shortlisted-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        STUDENT
+                                    </th>
+
+                                    <th>
+                                        COMPANY
+                                    </th>
+
+                                    <th>
+                                        ROLE
+                                    </th>
+
+                                    <th>
+                                        PACKAGE
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody
+                                id="shortlistedTableBody"
+                            >
+
+
+                                {% for student in shortlisted_students %}
+
+
+                                <tr
+                                    class="shortlisted-row"
+
+                                    data-student="
+                                        {{ (
+                                            student.student_name or ''
+                                        )|lower }}
+                                    "
+
+                                    data-company="
+                                        {{ (
+                                            student.company_name or ''
+                                        )|lower }}
+                                    "
+
+                                    data-role="
+                                        {{ (
+                                            student.job_role or ''
+                                        )|lower }}
+                                    "
+                                >
+
+
+                                    <!-- STUDENT -->
+
+                                    <td>
+
+                                        <div class="shortlisted-student">
+
+                                            <div class="shortlisted-avatar">
+
+                                                {{
+                                                    (
+                                                        student.student_name
+                                                        or 'S'
+                                                    )[0]|upper
+                                                }}
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <strong>
+                                                    {{
+                                                        student.student_name
+                                                        or
+                                                        'Unknown Student'
+                                                    }}
+                                                </strong>
+
+                                                <span>
+                                                    {{
+                                                        student.registration_no
+                                                        or
+                                                        '—'
+                                                    }}
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+
+                                    <!-- COMPANY -->
+
+                                    <td>
+
+                                        <strong>
+                                            {{
+                                                student.company_name
+                                                or
+                                                '—'
+                                            }}
+                                        </strong>
+
+                                    </td>
+
+
+
+                                    <!-- ROLE -->
+
+                                    <td>
+
+                                        <span>
+                                            {{
+                                                student.job_role
+                                                or
+                                                '—'
+                                            }}
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- PACKAGE -->
+
+                                    <td>
+
+                                        <strong>
+                                            {{
+                                                student.ctc
+                                                or
+                                                '—'
+                                            }}
+                                        </strong>
+
+                                    </td>
+
+
+
+                                    <!-- STATUS -->
+
+                                    <td>
+
+                                        <span
+                                            class="shortlisted-status"
+                                        >
+                                            Shortlisted
+                                        </span>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                                {% endfor %}
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div
+                        id="noShortlistedResults"
+                        class="shortlisted-empty"
+                        hidden
+                    >
+
+                        <div class="shortlisted-empty-icon">
+                            ⌕
+                        </div>
+
+                        <h3>
+                            No Students Found
+                        </h3>
+
+                        <p>
+                            Try changing your search or company filter.
+                        </p>
+
+                    </div>
+
+
+                    {% else %}
+
+
+                    <div class="shortlisted-empty">
+
+                        <div class="shortlisted-empty-icon">
+                            ♙
+                        </div>
+
+                        <h3>
+                            No Shortlisted Students
+                        </h3>
+
+                        <p>
+                            No students from your branch have
+                            been shortlisted yet.
+                        </p>
+
+                    </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="shortlisted-access-notice">
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mentor access is view-only
+                        </strong>
+
+                        <span>
+                            Shortlisting decisions are managed by
+                            authorized placement administrators.
+                            Mentors cannot modify the shortlist.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/shortlisted_students.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

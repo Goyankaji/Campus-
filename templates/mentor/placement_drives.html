@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Placement Drives | Mentor Portal
+    </title>
+
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+    <!-- COMMON -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+
+    <!-- PAGE -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/placement_drives.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-area">
+
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="placement-drives-page">
+
+
+            <div class="placement-drives-container">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="drives-page-header">
+
+
+                    <div>
+
+                        <span class="drives-eyebrow">
+                            PLACEMENT MANAGEMENT
+                        </span>
+
+
+                        <h1>
+                            Placement Drives
+                        </h1>
+
+
+                        <p>
+                            View placement opportunities
+                            available to your students.
+                        </p>
+
+                    </div>
+
+
+                    <div class="drives-scope-card">
+
+                        <span>
+                            BRANCH
+                        </span>
+
+                        <strong>
+                            {{ mentor.branch_code }}
+                        </strong>
+
+                        <small>
+                            {{ mentor.branch_name }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SUMMARY CARDS
+                ================================================== -->
+
+                <div class="drives-summary-grid">
+
+
+                    <div class="drive-summary-card">
+
+                        <div class="drive-summary-icon blue">
+                            ▣
+                        </div>
+
+                        <div>
+
+                            <span>
+                                TOTAL DRIVES
+                            </span>
+
+                            <strong>
+                                {{ total_drives|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="drive-summary-card">
+
+                        <div class="drive-summary-icon green">
+                            ●
+                        </div>
+
+                        <div>
+
+                            <span>
+                                ACTIVE
+                            </span>
+
+                            <strong>
+                                {{ active_drives|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="drive-summary-card">
+
+                        <div class="drive-summary-icon purple">
+                            ★
+                        </div>
+
+                        <div>
+
+                            <span>
+                                UPCOMING
+                            </span>
+
+                            <strong>
+                                {{ upcoming_drives|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="drive-summary-card">
+
+                        <div class="drive-summary-icon orange">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                COMPLETED
+                            </span>
+
+                            <strong>
+                                {{ completed_drives|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FILTER PANEL
+                ================================================== -->
+
+                <div class="drives-panel">
+
+
+                    <div class="drives-toolbar">
+
+
+                        <div class="drives-search">
+
+                            <span>
+                                ⌕
+                            </span>
+
+                            <input
+                                type="search"
+                                id="driveSearch"
+                                placeholder="Search company or drive..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <select
+                            id="driveStatusFilter"
+                            aria-label="Filter placement drives"
+                        >
+
+                            <option value="all">
+                                All Drives
+                            </option>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="upcoming">
+                                Upcoming
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            type="button"
+                            id="resetDriveFilters"
+                            class="drive-reset-button"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         PANEL HEADER
+                    ================================================== -->
+
+                    <div class="drives-panel-header">
+
+
+                        <div>
+
+                            <strong>
+                                Available Drives
+                            </strong>
+
+                            <span>
+                                Showing
+                                <b id="visibleDriveCount">
+                                    {{ drives|default([])|length }}
+                                </b>
+                                drives
+                            </span>
+
+                        </div>
+
+
+                        <div class="view-only-label">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            View Only
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         DRIVE LIST
+                    ================================================== -->
+
+                    {% if drives %}
+
+
+                    <div
+                        class="drives-list"
+                        id="drivesList"
+                    >
+
+
+                        {% for drive in drives %}
+
+
+                        <article
+                            class="drive-card"
+
+                            data-company="
+                                {{ (
+                                    drive.company_name or
+                                    ''
+                                )|lower }}
+                            "
+
+                            data-title="
+                                {{ (
+                                    drive.drive_title or
+                                    ''
+                                )|lower }}
+                            "
+
+                            data-status="
+                                {{ (
+                                    drive.status or
+                                    ''
+                                )|lower }}
+                            "
+                        >
+
+
+                            <!-- =====================================
+                                 COMPANY ICON
+                            ====================================== -->
+
+                            <div class="drive-company-logo">
+
+                                {{ (
+                                    drive.company_name or
+                                    'C'
+                                )[0]|upper }}
+
+                            </div>
+
+
+
+                            <!-- =====================================
+                                 DRIVE CONTENT
+                            ====================================== -->
+
+                            <div class="drive-main-content">
+
+
+                                <div class="drive-title-row">
+
+
+                                    <div>
+
+                                        <h2>
+                                            {{
+                                                drive.drive_title or
+                                                drive.company_name or
+                                                'Placement Drive'
+                                            }}
+                                        </h2>
+
+
+                                        <span class="drive-company">
+
+                                            {{
+                                                drive.company_name or
+                                                'Company not specified'
+                                            }}
+
+                                        </span>
+
+                                    </div>
+
+
+                                    {% set drive_status =
+                                        (
+                                            drive.status or
+                                            'UPCOMING'
+                                        )|lower
+                                    %}
+
+
+                                    <span
+                                        class="drive-status
+                                        {{ drive_status }}"
+                                    >
+
+                                        {{
+                                            (
+                                                drive.status or
+                                                'UPCOMING'
+                                            )
+                                            |replace('_', ' ')
+                                            |title
+                                        }}
+
+                                    </span>
+
+                                </div>
+
+
+
+                                <!-- =================================
+                                     DRIVE DETAILS
+                                ================================== -->
+
+                                <div class="drive-details">
+
+
+                                    <div class="drive-detail">
+
+                                        <span>
+                                            ROLE
+                                        </span>
+
+                                        <strong>
+                                            {{ drive.job_role or '—' }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="drive-detail">
+
+                                        <span>
+                                            PACKAGE
+                                        </span>
+
+                                        <strong>
+
+                                            {% if drive.ctc %}
+                                                {{ drive.ctc }}
+                                            {% else %}
+                                                —
+                                            {% endif %}
+
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="drive-detail">
+
+                                        <span>
+                                            DRIVE DATE
+                                        </span>
+
+                                        <strong>
+                                            {{ drive.drive_date or '—' }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="drive-detail">
+
+                                        <span>
+                                            DEADLINE
+                                        </span>
+
+                                        <strong>
+                                            {{ drive.application_deadline or '—' }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- =================================
+                                     ELIGIBILITY
+                                ================================== -->
+
+                                <div class="drive-footer">
+
+
+                                    <div class="drive-eligibility">
+
+                                        <span>
+                                            ELIGIBILITY
+                                        </span>
+
+                                        <strong>
+                                            {{ drive.eligibility or
+                                               'As per drive criteria' }}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <span class="drive-view-note">
+                                        Student applications are
+                                        managed separately.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+                    <!-- =================================================
+                         EMPTY FILTER RESULT
+                    ================================================== -->
+
+                    <div
+                        id="noDriveResults"
+                        class="drives-empty"
+                        hidden
+                    >
+
+                        <div class="drive-empty-icon">
+                            ⌕
+                        </div>
+
+                        <h3>
+                            No Drives Found
+                        </h3>
+
+                        <p>
+                            Try changing your search or filter.
+                        </p>
+
+                    </div>
+
+
+                    {% else %}
+
+
+                    <!-- =================================================
+                         NO DRIVES
+                    ================================================== -->
+
+                    <div class="drives-empty">
+
+                        <div class="drive-empty-icon">
+                            ▣
+                        </div>
+
+                        <h3>
+                            No Placement Drives
+                        </h3>
+
+                        <p>
+                            There are currently no placement
+                            drives available.
+                        </p>
+
+                    </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     VIEW ONLY NOTICE
+                ================================================== -->
+
+                <div class="drive-access-notice">
+
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Mentor access is view-only
+                        </strong>
+
+                        <span>
+                            Placement drives are managed by
+                            authorized placement administrators.
+                            Mentors can view drive information
+                            but cannot create, edit or delete drives.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     COMMON JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<!-- =========================================================
+     PAGE JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/placement_drives.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

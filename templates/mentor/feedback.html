@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Feedback | Mentor Portal
+    </title>
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/feedback.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <main class="main-area">
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="feedback-page">
+
+            <div class="feedback-container">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="feedback-header">
+
+                    <div>
+
+                        <span class="feedback-eyebrow">
+                            SYSTEM
+                        </span>
+
+                        <h1>
+                            Feedback
+                        </h1>
+
+                        <p>
+                            View feedback and communication
+                            related to your mentor activities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feedback-scope">
+
+                        <span>
+                            MENTOR PORTAL
+                        </span>
+
+                        <strong>
+                            Feedback
+                        </strong>
+
+                        <small>
+                            View Only
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SUMMARY
+                ================================================== -->
+
+                <div class="feedback-stats">
+
+
+                    <div class="feedback-stat">
+
+                        <div class="feedback-stat-icon blue">
+                            ◌
+                        </div>
+
+                        <div>
+
+                            <span>
+                                TOTAL FEEDBACK
+                            </span>
+
+                            <strong>
+                                {{ feedback|default([])|length }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feedback-stat">
+
+                        <div class="feedback-stat-icon green">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                POSITIVE
+                            </span>
+
+                            <strong>
+                                {{ positive_feedback|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feedback-stat">
+
+                        <div class="feedback-stat-icon orange">
+                            !
+                        </div>
+
+                        <div>
+
+                            <span>
+                                NEEDS ATTENTION
+                            </span>
+
+                            <strong>
+                                {{ attention_feedback|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feedback-stat">
+
+                        <div class="feedback-stat-icon purple">
+                            ★
+                        </div>
+
+                        <div>
+
+                            <span>
+                                AVERAGE RATING
+                            </span>
+
+                            <strong>
+                                {{ average_rating|default('—') }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TOOLBAR
+                ================================================== -->
+
+                <div class="feedback-toolbar">
+
+
+                    <div class="feedback-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="search"
+                            id="feedbackSearch"
+                            placeholder="Search feedback..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="feedbackTypeFilter"
+                    >
+
+                        <option value="all">
+                            All Feedback
+                        </option>
+
+                        <option value="positive">
+                            Positive
+                        </option>
+
+                        <option value="attention">
+                            Needs Attention
+                        </option>
+
+                        <option value="general">
+                            General
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        id="resetFeedbackFilters"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LIST HEADER
+                ================================================== -->
+
+                <div class="feedback-list-header">
+
+                    <div>
+
+                        <strong>
+                            Feedback Records
+                        </strong>
+
+                        <span>
+                            Showing
+                            <b id="visibleFeedbackCount">
+                                {{ feedback|default([])|length }}
+                            </b>
+                        </span>
+
+                    </div>
+
+
+                    <div class="feedback-view-only">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        View Only
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FEEDBACK LIST
+                ================================================== -->
+
+                <div
+                    class="feedback-list"
+                    id="feedbackList"
+                >
+
+
+                    {% if feedback %}
+
+
+                        {% for item in feedback %}
+
+
+                        {% set feedback_type =
+                            (
+                                item.feedback_type or
+                                'general'
+                            )|lower
+                        %}
+
+
+                        <article
+                            class="feedback-card"
+
+                            data-title="
+                                {{ (
+                                    item.title or ''
+                                )|lower }}
+                            "
+
+                            data-content="
+                                {{ (
+                                    item.message or
+                                    item.content or
+                                    ''
+                                )|lower }}
+                            "
+
+                            data-type="
+                                {{ feedback_type }}
+                            "
+                        >
+
+
+                            <div class="feedback-icon">
+
+                                {% if feedback_type == 'positive' %}
+                                    ✓
+                                {% elif feedback_type == 'attention' %}
+                                    !
+                                {% else %}
+                                    ◌
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="feedback-content">
+
+
+                                <div class="feedback-top">
+
+                                    <div>
+
+                                        <span
+                                            class="feedback-type
+                                            {{ feedback_type }}"
+                                        >
+                                            {{
+                                                feedback_type
+                                                |title
+                                            }}
+                                        </span>
+
+                                    </div>
+
+
+                                    <span class="feedback-date">
+
+                                        {{
+                                            item.created_at
+                                            or
+                                            '—'
+                                        }}
+
+                                    </span>
+
+                                </div>
+
+
+                                <h2>
+
+                                    {{
+                                        item.title
+                                        or
+                                        'Feedback'
+                                    }}
+
+                                </h2>
+
+
+                                <p>
+
+                                    {{
+                                        item.message
+                                        or
+                                        item.content
+                                        or
+                                        'No additional information available.'
+                                    }}
+
+                                </p>
+
+
+                                {% if item.rating %}
+
+                                <div class="feedback-rating">
+
+                                    <span>
+                                        Rating
+                                    </span>
+
+                                    <strong>
+                                        {{ item.rating }}/5
+                                    </strong>
+
+                                </div>
+
+                                {% endif %}
+
+
+                                {% if item.author_name %}
+
+                                <div class="feedback-author">
+
+                                    From
+                                    <strong>
+                                        {{ item.author_name }}
+                                    </strong>
+
+                                </div>
+
+                                {% endif %}
+
+
+                            </div>
+
+                        </article>
+
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <div class="feedback-empty">
+
+                            <div class="feedback-empty-icon">
+                                ◌
+                            </div>
+
+                            <h3>
+                                No Feedback
+                            </h3>
+
+                            <p>
+                                There are currently no feedback
+                                records available.
+                            </p>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     FILTER EMPTY
+                ================================================== -->
+
+                <div
+                    id="noFeedbackResults"
+                    class="feedback-empty"
+                    hidden
+                >
+
+                    <div class="feedback-empty-icon">
+                        ⌕
+                    </div>
+
+                    <h3>
+                        No Matching Feedback
+                    </h3>
+
+                    <p>
+                        Try changing your search or feedback filter.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="feedback-access-notice">
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mentor access is view-only
+                        </strong>
+
+                        <span>
+                            Feedback records are managed by the
+                            authorized Campus Placement Portal
+                            users. Mentors cannot modify or delete
+                            feedback.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/feedback.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        My Students | Mentor Portal
+    </title>
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/students.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN AREA
+    ====================================================== -->
+
+    <main class="main-area">
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="students-page">
+
+            <div class="students-container">
+
+
+                <!-- =================================================
+                     PAGE HEADER
+                ================================================== -->
+
+                <div class="students-page-header">
+
+                    <div>
+
+                        <span class="students-eyebrow">
+                            STUDENT MANAGEMENT
+                        </span>
+
+                        <h1>
+                            My Students
+                        </h1>
+
+                        <p>
+                            View students assigned to your
+                            branch.
+                        </p>
+
+                    </div>
+
+
+                    <div class="students-scope-card">
+
+                        <span>
+                            YOUR BRANCH
+                        </span>
+
+                        <strong>
+                            {{ mentor.branch_code }}
+                        </strong>
+
+                        <small>
+                            {{ mentor.branch_name }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STATISTICS
+                ================================================== -->
+
+                <div class="students-stats">
+
+
+                    <div class="student-stat-card">
+
+                        <div class="student-stat-icon blue">
+                            ♙
+                        </div>
+
+                        <div>
+
+                            <span>
+                                TOTAL STUDENTS
+                            </span>
+
+                            <strong>
+                                {{ total_students }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-stat-card">
+
+                        <div class="student-stat-icon green">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                ACTIVE
+                            </span>
+
+                            <strong>
+                                {{ active_students }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-stat-card">
+
+                        <div class="student-stat-icon purple">
+                            ★
+                        </div>
+
+                        <div>
+
+                            <span>
+                                PLACEMENT READY
+                            </span>
+
+                            <strong>
+                                {{ placement_ready }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-stat-card">
+
+                        <div class="student-stat-icon orange">
+                            !
+                        </div>
+
+                        <div>
+
+                            <span>
+                                BACKLOGS
+                            </span>
+
+                            <strong>
+                                {{ backlog_students }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STUDENTS PANEL
+                ================================================== -->
+
+                <div class="students-panel">
+
+
+                    <!-- =================================================
+                         TOOLBAR
+                    ================================================== -->
+
+                    <div class="students-toolbar">
+
+
+                        <div class="students-search">
+
+                            <span>
+                                ⌕
+                            </span>
+
+                            <input
+                                type="search"
+                                id="studentSearch"
+                                placeholder="Search by name, registration or enrollment..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <div class="students-filter-group">
+
+
+                            <select
+                                id="courseFilter"
+                                aria-label="Filter by course"
+                            >
+
+                                <option value="all">
+                                    All Courses
+                                </option>
+
+                                {% set course_values = [] %}
+
+                                {% for student in students %}
+
+                                    {% if student.course_code
+                                          and student.course_code
+                                          not in course_values %}
+
+                                        {% set _ =
+                                            course_values.append(
+                                                student.course_code
+                                            )
+                                        %}
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+
+                                {% for course in course_values %}
+
+                                    <option
+                                        value="{{ course|lower }}"
+                                    >
+                                        {{ course }}
+                                    </option>
+
+                                {% endfor %}
+
+                            </select>
+
+
+                            <select
+                                id="sessionFilter"
+                                aria-label="Filter by session"
+                            >
+
+                                <option value="all">
+                                    All Sessions
+                                </option>
+
+                                {% set session_values = [] %}
+
+                                {% for student in students %}
+
+                                    {% if student.session_name
+                                          and student.session_name
+                                          not in session_values %}
+
+                                        {% set _ =
+                                            session_values.append(
+                                                student.session_name
+                                            )
+                                        %}
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+
+                                {% for session in session_values %}
+
+                                    <option
+                                        value="{{ session|lower }}"
+                                    >
+                                        {{ session }}
+                                    </option>
+
+                                {% endfor %}
+
+                            </select>
+
+
+                            <select
+                                id="statusFilter"
+                                aria-label="Filter by status"
+                            >
+
+                                <option value="all">
+                                    All Status
+                                </option>
+
+                                <option value="active">
+                                    Active
+                                </option>
+
+                                <option value="pending">
+                                    Pending
+                                </option>
+
+                                <option value="blocked">
+                                    Blocked
+                                </option>
+
+                                <option value="inactive">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+
+                            <button
+                                type="button"
+                                id="resetStudentFilters"
+                                class="reset-filter-button"
+                            >
+                                Reset
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         TABLE HEADER INFO
+                    ================================================== -->
+
+                    <div class="students-table-header">
+
+
+                        <div>
+
+                            <strong>
+                                Students
+                            </strong>
+
+                            <span>
+                                Showing
+                                <b id="visibleStudentCount">
+                                    {{ students|length }}
+                                </b>
+                                students
+                            </span>
+
+                        </div>
+
+
+                        <div class="view-only-label">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            View Only
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         TABLE
+                    ================================================== -->
+
+                    {% if students %}
+
+                    <div class="students-table-wrapper">
+
+
+                        <table class="students-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        STUDENT
+                                    </th>
+
+                                    <th>
+                                        REGISTRATION
+                                    </th>
+
+                                    <th>
+                                        COURSE
+                                    </th>
+
+                                    <th>
+                                        SESSION
+                                    </th>
+
+                                    <th>
+                                        CGPA
+                                    </th>
+
+                                    <th>
+                                        BACKLOGS
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
+
+                                    <th>
+                                        ACTION
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="studentsTableBody">
+
+
+                                {% for student in students %}
+
+                                <tr
+                                    class="student-row"
+
+                                    data-name="
+                                        {{
+                                            (
+                                                (student.first_name or '') ~ ' ' ~
+                                                (student.middle_name or '') ~ ' ' ~
+                                                (student.last_name or '')
+                                            )
+                                            |trim
+                                            |lower
+                                        }}
+                                    "
+
+                                    data-registration="
+                                        {{ (student.registration_no or '')|lower }}
+                                    "
+
+                                    data-enrollment="
+                                        {{ (student.enrollment_no or '')|lower }}
+                                    "
+
+                                    data-course="
+                                        {{ (student.course_code or '')|lower }}
+                                    "
+
+                                    data-session="
+                                        {{ (student.session_name or '')|lower }}
+                                    "
+
+                                    data-status="
+                                        {{ (student.status or '')|lower }}
+                                    "
+
+                                    data-cgpa="
+                                        {{ student.cgpa or 0 }}
+                                    "
+
+                                    data-backlogs="
+                                        {{ student.backlogs or 0 }}
+                                    "
+                                >
+
+
+                                    <!-- STUDENT -->
+
+                                    <td>
+
+                                        <div class="student-identity">
+
+
+                                            <div class="student-avatar">
+
+                                                {{ (
+                                                    student.first_name or 'S'
+                                                )[0]|upper }}
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <strong>
+
+                                                    {{ student.first_name }}
+
+                                                    {% if student.middle_name %}
+                                                        {{ student.middle_name }}
+                                                    {% endif %}
+
+                                                    {% if student.last_name %}
+                                                        {{ student.last_name }}
+                                                    {% endif %}
+
+                                                </strong>
+
+
+                                                <span>
+
+                                                    {{ student.email or
+                                                       'Email unavailable' }}
+
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+
+                                    <!-- REGISTRATION -->
+
+                                    <td>
+
+                                        <span class="student-code">
+
+                                            {{ student.registration_no }}
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- COURSE -->
+
+                                    <td>
+
+                                        <div class="student-course">
+
+                                            <strong>
+                                                {{ student.course_code or '—' }}
+                                            </strong>
+
+                                            <span>
+                                                {{ student.course_name or '—' }}
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+
+                                    <!-- SESSION -->
+
+                                    <td>
+
+                                        <span class="session-text">
+
+                                            {{ student.session_name or '—' }}
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- CGPA -->
+
+                                    <td>
+
+                                        {% if student.cgpa is not none %}
+
+                                            <strong class="cgpa-value">
+
+                                                {{
+                                                    "%.2f"|format(
+                                                        student.cgpa
+                                                    )
+                                                }}
+
+                                            </strong>
+
+                                        {% else %}
+
+                                            <span>
+                                                —
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+
+                                    <!-- BACKLOGS -->
+
+                                    <td>
+
+                                        {% set backlog =
+                                            student.backlogs or 0
+                                        %}
+
+
+                                        {% if backlog > 0 %}
+
+                                            <span
+                                                class="backlog-badge has-backlog"
+                                            >
+                                                {{ backlog }}
+                                            </span>
+
+                                        {% else %}
+
+                                            <span
+                                                class="backlog-badge no-backlog"
+                                            >
+                                                0
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+
+                                    <!-- STATUS -->
+
+                                    <td>
+
+                                        {% set current_status =
+                                            (
+                                                student.status or
+                                                'PENDING'
+                                            )|lower
+                                        %}
+
+
+                                        <span
+                                            class="student-status
+                                            {{ current_status }}"
+                                        >
+
+                                            {{
+                                                (
+                                                    student.status or
+                                                    'PENDING'
+                                                )
+                                                |replace('_', ' ')
+                                                |title
+                                            }}
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- ACTION -->
+
+                                    <td>
+
+                                        <a
+                                            href="{{ url_for(
+                                                'mentor_student_detail',
+                                                student_id=student.student_id
+                                            ) }}"
+                                            class="view-student-button"
+                                        >
+
+                                            <span>
+                                                View
+                                            </span>
+
+                                            <span>
+                                                →
+                                            </span>
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         NO SEARCH RESULT
+                    ================================================== -->
+
+                    <div
+                        id="noSearchResults"
+                        class="students-empty filtered-empty"
+                        hidden
+                    >
+
+                        <div class="empty-icon">
+                            ⌕
+                        </div>
+
+                        <h3>
+                            No Students Found
+                        </h3>
+
+                        <p>
+                            Try changing your search or filters.
+                        </p>
+
+                    </div>
+
+
+                    {% else %}
+
+
+                    <!-- =================================================
+                         NO STUDENTS
+                    ================================================== -->
+
+                    <div class="students-empty">
+
+                        <div class="empty-icon">
+                            ♙
+                        </div>
+
+                        <h3>
+                            No Students Assigned
+                        </h3>
+
+                        <p>
+                            There are currently no students
+                            assigned to your branch.
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="student-access-notice">
+
+                    <div class="access-notice-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            View-only access
+                        </strong>
+
+                        <span>
+                            You can view student information,
+                            but student records cannot be
+                            edited or deleted from the Mentor Portal.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     COMMON JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+
+<!-- =========================================================
+     STUDENTS JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/students.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

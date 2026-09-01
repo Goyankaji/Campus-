@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Placed Students | Mentor Portal
+    </title>
+
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/placed_students.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN AREA
+    ====================================================== -->
+
+    <main class="main-area">
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="placed-page">
+
+
+            <div class="placed-container">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="placed-header">
+
+                    <div>
+
+                        <span class="placed-eyebrow">
+                            PLACEMENT MANAGEMENT
+                        </span>
+
+                        <h1>
+                            Placed Students
+                        </h1>
+
+                        <p>
+                            View students from your branch
+                            who have received placement offers.
+                        </p>
+
+                    </div>
+
+
+                    <div class="placed-scope">
+
+                        <span>
+                            YOUR BRANCH
+                        </span>
+
+                        <strong>
+                            {{ mentor.branch_code }}
+                        </strong>
+
+                        <small>
+                            {{ mentor.branch_name }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STATISTICS
+                ================================================== -->
+
+                <div class="placed-stats">
+
+
+                    <div class="placed-stat">
+
+                        <div class="placed-stat-icon blue">
+                            ♙
+                        </div>
+
+                        <div>
+
+                            <span>
+                                TOTAL PLACED
+                            </span>
+
+                            <strong>
+                                {{ total_placed|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="placed-stat">
+
+                        <div class="placed-stat-icon green">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <span>
+                                OFFERS ACCEPTED
+                            </span>
+
+                            <strong>
+                                {{ accepted_offers|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="placed-stat">
+
+                        <div class="placed-stat-icon purple">
+                            ₹
+                        </div>
+
+                        <div>
+
+                            <span>
+                                HIGHEST PACKAGE
+                            </span>
+
+                            <strong>
+                                {{ highest_package|default('—') }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="placed-stat">
+
+                        <div class="placed-stat-icon orange">
+                            ◉
+                        </div>
+
+                        <div>
+
+                            <span>
+                                COMPANIES
+                            </span>
+
+                            <strong>
+                                {{ placed_companies|default(0) }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MAIN PANEL
+                ================================================== -->
+
+                <div class="placed-panel">
+
+
+                    <!-- TOOLBAR -->
+
+                    <div class="placed-toolbar">
+
+
+                        <div class="placed-search">
+
+                            <span>
+                                ⌕
+                            </span>
+
+                            <input
+                                type="search"
+                                id="placedSearch"
+                                placeholder="Search student or company..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <select
+                            id="placedCompanyFilter"
+                        >
+
+                            <option value="all">
+                                All Companies
+                            </option>
+
+                            {% for company in companies|default([]) %}
+
+                                <option
+                                    value="{{ company|lower }}"
+                                >
+                                    {{ company }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+
+                        <button
+                            type="button"
+                            id="resetPlacedFilters"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- PANEL HEADER -->
+
+                    <div class="placed-panel-header">
+
+                        <div>
+
+                            <strong>
+                                Placed Students
+                            </strong>
+
+                            <span>
+                                Showing
+                                <b id="visiblePlacedCount">
+                                    {{ placed_students|default([])|length }}
+                                </b>
+                            </span>
+
+                        </div>
+
+
+                        <div class="placed-view-only">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            View Only
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         TABLE
+                    ================================================== -->
+
+                    {% if placed_students %}
+
+
+                    <div class="placed-table-wrapper">
+
+                        <table class="placed-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        STUDENT
+                                    </th>
+
+                                    <th>
+                                        COMPANY
+                                    </th>
+
+                                    <th>
+                                        ROLE
+                                    </th>
+
+                                    <th>
+                                        PACKAGE
+                                    </th>
+
+                                    <th>
+                                        OFFER STATUS
+                                    </th>
+
+                                    <th>
+                                        JOINING
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody
+                                id="placedTableBody"
+                            >
+
+
+                                {% for student in placed_students %}
+
+
+                                <tr
+                                    class="placed-row"
+
+                                    data-student="
+                                        {{ (
+                                            student.student_name or ''
+                                        )|lower }}
+                                    "
+
+                                    data-company="
+                                        {{ (
+                                            student.company_name or ''
+                                        )|lower }}
+                                    "
+
+                                    data-role="
+                                        {{ (
+                                            student.job_role or ''
+                                        )|lower }}
+                                    "
+                                >
+
+
+                                    <!-- STUDENT -->
+
+                                    <td>
+
+                                        <div class="placed-student">
+
+                                            <div class="placed-avatar">
+
+                                                {{
+                                                    (
+                                                        student.student_name
+                                                        or 'S'
+                                                    )[0]|upper
+                                                }}
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <strong>
+                                                    {{
+                                                        student.student_name
+                                                        or
+                                                        'Unknown Student'
+                                                    }}
+                                                </strong>
+
+                                                <span>
+                                                    {{
+                                                        student.registration_no
+                                                        or
+                                                        '—'
+                                                    }}
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+
+                                    <!-- COMPANY -->
+
+                                    <td>
+
+                                        <strong class="placed-company">
+                                            {{
+                                                student.company_name
+                                                or
+                                                '—'
+                                            }}
+                                        </strong>
+
+                                    </td>
+
+
+
+                                    <!-- ROLE -->
+
+                                    <td>
+
+                                        <span class="placed-role">
+                                            {{
+                                                student.job_role
+                                                or
+                                                '—'
+                                            }}
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- PACKAGE -->
+
+                                    <td>
+
+                                        <strong class="placed-package">
+                                            {{
+                                                student.ctc
+                                                or
+                                                '—'
+                                            }}
+                                        </strong>
+
+                                    </td>
+
+
+
+                                    <!-- OFFER STATUS -->
+
+                                    <td>
+
+                                        <span
+                                            class="placed-offer-status"
+                                        >
+                                            {{
+                                                student.offer_status
+                                                or
+                                                'Offer Accepted'
+                                            }}
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- JOINING -->
+
+                                    <td>
+
+                                        <span class="placed-joining">
+
+                                            {{
+                                                student.joining_date
+                                                or
+                                                '—'
+                                            }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                                {% endfor %}
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div
+                        id="noPlacedResults"
+                        class="placed-empty"
+                        hidden
+                    >
+
+                        <div class="placed-empty-icon">
+                            ⌕
+                        </div>
+
+                        <h3>
+                            No Students Found
+                        </h3>
+
+                        <p>
+                            Try changing your search or company filter.
+                        </p>
+
+                    </div>
+
+
+                    {% else %}
+
+
+                    <div class="placed-empty">
+
+                        <div class="placed-empty-icon">
+                            ♙
+                        </div>
+
+                        <h3>
+                            No Placed Students
+                        </h3>
+
+                        <p>
+                            No students from your branch have
+                            been placed yet.
+                        </p>
+
+                    </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="placed-access-notice">
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mentor access is view-only
+                        </strong>
+
+                        <span>
+                            Placement offers and joining records
+                            are managed by authorized placement
+                            administrators. Mentors cannot modify
+                            these records.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/placed_students.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

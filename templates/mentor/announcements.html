@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Announcements | Mentor Portal
+    </title>
+
+    <script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/announcements.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <main class="main-area">
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="announcements-page">
+
+            <div class="announcements-container">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="announcements-header">
+
+                    <div>
+
+                        <span class="announcements-eyebrow">
+                            SYSTEM
+                        </span>
+
+                        <h1>
+                            Announcements
+                        </h1>
+
+                        <p>
+                            Important placement and campus
+                            updates for mentors.
+                        </p>
+
+                    </div>
+
+
+                    <div class="announcement-scope">
+
+                        <span>
+                            MENTOR PORTAL
+                        </span>
+
+                        <strong>
+                            Announcements
+                        </strong>
+
+                        <small>
+                            View Only
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TOOLBAR
+                ================================================== -->
+
+                <div class="announcements-toolbar">
+
+
+                    <div class="announcements-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="search"
+                            id="announcementSearch"
+                            placeholder="Search announcements..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="announcementCategoryFilter"
+                    >
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="placement">
+                            Placement
+                        </option>
+
+                        <option value="academic">
+                            Academic
+                        </option>
+
+                        <option value="general">
+                            General
+                        </option>
+
+                        <option value="urgent">
+                            Urgent
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        id="resetAnnouncementFilters"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SUMMARY
+                ================================================== -->
+
+                <div class="announcement-summary">
+
+                    <div>
+
+                        <strong>
+                            Latest Announcements
+                        </strong>
+
+                        <span>
+                            Showing
+                            <b id="visibleAnnouncementCount">
+                                {{ announcements|default([])|length }}
+                            </b>
+                        </span>
+
+                    </div>
+
+
+                    <div class="announcement-read-only">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        View Only
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ANNOUNCEMENT LIST
+                ================================================== -->
+
+                <div
+                    class="announcements-list"
+                    id="announcementsList"
+                >
+
+
+                    {% if announcements %}
+
+
+                        {% for announcement in announcements %}
+
+
+                        <article
+                            class="announcement-card"
+
+                            data-title="
+                                {{ (
+                                    announcement.title or ''
+                                )|lower }}
+                            "
+
+                            data-content="
+                                {{ (
+                                    announcement.content or ''
+                                )|lower }}
+                            "
+
+                            data-category="
+                                {{ (
+                                    announcement.category or
+                                    'general'
+                                )|lower }}
+                            "
+                        >
+
+
+                            <div class="announcement-card-icon">
+
+                                {% set category =
+                                    (
+                                        announcement.category or
+                                        'general'
+                                    )|lower
+                                %}
+
+
+                                {% if category == 'placement' %}
+                                    ◉
+                                {% elif category == 'academic' %}
+                                    ▤
+                                {% elif category == 'urgent' %}
+                                    !
+                                {% else %}
+                                    ◈
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="announcement-content">
+
+
+                                <div class="announcement-top">
+
+
+                                    <div>
+
+                                        <span
+                                            class="announcement-category
+                                            {{ category }}"
+                                        >
+                                            {{
+                                                category
+                                                |title
+                                            }}
+                                        </span>
+
+
+                                        {% if announcement.is_important %}
+
+                                            <span
+                                                class="announcement-important"
+                                            >
+                                                Important
+                                            </span>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <span class="announcement-date">
+
+                                        {{
+                                            announcement.created_at
+                                            or
+                                            '—'
+                                        }}
+
+                                    </span>
+
+                                </div>
+
+
+                                <h2>
+
+                                    {{
+                                        announcement.title
+                                        or
+                                        'Announcement'
+                                    }}
+
+                                </h2>
+
+
+                                <p>
+
+                                    {{
+                                        announcement.content
+                                        or
+                                        'No additional information available.'
+                                    }}
+
+                                </p>
+
+
+                                {% if announcement.author_name %}
+
+                                <div class="announcement-author">
+
+                                    Posted by
+                                    <strong>
+                                        {{
+                                            announcement.author_name
+                                        }}
+                                    </strong>
+
+                                </div>
+
+                                {% endif %}
+
+
+                            </div>
+
+                        </article>
+
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <div class="announcements-empty">
+
+                            <div class="announcement-empty-icon">
+                                ◈
+                            </div>
+
+                            <h3>
+                                No Announcements
+                            </h3>
+
+                            <p>
+                                There are currently no announcements
+                                available for mentors.
+                            </p>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SEARCH EMPTY
+                ================================================== -->
+
+                <div
+                    id="noAnnouncementResults"
+                    class="announcements-empty"
+                    hidden
+                >
+
+                    <div class="announcement-empty-icon">
+                        ⌕
+                    </div>
+
+                    <h3>
+                        No Matching Announcements
+                    </h3>
+
+                    <p>
+                        Try changing your search or category filter.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="announcement-access-notice">
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mentor access is view-only
+                        </strong>
+
+                        <span>
+                            Announcements are published by
+                            authorized administrators.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/announcements.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

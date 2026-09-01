@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Notifications | Mentor Portal
+    </title>
+
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/notifications.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <main class="main-area">
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="notifications-page">
+
+            <div class="notifications-container">
+
+
+                <!-- =================================================
+                     HEADER
+                ================================================== -->
+
+                <div class="notifications-header">
+
+                    <div>
+
+                        <span class="notifications-eyebrow">
+                            SYSTEM
+                        </span>
+
+                        <h1>
+                            Notifications
+                        </h1>
+
+                        <p>
+                            Stay updated with important
+                            placement and campus activities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="notification-summary-card">
+
+                        <span>
+                            UNREAD
+                        </span>
+
+                        <strong id="unreadNotificationCount">
+                            {{ unread_notifications|default(0) }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TOOLBAR
+                ================================================== -->
+
+                <div class="notifications-toolbar">
+
+
+                    <div class="notifications-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            type="search"
+                            id="notificationSearch"
+                            placeholder="Search notifications..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="notificationFilter"
+                    >
+
+                        <option value="all">
+                            All Notifications
+                        </option>
+
+                        <option value="unread">
+                            Unread
+                        </option>
+
+                        <option value="read">
+                            Read
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        id="markAllNotificationsRead"
+                    >
+                        Mark All Read
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="resetNotificationFilters"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LIST HEADER
+                ================================================== -->
+
+                <div class="notifications-list-header">
+
+                    <div>
+
+                        <strong>
+                            Notifications
+                        </strong>
+
+                        <span>
+                            Showing
+                            <b id="visibleNotificationCount">
+                                {{ notifications|default([])|length }}
+                            </b>
+                        </span>
+
+                    </div>
+
+
+                    <div class="notification-view-only">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        View Only
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     NOTIFICATION LIST
+                ================================================== -->
+
+                <div
+                    class="notifications-list"
+                    id="notificationsList"
+                >
+
+
+                    {% if notifications %}
+
+
+                        {% for notification in notifications %}
+
+                        {% set notification_status =
+                            (
+                                notification.status or
+                                'UNREAD'
+                            )|lower
+                        %}
+
+
+                        <article
+                            class="
+                                notification-card
+                                {{ notification_status }}
+                            "
+
+                            data-title="
+                                {{ (
+                                    notification.title or ''
+                                )|lower }}
+                            "
+
+                            data-content="
+                                {{ (
+                                    notification.message or
+                                    notification.content or
+                                    ''
+                                )|lower }}
+                            "
+
+                            data-status="
+                                {{ notification_status }}
+                            "
+                        >
+
+
+                            <div class="notification-icon">
+
+                                {% if notification.type == 'PLACEMENT' %}
+                                    ◉
+                                {% elif notification.type == 'APPLICATION' %}
+                                    ▤
+                                {% elif notification.type == 'SYSTEM' %}
+                                    ⚙
+                                {% elif notification.type == 'URGENT' %}
+                                    !
+                                {% else %}
+                                    ◈
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="notification-content">
+
+
+                                <div class="notification-top">
+
+                                    <h2>
+
+                                        {{
+                                            notification.title
+                                            or
+                                            'Notification'
+                                        }}
+
+                                    </h2>
+
+
+                                    <span class="notification-date">
+
+                                        {{
+                                            notification.created_at
+                                            or
+                                            '—'
+                                        }}
+
+                                    </span>
+
+                                </div>
+
+
+                                <p>
+
+                                    {{
+                                        notification.message
+                                        or
+                                        notification.content
+                                        or
+                                        'No additional information available.'
+                                    }}
+
+                                </p>
+
+
+                                <div class="notification-meta">
+
+
+                                    <span
+                                        class="notification-type"
+                                    >
+                                        {{
+                                            notification.type
+                                            or
+                                            'GENERAL'
+                                        }}
+                                    </span>
+
+
+                                    {% if notification_status == 'unread' %}
+
+                                        <span
+                                            class="notification-unread"
+                                        >
+                                            Unread
+                                        </span>
+
+                                    {% else %}
+
+                                        <span
+                                            class="notification-read"
+                                        >
+                                            Read
+                                        </span>
+
+                                    {% endif %}
+
+
+                                </div>
+
+                            </div>
+
+
+                        </article>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <div class="notifications-empty">
+
+                            <div class="notification-empty-icon">
+                                ◈
+                            </div>
+
+                            <h3>
+                                No Notifications
+                            </h3>
+
+                            <p>
+                                You don't have any notifications
+                                at the moment.
+                            </p>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SEARCH EMPTY
+                ================================================== -->
+
+                <div
+                    id="noNotificationResults"
+                    class="notifications-empty"
+                    hidden
+                >
+
+                    <div class="notification-empty-icon">
+                        ⌕
+                    </div>
+
+                    <h3>
+                        No Matching Notifications
+                    </h3>
+
+                    <p>
+                        Try changing your search or filter.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="notification-access-notice">
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mentor notifications
+                        </strong>
+
+                        <span>
+                            Notifications are generated by the
+                            Campus Placement Portal. Mentor
+                            records and system notifications
+                            cannot be edited.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/notifications.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

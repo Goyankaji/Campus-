@@ -1,0 +1,592 @@
+/* =========================================================
+   CAMPUS — MENTOR NOTIFICATIONS
+   VIEW-ONLY
+========================================================= */
+
+
+/* =========================================================
+   1. PAGE
+========================================================= */
+
+.notifications-page {
+    width: 100%;
+    min-height: calc(100vh - 76px);
+}
+
+.notifications-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 28px;
+}
+
+
+/* =========================================================
+   2. HEADER
+========================================================= */
+
+.notifications-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.notifications-eyebrow {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--mentor-primary);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .8px;
+}
+
+.notifications-header h1 {
+    margin: 0;
+    color: var(--mentor-text);
+    font-size: 27px;
+    line-height: 1.2;
+    font-weight: 850;
+}
+
+.notifications-header p {
+    margin: 7px 0 0;
+    color: var(--mentor-text-soft);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   3. UNREAD SUMMARY
+========================================================= */
+
+.notification-summary-card {
+    min-width: 125px;
+    padding: 13px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border: 1px solid var(--mentor-border);
+    border-radius: 13px;
+    background: var(--mentor-surface);
+    box-shadow: var(--mentor-shadow);
+}
+
+.notification-summary-card span {
+    color: var(--mentor-text-muted);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .7px;
+}
+
+.notification-summary-card strong {
+    color: var(--mentor-primary);
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 850;
+}
+
+
+/* =========================================================
+   4. TOOLBAR
+========================================================= */
+
+.notifications-toolbar {
+    padding: 15px 18px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid var(--mentor-border);
+    border-radius: 14px 14px 0 0;
+    background: var(--mentor-surface);
+    box-shadow: var(--mentor-shadow);
+}
+
+.notifications-search {
+    width: 360px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 11px;
+    border: 1px solid var(--mentor-border);
+    border-radius: 9px;
+    background: var(--mentor-surface-soft);
+}
+
+.notifications-search:focus-within {
+    border-color: var(--mentor-primary);
+}
+
+.notifications-search span {
+    color: var(--mentor-text-muted);
+    font-size: 16px;
+}
+
+.notifications-search input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--mentor-text);
+    font-size: 10px;
+}
+
+.notifications-search input::placeholder {
+    color: var(--mentor-text-muted);
+}
+
+#notificationFilter {
+    height: 39px;
+    min-width: 145px;
+    padding: 0 10px;
+    border: 1px solid var(--mentor-border);
+    border-radius: 8px;
+    outline: 0;
+    background: var(--mentor-surface);
+    color: var(--mentor-text-soft);
+    font-size: 9px;
+}
+
+#notificationFilter:focus {
+    border-color: var(--mentor-primary);
+}
+
+#markAllNotificationsRead,
+#resetNotificationFilters {
+    height: 39px;
+    padding: 0 13px;
+    border-radius: 8px;
+    outline: 0;
+    font-size: 9px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+#markAllNotificationsRead {
+    border: 1px solid var(--mentor-primary);
+    background: var(--mentor-primary);
+    color: #ffffff;
+}
+
+#markAllNotificationsRead:hover {
+    opacity: .9;
+}
+
+#resetNotificationFilters {
+    border: 1px solid var(--mentor-border);
+    background: var(--mentor-surface);
+    color: var(--mentor-text-soft);
+}
+
+#resetNotificationFilters:hover {
+    border-color: var(--mentor-primary);
+    color: var(--mentor-primary);
+    background: var(--mentor-primary-soft);
+}
+
+
+/* =========================================================
+   5. LIST HEADER
+========================================================= */
+
+.notifications-list-header {
+    min-height: 57px;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border-left: 1px solid var(--mentor-border);
+    border-right: 1px solid var(--mentor-border);
+    border-bottom: 1px solid var(--mentor-border);
+    background: var(--mentor-surface);
+}
+
+.notifications-list-header > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notifications-list-header strong {
+    color: var(--mentor-text);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.notifications-list-header > div:first-child span {
+    color: var(--mentor-text-muted);
+    font-size: 9px;
+}
+
+.notifications-list-header b {
+    color: var(--mentor-text-soft);
+}
+
+.notification-view-only {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 9px;
+    border-radius: 7px;
+    background: #ecfdf3;
+    color: #15803d;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+body.dark-mode .notification-view-only {
+    background: rgba(22, 163, 74, .14);
+    color: #86efac;
+}
+
+
+/* =========================================================
+   6. LIST
+========================================================= */
+
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--mentor-border);
+    border-right: 1px solid var(--mentor-border);
+    background: var(--mentor-surface);
+}
+
+
+/* =========================================================
+   7. NOTIFICATION CARD
+========================================================= */
+
+.notification-card {
+    position: relative;
+    padding: 17px 18px;
+    display: flex;
+    gap: 13px;
+    border-bottom: 1px solid var(--mentor-border);
+    transition: background .15s ease;
+}
+
+.notification-card:last-child {
+    border-bottom: 0;
+}
+
+.notification-card:hover {
+    background: var(--mentor-surface-soft);
+}
+
+.notification-card.unread {
+    background: rgba(124, 58, 237, .025);
+}
+
+.notification-card.unread::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    background: var(--mentor-primary);
+}
+
+
+/* =========================================================
+   8. ICON
+========================================================= */
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--mentor-primary-soft);
+    color: var(--mentor-primary);
+    font-size: 15px;
+    font-weight: 850;
+}
+
+
+/* =========================================================
+   9. CONTENT
+========================================================= */
+
+.notification-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.notification-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.notification-top h2 {
+    margin: 0;
+    color: var(--mentor-text);
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 800;
+}
+
+.notification-date {
+    flex-shrink: 0;
+    color: var(--mentor-text-muted);
+    font-size: 8px;
+}
+
+.notification-content p {
+    max-width: 950px;
+    margin: 6px 0 0;
+    color: var(--mentor-text-soft);
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   10. META
+========================================================= */
+
+.notification-meta {
+    margin-top: 9px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.notification-type,
+.notification-unread,
+.notification-read {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 7px;
+    border-radius: 999px;
+    font-size: 7px;
+    font-weight: 800;
+}
+
+.notification-type {
+    background: var(--mentor-surface-soft);
+    color: var(--mentor-text-muted);
+}
+
+.notification-unread {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.notification-read {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+body.dark-mode .notification-unread {
+    background: rgba(37, 99, 235, .14);
+    color: #93c5fd;
+}
+
+body.dark-mode .notification-read {
+    background: rgba(100, 116, 139, .14);
+    color: #cbd5e1;
+}
+
+
+/* =========================================================
+   11. EMPTY STATE
+========================================================= */
+
+.notifications-empty {
+    padding: 55px 20px;
+    text-align: center;
+    border-left: 1px solid var(--mentor-border);
+    border-right: 1px solid var(--mentor-border);
+    background: var(--mentor-surface);
+}
+
+.notification-empty-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--mentor-primary-soft);
+    color: var(--mentor-primary);
+    font-size: 19px;
+}
+
+.notifications-empty h3 {
+    margin: 0;
+    color: var(--mentor-text);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.notifications-empty p {
+    margin: 6px 0 0;
+    color: var(--mentor-text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   12. ACCESS NOTICE
+========================================================= */
+
+.notification-access-notice {
+    margin-top: 14px;
+    padding: 13px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--mentor-border);
+    border-radius: 11px;
+    background: var(--mentor-surface);
+}
+
+.notification-access-notice .access-icon {
+    width: 29px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #ecfdf3;
+    color: #15803d;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+body.dark-mode .notification-access-notice .access-icon {
+    background: rgba(22, 163, 74, .14);
+    color: #86efac;
+}
+
+.notification-access-notice > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.notification-access-notice strong {
+    color: var(--mentor-text);
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.notification-access-notice span {
+    color: var(--mentor-text-muted);
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   13. TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .notifications-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .notifications-search {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   14. MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .notifications-container {
+        padding: 18px 14px;
+    }
+
+    .notifications-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .notifications-header h1 {
+        font-size: 23px;
+    }
+
+    .notification-summary-card {
+        width: 100%;
+    }
+
+    .notifications-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #notificationFilter,
+    #markAllNotificationsRead,
+    #resetNotificationFilters {
+        width: 100%;
+    }
+
+    .notifications-list-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .notification-card {
+        padding: 15px;
+    }
+
+    .notification-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .notification-date {
+        order: 2;
+    }
+
+    .notification-access-notice {
+        align-items: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   15. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .notification-card {
+        gap: 10px;
+    }
+
+    .notification-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+    }
+
+    .notification-top h2 {
+        font-size: 11px;
+    }
+
+}

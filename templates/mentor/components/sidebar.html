@@ -1,0 +1,324 @@
+<!-- =========================================================
+     CAMPUS — MENTOR SIDEBAR
+     Reusable component for all Mentor pages
+========================================================= -->
+
+<aside
+    class="mentor-sidebar"
+    id="mentorSidebar"
+>
+
+
+    <!-- =====================================================
+         LOGO
+    ====================================================== -->
+
+    <div class="mentor-logo">
+
+        <img
+            src="{{ url_for(
+                'static',
+                filename='images/college-logo.JPEG'
+            ) }}"
+            alt="College Logo"
+        >
+
+        <div class="mentor-logo-text">
+
+            <h2>
+                MENTOR PORTAL
+            </h2>
+
+            <span>
+                DEPARTMENT DASHBOARD
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <nav class="mentor-navigation">
+
+
+        <!-- =================================================
+             OVERVIEW
+        ================================================== -->
+
+        <div class="nav-title">
+            OVERVIEW
+        </div>
+
+
+        <a
+            href="{{ url_for('mentor_dashboard') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_dashboard' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ⌂
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+
+
+        <!-- =================================================
+             STUDENTS
+        ================================================== -->
+
+        <div class="nav-title">
+            STUDENTS
+        </div>
+
+
+        <a
+            href="{{ url_for('mentor_students') }}"
+            class="mentor-nav
+            {% if request.endpoint in [
+                'mentor_students',
+                'mentor_student_detail'
+            ] %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ♙
+            </span>
+
+            <span>
+                My Students
+            </span>
+
+        </a>
+
+
+
+        <!-- =================================================
+             PLACEMENT
+        ================================================== -->
+
+        <div class="nav-title">
+            PLACEMENT
+        </div>
+
+
+        <!-- PLACEMENT DRIVES -->
+
+        <a
+            href="{{ url_for('mentor_placement_drives') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_placement_drives' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ▣
+            </span>
+
+            <span>
+                Placement Drives
+            </span>
+
+        </a>
+
+
+        <!-- APPLICATIONS -->
+
+        <a
+            href="{{ url_for('mentor_applications') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_applications' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ▤
+            </span>
+
+            <span>
+                Applications
+            </span>
+
+        </a>
+
+
+        <!-- SHORTLISTED STUDENTS -->
+
+        <a
+            href="{{ url_for('mentor_shortlisted_students') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_shortlisted_students' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ★
+            </span>
+
+            <span>
+                Shortlisted Students
+            </span>
+
+        </a>
+
+
+        <!-- PLACED STUDENTS -->
+
+        <a
+            href="{{ url_for('mentor_placed_students') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_placed_students' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ✓
+            </span>
+
+            <span>
+                Placed Students
+            </span>
+
+        </a>
+
+
+
+        <!-- =================================================
+             SYSTEM
+        ================================================== -->
+
+        <div class="nav-title">
+            SYSTEM
+        </div>
+
+
+        <!-- ANNOUNCEMENTS -->
+
+        <a
+            href="{{ url_for('mentor_announcements') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_announcements' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ◈
+            </span>
+
+            <span>
+                Announcements
+            </span>
+
+        </a>
+
+
+        <!-- NOTIFICATIONS -->
+
+        <a
+            href="{{ url_for('mentor_notifications') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_notifications' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ♢
+            </span>
+
+            <span>
+                Notifications
+            </span>
+
+            <span class="badge red">
+                5
+            </span>
+
+        </a>
+
+
+        <!-- FEEDBACK -->
+
+        <a
+            href="{{ url_for('mentor_feedback') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_feedback' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ◌
+            </span>
+
+            <span>
+                Feedback
+            </span>
+
+        </a>
+
+
+        <!-- SETTINGS -->
+
+        <a
+            href="{{ url_for('mentor_settings') }}"
+            class="mentor-nav
+            {% if request.endpoint == 'mentor_settings' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-symbol">
+                ⚙
+            </span>
+
+            <span>
+                Settings
+            </span>
+
+        </a>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         LOGOUT
+    ====================================================== -->
+
+    <a
+        href="{{ url_for('index') }}"
+        class="mentor-logout"
+    >
+
+        <span>
+            ⇥
+        </span>
+
+        <span>
+            Logout
+        </span>
+
+    </a>
+
+
+</aside>

@@ -26,7 +26,7 @@ import os
 # Role IDs:
 # 1 = ADMIN
 # 2 = STUDENT
-# 3 = MENTOR / TUTOR
+# 3 = MENTOR
 # 4 = HOD
 # 5 = TPO
 # 6 = AUTHORITY
@@ -61,7 +61,7 @@ app.secret_key = os.getenv(
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "arpit@2467",
+    "password": "Tonu567890@",
     "database": "campus_placement_manager",
     "port": 3306
 }
@@ -726,7 +726,7 @@ def login():
 
         if role_id == "3":
             return redirect(
-                url_for("tutor_dashboard")
+                url_for("mentor_dashboard")
             )
 
         if role_id == "4":
@@ -5495,7 +5495,99 @@ def hod_context_api():
 
 
 # =========================================================
-# MENTOR / TUTOR
+# =========================================================
+# MENTOR
+# =========================================================
+# =========================================================
+
+
+# =========================================================
+# MENTOR BRANCH SCOPE
+# =========================================================
+
+def get_mentor_scope():
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+        cursor.execute(
+            """
+            SELECT
+
+                f.faculty_id,
+                f.user_id,
+                f.employee_id,
+                f.campus_id,
+                f.branch_id,
+
+                f.faculty_type,
+                f.designation,
+                f.status,
+
+                b.branch_code,
+                b.branch_name,
+
+                co.course_id,
+                co.course_code,
+                co.course_name
+
+            FROM faculty f
+
+            INNER JOIN branches b
+                ON f.branch_id = b.branch_id
+
+            INNER JOIN courses co
+                ON b.course_id = co.course_id
+
+            WHERE
+
+                f.user_id = %s
+
+                AND f.faculty_type = 'MENTOR'
+
+                AND f.status = 'ACTIVE'
+
+                AND b.status = 'ACTIVE'
+
+            LIMIT 1
+            """,
+            (
+                session.get("user_id"),
+            )
+        )
+
+        mentor = cursor.fetchone()
+
+        return mentor
+
+    except Exception as error:
+
+        print(
+            "MENTOR SCOPE ERROR:",
+            error
+        )
+
+        return None
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection and connection.is_connected():
+            connection.close()
+
+
+# =========================================================
+# MENTOR DASHBOARD
 # =========================================================
 
 @app.route("/mentor/dashboard")
@@ -5503,18 +5595,1243 @@ def hod_context_api():
 @role_required("3")
 def mentor_dashboard():
 
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("index")
+        )
+
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+
+        # =================================================
+        # TOTAL STUDENTS
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+                COUNT(*) AS total_students
+            FROM students
+            WHERE
+                campus_id = %s
+                AND branch_id = %s
+            """,
+            (
+                mentor["campus_id"],
+                mentor["branch_id"]
+            )
+        )
+
+        result = cursor.fetchone()
+
+        total_students = (
+            result["total_students"]
+            if result
+            else 0
+        )
+
+
+        # =================================================
+        # ACTIVE STUDENTS
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+                COUNT(*) AS active_students
+            FROM students
+            WHERE
+                campus_id = %s
+                AND branch_id = %s
+                AND UPPER(
+                    COALESCE(status, '')
+                ) = 'ACTIVE'
+            """,
+            (
+                mentor["campus_id"],
+                mentor["branch_id"]
+            )
+        )
+
+        result = cursor.fetchone()
+
+        active_students = (
+            result["active_students"]
+            if result
+            else 0
+        )
+
+
+        # =================================================
+        # PLACEMENT READY STUDENTS
+        # =================================================
+        # Current project rule:
+        # CGPA >= 6 and no backlogs
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+                COUNT(*) AS placement_ready
+            FROM students
+            WHERE
+                campus_id = %s
+                AND branch_id = %s
+
+                AND UPPER(
+                    COALESCE(status, '')
+                ) = 'ACTIVE'
+
+                AND cgpa IS NOT NULL
+                AND cgpa >= 6
+
+                AND COALESCE(backlogs, 0) = 0
+            """,
+            (
+                mentor["campus_id"],
+                mentor["branch_id"]
+            )
+        )
+
+        result = cursor.fetchone()
+
+        placement_ready = (
+            result["placement_ready"]
+            if result
+            else 0
+        )
+
+
+        # =================================================
+        # STUDENTS WITH BACKLOGS
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+                COUNT(*) AS backlog_students
+            FROM students
+            WHERE
+                campus_id = %s
+                AND branch_id = %s
+                AND COALESCE(backlogs, 0) > 0
+            """,
+            (
+                mentor["campus_id"],
+                mentor["branch_id"]
+            )
+        )
+
+        result = cursor.fetchone()
+
+        backlog_students = (
+            result["backlog_students"]
+            if result
+            else 0
+        )
+
+
+        # =================================================
+        # PLACED STUDENTS
+        # =================================================
+
+        placed_students = 0
+
+        try:
+
+            cursor.execute(
+                """
+                SELECT
+                    COUNT(
+                        DISTINCT pa.student_id
+                    ) AS placed_students
+
+                FROM placement_applications pa
+
+                INNER JOIN placements pl
+                    ON pa.application_id =
+                       pl.application_id
+
+                INNER JOIN students s
+                    ON pa.student_id =
+                       s.student_id
+
+                WHERE
+
+                    s.campus_id = %s
+
+                    AND s.branch_id = %s
+
+                    AND UPPER(
+                        COALESCE(
+                            pl.placement_status,
+                            ''
+                        )
+                    ) IN (
+                        'SELECTED',
+                        'PLACED',
+                        'JOINED',
+                        'CONFIRMED'
+                    )
+                """,
+                (
+                    mentor["campus_id"],
+                    mentor["branch_id"]
+                )
+            )
+
+            result = cursor.fetchone()
+
+            placed_students = (
+                result["placed_students"]
+                if result
+                else 0
+            )
+
+        except Exception as placement_error:
+
+            print(
+                "MENTOR PLACED STUDENTS ERROR:",
+                placement_error
+            )
+
+            placed_students = 0
+
+
+        # =================================================
+        # PLACEMENT PERCENTAGE
+        # =================================================
+
+        if total_students > 0:
+
+            placement_percentage = round(
+                (
+                    placed_students
+                    / total_students
+                ) * 100,
+                2
+            )
+
+        else:
+
+            placement_percentage = 0
+
+
+        # =================================================
+        # RECENT STUDENTS
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+
+                s.student_id,
+                s.registration_no,
+                s.enrollment_no,
+
+                s.first_name,
+                s.middle_name,
+                s.last_name,
+
+                s.email,
+
+                s.cgpa,
+                s.backlogs,
+
+                s.status,
+
+                co.course_name,
+
+                b.branch_code,
+                b.branch_name,
+
+                sec.section_name,
+
+                a.session_name
+
+            FROM students s
+
+            LEFT JOIN courses co
+                ON s.course_id =
+                   co.course_id
+
+            LEFT JOIN branches b
+                ON s.branch_id =
+                   b.branch_id
+
+            LEFT JOIN sections sec
+                ON s.section_id =
+                   sec.section_id
+
+            LEFT JOIN academic_sessions a
+                ON s.session_id =
+                   a.session_id
+
+            WHERE
+
+                s.campus_id = %s
+
+                AND s.branch_id = %s
+
+            ORDER BY
+                s.created_at DESC
+
+            LIMIT 5
+            """,
+            (
+                mentor["campus_id"],
+                mentor["branch_id"]
+            )
+        )
+
+        recent_students = cursor.fetchall()
+
+
+        # =================================================
+        # DEBUG
+        # =================================================
+
+        print(
+            "===================================="
+        )
+
+        print(
+            "MENTOR DASHBOARD"
+        )
+
+        print(
+            "MENTOR:",
+            mentor["user_id"]
+        )
+
+        print(
+            "CAMPUS:",
+            mentor["campus_id"]
+        )
+
+        print(
+            "BRANCH:",
+            mentor["branch_code"]
+        )
+
+        print(
+            "TOTAL STUDENTS:",
+            total_students
+        )
+
+        print(
+            "ACTIVE STUDENTS:",
+            active_students
+        )
+
+        print(
+            "PLACEMENT READY:",
+            placement_ready
+        )
+
+        print(
+            "BACKLOG STUDENTS:",
+            backlog_students
+        )
+
+        print(
+            "PLACED STUDENTS:",
+            placed_students
+        )
+
+        print(
+            "PLACEMENT PERCENTAGE:",
+            placement_percentage
+        )
+
+        print(
+            "===================================="
+        )
+
+
+        # =================================================
+        # RENDER DASHBOARD
+        # =================================================
+
+        return render_template(
+
+            "mentor/dashboard.html",
+
+            mentor=mentor,
+
+            total_students=total_students,
+
+            active_students=active_students,
+
+            placement_ready=placement_ready,
+
+            backlog_students=backlog_students,
+
+            placed_students=placed_students,
+
+            placement_percentage=
+                placement_percentage,
+
+            recent_students=
+                recent_students
+
+        )
+
+
+    except Exception as error:
+
+        print(
+            "===================================="
+        )
+
+        print(
+            "MENTOR DASHBOARD ERROR:",
+            error
+        )
+
+        print(
+            "===================================="
+        )
+
+        flash(
+            "Unable to load mentor dashboard.",
+            "error"
+        )
+
+        return render_template(
+
+            "mentor/dashboard.html",
+
+            mentor=mentor,
+
+            total_students=0,
+
+            active_students=0,
+
+            placement_ready=0,
+
+            backlog_students=0,
+
+            placed_students=0,
+
+            placement_percentage=0,
+
+            recent_students=[],
+
+            db_error=str(error)
+
+        )
+
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection and connection.is_connected():
+            connection.close()
+
+
+# =========================================================
+# MENTOR MY STUDENTS
+# =========================================================
+
+@app.route("/mentor/students")
+@login_required
+@role_required("3")
+def mentor_students():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+
+        # =================================================
+        # STUDENTS OF MENTOR'S BRANCH ONLY
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+
+                s.student_id,
+                s.user_id,
+
+                s.registration_no,
+                s.enrollment_no,
+
+                s.first_name,
+                s.middle_name,
+                s.last_name,
+
+                s.email,
+                s.phone,
+
+                s.cgpa,
+                s.backlogs,
+
+                s.status,
+
+                s.course_id,
+                s.branch_id,
+                s.section_id,
+                s.session_id,
+
+                b.branch_code,
+                b.branch_name,
+
+                co.course_code,
+                co.course_name,
+
+                sec.section_name,
+
+                a.session_name
+
+            FROM students s
+
+            LEFT JOIN branches b
+                ON s.branch_id =
+                   b.branch_id
+
+            LEFT JOIN courses co
+                ON s.course_id =
+                   co.course_id
+
+            LEFT JOIN sections sec
+                ON s.section_id =
+                   sec.section_id
+
+            LEFT JOIN academic_sessions a
+                ON s.session_id =
+                   a.session_id
+
+            WHERE
+
+                s.campus_id = %s
+
+                AND s.branch_id = %s
+
+            ORDER BY
+
+                s.first_name ASC,
+
+                s.last_name ASC
+
+            """,
+
+            (
+                mentor["campus_id"],
+                mentor["branch_id"]
+            )
+        )
+
+
+        students = cursor.fetchall()
+
+
+        # =================================================
+        # STATISTICS
+        # =================================================
+
+        total_students = len(
+            students
+        )
+
+        active_students = sum(
+
+            1
+
+            for student in students
+
+            if str(
+                student.get(
+                    "status",
+                    ""
+                )
+            ).upper() == "ACTIVE"
+
+        )
+
+        placement_ready = sum(
+
+            1
+
+            for student in students
+
+            if (
+                str(
+                    student.get(
+                        "status",
+                        ""
+                    )
+                ).upper() == "ACTIVE"
+
+                and
+
+                student.get("cgpa") is not None
+
+                and
+
+                float(
+                    student.get(
+                        "cgpa"
+                    )
+                ) >= 6
+
+                and
+
+                int(
+                    student.get(
+                        "backlogs"
+                    ) or 0
+                ) == 0
+            )
+
+        )
+
+        backlog_students = sum(
+
+            1
+
+            for student in students
+
+            if int(
+                student.get(
+                    "backlogs"
+                ) or 0
+            ) > 0
+
+        )
+
+
+        # =================================================
+        # RENDER
+        # =================================================
+
+        return render_template(
+
+            "mentor/students.html",
+
+            mentor=mentor,
+
+            students=students,
+
+            total_students=
+                total_students,
+
+            active_students=
+                active_students,
+
+            placement_ready=
+                placement_ready,
+
+            backlog_students=
+                backlog_students
+
+        )
+
+
+    except Exception as error:
+
+        print(
+            "MENTOR STUDENTS ERROR:",
+            error
+        )
+
+        flash(
+            "Unable to load students.",
+            "error"
+        )
+
+        return render_template(
+
+            "mentor/students.html",
+
+            mentor=mentor,
+
+            students=[],
+
+            total_students=0,
+
+            active_students=0,
+
+            placement_ready=0,
+
+            backlog_students=0,
+
+            db_error=str(error)
+
+        )
+
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection and connection.is_connected():
+            connection.close()
+
+
+# =========================================================
+# MENTOR STUDENT DETAIL — VIEW ONLY
+# =========================================================
+
+@app.route(
+    "/mentor/students/<student_id>"
+)
+@login_required
+@role_required("3")
+def mentor_student_detail(
+    student_id
+):
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+
+    connection = None
+    cursor = None
+
+    try:
+
+        connection = get_db_connection()
+
+        cursor = connection.cursor(
+            dictionary=True
+        )
+
+
+        # =================================================
+        # IMPORTANT
+        # =================================================
+        # Student can ONLY be opened when the student
+        # belongs to the mentor's campus + branch.
+        # =================================================
+
+        cursor.execute(
+            """
+            SELECT
+
+                s.student_id,
+                s.user_id,
+
+                s.campus_id,
+
+                s.registration_no,
+                s.enrollment_no,
+
+                s.first_name,
+                s.middle_name,
+                s.last_name,
+
+                s.date_of_birth,
+                s.gender,
+
+                s.phone,
+                s.email,
+
+                s.address,
+                s.city,
+                s.state,
+
+                s.session_id,
+                s.course_id,
+                s.branch_id,
+                s.section_id,
+
+                s.tenth_percentage,
+                s.twelfth_percentage,
+
+                s.cgpa,
+                s.backlogs,
+
+                s.resume_file,
+                s.certificate_files,
+
+                s.internship_details,
+                s.internship_files,
+
+                s.status,
+
+                c.campus_code,
+                c.campus_name,
+
+                co.course_code,
+                co.course_name,
+
+                b.branch_code,
+                b.branch_name,
+
+                sec.section_name,
+
+                a.session_name
+
+            FROM students s
+
+            LEFT JOIN campuses c
+                ON s.campus_id =
+                   c.campus_id
+
+            LEFT JOIN courses co
+                ON s.course_id =
+                   co.course_id
+
+            LEFT JOIN branches b
+                ON s.branch_id =
+                   b.branch_id
+
+            LEFT JOIN sections sec
+                ON s.section_id =
+                   sec.section_id
+
+            LEFT JOIN academic_sessions a
+                ON s.session_id =
+                   a.session_id
+
+            WHERE
+
+                s.student_id = %s
+
+                AND s.campus_id = %s
+
+                AND s.branch_id = %s
+
+            LIMIT 1
+            """,
+
+            (
+                student_id,
+                mentor["campus_id"],
+                mentor["branch_id"]
+            )
+        )
+
+
+        student = cursor.fetchone()
+
+
+        # =================================================
+        # SECURITY
+        # =================================================
+
+        if not student:
+
+            flash(
+                "Student not found or you are not authorized to view this student.",
+                "error"
+            )
+
+            return redirect(
+                url_for("mentor_students")
+            )
+
+
+        # =================================================
+        # PLACEMENT DETAILS
+        # =================================================
+
+        placements = []
+
+
+        try:
+
+            cursor.execute(
+                """
+                SELECT
+
+                    pa.application_id,
+                    pa.application_status,
+                    pa.applied_at,
+
+                    pd.drive_id,
+                    pd.drive_name,
+                    pd.job_role,
+                    pd.package_lpa,
+
+                    co.company_id,
+                    co.company_name,
+
+                    pp.stage,
+                    pp.status AS progress_status,
+
+                    pp.score,
+                    pp.scheduled_at,
+
+                    pp.offer_package_lpa,
+                    pp.joining_date,
+
+                    pl.placement_status,
+                    pl.package_lpa
+                        AS placed_package,
+
+                    pl.joining_date
+                        AS placed_joining_date
+
+                FROM placement_applications pa
+
+                INNER JOIN placement_drives pd
+                    ON pa.drive_id =
+                       pd.drive_id
+
+                INNER JOIN companies co
+                    ON pd.company_id =
+                       co.company_id
+
+                LEFT JOIN placement_progress pp
+                    ON pa.application_id =
+                       pp.application_id
+
+                LEFT JOIN placements pl
+                    ON pa.application_id =
+                       pl.application_id
+
+                WHERE
+
+                    pa.student_id = %s
+
+                ORDER BY
+                    pa.applied_at DESC
+                """,
+
+                (
+                    student["student_id"],
+                )
+            )
+
+            placements = cursor.fetchall()
+
+        except Exception as placement_error:
+
+            print(
+                "MENTOR PLACEMENT DETAILS ERROR:",
+                placement_error
+            )
+
+            placements = []
+
+
+        # =================================================
+        # RENDER VIEW-ONLY DETAIL
+        # =================================================
+
+        return render_template(
+
+            "mentor/student_detail.html",
+
+            mentor=mentor,
+
+            student=student,
+
+            placements=placements
+
+        )
+
+
+    except Exception as error:
+
+        print(
+            "===================================="
+        )
+
+        print(
+            "MENTOR STUDENT DETAIL ERROR:",
+            error
+        )
+
+        print(
+            "===================================="
+        )
+
+        flash(
+            "Unable to load student details.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_students")
+        )
+
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if connection and connection.is_connected():
+            connection.close()
+
+
+# =========================================================
+# MENTOR PLACEMENT DRIVES
+# =========================================================
+
+@app.route("/mentor/placement-drives")
+@login_required
+@role_required("3")
+def mentor_placement_drives():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
     return render_template(
-        "tutor/dashboard.html"
+        "mentor/placement_drives.html",
+        mentor=mentor
     )
 
 
-@app.route("/tutor/dashboard")
+# =========================================================
+# MENTOR APPLICATIONS
+# =========================================================
+
+@app.route("/mentor/applications")
 @login_required
 @role_required("3")
-def tutor_dashboard():
+def mentor_applications():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
 
     return render_template(
-        "tutor/dashboard.html"
+        "mentor/applications.html",
+        mentor=mentor
+    )
+
+
+# =========================================================
+# MENTOR SHORTLISTED STUDENTS
+# =========================================================
+
+@app.route("/mentor/shortlisted-students")
+@login_required
+@role_required("3")
+def mentor_shortlisted_students():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+    return render_template(
+        "mentor/shortlisted_students.html",
+        mentor=mentor
+    )
+
+
+# =========================================================
+# MENTOR PLACED STUDENTS
+# =========================================================
+
+@app.route("/mentor/placed-students")
+@login_required
+@role_required("3")
+def mentor_placed_students():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+    return render_template(
+        "mentor/placed_students.html",
+        mentor=mentor
+    )
+
+
+# =========================================================
+# MENTOR ANNOUNCEMENTS
+# =========================================================
+
+@app.route("/mentor/announcements")
+@login_required
+@role_required("3")
+def mentor_announcements():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+    return render_template(
+        "mentor/announcements.html",
+        mentor=mentor
+    )
+
+
+# =========================================================
+# MENTOR NOTIFICATIONS
+# =========================================================
+
+@app.route("/mentor/notifications")
+@login_required
+@role_required("3")
+def mentor_notifications():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+    return render_template(
+        "mentor/notifications.html",
+        mentor=mentor
+    )
+
+
+# =========================================================
+# MENTOR FEEDBACK
+# =========================================================
+
+@app.route("/mentor/feedback")
+@login_required
+@role_required("3")
+def mentor_feedback():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+    return render_template(
+        "mentor/feedback.html",
+        mentor=mentor
+    )
+
+
+# =========================================================
+# MENTOR SETTINGS
+# =========================================================
+
+@app.route("/mentor/settings")
+@login_required
+@role_required("3")
+def mentor_settings():
+
+    mentor = get_mentor_scope()
+
+    if not mentor:
+
+        flash(
+            "Mentor branch assignment not found.",
+            "error"
+        )
+
+        return redirect(
+            url_for("mentor_dashboard")
+        )
+
+    return render_template(
+        "mentor/settings.html",
+        mentor=mentor
     )
 
 

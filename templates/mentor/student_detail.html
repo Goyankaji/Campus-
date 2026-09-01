@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Student Details | Mentor Portal
+    </title>
+
+<script>
+(function () {
+
+    if (
+        localStorage.getItem("mentorTheme") === "dark"
+    ) {
+
+        document.documentElement.classList.add(
+            "dark-mode"
+        );
+
+    }
+
+})();
+</script>
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/mentor-common.css'
+        ) }}"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/mentor/student_detail.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'mentor/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN AREA
+    ====================================================== -->
+
+    <main class="main-area">
+
+
+        {% include 'mentor/components/topbar.html' %}
+
+
+        <section class="student-detail-page">
+
+
+            <div class="student-detail-container">
+
+
+                <!-- =================================================
+                     BACK + VIEW ONLY
+                ================================================== -->
+
+                <div class="detail-topbar">
+
+
+                    <a
+                        href="{{ url_for('mentor_students') }}"
+                        class="back-students-button"
+                    >
+                        <span>←</span>
+                        <span>Back to My Students</span>
+                    </a>
+
+
+                    <div class="detail-view-only">
+
+                        <span>✓</span>
+
+                        View Only
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     STUDENT PROFILE HEADER
+                ================================================== -->
+
+                <div class="student-profile-card">
+
+
+                    <div class="student-profile-main">
+
+
+                        <div class="student-detail-avatar">
+
+                            {{ (
+                                student.first_name or 'S'
+                            )[0]|upper }}
+
+                        </div>
+
+
+                        <div class="student-profile-info">
+
+
+                            <span class="detail-eyebrow">
+                                STUDENT PROFILE
+                            </span>
+
+
+                            <h1>
+
+                                {{ student.first_name }}
+
+                                {% if student.middle_name %}
+                                    {{ student.middle_name }}
+                                {% endif %}
+
+                                {% if student.last_name %}
+                                    {{ student.last_name }}
+                                {% endif %}
+
+                            </h1>
+
+
+                            <p>
+
+                                {{ student.registration_no }}
+
+                                {% if student.enrollment_no %}
+                                    · {{ student.enrollment_no }}
+                                {% endif %}
+
+                            </p>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="student-profile-status">
+
+
+                        <span class="status-label">
+                            ACCOUNT STATUS
+                        </span>
+
+
+                        {% set current_status =
+                            (
+                                student.status or
+                                'PENDING'
+                            )|lower
+                        %}
+
+
+                        <span
+                            class="detail-status
+                            {{ current_status }}"
+                        >
+
+                            {{
+                                (
+                                    student.status or
+                                    'PENDING'
+                                )
+                                |replace('_', ' ')
+                                |title
+                            }}
+
+                        </span>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACADEMIC SUMMARY
+                ================================================== -->
+
+                <div class="detail-section">
+
+
+                    <div class="detail-section-heading">
+
+                        <div>
+
+                            <span>
+                                ACADEMIC
+                            </span>
+
+                            <h2>
+                                Academic Summary
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="academic-summary-grid">
+
+
+                        <div class="academic-summary-card">
+
+                            <span>
+                                COURSE
+                            </span>
+
+                            <strong>
+                                {{ student.course_code or '—' }}
+                            </strong>
+
+                            <small>
+                                {{ student.course_name or '—' }}
+                            </small>
+
+                        </div>
+
+
+                        <div class="academic-summary-card">
+
+                            <span>
+                                BRANCH
+                            </span>
+
+                            <strong>
+                                {{ student.branch_code or '—' }}
+                            </strong>
+
+                            <small>
+                                {{ student.branch_name or '—' }}
+                            </small>
+
+                        </div>
+
+
+                        <div class="academic-summary-card">
+
+                            <span>
+                                CGPA
+                            </span>
+
+                            <strong>
+
+                                {% if student.cgpa is not none %}
+                                    {{ "%.2f"|format(student.cgpa) }}
+                                {% else %}
+                                    —
+                                {% endif %}
+
+                            </strong>
+
+                            <small>
+                                Current CGPA
+                            </small>
+
+                        </div>
+
+
+                        <div class="academic-summary-card">
+
+                            <span>
+                                BACKLOGS
+                            </span>
+
+                            <strong>
+
+                                {{ student.backlogs or 0 }}
+
+                            </strong>
+
+                            <small>
+
+                                {% if (student.backlogs or 0) > 0 %}
+                                    Requires attention
+                                {% else %}
+                                    No active backlogs
+                                {% endif %}
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INFORMATION GRID
+                ================================================== -->
+
+                <div class="detail-information-grid">
+
+
+                    <!-- =================================================
+                         PERSONAL INFORMATION
+                    ================================================== -->
+
+                    <div class="detail-card">
+
+
+                        <div class="detail-card-header">
+
+                            <div class="detail-card-icon blue">
+                                ♙
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    PERSONAL
+                                </span>
+
+                                <h2>
+                                    Personal Information
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-fields">
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Full Name
+                                </span>
+
+                                <strong>
+
+                                    {{ student.first_name }}
+
+                                    {% if student.middle_name %}
+                                        {{ student.middle_name }}
+                                    {% endif %}
+
+                                    {% if student.last_name %}
+                                        {{ student.last_name }}
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Date of Birth
+                                </span>
+
+                                <strong>
+                                    {{ student.date_of_birth or '—' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Gender
+                                </span>
+
+                                <strong>
+                                    {{ student.gender or '—' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Phone
+                                </span>
+
+                                <strong>
+                                    {{ student.phone or '—' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field full">
+
+                                <span>
+                                    Email
+                                </span>
+
+                                <strong>
+                                    {{ student.email or '—' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field full">
+
+                                <span>
+                                    Address
+                                </span>
+
+                                <strong>
+                                    {{ student.address or '—' }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         ACADEMIC INFORMATION
+                    ================================================== -->
+
+                    <div class="detail-card">
+
+
+                        <div class="detail-card-header">
+
+                            <div class="detail-card-icon purple">
+                                ◈
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    ACADEMIC
+                                </span>
+
+                                <h2>
+                                    Academic Information
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-fields">
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Registration No.
+                                </span>
+
+                                <strong>
+                                    {{ student.registration_no }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Enrollment No.
+                                </span>
+
+                                <strong>
+                                    {{ student.enrollment_no }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Course
+                                </span>
+
+                                <strong>
+                                    {{ student.course_name or '—' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Branch
+                                </span>
+
+                                <strong>
+                                    {{ student.branch_name or '—' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    10th Percentage
+                                </span>
+
+                                <strong>
+
+                                    {% if student.tenth_percentage is not none %}
+                                        {{ "%.2f"|format(
+                                            student.tenth_percentage
+                                        ) }}%
+                                    {% else %}
+                                        —
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    12th Percentage
+                                </span>
+
+                                <strong>
+
+                                    {% if student.twelfth_percentage is not none %}
+                                        {{ "%.2f"|format(
+                                            student.twelfth_percentage
+                                        ) }}%
+                                    {% else %}
+                                        —
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    CGPA
+                                </span>
+
+                                <strong>
+
+                                    {% if student.cgpa is not none %}
+                                        {{ "%.2f"|format(student.cgpa) }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="detail-field">
+
+                                <span>
+                                    Backlogs
+                                </span>
+
+                                <strong>
+                                    {{ student.backlogs or 0 }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         INTERNSHIP
+                    ================================================== -->
+
+                    <div class="detail-card">
+
+
+                        <div class="detail-card-header">
+
+                            <div class="detail-card-icon green">
+                                ◆
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    EXPERIENCE
+                                </span>
+
+                                <h2>
+                                    Internship Details
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-text-block">
+
+                            {% if student.internship_details %}
+
+                                <p>
+                                    {{ student.internship_details }}
+                                </p>
+
+                            {% else %}
+
+                                <div class="detail-no-data">
+
+                                    <span>
+                                        —
+                                    </span>
+
+                                    <p>
+                                        No internship information
+                                        available.
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         DOCUMENTS
+                    ================================================== -->
+
+                    <div class="detail-card">
+
+
+                        <div class="detail-card-header">
+
+                            <div class="detail-card-icon orange">
+                                ▣
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    DOCUMENTS
+                                </span>
+
+                                <h2>
+                                    Student Documents
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="document-list">
+
+
+                            <div class="document-item">
+
+                                <div>
+
+                                    <span class="document-icon">
+                                        PDF
+                                    </span>
+
+                                    <div>
+
+                                        <strong>
+                                            Resume
+                                        </strong>
+
+                                        <small>
+                                            Uploaded resume
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                {% if student.resume_file %}
+
+                                    <a
+                                        href="{{ student.resume_file }}"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="document-view"
+                                    >
+                                        View
+                                    </a>
+
+                                {% else %}
+
+                                    <span class="document-unavailable">
+                                        Not available
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="document-item">
+
+                                <div>
+
+                                    <span class="document-icon">
+                                        DOC
+                                    </span>
+
+                                    <div>
+
+                                        <strong>
+                                            Certificates
+                                        </strong>
+
+                                        <small>
+                                            Academic certificates
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                {% if student.certificate_files %}
+
+                                    <span class="document-available">
+                                        Available
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="document-unavailable">
+                                        Not available
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACCESS NOTICE
+                ================================================== -->
+
+                <div class="detail-access-notice">
+
+
+                    <div class="access-icon">
+                        ✓
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Mentor access is view-only
+                        </strong>
+
+                        <span>
+                            This student record is managed by
+                            authorized administrators. Mentors
+                            cannot edit, delete or modify
+                            student information.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/mentor-common.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/mentor/student_detail.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>
