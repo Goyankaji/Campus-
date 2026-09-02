@@ -61,7 +61,7 @@ app.secret_key = os.getenv(
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "######",
+    "password": "Tonu567890@",
     "database": "campus_placement_manager",
     "port": 3306
 }
@@ -886,16 +886,18 @@ def admin_logout():
 # =========================================================
 
 def render_student_page(template):
-
     student = get_student_data()
 
     return render_template(
         template,
         student=student,
-        profile_completion=
-            get_profile_completion()
+        profile_completion=get_profile_completion()
     )
 
+
+# =========================================================
+# STUDENT DASHBOARD
+# =========================================================
 
 @app.route("/student/dashboard")
 @login_required
@@ -907,6 +909,10 @@ def student_dashboard():
     )
 
 
+# =========================================================
+# STUDENT PROFILE
+# =========================================================
+
 @app.route("/student/profile")
 @login_required
 @role_required("2")
@@ -916,6 +922,10 @@ def student_profile():
         "students/profile.html"
     )
 
+
+# =========================================================
+# ACADEMICS
+# =========================================================
 
 @app.route("/student/academics")
 @login_required
@@ -927,55 +937,9 @@ def student_academics():
     )
 
 
-@app.route("/student/placement-drives")
-@login_required
-@role_required("2")
-def placement_drives():
-
-    return render_student_page(
-        "students/placement_drives.html"
-    )
-
-
-@app.route("/student/applications")
-@login_required
-@role_required("2")
-def student_applications():
-
-    return render_student_page(
-        "students/applications.html"
-    )
-
-
-@app.route("/student/interviews")
-@login_required
-@role_required("2")
-def student_interviews():
-
-    return render_student_page(
-        "students/interviews.html"
-    )
-
-
-@app.route("/student/preparation")
-@login_required
-@role_required("2")
-def student_preparation():
-
-    return render_student_page(
-        "students/preparation.html"
-    )
-
-
-@app.route("/student/noc")
-@login_required
-@role_required("2")
-def student_noc():
-
-    return render_student_page(
-        "students/noc.html"
-    )
-
+# =========================================================
+# MY UPLOADS
+# =========================================================
 
 @app.route("/student/my-uploads")
 @login_required
@@ -987,25 +951,51 @@ def student_my_uploads():
     )
 
 
-@app.route("/student/announcements")
+# =========================================================
+# PLACEMENT DRIVES
+# =========================================================
+
+@app.route("/student/placement-drives")
 @login_required
 @role_required("2")
-def student_announcements():
+def placement_drives():
 
     return render_student_page(
-        "students/announcements.html"
+        "students/placement_drives.html"
     )
 
 
-@app.route("/student/settings")
+# =========================================================
+# MY APPLICATIONS
+# =========================================================
+
+@app.route("/student/applications")
 @login_required
 @role_required("2")
-def student_settings():
+def student_applications():
 
     return render_student_page(
-        "students/settings.html"
+        "students/applications.html"
     )
 
+
+# =========================================================
+# INTERVIEWS
+# =========================================================
+
+@app.route("/student/interviews")
+@login_required
+@role_required("2")
+def student_interviews():
+
+    return render_student_page(
+        "students/interviews.html"
+    )
+
+
+# =========================================================
+# OFFERS & JOINING
+# =========================================================
 
 @app.route("/student/offers-joining")
 @login_required
@@ -1017,86 +1007,51 @@ def student_offers_joining():
     )
 
 
-@app.route(
-    "/student/help",
-    methods=["GET", "POST"]
-)
+# =========================================================
+# PREPARATION
+# =========================================================
+
+@app.route("/student/preparation")
 @login_required
 @role_required("2")
-def student_help():
-
-    if request.method == "POST":
-
-        category = request.form.get(
-            "category",
-            ""
-        ).strip()
-
-        subject = request.form.get(
-            "subject",
-            ""
-        ).strip()
-
-        description = request.form.get(
-            "description",
-            ""
-        ).strip()
-
-        if not category:
-
-            flash(
-                "Please select an issue category.",
-                "error"
-            )
-
-            return render_student_page(
-                "students/help.html"
-            )
-
-        if not subject:
-
-            flash(
-                "Please enter a subject.",
-                "error"
-            )
-
-            return render_student_page(
-                "students/help.html"
-            )
-
-        if not description:
-
-            flash(
-                "Please describe your issue.",
-                "error"
-            )
-
-            return render_student_page(
-                "students/help.html"
-            )
-
-        print(
-            "STUDENT COMPLAINT:",
-            {
-                "category": category,
-                "subject": subject,
-                "description": description
-            }
-        )
-
-        flash(
-            "Your complaint has been submitted successfully.",
-            "success"
-        )
-
-        return redirect(
-            url_for("student_help")
-        )
+def student_preparation():
 
     return render_student_page(
-        "students/help.html"
+        "students/preparation.html"
     )
 
+
+# =========================================================
+# STARTUP
+# =========================================================
+
+@app.route("/student/startup")
+@login_required
+@role_required("2")
+def student_startup():
+
+    return render_student_page(
+        "students/startup.html"
+    )
+
+
+# =========================================================
+# NOC
+# =========================================================
+
+@app.route("/student/noc")
+@login_required
+@role_required("2")
+def student_noc():
+
+    return render_student_page(
+        "students/noc.html"
+    )
+
+
+# =========================================================
+# DISCUSSION
+# =========================================================
 
 @app.route("/student/discussion")
 @login_required
@@ -1108,9 +1063,221 @@ def student_discussion():
     )
 
 
-@app.route(
-    "/student/preparation/pyq/<company>"
-)
+# =========================================================
+# ANNOUNCEMENTS
+# =========================================================
+
+@app.route("/student/announcements")
+@login_required
+@role_required("2")
+def student_announcements():
+
+    return render_student_page(
+        "students/announcements.html"
+    )
+
+
+# =========================================================
+# HELP & SUPPORT
+# =========================================================
+
+@app.route("/student/help", methods=["GET", "POST"])
+@login_required
+@role_required("2")
+def student_help():
+
+    if request.method == "POST":
+
+        category = request.form.get("category", "").strip()
+        subject = request.form.get("subject", "").strip()
+        description = request.form.get("description", "").strip()
+
+        if not category:
+            flash("Please select a category.", "error")
+            return redirect(url_for("student_help"))
+
+        if not subject:
+            flash("Please enter a subject.", "error")
+            return redirect(url_for("student_help"))
+
+        if not description:
+            flash("Please enter a description.", "error")
+            return redirect(url_for("student_help"))
+
+        print(
+            "STUDENT COMPLAINT:",
+            {
+                "category": category,
+                "subject": subject,
+                "description": description
+            }
+        )
+
+        flash(
+            "Your request has been submitted successfully.",
+            "success"
+        )
+
+        return redirect(url_for("student_help"))
+
+    return render_student_page(
+        "students/help.html"
+    )
+
+
+# =========================================================
+# SETTINGS
+# =========================================================
+
+@app.route("/student/settings")
+@login_required
+@role_required("2")
+def student_settings():
+
+    return render_student_page(
+        "students/settings.html"
+    )
+
+
+# =========================================================
+# BLOG
+# =========================================================
+
+@app.route("/student/blog")
+@login_required
+@role_required("2")
+def student_blog():
+
+    return render_student_page(
+        "students/blog.html"
+    )
+
+# =========================================================
+# CREATE BLOG POST
+# =========================================================
+
+@app.route("/student/blog/create", methods=["POST"])
+@login_required
+@role_required("2")
+def student_blog_create():
+
+    try:
+
+        student = get_student_data()
+
+        if not student:
+            flash("Student information not found.", "error")
+            return redirect(url_for("student_blog"))
+
+        # -------------------------------------------------
+        # FORM DATA
+        # -------------------------------------------------
+
+        title = request.form.get("title", "").strip()
+        content = request.form.get("content", "").strip()
+        post_type = request.form.get("post_type", "DISCUSSION").strip().upper()
+
+        # -------------------------------------------------
+        # VALIDATION
+        # -------------------------------------------------
+
+        if not title:
+            flash("Please enter a title.", "error")
+            return redirect(url_for("student_blog"))
+
+        if not content:
+            flash("Please enter your content.", "error")
+            return redirect(url_for("student_blog"))
+
+        allowed_types = {
+            "QUESTION",
+            "DISCUSSION",
+            "INFORMATION"
+        }
+
+        if post_type not in allowed_types:
+            post_type = "DISCUSSION"
+
+        # -------------------------------------------------
+        # DATABASE
+        # -------------------------------------------------
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            INSERT INTO student_posts
+            (
+                student_id,
+                title,
+                content,
+                post_type,
+                status,
+                created_at,
+                updated_at
+            )
+            VALUES
+            (
+                %s,
+                %s,
+                %s,
+                %s,
+                'PENDING',
+                NOW(),
+                NOW()
+            )
+            """,
+            (
+                student.get("student_id"),
+                title,
+                content,
+                post_type
+            )
+        )
+
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+        flash(
+            "Your post has been submitted for moderation.",
+            "success"
+        )
+
+        return redirect(url_for("student_blog"))
+
+    except Exception as e:
+
+        print("BLOG CREATE ERROR:", e)
+
+        try:
+            conn.rollback()
+        except Exception:
+            pass
+
+        try:
+            cursor.close()
+        except Exception:
+            pass
+
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+        flash(
+            "Unable to create blog post.",
+            "error"
+        )
+
+        return redirect(url_for("student_blog"))
+# =========================================================
+# COMPANY PYQ
+# =========================================================
+
+@app.route("/student/preparation/pyq/<company>")
 @login_required
 @role_required("2")
 def student_pyq(company):
@@ -1118,1471 +1285,32 @@ def student_pyq(company):
     pyq_data = {
 
         "tcs": {
-            "company": "TCS",
-            "title": "TCS Placement Paper 2025",
-            "type": "Aptitude · Technical · Coding",
-            "questions": 40,
-            "year": "2025",
-            "difficulty": "Moderate"
+            "name": "TCS",
+            "questions": []
         },
 
         "infosys": {
-            "company": "Infosys",
-            "title": "Infosys Placement Paper 2025",
-            "type": "Aptitude · Logical Reasoning",
-            "questions": 35,
-            "year": "2025",
-            "difficulty": "Moderate"
+            "name": "Infosys",
+            "questions": []
         },
 
         "amazon": {
-            "company": "Amazon",
-            "title": "Amazon SDE Assessment",
-            "type": "DSA · Coding · Problem Solving",
-            "questions": 30,
-            "year": "2025",
-            "difficulty": "Advanced"
+            "name": "Amazon",
+            "questions": []
         }
 
     }
 
-    pyq = pyq_data.get(
-        company.lower()
-    )
+    pyq = pyq_data.get(company.lower())
 
     if not pyq:
-
-        return (
-            "PYQ not found",
-            404
-        )
+        return ("PYQ not found", 404)
 
     return render_template(
         "students/pyq_detail.html",
         student=get_student_data(),
-        profile_completion=
-            get_profile_completion(),
+        profile_completion=get_profile_completion(),
         pyq=pyq
-    )
-
-
-# =========================================================
-# STUDENT COMMUNITY TABLES
-# =========================================================
-
-def ensure_community_tables():
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor()
-
-        cursor.execute(
-            """
-            CREATE TABLE IF NOT EXISTS student_posts (
-
-                post_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-
-                user_id VARCHAR(100) NOT NULL,
-
-                author_name VARCHAR(150) NOT NULL,
-
-                post_type ENUM(
-                    'QUESTION',
-                    'DISCUSSION',
-                    'INFORMATION'
-                ) NOT NULL DEFAULT 'QUESTION',
-
-                title VARCHAR(220) NOT NULL,
-
-                content TEXT NOT NULL,
-
-                tags VARCHAR(500),
-
-                status ENUM(
-                    'PENDING',
-                    'APPROVED',
-                    'REJECTED'
-                ) NOT NULL DEFAULT 'PENDING',
-
-                rejection_reason VARCHAR(500),
-
-                created_at TIMESTAMP
-                    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-                reviewed_at TIMESTAMP NULL,
-
-                reviewed_by VARCHAR(100),
-
-                INDEX idx_posts_status(status),
-
-                INDEX idx_posts_user(user_id),
-
-                INDEX idx_posts_created(created_at)
-
-            )
-            ENGINE=InnoDB
-            DEFAULT CHARSET=utf8mb4
-            """
-        )
-
-        cursor.execute(
-            """
-            CREATE TABLE IF NOT EXISTS student_post_comments (
-
-                comment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-
-                post_id BIGINT NOT NULL,
-
-                user_id VARCHAR(100) NOT NULL,
-
-                author_name VARCHAR(150) NOT NULL,
-
-                content TEXT NOT NULL,
-
-                status ENUM(
-                    'PENDING',
-                    'APPROVED',
-                    'REJECTED'
-                ) NOT NULL DEFAULT 'APPROVED',
-
-                created_at TIMESTAMP
-                    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-                INDEX idx_comments_post(post_id),
-
-                CONSTRAINT fk_comments_post
-                    FOREIGN KEY(post_id)
-                    REFERENCES student_posts(post_id)
-                    ON DELETE CASCADE
-
-            )
-            ENGINE=InnoDB
-            DEFAULT CHARSET=utf8mb4
-            """
-        )
-
-        cursor.execute(
-            """
-            CREATE TABLE IF NOT EXISTS student_post_likes (
-
-                like_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-
-                post_id BIGINT NOT NULL,
-
-                user_id VARCHAR(100) NOT NULL,
-
-                created_at TIMESTAMP
-                    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-                UNIQUE KEY uq_post_user_like(
-                    post_id,
-                    user_id
-                ),
-
-                INDEX idx_likes_post(post_id),
-
-                CONSTRAINT fk_likes_post
-                    FOREIGN KEY(post_id)
-                    REFERENCES student_posts(post_id)
-                    ON DELETE CASCADE
-
-            )
-            ENGINE=InnoDB
-            DEFAULT CHARSET=utf8mb4
-            """
-        )
-
-        connection.commit()
-
-        return True
-
-    except Exception as error:
-
-        if connection:
-            connection.rollback()
-
-        print(
-            "COMMUNITY TABLE ERROR:",
-            error
-        )
-
-        return False
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-
-def get_community_posts(
-    user_id=None,
-    category="ALL",
-    search=""
-):
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor(
-            dictionary=True
-        )
-
-        conditions = []
-        params = []
-
-        if user_id:
-
-            conditions.append(
-                """
-                (
-                    p.status = 'APPROVED'
-                    OR p.user_id = %s
-                )
-                """
-            )
-
-            params.append(
-                str(user_id)
-            )
-
-        else:
-
-            conditions.append(
-                "p.status = 'APPROVED'"
-            )
-
-        if category in (
-            "QUESTION",
-            "DISCUSSION",
-            "INFORMATION"
-        ):
-
-            conditions.append(
-                "p.post_type = %s"
-            )
-
-            params.append(
-                category
-            )
-
-        if search:
-
-            conditions.append(
-                """
-                (
-                    p.title LIKE %s
-                    OR p.content LIKE %s
-                    OR COALESCE(p.tags, '') LIKE %s
-                    OR p.author_name LIKE %s
-                )
-                """
-            )
-
-            value = f"%{search}%"
-
-            params.extend(
-                [
-                    value,
-                    value,
-                    value,
-                    value
-                ]
-            )
-
-        where_sql = " AND ".join(
-            conditions
-        )
-
-        current_user_id = str(
-            user_id or ""
-        )
-
-        cursor.execute(
-            f"""
-            SELECT
-
-                p.post_id,
-                p.user_id,
-                p.author_name,
-                p.post_type,
-                p.title,
-                p.content,
-                p.tags,
-                p.status,
-                p.rejection_reason,
-                p.created_at,
-                p.reviewed_at,
-
-                COALESCE(
-                    l.like_count,
-                    0
-                ) AS like_count,
-
-                COALESCE(
-                    c.comment_count,
-                    0
-                ) AS comment_count,
-
-                CASE
-                    WHEN ul.like_id IS NULL
-                    THEN 0
-                    ELSE 1
-                END AS liked_by_me
-
-            FROM student_posts p
-
-            LEFT JOIN (
-                SELECT
-                    post_id,
-                    COUNT(*) AS like_count
-                FROM student_post_likes
-                GROUP BY post_id
-            ) l
-                ON l.post_id = p.post_id
-
-            LEFT JOIN (
-                SELECT
-                    post_id,
-                    COUNT(*) AS comment_count
-                FROM student_post_comments
-                WHERE status = 'APPROVED'
-                GROUP BY post_id
-            ) c
-                ON c.post_id = p.post_id
-
-            LEFT JOIN student_post_likes ul
-                ON ul.post_id = p.post_id
-                AND ul.user_id = %s
-
-            WHERE {where_sql}
-
-            ORDER BY p.created_at DESC
-            """,
-            tuple(
-                [current_user_id] +
-                params
-            )
-        )
-
-        return cursor.fetchall()
-
-    except Exception as error:
-
-        print(
-            "COMMUNITY POSTS ERROR:",
-            error
-        )
-
-        return []
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-
-@app.route("/student/blog")
-@login_required
-@role_required("2")
-def student_blog():
-
-    ensure_community_tables()
-
-    category = request.args.get(
-        "category",
-        "ALL"
-    ).upper()
-
-    search = request.args.get(
-        "search",
-        ""
-    ).strip()
-
-    if category not in (
-        "ALL",
-        "QUESTION",
-        "DISCUSSION",
-        "INFORMATION"
-    ):
-
-        category = "ALL"
-
-    return render_template(
-        "students/blog.html",
-        student=get_student_data(),
-        profile_completion=
-            get_profile_completion(),
-        posts=get_community_posts(
-            user_id=session.get("user_id"),
-            category=category,
-            search=search
-        ),
-        active_category=category,
-        search=search
-    )
-
-
-@app.route(
-    "/student/blog/create",
-    methods=["POST"]
-)
-@login_required
-@role_required("2")
-def student_blog_create():
-
-    ensure_community_tables()
-
-    post_type = request.form.get(
-        "post_type",
-        "QUESTION"
-    ).strip().upper()
-
-    title = request.form.get(
-        "title",
-        ""
-    ).strip()
-
-    content = request.form.get(
-        "content",
-        ""
-    ).strip()
-
-    tags = request.form.get(
-        "tags",
-        ""
-    ).strip()
-
-    if post_type not in (
-        "QUESTION",
-        "DISCUSSION",
-        "INFORMATION"
-    ):
-
-        flash(
-            "Invalid post type.",
-            "error"
-        )
-
-        return redirect(
-            url_for("student_blog")
-        )
-
-    if not title:
-
-        flash(
-            "Please enter a title.",
-            "error"
-        )
-
-        return redirect(
-            url_for("student_blog")
-        )
-
-    if len(title) > 220:
-
-        flash(
-            "Title is too long.",
-            "error"
-        )
-
-        return redirect(
-            url_for("student_blog")
-        )
-
-    if not content:
-
-        flash(
-            "Please enter your question or message.",
-            "error"
-        )
-
-        return redirect(
-            url_for("student_blog")
-        )
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor()
-
-        cursor.execute(
-            """
-            INSERT INTO student_posts
-            (
-                user_id,
-                author_name,
-                post_type,
-                title,
-                content,
-                tags,
-                status
-            )
-            VALUES
-            (
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                'PENDING'
-            )
-            """,
-            (
-                str(
-                    session.get("user_id")
-                ),
-                session.get(
-                    "username",
-                    "Student"
-                ),
-                post_type,
-                title,
-                content,
-                tags or None
-            )
-        )
-
-        connection.commit()
-
-        flash(
-            "Your post has been submitted for admin review.",
-            "success"
-        )
-
-    except Exception as error:
-
-        if connection:
-            connection.rollback()
-
-        print(
-            "COMMUNITY CREATE ERROR:",
-            error
-        )
-
-        flash(
-            "Unable to submit your post right now.",
-            "error"
-        )
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-    return redirect(
-        url_for("student_blog")
-    )
-
-
-@app.route(
-    "/student/blog/<int:post_id>"
-)
-@login_required
-@role_required("2")
-def student_blog_detail(post_id):
-
-    ensure_community_tables()
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor(
-            dictionary=True
-        )
-
-        cursor.execute(
-            """
-            SELECT
-
-                p.*,
-
-                COALESCE(
-                    (
-                        SELECT COUNT(*)
-                        FROM student_post_likes l
-                        WHERE l.post_id = p.post_id
-                    ),
-                    0
-                ) AS like_count
-
-            FROM student_posts p
-
-            WHERE
-
-                p.post_id = %s
-
-                AND
-
-                (
-                    p.status = 'APPROVED'
-                    OR p.user_id = %s
-                )
-
-            LIMIT 1
-            """,
-            (
-                post_id,
-                str(
-                    session.get("user_id")
-                )
-            )
-        )
-
-        post = cursor.fetchone()
-
-        if not post:
-
-            return (
-                "Post not found",
-                404
-            )
-
-        cursor.execute(
-            """
-            SELECT
-                comment_id,
-                author_name,
-                content,
-                created_at
-            FROM student_post_comments
-            WHERE
-                post_id = %s
-                AND status = 'APPROVED'
-            ORDER BY created_at ASC
-            """,
-            (post_id,)
-        )
-
-        comments = cursor.fetchall()
-
-        return render_template(
-            "students/blog_detail.html",
-            student=get_student_data(),
-            profile_completion=
-                get_profile_completion(),
-            post=post,
-            comments=comments
-        )
-
-    except Exception as error:
-
-        print(
-            "COMMUNITY DETAIL ERROR:",
-            error
-        )
-
-        return (
-            "Unable to load post.",
-            500
-        )
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-
-@app.route(
-    "/student/blog/<int:post_id>/comment",
-    methods=["POST"]
-)
-@login_required
-@role_required("2")
-def student_blog_comment(post_id):
-
-    ensure_community_tables()
-
-    content = request.form.get(
-        "content",
-        ""
-    ).strip()
-
-    if not content:
-
-        flash(
-            "Please write a reply.",
-            "error"
-        )
-
-        return redirect(
-            url_for(
-                "student_blog_detail",
-                post_id=post_id
-            )
-        )
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor(
-            dictionary=True
-        )
-
-        cursor.execute(
-            """
-            SELECT post_id
-            FROM student_posts
-            WHERE
-                post_id = %s
-                AND status = 'APPROVED'
-            LIMIT 1
-            """,
-            (post_id,)
-        )
-
-        if not cursor.fetchone():
-
-            flash(
-                "This discussion is not available.",
-                "error"
-            )
-
-            return redirect(
-                url_for("student_blog")
-            )
-
-        cursor.execute(
-            """
-            INSERT INTO student_post_comments
-            (
-                post_id,
-                user_id,
-                author_name,
-                content,
-                status
-            )
-            VALUES
-            (
-                %s,
-                %s,
-                %s,
-                %s,
-                'APPROVED'
-            )
-            """,
-            (
-                post_id,
-                str(
-                    session.get("user_id")
-                ),
-                session.get(
-                    "username",
-                    "Student"
-                ),
-                content
-            )
-        )
-
-        connection.commit()
-
-        flash(
-            "Your reply has been added.",
-            "success"
-        )
-
-    except Exception as error:
-
-        if connection:
-            connection.rollback()
-
-        print(
-            "COMMUNITY COMMENT ERROR:",
-            error
-        )
-
-        flash(
-            "Unable to add your reply.",
-            "error"
-        )
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-    return redirect(
-        url_for(
-            "student_blog_detail",
-            post_id=post_id
-        )
-    )
-
-
-@app.route(
-    "/student/blog/<int:post_id>/like",
-    methods=["POST"]
-)
-@login_required
-@role_required("2")
-def student_blog_like(post_id):
-
-    ensure_community_tables()
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor(
-            dictionary=True
-        )
-
-        user_id = str(
-            session.get("user_id")
-        )
-
-        cursor.execute(
-            """
-            SELECT like_id
-            FROM student_post_likes
-            WHERE
-                post_id = %s
-                AND user_id = %s
-            LIMIT 1
-            """,
-            (
-                post_id,
-                user_id
-            )
-        )
-
-        existing = cursor.fetchone()
-
-        if existing:
-
-            cursor.execute(
-                """
-                DELETE FROM student_post_likes
-                WHERE like_id = %s
-                """,
-                (
-                    existing["like_id"],
-                )
-            )
-
-            liked = False
-
-        else:
-
-            cursor.execute(
-                """
-                SELECT post_id
-                FROM student_posts
-                WHERE
-                    post_id = %s
-                    AND status = 'APPROVED'
-                LIMIT 1
-                """,
-                (post_id,)
-            )
-
-            if not cursor.fetchone():
-
-                return {
-                    "success": False,
-                    "message": "Post unavailable."
-                }, 404
-
-            cursor.execute(
-                """
-                INSERT INTO student_post_likes
-                (
-                    post_id,
-                    user_id
-                )
-                VALUES
-                (
-                    %s,
-                    %s
-                )
-                """,
-                (
-                    post_id,
-                    user_id
-                )
-            )
-
-            liked = True
-
-        connection.commit()
-
-        cursor.execute(
-            """
-            SELECT COUNT(*) AS total
-            FROM student_post_likes
-            WHERE post_id = %s
-            """,
-            (post_id,)
-        )
-
-        result = cursor.fetchone()
-
-        return {
-            "success": True,
-            "liked": liked,
-            "count":
-                result["total"]
-                if result
-                else 0
-        }
-
-    except Exception as error:
-
-        if connection:
-            connection.rollback()
-
-        print(
-            "COMMUNITY LIKE ERROR:",
-            error
-        )
-
-        return {
-            "success": False,
-            "message": "Unable to update like."
-        }, 500
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-
-@app.route(
-    "/student/blog/<int:post_id>/edit",
-    methods=["POST"]
-)
-@login_required
-@role_required("2")
-def student_blog_edit(post_id):
-
-    ensure_community_tables()
-
-    post_type = request.form.get(
-        "post_type",
-        "QUESTION"
-    ).strip().upper()
-
-    title = request.form.get(
-        "title",
-        ""
-    ).strip()
-
-    content = request.form.get(
-        "content",
-        ""
-    ).strip()
-
-    tags = request.form.get(
-        "tags",
-        ""
-    ).strip()
-
-    if post_type not in (
-        "QUESTION",
-        "DISCUSSION",
-        "INFORMATION"
-    ):
-
-        flash(
-            "Invalid post type.",
-            "error"
-        )
-
-        return redirect(
-            url_for(
-                "student_blog_detail",
-                post_id=post_id
-            )
-        )
-
-    if not title or not content:
-
-        flash(
-            "Title and content are required.",
-            "error"
-        )
-
-        return redirect(
-            url_for(
-                "student_blog_detail",
-                post_id=post_id
-            )
-        )
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor(
-            dictionary=True
-        )
-
-        current_user_id = str(
-            session.get("user_id")
-        )
-
-        cursor.execute(
-            """
-            UPDATE student_posts
-            SET
-                post_type = %s,
-                title = %s,
-                content = %s,
-                tags = %s,
-                status = 'PENDING',
-                rejection_reason = NULL,
-                reviewed_at = NULL,
-                reviewed_by = NULL
-            WHERE
-                post_id = %s
-                AND user_id = %s
-            """,
-            (
-                post_type,
-                title,
-                content,
-                tags or None,
-                post_id,
-                current_user_id
-            )
-        )
-
-        if cursor.rowcount != 1:
-
-            connection.rollback()
-
-            flash(
-                "You are not allowed to edit this post.",
-                "error"
-            )
-
-            return redirect(
-                url_for("student_blog")
-            )
-
-        connection.commit()
-
-        flash(
-            "Post updated and sent for admin review.",
-            "success"
-        )
-
-    except Exception as error:
-
-        if connection:
-            connection.rollback()
-
-        print(
-            "COMMUNITY EDIT ERROR:",
-            error
-        )
-
-        flash(
-            "Unable to update your post.",
-            "error"
-        )
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-    return redirect(
-        url_for(
-            "student_blog_detail",
-            post_id=post_id
-        )
-    )
-
-
-@app.route(
-    "/student/blog/<int:post_id>/delete",
-    methods=["POST"]
-)
-@login_required
-@role_required("2")
-def student_blog_delete(post_id):
-
-    ensure_community_tables()
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor()
-
-        cursor.execute(
-            """
-            DELETE FROM student_posts
-            WHERE
-                post_id = %s
-                AND user_id = %s
-            """,
-            (
-                post_id,
-                str(
-                    session.get("user_id")
-                )
-            )
-        )
-
-        if cursor.rowcount != 1:
-
-            connection.rollback()
-
-            flash(
-                "You are not allowed to delete this post.",
-                "error"
-            )
-
-            return redirect(
-                url_for("student_blog")
-            )
-
-        connection.commit()
-
-        flash(
-            "Your post has been deleted.",
-            "success"
-        )
-
-    except Exception as error:
-
-        if connection:
-            connection.rollback()
-
-        print(
-            "COMMUNITY DELETE ERROR:",
-            error
-        )
-
-        flash(
-            "Unable to delete your post.",
-            "error"
-        )
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-    return redirect(
-        url_for("student_blog")
-    )
-
-
-# =========================================================
-# ADMIN COMMUNITY MODERATION
-# =========================================================
-
-@app.route("/admin/community")
-@admin_required
-def admin_community():
-
-    ensure_community_tables()
-
-    status = request.args.get(
-        "status",
-        "PENDING"
-    ).upper()
-
-    if status not in (
-        "PENDING",
-        "APPROVED",
-        "REJECTED",
-        "ALL"
-    ):
-
-        status = "PENDING"
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor(
-            dictionary=True
-        )
-
-        if status == "ALL":
-
-            cursor.execute(
-                """
-                SELECT *
-                FROM student_posts
-                ORDER BY
-                    CASE status
-                        WHEN 'PENDING' THEN 1
-                        WHEN 'APPROVED' THEN 2
-                        ELSE 3
-                    END,
-                    created_at DESC
-                """
-            )
-
-        else:
-
-            cursor.execute(
-                """
-                SELECT *
-                FROM student_posts
-                WHERE status = %s
-                ORDER BY created_at DESC
-                """,
-                (status,)
-            )
-
-        posts = cursor.fetchall()
-
-        cursor.execute(
-            """
-            SELECT
-
-                COUNT(*) AS total,
-
-                SUM(
-                    status = 'PENDING'
-                ) AS pending,
-
-                SUM(
-                    status = 'APPROVED'
-                ) AS approved,
-
-                SUM(
-                    status = 'REJECTED'
-                ) AS rejected
-
-            FROM student_posts
-            """
-        )
-
-        stats = cursor.fetchone() or {}
-
-        return render_template(
-            "admin/community_moderation.html",
-            posts=posts,
-            active_status=status,
-            stats=stats
-        )
-
-    except Exception as error:
-
-        print(
-            "ADMIN COMMUNITY ERROR:",
-            error
-        )
-
-        return render_template(
-            "admin/community_moderation.html",
-            posts=[],
-            active_status=status,
-            stats={},
-            db_error=str(error)
-        ), 500
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-
-@app.route(
-    "/admin/community/<int:post_id>/review",
-    methods=["POST"]
-)
-@admin_required
-def admin_community_review(post_id):
-
-    ensure_community_tables()
-
-    action = request.form.get(
-        "action",
-        ""
-    ).strip().upper()
-
-    rejection_reason = request.form.get(
-        "rejection_reason",
-        ""
-    ).strip()
-
-    if action not in (
-        "APPROVE",
-        "REJECT"
-    ):
-
-        flash(
-            "Invalid moderation action.",
-            "error"
-        )
-
-        return redirect(
-            url_for("admin_community")
-        )
-
-    if (
-        action == "REJECT"
-        and
-        not rejection_reason
-    ):
-
-        flash(
-            "Please provide a rejection reason.",
-            "error"
-        )
-
-        return redirect(
-            url_for("admin_community")
-        )
-
-    connection = None
-    cursor = None
-
-    try:
-
-        connection = get_db_connection()
-
-        cursor = connection.cursor()
-
-        reviewer = str(
-            session.get(
-                "user_id",
-                "ADMIN"
-            )
-        )
-
-        if action == "APPROVE":
-
-            cursor.execute(
-                """
-                UPDATE student_posts
-                SET
-                    status = 'APPROVED',
-                    rejection_reason = NULL,
-                    reviewed_at = CURRENT_TIMESTAMP,
-                    reviewed_by = %s
-                WHERE post_id = %s
-                """,
-                (
-                    reviewer,
-                    post_id
-                )
-            )
-
-            message = \
-                "Post approved successfully."
-
-        else:
-
-            cursor.execute(
-                """
-                UPDATE student_posts
-                SET
-                    status = 'REJECTED',
-                    rejection_reason = %s,
-                    reviewed_at = CURRENT_TIMESTAMP,
-                    reviewed_by = %s
-                WHERE post_id = %s
-                """,
-                (
-                    rejection_reason,
-                    reviewer,
-                    post_id
-                )
-            )
-
-            message = "Post rejected."
-
-        connection.commit()
-
-        flash(
-            message,
-            "success"
-        )
-
-    except Exception as error:
-
-        if connection:
-            connection.rollback()
-
-        print(
-            "ADMIN COMMUNITY REVIEW ERROR:",
-            error
-        )
-
-        flash(
-            "Unable to update post status.",
-            "error"
-        )
-
-    finally:
-
-        if cursor:
-            cursor.close()
-
-        if connection:
-            connection.close()
-
-    return redirect(
-        url_for("admin_community")
     )
 
 
@@ -2905,16 +1633,6 @@ def admin_roles():
         "admin/roles.html"
     )
 
-
-@app.route("/admin/verification")
-@admin_required
-def admin_verification():
-
-    return render_template(
-        "admin/verification.html"
-    )
-
-
 @app.route("/admin/notifications")
 @admin_required
 def admin_notifications():
@@ -2923,6 +1641,13 @@ def admin_notifications():
         "admin/notifications.html"
     )
 
+@app.route("/admin/community_moderation")
+@admin_required
+def admin_community():
+
+    return render_template(
+        "admin/community_moderation.html"
+    )
 
 @app.route("/admin/feedback")
 @admin_required
@@ -3014,6 +1739,65 @@ def tpo_offers():
         "tpo/offers.html"
     )
 
+# =========================================================
+# TPO — SPECIAL PLACEMENT
+# =========================================================
+
+
+# ---------------------------------------------------------
+# OFF CAMPUS
+# ---------------------------------------------------------
+
+@app.route("/tpo/off-campus")
+@login_required
+@role_required("5")
+def tpo_off_campus():
+
+    return render_template(
+        "tpo/off_campus.html"
+    )
+
+
+# ---------------------------------------------------------
+# PRE-PLACED
+# ---------------------------------------------------------
+
+@app.route("/tpo/pre-placed")
+@login_required
+@role_required("5")
+def tpo_pre_placed():
+
+    return render_template(
+        "tpo/pre_placed.html"
+    )
+
+
+# ---------------------------------------------------------
+# NOC
+# ---------------------------------------------------------
+
+@app.route("/tpo/noc")
+@login_required
+@role_required("5")
+def tpo_noc():
+
+    return render_template(
+        "tpo/noc.html"
+    )
+
+
+# ---------------------------------------------------------
+# STARTUP IDEAS
+# ---------------------------------------------------------
+
+@app.route("/tpo/startup-ideas")
+@login_required
+@role_required("5")
+def tpo_startup_ideas():
+
+    return render_template(
+        "tpo/startup_ideas.html"
+    )
 
 @app.route("/tpo/placed-students")
 @login_required
@@ -3075,14 +1859,14 @@ def tpo_settings():
     )
 
 
-@app.route("/tpo/noc")
-@login_required
-@role_required("5")
-def tpo_noc():
+# @app.route("/tpo/noc")
+# @login_required
+# @role_required("5")
+# def tpo_noc():
 
-    return render_template(
-        "tpo/noc.html"
-    )
+#     return render_template(
+#         "tpo/noc.html"
+#     )
 
 
 # =========================================================
