@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Off Campus | TPO | Campus
+    </title>
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         TPO COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-common.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-sidebar.css'
+        ) }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-topbar.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         OFF CAMPUS CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/off_campus.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'tpo/components/tpo_topbar.html' %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="off-campus-content">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="off-campus-page-header">
+
+                <div>
+
+                    <div class="off-campus-eyebrow">
+                        SPECIAL PLACEMENT
+                    </div>
+
+                    <h1>
+                        Off Campus
+                    </h1>
+
+                    <div class="off-campus-breadcrumb">
+
+                        <span>
+                            TPO
+                        </span>
+
+                        <span>
+                            ›
+                        </span>
+
+                        <span>
+                            Special Placement
+                        </span>
+
+                        <span>
+                            ›
+                        </span>
+
+                        <strong>
+                            Off Campus
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPROVAL INFORMATION
+            ================================================== -->
+
+            <div class="off-campus-approval-banner">
+
+
+                <div class="off-campus-approval-icon">
+                    ✓
+                </div>
+
+
+                <div class="off-campus-approval-content">
+
+                    <div class="off-campus-approval-title">
+                        Two-Level Approval Required
+                    </div>
+
+                    <div class="off-campus-approval-description">
+                        Every off-campus placement requires approval
+                        from both TPO and Authority. Either side can
+                        approve first.
+                    </div>
+
+                </div>
+
+
+                <div class="off-campus-approval-status">
+
+                    <span></span>
+
+                    TPO + Authority
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <section class="off-campus-stats">
+
+
+                <div class="off-campus-stat-card">
+
+                    <div class="off-campus-stat-icon purple">
+                        ◈
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Requests
+                        </span>
+
+                        <strong id="totalOffCampus">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="off-campus-stat-card">
+
+                    <div class="off-campus-stat-icon orange">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            TPO Pending
+                        </span>
+
+                        <strong id="tpoPendingOffCampus">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="off-campus-stat-card">
+
+                    <div class="off-campus-stat-icon blue">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Authority Pending
+                        </span>
+
+                        <strong id="authorityPendingOffCampus">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="off-campus-stat-card">
+
+                    <div class="off-campus-stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Final Approved
+                        </span>
+
+                        <strong id="approvedOffCampus">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 FILTERS
+            ================================================== -->
+
+            <div class="off-campus-filter-card">
+
+
+                <!-- SEARCH -->
+
+                <div class="off-campus-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="offCampusSearch"
+                        placeholder="Search student, registration or company..."
+                    >
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <select
+                    id="offCampusStatusFilter"
+                >
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="pending_tpo">
+                        TPO Pending
+                    </option>
+
+                    <option value="pending_authority">
+                        Authority Pending
+                    </option>
+
+                    <option value="approved">
+                        Final Approved
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <!-- CAMPUS -->
+
+                <select
+                    id="offCampusCampusFilter"
+                >
+
+                    <option value="all">
+                        All Campus
+                    </option>
+
+                    <option value="PCE">
+                        PCE
+                    </option>
+
+                    <option value="PCET">
+                        PCET
+                    </option>
+
+                </select>
+
+
+                <!-- RESET -->
+
+                <button
+                    type="button"
+                    id="resetOffCampusFilters"
+                    class="off-campus-reset-btn"
+                >
+
+                    ↻
+                    Reset
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 TABLE CARD
+            ================================================== -->
+
+            <div class="off-campus-table-card">
+
+
+                <!-- TABLE HEADER -->
+
+                <div class="off-campus-table-header">
+
+                    <div>
+
+                        <span>
+                            OFF-CAMPUS REQUEST QUEUE
+                        </span>
+
+                        <h2>
+                            Student Placement Requests
+                        </h2>
+
+                        <p>
+                            Approval can be completed in either order.
+                        </p>
+
+                    </div>
+
+
+                    <div class="off-campus-approval-note">
+
+                        <span class="off-campus-approval-dot"></span>
+
+                        TPO + Authority
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="off-campus-table-wrapper">
+
+                    <table
+                        class="off-campus-table"
+                        id="offCampusTable"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    STUDENT
+                                </th>
+
+                                <th>
+                                    REGISTRATION
+                                </th>
+
+                                <th>
+                                    COMPANY
+                                </th>
+
+                                <th>
+                                    POSITION
+                                </th>
+
+                                <th>
+                                    PACKAGE
+                                </th>
+
+                                <th>
+                                    REQUEST DATE
+                                </th>
+
+                                <th>
+                                    TPO STATUS
+                                </th>
+
+                                <th>
+                                    AUTHORITY STATUS
+                                </th>
+
+                                <th>
+                                    FINAL STATUS
+                                </th>
+
+                                <th>
+                                    ACTION
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="offCampusTableBody">
+
+
+                            <!-- =================================================
+                                 EMPTY STATE
+                            ================================================== -->
+
+                            <tr
+                                class="off-campus-empty-row"
+                            >
+
+                                <td colspan="10">
+
+                                    <div
+                                        class="off-campus-empty-state"
+                                    >
+
+                                        <div
+                                            class="off-campus-empty-icon"
+                                        >
+                                            ◈
+                                        </div>
+
+                                        <strong>
+                                            No off-campus requests yet
+                                        </strong>
+
+                                        <span>
+                                            Student off-campus placement
+                                            requests will appear here.
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- =================================================
+                     FOOTER
+                ================================================== -->
+
+                <div class="off-campus-table-footer">
+
+                    <span id="offCampusCount">
+                        Showing 0 requests
+                    </span>
+
+
+                    <div class="off-campus-pagination">
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="active"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     DETAILS MODAL
+====================================================== -->
+
+<div
+    id="offCampusDetailsModal"
+    class="off-campus-modal"
+    style="display:none;"
+>
+
+    <div class="off-campus-modal-overlay"></div>
+
+
+    <div class="off-campus-modal-card">
+
+
+        <!-- HEADER -->
+
+        <div class="off-campus-modal-header">
+
+            <div>
+
+                <span>
+                    OFF CAMPUS
+                </span>
+
+                <h2>
+                    Placement Details
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeOffCampusDetails"
+                class="off-campus-modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- DETAILS -->
+
+        <div
+            id="offCampusDetailsBody"
+            class="off-campus-details-body"
+        >
+
+            <!-- JS WILL FILL DETAILS -->
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="off-campus-modal-footer">
+
+            <button
+                type="button"
+                id="closeOffCampusDetailsBottom"
+                class="off-campus-secondary-btn"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     REJECTION MODAL
+====================================================== -->
+
+<div
+    id="offCampusRejectModal"
+    class="off-campus-modal"
+    style="display:none;"
+>
+
+    <div class="off-campus-modal-overlay"></div>
+
+
+    <div class="off-campus-modal-card">
+
+
+        <!-- HEADER -->
+
+        <div class="off-campus-modal-header">
+
+            <div>
+
+                <span>
+                    TPO ACTION
+                </span>
+
+                <h2>
+                    Reject Off-Campus Request
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeOffCampusReject"
+                class="off-campus-modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- REJECTION -->
+
+        <div class="off-campus-reject-body">
+
+            <label for="offCampusRejectReason">
+                Rejection Reason
+            </label>
+
+
+            <textarea
+                id="offCampusRejectReason"
+                rows="5"
+                placeholder="Enter the reason for rejecting this request..."
+            ></textarea>
+
+
+            <small>
+                This reason will be visible to the student and Authority.
+            </small>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="off-campus-modal-footer">
+
+            <button
+                type="button"
+                id="cancelOffCampusReject"
+                class="off-campus-secondary-btn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmOffCampusReject"
+                class="off-campus-danger-btn"
+            >
+                Reject Request
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     COMMON TPO JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-sidebar.js'
+    ) }}"
+></script>
+
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-topbar.js'
+    ) }}"
+></script>
+
+
+<!-- =====================================================
+     OFF CAMPUS JS
+====================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/off_campus.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

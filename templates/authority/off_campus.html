@@ -11,7 +11,9 @@
 
 <div class="off-campus-page">
 
-    <!-- HEADER -->
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
 
     <div class="off-campus-header">
 
@@ -26,71 +28,31 @@
             </h1>
 
             <p>
-                Track students placed through off-campus recruitment opportunities.
+                Review and manage off-campus placement applications for your college.
             </p>
 
         </div>
 
-
-        <div class="header-actions">
-
-            <select
-                id="academicYear"
-                class="off-campus-select"
-            >
-                <option value="2026-27">
-                    2026 - 27
-                </option>
-
-                <option value="2025-26">
-                    2025 - 26
-                </option>
-
-                <option value="2024-25">
-                    2024 - 25
-                </option>
-            </select>
-
-
-            <select
-                id="placementStatus"
-                class="off-campus-select"
-            >
-                <option value="all">
-                    All Status
-                </option>
-
-                <option value="verified">
-                    Verified
-                </option>
-
-                <option value="pending">
-                    Pending Verification
-                </option>
-            </select>
-
-
-            <button
-                type="button"
-                id="exportOffCampusReport"
-                class="export-btn"
-            >
-                ↓ Export Report
-            </button>
-
-        </div>
+        <button
+            type="button"
+            class="off-campus-export-btn"
+            id="exportOffCampus"
+        >
+            Export Report
+        </button>
 
     </div>
 
 
-    <!-- SCOPE -->
+    <!-- =====================================================
+         COLLEGE SCOPE
+    ===================================================== -->
 
     <div class="scope-card">
 
         <div class="scope-icon">
             ◉
         </div>
-
 
         <div class="scope-info">
 
@@ -103,11 +65,10 @@
             </strong>
 
             <small>
-                Off-campus placement records are restricted to your assigned college.
+                Off-campus placement applications are restricted to your assigned college.
             </small>
 
         </div>
-
 
         <div class="scope-code">
             ● {{ session.get("college_code", "PCE") }}
@@ -116,30 +77,28 @@
     </div>
 
 
-    <!-- SUMMARY -->
+    <!-- =====================================================
+         SUMMARY
+    ===================================================== -->
 
     <div class="summary-grid">
 
         <div class="summary-card">
 
             <div class="summary-icon purple">
-                ◈
+                ▦
             </div>
 
             <div>
+                <span>Total Applications</span>
 
-                <span>
-                    Off-Campus Placements
-                </span>
-
-                <strong>
-                    214
+                <strong id="totalOffCampus">
+                    0
                 </strong>
 
                 <small>
-                    Total recorded placements
+                    All applications
                 </small>
-
             </div>
 
         </div>
@@ -147,24 +106,20 @@
 
         <div class="summary-card">
 
-            <div class="summary-icon blue">
-                ◉
+            <div class="summary-icon orange">
+                ◷
             </div>
 
             <div>
+                <span>Pending</span>
 
-                <span>
-                    Students Placed
-                </span>
-
-                <strong>
-                    198
+                <strong id="pendingOffCampus">
+                    0
                 </strong>
 
                 <small>
-                    Students successfully placed
+                    Awaiting final decision
                 </small>
-
             </div>
 
         </div>
@@ -177,19 +132,15 @@
             </div>
 
             <div>
+                <span>Approved</span>
 
-                <span>
-                    Verified
-                </span>
-
-                <strong>
-                    186
+                <strong id="approvedOffCampus">
+                    0
                 </strong>
 
                 <small>
-                    Placement records verified
+                    Final approved
                 </small>
-
             </div>
 
         </div>
@@ -197,24 +148,20 @@
 
         <div class="summary-card">
 
-            <div class="summary-icon orange">
-                ₹
+            <div class="summary-icon red">
+                ✕
             </div>
 
             <div>
+                <span>Rejected</span>
 
-                <span>
-                    Average Package
-                </span>
-
-                <strong>
-                    ₹7.10 LPA
+                <strong id="rejectedOffCampus">
+                    0
                 </strong>
 
                 <small>
-                    Across verified placements
+                    Final rejected
                 </small>
-
             </div>
 
         </div>
@@ -222,204 +169,25 @@
     </div>
 
 
-    <!-- PERFORMANCE -->
-
-    <div class="reports-grid">
-
-        <section class="report-card">
-
-            <div class="card-header">
-
-                <div>
-
-                    <h2>
-                        Off-Campus Performance
-                    </h2>
-
-                    <p>
-                        Overview of students placed outside campus drives.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="performance-content">
-
-                <div class="performance-stat">
-
-                    <span>
-                        Total Records
-                    </span>
-
-                    <strong>
-                        214
-                    </strong>
-
-                    <small>
-                        Placement records
-                    </small>
-
-                </div>
-
-
-                <div class="performance-stat">
-
-                    <span>
-                        Verified Records
-                    </span>
-
-                    <strong>
-                        186
-                    </strong>
-
-                    <small>
-                        Verified placements
-                    </small>
-
-                </div>
-
-
-                <div class="performance-stat">
-
-                    <span>
-                        Companies
-                    </span>
-
-                    <strong>
-                        67
-                    </strong>
-
-                    <small>
-                        Hiring organisations
-                    </small>
-
-                </div>
-
-
-                <div class="performance-stat">
-
-                    <span>
-                        Highest Package
-                    </span>
-
-                    <strong>
-                        ₹18.00 LPA
-                    </strong>
-
-                    <small>
-                        Highest verified package
-                    </small>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- STATUS -->
-
-        <section class="report-card">
-
-            <div class="card-header">
-
-                <div>
-
-                    <h2>
-                        Verification Status
-                    </h2>
-
-                    <p>
-                        Current status of off-campus placement records.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="status-list">
-
-                <div class="status-row">
-
-                    <div class="status-label">
-
-                        <span class="dot green"></span>
-
-                        Verified
-
-                    </div>
-
-                    <strong>
-                        186
-                    </strong>
-
-                </div>
-
-
-                <div class="status-track">
-
-                    <div
-                        class="status-fill green"
-                        style="width:86.9%;"
-                    ></div>
-
-                </div>
-
-
-                <div class="status-row">
-
-                    <div class="status-label">
-
-                        <span class="dot orange"></span>
-
-                        Pending Verification
-
-                    </div>
-
-                    <strong>
-                        28
-                    </strong>
-
-                </div>
-
-
-                <div class="status-track">
-
-                    <div
-                        class="status-fill orange"
-                        style="width:13.1%;"
-                    ></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </div>
-
-
-    <!-- PLACEMENT TABLE -->
-
-    <section class="report-card placement-table-card">
+    <!-- =====================================================
+         APPLICATIONS
+    ===================================================== -->
+
+    <section class="report-card">
 
         <div class="card-header">
 
             <div>
 
                 <h2>
-                    Off-Campus Placement Records
+                    Off-Campus Applications
                 </h2>
 
                 <p>
-                    Student-wise verified and pending off-campus placements.
+                    Review student applications and approval status.
                 </p>
 
             </div>
-
 
             <div class="search-box">
 
@@ -429,8 +197,9 @@
 
                 <input
                     type="text"
-                    id="placementSearch"
-                    placeholder="Search student or company..."
+                    id="offCampusSearch"
+                    placeholder="Search student, company..."
+                    autocomplete="off"
                 >
 
             </div>
@@ -438,9 +207,72 @@
         </div>
 
 
+        <!-- =================================================
+             FILTER BAR
+        ================================================= -->
+
+        <div class="off-campus-filter-bar">
+
+            <select id="offCampusStatus">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="approved">
+                    Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <select id="offCampusType">
+
+                <option value="all">
+                    All Placement Types
+                </option>
+
+                <option value="job">
+                    Job
+                </option>
+
+                <option value="internship">
+                    Internship
+                </option>
+
+                <option value="higher-studies">
+                    Higher Studies
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                id="offCampusReset"
+                class="reset-btn"
+            >
+                Reset
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================= -->
+
         <div class="table-wrapper">
 
-            <table class="placement-table">
+            <table class="off-campus-table">
 
                 <thead>
 
@@ -451,15 +283,19 @@
                         </th>
 
                         <th>
+                            REGISTRATION
+                        </th>
+
+                        <th>
                             BRANCH
                         </th>
 
                         <th>
-                            ROLL NO.
+                            TYPE
                         </th>
 
                         <th>
-                            COMPANY
+                            ORGANIZATION
                         </th>
 
                         <th>
@@ -467,11 +303,23 @@
                         </th>
 
                         <th>
-                            PLACED ON
+                            DATE
                         </th>
 
                         <th>
-                            STATUS
+                            TPO
+                        </th>
+
+                        <th>
+                            AUTHORITY
+                        </th>
+
+                        <th>
+                            FINAL
+                        </th>
+
+                        <th>
+                            ACTION
                         </th>
 
                     </tr>
@@ -479,366 +327,200 @@
                 </thead>
 
 
-                <tbody id="placementTableBody">
-
-
-                    <tr
-                        data-status="verified"
-                        data-search="rahul sharma microsoft"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Rahul Sharma
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE001
-                        </td>
-
-                        <td>
-                            Microsoft
-                        </td>
-
-                        <td class="package">
-                            ₹18.00 LPA
-                        </td>
-
-                        <td>
-                            18 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge verified">
-                                Verified
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="verified"
-                        data-search="priya meena infosys"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Priya Meena
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            IT
-                        </td>
-
-                        <td>
-                            21PIT014
-                        </td>
-
-                        <td>
-                            Infosys
-                        </td>
-
-                        <td class="package">
-                            ₹8.20 LPA
-                        </td>
-
-                        <td>
-                            12 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge verified">
-                                Verified
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="pending"
-                        data-search="aman kumar wipro"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Aman Kumar
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            ECE
-                        </td>
-
-                        <td>
-                            21PEC027
-                        </td>
-
-                        <td>
-                            Wipro
-                        </td>
-
-                        <td class="package">
-                            ₹7.00 LPA
-                        </td>
-
-                        <td>
-                            21 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="verified"
-                        data-search="neha joshi accenture"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Neha Joshi
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE042
-                        </td>
-
-                        <td>
-                            Accenture
-                        </td>
-
-                        <td class="package">
-                            ₹9.00 LPA
-                        </td>
-
-                        <td>
-                            09 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge verified">
-                                Verified
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="verified"
-                        data-search="mohit singh capgemini"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Mohit Singh
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            ME
-                        </td>
-
-                        <td>
-                            21PME018
-                        </td>
-
-                        <td>
-                            Capgemini
-                        </td>
-
-                        <td class="package">
-                            ₹6.50 LPA
-                        </td>
-
-                        <td>
-                            05 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge verified">
-                                Verified
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="pending"
-                        data-search="ankit gupta deloitte"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Ankit Gupta
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            EE
-                        </td>
-
-                        <td>
-                            21PEE031
-                        </td>
-
-                        <td>
-                            Deloitte
-                        </td>
-
-                        <td class="package">
-                            ₹10.50 LPA
-                        </td>
-
-                        <td>
-                            22 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="verified"
-                        data-search="simran kaur amazon"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Simran Kaur
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE067
-                        </td>
-
-                        <td>
-                            Amazon
-                        </td>
-
-                        <td class="package">
-                            ₹12.00 LPA
-                        </td>
-
-                        <td>
-                            01 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge verified">
-                                Verified
-                            </span>
-
-                        </td>
-
-                    </tr>
-
+                <tbody id="offCampusTableBody">
+                    <!-- JS will render rows -->
                 </tbody>
 
             </table>
 
         </div>
 
+
+        <!-- =================================================
+             TABLE FOOTER
+        ================================================= -->
+
+        <div class="table-footer">
+
+            <span id="offCampusResultCount">
+                Showing 0 applications
+            </span>
+
+            <span>
+                College:
+                <strong>
+                    {{ session.get("college_code", "PCE") }}
+                </strong>
+            </span>
+
+        </div>
+
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- =====================================================
+         DETAILS MODAL
+    ===================================================== -->
+
+    <div
+        class="off-campus-modal"
+        id="offCampusDetailsModal"
+        hidden
+    >
+
+        <div class="off-campus-modal-overlay"></div>
+
+
+        <div class="off-campus-modal-card">
+
+            <div class="off-campus-modal-header">
+
+                <div>
+
+                    <span>
+                        OFF-CAMPUS APPLICATION
+                    </span>
+
+                    <h2>
+                        Application Details
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeOffCampusDetails"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="off-campus-modal-body"
+                id="offCampusDetailsBody"
+            >
+                <!-- JS will render details -->
+            </div>
+
+
+            <div class="off-campus-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="closeOffCampusDetailsBottom"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         REJECT MODAL
+    ===================================================== -->
+
+    <div
+        class="off-campus-modal"
+        id="offCampusRejectModal"
+        hidden
+    >
+
+        <div class="off-campus-modal-overlay"></div>
+
+
+        <div class="off-campus-modal-card reject-modal-card">
+
+            <div class="off-campus-modal-header">
+
+                <div>
+
+                    <span>
+                        AUTHORITY DECISION
+                    </span>
+
+                    <h2>
+                        Reject Application
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeOffCampusReject"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="reject-body">
+
+                <label for="offCampusRejectReason">
+                    Rejection Reason
+                </label>
+
+                <textarea
+                    id="offCampusRejectReason"
+                    rows="5"
+                    placeholder="Enter reason for rejecting this application..."
+                ></textarea>
+
+                <small>
+                    A rejection reason is required.
+                </small>
+
+            </div>
+
+
+            <div class="off-campus-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="cancelOffCampusReject"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="reject-confirm-btn"
+                    id="confirmOffCampusReject"
+                >
+                    Reject Application
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
     <div class="reports-footer">
 
         <span>
-            Report generated for
-            <strong id="footerYear">
-                2026-27
-            </strong>
+            Campus Placement Portal
         </span>
 
         <span>
-            Campus Placement Portal
+            Authority Off-Campus Management
         </span>
 
     </div>

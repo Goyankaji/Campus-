@@ -4,118 +4,54 @@
 
 {% block content %}
 
-<link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/authority/startup_ideas.css') }}"
->
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/authority/startup_ideas.css') }}">
 
-<div class="startup-page">
+<div class="startup-ideas-page">
 
-    <!-- HEADER -->
-
-    <div class="startup-header">
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+    <div class="startup-ideas-header">
 
         <div>
+            <div class="page-eyebrow">SPECIAL INITIATIVES</div>
 
-            <div class="page-eyebrow">
-                SPECIAL INITIATIVES
-            </div>
-
-            <h1>
-                Startup Ideas
-            </h1>
+            <h1>Startup Ideas</h1>
 
             <p>
-                Review and track innovative startup ideas submitted by students.
+                Review and manage student startup ideas submitted by your college.
             </p>
-
         </div>
 
-
-        <div class="header-actions">
-
-            <select
-                id="academicYear"
-                class="startup-select"
-            >
-                <option value="2026-27">
-                    2026 - 27
-                </option>
-
-                <option value="2025-26">
-                    2025 - 26
-                </option>
-
-                <option value="2024-25">
-                    2024 - 25
-                </option>
-            </select>
-
-
-            <select
-                id="ideaStatus"
-                class="startup-select"
-            >
-                <option value="all">
-                    All Status
-                </option>
-
-                <option value="submitted">
-                    Submitted
-                </option>
-
-                <option value="review">
-                    Under Review
-                </option>
-
-                <option value="approved">
-                    Approved
-                </option>
-
-                <option value="rejected">
-                    Rejected
-                </option>
-            </select>
-
-
-            <button
-                type="button"
-                id="exportStartupReport"
-                class="export-btn"
-            >
-                ↓ Export Report
-            </button>
-
-        </div>
+        <button
+            type="button"
+            class="startup-ideas-export-btn"
+            id="exportStartupIdeas">
+            Export Report
+        </button>
 
     </div>
 
 
-    <!-- SCOPE -->
-
+    <!-- =====================================================
+         AUTHORITY SCOPE
+    ====================================================== -->
     <div class="scope-card">
 
-        <div class="scope-icon">
-            ★
-        </div>
-
+        <div class="scope-icon">◉</div>
 
         <div class="scope-info">
 
-            <span>
-                AUTHORITY DATA SCOPE
-            </span>
+            <span>AUTHORITY DATA SCOPE</span>
 
-            <strong>
-                College Authority
-            </strong>
+            <strong>College Authority</strong>
 
             <small>
-                Startup ideas are restricted to your assigned college.
+                Startup idea records are restricted to your assigned college.
             </small>
 
         </div>
-
 
         <div class="scope-code">
             ● {{ session.get("college_code", "PCE") }}
@@ -124,30 +60,27 @@
     </div>
 
 
-    <!-- SUMMARY -->
-
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
     <div class="summary-grid">
 
         <div class="summary-card">
 
             <div class="summary-icon purple">
-                ✦
+                ▦
             </div>
 
             <div>
+                <span>Total Ideas</span>
 
-                <span>
-                    Total Ideas
-                </span>
-
-                <strong>
-                    84
+                <strong id="totalStartupIdeas">
+                    0
                 </strong>
 
                 <small>
-                    Ideas submitted
+                    All submissions
                 </small>
-
             </div>
 
         </div>
@@ -160,19 +93,15 @@
             </div>
 
             <div>
+                <span>Pending</span>
 
-                <span>
-                    Under Review
-                </span>
-
-                <strong>
-                    21
+                <strong id="pendingStartupIdeas">
+                    0
                 </strong>
 
                 <small>
-                    Awaiting evaluation
+                    Awaiting final decision
                 </small>
-
             </div>
 
         </div>
@@ -185,19 +114,15 @@
             </div>
 
             <div>
+                <span>Approved</span>
 
-                <span>
-                    Approved
-                </span>
-
-                <strong>
-                    38
+                <strong id="approvedStartupIdeas">
+                    0
                 </strong>
 
                 <small>
-                    Ideas approved
+                    Final approved
                 </small>
-
             </div>
 
         </div>
@@ -205,23 +130,293 @@
 
         <div class="summary-card">
 
-            <div class="summary-icon blue">
-                ◈
+            <div class="summary-icon red">
+                ✕
             </div>
 
             <div>
+                <span>Rejected</span>
 
-                <span>
-                    Student Teams
-                </span>
-
-                <strong>
-                    126
+                <strong id="rejectedStartupIdeas">
+                    0
                 </strong>
 
                 <small>
-                    Students participating
+                    Final rejected
                 </small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN REPORT CARD
+    ====================================================== -->
+    <section class="report-card">
+
+        <!-- CARD HEADER -->
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Student Startup Ideas
+                </h2>
+
+                <p>
+                    Review startup ideas and approval status.
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH -->
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="startupIdeasSearch"
+                    placeholder="Search student, idea..."
+                    autocomplete="off">
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+        <div class="startup-ideas-filter-bar">
+
+            <select id="startupIdeasStatus">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="approved">
+                    Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <select id="startupIdeasType">
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="technology">
+                    Technology
+                </option>
+
+                <option value="fintech">
+                    FinTech
+                </option>
+
+                <option value="edtech">
+                    EdTech
+                </option>
+
+                <option value="healthtech">
+                    HealthTech
+                </option>
+
+                <option value="social">
+                    Social Impact
+                </option>
+
+                <option value="other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <select id="startupIdeasStage">
+
+                <option value="all">
+                    All Stages
+                </option>
+
+                <option value="idea">
+                    Idea
+                </option>
+
+                <option value="prototype">
+                    Prototype
+                </option>
+
+                <option value="mvp">
+                    MVP
+                </option>
+
+                <option value="early-stage">
+                    Early Stage
+                </option>
+
+                <option value="growth">
+                    Growth
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                id="startupIdeasReset"
+                class="reset-btn">
+
+                Reset
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+        <div class="table-wrapper">
+
+            <table class="startup-ideas-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>STUDENT</th>
+
+                        <th>REGISTRATION</th>
+
+                        <th>BRANCH</th>
+
+                        <th>STARTUP IDEA</th>
+
+                        <th>CATEGORY</th>
+
+                        <th>STAGE</th>
+
+                        <th>DATE</th>
+
+                        <th>TPO</th>
+
+                        <th>AUTHORITY</th>
+
+                        <th>FINAL</th>
+
+                        <th>ACTION</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="startupIdeasTableBody">
+                    <!-- JS DATA -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE FOOTER
+        ================================================== -->
+        <div class="table-footer">
+
+            <span id="startupIdeasResultCount">
+                Showing 0 ideas
+            </span>
+
+            <span>
+                College:
+                <strong>
+                    {{ session.get("college_code", "PCE") }}
+                </strong>
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+    ====================================================== -->
+    <div
+        class="startup-ideas-modal"
+        id="startupIdeasDetailsModal"
+        hidden>
+
+        <div class="startup-ideas-modal-overlay"></div>
+
+
+        <div class="startup-ideas-modal-card">
+
+            <!-- MODAL HEADER -->
+            <div class="startup-ideas-modal-header">
+
+                <div>
+
+                    <span>
+                        STARTUP IDEA REVIEW
+                    </span>
+
+                    <h2>
+                        Idea Details
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeStartupIdeasDetails"
+                    aria-label="Close">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <!-- MODAL BODY -->
+            <div
+                class="startup-ideas-modal-body"
+                id="startupIdeasDetailsBody">
+
+            </div>
+
+
+            <!-- MODAL FOOTER -->
+            <div class="startup-ideas-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="closeStartupIdeasDetailsBottom">
+
+                    Close
+
+                </button>
 
             </div>
 
@@ -230,580 +425,109 @@
     </div>
 
 
-    <!-- IDEA CATEGORY -->
+    <!-- =====================================================
+         REJECT MODAL
+    ====================================================== -->
+    <div
+        class="startup-ideas-modal"
+        id="startupIdeasRejectModal"
+        hidden>
 
-    <section class="report-card category-card">
+        <div class="startup-ideas-modal-overlay"></div>
 
-        <div class="card-header">
 
-            <div>
+        <div class="startup-ideas-modal-card reject-modal-card">
 
-                <h2>
-                    Idea Categories
-                </h2>
+            <!-- HEADER -->
+            <div class="startup-ideas-modal-header">
 
-                <p>
-                    Distribution of submitted startup ideas by category.
-                </p>
+                <div>
+
+                    <span>
+                        AUTHORITY DECISION
+                    </span>
+
+                    <h2>
+                        Reject Startup Idea
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeStartupIdeasReject"
+                    aria-label="Close">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <!-- REJECTION BODY -->
+            <div class="reject-body">
+
+                <label for="startupIdeasRejectReason">
+                    Rejection Reason
+                </label>
+
+
+                <textarea
+                    id="startupIdeasRejectReason"
+                    rows="5"
+                    placeholder="Enter reason for rejecting this startup idea..."></textarea>
+
+
+                <small>
+                    A rejection reason is required.
+                </small>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <div class="startup-ideas-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="cancelStartupIdeasReject">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="reject-confirm-btn"
+                    id="confirmStartupIdeasReject">
+
+                    Reject Idea
+
+                </button>
 
             </div>
 
         </div>
 
+    </div>
 
-        <div class="category-grid">
 
-
-            <div class="category-item">
-
-                <div class="category-icon purple">
-                    ◈
-                </div>
-
-                <div class="category-info">
-
-                    <div class="category-heading">
-
-                        <span>
-                            Technology
-                        </span>
-
-                        <strong>
-                            28
-                        </strong>
-
-                    </div>
-
-                    <div class="category-track">
-
-                        <div
-                            style="width:66%;"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="category-item">
-
-                <div class="category-icon blue">
-                    ◉
-                </div>
-
-                <div class="category-info">
-
-                    <div class="category-heading">
-
-                        <span>
-                            FinTech
-                        </span>
-
-                        <strong>
-                            14
-                        </strong>
-
-                    </div>
-
-                    <div class="category-track">
-
-                        <div
-                            style="width:48%;"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="category-item">
-
-                <div class="category-icon green">
-                    ♻
-                </div>
-
-                <div class="category-info">
-
-                    <div class="category-heading">
-
-                        <span>
-                            Sustainability
-                        </span>
-
-                        <strong>
-                            12
-                        </strong>
-
-                    </div>
-
-                    <div class="category-track">
-
-                        <div
-                            style="width:42%;"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="category-item">
-
-                <div class="category-icon orange">
-                    ♡
-                </div>
-
-                <div class="category-info">
-
-                    <div class="category-heading">
-
-                        <span>
-                            Healthcare
-                        </span>
-
-                        <strong>
-                            10
-                        </strong>
-
-                    </div>
-
-                    <div class="category-track">
-
-                        <div
-                            style="width:36%;"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- STARTUP IDEAS TABLE -->
-
-    <section class="report-card startup-table-card">
-
-        <div class="card-header">
-
-            <div>
-
-                <h2>
-                    Submitted Startup Ideas
-                </h2>
-
-                <p>
-                    Review startup proposals submitted by student teams.
-                </p>
-
-            </div>
-
-
-            <div class="search-box">
-
-                <span>
-                    ⌕
-                </span>
-
-                <input
-                    type="text"
-                    id="ideaSearch"
-                    placeholder="Search idea or student..."
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="table-wrapper">
-
-            <table class="startup-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            STARTUP IDEA
-                        </th>
-
-                        <th>
-                            TEAM LEAD
-                        </th>
-
-                        <th>
-                            BRANCH
-                        </th>
-
-                        <th>
-                            TEAM
-                        </th>
-
-                        <th>
-                            CATEGORY
-                        </th>
-
-                        <th>
-                            SUBMITTED
-                        </th>
-
-                        <th>
-                            STATUS
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="startupTableBody">
-
-
-                    <tr
-                        data-status="approved"
-                        data-search="smart campus arjun sharma"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Smart Campus
-                            </strong>
-
-                            <small>
-                                AI-powered campus management platform
-                            </small>
-
-                        </td>
-
-                        <td>
-                            Arjun Sharma
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            4 Students
-                        </td>
-
-                        <td>
-
-                            <span class="category-badge technology">
-                                Technology
-                            </span>
-
-                        </td>
-
-                        <td>
-                            08 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge approved">
-                                Approved
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="review"
-                        data-search="finpay rohit meena fintech"
-                    >
-
-                        <td>
-
-                            <strong>
-                                FinPay
-                            </strong>
-
-                            <small>
-                                Digital payment solution for students
-                            </small>
-
-                        </td>
-
-                        <td>
-                            Rohit Meena
-                        </td>
-
-                        <td>
-                            IT
-                        </td>
-
-                        <td>
-                            3 Students
-                        </td>
-
-                        <td>
-
-                            <span class="category-badge fintech">
-                                FinTech
-                            </span>
-
-                        </td>
-
-                        <td>
-                            14 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge review">
-                                Under Review
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="submitted"
-                        data-search="greenride neha joshi sustainability"
-                    >
-
-                        <td>
-
-                            <strong>
-                                GreenRide
-                            </strong>
-
-                            <small>
-                                Sustainable student transportation platform
-                            </small>
-
-                        </td>
-
-                        <td>
-                            Neha Joshi
-                        </td>
-
-                        <td>
-                            ECE
-                        </td>
-
-                        <td>
-                            5 Students
-                        </td>
-
-                        <td>
-
-                            <span class="category-badge sustainability">
-                                Sustainability
-                            </span>
-
-                        </td>
-
-                        <td>
-                            19 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge submitted">
-                                Submitted
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="approved"
-                        data-search="mediconnect simran kaur healthcare"
-                    >
-
-                        <td>
-
-                            <strong>
-                                MediConnect
-                            </strong>
-
-                            <small>
-                                Student-focused healthcare platform
-                            </small>
-
-                        </td>
-
-                        <td>
-                            Simran Kaur
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            4 Students
-                        </td>
-
-                        <td>
-
-                            <span class="category-badge healthcare">
-                                Healthcare
-                            </span>
-
-                        </td>
-
-                        <td>
-                            05 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge approved">
-                                Approved
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="rejected"
-                        data-search="farmconnect aman kumar sustainability"
-                    >
-
-                        <td>
-
-                            <strong>
-                                FarmConnect
-                            </strong>
-
-                            <small>
-                                Digital platform connecting farmers and buyers
-                            </small>
-
-                        </td>
-
-                        <td>
-                            Aman Kumar
-                        </td>
-
-                        <td>
-                            ME
-                        </td>
-
-                        <td>
-                            3 Students
-                        </td>
-
-                        <td>
-
-                            <span class="category-badge sustainability">
-                                Sustainability
-                            </span>
-
-                        </td>
-
-                        <td>
-                            02 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge rejected">
-                                Rejected
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="review"
-                        data-search="skillbridge priya meena technology"
-                    >
-
-                        <td>
-
-                            <strong>
-                                SkillBridge
-                            </strong>
-
-                            <small>
-                                Industry-ready skill development platform
-                            </small>
-
-                        </td>
-
-                        <td>
-                            Priya Meena
-                        </td>
-
-                        <td>
-                            IT
-                        </td>
-
-                        <td>
-                            4 Students
-                        </td>
-
-                        <td>
-
-                            <span class="category-badge technology">
-                                Technology
-                            </span>
-
-                        </td>
-
-                        <td>
-                            21 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge review">
-                                Under Review
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
+    <!-- =====================================================
+         PAGE FOOTER
+    ====================================================== -->
     <div class="reports-footer">
 
         <span>
-            Report generated for
-            <strong id="footerYear">
-                2026-27
-            </strong>
+            Campus Placement Portal
         </span>
 
         <span>
-            Campus Placement Portal
+            Authority Startup Ideas Management
         </span>
 
     </div>
@@ -811,8 +535,6 @@
 </div>
 
 
-<script
-    src="{{ url_for('static', filename='js/authority/startup_ideas.js') }}"
-></script>
+<script src="{{ url_for('static', filename='js/authority/startup_ideas.js') }}"></script>
 
 {% endblock %}

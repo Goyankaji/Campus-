@@ -1,0 +1,830 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   TPO — PRE-PLACED STUDENTS
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.preplaced-content {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 24px 28px 40px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.preplaced-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.preplaced-eyebrow {
+    margin-bottom: 6px;
+    color: #8b5cf6;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.preplaced-page-header h1 {
+    margin: 0 0 6px;
+    color: var(--text-main, #172033);
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.preplaced-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-secondary, #64748b);
+    font-size: 9px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   APPROVAL BANNER
+========================================================= */
+
+.preplaced-approval-banner {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 18px;
+    padding: 13px 16px;
+    border: 1px solid rgba(124, 58, 237, .15);
+    border-radius: 11px;
+    background: rgba(124, 58, 237, .035);
+}
+
+.preplaced-approval-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: rgba(124, 58, 237, .10);
+    color: #8b5cf6;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.preplaced-approval-content {
+    flex: 1;
+}
+
+.preplaced-approval-title {
+    margin-bottom: 4px;
+    color: var(--text-main, #172033);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.preplaced-approval-description {
+    color: var(--text-secondary, #64748b);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.preplaced-approval-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 9px;
+    border-radius: 7px;
+    background: rgba(16, 185, 129, .08);
+    color: #10b981;
+    font-size: 8px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.preplaced-approval-status span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #10b981;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.preplaced-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 17px;
+}
+
+.preplaced-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 70px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    border: 1px solid rgba(120, 130, 160, .12);
+    border-radius: 11px;
+    background: var(--card-bg, #ffffff);
+}
+
+.preplaced-stat-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.preplaced-stat-icon.purple {
+    background: rgba(124, 58, 237, .10);
+    color: #8b5cf6;
+}
+
+.preplaced-stat-icon.orange {
+    background: rgba(245, 158, 11, .10);
+    color: #f59e0b;
+}
+
+.preplaced-stat-icon.blue {
+    background: rgba(59, 130, 246, .10);
+    color: #3b82f6;
+}
+
+.preplaced-stat-icon.green {
+    background: rgba(16, 185, 129, .10);
+    color: #10b981;
+}
+
+.preplaced-stat-card span {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-secondary, #64748b);
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .08em;
+}
+
+.preplaced-stat-card strong {
+    color: var(--text-main, #172033);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.preplaced-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.preplaced-search {
+    position: relative;
+    flex: 1;
+}
+
+.preplaced-search > span {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary, #64748b);
+    font-size: 13px;
+    opacity: .55;
+}
+
+.preplaced-search input,
+.preplaced-filter-bar select {
+    height: 37px;
+    box-sizing: border-box;
+    border: 1px solid rgba(120, 130, 160, .15);
+    border-radius: 8px;
+    outline: none;
+    background: var(--card-bg, #ffffff);
+    color: var(--text-main, #172033);
+    font-family: inherit;
+    font-size: 9px;
+}
+
+.preplaced-search input {
+    width: 100%;
+    padding: 0 11px 0 32px;
+}
+
+.preplaced-filter-bar select {
+    min-width: 155px;
+    padding: 0 10px;
+}
+
+.preplaced-filter-bar select option {
+    background: #ffffff;
+    color: #172033;
+}
+
+.preplaced-search input:focus,
+.preplaced-filter-bar select:focus {
+    border-color: rgba(124, 58, 237, .38);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, .055);
+}
+
+.preplaced-reset-btn {
+    height: 37px;
+    padding: 0 12px;
+    border: 1px solid rgba(120, 130, 160, .15);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary, #64748b);
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.preplaced-table-card {
+    overflow: hidden;
+    border: 1px solid rgba(120, 130, 160, .12);
+    border-radius: 12px;
+    background: var(--card-bg, #ffffff);
+}
+
+.preplaced-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 19px;
+    border-bottom: 1px solid rgba(120, 130, 160, .10);
+}
+
+.preplaced-table-header > div:first-child span {
+    display: block;
+    margin-bottom: 5px;
+    color: #8b5cf6;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .11em;
+}
+
+.preplaced-table-header h2 {
+    margin: 0;
+    color: var(--text-main, #172033);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.preplaced-table-header p {
+    margin: 5px 0 0;
+    color: var(--text-secondary, #64748b);
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   REQUEST COUNT
+========================================================= */
+
+#preplacedCount {
+    color: var(--text-secondary, #64748b);
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.preplaced-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.preplaced-table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+}
+
+.preplaced-table th {
+    padding: 11px 13px;
+    border-bottom: 1px solid rgba(120, 130, 160, .10);
+    color: var(--text-secondary, #64748b);
+    text-align: left;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    white-space: nowrap;
+}
+
+.preplaced-table td {
+    padding: 13px;
+    border-bottom: 1px solid rgba(120, 130, 160, .075);
+    color: var(--text-main, #172033);
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.preplaced-table tbody tr {
+    transition: background .18s ease;
+}
+
+.preplaced-table tbody tr:hover {
+    background: rgba(124, 58, 237, .025);
+}
+
+
+/* =========================================================
+   STUDENT
+========================================================= */
+
+.preplaced-student {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.preplaced-avatar {
+    width: 31px;
+    height: 31px;
+    min-width: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(124, 58, 237, .10);
+    color: #8b5cf6;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.preplaced-student strong {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.preplaced-student span {
+    display: block;
+    margin-top: 3px;
+    color: var(--text-secondary, #64748b);
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.preplaced-company strong {
+    display: block;
+    max-width: 185px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-main, #172033);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.preplaced-company span {
+    display: block;
+    max-width: 185px;
+    overflow: hidden;
+    margin-top: 3px;
+    color: var(--text-secondary, #64748b);
+    text-overflow: ellipsis;
+    font-size: 7px;
+}
+
+.preplaced-type {
+    font-weight: 700;
+}
+
+.preplaced-package {
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.preplaced-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 7px;
+    font-weight: 800;
+}
+
+.preplaced-status.pending {
+    background: rgba(245, 158, 11, .10);
+    color: #d97706;
+}
+
+.preplaced-status.approved {
+    background: rgba(16, 185, 129, .10);
+    color: #059669;
+}
+
+.preplaced-status.rejected {
+    background: rgba(239, 68, 68, .10);
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.preplaced-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.preplaced-action-btn {
+    height: 27px;
+    padding: 0 8px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 7px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.preplaced-view-btn {
+    border: 1px solid rgba(120, 130, 160, .16);
+    background: transparent;
+    color: var(--text-secondary, #64748b);
+}
+
+.preplaced-approve-btn {
+    border: 1px solid rgba(16, 185, 129, .20);
+    background: rgba(16, 185, 129, .07);
+    color: #059669;
+}
+
+.preplaced-reject-btn {
+    border: 1px solid rgba(239, 68, 68, .20);
+    background: rgba(239, 68, 68, .07);
+    color: #dc2626;
+}
+
+.preplaced-action-btn:hover {
+    filter: brightness(1.06);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.preplaced-empty-state {
+    min-height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.preplaced-empty-state > div {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    border-radius: 10px;
+    background: rgba(124, 58, 237, .08);
+    color: #8b5cf6;
+    font-size: 14px;
+}
+
+.preplaced-empty-state strong {
+    color: var(--text-main, #172033);
+    font-size: 10px;
+}
+
+.preplaced-empty-state span {
+    color: var(--text-secondary, #64748b);
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.preplaced-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+}
+
+.preplaced-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, .62);
+    backdrop-filter: blur(4px);
+}
+
+.preplaced-modal-card {
+    position: relative;
+    width: min(820px, calc(100% - 30px));
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+    margin: 25px auto;
+    border: 1px solid rgba(120, 130, 160, .14);
+    border-radius: 14px;
+    background: var(--card-bg, #ffffff);
+    color: var(--text-main, #172033);
+    box-shadow: 0 25px 70px rgba(15, 23, 42, .25);
+}
+
+.preplaced-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(120, 130, 160, .10);
+}
+
+.preplaced-modal-header span {
+    display: block;
+    margin-bottom: 5px;
+    color: #8b5cf6;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .11em;
+}
+
+.preplaced-modal-header h2 {
+    margin: 0;
+    color: var(--text-main, #172033);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.preplaced-modal-close {
+    width: 29px;
+    height: 29px;
+    border: 0;
+    border-radius: 7px;
+    background: rgba(15, 23, 42, .06);
+    color: var(--text-main, #172033);
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.preplaced-modal-body {
+    padding: 19px;
+}
+
+
+/* =========================================================
+   DETAIL GRID
+========================================================= */
+
+.preplaced-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.preplaced-detail-item {
+    padding: 11px;
+    border: 1px solid rgba(120, 130, 160, .10);
+    border-radius: 8px;
+    background: rgba(120, 130, 160, .025);
+}
+
+.preplaced-detail-item.full {
+    grid-column: 1 / -1;
+}
+
+.preplaced-detail-item span {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-secondary, #64748b);
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .07em;
+}
+
+.preplaced-detail-item strong {
+    color: var(--text-main, #172033);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.55;
+    white-space: normal;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.preplaced-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 14px 20px;
+    border-top: 1px solid rgba(120, 130, 160, .10);
+}
+
+.preplaced-secondary-btn {
+    height: 33px;
+    padding: 0 13px;
+    border: 1px solid rgba(120, 130, 160, .16);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-secondary, #64748b);
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   REJECT MODAL
+========================================================= */
+
+.preplaced-reject-body {
+    padding: 19px;
+}
+
+.preplaced-reject-body label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--text-main, #172033);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.preplaced-reject-body textarea {
+    width: 100%;
+    min-height: 115px;
+    box-sizing: border-box;
+    padding: 10px;
+    resize: vertical;
+    border: 1px solid rgba(120, 130, 160, .16);
+    border-radius: 8px;
+    outline: none;
+    background: var(--card-bg, #ffffff);
+    color: var(--text-main, #172033);
+    font-family: inherit;
+    font-size: 9px;
+}
+
+.preplaced-reject-body textarea:focus {
+    border-color: rgba(124, 58, 237, .38);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, .05);
+}
+
+.preplaced-reject-body small {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-secondary, #64748b);
+    font-size: 7px;
+}
+
+.preplaced-danger-btn {
+    height: 33px;
+    padding: 0 13px;
+    border: 1px solid rgba(239, 68, 68, .20);
+    border-radius: 7px;
+    background: rgba(239, 68, 68, .07);
+    color: #dc2626;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 800;
+    cursor: pointer;
+}
+/* =========================================================
+   PRE-PLACED — DARK THEME
+========================================================= */
+
+body.dark-theme .preplaced-content {
+    color: #f4f5ff;
+}
+
+body.dark-theme .preplaced-page-header h1,
+body.dark-theme .preplaced-approval-title,
+body.dark-theme .preplaced-stat-card strong,
+body.dark-theme .preplaced-table-header h2,
+body.dark-theme .preplaced-table td,
+body.dark-theme .preplaced-company strong,
+body.dark-theme .preplaced-empty-state strong {
+    color: #f4f5ff;
+}
+
+body.dark-theme .preplaced-breadcrumb,
+body.dark-theme .preplaced-approval-description,
+body.dark-theme .preplaced-stat-card span,
+body.dark-theme .preplaced-table-header p,
+body.dark-theme #preplacedCount,
+body.dark-theme .preplaced-student span,
+body.dark-theme .preplaced-company span {
+    color: rgba(255,255,255,.55);
+}
+
+body.dark-theme .preplaced-stat-card,
+body.dark-theme .preplaced-table-card {
+    background: #11182b;
+    border-color: rgba(255,255,255,.09);
+}
+
+body.dark-theme .preplaced-search input,
+body.dark-theme .preplaced-filter-bar select {
+    background: #0d1426;
+    color: #f4f5ff;
+    border-color: rgba(255,255,255,.10);
+}
+
+body.dark-theme .preplaced-search input::placeholder {
+    color: rgba(255,255,255,.38);
+}
+
+body.dark-theme .preplaced-filter-bar select option {
+    background: #11182b;
+    color: #ffffff;
+}
+
+body.dark-theme .preplaced-table th {
+    color: rgba(255,255,255,.45);
+}
+
+body.dark-theme .preplaced-table td {
+    border-bottom-color: rgba(255,255,255,.07);
+}
+
+body.dark-theme .preplaced-table tbody tr:hover {
+    background: rgba(124,58,237,.045);
+}
+
+body.dark-theme .preplaced-approval-banner {
+    background: rgba(124,58,237,.055);
+    border-color: rgba(124,58,237,.18);
+}
+
+body.dark-theme .preplaced-modal-card {
+    background: #11182b;
+    color: #f4f5ff;
+}
+
+body.dark-theme .preplaced-detail-item {
+    background: rgba(255,255,255,.025);
+    border-color: rgba(255,255,255,.08);
+}
+
+body.dark-theme .preplaced-detail-item span {
+    color: rgba(255,255,255,.45);
+}
+
+body.dark-theme .preplaced-detail-item strong {
+    color: #f4f5ff;
+}

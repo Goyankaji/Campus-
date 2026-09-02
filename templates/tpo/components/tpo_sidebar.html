@@ -80,6 +80,8 @@
         </div>
 
 
+        <!-- DASHBOARD -->
+
         <a
             href="{{ url_for('tpo_dashboard') }}"
             class="nav-item
@@ -108,7 +110,7 @@
         </div>
 
 
-        <!-- Placement Overview -->
+        <!-- PLACEMENT OVERVIEW -->
 
         <a
             href="{{ url_for('tpo_placement_overview') }}"
@@ -132,7 +134,7 @@
         </a>
 
 
-        <!-- Students -->
+        <!-- STUDENTS -->
 
         <a
             href="{{ url_for('tpo_students') }}"
@@ -153,7 +155,7 @@
         </a>
 
 
-        <!-- Companies -->
+        <!-- COMPANIES -->
 
         <a
             href="{{ url_for('tpo_companies') }}"
@@ -174,7 +176,7 @@
         </a>
 
 
-        <!-- Placement Drives -->
+        <!-- PLACEMENT DRIVES -->
 
         <a
             href="{{ url_for('tpo_placement_drives') }}"
@@ -195,7 +197,7 @@
         </a>
 
 
-        <!-- Applications -->
+        <!-- APPLICATIONS -->
 
         <a
             href="{{ url_for('tpo_applications') }}"
@@ -216,7 +218,7 @@
         </a>
 
 
-        <!-- Shortlisted Students -->
+        <!-- SHORTLISTED STUDENTS -->
 
         <a
             href="{{ url_for('tpo_shortlisted_students') }}"
@@ -237,7 +239,7 @@
         </a>
 
 
-        <!-- Interviews -->
+        <!-- INTERVIEWS -->
 
         <a
             href="{{ url_for('tpo_interviews') }}"
@@ -258,7 +260,7 @@
         </a>
 
 
-        <!-- Offers & Joining -->
+        <!-- OFFERS & JOINING -->
 
         <a
             href="{{ url_for('tpo_offers') }}"
@@ -288,100 +290,85 @@
         </div>
 
 
-        <!-- Off Campus -->
+        <!-- OFF CAMPUS -->
 
         <a
-            href="#"
+            href="{{ url_for('tpo_off_campus') }}"
             class="nav-item
             {% if request.endpoint == 'tpo_off_campus' %}
                 active
             {% endif %}"
-            data-coming-soon="true"
         >
 
             <span class="nav-icon">
-                ↗
+                ◇
             </span>
 
             <span>
                 Off Campus
             </span>
 
-            <span class="nav-badge new-badge">
-                NEW
-            </span>
-
         </a>
 
 
-        <!-- Pre-Placed -->
+        <!-- PRE-PLACED -->
 
         <a
-            href="#"
+            href="{{ url_for('tpo_pre_placed') }}"
             class="nav-item
             {% if request.endpoint == 'tpo_pre_placed' %}
                 active
             {% endif %}"
-            data-coming-soon="true"
         >
 
             <span class="nav-icon">
-                ★
+                ◈
             </span>
 
             <span>
                 Pre-Placed
             </span>
 
-            <span class="nav-badge new-badge">
-                NEW
+        </a>
+
+
+        <!-- NOC -->
+
+        <a
+            href="{{ url_for('tpo_noc') }}"
+            class="nav-item
+            {% if request.endpoint == 'tpo_noc' %}
+                active
+            {% endif %}"
+        >
+
+            <span class="nav-icon">
+                ▧
+            </span>
+
+            <span>
+                NOC
             </span>
 
         </a>
 
 
-        <!-- =====================================================
-     NOC
-====================================================== -->
-
-<a
-    href="{{ url_for('tpo_noc') }}"
-    class="tpo-nav-link
-    {% if request.endpoint == 'tpo_noc' %}active{% endif %}"
->
-
-    <span class="tpo-nav-icon noc-sidebar-icon">
-        ◇
-    </span>
-
-    <span class="tpo-nav-text">
-        NOC
-    </span>
-
-</a>
-
-
-        <!-- Startups -->
+        <!-- STARTUP IDEAS -->
 
         <a
-            href="#"
+            href="{{ url_for('tpo_startup_ideas') }}"
             class="nav-item
-            {% if request.endpoint == 'tpo_startups' %}
+            {% if request.endpoint == 'tpo_startup_ideas' %}
                 active
             {% endif %}"
-            data-coming-soon="true"
         >
 
             <span class="nav-icon">
-                ✦
+                ◆
             </span>
 
             <span>
-                Startups
-            </span>
-
-            <span class="nav-badge new-badge">
-                NEW
+                Startup Ideas
             </span>
 
         </a>
@@ -396,7 +383,7 @@
         </div>
 
 
-        <!-- Preparation Materials -->
+        <!-- PREPARATION MATERIALS -->
 
         <a
             href="{{ url_for('tpo_preparation') }}"
@@ -430,7 +417,7 @@
         </div>
 
 
-        <!-- Placed Students -->
+        <!-- PLACED STUDENTS -->
 
         <a
             href="{{ url_for('tpo_placed_students') }}"
@@ -451,7 +438,7 @@
         </a>
 
 
-        <!-- Reports -->
+        <!-- REPORTS -->
 
         <a
             href="{{ url_for('tpo_reports') }}"
@@ -481,7 +468,7 @@
         </div>
 
 
-        <!-- Notifications -->
+        <!-- NOTIFICATIONS -->
 
         <a
             href="{{ url_for('tpo_notifications') }}"
@@ -506,7 +493,7 @@
         </a>
 
 
-        <!-- Announcements -->
+        <!-- ANNOUNCEMENTS -->
 
         <a
             href="{{ url_for('tpo_announcements') }}"
@@ -531,7 +518,7 @@
         </a>
 
 
-        <!-- Settings -->
+        <!-- SETTINGS -->
 
         <a
             href="{{ url_for('tpo_settings') }}"
@@ -552,7 +539,7 @@
         </a>
 
 
-        <!-- Logout -->
+        <!-- LOGOUT -->
 
         <a
             href="{{ url_for('logout') }}"
@@ -592,38 +579,5 @@
 
 
     </nav>
-<style>
 
-    .tpo-nav-link {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .tpo-nav-icon {
-        width: 18px;
-        min-width: 18px;
-
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 11px;
-        line-height: 1;
-    }
-
-    .tpo-nav-text {
-        display: inline-flex;
-        align-items: center;
-
-        font-size: 11px;
-        font-weight: 600;
-        line-height: 1;
-    }
-
-    .noc-sidebar-icon {
-        font-size: 12px;
-    }
-
-</style>
 </aside>

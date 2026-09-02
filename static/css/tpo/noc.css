@@ -1328,194 +1328,102 @@
     }
 
 }
-
-
 /* =========================================================
-   TPO DARK / LIGHT THEME
+   NOC — DARK THEME
+   Theme class used by TPO Topbar JS: dark-theme
 ========================================================= */
 
-
-/* =========================
-   LIGHT THEME
-========================= */
-
-body:not(.dark-theme) .noc-content {
-    background: #f5f7fb;
+body.dark-theme .noc-content,
+body.dark-theme .noc-page {
+    background: #0b1224;
+    color: #f4f5ff;
 }
 
-body:not(.dark-theme) .noc-stat-card,
-body:not(.dark-theme) .noc-filter-card,
-body:not(.dark-theme) .noc-table-card {
-
-    background: #ffffff;
-
-    border-color:
-        rgba(30, 41, 59, .10);
-
-    box-shadow:
-        0 8px 25px
-        rgba(15, 23, 42, .05);
-
+body.dark-theme .noc-content h1,
+body.dark-theme .noc-content h2,
+body.dark-theme .noc-content h3,
+body.dark-theme .noc-card h1,
+body.dark-theme .noc-card h2,
+body.dark-theme .noc-card h3,
+body.dark-theme .noc-table-card h2 {
+    color: #f4f5ff;
 }
 
-body:not(.dark-theme) .noc-page-header h1,
-body:not(.dark-theme) .noc-table-header h2 {
-
-    color: #172033;
-
+body.dark-theme .noc-content p,
+body.dark-theme .noc-content span,
+body.dark-theme .noc-breadcrumb,
+body.dark-theme .noc-count {
+    color: rgba(255,255,255,.58);
 }
 
-body:not(.dark-theme) .noc-page-header,
-body:not(.dark-theme) .noc-table-card,
-body:not(.dark-theme) .noc-filter-card {
-
-    color: #172033;
-
-}
-
-
-body:not(.dark-theme) .noc-search,
-body:not(.dark-theme) .noc-filter-card select {
-
-    background: #ffffff;
-
-    border-color:
-        rgba(30, 41, 59, .13);
-
-    color: #172033;
-
-}
-
-
-body:not(.dark-theme) .noc-search input {
-
-    color: #172033;
-
-}
-
-
-body:not(.dark-theme) .noc-table th {
-
-    color: #475569;
-
-}
-
-
-body:not(.dark-theme) .noc-table td {
-
-    color: #334155;
-
-    border-bottom-color:
-        rgba(30, 41, 59, .08);
-
-}
-
-
-body:not(.dark-theme) .noc-modal-card {
-
-    background: #ffffff;
-
-    color: #172033;
-
-}
-
-
-body:not(.dark-theme) .noc-detail-item {
-
-    background: #f8fafc;
-
-    border-color:
-        rgba(30, 41, 59, .10);
-
-}
-
-
-/* =========================
-   DARK THEME
-========================= */
-
-body.dark-theme .noc-content {
-
-    background: #080f21;
-
-}
-
-
+body.dark-theme .noc-card,
+body.dark-theme .noc-table-card,
 body.dark-theme .noc-stat-card,
-body.dark-theme .noc-filter-card,
-body.dark-theme .noc-table-card {
-
-    background:
-        rgba(255, 255, 255, .025);
-
-    border-color:
-        rgba(120, 120, 145, .15);
-
+body.dark-theme .noc-filter-bar,
+body.dark-theme .noc-request-card {
+    background: #11182b;
+    border-color: rgba(255,255,255,.09);
 }
 
+body.dark-theme .noc-table th {
+    color: rgba(255,255,255,.45);
+    border-bottom-color: rgba(255,255,255,.08);
+}
+
+body.dark-theme .noc-table td {
+    color: #f4f5ff;
+    border-bottom-color: rgba(255,255,255,.07);
+}
+
+body.dark-theme .noc-table tbody tr:hover {
+    background: rgba(124,58,237,.045);
+}
+
+body.dark-theme .noc-search input,
+body.dark-theme .noc-filter-bar select {
+    background: #0d1426;
+    color: #f4f5ff;
+    border-color: rgba(255,255,255,.10);
+}
+
+body.dark-theme .noc-search input::placeholder {
+    color: rgba(255,255,255,.38);
+}
+
+body.dark-theme .noc-filter-bar select option {
+    background: #11182b;
+    color: #ffffff;
+}
+
+body.dark-theme .noc-approval-banner {
+    background: rgba(124,58,237,.055);
+    border-color: rgba(124,58,237,.20);
+}
 
 body.dark-theme .noc-modal-card {
-
-    background: #151a2c;
-
-    color: #ffffff;
-
-}
-/* =========================================================
-   APPROVAL BANNER — LIGHT MODE FIX
-========================================================= */
-
-body:not(.dark-theme) .noc-approval-banner {
-
-    background: #f8f7ff;
-
-    border-color: rgba(124, 58, 237, .18);
-
+    background: #11182b;
+    color: #f4f5ff;
 }
 
-
-body:not(.dark-theme) .noc-approval-icon {
-
-    background: rgba(124, 58, 237, .12);
-
-    color: #7c3aed;
-
+body.dark-theme .noc-modal-card h2,
+body.dark-theme .noc-modal-card strong {
+    color: #f4f5ff;
 }
 
-
-body:not(.dark-theme) .noc-approval-title {
-
-    color: #172033;
-
-    font-size: 12px;
-
-    font-weight: 800;
-
+body.dark-theme .noc-modal-card p,
+body.dark-theme .noc-modal-card span {
+    color: rgba(255,255,255,.58);
 }
 
-
-body:not(.dark-theme) .noc-approval-description {
-
-    color: #64748b;
-
-    font-size: 10px;
-
-    font-weight: 500;
-
+body.dark-theme .noc-detail-item {
+    background: rgba(255,255,255,.025);
+    border-color: rgba(255,255,255,.08);
 }
 
-
-body:not(.dark-theme) .noc-approval-status {
-
-    background: rgba(16, 185, 129, .10);
-
-    color: #059669;
-
+body.dark-theme .noc-detail-item span {
+    color: rgba(255,255,255,.45);
 }
 
-
-body:not(.dark-theme) .noc-approval-status span {
-
-    background: #10b981;
-
+body.dark-theme .noc-detail-item strong {
+    color: #f4f5ff;
 }

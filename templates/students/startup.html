@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b1224"
+    >
+
+    <title>
+        Startup | Campus
+    </title>
+
+
+    <!-- =====================================================
+         COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/common.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         STARTUP CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/student/startup.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="student-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    {% include 'students/components/sidebar.html' %}
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="student-main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        {% include 'students/components/topbar.html' %}
+
+
+        <!-- =================================================
+             STARTUP PAGE
+        ================================================== -->
+
+        <div class="student-startup-page">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="student-startup-header">
+
+                <div>
+
+                    <span class="student-startup-eyebrow">
+                        ENTREPRENEURSHIP
+                    </span>
+
+                    <h1>
+                        Startup
+                    </h1>
+
+                    <p>
+                        Submit your startup idea and track its
+                        institutional approval status.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="student-startup-primary-btn"
+                    data-open-startup-form
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    New Application
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPROVAL FLOW
+            ================================================== -->
+
+            <section class="student-startup-flow-card">
+
+                <div class="student-startup-flow-heading">
+
+                    <span>
+                        TWO-LEVEL APPROVAL
+                    </span>
+
+                    <h2>
+                        Startup Approval Process
+                    </h2>
+
+                </div>
+
+
+                <div class="student-startup-flow">
+
+
+                    <!-- STEP 1 -->
+
+                    <div class="student-startup-flow-step">
+
+                        <div class="student-startup-flow-number">
+                            01
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Student Application
+                            </strong>
+
+                            <p>
+                                Submit startup details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-startup-flow-line"></div>
+
+
+                    <!-- STEP 2 -->
+
+                    <div class="student-startup-flow-step">
+
+                        <div class="student-startup-flow-number">
+                            02
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                TPO Approval
+                            </strong>
+
+                            <p>
+                                TPO reviews the proposal.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-startup-flow-line"></div>
+
+
+                    <!-- STEP 3 -->
+
+                    <div class="student-startup-flow-step">
+
+                        <div class="student-startup-flow-number">
+                            03
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Authority Approval
+                            </strong>
+
+                            <p>
+                                Final institutional review.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-startup-flow-line"></div>
+
+
+                    <!-- STEP 4 -->
+
+                    <div class="student-startup-flow-step">
+
+                        <div
+                            class="
+                                student-startup-flow-number
+                                final
+                            "
+                        >
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Approved
+                            </strong>
+
+                            <p>
+                                Startup application approved.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FLASH MESSAGES
+            ================================================== -->
+
+            {% with messages =
+                get_flashed_messages(
+                    with_categories=true
+                )
+            %}
+
+                {% if messages %}
+
+                    <div class="student-startup-alerts">
+
+                        {% for category, message in messages %}
+
+                            <div
+                                class="
+                                    student-startup-alert
+                                    {{ category }}
+                                "
+                            >
+
+                                {{ message }}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- =================================================
+                 APPLICATION SECTION
+            ================================================== -->
+
+            <section class="student-startup-applications">
+
+
+                <div class="student-startup-section-header">
+
+                    <div>
+
+                        <span>
+                            MY APPLICATIONS
+                        </span>
+
+                        <h2>
+                            Startup Applications
+                        </h2>
+
+                    </div>
+
+
+                    <span class="student-startup-count">
+
+                        {{ applications|length }}
+
+                        Application{% if applications|length != 1 %}s{% endif %}
+
+                    </span>
+
+                </div>
+
+
+                {% if applications %}
+
+
+                    <div class="student-startup-list">
+
+
+                        {% for application in applications %}
+
+
+                            <!-- =================================================
+                                 APPLICATION CARD
+                            ================================================== -->
+
+                            <article
+                                class="
+                                    student-startup-application
+                                "
+                                data-startup-id="
+                                    {{ application.startup_id }}
+                                "
+                            >
+
+
+                                <!-- =============================================
+                                     HEADER
+                                ============================================== -->
+
+                                <div
+                                    class="
+                                        student-startup-application-header
+                                    "
+                                >
+
+                                    <div>
+
+                                        <span
+                                            class="
+                                                student-startup-application-id
+                                            "
+                                        >
+
+                                            APPLICATION #
+
+                                            {{ application.startup_id }}
+
+                                        </span>
+
+
+                                        <h3>
+                                            {{ application.startup_name }}
+                                        </h3>
+
+
+                                        {% if
+                                            application.startup_category
+                                        %}
+
+                                            <p>
+
+                                                {{
+                                                    application.startup_category
+                                                }}
+
+                                                {% if
+                                                    application.startup_stage
+                                                %}
+
+                                                    ·
+
+                                                    {{
+                                                        application.startup_stage
+                                                    }}
+
+                                                {% endif %}
+
+                                            </p>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <!-- FINAL STATUS -->
+
+                                    <span
+                                        class="
+                                            student-startup-status
+                                            {{ application.final_status|lower }}
+                                        "
+                                    >
+
+                                        {% if
+                                            application.final_status ==
+                                            'PENDING_TPO'
+                                        %}
+
+                                            Pending TPO
+
+                                        {% elif
+                                            application.final_status ==
+                                            'PENDING_AUTHORITY'
+                                        %}
+
+                                            Pending Authority
+
+                                        {% elif
+                                            application.final_status ==
+                                            'APPROVED'
+                                        %}
+
+                                            Approved
+
+                                        {% elif
+                                            application.final_status ==
+                                            'REJECTED'
+                                        %}
+
+                                            Rejected
+
+                                        {% else %}
+
+                                            {{
+                                                application.final_status
+                                                |title
+                                            }}
+
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+
+                                <!-- =============================================
+                                     DESCRIPTION
+                                ============================================== -->
+
+                                <div
+                                    class="
+                                        student-startup-description
+                                    "
+                                >
+
+                                    {{ application.description }}
+
+                                </div>
+
+
+                                <!-- =============================================
+                                     APPROVAL STATUS
+                                ============================================== -->
+
+                                <div
+                                    class="
+                                        student-startup-approval-grid
+                                    "
+                                >
+
+
+                                    <!-- TPO -->
+
+                                    <div
+                                        class="
+                                            student-startup-approval-card
+                                            {{ application.tpo_status|lower }}
+                                        "
+                                    >
+
+                                        <div
+                                            class="
+                                                student-startup-approval-icon
+                                            "
+                                        >
+
+                                            {% if
+                                                application.tpo_status ==
+                                                'APPROVED'
+                                            %}
+
+                                                ✓
+
+                                            {% elif
+                                                application.tpo_status ==
+                                                'REJECTED'
+                                            %}
+
+                                                ×
+
+                                            {% else %}
+
+                                                …
+
+                                            {% endif %}
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <span>
+                                                TPO REVIEW
+                                            </span>
+
+
+                                            <strong>
+
+                                                {% if
+                                                    application.tpo_status ==
+                                                    'APPROVED'
+                                                %}
+
+                                                    Approved
+
+                                                {% elif
+                                                    application.tpo_status ==
+                                                    'REJECTED'
+                                                %}
+
+                                                    Rejected
+
+                                                {% else %}
+
+                                                    Pending
+
+                                                {% endif %}
+
+                                            </strong>
+
+
+                                            {% if
+                                                application.tpo_remarks
+                                            %}
+
+                                                <p>
+                                                    {{
+                                                        application.tpo_remarks
+                                                    }}
+                                                </p>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- AUTHORITY -->
+
+                                    <div
+                                        class="
+                                            student-startup-approval-card
+                                            {{ application.authority_status|lower }}
+                                        "
+                                    >
+
+                                        <div
+                                            class="
+                                                student-startup-approval-icon
+                                            "
+                                        >
+
+                                            {% if
+                                                application.authority_status ==
+                                                'APPROVED'
+                                            %}
+
+                                                ✓
+
+                                            {% elif
+                                                application.authority_status ==
+                                                'REJECTED'
+                                            %}
+
+                                                ×
+
+                                            {% elif
+                                                application.authority_status ==
+                                                'PENDING'
+                                            %}
+
+                                                …
+
+                                            {% else %}
+
+                                                —
+
+                                            {% endif %}
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <span>
+                                                AUTHORITY REVIEW
+                                            </span>
+
+
+                                            <strong>
+
+                                                {% if
+                                                    application.authority_status ==
+                                                    'APPROVED'
+                                                %}
+
+                                                    Approved
+
+                                                {% elif
+                                                    application.authority_status ==
+                                                    'REJECTED'
+                                                %}
+
+                                                    Rejected
+
+                                                {% elif
+                                                    application.authority_status ==
+                                                    'PENDING'
+                                                %}
+
+                                                    Pending
+
+                                                {% else %}
+
+                                                    Not Started
+
+                                                {% endif %}
+
+                                            </strong>
+
+
+                                            {% if
+                                                application.authority_remarks
+                                            %}
+
+                                                <p>
+                                                    {{
+                                                        application.authority_remarks
+                                                    }}
+                                                </p>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <!-- =============================================
+                                     FOOTER
+                                ============================================== -->
+
+                                <div
+                                    class="
+                                        student-startup-application-footer
+                                    "
+                                >
+
+                                    <span>
+
+                                        Submitted
+
+                                        {% if
+                                            application.created_at
+                                        %}
+
+                                            ·
+
+                                            {{
+                                                application.created_at.strftime(
+                                                    '%d %b %Y'
+                                                )
+                                            }}
+
+                                        {% endif %}
+
+                                    </span>
+
+
+                                    <!-- =========================================
+                                         ACTIONS
+                                    ========================================== -->
+
+                                    <div
+                                        class="
+                                            student-startup-application-actions
+                                        "
+                                    >
+
+
+                                        {% if
+                                            application.final_status ==
+                                            'PENDING_TPO'
+                                        %}
+
+
+                                            <!-- EDIT -->
+
+                                            <button
+                                                type="button"
+                                                class="
+                                                    student-startup-action-btn
+                                                    edit
+                                                "
+                                                data-edit-startup
+                                                data-startup-id="
+                                                    {{ application.startup_id }}
+                                                "
+                                                data-startup-name="{{ application.startup_name|e }}"
+                                                data-founder-name="{{ (application.founder_name or '')|e }}"
+                                                data-team-members="{{ (application.team_members or '')|e }}"
+                                                data-category="{{ (application.startup_category or '')|e }}"
+                                                data-stage="{{ (application.startup_stage or '')|e }}"
+                                                data-website="{{ (application.website_url or '')|e }}"
+                                                data-problem="{{ (application.problem_statement or '')|e }}"
+                                                data-solution="{{ (application.proposed_solution or '')|e }}"
+                                                data-description="{{ application.description|e }}"
+                                            >
+
+                                                <i
+                                                    class="
+                                                        fa-solid
+                                                        fa-pen
+                                                    "
+                                                ></i>
+
+                                                Edit
+
+                                            </button>
+
+
+                                            <!-- WITHDRAW -->
+
+                                            <button
+                                                type="button"
+                                                class="
+                                                    student-startup-action-btn
+                                                    delete
+                                                "
+                                                data-withdraw-startup
+                                                data-startup-id="
+                                                    {{ application.startup_id }}
+                                                "
+                                            >
+
+                                                <i
+                                                    class="
+                                                        fa-solid
+                                                        fa-trash
+                                                    "
+                                                ></i>
+
+                                                Withdraw
+
+                                            </button>
+
+
+                                        {% elif
+                                            application.final_status ==
+                                            'APPROVED'
+                                        %}
+
+                                            <span
+                                                class="
+                                                    student-startup-final-message
+                                                "
+                                            >
+
+                                                ✓ Startup approved
+
+                                            </span>
+
+
+                                        {% elif
+                                            application.final_status ==
+                                            'REJECTED'
+                                        %}
+
+                                            <span
+                                                class="
+                                                    student-startup-final-message
+                                                    rejected
+                                                "
+                                            >
+
+                                                Application rejected
+
+                                            </span>
+
+
+                                        {% elif
+                                            application.final_status ==
+                                            'PENDING_AUTHORITY'
+                                        %}
+
+                                            <span>
+
+                                                Waiting for Authority review
+
+                                            </span>
+
+
+                                        {% endif %}
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </article>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <!-- =================================================
+                         EMPTY STATE
+                    ================================================== -->
+
+                    <div class="student-startup-empty">
+
+                        <div
+                            class="
+                                student-startup-empty-icon
+                            "
+                        >
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-rocket
+                                "
+                            ></i>
+
+                        </div>
+
+
+                        <h3>
+                            No startup applications yet
+                        </h3>
+
+
+                        <p>
+                            Have a startup idea?
+                            Submit your first application
+                            for TPO and Authority review.
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="
+                                student-startup-primary-btn
+                            "
+                            data-open-startup-form
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Start Application
+
+                        </button>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     CREATE / EDIT MODAL
+========================================================= -->
+
+<div
+    class="student-startup-modal"
+    data-startup-modal
+>
+
+
+    <!-- BACKDROP -->
+
+    <div
+        class="student-startup-modal-backdrop"
+        data-close-startup-form
+    ></div>
+
+
+    <!-- MODAL -->
+
+    <div class="student-startup-modal-card">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="student-startup-modal-header">
+
+            <div>
+
+                <span>
+                    STARTUP APPLICATION
+                </span>
+
+                <h2 data-startup-modal-title>
+                    Submit Your Startup
+                </h2>
+
+                <p>
+                    Provide accurate information for
+                    institutional review.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="student-startup-modal-close"
+                data-close-startup-form
+            >
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <form
+    method="POST"
+    action="{{ url_for('student_startup') }}"
+    class="student-startup-form"
+    data-startup-form
+    data-create-action="{{ url_for('student_startup') }}"
+>
+
+
+            <!-- STARTUP ID -->
+
+            <input
+                type="hidden"
+                name="startup_id"
+                value=""
+                data-startup-id-input
+            >
+
+
+            <!-- STARTUP NAME -->
+
+            <div
+                class="
+                    student-startup-form-group
+                    full
+                "
+            >
+
+                <label>
+
+                    Startup Name
+
+                    <span>*</span>
+
+                </label>
+
+
+                <input
+                    type="text"
+                    name="startup_name"
+                    maxlength="200"
+                    required
+                    placeholder="Enter your startup name"
+                    data-startup-field="startup_name"
+                >
+
+            </div>
+
+
+            <!-- FOUNDER -->
+
+            <div class="student-startup-form-group">
+
+                <label>
+                    Founder Name
+                </label>
+
+
+                <input
+                    type="text"
+                    name="founder_name"
+                    maxlength="200"
+                    placeholder="Founder / Lead"
+                    data-startup-field="founder_name"
+                >
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="student-startup-form-group">
+
+                <label>
+                    Startup Category
+                </label>
+
+
+                <select
+                    name="startup_category"
+                    data-startup-field="startup_category"
+                >
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option value="Technology">
+                        Technology
+                    </option>
+
+                    <option value="Education">
+                        Education
+                    </option>
+
+                    <option value="FinTech">
+                        FinTech
+                    </option>
+
+                    <option value="HealthTech">
+                        HealthTech
+                    </option>
+
+                    <option value="E-Commerce">
+                        E-Commerce
+                    </option>
+
+                    <option value="Social Impact">
+                        Social Impact
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- STAGE -->
+
+            <div class="student-startup-form-group">
+
+                <label>
+                    Startup Stage
+                </label>
+
+
+                <select
+                    name="startup_stage"
+                    data-startup-field="startup_stage"
+                >
+
+                    <option value="">
+                        Select stage
+                    </option>
+
+                    <option value="Idea">
+                        Idea
+                    </option>
+
+                    <option value="Prototype">
+                        Prototype
+                    </option>
+
+                    <option value="MVP">
+                        MVP
+                    </option>
+
+                    <option value="Early Revenue">
+                        Early Revenue
+                    </option>
+
+                    <option value="Growth">
+                        Growth
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- WEBSITE -->
+
+            <div class="student-startup-form-group">
+
+                <label>
+                    Website
+                </label>
+
+
+                <input
+                    type="url"
+                    name="website_url"
+                    maxlength="500"
+                    placeholder="https://example.com"
+                    data-startup-field="website_url"
+                >
+
+            </div>
+
+
+            <!-- TEAM -->
+
+            <div
+                class="
+                    student-startup-form-group
+                    full
+                "
+            >
+
+                <label>
+                    Team Members
+                </label>
+
+
+                <input
+                    type="text"
+                    name="team_members"
+                    maxlength="1000"
+                    placeholder="Names separated by commas"
+                    data-startup-field="team_members"
+                >
+
+            </div>
+
+
+            <!-- PROBLEM -->
+
+            <div
+                class="
+                    student-startup-form-group
+                    full
+                "
+            >
+
+                <label>
+                    Problem Statement
+                </label>
+
+
+                <textarea
+                    name="problem_statement"
+                    rows="4"
+                    maxlength="3000"
+                    placeholder="What problem does your startup solve?"
+                    data-startup-field="problem_statement"
+                ></textarea>
+
+            </div>
+
+
+            <!-- SOLUTION -->
+
+            <div
+                class="
+                    student-startup-form-group
+                    full
+                "
+            >
+
+                <label>
+                    Proposed Solution
+                </label>
+
+
+                <textarea
+                    name="proposed_solution"
+                    rows="4"
+                    maxlength="3000"
+                    placeholder="How does your startup solve the problem?"
+                    data-startup-field="proposed_solution"
+                ></textarea>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div
+                class="
+                    student-startup-form-group
+                    full
+                "
+            >
+
+                <label>
+
+                    Startup Description
+
+                    <span>*</span>
+
+                </label>
+
+
+                <textarea
+                    name="description"
+                    rows="5"
+                    maxlength="5000"
+                    required
+                    placeholder="Describe your startup, product, service and vision..."
+                    data-startup-field="description"
+                ></textarea>
+
+            </div>
+
+
+            <!-- APPROVAL NOTE -->
+
+            <div
+                class="
+                    student-startup-form-note
+                "
+            >
+
+                <i
+                    class="
+                        fa-solid
+                        fa-shield-halved
+                    "
+                ></i>
+
+
+                <div>
+
+                    <strong>
+                        Two-Level Approval Required
+                    </strong>
+
+                    <p>
+                        Your application will first be reviewed
+                        by the TPO. Only after TPO approval will
+                        it move to the Authority for final approval.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div
+                class="
+                    student-startup-form-actions
+                "
+            >
+
+                <button
+                    type="button"
+                    class="student-startup-secondary-btn"
+                    data-close-startup-form
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="student-startup-primary-btn"
+                    data-startup-submit
+                >
+
+                    Submit Application
+
+                    <i
+                        class="
+                            fa-solid
+                            fa-arrow-right
+                        "
+                    ></i>
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     WITHDRAW FORM
+========================================================= -->
+
+<form
+    method="POST"
+    action=""
+    data-withdraw-form
+    style="display: none;"
+>
+
+</form>
+
+
+<!-- =========================================================
+     COMMON JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/common.js'
+    ) }}"
+></script>
+
+
+<!-- =========================================================
+     STARTUP JS
+========================================================= -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/student/startup.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

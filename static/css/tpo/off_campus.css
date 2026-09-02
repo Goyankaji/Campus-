@@ -1,0 +1,1668 @@
+/* =========================================================
+   CAMPUS PLACEMENT PORTAL
+   TPO — OFF CAMPUS
+   UI ONLY
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.off-campus-content {
+
+    padding: 28px 30px 40px;
+
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.off-campus-page-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+}
+
+
+.off-campus-eyebrow {
+
+    margin-bottom: 7px;
+
+    color: #8b5cf6;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .13em;
+
+}
+
+
+.off-campus-page-header h1 {
+
+    margin: 0 0 7px;
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    line-height: 1.15;
+
+}
+
+
+.off-campus-breadcrumb {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 9px;
+
+    opacity: .48;
+
+}
+
+
+.off-campus-breadcrumb strong {
+
+    opacity: .95;
+
+}
+
+
+/* =========================================================
+   APPROVAL BANNER
+========================================================= */
+
+.off-campus-approval-banner {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 20px;
+
+    padding: 14px 17px;
+
+    border: 1px solid
+        rgba(124, 58, 237, .16);
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(124, 58, 237, .06),
+            rgba(124, 58, 237, .025)
+        );
+
+}
+
+
+.off-campus-approval-icon {
+
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(124, 58, 237, .13);
+
+    color: #a78bfa;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+}
+
+
+.off-campus-approval-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.off-campus-approval-title {
+
+    margin-bottom: 4px;
+
+    color: #f4f5ff;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    line-height: 1.3;
+
+}
+
+
+.off-campus-approval-description {
+
+    color: rgba(255,255,255,.55);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+
+}
+
+
+.off-campus-approval-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    flex-shrink: 0;
+
+    padding: 6px 9px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(16,185,129,.08);
+
+    color: #34d399;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+
+.off-campus-approval-status span {
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #34d399;
+
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.off-campus-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 13px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.off-campus-stat-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-height: 72px;
+
+    padding: 15px 17px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        rgba(120,130,160,.12);
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease;
+
+}
+
+
+.off-campus-stat-card:hover {
+
+    transform: translateY(-1px);
+
+    border-color:
+        rgba(124,58,237,.22);
+
+}
+
+
+.off-campus-stat-card span {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .08em;
+
+    opacity: .45;
+
+}
+
+
+.off-campus-stat-card strong {
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+}
+
+
+.off-campus-stat-icon {
+
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.off-campus-stat-icon.purple {
+
+    background:
+        rgba(124,58,237,.12);
+
+    color: #a78bfa;
+
+}
+
+
+.off-campus-stat-icon.orange {
+
+    background:
+        rgba(245,158,11,.10);
+
+    color: #fbbf24;
+
+}
+
+
+.off-campus-stat-icon.blue {
+
+    background:
+        rgba(59,130,246,.10);
+
+    color: #60a5fa;
+
+}
+
+
+.off-campus-stat-icon.green {
+
+    background:
+        rgba(16,185,129,.10);
+
+    color: #34d399;
+
+}
+
+
+/* =========================================================
+   FILTER CARD
+========================================================= */
+
+.off-campus-filter-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.off-campus-search {
+
+    position: relative;
+
+    flex: 1;
+
+}
+
+
+.off-campus-search > span {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size: 14px;
+
+    opacity: .42;
+
+}
+
+
+.off-campus-search input,
+.off-campus-filter-card select {
+
+    height: 38px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        rgba(120,130,160,.16);
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color: inherit;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+}
+
+
+.off-campus-search input {
+
+    width: 100%;
+
+    padding:
+        0 12px 0 34px;
+
+}
+
+
+.off-campus-filter-card select {
+
+    min-width: 165px;
+
+    padding: 0 10px;
+
+}
+
+
+.off-campus-filter-card select option {
+
+    background: #11182b;
+
+    color: #ffffff;
+
+}
+
+
+.off-campus-search input:focus,
+.off-campus-filter-card select:focus {
+
+    border-color:
+        rgba(124,58,237,.45);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(124,58,237,.06);
+
+}
+
+
+.off-campus-reset-btn {
+
+    height: 38px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 0 13px;
+
+    border:
+        1px solid
+        rgba(120,130,160,.16);
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.off-campus-table-card {
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(120,130,160,.12);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.025);
+
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.off-campus-table-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    border-bottom:
+        1px solid
+        rgba(120,130,160,.10);
+
+}
+
+
+.off-campus-table-header > div:first-child span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8b5cf6;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .11em;
+
+}
+
+
+.off-campus-table-header h2 {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+}
+
+
+.off-campus-table-header p {
+
+    margin: 5px 0 0;
+
+    font-size: 9px;
+
+    opacity: .48;
+
+}
+
+
+.off-campus-approval-note {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(16,185,129,.07);
+
+    color: #34d399;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+
+.off-campus-approval-dot {
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #34d399;
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.off-campus-table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+.off-campus-table {
+
+    width: 100%;
+
+    min-width: 1250px;
+
+    border-collapse: collapse;
+
+}
+
+
+.off-campus-table th {
+
+    padding: 12px 14px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid
+        rgba(120,130,160,.10);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .08em;
+
+    opacity: .42;
+
+    white-space: nowrap;
+
+}
+
+
+.off-campus-table td {
+
+    padding: 14px;
+
+    border-bottom:
+        1px solid
+        rgba(120,130,160,.07);
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+}
+
+
+.off-campus-table tbody tr {
+
+    transition:
+        background .15s ease;
+
+}
+
+
+.off-campus-table tbody tr:hover {
+
+    background:
+        rgba(124,58,237,.035);
+
+}
+
+
+/* =========================================================
+   STUDENT
+========================================================= */
+
+.off-campus-student-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+}
+
+
+.off-campus-student-avatar {
+
+    width: 31px;
+    height: 31px;
+
+    min-width: 31px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        rgba(124,58,237,.12);
+
+    color: #a78bfa;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.off-campus-student-info strong {
+
+    display: block;
+
+    font-size: 10px;
+
+}
+
+
+.off-campus-student-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 8px;
+
+    opacity: .45;
+
+}
+
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.off-campus-company strong {
+
+    display: block;
+
+    font-size: 10px;
+
+}
+
+
+.off-campus-company span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 8px;
+
+    opacity: .45;
+
+}
+
+
+/* =========================================================
+   PACKAGE
+========================================================= */
+
+.off-campus-package {
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.off-campus-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+}
+
+
+.off-campus-status.pending {
+
+    background:
+        rgba(245,158,11,.10);
+
+    color: #fbbf24;
+
+}
+
+
+.off-campus-status.approved {
+
+    background:
+        rgba(16,185,129,.10);
+
+    color: #34d399;
+
+}
+
+
+.off-campus-status.rejected {
+
+    background:
+        rgba(239,68,68,.10);
+
+    color: #f87171;
+
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.off-campus-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+
+.off-campus-action-btn {
+
+    height: 28px;
+
+    padding: 0 9px;
+
+    border-radius: 6px;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.off-campus-view-btn {
+
+    border:
+        1px solid
+        rgba(120,130,160,.16);
+
+    background: transparent;
+
+    color: inherit;
+
+}
+
+
+.off-campus-approve-btn {
+
+    border:
+        1px solid
+        rgba(16,185,129,.20);
+
+    background:
+        rgba(16,185,129,.07);
+
+    color: #34d399;
+
+}
+
+
+.off-campus-reject-btn {
+
+    border:
+        1px solid
+        rgba(239,68,68,.20);
+
+    background:
+        rgba(239,68,68,.07);
+
+    color: #f87171;
+
+}
+
+
+.off-campus-action-btn:hover {
+
+    filter: brightness(1.12);
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.off-campus-empty-row td {
+
+    padding: 0;
+
+}
+
+
+.off-campus-empty-state {
+
+    min-height: 240px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.off-campus-empty-icon {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 5px;
+
+    border-radius: 11px;
+
+    background:
+        rgba(124,58,237,.08);
+
+    color: #8b5cf6;
+
+    font-size: 15px;
+
+}
+
+
+.off-campus-empty-state strong {
+
+    font-size: 11px;
+
+}
+
+
+.off-campus-empty-state span {
+
+    font-size: 9px;
+
+    opacity: .45;
+
+}
+
+
+/* =========================================================
+   TABLE FOOTER
+========================================================= */
+
+.off-campus-table-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 12px 18px;
+
+    border-top:
+        1px solid
+        rgba(120,130,160,.07);
+
+    font-size: 9px;
+
+    opacity: .55;
+
+}
+
+
+.off-campus-pagination {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+}
+
+
+.off-campus-pagination button {
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(120,130,160,.13);
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+}
+
+
+.off-campus-pagination button.active {
+
+    background:
+        rgba(124,58,237,.12);
+
+    border-color:
+        rgba(124,58,237,.22);
+
+    color: #a78bfa;
+
+}
+
+
+.off-campus-pagination button:disabled {
+
+    opacity: .3;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.off-campus-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+}
+
+
+.off-campus-modal-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.68);
+
+    backdrop-filter:
+        blur(4px);
+
+}
+
+
+.off-campus-modal-card {
+
+    position: relative;
+
+    width:
+        min(760px, calc(100% - 30px));
+
+    max-height:
+        calc(100vh - 50px);
+
+    overflow-y: auto;
+
+    margin: 25px auto;
+
+    border:
+        1px solid
+        rgba(120,130,160,.16);
+
+    border-radius: 14px;
+
+    background: #151a2c;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.4);
+
+}
+
+
+.off-campus-modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 19px 20px;
+
+    border-bottom:
+        1px solid
+        rgba(120,130,160,.10);
+
+}
+
+
+.off-campus-modal-header span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8b5cf6;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .11em;
+
+}
+
+
+.off-campus-modal-header h2 {
+
+    margin: 0;
+
+    font-size: 17px;
+
+}
+
+
+.off-campus-modal-close {
+
+    width: 29px;
+    height: 29px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: inherit;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+}
+
+
+.off-campus-details-body {
+
+    padding: 20px;
+
+}
+
+
+.off-campus-detail-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+    gap: 12px;
+
+}
+
+
+.off-campus-detail-item {
+
+    padding: 12px;
+
+    border:
+        1px solid
+        rgba(120,130,160,.10);
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.02);
+
+}
+
+
+.off-campus-detail-item.full {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.off-campus-detail-item span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .07em;
+
+    opacity: .42;
+
+}
+
+
+.off-campus-detail-item strong {
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+}
+
+
+.off-campus-modal-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding: 15px 20px;
+
+    border-top:
+        1px solid
+        rgba(120,130,160,.10);
+
+}
+
+
+.off-campus-secondary-btn {
+
+    height: 34px;
+
+    padding: 0 13px;
+
+    border:
+        1px solid
+        rgba(120,130,160,.16);
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: inherit;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   REJECT BODY
+========================================================= */
+
+.off-campus-reject-body {
+
+    padding: 20px;
+
+}
+
+
+.off-campus-reject-body label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.off-campus-reject-body textarea {
+
+    width: 100%;
+
+    min-height: 120px;
+
+    box-sizing: border-box;
+
+    padding: 11px;
+
+    resize: vertical;
+
+    border:
+        1px solid
+        rgba(120,130,160,.17);
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color: inherit;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+}
+
+
+.off-campus-reject-body small {
+
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 8px;
+
+    opacity: .4;
+
+}
+
+
+.off-campus-danger-btn {
+
+    height: 34px;
+
+    padding: 0 13px;
+
+    border:
+        1px solid
+        rgba(239,68,68,.22);
+
+    border-radius: 7px;
+
+    background:
+        rgba(239,68,68,.08);
+
+    color: #f87171;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
+
+body:not(.dark-theme) .off-campus-content {
+
+    color: #172033;
+
+}
+
+
+body:not(.dark-theme) .off-campus-stat-card,
+body:not(.dark-theme) .off-campus-filter-card,
+body:not(.dark-theme) .off-campus-table-card {
+
+    background: #ffffff;
+
+    border-color:
+        rgba(30,41,59,.10);
+
+    box-shadow:
+        0 8px 25px
+        rgba(15,23,42,.045);
+
+}
+
+
+body:not(.dark-theme) .off-campus-page-header h1,
+body:not(.dark-theme) .off-campus-table-header h2 {
+
+    color: #172033;
+
+}
+
+
+body:not(.dark-theme) .off-campus-approval-banner {
+
+    background: #f8f7ff;
+
+    border-color:
+        rgba(124,58,237,.18);
+
+}
+
+
+body:not(.dark-theme) .off-campus-approval-icon {
+
+    background:
+        rgba(124,58,237,.11);
+
+    color: #7c3aed;
+
+}
+
+
+body:not(.dark-theme) .off-campus-approval-title {
+
+    color: #172033;
+
+}
+
+
+body:not(.dark-theme) .off-campus-approval-description {
+
+    color: #64748b;
+
+}
+
+
+body:not(.dark-theme) .off-campus-search input,
+body:not(.dark-theme) .off-campus-filter-card select {
+
+    background: #ffffff;
+
+    border-color:
+        rgba(30,41,59,.13);
+
+    color: #172033;
+
+}
+
+
+body:not(.dark-theme) .off-campus-table th {
+
+    color: #475569;
+
+}
+
+
+body:not(.dark-theme) .off-campus-table td {
+
+    color: #334155;
+
+    border-bottom-color:
+        rgba(30,41,59,.08);
+
+}
+
+
+body:not(.dark-theme) .off-campus-modal-card {
+
+    background: #ffffff;
+
+    color: #172033;
+
+}
+
+
+body:not(.dark-theme) .off-campus-detail-item {
+
+    background: #f8fafc;
+
+    border-color:
+        rgba(30,41,59,.10);
+
+}
+
+
+body:not(.dark-theme) .off-campus-modal-close {
+
+    background:
+        rgba(15,23,42,.06);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .off-campus-stats {
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .off-campus-content {
+
+        padding:
+            20px 14px 35px;
+
+    }
+
+
+    .off-campus-approval-banner {
+
+        align-items: flex-start;
+
+    }
+
+
+    .off-campus-approval-status {
+
+        display: none;
+
+    }
+
+
+    .off-campus-filter-card {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .off-campus-search {
+
+        width: 100%;
+
+    }
+
+
+    .off-campus-filter-card select,
+    .off-campus-reset-btn {
+
+        width: 100%;
+
+    }
+
+
+    .off-campus-table-header {
+
+        align-items: flex-start;
+
+    }
+
+
+    .off-campus-approval-note {
+
+        display: none;
+
+    }
+
+
+    .off-campus-detail-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .off-campus-detail-item.full {
+
+        grid-column: auto;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .off-campus-stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

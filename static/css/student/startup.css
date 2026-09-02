@@ -1,0 +1,1736 @@
+/* =========================================================
+   CAMPUS — STUDENT STARTUP
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.student-startup-page {
+
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding:
+        0 28px
+        40px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.student-startup-header {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.student-startup-eyebrow {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+}
+
+
+.student-startup-header h1 {
+
+    margin: 0 0 5px;
+
+    color:
+        var(--student-text);
+
+    font-size: 24px;
+
+    line-height: 1.2;
+}
+
+
+.student-startup-header p {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.student-startup-primary-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 35px;
+
+    padding:
+        0 13px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background:
+        var(--student-primary);
+
+    color: #ffffff;
+
+    font: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 5px 15px
+        rgba(
+            124,
+            58,
+            237,
+            .18
+        );
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.student-startup-primary-btn:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            124,
+            58,
+            237,
+            .25
+        );
+}
+
+
+.student-startup-secondary-btn {
+
+    min-height: 35px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 7px;
+
+    background:
+        transparent;
+
+    color:
+        var(--student-text-soft);
+
+    font: inherit;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        .18s ease;
+}
+
+
+.student-startup-secondary-btn:hover {
+
+    border-color:
+        var(--student-primary);
+
+    color:
+        var(--student-primary);
+}
+
+
+/* =========================================================
+   APPROVAL FLOW CARD
+========================================================= */
+
+.student-startup-flow-card {
+
+    margin-bottom: 18px;
+
+    padding: 16px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 12px;
+
+    background:
+        var(--student-surface);
+
+    box-shadow:
+        var(--student-shadow);
+}
+
+
+.student-startup-flow-heading {
+
+    margin-bottom: 14px;
+}
+
+
+.student-startup-flow-heading span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.student-startup-flow-heading h2 {
+
+    margin: 0;
+
+    color:
+        var(--student-text);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FLOW
+========================================================= */
+
+.student-startup-flow {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.student-startup-flow-step {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+}
+
+
+.student-startup-flow-number {
+
+    width: 32px;
+
+    height: 32px;
+
+    flex:
+        0 0 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.student-startup-flow-number.final {
+
+    background:
+        rgba(
+            25,
+            201,
+            139,
+            .10
+        );
+
+    color:
+        var(--student-success);
+
+}
+
+
+.student-startup-flow-step strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color:
+        var(--student-text);
+
+    font-size: 8px;
+
+}
+
+
+.student-startup-flow-step p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+
+    line-height: 1.45;
+}
+
+
+.student-startup-flow-line {
+
+    width: 22px;
+
+    height: 1px;
+
+    flex:
+        0 0 22px;
+
+    background:
+        var(--student-border);
+}
+
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.student-startup-alerts {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 14px;
+}
+
+
+.student-startup-alert {
+
+    padding:
+        10px
+        12px;
+
+    border-radius: 8px;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+.student-startup-alert.success {
+
+    background:
+        rgba(
+            25,
+            201,
+            139,
+            .09
+        );
+
+    color:
+        var(--student-success);
+}
+
+
+.student-startup-alert.error {
+
+    background:
+        rgba(
+            239,
+            71,
+            111,
+            .09
+        );
+
+    color:
+        var(--student-danger);
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.student-startup-section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 11px;
+}
+
+
+.student-startup-section-header > div > span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.student-startup-section-header h2 {
+
+    margin: 0;
+
+    color:
+        var(--student-text);
+
+    font-size: 15px;
+}
+
+
+.student-startup-count {
+
+    padding:
+        6px
+        9px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 6px;
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   APPLICATION LIST
+========================================================= */
+
+.student-startup-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+/* =========================================================
+   APPLICATION CARD
+========================================================= */
+
+.student-startup-application {
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 11px;
+
+    background:
+        var(--student-surface);
+
+    box-shadow:
+        var(--student-shadow);
+}
+
+
+/* =========================================================
+   APPLICATION HEADER
+========================================================= */
+
+.student-startup-application-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        14px
+        16px;
+
+    border-bottom:
+        1px solid
+        var(--student-border);
+}
+
+
+.student-startup-application-id {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: .8px;
+}
+
+
+.student-startup-application-header h3 {
+
+    margin: 0 0 4px;
+
+    color:
+        var(--student-text);
+
+    font-size: 13px;
+
+    line-height: 1.35;
+}
+
+
+.student-startup-application-header p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   FINAL STATUS
+========================================================= */
+
+.student-startup-status {
+
+    flex-shrink: 0;
+
+    padding:
+        6px
+        9px;
+
+    border-radius: 20px;
+
+    font-size: 7px;
+
+    font-weight: 800;
+}
+
+
+.student-startup-status.pending_tpo {
+
+    background:
+        rgba(
+            244,
+            183,
+            64,
+            .10
+        );
+
+    color:
+        var(--student-warning);
+}
+
+
+.student-startup-status.pending_authority {
+
+    background:
+        rgba(
+            124,
+            58,
+            237,
+            .10
+        );
+
+    color:
+        var(--student-primary);
+}
+
+
+.student-startup-status.approved {
+
+    background:
+        rgba(
+            25,
+            201,
+            139,
+            .10
+        );
+
+    color:
+        var(--student-success);
+}
+
+
+.student-startup-status.rejected {
+
+    background:
+        rgba(
+            239,
+            71,
+            111,
+            .10
+        );
+
+    color:
+        var(--student-danger);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.student-startup-description {
+
+    padding:
+        14px
+        16px;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 9px;
+
+    line-height: 1.65;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   APPROVAL GRID
+========================================================= */
+
+.student-startup-approval-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 9px;
+
+    padding:
+        0
+        16px
+        13px;
+}
+
+
+.student-startup-approval-card {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    min-width: 0;
+
+    padding:
+        11px;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 8px;
+
+    background:
+        var(--student-surface-soft);
+}
+
+
+.student-startup-approval-icon {
+
+    width: 27px;
+
+    height: 27px;
+
+    flex:
+        0 0 27px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background:
+        rgba(
+            148,
+            163,
+            184,
+            .10
+        );
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+.student-startup-approval-card > div:last-child {
+
+    min-width: 0;
+}
+
+
+.student-startup-approval-card > div:last-child > span {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: .7px;
+}
+
+
+.student-startup-approval-card strong {
+
+    display: block;
+
+    color:
+        var(--student-text);
+
+    font-size: 8px;
+}
+
+
+.student-startup-approval-card p {
+
+    margin:
+        4px
+        0
+        0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+
+    line-height: 1.45;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   APPROVAL STATES
+========================================================= */
+
+.student-startup-approval-card.approved {
+
+    border-color:
+        rgba(
+            25,
+            201,
+            139,
+            .18
+        );
+}
+
+
+.student-startup-approval-card.approved
+.student-startup-approval-icon {
+
+    background:
+        rgba(
+            25,
+            201,
+            139,
+            .10
+        );
+
+    color:
+        var(--student-success);
+}
+
+
+.student-startup-approval-card.rejected {
+
+    border-color:
+        rgba(
+            239,
+            71,
+            111,
+            .18
+        );
+}
+
+
+.student-startup-approval-card.rejected
+.student-startup-approval-icon {
+
+    background:
+        rgba(
+            239,
+            71,
+            111,
+            .10
+        );
+
+    color:
+        var(--student-danger);
+}
+
+
+.student-startup-approval-card.pending {
+
+    border-color:
+        rgba(
+            244,
+            183,
+            64,
+            .18
+        );
+}
+
+
+.student-startup-approval-card.pending
+.student-startup-approval-icon {
+
+    background:
+        rgba(
+            244,
+            183,
+            64,
+            .10
+        );
+
+    color:
+        var(--student-warning);
+}
+
+
+.student-startup-approval-card.not_started {
+
+    opacity: .72;
+}
+
+
+/* =========================================================
+   APPLICATION FOOTER
+========================================================= */
+
+.student-startup-application-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding:
+        10px
+        16px;
+
+    border-top:
+        1px solid
+        var(--student-border);
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+}
+
+
+.student-startup-final-message {
+
+    color:
+        var(--student-success);
+
+    font-weight: 700;
+}
+
+
+.student-startup-final-message.rejected {
+
+    color:
+        var(--student-danger);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.student-startup-empty {
+
+    min-height: 280px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        30px
+        20px;
+
+    box-sizing: border-box;
+
+    border:
+        1px dashed
+        var(--student-border);
+
+    border-radius: 12px;
+
+    background:
+        var(--student-surface);
+
+    text-align: center;
+}
+
+
+.student-startup-empty-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 12px;
+
+    border-radius: 12px;
+
+    background:
+        var(--student-primary-soft);
+
+    color:
+        var(--student-primary);
+
+    font-size: 19px;
+}
+
+
+.student-startup-empty h3 {
+
+    margin:
+        0
+        0
+        5px;
+
+    color:
+        var(--student-text);
+
+    font-size: 13px;
+}
+
+
+.student-startup-empty p {
+
+    max-width: 400px;
+
+    margin:
+        0
+        0
+        15px;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.student-startup-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+}
+
+
+.student-startup-modal.open {
+
+    display: flex;
+}
+
+
+.student-startup-modal-backdrop {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(
+            2,
+            6,
+            23,
+            .72
+        );
+
+    backdrop-filter:
+        blur(4px);
+}
+
+
+.student-startup-modal-card {
+
+    position: relative;
+
+    z-index: 1;
+
+    width:
+        min(
+            720px,
+            100%
+        );
+
+    max-height:
+        calc(
+            100vh - 40px
+        );
+
+    overflow-y: auto;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 13px;
+
+    background:
+        var(--student-surface);
+
+    box-shadow:
+        0 25px 70px
+        rgba(
+            0,
+            0,
+            0,
+            .35
+        );
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.student-startup-modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        17px
+        18px;
+
+    border-bottom:
+        1px solid
+        var(--student-border);
+}
+
+
+.student-startup-modal-header span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.student-startup-modal-header h2 {
+
+    margin:
+        0
+        0
+        4px;
+
+    color:
+        var(--student-text);
+
+    font-size: 16px;
+}
+
+
+.student-startup-modal-header p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+.student-startup-modal-close {
+
+    width: 29px;
+
+    height: 29px;
+
+    flex:
+        0 0 29px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color:
+        var(--student-text-muted);
+
+    font: inherit;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+
+.student-startup-modal-close:hover {
+
+    color:
+        var(--student-danger);
+
+    border-color:
+        rgba(
+            239,
+            71,
+            111,
+            .25
+        );
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.student-startup-form {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        13px
+        12px;
+
+    padding: 18px;
+}
+
+
+.student-startup-form-group {
+
+    min-width: 0;
+}
+
+
+.student-startup-form-group.full {
+
+    grid-column:
+        1 / -1;
+}
+
+
+.student-startup-form-group label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        var(--student-text-soft);
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+.student-startup-form-group label span {
+
+    color:
+        var(--student-danger);
+}
+
+
+.student-startup-form-group input,
+.student-startup-form-group select,
+.student-startup-form-group textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        var(--student-border);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background:
+        var(--student-surface-soft);
+
+    color:
+        var(--student-text);
+
+    font: inherit;
+
+    font-size: 9px;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.student-startup-form-group input,
+.student-startup-form-group select {
+
+    height: 36px;
+
+    padding:
+        0
+        10px;
+}
+
+
+.student-startup-form-group textarea {
+
+    min-height: 90px;
+
+    padding:
+        9px
+        10px;
+
+    resize: vertical;
+
+    line-height: 1.55;
+}
+
+
+.student-startup-form-group input::placeholder,
+.student-startup-form-group textarea::placeholder {
+
+    color:
+        var(--student-text-muted);
+
+    opacity: .7;
+}
+
+
+.student-startup-form-group input:focus,
+.student-startup-form-group select:focus,
+.student-startup-form-group textarea:focus {
+
+    border-color:
+        var(--student-primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            124,
+            58,
+            237,
+            .10
+        );
+}
+
+
+/* =========================================================
+   FORM NOTE
+========================================================= */
+
+.student-startup-form-note {
+
+    grid-column:
+        1 / -1;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding:
+        11px
+        12px;
+
+    border:
+        1px solid
+        rgba(
+            124,
+            58,
+            237,
+            .16
+        );
+
+    border-radius: 8px;
+
+    background:
+        var(--student-primary-soft);
+}
+
+
+.student-startup-form-note > i {
+
+    margin-top: 2px;
+
+    color:
+        var(--student-primary);
+
+    font-size: 11px;
+}
+
+
+.student-startup-form-note strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color:
+        var(--student-text);
+
+    font-size: 8px;
+}
+
+
+.student-startup-form-note p {
+
+    margin: 0;
+
+    color:
+        var(--student-text-muted);
+
+    font-size: 7px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.student-startup-form-actions {
+
+    grid-column:
+        1 / -1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding-top: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .student-startup-flow {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .student-startup-flow-step {
+
+        width: 100%;
+
+    }
+
+
+    .student-startup-flow-line {
+
+        width: 1px;
+
+        height: 15px;
+
+        margin-left: 15px;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .student-startup-page {
+
+        padding:
+            0
+            16px
+            30px;
+
+    }
+
+
+    .student-startup-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .student-startup-header
+    .student-startup-primary-btn {
+
+        width: 100%;
+
+    }
+
+
+    .student-startup-application-header {
+
+        flex-direction: column;
+
+    }
+
+
+    .student-startup-status {
+
+        align-self: flex-start;
+
+    }
+
+
+    .student-startup-approval-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .student-startup-application-footer {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .student-startup-form {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .student-startup-form-group.full {
+
+        grid-column: auto;
+
+    }
+
+
+    .student-startup-form-note {
+
+        grid-column: auto;
+
+    }
+
+
+    .student-startup-form-actions {
+
+        grid-column: auto;
+
+        flex-direction: column-reverse;
+
+    }
+
+
+    .student-startup-form-actions button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .student-startup-flow-card {
+
+        padding: 13px;
+
+    }
+
+
+    .student-startup-application-header {
+
+        padding:
+            12px
+            13px;
+
+    }
+
+
+    .student-startup-description {
+
+        padding:
+            12px
+            13px;
+
+    }
+
+
+    .student-startup-approval-grid {
+
+        padding:
+            0
+            13px
+            11px;
+
+    }
+
+
+    .student-startup-application-footer {
+
+        padding:
+            9px
+            13px;
+
+    }
+
+
+    .student-startup-modal {
+
+        padding: 10px;
+
+    }
+
+
+    .student-startup-modal-card {
+
+        max-height:
+            calc(
+                100vh - 20px
+            );
+
+    }
+
+
+    .student-startup-modal-header {
+
+        padding:
+            14px;
+
+    }
+
+
+    .student-startup-form {
+
+        padding:
+            14px;
+
+    }
+
+}

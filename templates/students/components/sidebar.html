@@ -94,27 +94,6 @@
         <div class="student-nav-heading">
             MAIN
         </div>
-
-
-        <!-- MY PROFILE -->
-
-        <a
-            href="{{ url_for('student_profile') }}"
-            class="student-nav-link
-            {% if request.endpoint == 'student_profile' %}
-                active
-            {% endif %}"
-        >
-
-            <span class="student-nav-icon">♙</span>
-
-            <span class="student-nav-label">
-                My Profile
-            </span>
-
-        </a>
-
-
         <!-- ACADEMICS -->
 
         <a
@@ -250,20 +229,17 @@
         <!-- NOC -->
 
         <a
-            href="#"
-            class="student-nav-link"
-            data-coming-soon="true"
-            id="studentNocLink"
+            href="{{ url_for('student_noc') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'student_noc' %}
+                active
+            {% endif %}"
         >
 
-            <span class="student-nav-icon">◈</span>
+            <span class="student-nav-icon">✓</span>
 
             <span class="student-nav-label">
                 NOC
-            </span>
-
-            <span class="student-nav-badge new">
-                NEW
             </span>
 
         </a>
@@ -272,20 +248,17 @@
         <!-- STARTUP -->
 
         <a
-            href="#"
-            class="student-nav-link"
-            data-coming-soon="true"
-            id="studentStartupLink"
+            href="{{ url_for('student_startup') }}"
+            class="student-nav-link
+            {% if request.endpoint == 'student_startup' %}
+                active
+            {% endif %}"
         >
 
-            <span class="student-nav-icon">✦</span>
+            <span class="student-nav-icon">✓</span>
 
             <span class="student-nav-label">
-                Startup
-            </span>
-
-            <span class="student-nav-badge new">
-                NEW
+                Start Up
             </span>
 
         </a>

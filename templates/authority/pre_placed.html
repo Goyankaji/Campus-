@@ -11,7 +11,9 @@
 
 <div class="pre-placed-page">
 
-    <!-- HEADER -->
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
 
     <div class="pre-placed-header">
 
@@ -26,71 +28,31 @@
             </h1>
 
             <p>
-                Track students who secured placements before the regular placement process.
+                Review and manage pre-placement declarations for your college.
             </p>
 
         </div>
 
-
-        <div class="header-actions">
-
-            <select
-                id="academicYear"
-                class="pre-placed-select"
-            >
-                <option value="2026-27">
-                    2026 - 27
-                </option>
-
-                <option value="2025-26">
-                    2025 - 26
-                </option>
-
-                <option value="2024-25">
-                    2024 - 25
-                </option>
-            </select>
-
-
-            <select
-                id="placementStatus"
-                class="pre-placed-select"
-            >
-                <option value="all">
-                    All Status
-                </option>
-
-                <option value="confirmed">
-                    Confirmed
-                </option>
-
-                <option value="pending">
-                    Pending
-                </option>
-            </select>
-
-
-            <button
-                type="button"
-                id="exportPrePlacedReport"
-                class="export-btn"
-            >
-                ↓ Export Report
-            </button>
-
-        </div>
+        <button
+            type="button"
+            class="pre-placed-export-btn"
+            id="exportPrePlaced"
+        >
+            Export Report
+        </button>
 
     </div>
 
 
-    <!-- SCOPE -->
+    <!-- =====================================================
+         COLLEGE SCOPE
+    ===================================================== -->
 
     <div class="scope-card">
 
         <div class="scope-icon">
-            ✓
+            ◉
         </div>
-
 
         <div class="scope-info">
 
@@ -103,11 +65,10 @@
             </strong>
 
             <small>
-                Pre-placement records are restricted to your assigned college.
+                Pre-placed student records are restricted to your assigned college.
             </small>
 
         </div>
-
 
         <div class="scope-code">
             ● {{ session.get("college_code", "PCE") }}
@@ -116,55 +77,28 @@
     </div>
 
 
-    <!-- SUMMARY -->
+    <!-- =====================================================
+         SUMMARY
+    ===================================================== -->
 
     <div class="summary-grid">
 
         <div class="summary-card">
 
             <div class="summary-icon purple">
-                ✓
+                ▦
             </div>
 
             <div>
+                <span>Total Students</span>
 
-                <span>
-                    Pre-Placed Students
-                </span>
-
-                <strong>
-                    126
+                <strong id="totalPrePlaced">
+                    0
                 </strong>
 
                 <small>
-                    Students placed before drives
+                    All declarations
                 </small>
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-icon green">
-                ◉
-            </div>
-
-            <div>
-
-                <span>
-                    Confirmed
-                </span>
-
-                <strong>
-                    118
-                </strong>
-
-                <small>
-                    Confirmed placements
-                </small>
-
             </div>
 
         </div>
@@ -177,19 +111,15 @@
             </div>
 
             <div>
+                <span>Pending</span>
 
-                <span>
-                    Pending
-                </span>
-
-                <strong>
-                    8
+                <strong id="pendingPrePlaced">
+                    0
                 </strong>
 
                 <small>
-                    Awaiting confirmation
+                    Awaiting final decision
                 </small>
-
             </div>
 
         </div>
@@ -197,24 +127,41 @@
 
         <div class="summary-card">
 
-            <div class="summary-icon blue">
-                ₹
+            <div class="summary-icon green">
+                ✓
             </div>
 
             <div>
+                <span>Approved</span>
 
-                <span>
-                    Average Package
-                </span>
-
-                <strong>
-                    ₹8.40 LPA
+                <strong id="approvedPrePlaced">
+                    0
                 </strong>
 
                 <small>
-                    Across confirmed placements
+                    Final approved
                 </small>
+            </div>
 
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon red">
+                ✕
+            </div>
+
+            <div>
+                <span>Rejected</span>
+
+                <strong id="rejectedPrePlaced">
+                    0
+                </strong>
+
+                <small>
+                    Final rejected
+                </small>
             </div>
 
         </div>
@@ -222,204 +169,25 @@
     </div>
 
 
-    <!-- PERFORMANCE -->
-
-    <div class="reports-grid">
-
-        <section class="report-card">
-
-            <div class="card-header">
-
-                <div>
-
-                    <h2>
-                        Pre-Placement Overview
-                    </h2>
-
-                    <p>
-                        Overall placement status of pre-placed students.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="performance-content">
-
-                <div class="performance-stat">
-
-                    <span>
-                        Total Students
-                    </span>
-
-                    <strong>
-                        126
-                    </strong>
-
-                    <small>
-                        Pre-placed students
-                    </small>
-
-                </div>
-
-
-                <div class="performance-stat">
-
-                    <span>
-                        Companies
-                    </span>
-
-                    <strong>
-                        34
-                    </strong>
-
-                    <small>
-                        Hiring companies
-                    </small>
-
-                </div>
-
-
-                <div class="performance-stat">
-
-                    <span>
-                        Highest Package
-                    </span>
-
-                    <strong>
-                        ₹24.00 LPA
-                    </strong>
-
-                    <small>
-                        Highest confirmed package
-                    </small>
-
-                </div>
-
-
-                <div class="performance-stat">
-
-                    <span>
-                        Average Package
-                    </span>
-
-                    <strong>
-                        ₹8.40 LPA
-                    </strong>
-
-                    <small>
-                        Average confirmed package
-                    </small>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- STATUS -->
-
-        <section class="report-card">
-
-            <div class="card-header">
-
-                <div>
-
-                    <h2>
-                        Placement Status
-                    </h2>
-
-                    <p>
-                        Current confirmation status of pre-placements.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="status-list">
-
-                <div class="status-row">
-
-                    <div class="status-label">
-
-                        <span class="dot green"></span>
-
-                        Confirmed
-
-                    </div>
-
-                    <strong>
-                        118
-                    </strong>
-
-                </div>
-
-
-                <div class="status-track">
-
-                    <div
-                        class="status-fill green"
-                        style="width:93.65%;"
-                    ></div>
-
-                </div>
-
-
-                <div class="status-row">
-
-                    <div class="status-label">
-
-                        <span class="dot orange"></span>
-
-                        Pending
-
-                    </div>
-
-                    <strong>
-                        8
-                    </strong>
-
-                </div>
-
-
-                <div class="status-track">
-
-                    <div
-                        class="status-fill orange"
-                        style="width:6.35%;"
-                    ></div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </div>
-
-
-    <!-- STUDENT TABLE -->
-
-    <section class="report-card student-table-card">
+    <!-- =====================================================
+         APPLICATIONS
+    ===================================================== -->
+
+    <section class="report-card">
 
         <div class="card-header">
 
             <div>
 
                 <h2>
-                    Pre-Placed Student Records
+                    Pre-Placement Declarations
                 </h2>
 
                 <p>
-                    Student-wise company, package and placement details.
+                    Review student declarations and approval status.
                 </p>
 
             </div>
-
 
             <div class="search-box">
 
@@ -429,8 +197,9 @@
 
                 <input
                     type="text"
-                    id="studentSearch"
-                    placeholder="Search student or company..."
+                    id="prePlacedSearch"
+                    placeholder="Search student, company..."
+                    autocomplete="off"
                 >
 
             </div>
@@ -438,9 +207,68 @@
         </div>
 
 
+        <!-- =================================================
+             FILTER BAR
+        ================================================= -->
+
+        <div class="pre-placed-filter-bar">
+
+            <select id="prePlacedStatus">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="approved">
+                    Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <select id="prePlacedType">
+
+                <option value="all">
+                    All Placement Types
+                </option>
+
+                <option value="job">
+                    Job
+                </option>
+
+                <option value="internship">
+                    Internship
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                id="prePlacedReset"
+                class="reset-btn"
+            >
+                Reset
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================= -->
+
         <div class="table-wrapper">
 
-            <table class="student-table">
+            <table class="pre-placed-table">
 
                 <thead>
 
@@ -451,11 +279,15 @@
                         </th>
 
                         <th>
+                            REGISTRATION
+                        </th>
+
+                        <th>
                             BRANCH
                         </th>
 
                         <th>
-                            ROLL NO.
+                            TYPE
                         </th>
 
                         <th>
@@ -467,11 +299,23 @@
                         </th>
 
                         <th>
-                            PLACED ON
+                            DATE
                         </th>
 
                         <th>
-                            STATUS
+                            TPO
+                        </th>
+
+                        <th>
+                            AUTHORITY
+                        </th>
+
+                        <th>
+                            FINAL
+                        </th>
+
+                        <th>
+                            ACTION
                         </th>
 
                     </tr>
@@ -479,366 +323,200 @@
                 </thead>
 
 
-                <tbody id="studentTableBody">
-
-
-                    <tr
-                        data-status="confirmed"
-                        data-search="rahul sharma microsoft"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Rahul Sharma
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE001
-                        </td>
-
-                        <td>
-                            Microsoft
-                        </td>
-
-                        <td class="package">
-                            ₹24.00 LPA
-                        </td>
-
-                        <td>
-                            12 Jul 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge confirmed">
-                                Confirmed
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="confirmed"
-                        data-search="priya meena infosys"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Priya Meena
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            IT
-                        </td>
-
-                        <td>
-                            21PIT014
-                        </td>
-
-                        <td>
-                            Infosys
-                        </td>
-
-                        <td class="package">
-                            ₹8.20 LPA
-                        </td>
-
-                        <td>
-                            15 Jul 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge confirmed">
-                                Confirmed
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="pending"
-                        data-search="aman kumar wipro"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Aman Kumar
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            ECE
-                        </td>
-
-                        <td>
-                            21PEC027
-                        </td>
-
-                        <td>
-                            Wipro
-                        </td>
-
-                        <td class="package">
-                            ₹7.00 LPA
-                        </td>
-
-                        <td>
-                            18 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="confirmed"
-                        data-search="neha joshi accenture"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Neha Joshi
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE042
-                        </td>
-
-                        <td>
-                            Accenture
-                        </td>
-
-                        <td class="package">
-                            ₹9.00 LPA
-                        </td>
-
-                        <td>
-                            10 Jul 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge confirmed">
-                                Confirmed
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="confirmed"
-                        data-search="mohit singh capgemini"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Mohit Singh
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            ME
-                        </td>
-
-                        <td>
-                            21PME018
-                        </td>
-
-                        <td>
-                            Capgemini
-                        </td>
-
-                        <td class="package">
-                            ₹6.50 LPA
-                        </td>
-
-                        <td>
-                            08 Jul 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge confirmed">
-                                Confirmed
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="pending"
-                        data-search="ankit gupta deloitte"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Ankit Gupta
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            EE
-                        </td>
-
-                        <td>
-                            21PEE031
-                        </td>
-
-                        <td>
-                            Deloitte
-                        </td>
-
-                        <td class="package">
-                            ₹10.50 LPA
-                        </td>
-
-                        <td>
-                            21 Aug 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr
-                        data-status="confirmed"
-                        data-search="simran kaur amazon"
-                    >
-
-                        <td>
-
-                            <strong>
-                                Simran Kaur
-                            </strong>
-
-                            <small>
-                                Student
-                            </small>
-
-                        </td>
-
-                        <td>
-                            CSE
-                        </td>
-
-                        <td>
-                            21PCE067
-                        </td>
-
-                        <td>
-                            Amazon
-                        </td>
-
-                        <td class="package">
-                            ₹12.00 LPA
-                        </td>
-
-                        <td>
-                            05 Jul 2026
-                        </td>
-
-                        <td>
-
-                            <span class="status-badge confirmed">
-                                Confirmed
-                            </span>
-
-                        </td>
-
-                    </tr>
-
+                <tbody id="prePlacedTableBody">
+                    <!-- JS will render rows -->
                 </tbody>
 
             </table>
 
         </div>
 
+
+        <!-- =================================================
+             TABLE FOOTER
+        ================================================= -->
+
+        <div class="table-footer">
+
+            <span id="prePlacedResultCount">
+                Showing 0 students
+            </span>
+
+            <span>
+                College:
+                <strong>
+                    {{ session.get("college_code", "PCE") }}
+                </strong>
+            </span>
+
+        </div>
+
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- =====================================================
+         DETAILS MODAL
+    ===================================================== -->
+
+    <div
+        class="pre-placed-modal"
+        id="prePlacedDetailsModal"
+        hidden
+    >
+
+        <div class="pre-placed-modal-overlay"></div>
+
+
+        <div class="pre-placed-modal-card">
+
+            <div class="pre-placed-modal-header">
+
+                <div>
+
+                    <span>
+                        PRE-PLACEMENT DECLARATION
+                    </span>
+
+                    <h2>
+                        Student Details
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closePrePlacedDetails"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="pre-placed-modal-body"
+                id="prePlacedDetailsBody"
+            >
+                <!-- JS will render details -->
+            </div>
+
+
+            <div class="pre-placed-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="closePrePlacedDetailsBottom"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         REJECT MODAL
+    ===================================================== -->
+
+    <div
+        class="pre-placed-modal"
+        id="prePlacedRejectModal"
+        hidden
+    >
+
+        <div class="pre-placed-modal-overlay"></div>
+
+
+        <div class="pre-placed-modal-card reject-modal-card">
+
+            <div class="pre-placed-modal-header">
+
+                <div>
+
+                    <span>
+                        AUTHORITY DECISION
+                    </span>
+
+                    <h2>
+                        Reject Declaration
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closePrePlacedReject"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="reject-body">
+
+                <label for="prePlacedRejectReason">
+                    Rejection Reason
+                </label>
+
+                <textarea
+                    id="prePlacedRejectReason"
+                    rows="5"
+                    placeholder="Enter reason for rejecting this declaration..."
+                ></textarea>
+
+                <small>
+                    A rejection reason is required.
+                </small>
+
+            </div>
+
+
+            <div class="pre-placed-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="cancelPrePlacedReject"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="reject-confirm-btn"
+                    id="confirmPrePlacedReject"
+                >
+                    Reject Declaration
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
     <div class="reports-footer">
 
         <span>
-            Report generated for
-            <strong id="footerYear">
-                2026-27
-            </strong>
+            Campus Placement Portal
         </span>
 
         <span>
-            Campus Placement Portal
+            Authority Pre-Placed Management
         </span>
 
     </div>

@@ -2,322 +2,207 @@
    CAMPUS ADMIN — COMMUNITY MODERATION JS
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
 
+    /* =====================================================
+       STATUS FILTER
+    ===================================================== */
 
-        /* =====================================================
-           STATUS FILTER
-        ===================================================== */
+    const statusSelect =
+        document.querySelector("#moderationStatus");
 
-        const statusSelect =
-            document.querySelector(
-                "#moderationStatus"
+    if (statusSelect) {
+
+        statusSelect.addEventListener("change", function () {
+
+            const url =
+                new URL(window.location.href);
+
+            url.searchParams.set(
+                "status",
+                this.value
             );
 
+            window.location.href =
+                url.toString();
 
-        if (statusSelect) {
+        });
 
-            statusSelect.addEventListener(
-                "change",
+    }
+
+
+    /* =====================================================
+       APPROVE CONFIRMATION
+    ===================================================== */
+
+    document
+        .querySelectorAll("[data-approve]")
+        .forEach(function (button) {
+
+            button.addEventListener("click", function (event) {
+
+                const confirmed =
+                    window.confirm(
+                        "Approve this post and publish it to students?"
+                    );
+
+                if (!confirmed) {
+
+                    event.preventDefault();
+
+                    return;
+
+                }
+
+                button.disabled = true;
+
+                button.textContent = "Approving...";
+
+            });
+
+        });
+
+
+    /* =====================================================
+       REJECT MODAL
+    ===================================================== */
+
+    const modal =
+        document.querySelector("#rejectModal");
+
+    const rejectForm =
+        document.querySelector("#rejectForm");
+
+    const reasonInput =
+        document.querySelector("#rejectionReason");
+
+
+    /* =====================================================
+       OPEN REJECT MODAL
+    ===================================================== */
+
+    function openRejectModal(postId) {
+
+        if (
+            !modal ||
+            !rejectForm ||
+            !postId
+        ) {
+            return;
+        }
+
+
+        rejectForm.action =
+            "/admin/community/" +
+            encodeURIComponent(postId) +
+            "/review";
+
+
+        modal.classList.add("open");
+
+
+        document.body.style.overflow =
+            "hidden";
+
+
+        if (reasonInput) {
+
+            reasonInput.value = "";
+
+
+            setTimeout(function () {
+
+                reasonInput.focus();
+
+            }, 120);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CLOSE REJECT MODAL
+    ===================================================== */
+
+    function closeRejectModal() {
+
+        if (!modal) {
+            return;
+        }
+
+
+        modal.classList.remove("open");
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =====================================================
+       OPEN BUTTONS
+    ===================================================== */
+
+    document
+        .querySelectorAll("[data-open-reject]")
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
                 function () {
 
-                    const status =
-                        this.value;
-
-
-                    const url =
-                        new URL(
-                            window.location.href
+                    const postId =
+                        button.getAttribute(
+                            "data-post-id"
                         );
 
 
-                    url.searchParams.set(
-                        "status",
-                        status
-                    );
-
-
-                    window.location.href =
-                        url.toString();
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           APPROVE CONFIRMATION
-        ===================================================== */
-
-        document
-            .querySelectorAll(
-                "[data-approve]"
-            )
-            .forEach(
-                function (button) {
-
-                    button.addEventListener(
-                        "click",
-                        function (event) {
-
-                            const confirmed =
-                                window.confirm(
-                                    "Approve this post and publish it to students?"
-                                );
-
-
-                            if (!confirmed) {
-
-                                event.preventDefault();
-
-                                return;
-
-                            }
-
-
-                            button.disabled =
-                                true;
-
-
-                            button.textContent =
-                                "Approving...";
-
-                        }
+                    openRejectModal(
+                        postId
                     );
 
                 }
             );
 
-
-        /* =====================================================
-           REJECT MODAL
-        ===================================================== */
-
-        const modal =
-            document.querySelector(
-                "#rejectModal"
-            );
+        });
 
 
-        const rejectForm =
-            document.querySelector(
-                "#rejectForm"
-            );
+    /* =====================================================
+       CLOSE BUTTONS
+    ===================================================== */
 
+    document
+        .querySelectorAll("[data-close-reject]")
+        .forEach(function (button) {
 
-        const reasonInput =
-            document.querySelector(
-                "#rejectionReason"
-            );
-
-
-        const openRejectButtons =
-            document.querySelectorAll(
-                "[data-open-reject]"
-            );
-
-
-        const closeRejectButtons =
-            document.querySelectorAll(
-                "[data-close-reject]"
-            );
-
-
-        function openRejectModal(
-            postId
-        ) {
-
-            if (!modal || !rejectForm) {
-                return;
-            }
-
-
-            rejectForm.action =
-                "/admin/community/"
-                +
-                encodeURIComponent(
-                    postId
-                )
-                +
-                "/review";
-
-
-            modal.classList.add(
-                "open"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            if (reasonInput) {
-
-                reasonInput.value =
-                    "";
-
-                setTimeout(
-                    function () {
-
-                        reasonInput.focus();
-
-                    },
-                    100
-                );
-
-            }
-
-        }
-
-
-        function closeRejectModal() {
-
-            if (!modal) {
-                return;
-            }
-
-
-            modal.classList.remove(
-                "open"
-            );
-
-
-            document.body.style.overflow =
-                "";
-
-        }
-
-
-        openRejectButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        const postId =
-                            button.getAttribute(
-                                "data-post-id"
-                            );
-
-
-                        if (!postId) {
-                            return;
-                        }
-
-
-                        openRejectModal(
-                            postId
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        closeRejectButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        closeRejectModal();
-
-                    }
-                );
-
-            }
-        );
-
-
-        if (modal) {
-
-            modal.addEventListener(
+            button.addEventListener(
                 "click",
-                function (event) {
+                function () {
 
-                    if (
-                        event.target.classList.contains(
-                            "moderation-modal-backdrop"
-                        )
-                    ) {
-
-                        closeRejectModal();
-
-                    }
+                    closeRejectModal();
 
                 }
             );
 
-        }
+        });
 
 
-        /* =====================================================
-           REJECT FORM
-        ===================================================== */
+    /* =====================================================
+       BACKDROP CLICK
+    ===================================================== */
 
-        if (rejectForm) {
+    if (modal) {
 
-            rejectForm.addEventListener(
-                "submit",
-                function (event) {
-
-                    if (
-                        !reasonInput ||
-                        !reasonInput.value.trim()
-                    ) {
-
-                        event.preventDefault();
-
-                        if (reasonInput) {
-
-                            reasonInput.focus();
-
-                        }
-
-                        return;
-
-                    }
-
-
-                    const submitButton =
-                        rejectForm.querySelector(
-                            'button[type="submit"]'
-                        );
-
-
-                    if (submitButton) {
-
-                        submitButton.disabled =
-                            true;
-
-                        submitButton.textContent =
-                            "Rejecting...";
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           ESCAPE
-        ===================================================== */
-
-        document.addEventListener(
-            "keydown",
+        modal.addEventListener(
+            "click",
             function (event) {
 
                 if (
-                    event.key === "Escape"
+                    event.target.classList.contains(
+                        "moderation-modal-backdrop"
+                    )
                 ) {
 
                     closeRejectModal();
@@ -327,20 +212,96 @@ document.addEventListener(
             }
         );
 
+    }
 
-        /* =====================================================
-           CLEANUP
-        ===================================================== */
 
-        window.addEventListener(
-            "beforeunload",
-            function () {
+    /* =====================================================
+       REJECT FORM
+    ===================================================== */
 
-                document.body.style.overflow =
-                    "";
+    if (rejectForm) {
+
+        rejectForm.addEventListener(
+            "submit",
+            function (event) {
+
+                if (
+                    !reasonInput ||
+                    !reasonInput.value.trim()
+                ) {
+
+                    event.preventDefault();
+
+
+                    if (reasonInput) {
+
+                        reasonInput.focus();
+
+                    }
+
+
+                    return;
+
+                }
+
+
+                const submitButton =
+                    rejectForm.querySelector(
+                        'button[type="submit"]'
+                    );
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        true;
+
+
+                    submitButton.textContent =
+                        "Rejecting...";
+
+                }
 
             }
         );
 
     }
-);
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                modal &&
+                modal.classList.contains("open")
+            ) {
+
+                closeRejectModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CLEANUP
+    ===================================================== */
+
+    window.addEventListener(
+        "beforeunload",
+        function () {
+
+            document.body.style.overflow =
+                "";
+
+        }
+    );
+
+});

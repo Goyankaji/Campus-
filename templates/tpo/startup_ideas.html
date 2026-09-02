@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f6f8fc"
+    >
+
+    <title>
+        Startup Ideas | TPO | Campus
+    </title>
+
+
+    <!-- =====================================================
+         TPO COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-common.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         TPO SIDEBAR CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-sidebar.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         TPO TOPBAR CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-topbar.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         STARTUP IDEAS CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/startup_ideas.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TPO SIDEBAR
+========================================================= -->
+
+{% include 'tpo/components/tpo_sidebar.html' %}
+
+
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main-content">
+
+    {% include 'tpo/components/tpo_topbar.html' %}
+
+    <div class="startup-content">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="startup-page-header">
+
+            <div>
+
+                <div class="startup-eyebrow">
+                    SPECIAL PLACEMENT
+                </div>
+
+
+                <h1>
+                    Startup Ideas
+                </h1>
+
+
+                <div class="startup-breadcrumb">
+
+                    <span>
+                        TPO
+                    </span>
+
+                    <span>
+                        /
+                    </span>
+
+                    <span>
+                        Startup Ideas
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             APPROVAL INFORMATION
+        ================================================== -->
+
+        <div class="startup-approval-banner">
+
+
+            <div class="startup-approval-icon">
+                ◆
+            </div>
+
+
+            <div class="startup-approval-content">
+
+                <div class="startup-approval-title">
+                    Two-Level Approval Required
+                </div>
+
+
+                <div class="startup-approval-description">
+
+                    Every startup submission is reviewed independently
+                    by TPO and Authority. Final approval is granted only
+                    after both sides approve the submission.
+
+                </div>
+
+            </div>
+
+
+            <div class="startup-approval-status">
+
+                <span></span>
+
+                Independent Approval
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="startup-stats">
+
+
+            <!-- TOTAL -->
+
+            <div class="startup-stat-card">
+
+                <div class="startup-stat-icon purple">
+                    ◆
+                </div>
+
+                <div>
+
+                    <span>
+                        TOTAL SUBMISSIONS
+                    </span>
+
+                    <strong id="totalStartups">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TPO PENDING -->
+
+            <div class="startup-stat-card">
+
+                <div class="startup-stat-icon orange">
+                    ◷
+                </div>
+
+                <div>
+
+                    <span>
+                        TPO PENDING
+                    </span>
+
+                    <strong id="tpoPendingStartups">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AUTHORITY PENDING -->
+
+            <div class="startup-stat-card">
+
+                <div class="startup-stat-icon blue">
+                    ◇
+                </div>
+
+                <div>
+
+                    <span>
+                        AUTHORITY PENDING
+                    </span>
+
+                    <strong id="authorityPendingStartups">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FINAL APPROVED -->
+
+            <div class="startup-stat-card">
+
+                <div class="startup-stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        FINAL APPROVED
+                    </span>
+
+                    <strong id="approvedStartups">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="startup-filter-bar">
+
+
+            <!-- SEARCH -->
+
+            <div class="startup-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="startupSearch"
+                    placeholder="Search student, registration or startup..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <select
+                id="startupStatusFilter"
+                aria-label="Filter by startup status"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="pending_tpo">
+                    Pending TPO
+                </option>
+
+                <option value="pending_authority">
+                    Pending Authority
+                </option>
+
+                <option value="approved">
+                    Final Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+
+            <!-- STAGE -->
+
+            <select
+                id="startupStageFilter"
+                aria-label="Filter by startup stage"
+            >
+
+                <option value="all">
+                    All Stages
+                </option>
+
+                <option value="Idea">
+                    Idea
+                </option>
+
+                <option value="Prototype">
+                    Prototype
+                </option>
+
+                <option value="MVP">
+                    MVP
+                </option>
+
+                <option value="Early Stage">
+                    Early Stage
+                </option>
+
+                <option value="Revenue">
+                    Revenue
+                </option>
+
+            </select>
+
+
+
+            <!-- RESET -->
+
+            <button
+                type="button"
+                id="resetStartupFilters"
+                class="startup-reset-btn"
+            >
+                ↻
+                Reset
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE CARD
+        ================================================== -->
+
+        <section class="startup-table-card">
+
+
+            <!-- TABLE HEADER -->
+
+            <div class="startup-table-header">
+
+                <div>
+
+                    <span>
+                        STARTUP SUBMISSIONS
+                    </span>
+
+
+                    <h2>
+                        Student Startup Ideas
+                    </h2>
+
+
+                    <p>
+                        Review and process student startup submissions.
+                    </p>
+
+                </div>
+
+
+                <div id="startupCount">
+                    Showing 0 requests
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
+
+            <div class="startup-table-wrapper">
+
+                <table class="startup-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                STUDENT
+                            </th>
+
+
+                            <th>
+                                REGISTRATION
+                            </th>
+
+
+                            <th>
+                                STARTUP / IDEA
+                            </th>
+
+
+                            <th>
+                                STAGE
+                            </th>
+
+
+                            <th>
+                                SUBMITTED
+                            </th>
+
+
+                            <th>
+                                TPO
+                            </th>
+
+
+                            <th>
+                                AUTHORITY
+                            </th>
+
+
+                            <th>
+                                FINAL
+                            </th>
+
+
+                            <th>
+                                ACTION
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="startupTableBody">
+
+                        <!--
+                            STARTUP DATA WILL BE
+                            RENDERED BY startup_ideas.js
+                        -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     STARTUP DETAILS MODAL
+========================================================= -->
+
+<div
+    class="startup-modal"
+    id="startupDetailsModal"
+    style="display: none;"
+>
+
+
+    <div class="startup-modal-overlay"></div>
+
+
+    <div class="startup-modal-card">
+
+
+        <!-- HEADER -->
+
+        <div class="startup-modal-header">
+
+            <div>
+
+                <span>
+                    STARTUP DETAILS
+                </span>
+
+
+                <h2>
+                    Startup Submission
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="startup-modal-close"
+                id="closeStartupDetails"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- BODY -->
+
+        <div
+            class="startup-modal-body"
+            id="startupDetailsBody"
+        >
+
+            <!-- JS WILL RENDER DETAILS -->
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="startup-modal-footer">
+
+            <button
+                type="button"
+                class="startup-secondary-btn"
+                id="closeStartupDetailsBottom"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     REJECT MODAL
+========================================================= -->
+
+<div
+    class="startup-modal"
+    id="startupRejectModal"
+    style="display: none;"
+>
+
+
+    <div class="startup-modal-overlay"></div>
+
+
+    <div class="startup-modal-card">
+
+
+        <!-- HEADER -->
+
+        <div class="startup-modal-header">
+
+            <div>
+
+                <span>
+                    REJECT SUBMISSION
+                </span>
+
+
+                <h2>
+                    Rejection Reason
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="startup-modal-close"
+                id="closeStartupReject"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- BODY -->
+
+        <div class="startup-reject-body">
+
+            <label
+                for="startupRejectReason"
+            >
+                Reason for rejection
+            </label>
+
+
+            <textarea
+                id="startupRejectReason"
+                placeholder="Enter the reason for rejecting this startup submission..."
+            ></textarea>
+
+
+            <small>
+                This remark will be recorded with the TPO decision.
+            </small>
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="startup-modal-footer">
+
+            <button
+                type="button"
+                class="startup-secondary-btn"
+                id="cancelStartupReject"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                class="startup-danger-btn"
+                id="confirmStartupReject"
+            >
+                Reject Submission
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-sidebar.js'
+    ) }}"
+></script>
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-topbar.js'
+    ) }}"
+></script>
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/startup_ideas.js'
+    ) }}"
+></script>
+
+</body>
+
+</html>

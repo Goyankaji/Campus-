@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f6f8fc"
+    >
+
+    <title>
+        Pre-Placed Students | TPO | Campus
+    </title>
+
+
+    <!-- =====================================================
+         TPO COMMON CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-common.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         TPO SIDEBAR CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-sidebar.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         TPO TOPBAR CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/tpo-topbar.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         PRE-PLACED CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/tpo/pre_placed.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+{% include 'tpo/components/tpo_sidebar.html' %}
+
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main-content">
+
+
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
+
+    {% include 'tpo/components/tpo_topbar.html' %}
+
+
+
+    <div class="preplaced-content">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="preplaced-page-header">
+
+            <div>
+
+                <div class="preplaced-eyebrow">
+                    SPECIAL PLACEMENT
+                </div>
+
+
+                <h1>
+                    Pre-Placed Students
+                </h1>
+
+
+                <div class="preplaced-breadcrumb">
+
+                    <span>
+                        TPO
+                    </span>
+
+                    <span>
+                        /
+                    </span>
+
+                    <span>
+                        Pre-Placed
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             APPROVAL BANNER
+        ================================================== -->
+
+        <div class="preplaced-approval-banner">
+
+
+            <div class="preplaced-approval-icon">
+                ✓
+            </div>
+
+
+            <div class="preplaced-approval-content">
+
+                <div class="preplaced-approval-title">
+                    Two-Level Approval Required
+                </div>
+
+
+                <div class="preplaced-approval-description">
+
+                    Every pre-placement request remains visible
+                    to both TPO and Authority. Final approval requires
+                    approval from both sides.
+
+                </div>
+
+            </div>
+
+
+            <div class="preplaced-approval-status">
+
+                <span></span>
+
+                TPO + Authority Approval
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="preplaced-stats">
+
+
+            <!-- TOTAL -->
+
+            <div class="preplaced-stat-card">
+
+                <div class="preplaced-stat-icon purple">
+                    ◆
+                </div>
+
+                <div>
+
+                    <span>
+                        TOTAL REQUESTS
+                    </span>
+
+                    <strong id="totalPreplaced">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TPO PENDING -->
+
+            <div class="preplaced-stat-card">
+
+                <div class="preplaced-stat-icon orange">
+                    ◷
+                </div>
+
+                <div>
+
+                    <span>
+                        PENDING TPO
+                    </span>
+
+                    <strong id="tpoPendingPreplaced">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AUTHORITY PENDING -->
+
+            <div class="preplaced-stat-card">
+
+                <div class="preplaced-stat-icon blue">
+                    ◇
+                </div>
+
+                <div>
+
+                    <span>
+                        PENDING AUTHORITY
+                    </span>
+
+                    <strong id="authorityPendingPreplaced">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APPROVED -->
+
+            <div class="preplaced-stat-card">
+
+                <div class="preplaced-stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        FINAL APPROVED
+                    </span>
+
+                    <strong id="approvedPreplaced">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FILTER BAR
+        ================================================== -->
+
+        <div class="preplaced-filter-bar">
+
+
+            <!-- SEARCH -->
+
+            <div class="preplaced-search">
+
+                <span>
+                    ⌕
+                </span>
+
+
+                <input
+                    type="text"
+                    id="preplacedSearch"
+                    placeholder="Search student, registration or company..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- STATUS -->
+
+            <select
+                id="preplacedStatusFilter"
+                aria-label="Filter by approval status"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="pending_tpo">
+                    Pending TPO
+                </option>
+
+                <option value="pending_authority">
+                    Pending Authority
+                </option>
+
+                <option value="approved">
+                    Final Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+
+            <!-- TYPE -->
+
+            <select
+                id="preplacedTypeFilter"
+                aria-label="Filter by placement type"
+            >
+
+                <option value="all">
+                    All Types
+                </option>
+
+                <option value="Job Offer">
+                    Job Offer
+                </option>
+
+                <option value="Internship">
+                    Internship
+                </option>
+
+                <option value="PPO">
+                    PPO
+                </option>
+
+                <option value="Family Business">
+                    Family Business
+                </option>
+
+                <option value="Entrepreneurship">
+                    Entrepreneurship
+                </option>
+
+            </select>
+
+
+
+            <!-- RESET -->
+
+            <button
+                type="button"
+                id="resetPreplacedFilters"
+                class="preplaced-reset-btn"
+            >
+
+                ↻
+
+                Reset
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABLE CARD
+        ================================================== -->
+
+        <section class="preplaced-table-card">
+
+
+            <!-- TABLE HEADER -->
+
+            <div class="preplaced-table-header">
+
+                <div>
+
+                    <span>
+                        PRE-PLACEMENT REQUESTS
+                    </span>
+
+
+                    <h2>
+                        Student Pre-Placed Requests
+                    </h2>
+
+
+                    <p>
+                        Review and process student pre-placement
+                        declarations.
+                    </p>
+
+                </div>
+
+
+                <div id="preplacedCount">
+                    Showing 0 requests
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TABLE
+            ================================================== -->
+
+            <div class="preplaced-table-wrapper">
+
+                <table class="preplaced-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                STUDENT
+                            </th>
+
+                            <th>
+                                REGISTRATION
+                            </th>
+
+                            <th>
+                                COMPANY / ORGANIZATION
+                            </th>
+
+                            <th>
+                                TYPE
+                            </th>
+
+                            <th>
+                                PACKAGE
+                            </th>
+
+                            <th>
+                                SUBMITTED
+                            </th>
+
+                            <th>
+                                TPO
+                            </th>
+
+                            <th>
+                                AUTHORITY
+                            </th>
+
+                            <th>
+                                FINAL
+                            </th>
+
+                            <th>
+                                ACTION
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="preplacedTableBody">
+
+                        <!--
+                            DATA WILL BE RENDERED
+                            BY pre_placed.js
+                        -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     DETAILS MODAL
+========================================================= -->
+
+<div
+    class="preplaced-modal"
+    id="preplacedDetailsModal"
+    style="display: none;"
+>
+
+
+    <div class="preplaced-modal-overlay"></div>
+
+
+    <div class="preplaced-modal-card">
+
+
+        <!-- HEADER -->
+
+        <div class="preplaced-modal-header">
+
+            <div>
+
+                <span>
+                    PRE-PLACEMENT DETAILS
+                </span>
+
+
+                <h2>
+                    Student Request
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="preplaced-modal-close"
+                id="closePreplacedDetails"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- BODY -->
+
+        <div
+            class="preplaced-modal-body"
+            id="preplacedDetailsBody"
+        >
+
+            <!-- JS WILL RENDER DETAILS -->
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="preplaced-modal-footer">
+
+            <button
+                type="button"
+                class="preplaced-secondary-btn"
+                id="closePreplacedDetailsBottom"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     REJECT MODAL
+========================================================= -->
+
+<div
+    class="preplaced-modal"
+    id="preplacedRejectModal"
+    style="display: none;"
+>
+
+
+    <div class="preplaced-modal-overlay"></div>
+
+
+    <div class="preplaced-modal-card">
+
+
+        <!-- HEADER -->
+
+        <div class="preplaced-modal-header">
+
+            <div>
+
+                <span>
+                    REJECT REQUEST
+                </span>
+
+
+                <h2>
+                    Rejection Reason
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="preplaced-modal-close"
+                id="closePreplacedReject"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- BODY -->
+
+        <div class="preplaced-reject-body">
+
+            <label
+                for="preplacedRejectReason"
+            >
+                Reason for rejection
+            </label>
+
+
+            <textarea
+                id="preplacedRejectReason"
+                placeholder="Enter the reason for rejecting this request..."
+            ></textarea>
+
+
+            <small>
+                This remark will be recorded with the TPO decision.
+            </small>
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="preplaced-modal-footer">
+
+            <button
+                type="button"
+                class="preplaced-secondary-btn"
+                id="cancelPreplacedReject"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                class="preplaced-danger-btn"
+                id="confirmPreplacedReject"
+            >
+                Reject Request
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-sidebar.js'
+    ) }}"
+></script>
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/tpo-topbar.js'
+    ) }}"
+></script>
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/tpo/pre_placed.js'
+    ) }}"
+></script>
+
+
+</body>
+
+</html>

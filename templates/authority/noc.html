@@ -1,526 +1,506 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "authority/base.html" %}
 
-<head>
+{% block title %}NOC Management | Authority{% endblock %}
 
-    <meta charset="UTF-8">
+{% block content %}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        NOC Requests | Authority
-    </title>
-
-
-    <!-- =====================================================
-         AUTHORITY COMMON CSS
-    ====================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for(
-            'static',
-            filename='css/authority/common.css'
-        ) }}"
-    >
-
-</head>
-
-
-<body>
-
-
-<div class="authority-layout">
-
-
-    <!-- =====================================================
-         SIDEBAR
-    ====================================================== -->
-
-    {% include 'authority/components/sidebar.html' %}
-
-
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
-    <main class="authority-main">
-
-
-        <!-- =================================================
-             TOPBAR
-        ================================================== -->
-
-        {% include 'authority/components/topbar.html' %}
-
-
-        <!-- =================================================
-             PAGE
-        ================================================== -->
-
-        <section class="authority-noc-page">
-
-
-            <!-- =================================================
-                 HEADER
-            ================================================== -->
-
-            <div class="authority-noc-header">
-
-                <div>
-
-                    <span>
-                        APPROVAL MANAGEMENT
-                    </span>
-
-                    <h1>
-                        NOC Requests
-                    </h1>
-
-                    <p>
-                        Review and approve student No Objection Certificate requests.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- =================================================
-                 STATUS INFORMATION
-            ================================================== -->
-
-            <div class="authority-noc-info">
-
-                <div>
-
-                    <strong>
-                        Two-Level Approval
-                    </strong>
-
-                    <p>
-                        Every NOC request requires approval from both
-                        TPO and Authority before it becomes final.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- =================================================
-                 STATS
-            ================================================== -->
-
-            <div class="authority-noc-stats">
-
-
-                <div class="authority-noc-stat">
-
-                    <span>
-                        TOTAL REQUESTS
-                    </span>
-
-                    <strong id="authorityTotalNoc">
-                        0
-                    </strong>
-
-                </div>
-
-
-                <div class="authority-noc-stat">
-
-                    <span>
-                        WAITING FOR AUTHORITY
-                    </span>
-
-                    <strong id="authorityPendingNoc">
-                        0
-                    </strong>
-
-                </div>
-
-
-                <div class="authority-noc-stat">
-
-                    <span>
-                        AUTHORITY APPROVED
-                    </span>
-
-                    <strong id="authorityApprovedNoc">
-                        0
-                    </strong>
-
-                </div>
-
-
-                <div class="authority-noc-stat">
-
-                    <span>
-                        REJECTED
-                    </span>
-
-                    <strong id="authorityRejectedNoc">
-                        0
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 FILTERS
-            ================================================== -->
-
-            <div class="authority-noc-filters">
-
-
-                <div class="authority-noc-search">
-
-                    <span>
-                        ⌕
-                    </span>
-
-                    <input
-                        type="text"
-                        id="authorityNocSearch"
-                        placeholder="Search student, registration or organization..."
-                    >
-
-                </div>
-
-
-                <select
-                    id="authorityNocFilter"
-                >
-
-                    <option value="all">
-                        All Requests
-                    </option>
-
-                    <option value="pending">
-                        Authority Pending
-                    </option>
-
-                    <option value="approved">
-                        Authority Approved
-                    </option>
-
-                    <option value="rejected">
-                        Rejected
-                    </option>
-
-                </select>
-
-
-                <button
-                    type="button"
-                    id="authorityNocReset"
-                >
-                    Reset
-                </button>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 TABLE
-            ================================================== -->
-
-            <div class="authority-noc-card">
-
-
-                <div class="authority-noc-card-header">
-
-                    <div>
-
-                        <span>
-                            NOC REQUEST QUEUE
-                        </span>
-
-                        <h2>
-                            Student Requests
-                        </h2>
-
-                    </div>
-
-
-                    <div class="authority-noc-legend">
-
-                        <span>
-                            TPO
-                        </span>
-
-                        <span>
-                            Authority
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="authority-noc-table-wrapper">
-
-                    <table
-                        class="authority-noc-table"
-                    >
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    STUDENT
-                                </th>
-
-                                <th>
-                                    REG. NO.
-                                </th>
-
-                                <th>
-                                    PURPOSE
-                                </th>
-
-                                <th>
-                                    ORGANIZATION
-                                </th>
-
-                                <th>
-                                    REQUEST DATE
-                                </th>
-
-                                <th>
-                                    TPO STATUS
-                                </th>
-
-                                <th>
-                                    AUTHORITY STATUS
-                                </th>
-
-                                <th>
-                                    FINAL STATUS
-                                </th>
-
-                                <th>
-                                    ACTION
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody
-                            id="authorityNocTableBody"
-                        >
-
-                            <!-- JS DATA -->
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-
-                <!-- =================================================
-                     FOOTER
-                ================================================== -->
-
-                <div class="authority-noc-footer">
-
-                    <span id="authorityNocCount">
-                        Showing 0 requests
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-    </main>
-
-</div>
-
-
-<!-- =====================================================
-     DETAILS MODAL
-====================================================== -->
-
-<div
-    id="authorityNocDetailsModal"
-    class="authority-noc-modal"
-    style="display:none;"
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/authority/noc.css') }}"
 >
 
+<div class="noc-page">
 
-    <div class="authority-noc-modal-overlay"></div>
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
+    <div class="noc-header">
 
-    <div class="authority-noc-modal-card">
+        <div>
 
-
-        <div class="authority-noc-modal-header">
-
-            <div>
-
-                <span>
-                    NOC REQUEST
-                </span>
-
-                <h2>
-                    Request Details
-                </h2>
-
+            <div class="page-eyebrow">
+                SPECIAL INITIATIVES
             </div>
 
+            <h1>
+                NOC Management
+            </h1>
 
-            <button
-                type="button"
-                id="closeAuthorityNocDetails"
-            >
-                ×
-            </button>
+            <p>
+                Review and manage student NOC applications for your college.
+            </p>
 
         </div>
 
-
-        <div
-            id="authorityNocDetailsBody"
-            class="authority-noc-details-body"
+        <button
+            type="button"
+            class="noc-export-btn"
+            id="exportNocReport"
         >
-        </div>
-
-
-        <div class="authority-noc-modal-footer">
-
-            <button
-                type="button"
-                id="closeAuthorityNocDetailsBottom"
-            >
-                Close
-            </button>
-
-        </div>
-
+            Export Report
+        </button>
 
     </div>
 
-</div>
 
+    <!-- =====================================================
+         COLLEGE SCOPE
+         ===================================================== -->
 
-<!-- =====================================================
-     REJECTION MODAL
-====================================================== -->
+    <div class="scope-card">
 
-<div
-    id="authorityNocRejectModal"
-    class="authority-noc-modal"
-    style="display:none;"
->
-
-
-    <div class="authority-noc-modal-overlay"></div>
-
-
-    <div class="authority-noc-modal-card">
-
-
-        <div class="authority-noc-modal-header">
-
-            <div>
-
-                <span>
-                    AUTHORITY ACTION
-                </span>
-
-                <h2>
-                    Reject NOC Request
-                </h2>
-
-            </div>
-
-
-            <button
-                type="button"
-                id="closeAuthorityNocReject"
-            >
-                ×
-            </button>
-
+        <div class="scope-icon">
+            ◉
         </div>
 
+        <div class="scope-info">
 
-        <div class="authority-noc-reject-body">
+            <span>
+                AUTHORITY DATA SCOPE
+            </span>
 
-            <label for="authorityNocRejectReason">
-                Rejection Reason
-            </label>
-
-
-            <textarea
-                id="authorityNocRejectReason"
-                rows="5"
-                placeholder="Enter reason for rejecting this NOC request..."
-            ></textarea>
-
+            <strong>
+                College Authority
+            </strong>
 
             <small>
-                This reason will be visible to the student and TPO.
+                NOC applications are restricted to your assigned college.
             </small>
 
         </div>
 
+        <div class="scope-code">
+            ● {{ session.get("college_code", "PCE") }}
+        </div>
 
-        <div class="authority-noc-modal-footer">
-
-
-            <button
-                type="button"
-                id="cancelAuthorityNocReject"
-            >
-                Cancel
-            </button>
+    </div>
 
 
-            <button
-                type="button"
-                id="confirmAuthorityNocReject"
-            >
-                Reject NOC
-            </button>
+    <!-- =====================================================
+         SUMMARY
+         ===================================================== -->
 
+    <div class="summary-grid">
+
+        <div class="summary-card">
+
+            <div class="summary-icon purple">
+                ▦
+            </div>
+
+            <div>
+                <span>Total NOC</span>
+
+                <strong id="totalNoc">
+                    0
+                </strong>
+
+                <small>
+                    All applications
+                </small>
+            </div>
 
         </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon orange">
+                ◷
+            </div>
+
+            <div>
+                <span>Pending</span>
+
+                <strong id="pendingNoc">
+                    0
+                </strong>
+
+                <small>
+                    Awaiting final decision
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon green">
+                ✓
+            </div>
+
+            <div>
+                <span>Approved</span>
+
+                <strong id="approvedNoc">
+                    0
+                </strong>
+
+                <small>
+                    Final approved
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon red">
+                ✕
+            </div>
+
+            <div>
+                <span>Rejected</span>
+
+                <strong id="rejectedNoc">
+                    0
+                </strong>
+
+                <small>
+                    Final rejected
+                </small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         APPLICATIONS
+         ===================================================== -->
+
+    <section class="report-card noc-applications-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    NOC Applications
+                </h2>
+
+                <p>
+                    Review student requests and approval status.
+                </p>
+
+            </div>
+
+            <div class="search-box">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="nocSearch"
+                    placeholder="Search student, company..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTER BAR
+             ================================================= -->
+
+        <div class="noc-filter-bar">
+
+            <select id="nocStatus">
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="approved">
+                    Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                id="nocReset"
+                class="reset-btn"
+            >
+                Reset
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+             ================================================= -->
+
+        <div class="table-wrapper">
+
+            <table class="noc-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            STUDENT
+                        </th>
+
+                        <th>
+                            REGISTRATION
+                        </th>
+
+                        <th>
+                            PURPOSE
+                        </th>
+
+                        <th>
+                            ORGANIZATION
+                        </th>
+
+                        <th>
+                            DATE
+                        </th>
+
+                        <th>
+                            TPO
+                        </th>
+
+                        <th>
+                            AUTHORITY
+                        </th>
+
+                        <th>
+                            FINAL
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="nocTableBody">
+                    <!-- JS will render rows -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE FOOTER
+             ================================================= -->
+
+        <div class="table-footer">
+
+            <span id="nocResultCount">
+                Showing 0 applications
+            </span>
+
+            <span>
+                College:
+                <strong>
+                    {{ session.get("college_code", "PCE") }}
+                </strong>
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETAILS MODAL
+         ===================================================== -->
+
+    <div
+        class="noc-modal"
+        id="nocDetailsModal"
+        hidden
+    >
+
+        <div class="noc-modal-overlay"></div>
+
+
+        <div class="noc-modal-card">
+
+            <div class="noc-modal-header">
+
+                <div>
+
+                    <span>
+                        NOC APPLICATION
+                    </span>
+
+                    <h2>
+                        Application Details
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeNocDetails"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="noc-modal-body"
+                id="nocDetailsBody"
+            >
+                <!-- JS will render details -->
+            </div>
+
+
+            <div class="noc-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="closeNocDetailsBottom"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         REJECT MODAL
+         ===================================================== -->
+
+    <div
+        class="noc-modal"
+        id="nocRejectModal"
+        hidden
+    >
+
+        <div class="noc-modal-overlay"></div>
+
+
+        <div class="noc-modal-card reject-modal-card">
+
+            <div class="noc-modal-header">
+
+                <div>
+
+                    <span>
+                        AUTHORITY DECISION
+                    </span>
+
+                    <h2>
+                        Reject NOC
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeNocReject"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="reject-body">
+
+                <label for="nocRejectReason">
+                    Rejection Reason
+                </label>
+
+                <textarea
+                    id="nocRejectReason"
+                    rows="5"
+                    placeholder="Enter reason for rejecting this NOC..."
+                ></textarea>
+
+                <small>
+                    A rejection reason is required.
+                </small>
+
+            </div>
+
+
+            <div class="noc-modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary"
+                    id="cancelNocReject"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="reject-confirm-btn"
+                    id="confirmNocReject"
+                >
+                    Reject NOC
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <div class="reports-footer">
+
+        <span>
+            Campus Placement Portal
+        </span>
+
+        <span>
+            Authority NOC Management
+        </span>
 
     </div>
 
 </div>
 
 
-<!-- =====================================================
-     AUTHORITY NOC JS
-====================================================== -->
-
 <script
-    src="{{ url_for(
-        'static',
-        filename='js/authority/noc.js'
-    ) }}"
+    src="{{ url_for('static', filename='js/authority/noc.js') }}"
 ></script>
 
-
-</body>
-
-</html>
+{% endblock %}
