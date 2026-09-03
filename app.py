@@ -61,7 +61,7 @@ app.secret_key = os.getenv(
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "######",
+    "password": "_____",
     "database": "campus_placement_manager",
     "port": 3306
 }
